@@ -1,0 +1,2 @@
+express; socket.io
+npm install blueimp-file-upload-node

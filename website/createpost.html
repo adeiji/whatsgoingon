@@ -82,6 +82,12 @@
 	<script type="text/javascript" src="assets/js/plugins.js"></script>
 	<script type="text/javascript" src="assets/js/plugins.form-components.js"></script>
 
+	<!-- Combodate -->
+	<script type="text/javascript" src="assets/js/combodate.js"></script> 
+
+	<!-- User -->
+	<script type="text/javascript" src="assets/js/createpost.js"></script> 	
+
 	<script>
 	$(document).ready(function(){
 		"use strict";
@@ -508,7 +514,7 @@
 									   Category
 										<span class="caret"></span>
 									  </button>
-									  <ul class="dropdown-menu" id = "category-list" role="menu" aria-labelledby="category-list-dropbdown">	
+									  <ul class="dropdown-menu" id = "category-box-list" role="menu" aria-labelledby="category-list-dropbdown">	
 									    <li role=""><a role="menuitem" tabindex="-1">Under 21</a></li>
 										<li role=""><a role="menuitem" tabindex="-1">Indie</a></li>
 										<li role=""><a role="menuitem" tabindex="-1">Classy</a></li>
@@ -522,102 +528,78 @@
 								<div id = "title">
 									<input class="form-control" type="text" id="event-title" placeholder = "Enter the title of the event" style = "margin-top: 5px;">
 								</div>
-								<div id = "start-time" class = "select-box">
-									<div class="dropdown">
-									  <button class="btn btn-default" id = "category-box" type="button" data-toggle="dropdown">
-									   Start Time
-										<span class="caret"></span>
-									  </button>
-									  <ul class="dropdown-menu" id = "category-list" role="menu" aria-labelledby="category-list-dropbdown">	
-									    <li role=""><a role="menuitem" tabindex="-1">Under 21</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Indie</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Classy</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Nerdy</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Party</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Family Friendly</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Everything</a></li>
-									  </ul>						  
-									</div>
+								<div id = "start-time" class = "combodate">
+									<input type = "combodate" data-format="DD-MM-YYYY HH:mm" data-template="DD / MM / YYYY     HH : mm" name="datetime" value="21-12-2014 20:30">
 								</div>
-								<div id = "start-date" class = "select-box">
-									<div class="dropdown">
-									  <button class="btn btn-default" id = "category-box" type="button" data-toggle="dropdown">
-									   Start Date
-										<span class="caret"></span>
-									  </button>
-									  <ul class="dropdown-menu" id = "category-list" role="menu" aria-labelledby="category-list-dropbdown">	
-									    <li role=""><a role="menuitem" tabindex="-1">Under 21</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Indie</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Classy</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Nerdy</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Party</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Family Friendly</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Everything</a></li>
-									  </ul>						  
-									</div>
-								</div>
+								
 							</div>
 							<div class = "line">
 								<div id = "category" class = "select-box">
 									<div class="dropdown">
-									  <button class="btn btn-default" id = "category-box" type="button" data-toggle="dropdown">
+									  <button class="btn btn-default" id = "postrange-box" type="button" data-toggle="dropdown">
 									   Post Range
 										<span class="caret"></span>
 									  </button>
-									  <ul class="dropdown-menu" id = "category-list" role="menu" aria-labelledby="category-list-dropbdown">	
-									    <li role=""><a role="menuitem" tabindex="-1">Under 21</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Indie</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Classy</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Nerdy</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Party</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Family Friendly</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Everything</a></li>
+									  <ul class="dropdown-menu" id = "postrange-box-list" role="menu" aria-labelledby="category-list-dropbdown">	
+									    <li role=""><a role="menuitem" tabindex="-1">1 mile radius</a></li>
+										<li role=""><a role="menuitem" tabindex="-1">5 mile radius</a></li>
+										<li role=""><a role="menuitem" tabindex="-1">8 mile radius</a></li>
+										<li role=""><a role="menuitem" tabindex="-1">10 mile radius</a></li>
+										<li role=""><a role="menuitem" tabindex="-1">20 mile radius</a></li>
+										<li role=""><a role="menuitem" tabindex="-1">30 mile radius</a></li>
+										<li role=""><a role="menuitem" tabindex="-1">50 mile radius</a></li>
 									  </ul>						  
 									</div>
 								</div>
 								<div id = "title">
 									<input class="form-control" type="text" id="event-title" placeholder = "Enter the event address" style = "margin-top: 5px;">
 								</div>
-								<div id = "start-time" class = "select-box">
-									<div class="dropdown">
-									  <button class="btn btn-default" id = "category-box" type="button" data-toggle="dropdown">
-									   End Time
-										<span class="caret"></span>
-									  </button>
-									  <ul class="dropdown-menu" id = "category-list" role="menu" aria-labelledby="category-list-dropbdown">	
-									    <li role=""><a role="menuitem" tabindex="-1">Under 21</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Indie</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Classy</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Nerdy</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Party</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Family Friendly</a></li>
-										<li role=""><a role="menuitem" tabindex="-1">Everything</a></li>
-									  </ul>						  
-									</div>
+								<div id = "end-time" class = "combodate">
+									<input type = "combodate" data-format="DD-MM-YYYY HH:mm" data-template="DD / MM / YYYY     HH : mm" name="datetime" value="21-12-2014 20:30">
 								</div>
 								
 							</div>
 							<div class = "line">
-								<button class = "add-image-button">									
+								<button class = "add-image-button" index = "1">									
 								</button>
-								<button class = "add-image-button">									
+								<button class = "add-image-button" index = "2">									
 								</button>
-								<button class = "add-image-button">									
+								<button class = "add-image-button" index = "3">									
 								</button>
-								<button class = "add-image-button">									
+								<button class = "add-image-button" index = "4">									
 								</button>
-								<button class = "add-image-button">									
+								<button class = "add-image-button" index = "5">									
 								</button>
-								<button id = "upload-image" ></button>																	
+
+								<button id = "upload-image" onclick="$('#myInput').click();"></button>																	
 							</div>
 
 							<div class = "line">
-								<textarea placeholder = "Hi!"></textarea>
+								<textarea placeholder = "Enter a description"></textarea>
+								<div id = "category" class = "select-box">
+									<div class="dropdown">
+									  <button class="btn btn-default" id = "cost-box" type="button" data-toggle="dropdown">
+									   Cost
+										<span class="caret"></span>
+									  </button>
+									  <ul class="dropdown-menu" id = "cost-box-list" role="menu" aria-labelledby="category-list-dropbdown">	
+									    <li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">Free</a></li>
+										<li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">> $5</a></li>
+										<li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">> $10</a></li>
+										<li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">> $20</a></li>
+										<li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">> $40</a></li>
+										<li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">> $80</a></li>
+										<li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">> $160</a></li>
+									  </ul>						  									  
+									</div>
+								</div>
+								<button id = "post-button">Post Away</button>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /no-padding -->
+				<input id="myInput" type="file" style="visibility:hidden" />
 			</div>
 			<!-- /.container -->
 
