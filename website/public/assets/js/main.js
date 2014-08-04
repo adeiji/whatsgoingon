@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+	var pictures= [];
+	var pictureIndex = 0;
+
 	//Update the initialization call with my Application ID and Javascript Key
     Parse.initialize("3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR", "qqfASuIFfbkcr8mmLIFsxdkI1AGHJZy4cNKl7ujd");
     
@@ -21,14 +24,16 @@ $(document).ready(function () {
 		Parse.User.logOut();
 	});
 
-	$(function () {
-	    $('#fileupload').fileupload({
-	        dataType: 'json',
-	        done: function (e, data) {
-	            $.each(data.result.files, function (index, file) {
-	                alert('We were successful');
-	            });
-	    }
-    });
-});
+	$('#fileupload').on('change', function (ev) {
+		var file = ev.target.files[0];
+		var fileReader = new FileReader();
+
+		fileReader.onload = function (ev2) {
+			console.dir(ev2);
+			$('.post-image').attr('src', ev2.target.result);
+		};
+		pictureIndex = pictureIndex + 1;
+		fileReader.readAsDataURL(file);
+	})
+
 });
