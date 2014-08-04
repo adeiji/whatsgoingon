@@ -540,18 +540,18 @@
 									<input class="form-control" type="text" id="event-title" placeholder = "Enter the title of the event" style = "margin-top: 5px;">
 								</div>
 								<div id = "start-time" class = "combodate">
-									<input type = "combodate" data-format="DD-MM-YYYY HH:mm" data-template="DD / MM / YYYY     HH : mm" name="datetime" value="21-12-2014 20:30">
+									<input type = "combodate" id = "start-time-combodate" data-format="DD-MM-YYYY HH:mm" data-template="DD / MM / YYYY     HH : mm" name="datetime" value="21-12-2014 20:30">
 								</div>
 								
 							</div>
 							<div class = "line">
 								<div id = "category" class = "select-box">
 									<div class="dropdown">
-									  <button class="btn btn-default" id = "postrange-box" type="button" data-toggle="dropdown">
+									  <button class="btn btn-default" id = "post-range-box" type="button" data-toggle="dropdown">
 									   Post Range
 										<span class="caret"></span>
 									  </button>
-									  <ul class="dropdown-menu" id = "postrange-box-list" role="menu" aria-labelledby="category-list-dropbdown">	
+									  <ul class="dropdown-menu" id = "post-range-box-list" role="menu" aria-labelledby="category-list-dropbdown">	
 									    <li role=""><a role="menuitem" tabindex="-1">1 mile radius</a></li>
 										<li role=""><a role="menuitem" tabindex="-1">5 mile radius</a></li>
 										<li role=""><a role="menuitem" tabindex="-1">8 mile radius</a></li>
@@ -563,10 +563,10 @@
 									</div>
 								</div>
 								<div id = "title">
-									<input class="form-control" type="text" id="event-title" placeholder = "Enter the event address" style = "margin-top: 5px;">
+									<input class="form-control" type="text" id="event-address" placeholder = "Enter the event address" style = "margin-top: 5px;">
 								</div>
 								<div id = "end-time" class = "combodate">
-									<input type = "combodate" data-format="DD-MM-YYYY HH:mm" data-template="DD / MM / YYYY     HH : mm" name="datetime" value="21-12-2014 20:30">
+									<input type = "combodate" id = "end-time-combodate" data-format="DD-MM-YYYY HH:mm" data-template="DD / MM / YYYY     HH : mm" name="datetime" value="21-12-2014 20:30">
 								</div>
 								
 							</div>
@@ -586,14 +586,14 @@
 							</div>
 
 							<div class = "line">
-								<textarea placeholder = "Enter a description"></textarea>
+								<textarea placeholder = "Enter a description" id = "event-description"></textarea>
 								<div id = "category" class = "select-box">
 									<div class="dropdown">
 									  <button class="btn btn-default" id = "cost-box" type="button" data-toggle="dropdown">
 									   Cost
 										<span class="caret"></span>
 									  </button>
-									  <ul class="dropdown-menu" id = "cost-box-list" role="menu" aria-labelledby="category-list-dropbdown">	
+									  <ul class="dropdown-menu" id = "cost-box-list" role="menu" aria-labelledby="cost-list-dropbdown">	
 									    <li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">Free</a></li>
 										<li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">> $5</a></li>
 										<li role=""><a role="menuitem" tabindex="-1" list = "cost-box-list">> $10</a></li>

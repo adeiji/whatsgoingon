@@ -10,16 +10,14 @@ AWS.config.update({accessKeyId: 'AKIAI2AM7WJCCZUUMILQ', secretAccessKey: 'Z5ZO4y
 // Granted that will be impossible for an app made by Adebayo Ijidakinro because he gets far too many buckets to keep track of/
 
 // Add our post images to the bucket
-
-function addPicturesToBucket (pictures) {
+// Get the pictures that we're going to store on Amazon S3 and the Key which is the event name
+function addPicturesToBucket (picture, key) {
 
 	var s3 = new AWS.S3({ params: { Bucket: 'whatsgoingonnow-familyfriendly' } } );
-	pictures = $(document).data("pictures");
 
-	for (var i = pictures.length - 1; i >= 0; i--) {
-		var params = { Key: 'image', Body: pictures[i] };
-		s3.putObject(params, function (err, data) {
-			console.log(err);
-		});
-	};
+	var params = { Key: key, Body: picture };
+	s3.putObject(params, function (err, data) {
+		console.log(data);
+	});
+	
 };

@@ -42,10 +42,73 @@ $(document).ready(function () {
 	});
 
 	$('#post-button').on('click', function  () {
-		//Call this method within AWSManager.js and post the images to Amazon S3 and the data to parse
-		
-		addPicturesToBucket(pictures);			
-				
+
+		var postParams = createPost();
+
+		var MyEvent = Parse.Object.extend("Event");
+		var myEvent = new MyEvent();
+
+		myEvent.set('name', postParams.eventName);
+		myEvent.set('address', postParams.eventAddress);
+		myEvent.set('description', postParams.eventDescription);
+		myEvent.set('starttime', postParams.startTime);
+		myEvent.set('endtime', postParams.endTime);
+		myEvent.set('cost', postParams.cost);
+		myEvent.set('category', postParams.category);
+		myEvent.set('postrange', postParams.postRange);
+		myEvent.set('user', Parse.User.current()); //Gets the current user that is uploading this item
+		var pictureIds = [];
+
+		for (var i = pictures.length - 1; i >= 0; i--) {
+			pictureIds[i] = $('#event-title').val().replace(/\s/g, '') + createGuid().substring(0, 8);
+			//Call this method within AWSManager.js and post the images to Amazon S3 and the data to parse.  
+			addPicturesToBucket(pictures[i], pictureIds[i]);
+		};
+
+		myEvent.set('imageids', pictureIds);
+
+		myEvent.save(null, {
+			success: function (myEvent) {
+				console.log('New object created with objectId: ' + myEvent.id);
+			},
+			error: function (myEvent, error) {
+				alert('Failed to create new object, with error code: ' + error.message);
+			}
+		});
+
 	});
+
+	function createGuid() {
+    	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        	var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+        	return v.toString(16);
+    	});
+	};
+
+	//Get all the information for this post inputed
+
+	function createPost () {
+		var eventName = $('#event-title').val();
+		var eventAddress = $('#event-address').val();
+		var eventDescription = $('#event-description').val();
+		var startTime = $('#start-time-combodate').combodate('getValue', 'DD-MM-YYYY HH:mm');
+		var endTime = $('#end-time-combodate').combodate('getValue', 'DD-MM-YYYY HH:mm');
+		var cost = $('#cost-box').text();
+		var category = $('#category-box').text();
+		var postRange = $('#post-range-box').text();
+
+		var postParams = { 
+			eventName : eventName,
+			eventAddress : eventAddress,
+			eventDescription : eventDescription,
+			startTime : startTime,
+			endTime : endTime,
+			cost : cost,
+			category : category,
+			postRange : postRange
+		};
+
+		return postParams;
+	}
 });
 
