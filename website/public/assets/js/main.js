@@ -30,10 +30,22 @@ $(document).ready(function () {
 
 		fileReader.onload = function (ev2) {
 			console.dir(ev2);
-			$('.post-image').attr('src', ev2.target.result);
+			pictureIndex = pictureIndex + 1;
+			$('.post-image[index=' + pictureIndex + ']').attr('src', ev2.target.result);
+			
+			pictures[pictureIndex] = file;
+			// Attach the pictures array to the document DOM element to allow reading within a different javascript file
+			$(document).data("pictures", pictures);
 		};
-		pictureIndex = pictureIndex + 1;
-		fileReader.readAsDataURL(file);
-	})
 
+		fileReader.readAsDataURL(file);
+	});
+
+	$('#post-button').on('click', function  () {
+		//Call this method within AWSManager.js and post the images to Amazon S3 and the data to parse
+		
+		addPicturesToBucket(pictures);			
+				
+	});
 });
+
