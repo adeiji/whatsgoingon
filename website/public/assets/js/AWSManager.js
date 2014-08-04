@@ -13,10 +13,13 @@ AWS.config.update({accessKeyId: 'AKIAI2AM7WJCCZUUMILQ', secretAccessKey: 'Z5ZO4y
 
 function addPicturesToBucket (pictures) {
 
-	var bucket = new AWS.S3({ params: { Bucket: 'whatsgoingonnow-familyfriendly'}});
+	var s3 = new AWS.S3({ params: { Bucket: 'whatsgoingonnow-familyfriendly' } } );
 	pictures = $(document).data("pictures");
 
 	for (var i = pictures.length - 1; i >= 0; i--) {
 		var params = { Key: 'image', Body: pictures[i] };
+		s3.putObject(params, function (err, data) {
+			console.log(err);
+		});
 	};
 };
