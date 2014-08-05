@@ -27,6 +27,7 @@
 		F437BFC419904A4200CF61E9 /* MainMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFC319904A4200CF61E9 /* MainMenuView.xib */; };
 		F437BFC619904E4E00CF61E9 /* ViewEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFC519904E4E00CF61E9 /* ViewEventsView.xib */; };
 		F437BFC81990500500CF61E9 /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F437BFC71990500500CF61E9 /* Event.storyboard */; };
+		F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFC9199053B000CF61E9 /* EventDetailsView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		F437BFC319904A4200CF61E9 /* MainMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenuView.xib; sourceTree = "<group>"; };
 		F437BFC519904E4E00CF61E9 /* ViewEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewEventsView.xib; sourceTree = "<group>"; };
 		F437BFC71990500500CF61E9 /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
+		F437BFC9199053B000CF61E9 /* EventDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDetailsView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				F437BFC1199049D300CF61E9 /* SelectCategoryView.xib */,
 				F437BFC319904A4200CF61E9 /* MainMenuView.xib */,
 				F437BFC519904E4E00CF61E9 /* ViewEventsView.xib */,
+				F437BFC9199053B000CF61E9 /* EventDetailsView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,
+				F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */,
 				F437BFBE199048AF00CF61E9 /* WelcomeEventsView.xib in Resources */,
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
