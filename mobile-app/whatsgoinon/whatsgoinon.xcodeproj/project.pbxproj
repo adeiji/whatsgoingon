@@ -28,6 +28,22 @@
 		F437BFC619904E4E00CF61E9 /* ViewEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFC519904E4E00CF61E9 /* ViewEventsView.xib */; };
 		F437BFC81990500500CF61E9 /* Event.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F437BFC71990500500CF61E9 /* Event.storyboard */; };
 		F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFC9199053B000CF61E9 /* EventDetailsView.xib */; };
+		F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F437BFCB199185D000CF61E9 /* Posting.storyboard */; };
+		F437BFCE19918A4500CF61E9 /* InsertLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFCD19918A4500CF61E9 /* InsertLocationView.xib */; };
+		F437BFD019918B2200CF61E9 /* RateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFCF19918B2200CF61E9 /* RateView.xib */; };
+		F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFD419918DF800CF61E9 /* DESyncManager.m */; };
+		F437BFD71991906300CF61E9 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFD61991906300CF61E9 /* Parse.framework */; };
+		F437BFD9199190A100CF61E9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFD8199190A000CF61E9 /* Accounts.framework */; };
+		F437BFDB199190A600CF61E9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFDA199190A600CF61E9 /* AudioToolbox.framework */; };
+		F437BFDD199190AC00CF61E9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFDC199190AC00CF61E9 /* CFNetwork.framework */; };
+		F437BFDF199190B600CF61E9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFDE199190B600CF61E9 /* CoreLocation.framework */; };
+		F437BFE1199190C900CF61E9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE0199190C900CF61E9 /* libz.dylib */; };
+		F437BFE3199190EA00CF61E9 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE2199190EA00CF61E9 /* MobileCoreServices.framework */; };
+		F437BFE5199190F500CF61E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE4199190F500CF61E9 /* QuartzCore.framework */; };
+		F437BFE7199190FF00CF61E9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE6199190FF00CF61E9 /* Security.framework */; };
+		F437BFE91991910800CF61E9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE81991910800CF61E9 /* Social.framework */; };
+		F437BFEB1991911100CF61E9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFEA1991911100CF61E9 /* StoreKit.framework */; };
+		F437BFED1991911900CF61E9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFEC1991911900CF61E9 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +83,23 @@
 		F437BFC519904E4E00CF61E9 /* ViewEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewEventsView.xib; sourceTree = "<group>"; };
 		F437BFC71990500500CF61E9 /* Event.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Event.storyboard; sourceTree = "<group>"; };
 		F437BFC9199053B000CF61E9 /* EventDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDetailsView.xib; sourceTree = "<group>"; };
+		F437BFCB199185D000CF61E9 /* Posting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Posting.storyboard; sourceTree = "<group>"; };
+		F437BFCD19918A4500CF61E9 /* InsertLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InsertLocationView.xib; sourceTree = "<group>"; };
+		F437BFCF19918B2200CF61E9 /* RateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RateView.xib; sourceTree = "<group>"; };
+		F437BFD319918DF800CF61E9 /* DESyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESyncManager.h; sourceTree = "<group>"; };
+		F437BFD419918DF800CF61E9 /* DESyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESyncManager.m; sourceTree = "<group>"; };
+		F437BFD61991906300CF61E9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		F437BFD8199190A000CF61E9 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		F437BFDA199190A600CF61E9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F437BFDC199190AC00CF61E9 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F437BFDE199190B600CF61E9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F437BFE0199190C900CF61E9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		F437BFE2199190EA00CF61E9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F437BFE4199190F500CF61E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F437BFE6199190FF00CF61E9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F437BFE81991910800CF61E9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		F437BFEA1991911100CF61E9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		F437BFEC1991911900CF61E9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +107,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F437BFED1991911900CF61E9 /* SystemConfiguration.framework in Frameworks */,
+				F437BFEB1991911100CF61E9 /* StoreKit.framework in Frameworks */,
+				F437BFE91991910800CF61E9 /* Social.framework in Frameworks */,
+				F437BFE7199190FF00CF61E9 /* Security.framework in Frameworks */,
+				F437BFE5199190F500CF61E9 /* QuartzCore.framework in Frameworks */,
+				F437BFE3199190EA00CF61E9 /* MobileCoreServices.framework in Frameworks */,
+				F437BFE1199190C900CF61E9 /* libz.dylib in Frameworks */,
+				F437BFDF199190B600CF61E9 /* CoreLocation.framework in Frameworks */,
+				F437BFDD199190AC00CF61E9 /* CFNetwork.framework in Frameworks */,
+				F437BFDB199190A600CF61E9 /* AudioToolbox.framework in Frameworks */,
+				F437BFD9199190A100CF61E9 /* Accounts.framework in Frameworks */,
 				F437BF871990452000CF61E9 /* CoreGraphics.framework in Frameworks */,
 				F437BF891990452000CF61E9 /* UIKit.framework in Frameworks */,
+				F437BFD71991906300CF61E9 /* Parse.framework in Frameworks */,
 				F437BF851990452000CF61E9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -115,6 +160,18 @@
 		F437BF831990452000CF61E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F437BFEC1991911900CF61E9 /* SystemConfiguration.framework */,
+				F437BFEA1991911100CF61E9 /* StoreKit.framework */,
+				F437BFE81991910800CF61E9 /* Social.framework */,
+				F437BFE6199190FF00CF61E9 /* Security.framework */,
+				F437BFE4199190F500CF61E9 /* QuartzCore.framework */,
+				F437BFE2199190EA00CF61E9 /* MobileCoreServices.framework */,
+				F437BFE0199190C900CF61E9 /* libz.dylib */,
+				F437BFDE199190B600CF61E9 /* CoreLocation.framework */,
+				F437BFDC199190AC00CF61E9 /* CFNetwork.framework */,
+				F437BFDA199190A600CF61E9 /* AudioToolbox.framework */,
+				F437BFD8199190A000CF61E9 /* Accounts.framework */,
+				F437BFD61991906300CF61E9 /* Parse.framework */,
 				F437BF841990452000CF61E9 /* Foundation.framework */,
 				F437BF861990452000CF61E9 /* CoreGraphics.framework */,
 				F437BF881990452000CF61E9 /* UIKit.framework */,
@@ -126,6 +183,8 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F437BFD219918DE700CF61E9 /* Sync Manager */,
+				F437BFD119918CD200CF61E9 /* Location Manager */,
 				F437BFBC199048A100CF61E9 /* Views */,
 				F437BFBB1990489A00CF61E9 /* Storyboards */,
 				F437BF931990452000CF61E9 /* DEAppDelegate.h */,
@@ -173,6 +232,7 @@
 				F437BF961990452000CF61E9 /* Login.storyboard */,
 				F437BFB91990486500CF61E9 /* ViewPosts.storyboard */,
 				F437BFC71990500500CF61E9 /* Event.storyboard */,
+				F437BFCB199185D000CF61E9 /* Posting.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -185,8 +245,26 @@
 				F437BFC319904A4200CF61E9 /* MainMenuView.xib */,
 				F437BFC519904E4E00CF61E9 /* ViewEventsView.xib */,
 				F437BFC9199053B000CF61E9 /* EventDetailsView.xib */,
+				F437BFCD19918A4500CF61E9 /* InsertLocationView.xib */,
+				F437BFCF19918B2200CF61E9 /* RateView.xib */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		F437BFD119918CD200CF61E9 /* Location Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Location Manager";
+			sourceTree = "<group>";
+		};
+		F437BFD219918DE700CF61E9 /* Sync Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F437BFD319918DF800CF61E9 /* DESyncManager.h */,
+				F437BFD419918DF800CF61E9 /* DESyncManager.m */,
+			);
+			name = "Sync Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,14 +344,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F437BFCE19918A4500CF61E9 /* InsertLocationView.xib in Resources */,
 				F437BFC419904A4200CF61E9 /* MainMenuView.xib in Resources */,
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
+				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,
 				F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */,
 				F437BFBE199048AF00CF61E9 /* WelcomeEventsView.xib in Resources */,
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
+				F437BFD019918B2200CF61E9 /* RateView.xib in Resources */,
 				F437BFC619904E4E00CF61E9 /* ViewEventsView.xib in Resources */,
 				F437BFBA1990486500CF61E9 /* ViewPosts.storyboard in Resources */,
 			);
@@ -297,6 +378,7 @@
 				F437BF911990452000CF61E9 /* main.m in Sources */,
 				F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */,
 				F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */,
+				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +505,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "whatsgoinon/whatsgoinon-Prefix.pch";
 				INFOPLIST_FILE = "whatsgoinon/whatsgoinon-Info.plist";
@@ -436,6 +522,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "whatsgoinon/whatsgoinon-Prefix.pch";
 				INFOPLIST_FILE = "whatsgoinon/whatsgoinon-Info.plist";
