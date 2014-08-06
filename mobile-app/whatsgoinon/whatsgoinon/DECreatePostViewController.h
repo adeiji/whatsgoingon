@@ -10,7 +10,7 @@
 #import "DECreatePostView.h"
 #import "DEPost.h"
 
-@interface DECreatePostViewController : UIViewController
+@interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 #pragma mark - Action Methods
 
@@ -18,6 +18,7 @@
 - (IBAction)displayPreview:(id)sender;
 - (IBAction)displayInfo:(id)sender;
 - (IBAction)gotoNextScreen:(id)sender;
+- (IBAction)takePicture:(id)sender;
 
 @property (strong, nonatomic) IBOutlet DECreatePostView *createPostViewOne;
 @property (strong, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;

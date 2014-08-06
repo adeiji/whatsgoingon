@@ -56,6 +56,7 @@
     postObject[COST] = post.cost;
     postObject[CATEGORY] = post.category;
     postObject[ACTIVE] = [NSNumber numberWithBool:TRUE];
+    postObject[POST_RANGE] = @5.0;
 
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackground];

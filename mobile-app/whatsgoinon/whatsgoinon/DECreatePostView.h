@@ -24,10 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
-@property (weak, nonatomic) IBOutlet UIImageView *imgOne;
-@property (weak, nonatomic) IBOutlet UIImageView *imgTwo;
-@property (weak, nonatomic) IBOutlet UIImageView *imgThree;
-@property (weak, nonatomic) IBOutlet UIImageView *imgFour;
+
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *imageViews;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtCost;
 @property (weak, nonatomic) IBOutlet UITextView *txtDescription;

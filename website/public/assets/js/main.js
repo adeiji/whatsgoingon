@@ -92,11 +92,15 @@ $(document).ready(function () {
 		var eventName = $('#event-title').val();
 		var eventAddress = $('#event-address').val();
 		var eventDescription = $('#event-description').val();
-		var startTime = $('#start-time-combodate').combodate('getValue', 'DD-MM-YYYY HH:mm');
-		var endTime = $('#end-time-combodate').combodate('getValue', 'DD-MM-YYYY HH:mm');
-		var cost = $('#cost-box').text();
+		var startTimeString = $('#start-time-combodate').combodate('getValue', 'YYYY-MM-DDTHH:MM:SS');
+		var startTime = new Date(startTimeString);
+		var endTimeString = $('#end-time-combodate').combodate('getValue', 'YYYY-MM-DDTHH:MM:SS');
+		var endTime = new Date(endTimeString);
+		var costString = $('#cost-box').text();
+		var cost = parseFloat(costString.substring(3));
 		var category = $('#category-box').text();
-		var postRange = $('#post-range-box').text();
+		var postRangeString = $('#post-range-box').text();
+		var postRange = parseInt(postRangeString.substring(0, 2));
 
 		var postParams = { 
 			eventName : eventName,

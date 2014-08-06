@@ -199,6 +199,9 @@
                                 <state key="normal" title="Take picture">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="takePicture:" destination="yte-Ni-6PL" eventType="touchUpInside" id="u0r-pp-9El"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EtD-MX-bXP">
                                 <rect key="frame" x="20" y="209" width="70" height="53"/>
@@ -251,13 +254,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <connections>
                             <outlet property="btnPreview" destination="COG-BM-FZz" id="eAo-Ee-2fC"/>
-                            <outlet property="imgFour" destination="JkZ-BA-WQW" id="ex6-eJ-gTk"/>
-                            <outlet property="imgOne" destination="EtD-MX-bXP" id="foR-DZ-DHJ"/>
-                            <outlet property="imgThree" destination="b9m-P8-fR9" id="hja-Wf-Iyr"/>
-                            <outlet property="imgTwo" destination="PaI-3o-CvM" id="qb3-N2-av6"/>
                             <outlet property="txtCost" destination="Wza-IE-Ajb" id="d1D-w9-vjx"/>
                             <outlet property="txtDescription" destination="fur-Z1-yZ4" id="NWE-SC-Lee"/>
                             <outlet property="txtTitle" destination="pDi-Kc-q72" id="YTY-sZ-sxt"/>
+                            <outletCollection property="imageViews" destination="EtD-MX-bXP" id="VSS-h2-Dwf"/>
+                            <outletCollection property="imageViews" destination="PaI-3o-CvM" id="xmL-Vn-oAj"/>
+                            <outletCollection property="imageViews" destination="b9m-P8-fR9" id="izM-tM-r4c"/>
+                            <outletCollection property="imageViews" destination="JkZ-BA-WQW" id="sLb-NV-ekL"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Rne-0Q-bfD"/>
