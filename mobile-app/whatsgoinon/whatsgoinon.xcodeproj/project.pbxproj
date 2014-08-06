@@ -44,6 +44,12 @@
 		F437BFE91991910800CF61E9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE81991910800CF61E9 /* Social.framework */; };
 		F437BFEB1991911100CF61E9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFEA1991911100CF61E9 /* StoreKit.framework */; };
 		F437BFED1991911900CF61E9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFEC1991911900CF61E9 /* SystemConfiguration.framework */; };
+		F437BFF11991968200CF61E9 /* DEEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFF01991968200CF61E9 /* DEEvents.m */; };
+		F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFF419919B9B00CF61E9 /* DECreatePostViewController.m */; };
+		F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFFE19919F3200CF61E9 /* DECreatePostView.m */; };
+		F437C0061991A2C000CF61E9 /* DEPost.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0051991A2C000CF61E9 /* DEPost.m */; };
+		F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0081991A72E00CF61E9 /* DEPostManager.m */; };
+		F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C00C1991AB3D00CF61E9 /* DEMainViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +106,18 @@
 		F437BFE81991910800CF61E9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		F437BFEA1991911100CF61E9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F437BFEC1991911900CF61E9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F437BFEF1991968200CF61E9 /* DEEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEvents.h; sourceTree = "<group>"; };
+		F437BFF01991968200CF61E9 /* DEEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEvents.m; sourceTree = "<group>"; };
+		F437BFF319919B9B00CF61E9 /* DECreatePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECreatePostViewController.h; sourceTree = "<group>"; };
+		F437BFF419919B9B00CF61E9 /* DECreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECreatePostViewController.m; sourceTree = "<group>"; };
+		F437BFFD19919F3200CF61E9 /* DECreatePostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECreatePostView.h; sourceTree = "<group>"; };
+		F437BFFE19919F3200CF61E9 /* DECreatePostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECreatePostView.m; sourceTree = "<group>"; };
+		F437C0041991A2C000CF61E9 /* DEPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPost.h; sourceTree = "<group>"; };
+		F437C0051991A2C000CF61E9 /* DEPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPost.m; sourceTree = "<group>"; };
+		F437C0071991A72E00CF61E9 /* DEPostManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPostManager.h; sourceTree = "<group>"; };
+		F437C0081991A72E00CF61E9 /* DEPostManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPostManager.m; sourceTree = "<group>"; };
+		F437C00B1991AB3D00CF61E9 /* DEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMainViewController.h; sourceTree = "<group>"; };
+		F437C00C1991AB3D00CF61E9 /* DEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +201,9 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F437C00A1991AB2F00CF61E9 /* Main Screen */,
+				F437BFF219919B7200CF61E9 /* Posting */,
+				F437BFEE1991967300CF61E9 /* Event Objects */,
 				F437BFD219918DE700CF61E9 /* Sync Manager */,
 				F437BFD119918CD200CF61E9 /* Location Manager */,
 				F437BFBC199048A100CF61E9 /* Views */,
@@ -265,6 +286,47 @@
 				F437BFD419918DF800CF61E9 /* DESyncManager.m */,
 			);
 			name = "Sync Manager";
+			sourceTree = "<group>";
+		};
+		F437BFEE1991967300CF61E9 /* Event Objects */ = {
+			isa = PBXGroup;
+			children = (
+				F437BFEF1991968200CF61E9 /* DEEvents.h */,
+				F437BFF01991968200CF61E9 /* DEEvents.m */,
+			);
+			name = "Event Objects";
+			sourceTree = "<group>";
+		};
+		F437BFF219919B7200CF61E9 /* Posting */ = {
+			isa = PBXGroup;
+			children = (
+				F437C0031991A2B600CF61E9 /* Post */,
+				F437BFF319919B9B00CF61E9 /* DECreatePostViewController.h */,
+				F437BFF419919B9B00CF61E9 /* DECreatePostViewController.m */,
+				F437BFFD19919F3200CF61E9 /* DECreatePostView.h */,
+				F437BFFE19919F3200CF61E9 /* DECreatePostView.m */,
+			);
+			name = Posting;
+			sourceTree = "<group>";
+		};
+		F437C0031991A2B600CF61E9 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				F437C0041991A2C000CF61E9 /* DEPost.h */,
+				F437C0051991A2C000CF61E9 /* DEPost.m */,
+				F437C0071991A72E00CF61E9 /* DEPostManager.h */,
+				F437C0081991A72E00CF61E9 /* DEPostManager.m */,
+			);
+			name = Post;
+			sourceTree = "<group>";
+		};
+		F437C00A1991AB2F00CF61E9 /* Main Screen */ = {
+			isa = PBXGroup;
+			children = (
+				F437C00B1991AB3D00CF61E9 /* DEMainViewController.h */,
+				F437C00C1991AB3D00CF61E9 /* DEMainViewController.m */,
+			);
+			name = "Main Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,10 +437,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
 				F437BF911990452000CF61E9 /* main.m in Sources */,
 				F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */,
+				F437C0061991A2C000CF61E9 /* DEPost.m in Sources */,
+				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
 				F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */,
+				F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
+				F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */,
+				F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

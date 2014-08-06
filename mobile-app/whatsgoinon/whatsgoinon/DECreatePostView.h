@@ -1,0 +1,37 @@
+//
+//  DECreatePostViewOne.h
+//  whatsgoinon
+//
+//  Created by adeiji on 8/5/14.
+//  Copyright (c) 2014 adeiji. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface DECreatePostView : UIView
+
+#pragma mark - View Outlets
+
+@property (weak, nonatomic) IBOutlet UITextField *txtCategory;
+@property (weak, nonatomic) IBOutlet UITextField *txtStartDate;
+@property (weak, nonatomic) IBOutlet UITextField *txtStartTime;
+@property (weak, nonatomic) IBOutlet UITextField *txtEndDate;
+@property (weak, nonatomic) IBOutlet UITextField *txtEndTime;
+@property (weak, nonatomic) IBOutlet UIButton *btnInfo;
+@property (weak, nonatomic) IBOutlet UITextField *txtPostRange;
+@property (weak, nonatomic) IBOutlet UITextField *txtAddress;
+@property (weak, nonatomic) IBOutlet UIButton *btnCurrentLocation;
+@property (weak, nonatomic) IBOutlet UIButton *btnNext;
+
+@property (weak, nonatomic) IBOutlet UITextField *txtTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *imgOne;
+@property (weak, nonatomic) IBOutlet UIImageView *imgTwo;
+@property (weak, nonatomic) IBOutlet UIImageView *imgThree;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFour;
+
+@property (weak, nonatomic) IBOutlet UITextField *txtCost;
+@property (weak, nonatomic) IBOutlet UITextView *txtDescription;
+@property (weak, nonatomic) IBOutlet UIButton *btnPreview;
+
+
+@end

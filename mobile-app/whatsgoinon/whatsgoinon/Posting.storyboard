@@ -4,15 +4,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Create Post View Controller-->
         <scene sceneID="Tfw-os-7xr">
             <objects>
-                <viewController id="TtG-65-4oM" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="createPostDetailsOne" useStoryboardIdentifierAsRestorationIdentifier="YES" id="TtG-65-4oM" customClass="DECreatePostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pu1-P0-xUM"/>
                         <viewControllerLayoutGuide type="bottom" id="U1i-AW-klo"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ToC-2Z-wgc">
+                    <view key="view" contentMode="scaleToFill" id="ToC-2Z-wgc" customClass="DECreatePostView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -89,10 +89,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r8U-VK-ZGy">
-                                <rect key="frame" x="275" y="243" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C0N-mf-eJQ">
                                 <rect key="frame" x="20" y="276" width="224" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -100,6 +96,9 @@
                                 <state key="normal" title="Current Location">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="displayCurrentLocation:" destination="TtG-65-4oM" eventType="touchUpInside" id="gxg-qz-T9f"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the address of the event" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iI0-Is-RwP">
                                 <rect key="frame" x="20" y="314" width="280" height="30"/>
@@ -115,26 +114,51 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="yte-Ni-6PL" kind="push" id="feF-rz-FIS"/>
+                                    <action selector="gotoNextScreen:" destination="TtG-65-4oM" eventType="touchUpInside" id="vfd-94-FoH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diT-2q-BjY">
+                                <rect key="frame" x="277" y="247" width="16" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="?">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="displayInfo:" destination="TtG-65-4oM" eventType="touchUpInside" id="1na-4L-NP1"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="btnCurrentLocation" destination="C0N-mf-eJQ" id="eWM-EI-3vK"/>
+                            <outlet property="btnInfo" destination="diT-2q-BjY" id="ZyU-fa-elP"/>
+                            <outlet property="btnNext" destination="aFg-bg-W4v" id="9hH-JA-fZ1"/>
+                            <outlet property="txtAddress" destination="iI0-Is-RwP" id="Xu7-ib-DRu"/>
+                            <outlet property="txtCategory" destination="oGf-NR-P7x" id="UDe-uK-jzl"/>
+                            <outlet property="txtEndDate" destination="TwP-rK-EZ0" id="t6L-3k-EtJ"/>
+                            <outlet property="txtEndTime" destination="1Ua-op-W9o" id="Z5F-Xt-XcD"/>
+                            <outlet property="txtPostRange" destination="NGc-Zc-8Dd" id="xr2-uV-X59"/>
+                            <outlet property="txtStartDate" destination="MR4-rZ-z1g" id="Kt7-qn-siE"/>
+                            <outlet property="txtStartTime" destination="TI4-6R-w5q" id="aVT-Df-WwK"/>
+                        </connections>
                     </view>
+                    <connections>
+                        <outlet property="createPostViewOne" destination="ToC-2Z-wgc" id="PLH-pH-2ia"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fr9-3x-Xxg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="111" y="-276"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Post View Controller-->
         <scene sceneID="DhF-1b-i1M">
             <objects>
-                <viewController id="yte-Ni-6PL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreatePostDetailTwo" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yte-Ni-6PL" customClass="DECreatePostViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LoV-nX-peS"/>
                         <viewControllerLayoutGuide type="bottom" id="plc-Ak-4pP"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="rgs-zs-O5k">
+                    <view key="view" contentMode="scaleToFill" id="rgs-zs-O5k" customClass="DECreatePostView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -219,11 +243,27 @@
                                 <state key="normal" title="Preview">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="displayPreview:" destination="yte-Ni-6PL" eventType="touchUpInside" id="TjJ-9R-E2i"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="btnPreview" destination="COG-BM-FZz" id="eAo-Ee-2fC"/>
+                            <outlet property="imgFour" destination="JkZ-BA-WQW" id="ex6-eJ-gTk"/>
+                            <outlet property="imgOne" destination="EtD-MX-bXP" id="foR-DZ-DHJ"/>
+                            <outlet property="imgThree" destination="b9m-P8-fR9" id="hja-Wf-Iyr"/>
+                            <outlet property="imgTwo" destination="PaI-3o-CvM" id="qb3-N2-av6"/>
+                            <outlet property="txtCost" destination="Wza-IE-Ajb" id="d1D-w9-vjx"/>
+                            <outlet property="txtDescription" destination="fur-Z1-yZ4" id="NWE-SC-Lee"/>
+                            <outlet property="txtTitle" destination="pDi-Kc-q72" id="YTY-sZ-sxt"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="Rne-0Q-bfD"/>
+                    <connections>
+                        <outlet property="createPostViewTwo" destination="rgs-zs-O5k" id="AG7-fy-2il"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwR-ca-FOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

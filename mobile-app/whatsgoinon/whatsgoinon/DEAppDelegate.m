@@ -7,12 +7,23 @@
 //
 
 #import "DEAppDelegate.h"
+#import <Parse/Parse.h>
+#import "DESyncManager.h"
 
 @implementation DEAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    // Connect our app to Parse
+    [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
+                  clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
+    
+    // Track statistics around application opens
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    [DESyncManager getAllValues];
+    
     return YES;
 }
 							

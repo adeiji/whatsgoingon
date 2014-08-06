@@ -57,6 +57,7 @@ $(document).ready(function () {
 		myEvent.set('category', postParams.category);
 		myEvent.set('postrange', postParams.postRange);
 		myEvent.set('user', Parse.User.current()); //Gets the current user that is uploading this item
+		myEvent.set('active', true);
 		var pictureIds = [];
 
 		for (var i = pictures.length - 1; i >= 0; i--) {
