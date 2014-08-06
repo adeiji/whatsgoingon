@@ -23,6 +23,7 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     [DESyncManager getAllValues];
+    [DELocationManager sharedManager];
     
     return YES;
 }

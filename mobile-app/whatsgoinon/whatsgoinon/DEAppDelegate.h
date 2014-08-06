@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DELocationManager.h"
 
 @interface DEAppDelegate : UIResponder <UIApplicationDelegate>
 

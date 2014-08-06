@@ -63,13 +63,15 @@ static BOOL DEVELOPMENT = NO;
 // We display the post to allow the user to view the post before he actually makes it live
 - (IBAction)displayPreview:(id)sender {
     
+    DECreatePostView *view = self.createPostViewOne;
+    
     if (DEVELOPMENT)
     {
         // Development
-        _post.title = @"Chicken Scratch";
-        _post.cost = @14.0;
+        _post.title = view.txtTitle.text;
+        _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
         _post.images = nil;
-        _post.description = @"This is just a test of the iOS version";
+        _post.description = view.txtDescription.text;
     }
     else {
         // Production
@@ -89,12 +91,12 @@ static BOOL DEVELOPMENT = NO;
 
 - (IBAction)gotoNextScreen:(id)sender {
     DEPostManager *postManager = [DEPostManager sharedManager];
+    DELocationManager *locationManager = [DELocationManager sharedManager];
     
     DEPost *newPost = [DEPostManager createPostWithCategory:_createPostViewOne.txtCategory.text
                                                   StartTime:[NSDate date]
                                                     EndTime:[NSDate date]
-                                                   Latitude:[NSNumber numberWithDouble:3.88979878973]
-                                                  Longitude:[NSNumber numberWithDouble:9.4884883849]
+                                                   Location:[locationManager geoPoint]
                                                   PostRange:[NSNumber numberWithInt:5]
                                                       Title:nil
                                                        Cost:nil

@@ -15,8 +15,7 @@
 + (DEPost *) createPostWithCategory : (NSString *) category
                       StartTime : (NSDate *) startTime
                         EndTime : (NSDate *) endTime
-                       Latitude : (NSNumber *) latitude
-                      Longitude : (NSNumber *) longitude
+                       Location : (PFGeoPoint *) location
                       PostRange : (NSNumber *) postRange
                           Title : (NSString *) title
                            Cost : (NSNumber *) cost

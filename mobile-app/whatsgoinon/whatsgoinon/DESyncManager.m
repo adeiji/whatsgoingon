@@ -23,6 +23,7 @@
 #define CATEGORY @"category"
 #define POST_RANGE @"postrange"
 #define USER @"user"
+#define LOCATION @"location"
 
 + (void) getAllValues {
     DEPostManager *sharedManager = [DEPostManager sharedManager];
@@ -44,8 +45,6 @@
 }
 
 
-
-
 + (BOOL) savePost : (DEPost *) post {
     PFObject *postObject = [PFObject objectWithClassName:CLASS_NAME];
     
@@ -58,6 +57,7 @@
     postObject[CATEGORY] = post.category;
     postObject[ACTIVE] = [NSNumber numberWithBool:TRUE];
     postObject[POST_RANGE] = @5.0;
+    postObject[LOCATION] = post.location;
 
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackground];

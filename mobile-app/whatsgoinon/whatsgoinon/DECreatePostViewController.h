@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DECreatePostView.h"
 #import "DEPost.h"
+#import "DELocationManager.h"
 
 @interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
