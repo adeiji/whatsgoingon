@@ -13,6 +13,10 @@
 
 @end
 
+#define POST_HEIGHT 216
+#define POST_WIDTH 140
+#define IPHONE_DEVICE_WIDTH 320
+
 @implementation DEViewEventsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,23 +33,34 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, POST_HEIGHT * [_posts count]);
+    
+    [self resetPostCounter];
+    [self loadPosts];
     [self displayPost];
 }
 
+- (void) loadPosts {
+    _posts = [[DEPostManager sharedManager] posts];
+}
+
 - (void) displayPost {
-    DEPostManager *postManager = [DEPostManager sharedManager];
-    NSArray *posts = [postManager posts];
-    DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
     
-    CGRect frame = CGRectMake(0, 0, 100, 200);
-    viewEventsView.frame = frame;
-    
-    [posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
+        
+        CGRect frame = CGRectMake(0, POST_HEIGHT * postCounter, POST_WIDTH, POST_HEIGHT);
+        viewEventsView.frame = frame;
         [viewEventsView renderViewWithPost:obj];
         
         [_scrollView addSubview:viewEventsView];
-    
+        postCounter ++;
     }];
+    
+}
+
+- (void) resetPostCounter {
+    postCounter = 0;
 }
 
 - (void)didReceiveMemoryWarning

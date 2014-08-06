@@ -11,7 +11,10 @@
 #import "DEViewEventsView.h"
 
 @interface DEViewEventsViewController : UIViewController
-
+{
+    int postCounter;
+}
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) NSArray *posts;
 
 @end
