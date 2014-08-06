@@ -27,7 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,9 +36,17 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)viewWhatsGoingOnNow:(id)sender {
+    // Do any additional setup after loading the view.
+    UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
+    DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
+    
+    [self.navigationController pushViewController:viewEventsViewController animated:YES];
+}
+
 - (IBAction)showCreatePostView:(id)sender {
-    UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
-    DECreatePostViewController *createPostViewController = [viewPosts instantiateInitialViewController];
+    UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+    DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
     
     [self.navigationController pushViewController:createPostViewController animated:YES];
 }

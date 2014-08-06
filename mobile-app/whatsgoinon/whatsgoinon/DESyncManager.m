@@ -24,26 +24,27 @@
 #define POST_RANGE @"postrange"
 #define USER @"user"
 
-+ (NSArray *) getAllValues {
++ (void) getAllValues {
+    DEPostManager *sharedManager = [DEPostManager sharedManager];
     PFQuery *query = [PFQuery queryWithClassName:CLASS_NAME];
     //Get all the events that are currently active
     [query whereKey:ACTIVE equalTo:[NSNumber numberWithBool:true]];
-    
-    __block NSArray *events;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
             //The find succeeded, now do something with it
-            events = objects;
+            [sharedManager setPosts:objects];
         }
         else {
             // The find failed, let the customer know
         }
     }];
     
-    return events;
 }
+
+
+
 
 + (BOOL) savePost : (DEPost *) post {
     PFObject *postObject = [PFObject objectWithClassName:CLASS_NAME];

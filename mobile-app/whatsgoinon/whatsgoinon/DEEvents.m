@@ -26,7 +26,8 @@
 
 - (id) init {
     if (self = [super init]) {
-        _events = [DESyncManager getAllValues];
+        DEPostManager *sharedManager = [DEPostManager sharedManager];
+        _events = [sharedManager posts];
     }
     
     return self;

@@ -39,6 +39,9 @@
                                 <state key="normal" title="What's Goin' On Now">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="viewWhatsGoingOnNow:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="mDk-10-Qmo"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8F-ic-t46">
                                 <rect key="frame" x="0.0" y="470" width="320" height="49"/>

@@ -50,6 +50,9 @@
 		F437C0061991A2C000CF61E9 /* DEPost.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0051991A2C000CF61E9 /* DEPost.m */; };
 		F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0081991A72E00CF61E9 /* DEPostManager.m */; };
 		F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C00C1991AB3D00CF61E9 /* DEMainViewController.m */; };
+		F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C00F1991CDEB00CF61E9 /* DEViewEventsView.m */; };
+		F437C0131991CE0C00CF61E9 /* DEEventsTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0121991CE0C00CF61E9 /* DEEventsTimeline.m */; };
+		F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0161991CE7E00CF61E9 /* DEViewEventsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +121,12 @@
 		F437C0081991A72E00CF61E9 /* DEPostManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPostManager.m; sourceTree = "<group>"; };
 		F437C00B1991AB3D00CF61E9 /* DEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMainViewController.h; sourceTree = "<group>"; };
 		F437C00C1991AB3D00CF61E9 /* DEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMainViewController.m; sourceTree = "<group>"; };
+		F437C00E1991CDEB00CF61E9 /* DEViewEventsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewEventsView.h; sourceTree = "<group>"; };
+		F437C00F1991CDEB00CF61E9 /* DEViewEventsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewEventsView.m; sourceTree = "<group>"; };
+		F437C0111991CE0C00CF61E9 /* DEEventsTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventsTimeline.h; sourceTree = "<group>"; };
+		F437C0121991CE0C00CF61E9 /* DEEventsTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventsTimeline.m; sourceTree = "<group>"; };
+		F437C0151991CE7E00CF61E9 /* DEViewEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewEventsViewController.h; sourceTree = "<group>"; };
+		F437C0161991CE7E00CF61E9 /* DEViewEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewEventsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +302,12 @@
 			children = (
 				F437BFEF1991968200CF61E9 /* DEEvents.h */,
 				F437BFF01991968200CF61E9 /* DEEvents.m */,
+				F437C00E1991CDEB00CF61E9 /* DEViewEventsView.h */,
+				F437C00F1991CDEB00CF61E9 /* DEViewEventsView.m */,
+				F437C0111991CE0C00CF61E9 /* DEEventsTimeline.h */,
+				F437C0121991CE0C00CF61E9 /* DEEventsTimeline.m */,
+				F437C0151991CE7E00CF61E9 /* DEViewEventsViewController.h */,
+				F437C0161991CE7E00CF61E9 /* DEViewEventsViewController.m */,
 			);
 			name = "Event Objects";
 			sourceTree = "<group>";
@@ -438,10 +453,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
+				F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */,
 				F437BF911990452000CF61E9 /* main.m in Sources */,
 				F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */,
+				F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */,
 				F437C0061991A2C000CF61E9 /* DEPost.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
+				F437C0131991CE0C00CF61E9 /* DEEventsTimeline.m in Sources */,
 				F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */,
 				F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,

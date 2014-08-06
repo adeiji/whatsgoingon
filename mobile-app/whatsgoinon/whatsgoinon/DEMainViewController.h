@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DEViewEventsViewController.h"
 
 @interface DEMainViewController : UIViewController
+- (IBAction)viewWhatsGoingOnNow:(id)sender;
 
 - (IBAction)showCreatePostView:(id)sender;
 @end

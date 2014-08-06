@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "DEPost.h"
+#import "DEPostManager.h"
 
 @interface DESyncManager : NSObject
 
 // Get all the values from the Parse database
-+ (NSArray *) getAllValues;
++ (void) getAllValues;
 + (BOOL) savePost : (DEPost *) post;
 
 @end

@@ -16,6 +16,8 @@
 
 @implementation DECreatePostViewController
 
+static BOOL DEVELOPMENT = NO;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,6 +31,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void) setImageCounterToZero {
+    imageCounter = 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,15 +62,23 @@
 // ** Production
 // We display the post to allow the user to view the post before he actually makes it live
 - (IBAction)displayPreview:(id)sender {
-    // Development
-    _post.title = @"Chicken Scratch";
-    _post.cost = @14.0;
-    _post.images = nil;
-    _post.description = @"This is just a test of the iOS version";
-    // Production
-//    _post.cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
-//
-//    _post.description = _createPostViewTwo.txtDescription.text;
+    
+    if (DEVELOPMENT)
+    {
+        // Development
+        _post.title = @"Chicken Scratch";
+        _post.cost = @14.0;
+        _post.images = nil;
+        _post.description = @"This is just a test of the iOS version";
+    }
+    else {
+        // Production
+        _post.cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
+        _post.description = _createPostViewTwo.txtDescription.text;
+        _post.title = self.createPostViewTwo.txtTitle.text;
+        _post.images = nil;
+    }
+
     
     //For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
     [DESyncManager savePost:_post];
@@ -100,12 +114,40 @@
 
 - (IBAction)takePicture:(id)sender {
     
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    if (imageCounter < 4)
+    {
+        // Let the user take a picture and store it
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+    else {
+        // let the user know that he's taken too many pictures
+    }
     
-    [self presentViewController:picker animated:YES completion:NULL];
+}
+
+#pragma mark - ImagePickerControllerDelegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+    //Get the original image
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    //Shrink the size of the image.
+    UIGraphicsBeginImageContext( CGSizeMake(70, 56) );
+    [image drawInRect:CGRectMake(0,0,70,56)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    UIImageView  *imageView = [self.createPostViewTwo.imageViews objectAtIndex:imageCounter];
+
+    imageView.image = newImage;
+    //Increment the imageCounter so that we display on the next image
+    imageCounter ++;
+
+    [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
 

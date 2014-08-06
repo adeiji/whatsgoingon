@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--View Events View Controller-->
         <scene sceneID="Eyg-i7-8sg">
             <objects>
-                <viewController id="IJq-25-4RC" sceneMemberID="viewController">
+                <viewController id="IJq-25-4RC" customClass="DEViewEventsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="N8b-nZ-kCY"/>
                         <viewControllerLayoutGuide type="bottom" id="8VP-O7-Add"/>
@@ -23,6 +23,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="oFX-Ym-bdg" id="5vw-tq-pS6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v5y-sh-gXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

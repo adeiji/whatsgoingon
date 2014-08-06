@@ -11,7 +11,9 @@
 #import "DEPost.h"
 
 @interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-
+{
+    int imageCounter;
+}
 #pragma mark - Action Methods
 
 - (IBAction)displayCurrentLocation:(id)sender;

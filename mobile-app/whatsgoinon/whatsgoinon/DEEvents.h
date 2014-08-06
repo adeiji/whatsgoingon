@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DEPostManager.h"
 
 @interface DEEvents : NSObject
 

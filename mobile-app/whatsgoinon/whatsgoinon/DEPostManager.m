@@ -24,7 +24,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        _posts = [NSArray new];
+     
     }
     return self;
 }
