@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DECreatePostView : UIView
+@interface DECreatePostView : UIView <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UINavigationControllerDelegate>
 
 #pragma mark - View Outlets
 
@@ -31,5 +31,9 @@
 @property (weak, nonatomic) IBOutlet UITextView *txtDescription;
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;
 
+#pragma mark - UIPickerView Properties
+
+@property (strong, nonatomic) NSArray *categories;
+@property (strong, nonatomic) UIPickerView *categoriesPicker;
 
 @end

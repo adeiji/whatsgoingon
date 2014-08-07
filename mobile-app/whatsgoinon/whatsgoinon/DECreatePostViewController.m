@@ -31,6 +31,7 @@ static BOOL DEVELOPMENT = NO;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+        
 }
 
 - (void) setImageCounterToZero {
@@ -87,17 +88,28 @@ static BOOL DEVELOPMENT = NO;
 }
 
 - (IBAction)displayInfo:(id)sender {
+    
 }
+
 
 - (IBAction)gotoNextScreen:(id)sender {
     DEPostManager *postManager = [DEPostManager sharedManager];
     DELocationManager *locationManager = [DELocationManager sharedManager];
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEEE MMMM d, YYYY HH:mm a"];
+    
+    NSDate *startDate = [dateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtStartDate.text, _createPostViewOne.txtStartTime.text]];
+
+    NSDate *endDate = [dateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtEndDate.text, _createPostViewOne.txtEndTime.text]];
+    
+    NSLog(@"Captured Date %@", [startDate description]);
+    
     DEPost *newPost = [DEPostManager createPostWithCategory:_createPostViewOne.txtCategory.text
-                                                  StartTime:[NSDate date]
-                                                    EndTime:[NSDate date]
+                                                  StartTime:startDate
+                                                    EndTime:endDate
                                                    Location:[locationManager geoPoint]
-                                                  PostRange:[NSNumber numberWithInt:5]
+                                                  PostRange:[NSNumber numberWithInt:[_createPostViewOne.txtPostRange.text intValue]]
                                                       Title:nil
                                                        Cost:nil
                                                      Images:nil
