@@ -27,6 +27,15 @@
     dispatch_async(queue, ^{
         self.lblTitle.text = post[@"name"];
         self.imgMainImageView.backgroundColor = [UIColor greenColor];
+        
+        PFFile *imageFile = post[@"images"][0];
+        NSData *imageData = [imageFile getData];
+        UIImage *image = [UIImage imageWithData:imageData];
+        
+        //Load the images on the main thread asynchronously
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.imgMainImageView.image = image;
+        });
     });
 }
 

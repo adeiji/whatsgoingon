@@ -64,7 +64,12 @@
     postObject[IMAGES] = [self getImagesArrayWithArray:post.images];
     
     // If it saved successful return that it was successful and vice versa.
-    [postObject saveInBackground];
+    [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded)
+        {
+            NSLog(@"Post Saved to Parse Server");
+        }
+    }];
     
     return YES;
 }
