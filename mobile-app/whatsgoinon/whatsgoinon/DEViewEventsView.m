@@ -26,6 +26,7 @@
     
     dispatch_async(queue, ^{
         self.lblTitle.text = post[@"name"];
+        self.imgMainImageView.backgroundColor = [UIColor greenColor];
     });
 }
 

@@ -31,6 +31,8 @@ static BOOL DEVELOPMENT = NO;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    _images = [NSMutableArray new];
         
 }
 
@@ -79,12 +81,18 @@ static BOOL DEVELOPMENT = NO;
         _post.cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
         _post.description = _createPostViewTwo.txtDescription.text;
         _post.title = self.createPostViewTwo.txtTitle.text;
-        _post.images = nil;
+        _post.images = _images;
     }
 
     
     //For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
-    [DESyncManager savePost:_post];
+    BOOL postSaved = [DESyncManager savePost:_post];
+    
+    if (postSaved)
+    {
+        _post = nil;
+        _images = [NSMutableArray new];
+    }
 }
 
 - (IBAction)displayInfo:(id)sender {
@@ -160,7 +168,9 @@ static BOOL DEVELOPMENT = NO;
     imageView.image = newImage;
     //Increment the imageCounter so that we display on the next image
     imageCounter ++;
-
+    
+    [_images addObject:UIImageJPEGRepresentation(image, .25)];
+    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }

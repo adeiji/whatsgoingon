@@ -24,6 +24,7 @@
 #define POST_RANGE @"postrange"
 #define USER @"user"
 #define LOCATION @"location"
+#define IMAGES @"images"
 
 + (void) getAllValues {
     DEPostManager *sharedManager = [DEPostManager sharedManager];
@@ -36,6 +37,8 @@
         {
             //The find succeeded, now do something with it
             [sharedManager setPosts:objects];
+            
+            NSLog(@"Retreived all objects from server");
         }
         else {
             // The find failed, let the customer know
@@ -58,11 +61,26 @@
     postObject[ACTIVE] = [NSNumber numberWithBool:TRUE];
     postObject[POST_RANGE] = @5.0;
     postObject[LOCATION] = post.location;
-
+    postObject[IMAGES] = [self getImagesArrayWithArray:post.images];
+    
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackground];
     
     return YES;
+}
+
++ (NSMutableArray *) getImagesArrayWithArray : (NSArray *) imageArray
+{
+    NSMutableArray *images = [NSMutableArray new];
+    
+    for (NSData *imageData in imageArray) {
+        
+        PFFile *imageFile = [PFFile fileWithName:@"post-image" data:imageData];
+        
+        [images addObject:imageFile];
+    }
+    
+    return images;
 }
 
 @end

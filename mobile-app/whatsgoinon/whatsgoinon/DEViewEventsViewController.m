@@ -33,10 +33,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, POST_HEIGHT * [_posts count]);
+    //Load the posts first so that we can see how big we need to make the scroll view's content size.
+    [self loadPosts];
+    //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
+    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, POST_HEIGHT * (([_posts count] / 2) + ([_posts count] % 2)));
     
     [self resetPostCounter];
-    [self loadPosts];
     [self displayPost];
 }
 
@@ -45,16 +47,25 @@
 }
 
 - (void) displayPost {
+    __block int column = 0;
     
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
         
-        CGRect frame = CGRectMake(0, POST_HEIGHT * postCounter, POST_WIDTH, POST_HEIGHT);
+        CGRect frame = CGRectMake((column * POST_WIDTH) + (10 * (column + 1)), POST_HEIGHT * postCounter, POST_WIDTH, POST_HEIGHT);
         viewEventsView.frame = frame;
         [viewEventsView renderViewWithPost:obj];
         
         [_scrollView addSubview:viewEventsView];
-        postCounter ++;
+        
+        if (column == 0)
+        {
+            column = 1;
+        }
+        else {
+            column = 0;
+            postCounter ++;
+        }
     }];
     
 }

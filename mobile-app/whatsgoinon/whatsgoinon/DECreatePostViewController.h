@@ -27,5 +27,6 @@
 @property (strong, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;
 
 @property (strong, nonatomic) DEPost *post;
+@property (strong, nonatomic) NSMutableArray *images;
 
 @end
