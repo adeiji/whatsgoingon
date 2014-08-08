@@ -58,6 +58,12 @@
 		F4774F8C1992E46A00FCDE66 /* DELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F8B1992E46A00FCDE66 /* DELocation.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
+		F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9A19955E4200FCDE66 /* DEUserManager.m */; };
+		F4774F9F1995629500FCDE66 /* DELoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9E1995629500FCDE66 /* DELoginViewController.m */; };
+		F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FA11995653D00FCDE66 /* DEPromptLoginView.m */; };
+		F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FA41995655500FCDE66 /* DECreateAccountView.m */; };
+		F4774FA819956BBE00FCDE66 /* DECreateAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FA719956BBE00FCDE66 /* DECreateAccountViewController.m */; };
+		F4774FAB199575CE00FCDE66 /* DELoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FAA199575CE00FCDE66 /* DELoginView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +148,18 @@
 		F4774F901994398F00FCDE66 /* UDIDGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDIDGenerator.m; path = ../../../../12WeekFitness/Resources/UDIDGenerator.m; sourceTree = "<group>"; };
 		F4774F9319944B9400FCDE66 /* DEScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEScreenManager.h; sourceTree = "<group>"; };
 		F4774F9419944B9400FCDE66 /* DEScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEScreenManager.m; sourceTree = "<group>"; };
+		F4774F9919955E4200FCDE66 /* DEUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEUserManager.h; sourceTree = "<group>"; };
+		F4774F9A19955E4200FCDE66 /* DEUserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEUserManager.m; sourceTree = "<group>"; };
+		F4774F9D1995629500FCDE66 /* DELoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELoginViewController.h; sourceTree = "<group>"; };
+		F4774F9E1995629500FCDE66 /* DELoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELoginViewController.m; sourceTree = "<group>"; };
+		F4774FA01995653D00FCDE66 /* DEPromptLoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPromptLoginView.h; sourceTree = "<group>"; };
+		F4774FA11995653D00FCDE66 /* DEPromptLoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPromptLoginView.m; sourceTree = "<group>"; };
+		F4774FA31995655500FCDE66 /* DECreateAccountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECreateAccountView.h; sourceTree = "<group>"; };
+		F4774FA41995655500FCDE66 /* DECreateAccountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECreateAccountView.m; sourceTree = "<group>"; };
+		F4774FA619956BBE00FCDE66 /* DECreateAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECreateAccountViewController.h; sourceTree = "<group>"; };
+		F4774FA719956BBE00FCDE66 /* DECreateAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECreateAccountViewController.m; sourceTree = "<group>"; };
+		F4774FA9199575CE00FCDE66 /* DELoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELoginView.h; sourceTree = "<group>"; };
+		F4774FAA199575CE00FCDE66 /* DELoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELoginView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,14 +243,13 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
-				F4774F9219944B8400FCDE66 /* Global Screen Manager */,
+				F4774F9C1995628700FCDE66 /* Login */,
+				F4774F9619955E0B00FCDE66 /* Managers */,
 				F4774F8E199438DD00FCDE66 /* Dephyned Classes */,
 				F4774F861992E40300FCDE66 /* Location */,
-				F4774F821992E37A00FCDE66 /* AWS Services */,
 				F437C00A1991AB2F00CF61E9 /* Main Screen */,
 				F437BFF219919B7200CF61E9 /* Posting */,
 				F437BFEE1991967300CF61E9 /* Event Objects */,
-				F437BFD219918DE700CF61E9 /* Sync Manager */,
 				F437BFD119918CD200CF61E9 /* Location Manager */,
 				F437BFBC199048A100CF61E9 /* Views */,
 				F437BFBB1990489A00CF61E9 /* Storyboards */,
@@ -375,8 +392,6 @@
 		F4774F861992E40300FCDE66 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				F4774F871992E40C00FCDE66 /* DELocationManager.h */,
-				F4774F881992E40C00FCDE66 /* DELocationManager.m */,
 				F4774F8A1992E46A00FCDE66 /* DELocation.h */,
 				F4774F8B1992E46A00FCDE66 /* DELocation.m */,
 			);
@@ -399,6 +414,53 @@
 				F4774F9419944B9400FCDE66 /* DEScreenManager.m */,
 			);
 			name = "Global Screen Manager";
+			sourceTree = "<group>";
+		};
+		F4774F9619955E0B00FCDE66 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				F4774F9819955E3700FCDE66 /* User Manager */,
+				F437BFD219918DE700CF61E9 /* Sync Manager */,
+				F4774F821992E37A00FCDE66 /* AWS Services */,
+				F4774F9719955E1A00FCDE66 /* Location Manager */,
+				F4774F9219944B8400FCDE66 /* Global Screen Manager */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		F4774F9719955E1A00FCDE66 /* Location Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F4774F871992E40C00FCDE66 /* DELocationManager.h */,
+				F4774F881992E40C00FCDE66 /* DELocationManager.m */,
+			);
+			name = "Location Manager";
+			sourceTree = "<group>";
+		};
+		F4774F9819955E3700FCDE66 /* User Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F4774F9919955E4200FCDE66 /* DEUserManager.h */,
+				F4774F9A19955E4200FCDE66 /* DEUserManager.m */,
+			);
+			name = "User Manager";
+			sourceTree = "<group>";
+		};
+		F4774F9C1995628700FCDE66 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F4774F9D1995629500FCDE66 /* DELoginViewController.h */,
+				F4774F9E1995629500FCDE66 /* DELoginViewController.m */,
+				F4774FA01995653D00FCDE66 /* DEPromptLoginView.h */,
+				F4774FA11995653D00FCDE66 /* DEPromptLoginView.m */,
+				F4774FA31995655500FCDE66 /* DECreateAccountView.h */,
+				F4774FA41995655500FCDE66 /* DECreateAccountView.m */,
+				F4774FA619956BBE00FCDE66 /* DECreateAccountViewController.h */,
+				F4774FA719956BBE00FCDE66 /* DECreateAccountViewController.m */,
+				F4774FA9199575CE00FCDE66 /* DELoginView.h */,
+				F4774FAA199575CE00FCDE66 /* DELoginView.m */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */,
+				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
 				F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */,
 				F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */,
@@ -517,16 +580,21 @@
 				F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */,
 				F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */,
 				F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */,
+				F4774FA819956BBE00FCDE66 /* DECreateAccountViewController.m in Sources */,
 				F437C0061991A2C000CF61E9 /* DEPost.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
 				F4774F8C1992E46A00FCDE66 /* DELocation.m in Sources */,
+				F4774FAB199575CE00FCDE66 /* DELoginView.m in Sources */,
 				F437C0131991CE0C00CF61E9 /* DEEventsTimeline.m in Sources */,
 				F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */,
 				F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */,
 				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
+				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
+				F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */,
 				F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */,
 				F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */,
+				F4774F9F1995629500FCDE66 /* DELoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

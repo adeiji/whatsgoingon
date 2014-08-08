@@ -11,6 +11,7 @@
 @interface DEScreenManager : NSObject
 
 @property BOOL overlayDisplayed;
+@property (strong, nonatomic) UIViewController *nextScreen;
 
 + (id)sharedManager;
 

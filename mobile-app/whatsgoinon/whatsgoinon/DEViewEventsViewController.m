@@ -42,15 +42,19 @@
     [self resetPostCounter];
     [self displayPost];
     
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     
-    
+    for (__strong UIView *view in [_scrollView subviews]) {
+        view = nil;
+    }
 }
 
 - (void) loadPosts {
     _posts = [[DEPostManager sharedManager] posts];
 }
-
-
 
 - (void) displayPost {
     __block int column = 0;

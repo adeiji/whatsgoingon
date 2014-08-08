@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DEViewEventsViewController.h"
+#import "DEUserManager.h"
+#import "DELoginViewController.h"
 
 @interface DEMainViewController : UIViewController
 - (IBAction)viewWhatsGoingOnNow:(id)sender;

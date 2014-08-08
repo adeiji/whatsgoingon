@@ -15,6 +15,8 @@
 
 @implementation DEMainViewController
 
+#define PROMPT_LOGIN_VIEW_CONTROLLER @"promptLogin"
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,7 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,17 +38,56 @@
 }
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
-    // Do any additional setup after loading the view.
-    UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
-    DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
+    if ([self isLoggedIn])
+    {
+        // Do any additional setup after loading the view.
+        UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
+        DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
     
-    [self.navigationController pushViewController:viewEventsViewController animated:YES];
+        [self.navigationController pushViewController:viewEventsViewController animated:YES];
+    }
+    else {
+        UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
+        DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
+        
+        [self setNextScreenWithViewController:viewEventsViewController];
+    }
 }
 
-- (IBAction)showCreatePostView:(id)sender {
-    UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
-    DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
-    
-    [self.navigationController pushViewController:createPostViewController animated:YES];
+- (void) setNextScreenWithViewController : (UIViewController *) viewController {
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    screenManager.nextScreen = viewController;
 }
+
+
+- (IBAction)showCreatePostView:(id)sender {
+    if ([self isLoggedIn])
+    {
+        UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+        DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+    
+        [self.navigationController pushViewController:createPostViewController animated:YES];
+    }
+    else {
+        UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+        DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+        
+        [self setNextScreenWithViewController:createPostViewController];
+    }
+    
+}
+
+- (BOOL) isLoggedIn {
+    if (![DEUserManager isLoggedIn])
+    {
+        DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:PROMPT_LOGIN_VIEW_CONTROLLER];
+        
+        [[self navigationController] pushViewController:loginViewController animated:YES];
+        [[loginViewController navigationController] setNavigationBarHidden:YES animated:YES];
+        
+        return NO;
+    }
+    return YES;
+}
+
 @end
