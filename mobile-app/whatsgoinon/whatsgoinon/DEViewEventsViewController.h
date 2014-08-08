@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "DEPostManager.h"
 #import "DEViewEventsView.h"
+#import "DEScreenManager.h"
 
-@interface DEViewEventsViewController : UIViewController
+@interface DEViewEventsViewController : UIViewController 
 {
     int postCounter;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
 @property (strong, nonatomic) NSArray *posts;
+@property BOOL *overlayDisplayed;
 
 @end

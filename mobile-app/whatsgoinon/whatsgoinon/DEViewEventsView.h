@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "DEPost.h"
+#import "DEEventsTimeline.h"
+#import "DEScreenManager.h"
 
-@interface DEViewEventsView : UIView
+@interface DEViewEventsView : UIView <UIGestureRecognizerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *imgMainImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblSubtitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblDistance;
+@property (weak, nonatomic) DEEventsTimeline *overlayView;
+
 
 - (void) renderViewWithPost : (DEPost *) post;
 

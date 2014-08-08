@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DELocationManager.h"
+#import "DESyncManager.h"
+#import "DEScreenManager.h"
 
 @interface DEAppDelegate : UIResponder <UIApplicationDelegate>
 

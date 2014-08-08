@@ -57,6 +57,7 @@
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F8C1992E46A00FCDE66 /* DELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F8B1992E46A00FCDE66 /* DELocation.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
+		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,8 @@
 		F4774F8B1992E46A00FCDE66 /* DELocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocation.m; sourceTree = "<group>"; };
 		F4774F8F1994398F00FCDE66 /* UDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDIDGenerator.h; path = ../../../../12WeekFitness/Resources/UDIDGenerator.h; sourceTree = "<group>"; };
 		F4774F901994398F00FCDE66 /* UDIDGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDIDGenerator.m; path = ../../../../12WeekFitness/Resources/UDIDGenerator.m; sourceTree = "<group>"; };
+		F4774F9319944B9400FCDE66 /* DEScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEScreenManager.h; sourceTree = "<group>"; };
+		F4774F9419944B9400FCDE66 /* DEScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEScreenManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +225,7 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F4774F9219944B8400FCDE66 /* Global Screen Manager */,
 				F4774F8E199438DD00FCDE66 /* Dephyned Classes */,
 				F4774F861992E40300FCDE66 /* Location */,
 				F4774F821992E37A00FCDE66 /* AWS Services */,
@@ -388,6 +392,15 @@
 			name = "Dephyned Classes";
 			sourceTree = "<group>";
 		};
+		F4774F9219944B8400FCDE66 /* Global Screen Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F4774F9319944B9400FCDE66 /* DEScreenManager.h */,
+				F4774F9419944B9400FCDE66 /* DEScreenManager.m */,
+			);
+			name = "Global Screen Manager";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -502,6 +515,7 @@
 				F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */,
 				F437BF911990452000CF61E9 /* main.m in Sources */,
 				F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */,
+				F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */,
 				F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */,
 				F437C0061991A2C000CF61E9 /* DEPost.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,

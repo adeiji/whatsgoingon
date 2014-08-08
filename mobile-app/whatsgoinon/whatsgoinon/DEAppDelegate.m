@@ -8,7 +8,7 @@
 
 #import "DEAppDelegate.h"
 #import <Parse/Parse.h>
-#import "DESyncManager.h"
+
 
 @implementation DEAppDelegate
 
@@ -24,6 +24,7 @@
     
     [DESyncManager getAllValues];
     [DELocationManager sharedManager];
+    [DEScreenManager sharedManager];
     
     return YES;
 }

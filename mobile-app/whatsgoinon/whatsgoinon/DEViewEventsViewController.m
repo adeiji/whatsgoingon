@@ -16,6 +16,7 @@
 #define POST_HEIGHT 216
 #define POST_WIDTH 140
 #define IPHONE_DEVICE_WIDTH 320
+#define TOP_MARGIN 20
 
 @implementation DEViewEventsViewController
 
@@ -40,11 +41,16 @@
     
     [self resetPostCounter];
     [self displayPost];
+    
+    
+    
 }
 
 - (void) loadPosts {
     _posts = [[DEPostManager sharedManager] posts];
 }
+
+
 
 - (void) displayPost {
     __block int column = 0;
@@ -52,7 +58,7 @@
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
         
-        CGRect frame = CGRectMake((column * POST_WIDTH) + (10 * (column + 1)), POST_HEIGHT * postCounter, POST_WIDTH, POST_HEIGHT);
+        CGRect frame = CGRectMake((column * POST_WIDTH) + (10 * (column + 1)),TOP_MARGIN + POST_HEIGHT * postCounter, POST_WIDTH, POST_HEIGHT);
         viewEventsView.frame = frame;
         [viewEventsView renderViewWithPost:obj];
         
