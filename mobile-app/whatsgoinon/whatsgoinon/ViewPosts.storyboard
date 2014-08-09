@@ -16,12 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFX-Ym-bdg">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFX-Ym-bdg">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8VP-O7-Add" firstAttribute="top" secondItem="oFX-Ym-bdg" secondAttribute="bottom" id="BAT-tS-3IX"/>
+                            <constraint firstItem="oFX-Ym-bdg" firstAttribute="top" secondItem="OzN-Tk-2AE" secondAttribute="top" id="X8r-vQ-b6r"/>
+                            <constraint firstItem="oFX-Ym-bdg" firstAttribute="leading" secondItem="OzN-Tk-2AE" secondAttribute="leading" id="ZPp-00-FpX"/>
+                            <constraint firstAttribute="trailing" secondItem="oFX-Ym-bdg" secondAttribute="trailing" id="lYx-Ye-z3v"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="oFX-Ym-bdg" id="5vw-tq-pS6"/>

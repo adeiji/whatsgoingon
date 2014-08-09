@@ -68,6 +68,7 @@
         if (succeeded)
         {
             NSLog(@"Post Saved to Parse Server");
+            [self getAllValues];
         }
     }];
     

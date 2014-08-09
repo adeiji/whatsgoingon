@@ -17,6 +17,7 @@
 #define POST_WIDTH 140
 #define IPHONE_DEVICE_WIDTH 320
 #define TOP_MARGIN 20
+#define SCROLL_VIEW_DISTANCE_FROM_TOP 20
 
 @implementation DEViewEventsViewController
 
@@ -37,7 +38,7 @@
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [self loadPosts];
     //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
-    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, POST_HEIGHT * (([_posts count] / 2) + ([_posts count] % 2)));
+    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, POST_HEIGHT * (([_posts count] / 2) + ([_posts count] % 2)) + SCROLL_VIEW_DISTANCE_FROM_TOP);
     
     [self resetPostCounter];
     [self displayPost];

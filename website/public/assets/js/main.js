@@ -31,9 +31,9 @@ $(document).ready(function () {
 		fileReader.onload = function (ev2) {
 			console.dir(ev2);
 			pictureIndex = pictureIndex + 1;
-			$('.post-image[index=' + pictureIndex + ']').attr('src', ev2.target.result);
+			$('.post-image[index=' + pictureIndex + ']').attr('src', ev2.target.result);			
+			pictures[pictureIndex - 1] = file;
 			
-			pictures[pictureIndex] = file;
 			// Attach the pictures array to the document DOM element to allow reading within a different javascript file
 			$(document).data("pictures", pictures);
 		};
@@ -58,26 +58,53 @@ $(document).ready(function () {
 		myEvent.set('postrange', postParams.postRange);
 		myEvent.set('user', Parse.User.current()); //Gets the current user that is uploading this item
 		myEvent.set('active', true);
-		var pictureIds = [];
-
-		for (var i = pictures.length - 1; i >= 0; i--) {
-			pictureIds[i] = $('#event-title').val().replace(/\s/g, '') + createGuid().substring(0, 8);
-			//Call this method within AWSManager.js and post the images to Amazon S3 and the data to parse.  
-			addPicturesToBucket(pictures[i], pictureIds[i]);
-		};
-
-		myEvent.set('imageids', pictureIds);
 
 		myEvent.save(null, {
 			success: function (myEvent) {
 				console.log('New object created with objectId: ' + myEvent.id);
+
+				addImage(myEvent);
 			},
 			error: function (myEvent, error) {
-				alert('Failed to create new object, with error code: ' + error.message);
+				console.log('Failed to create new object, with error code: ' + error.message);
 			}
 		});
 
 	});
+
+	function addImage (myEvent) {
+		// Create a new Parse Object that will only store images
+		// The image will be stored with an ID corresponding to the event
+		
+		var pictureFiles = [];
+
+		for (var i = 0; i < pictures.length; i++) {
+			var pictureFile = new Parse.File("post-image.jpg", pictures[i]);
+			
+			pictureFiles[i] = pictureFile;
+			pictureFile.save().then(function () {
+				// The file was saved to parse
+				var images = new Parse.Object("Images");
+
+				images.set("eventId", myEvent.id);
+				images.set("image", pictureFile);	
+
+				images.save(null, {
+					success: function(image) {
+						// Execute any logic that should take place after the object is saved.
+						console.log('New object created with objectId: ' + image.id);
+					},
+					error: function(image, error) {
+					 	// Execute any logic that should take place if the save fails.
+					 	// error is a Parse.Error with an error code and description.
+				  		console.log('Failed to create new object, with error code: ' + error.message);
+					}
+				});
+			}, function (error) {
+				// Handle the error appropriately
+			});
+		}
+	}
 
 	function createGuid() {
     	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
