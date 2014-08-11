@@ -89,4 +89,17 @@
     return images;
 }
 
+// Display the new view controller, but remove all other views from the View Controller stack first.
++ (void) popToRootAndShowViewController : (UIViewController *) viewController
+{
+    // Successful login
+    UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    [navigationController popToRootViewControllerAnimated:NO];
+    [navigationController pushViewController:viewController animated:YES];
+    
+    [[viewController navigationController] setNavigationBarHidden:NO];
+
+}
+
 @end

@@ -15,5 +15,5 @@
 // Get all the values from the Parse database
 + (void) getAllValues;
 + (BOOL) savePost : (DEPost *) post;
-
++ (void) popToRootAndShowViewController : (UIViewController *) viewController;
 @end

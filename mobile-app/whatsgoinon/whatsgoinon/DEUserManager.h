@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "DELoginViewController.h"
+#import "DESyncManager.h"
 
 @interface DEUserManager : NSObject
 

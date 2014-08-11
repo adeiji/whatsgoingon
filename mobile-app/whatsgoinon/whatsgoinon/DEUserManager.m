@@ -60,13 +60,7 @@
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         if (user)
         {
-            // Successful login
-            UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-            
-            [navigationController popToRootViewControllerAnimated:NO];
-            [navigationController pushViewController:viewController animated:YES];
-            
-            [[viewController navigationController] setNavigationBarHidden:NO];
+            [DESyncManager popToRootAndShowViewController:viewController];
         }
         else {
             // Login failed, check error to see why.

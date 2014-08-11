@@ -66,6 +66,16 @@ static BOOL DEVELOPMENT = NO;
 // We display the post to allow the user to view the post before he actually makes it live
 - (IBAction)displayPreview:(id)sender {
     
+    DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
+    
+    eventViewController.isPreview = YES;
+    [self saveNewInfoToPost];
+    eventViewController.post = _post;
+    [self.navigationController pushViewController:eventViewController animated:YES];
+    
+}
+
+- (void) saveNewInfoToPost {
     DECreatePostView *view = self.createPostViewOne;
     
     if (DEVELOPMENT)
@@ -84,6 +94,10 @@ static BOOL DEVELOPMENT = NO;
         _post.images = _images;
     }
 
+}
+
+- (void) savePost {
+    
     
     //For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
     BOOL postSaved = [DESyncManager savePost:_post];
@@ -92,7 +106,9 @@ static BOOL DEVELOPMENT = NO;
     {
         _post = nil;
         _images = [NSMutableArray new];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
+
 }
 
 - (IBAction)displayInfo:(id)sender {

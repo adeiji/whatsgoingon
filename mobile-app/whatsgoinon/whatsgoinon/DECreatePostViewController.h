@@ -10,6 +10,7 @@
 #import "DECreatePostView.h"
 #import "DEPost.h"
 #import "DELocationManager.h"
+#import "DEEventViewController.h"
 
 @interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
