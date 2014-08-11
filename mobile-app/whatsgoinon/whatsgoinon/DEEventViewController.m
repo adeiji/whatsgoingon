@@ -30,10 +30,30 @@
         [[_eventView imgMainImage] setImage:mainImage];
         [[_eventView lblCost] setText:[[_post cost] stringValue]];
         [[_eventView lblNumberOfPeopleGoing] setText:0];
+        
+        UIBarButtonItem *postButton = [[UIBarButtonItem alloc]
+                                       initWithTitle:@"Post!"
+                                       style:UIBarButtonItemStyleBordered
+                                       target:self
+                                       action:@selector(savePost)];
+        self.navigationItem.rightBarButtonItem = postButton;
+
     }
     
-    [self showView:[_eventDetailsViewController viewInfo]];
+    [self showEventDetails:nil];
 }
+
+- (void) savePost {
+    //For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
+    BOOL postSaved = [DESyncManager savePost:_post];
+    
+    if (postSaved)
+    {
+        _post = nil;
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -53,6 +73,13 @@
 - (IBAction)showEventDetails:(id)sender
 {
     [self showView:[_eventDetailsViewController viewInfo]];
+    
+    DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
+    
+    [[detailsView txtDescription] setText:_post.description];
+    [[detailsView lblCost] setText:[_post.cost stringValue]];
+    [[detailsView lblNumberGoing] setText:@"0"];
+    [[detailsView lblTimeUntilStartsOrEnds] setText:@"3 hrs"];
 }
 - (IBAction)showEventComments:(id)sender
 {

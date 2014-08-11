@@ -11,8 +11,10 @@
 #import "DEPost.h"
 #import "DELocationManager.h"
 #import "DEEventViewController.h"
+#import "DEAddValueViewController.h"
 
-@interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
 {
     int imageCounter;
 }

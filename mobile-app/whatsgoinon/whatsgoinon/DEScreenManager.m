@@ -22,6 +22,7 @@
 - (id)init {
     if (self = [super init]) {
         _overlayDisplayed = NO;
+        _values = [NSMutableDictionary new];
     }
     return self;
 }

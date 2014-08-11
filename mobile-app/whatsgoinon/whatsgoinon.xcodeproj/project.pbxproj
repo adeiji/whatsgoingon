@@ -67,6 +67,10 @@
 		F4774FB019996A9B00FCDE66 /* DEEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FAF19996A9B00FCDE66 /* DEEventView.m */; };
 		F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB219996E7B00FCDE66 /* DEEventViewController.m */; };
 		F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */; };
+		F4CCBD6019997D6600532E9B /* DEEventDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */; };
+		F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD6619997FCF00532E9B /* DEAddValueViewController.m */; };
+		F4CCBD6919997FCF00532E9B /* DEAddValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CCBD6719997FCF00532E9B /* DEAddValueViewController.xib */; };
+		F4CCBD6C199980B800532E9B /* DEAddValueView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD6B199980B800532E9B /* DEAddValueView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +173,13 @@
 		F4774FB219996E7B00FCDE66 /* DEEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventViewController.m; sourceTree = "<group>"; };
 		F4774FB4199974A600FCDE66 /* DEEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsViewController.h; sourceTree = "<group>"; };
 		F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsViewController.m; sourceTree = "<group>"; };
+		F4CCBD5E19997D6600532E9B /* DEEventDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsView.h; sourceTree = "<group>"; };
+		F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsView.m; sourceTree = "<group>"; };
+		F4CCBD6519997FCF00532E9B /* DEAddValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAddValueViewController.h; sourceTree = "<group>"; };
+		F4CCBD6619997FCF00532E9B /* DEAddValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAddValueViewController.m; sourceTree = "<group>"; };
+		F4CCBD6719997FCF00532E9B /* DEAddValueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DEAddValueViewController.xib; sourceTree = "<group>"; };
+		F4CCBD6A199980B800532E9B /* DEAddValueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAddValueView.h; sourceTree = "<group>"; };
+		F4CCBD6B199980B800532E9B /* DEAddValueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAddValueView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +263,7 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F4CCBD6119997F9A00532E9B /* Add Value Screen */,
 				F4774F9C1995628700FCDE66 /* Login */,
 				F4774F9619955E0B00FCDE66 /* Managers */,
 				F4774F8E199438DD00FCDE66 /* Dephyned Classes */,
@@ -482,8 +494,22 @@
 				F4774FB219996E7B00FCDE66 /* DEEventViewController.m */,
 				F4774FB4199974A600FCDE66 /* DEEventDetailsViewController.h */,
 				F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */,
+				F4CCBD5E19997D6600532E9B /* DEEventDetailsView.h */,
+				F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */,
 			);
 			name = "View Post Details";
+			sourceTree = "<group>";
+		};
+		F4CCBD6119997F9A00532E9B /* Add Value Screen */ = {
+			isa = PBXGroup;
+			children = (
+				F4CCBD6519997FCF00532E9B /* DEAddValueViewController.h */,
+				F4CCBD6619997FCF00532E9B /* DEAddValueViewController.m */,
+				F4CCBD6719997FCF00532E9B /* DEAddValueViewController.xib */,
+				F4CCBD6A199980B800532E9B /* DEAddValueView.h */,
+				F4CCBD6B199980B800532E9B /* DEAddValueView.m */,
+			);
+			name = "Add Value Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,6 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F437BFCE19918A4500CF61E9 /* InsertLocationView.xib in Resources */,
+				F4CCBD6919997FCF00532E9B /* DEAddValueViewController.xib in Resources */,
 				F437BFC419904A4200CF61E9 /* MainMenuView.xib in Resources */,
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
@@ -613,10 +640,13 @@
 				F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */,
 				F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */,
 				F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */,
+				F4CCBD6019997D6600532E9B /* DEEventDetailsView.m in Sources */,
+				F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */,
 				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
 				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,
 				F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
+				F4CCBD6C199980B800532E9B /* DEAddValueView.m in Sources */,
 				F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */,
 				F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */,
 				F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */,

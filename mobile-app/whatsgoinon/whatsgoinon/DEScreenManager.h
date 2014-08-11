@@ -12,6 +12,7 @@
 
 @property BOOL overlayDisplayed;
 @property (strong, nonatomic) UIViewController *nextScreen;
+@property (strong, nonatomic) NSMutableDictionary *values;
 
 + (id)sharedManager;
 

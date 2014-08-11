@@ -33,7 +33,7 @@ static BOOL DEVELOPMENT = NO;
 	// Do any additional setup after loading the view.
     
     _images = [NSMutableArray new];
-        
+    [[_createPostViewTwo txtDescription] setDelegate:self];
 }
 
 - (void) setImageCounterToZero {
@@ -96,20 +96,6 @@ static BOOL DEVELOPMENT = NO;
 
 }
 
-- (void) savePost {
-    
-    
-    //For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
-    BOOL postSaved = [DESyncManager savePost:_post];
-    
-    if (postSaved)
-    {
-        _post = nil;
-        _images = [NSMutableArray new];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-
-}
 
 - (IBAction)displayInfo:(id)sender {
     
@@ -165,7 +151,6 @@ static BOOL DEVELOPMENT = NO;
     else {
         // let the user know that he's taken too many pictures
     }
-    
 }
 
 #pragma mark - ImagePickerControllerDelegate Methods
@@ -185,10 +170,28 @@ static BOOL DEVELOPMENT = NO;
     //Increment the imageCounter so that we display on the next image
     imageCounter ++;
     
-    [_images addObject:UIImageJPEGRepresentation(image, .25)];
+    [_images addObject:UIImageJPEGRepresentation(image, .1)];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
+}
+
+#pragma mark - Text View Delegate Methods
+
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+{
+    DEAddValueViewController *addValueViewController = [DEAddValueViewController new];
+    addValueViewController.inputView = textView;
+
+    [self.navigationController pushViewController:addValueViewController animated:YES];
+#warning Do not leave with this String, this is hard coded, instead we want to put a placeholder here instead of actual text
+    if (![textView.text isEqualToString:@"Enter a description"])
+    {
+        DEAddValueView *view = (DEAddValueView *) addValueViewController.view;
+        view.txtValue.text = textView.text;
+    }
+    
+    return YES;
 }
 
 @end

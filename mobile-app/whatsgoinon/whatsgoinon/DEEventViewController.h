@@ -10,6 +10,8 @@
 #import "DEPost.h"
 #import "DEEventView.h"
 #import "DEEventDetailsViewController.h"
+#import "DEEventDetailsView.h"
+#import "DESyncManager.h"
 
 @interface DEEventViewController : UIViewController
 
