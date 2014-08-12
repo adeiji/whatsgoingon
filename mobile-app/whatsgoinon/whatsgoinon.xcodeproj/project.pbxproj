@@ -55,7 +55,6 @@
 		F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0161991CE7E00CF61E9 /* DEViewEventsViewController.m */; };
 		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
-		F4774F8C1992E46A00FCDE66 /* DELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F8B1992E46A00FCDE66 /* DELocation.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
 		F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9A19955E4200FCDE66 /* DEUserManager.m */; };
@@ -152,8 +151,6 @@
 		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
 		F4774F881992E40C00FCDE66 /* DELocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationManager.m; sourceTree = "<group>"; };
-		F4774F8A1992E46A00FCDE66 /* DELocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocation.h; sourceTree = "<group>"; };
-		F4774F8B1992E46A00FCDE66 /* DELocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocation.m; sourceTree = "<group>"; };
 		F4774F8F1994398F00FCDE66 /* UDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDIDGenerator.h; path = ../../../../12WeekFitness/Resources/UDIDGenerator.h; sourceTree = "<group>"; };
 		F4774F901994398F00FCDE66 /* UDIDGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UDIDGenerator.m; path = ../../../../12WeekFitness/Resources/UDIDGenerator.m; sourceTree = "<group>"; };
 		F4774F9319944B9400FCDE66 /* DEScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEScreenManager.h; sourceTree = "<group>"; };
@@ -278,7 +275,6 @@
 				F4774F9C1995628700FCDE66 /* Login */,
 				F4774F9619955E0B00FCDE66 /* Managers */,
 				F4774F8E199438DD00FCDE66 /* Dephyned Classes */,
-				F4774F861992E40300FCDE66 /* Location */,
 				F437C00A1991AB2F00CF61E9 /* Main Screen */,
 				F437BFF219919B7200CF61E9 /* Posting */,
 				F437BFEE1991967300CF61E9 /* Event Objects */,
@@ -420,15 +416,6 @@
 				F4774F841992E38400FCDE66 /* DEAWSManager.m */,
 			);
 			name = "AWS Services";
-			sourceTree = "<group>";
-		};
-		F4774F861992E40300FCDE66 /* Location */ = {
-			isa = PBXGroup;
-			children = (
-				F4774F8A1992E46A00FCDE66 /* DELocation.h */,
-				F4774F8B1992E46A00FCDE66 /* DELocation.m */,
-			);
-			name = Location;
 			sourceTree = "<group>";
 		};
 		F4774F8E199438DD00FCDE66 /* Dephyned Classes */ = {
@@ -660,7 +647,6 @@
 				F4774FA819956BBE00FCDE66 /* DECreateAccountViewController.m in Sources */,
 				F437C0061991A2C000CF61E9 /* DEPost.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
-				F4774F8C1992E46A00FCDE66 /* DELocation.m in Sources */,
 				F4774FAB199575CE00FCDE66 /* DELoginView.m in Sources */,
 				F437C0131991CE0C00CF61E9 /* DEEventsTimeline.m in Sources */,
 				F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */,

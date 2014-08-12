@@ -7,18 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DELocation.h"
 #import <CoreLocation/CoreLocation.h>
 #import <Parse/Parse.h>
 
 @interface DELocationManager : NSObject <CLLocationManagerDelegate, NSURLConnectionDelegate>
 
+
+typedef void (^completionBlock) (NSString *distance);
+
 - (PFGeoPoint *) geoPoint;
 + (id)sharedManager;
 - (void) startSignificantChangeUpdates;
 - (void) stopSignificantChangeUpdates;
-+ (NSNumber *) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
-                                     LocationTwo : (PFGeoPoint *) location2;
++ (void) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
+                               LocationTwo : (PFGeoPoint *) location2
+                           CompletionBlock : (completionBlock) callback;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;

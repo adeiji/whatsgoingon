@@ -10,6 +10,7 @@
 #import "DEPost.h"
 #import "DEEventsTimeline.h"
 #import "DEScreenManager.h"
+#import "DELocationManager.h"
 
 @interface DEViewEventsView : UIView <UIGestureRecognizerDelegate>
 

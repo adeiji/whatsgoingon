@@ -19,6 +19,7 @@
     if (self) {
         // Initialization code
     }
+    
     return self;
 }
 
@@ -62,6 +63,16 @@
     return TRUE;
 }
 
+- (void) displayDistanceToLocationWithPost : (PFObject *) post
+{
+    DELocationManager *locationManager = [DELocationManager sharedManager];
+    PFGeoPoint *currentLocation = [locationManager currentLocation];
+    
+    [DELocationManager getDistanceInMilesBetweenLocation:currentLocation LocationTwo:post[@"location"] CompletionBlock:^(NSString *distance) {
+        self.lblDistance.text = distance;
+    }];
+}
+
 - (void) renderViewWithPost : (DEPost *) myPost {
     
     __block PFObject *post = (PFObject *) myPost;
@@ -75,7 +86,6 @@
     [_overlayView setFrame:CGRectMake(0, 0, 140, 216)];
     [self addSubview:_overlayView];
     [[_overlayView layer] setOpacity:0];
-    
     
     // THREADING
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -96,6 +106,8 @@
             });
         }
     });
+    
+    [self displayDistanceToLocationWithPost : post];
 }
 
 /*

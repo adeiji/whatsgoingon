@@ -20,6 +20,6 @@
 @property (strong, nonatomic) NSNumber *cost;
 @property (strong, nonatomic) NSArray *images;
 @property (strong, nonatomic) NSString *description;
-@property (strong, nonatomic) NSString *active;
+@property BOOL active;
 
 @end

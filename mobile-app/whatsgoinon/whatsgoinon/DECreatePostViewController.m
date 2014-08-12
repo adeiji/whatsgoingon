@@ -85,6 +85,7 @@ static BOOL DEVELOPMENT = NO;
         _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
         _post.images = nil;
         _post.description = view.txtDescription.text;
+        _post.active = YES;
     }
     else {
         // Production
