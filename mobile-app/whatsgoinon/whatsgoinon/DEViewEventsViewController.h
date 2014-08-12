@@ -10,6 +10,7 @@
 #import "DEPostManager.h"
 #import "DEViewEventsView.h"
 #import "DEScreenManager.h"
+#import "DELocationManager.h"
 
 @interface DEViewEventsViewController : UIViewController 
 {

@@ -44,6 +44,7 @@
 }
 
 - (void) savePost {
+    
     //For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
     BOOL postSaved = [DESyncManager savePost:_post];
     

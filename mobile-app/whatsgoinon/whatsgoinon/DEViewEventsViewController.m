@@ -77,8 +77,16 @@
             column = 0;
             postCounter ++;
         }
+        
+        [self getDistanceFromCurrentLocationOfEvent:obj];
     }];
+}
+
+- (void) getDistanceFromCurrentLocationOfEvent : (DEPost *) event {
+    DELocationManager *locationManager = [DELocationManager sharedManager];
+    DELocation *currentLocation = [locationManager currentLocation];
     
+    [DELocationManager getDistanceInMilesBetweenLocation:currentLocation LocationTwo:event.location];
 }
 
 - (void) resetPostCounter {
