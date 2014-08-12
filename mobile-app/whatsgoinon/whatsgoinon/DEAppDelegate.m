@@ -8,7 +8,7 @@
 
 #import "DEAppDelegate.h"
 #import <Parse/Parse.h>
-
+#import "TestFlight.h"
 
 @implementation DEAppDelegate
 
@@ -18,6 +18,9 @@
     // Connect our app to Parse
     [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
                   clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
+    
+    // start of your application:didFinishLaunchingWithOptions // ...
+    [TestFlight takeOff:@"7dff8d72-f33d-4eb7-aa3f-632fff9c3f03"];
     
     // Track statistics around application opens
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

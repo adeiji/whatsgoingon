@@ -73,5 +73,15 @@
 - (void) stopSignificantChangeUpdates {
     [_locationManager stopMonitoringSignificantLocationChanges];
 }
+// Call the Google Maps API and get the distance between the two points given, but this would be the distance that would actually be traveled as opposed to a straight line between the two points.
+- (NSNumber *) getDistanceInMilesBetweenLocation : (DELocation *) location1
+                                     LocationTwo : (DELocation *) location2
+{
+
+
+    
+    return nil;
+
+}
 
 @end

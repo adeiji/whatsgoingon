@@ -25,7 +25,7 @@
         [[_eventView btnGoing] setEnabled:NO];
         [[_eventView btnMaybe] setEnabled:NO];
         
-        UIImage *mainImage = [[_post images] firstObject];
+        UIImage *mainImage = [UIImage imageWithData:[[_post images] firstObject]];
         
         [[_eventView imgMainImage] setImage:mainImage];
         [[_eventView lblCost] setText:[[_post cost] stringValue]];
