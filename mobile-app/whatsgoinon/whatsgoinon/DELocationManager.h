@@ -13,7 +13,8 @@
 @interface DELocationManager : NSObject <CLLocationManagerDelegate, NSURLConnectionDelegate>
 
 
-typedef void (^completionBlock) (NSString *distance);
+typedef void (^completionBlock) (NSString *value);
+typedef void (^completionHandler) (PFGeoPoint *value);
 
 - (PFGeoPoint *) geoPoint;
 + (id)sharedManager;
@@ -22,10 +23,13 @@ typedef void (^completionBlock) (NSString *distance);
 + (void) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
                                LocationTwo : (PFGeoPoint *) location2
                            CompletionBlock : (completionBlock) callback;
++ (void) getLatLongValueFromAddress : (NSString *) address
+                    CompletionBlock : (completionHandler) callback;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) NSMutableData *responseData;
+@property (strong, nonatomic) PFGeoPoint *storedLocation;
 
 @end

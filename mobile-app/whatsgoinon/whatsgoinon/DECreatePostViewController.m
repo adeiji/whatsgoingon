@@ -16,7 +16,7 @@
 
 @implementation DECreatePostViewController
 
-static BOOL DEVELOPMENT = NO;
+static BOOL DEVELOPMENT = YES;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +34,7 @@ static BOOL DEVELOPMENT = NO;
     
     _images = [NSMutableArray new];
     [[_createPostViewTwo txtDescription] setDelegate:self];
+
 }
 
 - (void) setImageCounterToZero {
@@ -69,14 +70,15 @@ static BOOL DEVELOPMENT = NO;
     DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
     
     eventViewController.isPreview = YES;
+
     [self saveNewInfoToPost];
     eventViewController.post = _post;
     [self.navigationController pushViewController:eventViewController animated:YES];
-    
 }
 
 - (void) saveNewInfoToPost {
-    DECreatePostView *view = self.createPostViewOne;
+    DECreatePostView *view = self.createPostViewTwo;
+    DELocationManager *sharedManager = [DELocationManager sharedManager];
     
     if (DEVELOPMENT)
     {
@@ -86,6 +88,7 @@ static BOOL DEVELOPMENT = NO;
         _post.images = nil;
         _post.description = view.txtDescription.text;
         _post.active = YES;
+        _post.location = sharedManager.storedLocation;
     }
     else {
         // Production
@@ -94,7 +97,6 @@ static BOOL DEVELOPMENT = NO;
         _post.title = self.createPostViewTwo.txtTitle.text;
         _post.images = _images;
     }
-
 }
 
 
@@ -115,6 +117,11 @@ static BOOL DEVELOPMENT = NO;
     NSDate *endDate = [dateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtEndDate.text, _createPostViewOne.txtEndTime.text]];
     
     NSLog(@"Captured Date %@", [startDate description]);
+    
+    [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
+        DELocationManager *sharedManager = [DELocationManager sharedManager];
+        sharedManager.storedLocation = value;
+    }];
     
     DEPost *newPost = [DEPostManager createPostWithCategory:_createPostViewOne.txtCategory.text
                                                   StartTime:startDate

@@ -10,7 +10,8 @@
 
 @implementation DELocationManager
 
-#define GOOGLE_MATRIX_DISTANCE_API @"https://maps.googleapis.com/maps/api/distancematrix/json?origins=%@&destinations=%@&sensor=false&key=AIzaSyDuVa4zdofqE5f7z4wkmi6dw--0HQYm5Ho"
+#define GOOGLE_MATRIX_DISTANCE_API @"https://maps.googleapis.com/maps/api/distancematrix/json?origins=%@&destinations=%@&sensor=false&units=imperial&key=AIzaSyDuVa4zdofqE5f7z4wkmi6dw--0HQYm5Ho"
+#define GOOGLE_GEOLOCATION_API @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 
 // Do we need to make sure that the user is using location services or not upon application upload?
 
@@ -72,6 +73,32 @@
 - (void) stopSignificantChangeUpdates {
     [_locationManager stopMonitoringSignificantLocationChanges];
 }
+
++ (void) getLatLongValueFromAddress:(NSString *)address CompletionBlock:(completionHandler)callback {
+    NSLog(@"The address to get the lat/long value is: %@", address);
+    address = [address stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API, address]]];
+    
+    NSOperationQueue *queue = [NSOperationQueue new];
+    queue.name = @"Google Geolocation Queue";
+    queue.maxConcurrentOperationCount = 3;
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSError *error;
+        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        PFGeoPoint *location = [PFGeoPoint new];
+        location.latitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lat"] doubleValue];
+        location.longitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lng"] doubleValue];
+        
+        NSLog(@"%@", location);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Make sure that we call this method on the main thread so that it updates properly as supposed to
+            callback(location);
+        });
+    }];
+}
+
 // Call the Google Maps API and get the distance between the two points given, but this would be the distance that would actually be traveled as opposed to a straight line between the two points.
 + (void) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
                                      LocationTwo : (PFGeoPoint *) location2
