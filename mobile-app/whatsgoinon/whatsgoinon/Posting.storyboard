@@ -84,7 +84,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="displayCurrentLocation:" destination="TtG-65-4oM" eventType="touchUpInside" id="gxg-qz-T9f"/>
+                                    <action selector="displayCurrentLocation:" destination="TtG-65-4oM" eventType="touchUpInside" id="2a1-Ih-7WF"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the address of the event" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iI0-Is-RwP">

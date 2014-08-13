@@ -57,6 +57,12 @@ static BOOL DEVELOPMENT = YES;
 }
 
 - (IBAction)displayCurrentLocation:(id)sender {
+    
+    DELocationManager *locationManager = [DELocationManager sharedManager];
+    [DELocationManager getAddressFromLatLongValue:[locationManager geoPoint] CompletionBlock:^(NSString *value) {
+        _createPostViewOne.txtAddress.text = value;
+    }];
+    
 }
 
 // Here we set the rest of the values for the post
@@ -85,7 +91,7 @@ static BOOL DEVELOPMENT = YES;
         // Development
         _post.title = view.txtTitle.text;
         _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
-        _post.images = nil;
+        _post.images = _images;
         _post.description = view.txtDescription.text;
         _post.active = YES;
         _post.location = sharedManager.storedLocation;
@@ -160,6 +166,7 @@ static BOOL DEVELOPMENT = YES;
         // let the user know that he's taken too many pictures
     }
 }
+
 
 #pragma mark - ImagePickerControllerDelegate Methods
 

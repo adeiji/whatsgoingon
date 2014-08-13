@@ -26,6 +26,7 @@
 - (IBAction)gotoNextScreen:(id)sender;
 - (IBAction)takePicture:(id)sender;
 
+
 @property (strong, nonatomic) IBOutlet DECreatePostView *createPostViewOne;
 @property (strong, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;
 

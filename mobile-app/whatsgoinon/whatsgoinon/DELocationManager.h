@@ -25,6 +25,8 @@ typedef void (^completionHandler) (PFGeoPoint *value);
                            CompletionBlock : (completionBlock) callback;
 + (void) getLatLongValueFromAddress : (NSString *) address
                     CompletionBlock : (completionHandler) callback;
++ (void) getAddressFromLatLongValue : (PFGeoPoint *) location
+                    CompletionBlock : (completionBlock) callback;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;

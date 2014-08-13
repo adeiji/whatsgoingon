@@ -11,7 +11,8 @@
 @implementation DELocationManager
 
 #define GOOGLE_MATRIX_DISTANCE_API @"https://maps.googleapis.com/maps/api/distancematrix/json?origins=%@&destinations=%@&sensor=false&units=imperial&key=AIzaSyDuVa4zdofqE5f7z4wkmi6dw--0HQYm5Ho"
-#define GOOGLE_GEOLOCATION_API @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
+#define GOOGLE_GEOLOCATION_API_GET_COORDINATES @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
+#define GOOGLE_GEOLOCATION_API_GET_ADDRESS @"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 
 // Do we need to make sure that the user is using location services or not upon application upload?
 
@@ -77,7 +78,7 @@
 + (void) getLatLongValueFromAddress:(NSString *)address CompletionBlock:(completionHandler)callback {
     NSLog(@"The address to get the lat/long value is: %@", address);
     address = [address stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API, address]]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API_GET_COORDINATES, address]]];
     
     NSOperationQueue *queue = [NSOperationQueue new];
     queue.name = @"Google Geolocation Queue";
@@ -132,6 +133,33 @@
             callback(distance);
         });
     }];
+}
+
++ (void) getAddressFromLatLongValue:(PFGeoPoint *)location CompletionBlock:(completionBlock)callback {
+    NSLog(@"The lat/long value to get the address is: %@", location);
+    
+    NSString *latLong = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API_GET_ADDRESS, latLong]]];
+    
+    NSOperationQueue *queue = [NSOperationQueue new];
+    queue.name = @"Google Geolocation Queue";
+    queue.maxConcurrentOperationCount = 3;
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSError *error;
+        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+        
+        NSString *addressNumber = jsonData[@"results"][0][@"address_components"][0][@"short_name"];
+        NSString *street = jsonData[@"results"][0][@"address_components"][1][@"short_name"];
+        NSString *address = [NSString stringWithFormat:@"%@ %@", addressNumber, street];
+        
+        NSLog(@"%@", address);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Make sure that we call this method on the main thread so that it updates properly as supposed to
+            callback(address);
+        });
+    }];
+
 }
 
 
