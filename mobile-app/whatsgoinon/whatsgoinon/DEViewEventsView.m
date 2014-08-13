@@ -63,24 +63,29 @@
     return TRUE;
 }
 
-- (void) displayDistanceToLocationWithPost : (PFObject *) post
+- (void) displayDistanceToLocationWithPost : (DEPost *) post
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
     PFGeoPoint *currentLocation = [locationManager currentLocation];
     
-    [DELocationManager getDistanceInMilesBetweenLocation:currentLocation LocationTwo:post[@"location"] CompletionBlock:^(NSString *distance) {
+    [DELocationManager getDistanceInMilesBetweenLocation:currentLocation LocationTwo:post.location CompletionBlock:^(NSString *distance) {
         self.lblDistance.text = distance;
     }];
 }
 
 - (void) renderViewWithPost : (DEPost *) myPost {
     
-    __block PFObject *post = (PFObject *) myPost;
+    __block DEPost *post = myPost;
     
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showOverlayView:)];
     longPressGestureRecognizer.minimumPressDuration = .2;
     longPressGestureRecognizer.delegate = self;
     [self addGestureRecognizer:longPressGestureRecognizer];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayEventDetails:)];
+    tapGestureRecognizer.numberOfTapsRequired = 2;
+    tapGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:tapGestureRecognizer];
     
     _overlayView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:OVERLAY_VIEW];
     [_overlayView setFrame:CGRectMake(0, 0, 140, 216)];
@@ -91,12 +96,12 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
     dispatch_async(queue, ^{
-        self.lblTitle.text = post[@"name"];
+        self.lblTitle.text = post.title;
         self.imgMainImageView.backgroundColor = [UIColor greenColor];
         
-        if ([post[@"images"] count] > 0)
+        if ([post.images count] > 0)
         {
-            PFFile *imageFile = post[@"images"][0];
+            PFFile *imageFile = post.images[0];
             NSData *imageData = [imageFile getData];
             UIImage *image = [UIImage imageWithData:imageData];
             
@@ -108,15 +113,19 @@
     });
     
     [self displayDistanceToLocationWithPost : post];
+    
+    _post = myPost;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+// When the user taps this event twice it will take them to a screen to view all the details of the event.
+- (void) displayEventDetails : (id) sender {
+    UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateInitialViewController];
+    eventViewController.post = _post;
+    eventViewController.isPreview = NO;
+    [navigationController pushViewController:eventViewController animated:YES];
 }
-*/
+
 
 @end

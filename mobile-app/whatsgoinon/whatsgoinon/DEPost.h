@@ -22,4 +22,6 @@
 @property (strong, nonatomic) NSString *description;
 @property BOOL active;
 
++ (DEPost *) getPostFromPFObject : (PFObject *) object;
+
 @end

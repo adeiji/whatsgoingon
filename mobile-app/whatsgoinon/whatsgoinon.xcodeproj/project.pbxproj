@@ -73,6 +73,9 @@
 		F4CCBD74199AADBD00532E9B /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CCBD6E199AADBD00532E9B /* libTestFlight.a */; };
 		F4CCBD75199AADBD00532E9B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F4CCBD6F199AADBD00532E9B /* README.md */; };
 		F4CCBD76199AADBD00532E9B /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = F4CCBD70199AADBD00532E9B /* release_notes.md */; };
+		F4CCBD7A199B0A9900532E9B /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD79199B0A9900532E9B /* Constants.m */; };
+		F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD7D199BD6F500532E9B /* DESelectCategoryView.m */; };
+		F4CCBD81199BF30200532E9B /* DESector.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD80199BF30200532E9B /* DESector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +189,13 @@
 		F4CCBD71199AADBD00532E9B /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		F4CCBD72199AADBD00532E9B /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		F4CCBD73199AADBD00532E9B /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		F4CCBD78199B0A9900532E9B /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		F4CCBD79199B0A9900532E9B /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		F4CCBD7C199BD6F500532E9B /* DESelectCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESelectCategoryView.h; sourceTree = "<group>"; };
+		F4CCBD7D199BD6F500532E9B /* DESelectCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESelectCategoryView.m; sourceTree = "<group>"; };
+		F4CCBD7F199BF30200532E9B /* DESector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESector.h; sourceTree = "<group>"; };
+		F4CCBD80199BF30200532E9B /* DESector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESector.m; sourceTree = "<group>"; };
+		F4CCBD82199BF6C300532E9B /* DERotaryProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DERotaryProtocol.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +280,7 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F4CCBD77199B0A4A00532E9B /* Constants */,
 				F4CCBD6D199AADBD00532E9B /* TestFlightSDK3.0.2 */,
 				F4CCBD6119997F9A00532E9B /* Add Value Screen */,
 				F4774F9C1995628700FCDE66 /* Login */,
@@ -379,6 +390,7 @@
 		F437BFF219919B7200CF61E9 /* Posting */ = {
 			isa = PBXGroup;
 			children = (
+				F4CCBD7B199BD6DF00532E9B /* Categories */,
 				F4774FAD19996A7D00FCDE66 /* View Post Details */,
 				F437C0031991A2B600CF61E9 /* Post */,
 				F437BFF319919B9B00CF61E9 /* DECreatePostViewController.h */,
@@ -523,6 +535,27 @@
 			path = TestFlightSDK3.0.2;
 			sourceTree = "<group>";
 		};
+		F4CCBD77199B0A4A00532E9B /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				F4CCBD78199B0A9900532E9B /* Constants.h */,
+				F4CCBD79199B0A9900532E9B /* Constants.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		F4CCBD7B199BD6DF00532E9B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F4CCBD7C199BD6F500532E9B /* DESelectCategoryView.h */,
+				F4CCBD7D199BD6F500532E9B /* DESelectCategoryView.m */,
+				F4CCBD7F199BF30200532E9B /* DESector.h */,
+				F4CCBD80199BF30200532E9B /* DESector.m */,
+				F4CCBD82199BF6C300532E9B /* DERotaryProtocol.h */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -639,6 +672,7 @@
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
 				F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */,
 				F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */,
+				F4CCBD7A199B0A9900532E9B /* Constants.m in Sources */,
 				F437BF911990452000CF61E9 /* main.m in Sources */,
 				F4774FB019996A9B00FCDE66 /* DEEventView.m in Sources */,
 				F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */,
@@ -658,10 +692,12 @@
 				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,
 				F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
+				F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */,
 				F4CCBD6C199980B800532E9B /* DEAddValueView.m in Sources */,
 				F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */,
 				F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */,
 				F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */,
+				F4CCBD81199BF30200532E9B /* DESector.m in Sources */,
 				F4774F9F1995629500FCDE66 /* DELoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

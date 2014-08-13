@@ -8,29 +8,17 @@
 
 #import "DESyncManager.h"
 #import <Parse/Parse.h>
+#import "Constants.h"
 
 
 @implementation DESyncManager
 
-#define CLASS_NAME @"Event"
-#define ACTIVE @"active"
-#define TITLE @"name"
-#define ADDRESS @"address"
-#define DESCRIPTION @"description"
-#define START_TIME @"starttime"
-#define END_TIME @"endtime"
-#define COST @"cost"
-#define CATEGORY @"category"
-#define POST_RANGE @"postrange"
-#define USER @"user"
-#define LOCATION @"location"
-#define IMAGES @"images"
 
 + (void) getAllValues {
     DEPostManager *sharedManager = [DEPostManager sharedManager];
-    PFQuery *query = [PFQuery queryWithClassName:CLASS_NAME];
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME];
     //Get all the events that are currently active
-    [query whereKey:ACTIVE equalTo:[NSNumber numberWithBool:true]];
+    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
@@ -49,19 +37,19 @@
 
 
 + (BOOL) savePost : (DEPost *) post {
-    PFObject *postObject = [PFObject objectWithClassName:CLASS_NAME];
+    PFObject *postObject = [PFObject objectWithClassName:PARSE_CLASS_NAME];
     
-    postObject[TITLE] = post.title;
-    postObject[ADDRESS] = @"8605 Blowing Pines Drive, Las Veags, NV 89143";
-    postObject[DESCRIPTION] = post.description;
-    postObject[START_TIME] = post.startTime;
-    postObject[END_TIME] = post.endTime;
-    postObject[COST] = post.cost;
-    postObject[CATEGORY] = post.category;
-    postObject[ACTIVE] = [NSNumber numberWithBool:TRUE];
-    postObject[POST_RANGE] = @5.0;
-    postObject[LOCATION] = post.location;
-    postObject[IMAGES] = [self getImagesArrayWithArray:post.images];
+    postObject[PARSE_CLASS_EVENT_TITLE] = post.title;
+    postObject[PARSE_CLASS_EVENT_ADDRESS] = @"8605 Blowing Pines Drive, Las Veags, NV 89143";
+    postObject[PARSE_CLASS_EVENT_DESCRIPTION] = post.description;
+    postObject[PARSE_CLASS_EVENT_START_TIME] = post.startTime;
+    postObject[PARSE_CLASS_EVENT_END_TIME] = post.endTime;
+    postObject[PARSE_CLASS_EVENT_COST] = post.cost;
+    postObject[PARSE_CLASS_EVENT_CATEGORY] = post.category;
+    postObject[PARSE_CLASS_EVENT_ACTIVE] = [NSNumber numberWithBool:TRUE];
+    postObject[PARSE_CLASS_EVENT_POST_RANGE] = @5.0;
+    postObject[PARSE_CLASS_EVENT_LOCATION] = post.location;
+    postObject[PARSE_CLASS_EVENT_IMAGES] = [self getImagesArrayWithArray:post.images];
     
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

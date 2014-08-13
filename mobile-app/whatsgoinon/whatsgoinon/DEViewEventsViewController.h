@@ -11,6 +11,7 @@
 #import "DEViewEventsView.h"
 #import "DEScreenManager.h"
 #import "DELocationManager.h"
+#import "DESelectCategoryView.h"
 
 @interface DEViewEventsViewController : UIViewController 
 {

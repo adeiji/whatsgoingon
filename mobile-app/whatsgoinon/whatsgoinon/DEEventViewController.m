@@ -25,12 +25,9 @@
         [[_eventView btnGoing] setEnabled:NO];
         [[_eventView btnMaybe] setEnabled:NO];
         
-        UIImage *mainImage = [UIImage imageWithData:[[_post images] firstObject]];
-        
-        [[_eventView imgMainImage] setImage:mainImage];
-        [[_eventView lblCost] setText:[[_post cost] stringValue]];
         [[_eventView lblNumberOfPeopleGoing] setText:0];
-        
+        UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
+        [[_eventView imgMainImage] setImage:mainImage];
         UIBarButtonItem *postButton = [[UIBarButtonItem alloc]
                                        initWithTitle:@"Post!"
                                        style:UIBarButtonItemStyleBordered
@@ -39,6 +36,20 @@
         self.navigationItem.rightBarButtonItem = postButton;
 
     }
+    else {
+        PFFile *file = [[_post images] firstObject];
+        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (!error)
+            {
+                UIImage *mainImage = [UIImage imageWithData:data];
+                [[_eventView imgMainImage] setImage:mainImage];
+            }
+        } progressBlock:^(int percentDone) {
+            //Display to the user how much has been loaded
+        }];
+    }
+    
+    [[_eventView lblCost] setText:[[_post cost] stringValue]];
     
     [self showEventDetails:nil];
 }

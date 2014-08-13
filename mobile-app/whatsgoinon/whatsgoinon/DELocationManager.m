@@ -105,8 +105,6 @@
                                      LocationTwo : (PFGeoPoint *) location2
                                  CompletionBlock : (completionBlock)callback
 {
-
-    
     NSLog(@"Getting the distance in Miles between location: %@ & location: %@", location1, location2);
     
     NSString *loc1String = [NSString stringWithFormat:@"%f,%f", location1.latitude, location1.longitude];
