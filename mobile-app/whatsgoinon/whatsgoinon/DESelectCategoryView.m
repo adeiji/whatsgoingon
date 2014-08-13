@@ -8,6 +8,7 @@
 
 #import "DESelectCategoryView.h"
 #import <QuartzCore/QuartzCore.h>
+#import <POP.h>
 
 static float deltaAngle;
 
@@ -51,9 +52,9 @@ static float deltaAngle;
         [view addSubview:button];
         [container addSubview:view];
     }
-    
     container.userInteractionEnabled = NO;
     [self addSubview:container];
+    
     
     // 8 - Initialize sectors
     _sectors = [NSMutableArray arrayWithCapacity:NUMBER_OF_SECTIONS];
@@ -64,20 +65,20 @@ static float deltaAngle;
     }
     
     [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"value is %i", self.currentSector]];
+    
+    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] init];
+    _panGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:_panGestureRecognizer];
 }
 
-- (void) rotate {
-//    double radians = .78;
-//    
-//    [UIView animateWithDuration:1 animations:^{
-//        CGAffineTransform t = CGAffineTransformRotate(container.transform, -radians);
-//        container.transform = t;
-//    }];
+- (BOOL) gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return NO;
 }
 
 - (BOOL) pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     return YES;
 }
+
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     // 1 - Get touch position
@@ -90,7 +91,6 @@ static float deltaAngle;
     deltaAngle = atan2(dy,dx);
     // 4 - Save current transform
     _startTransform = container.transform;
-
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -121,42 +121,50 @@ static float deltaAngle;
         
         [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"value is %i", self.currentSector]];
     }
+    _velocity = [_panGestureRecognizer velocityInView:self];
 }
 
-- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    // 1 - Get current container rotation in radians
-    CGFloat radians = atan2f(container.transform.b, container.transform.a);
-    // 2 - Initialize new value
-    CGFloat newVal = 0.0;
-    // 3 - Iterate through all the sectors
-    for (DESector *s in _sectors) {
-        // 4 - Check for anomaly (occurs with even number of sectors)
-        if (s.minValue > 0 && s.maxValue < 0) {
-            if (s.maxValue > radians || s.minValue < radians) {
-                // 5 - Find the quadrant (positive or negative)
-                if (radians > 0) {
-                    newVal = radians - M_PI;
-                } else {
-                    newVal = M_PI + radians;
-                }
-                _currentSector = s.sector;
-            }
-        }
-        // 6 - All non-anomalous cases
-        else if (radians > s.minValue && radians < s.maxValue) {
-            newVal = radians - s.midValue;
-            _currentSector = s.sector;
-        }
-    }
-    // 7 - Set up animation for final rotation
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.2];
-    CGAffineTransform t = CGAffineTransformRotate(container.transform, -newVal);
-    container.transform = t;
-    [UIView commitAnimations];
-    
-    [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"value is %i", self.currentSector]];
+//- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+//{
+////    CGPoint velocity = [[touches anyObject] velocityInView:self];
+//    
+//    // 1 - Get current container rotation in radians
+//    CGFloat radians = atan2f(container.transform.b, container.transform.a);
+//    // 2 - Initialize new value
+//    CGFloat newVal = 0.0;
+//    // 3 - Iterate through all the sectors
+//    for (DESector *s in _sectors) {
+//        // 4 - Check for anomaly (occurs with even number of sectors)
+//        if (s.minValue > 0 && s.maxValue < 0) {
+//            if (s.maxValue > radians || s.minValue < radians) {
+//                // 5 - Find the quadrant (positive or negative)
+//                if (radians > 0) {
+//                    newVal = radians - M_PI;
+//                } else {
+//                    newVal = M_PI + radians;
+//                }
+//                _currentSector = s.sector;
+//            }
+//        }
+//        // 6 - All non-anomalous cases
+//        else if (radians > s.minValue && radians < s.maxValue) {
+//            newVal = radians - s.midValue;
+//            _currentSector = s.sector;
+//        }
+//    }
+//    // 7 - Set up animation for final rotation
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:0.2];
+//    CGAffineTransform t = CGAffineTransformRotate(container.transform, -newVal);
+//    container.transform = t;
+//    [UIView commitAnimations];
+//    
+//    [self.delegate wheelDidChangeValue:[NSString stringWithFormat:@"value is %i", self.currentSector]];
+//
+//}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+
 }
 
 - (float) calculateDistanceFromCenter:(CGPoint)point {

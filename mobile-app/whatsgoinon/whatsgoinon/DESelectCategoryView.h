@@ -10,7 +10,7 @@
 #import "DESector.h"
 #import "DERotaryProtocol.h"
 
-@interface DESelectCategoryView : UIView <DERotaryProtocol>
+@interface DESelectCategoryView : UIView <DERotaryProtocol, UIGestureRecognizerDelegate>
 {
     UIView *container;
 }
@@ -19,6 +19,10 @@
 @property (strong, nonatomic) NSMutableArray *sectors;
 @property int currentSector;
 @property (weak) id <DERotaryProtocol> delegate;
+@property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
+@property CGPoint velocity;
+@property (strong, nonatomic) UITouch *firstTouch;
+@property (strong, nonatomic) UITouch *secondTouch;
 
 #pragma mark - Outlets
 
