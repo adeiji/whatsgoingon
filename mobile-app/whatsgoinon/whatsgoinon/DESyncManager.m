@@ -24,7 +24,7 @@
         if (!error)
         {
             //The find succeeded, now do something with it
-            [sharedManager setPosts:objects];
+            //[sharedManager setPosts:objects];
             
             NSLog(@"Retreived all objects from server");
         }

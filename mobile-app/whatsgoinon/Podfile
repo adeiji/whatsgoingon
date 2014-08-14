@@ -5,6 +5,7 @@ target "whatsgoinon" do
 
 pod 'pop', '~> 1.0'
 pod 'Parse', '~> 1.2' 
+pod 'iCarousel', '~> 1.8'
 
 end
 

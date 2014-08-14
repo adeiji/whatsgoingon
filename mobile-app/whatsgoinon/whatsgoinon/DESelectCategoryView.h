@@ -10,22 +10,15 @@
 #import "DESector.h"
 #import "DERotaryProtocol.h"
 #import "DEScreenManager.h"
+#import <iCarousel/iCarousel.h>
 
-@interface DESelectCategoryView : UIView <DERotaryProtocol, UIGestureRecognizerDelegate>
+@interface DESelectCategoryView : UIView <UIGestureRecognizerDelegate, iCarouselDelegate, iCarouselDataSource>
 {
     UIView *container;
     BOOL isActive;
     NSArray *categories;
+    iCarousel *myCarousel;
 }
-
-@property CGAffineTransform startTransform;
-@property (strong, nonatomic) NSMutableArray *sectors;
-@property int currentSector;
-@property (weak) id <DERotaryProtocol> delegate;
-@property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
-@property CGPoint velocity;
-@property (strong, nonatomic) UITouch *firstTouch;
-@property (strong, nonatomic) UITouch *secondTouch;
 
 #pragma mark - Outlets
 
@@ -37,8 +30,5 @@
 #pragma mark - Instance Methods
 
 - (void) renderView;
-- (float) calculateDistanceFromCenter:(CGPoint)point;
-- (void) buildSectorsEven;
-- (void) buildSectorsOdd;
 - (void) loadView;
 @end
