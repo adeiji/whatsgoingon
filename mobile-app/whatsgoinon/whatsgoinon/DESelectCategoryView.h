@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "DESector.h"
 #import "DERotaryProtocol.h"
+#import "DEScreenManager.h"
 
 @interface DESelectCategoryView : UIView <DERotaryProtocol, UIGestureRecognizerDelegate>
 {
     UIView *container;
+    BOOL isActive;
+    NSArray *categories;
 }
 
 @property CGAffineTransform startTransform;
@@ -37,5 +40,5 @@
 - (float) calculateDistanceFromCenter:(CGPoint)point;
 - (void) buildSectorsEven;
 - (void) buildSectorsOdd;
-
+- (void) loadView;
 @end

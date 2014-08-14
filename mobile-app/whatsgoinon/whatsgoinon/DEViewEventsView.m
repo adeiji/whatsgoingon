@@ -125,6 +125,10 @@
     eventViewController.post = _post;
     eventViewController.isPreview = NO;
     [navigationController pushViewController:eventViewController animated:YES];
+    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIButton *button = [[screenManager values] objectForKey:@"viewCategoriesButton"];
+    button.hidden = YES;
 }
 
 

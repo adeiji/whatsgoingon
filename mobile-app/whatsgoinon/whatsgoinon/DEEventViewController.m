@@ -54,6 +54,15 @@
     [self showEventDetails:nil];
 }
 
+- (void) viewDidDisappear:(BOOL)animated {
+    if (!_isPreview)
+    {
+        DEScreenManager *sharedManager = [DEScreenManager sharedManager];
+        UIButton *button = [[sharedManager values] objectForKey:@"viewCategoriesButton"];
+        button.hidden = false;
+    }
+}
+
 - (void) savePost {
     
     //For now we call SyncManager but we may let PostManager handle this, we'll have to decide later

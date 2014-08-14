@@ -10,6 +10,6 @@
 
 @protocol DERotaryProtocol <NSObject>
 
-- (void) wheelDidChangeValue:(NSString *)newValue;
+- (void) wheelDidChangeValue:(int) index;
 
 @end

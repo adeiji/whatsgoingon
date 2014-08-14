@@ -45,7 +45,7 @@
     // Add the select category view to the window so that we completely cover the screen including the navigation bar.
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     [selectCategoryView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
-    [selectCategoryView renderView];
+    [selectCategoryView loadView];
     [window addSubview:selectCategoryView];
 
     [self resetPostCounter];
