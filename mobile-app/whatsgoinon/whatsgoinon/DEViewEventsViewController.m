@@ -60,6 +60,15 @@
     
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIButton *button = [[screenManager values] objectForKey:@"viewCategoriesButton"];
+    
+    button.hidden = YES;
+}
+
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     

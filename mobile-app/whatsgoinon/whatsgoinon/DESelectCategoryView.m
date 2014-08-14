@@ -32,15 +32,23 @@ static float deltaAngle;
 
 - (void) loadView {
     
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    
-    UIButton *viewCategories = [[UIButton alloc] initWithFrame:CGRectMake(320 - 60, 568 - 60, BUTTON_WIDTH, BUTTON_HEIGHT)];
-    [viewCategories setBackgroundColor:[UIColor blueColor]];
-    [viewCategories addTarget:self action:@selector(displayCategoryWheel:) forControlEvents:UIControlEventTouchUpInside];
-    [window addSubview:viewCategories];
-    
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    [[screenManager values] setObject:viewCategories forKey:@"viewCategoriesButton"];
+    UIButton *viewCategories = [[screenManager values] objectForKey:@"viewCategoriesButton"];
+    
+    if (![[screenManager values] objectForKey:@"viewCategoriesButton"])
+    {
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        
+        viewCategories = [[UIButton alloc] initWithFrame:CGRectMake(320 - 60, 568 - 60, BUTTON_WIDTH, BUTTON_HEIGHT)];
+        [viewCategories setBackgroundColor:[UIColor blueColor]];
+        [viewCategories addTarget:self action:@selector(displayCategoryWheel:) forControlEvents:UIControlEventTouchUpInside];
+        [window addSubview:viewCategories];
+        [[screenManager values] setObject:viewCategories forKey:@"viewCategoriesButton"];
+    }
+    else
+    {
+        viewCategories.hidden = NO;
+    }
     
     isActive = false;
     self.lblCategory.hidden = YES;
