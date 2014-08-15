@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DESharingView.h"
 
 @interface DEEventDetailsViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIView *viewMore;
-@property (strong, nonatomic) IBOutlet UIView *viewShare;
+@property (strong, nonatomic) IBOutlet DESharingView*viewShare;
 @property (strong, nonatomic) IBOutlet UIView *viewNoComments;
 @property (strong, nonatomic) IBOutlet UIView *viewSocialNetworkShare;
 @property (strong, nonatomic) IBOutlet UIView *viewInfo;

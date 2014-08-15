@@ -26,11 +26,12 @@
     return self;
 }
 // Check to see if there is a current user logged in and returns the result
-+ (BOOL) isLoggedIn
+- (BOOL) isLoggedIn
 {
     PFUser *currentUser = [PFUser currentUser];
     
     if (currentUser) {
+        _user = currentUser;
         return YES;
     }
     else {
@@ -69,5 +70,68 @@
     
     return nil;
 }
+
+- (NSError *) loginWithTwitter {
+    
+    [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
+        if (!user) {
+            NSLog(@"Uh oh. The user cancelled the Twitter login.");
+            return;
+        } else if (user.isNew) {
+            NSLog(@"User signed up and logged in with Twitter!");
+        } else {
+            NSLog(@"User logged in with Twitter!");
+        }
+    }];
+    
+    return nil;
+}
+
+- (NSError *) linkWithTwitter
+{
+    if (![PFTwitterUtils isLinkedWithUser:_user]) {
+        [PFTwitterUtils linkUser:_user block:^(BOOL succeeded, NSError *error) {
+            if ([PFTwitterUtils isLinkedWithUser:_user]) {
+                NSLog(@"Woohoo, user logged in with Twitter!");
+            }
+            else {
+                // Uh oh, there was an error here!
+                NSLog(@"%@", error);
+            }
+        }];
+    }
+    
+    return nil;
+}
+
+- (NSError *) loginWithFacebook {
+    
+    NSArray *permissionsArray = @[@"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    
+    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        // Display some sort of loading indicator
+        
+        if (!user) {
+            if (!error) {
+                NSLog(@"The user cancelled the Facebook login.");
+            }
+            else {
+                NSLog(@"An error occured: %@", error);
+            }
+        }
+        else if (user.isNew)
+        {
+            NSLog(@"User with facebook signed up and logged in");
+        }
+        else {
+            NSLog(@"User with facebook logged in!");
+        }
+        
+        
+    }];
+    
+    return nil;
+}
+
 
 @end

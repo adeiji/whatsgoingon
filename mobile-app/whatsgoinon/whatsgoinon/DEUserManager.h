@@ -21,9 +21,12 @@
                        Password : (NSString *) password
                  ViewController : (UIViewController *) viewController;
 
-+ (BOOL) isLoggedIn;
+- (BOOL) isLoggedIn;
 
 + (id)sharedManager;
+- (NSError *) loginWithTwitter;
+- (NSError *) linkWithTwitter;
+- (NSError *) loginWithFacebook;
 
 @property (strong, nonatomic) PFUser *user;
 

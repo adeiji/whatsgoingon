@@ -68,9 +68,9 @@
     DELocationManager *locationManager = [DELocationManager sharedManager];
     PFGeoPoint *currentLocation = [locationManager currentLocation];
     
-    [DELocationManager getDistanceInMilesBetweenLocation:currentLocation LocationTwo:post.location CompletionBlock:^(NSString *distance) {
-        self.lblDistance.text = distance;
-    }];
+//    [DELocationManager getDistanceInMilesBetweenLocation:currentLocation LocationTwo:post.location CompletionBlock:^(NSString *distance) {
+//        self.lblDistance.text = distance;
+//    }];
 }
 
 - (void) renderViewWithPost : (DEPost *) myPost {

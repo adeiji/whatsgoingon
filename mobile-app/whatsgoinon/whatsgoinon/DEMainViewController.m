@@ -78,7 +78,9 @@
 }
 
 - (BOOL) isLoggedIn {
-    if (![DEUserManager isLoggedIn])
+    DEUserManager *userManager = [DEUserManager sharedManager];
+    
+    if (![userManager isLoggedIn])
     {
         DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:PROMPT_LOGIN_VIEW_CONTROLLER];
         
@@ -87,6 +89,12 @@
         
         return NO;
     }
+    else {
+        DEUserManager *userManager = [DEUserManager sharedManager];
+        [userManager linkWithTwitter];
+        [userManager loginWithFacebook];
+    }
+    
     return YES;
 }
 

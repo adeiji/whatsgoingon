@@ -82,11 +82,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) showView : (UIView *) newView {
+- (UIView *) showView : (UIView *) newView {
     UIView *view = [[[_eventView detailsView] subviews] lastObject];
     [view removeFromSuperview];
     view = [_eventView detailsView];
     [view addSubview:newView];
+    
+    return newView;
 }
 
 #pragma mark - Button Action Methods
@@ -105,10 +107,21 @@
 - (IBAction)showEventComments:(id)sender
 {
     [self showView:[_eventDetailsViewController viewNoComments]];
+
 }
 - (IBAction)shareEvent:(id)sender
 {
-    [self showView:[_eventDetailsViewController viewSocialNetworkShare]];
+    DESharingView *shareView = (DESharingView *) [self showView:[_eventDetailsViewController viewSocialNetworkShare]];
+    
+    if (!_isPreview)
+    {
+        [[shareView switchPostOnTwitter] setEnabled:YES];
+        [[shareView switchPostOnFacebook] setEnabled:YES];
+        [[shareView switchPostOnInstagram] setEnabled:YES];
+        [[shareView btnShare] setEnabled:YES];
+    }
+
+
 }
 - (IBAction)viewMoreForEvent:(id)sender
 {
