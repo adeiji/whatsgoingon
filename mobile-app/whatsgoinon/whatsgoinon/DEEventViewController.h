@@ -13,6 +13,7 @@
 #import "DEEventDetailsView.h"
 #import "DESyncManager.h"
 #import "DEScreenManager.h"
+#import "DEEventDetailsMoreView.h"
 
 @interface DEEventViewController : UIViewController
 

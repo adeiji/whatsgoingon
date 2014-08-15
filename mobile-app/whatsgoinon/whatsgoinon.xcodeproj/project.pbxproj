@@ -68,6 +68,9 @@
 		F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB219996E7B00FCDE66 /* DEEventViewController.m */; };
 		F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
+		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
+		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
+		F4C68D32199EB2E900AD0D36 /* DEViewReportEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D31199EB2E900AD0D36 /* DEViewReportEvent.m */; };
 		F4CCBD6019997D6600532E9B /* DEEventDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */; };
 		F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD6619997FCF00532E9B /* DEAddValueViewController.m */; };
 		F4CCBD6919997FCF00532E9B /* DEAddValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CCBD6719997FCF00532E9B /* DEAddValueViewController.xib */; };
@@ -182,6 +185,11 @@
 		F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsViewController.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
+		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
+		F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsMoreView.m; sourceTree = "<group>"; };
+		F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewReportEvent.xib; sourceTree = "<group>"; };
+		F4C68D30199EB2E900AD0D36 /* DEViewReportEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewReportEvent.h; sourceTree = "<group>"; };
+		F4C68D31199EB2E900AD0D36 /* DEViewReportEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewReportEvent.m; sourceTree = "<group>"; };
 		F4CCBD5E19997D6600532E9B /* DEEventDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsView.h; sourceTree = "<group>"; };
 		F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsView.m; sourceTree = "<group>"; };
 		F4CCBD6519997FCF00532E9B /* DEAddValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAddValueViewController.h; sourceTree = "<group>"; };
@@ -361,6 +369,7 @@
 				F437BFC9199053B000CF61E9 /* EventDetailsView.xib */,
 				F437BFCD19918A4500CF61E9 /* InsertLocationView.xib */,
 				F437BFCF19918B2200CF61E9 /* RateView.xib */,
+				F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -384,6 +393,7 @@
 		F437BFEE1991967300CF61E9 /* Event Objects */ = {
 			isa = PBXGroup;
 			children = (
+				F4C68D26199EAD5300AD0D36 /* More View */,
 				F437BFEF1991968200CF61E9 /* DEEvents.h */,
 				F437BFF01991968200CF61E9 /* DEEvents.m */,
 				F437C00E1991CDEB00CF61E9 /* DEViewEventsView.h */,
@@ -529,6 +539,25 @@
 			name = "Sharing View";
 			sourceTree = "<group>";
 		};
+		F4C68D26199EAD5300AD0D36 /* More View */ = {
+			isa = PBXGroup;
+			children = (
+				F4C68D2C199EB25B00AD0D36 /* Report View */,
+				F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */,
+				F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */,
+			);
+			name = "More View";
+			sourceTree = "<group>";
+		};
+		F4C68D2C199EB25B00AD0D36 /* Report View */ = {
+			isa = PBXGroup;
+			children = (
+				F4C68D30199EB2E900AD0D36 /* DEViewReportEvent.h */,
+				F4C68D31199EB2E900AD0D36 /* DEViewReportEvent.m */,
+			);
+			name = "Report View";
+			sourceTree = "<group>";
+		};
 		F4CCBD6119997F9A00532E9B /* Add Value Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,6 +690,7 @@
 				F4CCBD6919997FCF00532E9B /* DEAddValueViewController.xib in Resources */,
 				F437BFC419904A4200CF61E9 /* MainMenuView.xib in Resources */,
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
+				F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */,
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,
@@ -724,6 +754,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */,
 				F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */,
 				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
@@ -737,6 +768,7 @@
 				F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */,
 				F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */,
 				F4774FA819956BBE00FCDE66 /* DECreateAccountViewController.m in Sources */,
+				F4C68D32199EB2E900AD0D36 /* DEViewReportEvent.m in Sources */,
 				F437C0061991A2C000CF61E9 /* DEPost.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
 				F4774FAB199575CE00FCDE66 /* DELoginView.m in Sources */,

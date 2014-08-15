@@ -30,49 +30,45 @@
 }
 */
 
-- (IBAction)sharePost:(id)sender {
-    if (_switchPostOnTwitter.on)
-    {
-        [self performSelectorOnMainThread:@selector(postToTwitter) withObject:nil waitUntilDone:YES];
-    }
-    if (_switchPostOnFacebook.on)
-    {
-        [self postToFacebook];
-    }
+- (void) getAddress {
+    [DELocationManager getAddressFromLatLongValue:_post.location CompletionBlock:^(NSString *value) {
+        [_post setAddress:value];
+    }];
 }
 
-- (BOOL) postToFacebook {
-    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+- (IBAction)shareFacebook:(id)sender {
+    DEUserManager *userManager = [DEUserManager sharedManager];
+    if ([PFFacebookUtils isLinkedWithUser:userManager.user])
+    {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
         UINavigationController *vc = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
         
-        [controller setInitialText:@"First post from my iPhone app"];
-        [vc presentViewController:controller animated:YES completion:Nil];
+        [controller setInitialText:[_post toString]];
+        [controller addImage:_image];
+        [vc presentViewController:controller animated:NO completion:^{
+            NSLog(@"Completed the transition");
+        }];
+        
     }
-
-    return NO;
 }
 
-- (BOOL) postToInstagram {
-    return NO;
+- (IBAction)shareInstagram:(id)sender {
 }
 
-- (BOOL) postToTwitter {
+- (IBAction)shareTwitter:(id)sender {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
         SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
-        [tweetSheet setInitialText:@"Great"];
-        
+        [tweetSheet setInitialText:[_post toString]];
+        [tweetSheet addImage:_image];
         UINavigationController *vc = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
         
-        [vc presentViewController:tweetSheet animated:YES completion:nil];
-        
-        return YES;
+        [vc presentViewController:tweetSheet animated:YES completion:^{
+            NSLog(@"Completed the transition");
+        }];
     }
-    
-    return NO;
 }
 
 @end

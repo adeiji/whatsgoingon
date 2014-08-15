@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "DELocationManager.h"
 
 @interface DEPost : NSObject
 
@@ -15,6 +16,7 @@
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSDate *endTime;
 @property (strong, nonatomic) PFGeoPoint *location;
+@property (strong, nonatomic) NSString *address;
 @property (strong, nonatomic) NSNumber *postRange;
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSNumber *cost;
@@ -23,5 +25,6 @@
 @property BOOL active;
 
 + (DEPost *) getPostFromPFObject : (PFObject *) object;
+- (NSString *) toString;
 
 @end

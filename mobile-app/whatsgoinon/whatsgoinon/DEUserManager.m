@@ -108,27 +108,29 @@
     
     NSArray *permissionsArray = @[@"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
     
-    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-        // Display some sort of loading indicator
-        
-        if (!user) {
-            if (!error) {
-                NSLog(@"The user cancelled the Facebook login.");
+    if (![PFUser currentUser] && // Check if a user is cached
+        ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook
+    {
+        [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+            // Display some sort of loading indicator
+            
+            if (!user) {
+                if (!error) {
+                    NSLog(@"The user cancelled the Facebook login.");
+                }
+                else {
+                    NSLog(@"An error occured: %@", error);
+                }
+            }
+            else if (user.isNew)
+            {
+                NSLog(@"User with facebook signed up and logged in");
             }
             else {
-                NSLog(@"An error occured: %@", error);
+                NSLog(@"User with facebook logged in!");
             }
-        }
-        else if (user.isNew)
-        {
-            NSLog(@"User with facebook signed up and logged in");
-        }
-        else {
-            NSLog(@"User with facebook logged in!");
-        }
-        
-        
-    }];
+        }];
+    }
     
     return nil;
 }

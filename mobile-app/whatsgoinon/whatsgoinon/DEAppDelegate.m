@@ -9,6 +9,7 @@
 #import "DEAppDelegate.h"
 #import <Parse/Parse.h>
 #import "TestFlight.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation DEAppDelegate
 
@@ -19,7 +20,7 @@
     [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
                   clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
     [PFTwitterUtils initializeWithConsumerKey:@"Pg6HkvcmVVsrfyrWLKswRBisa" consumerSecret:@"xXP4I1IPUEhalMSBdHNaO5zGl1IshaAbyh4FDoTcXwzdSEjDdW"];
-
+    [PFFacebookUtils initializeFacebook];
     // start of your application:didFinishLaunchingWithOptions // ...
     [TestFlight takeOff:@"7dff8d72-f33d-4eb7-aa3f-632fff9c3f03"];
     
@@ -60,6 +61,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [FBAppCall handleOpenURL:url
+                  sourceApplication:sourceApplication
+                        withSession:[PFFacebookUtils session]];
 }
 
 @end

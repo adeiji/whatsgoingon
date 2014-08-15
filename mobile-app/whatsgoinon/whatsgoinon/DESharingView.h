@@ -8,24 +8,28 @@
 
 #import <UIKit/UIKit.h>
 #import "DEPost.h"
+#import "DEUserManager.h"
 
 @interface DESharingView : UIView
 
-#pragma mark - Outlets
-
-@property (weak, nonatomic) IBOutlet UISwitch *switchPostOnFacebook;
-@property (weak, nonatomic) IBOutlet UISwitch *switchPostOnInstagram;
-@property (weak, nonatomic) IBOutlet UISwitch *switchPostOnTwitter;
-@property (weak, nonatomic) IBOutlet UIButton *btnShare;
+@property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) DEPost *post;
+
+#pragma mark - Outlets
+@property (weak, nonatomic) IBOutlet UIButton *btnShareFacebook;
+@property (weak, nonatomic) IBOutlet UIButton *btnShareInstagram;
+@property (weak, nonatomic) IBOutlet UIButton *btnShareTwitter;
 
 #pragma mark - Button Action Methods
 
-- (IBAction)sharePost:(id)sender;
+- (IBAction)shareFacebook:(id)sender;
+- (IBAction)shareInstagram:(id)sender;
+- (IBAction)shareTwitter:(id)sender;
 
 #pragma mark - Instance Methods
 - (BOOL) postToTwitter;
 - (BOOL) postToFacebook;
 - (BOOL) postToInstagram;
+- (void) getAddress;
 
 @end

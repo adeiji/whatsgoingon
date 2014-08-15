@@ -115,17 +115,23 @@
     
     if (!_isPreview)
     {
-        [[shareView switchPostOnTwitter] setEnabled:YES];
-        [[shareView switchPostOnFacebook] setEnabled:YES];
-        [[shareView switchPostOnInstagram] setEnabled:YES];
-        [[shareView btnShare] setEnabled:YES];
+        [[shareView btnShareTwitter] setEnabled:YES];
+        [[shareView btnShareFacebook] setEnabled:YES];
+        [[shareView btnShareInstagram] setEnabled:YES];
+        [shareView setImage:[[_eventView imgMainImage] image]];
+        [shareView setPost:_post];
+        [shareView getAddress];
     }
-
-
 }
 - (IBAction)viewMoreForEvent:(id)sender
 {
-    [self showView:[_eventDetailsViewController viewMore]];
+    DEEventDetailsMoreView *eventDetailsMoreView = (DEEventDetailsMoreView *)[self showView:[_eventDetailsViewController viewMore]];
+    
+    if (!_isPreview) {
+        [[eventDetailsMoreView btnMiscategorized] setEnabled:YES];
+        [[eventDetailsMoreView btnPostSomethingSimilar] setEnabled:YES];
+        [[eventDetailsMoreView btnReportEvent] setEnabled:YES];
+    }
 }
 
 @end

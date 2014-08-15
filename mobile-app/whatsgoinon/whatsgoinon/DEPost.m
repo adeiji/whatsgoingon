@@ -29,4 +29,20 @@
     return post;
 }
 
+- (NSString *) toString {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"EEE, MMM d HH:MM a"];
+    
+    NSString *startTime = [dateFormatter stringFromDate:_startTime];
+    NSString *endTime = [dateFormatter stringFromDate:_endTime];
+    
+    return [NSString stringWithFormat:@"HaxS \nTitle: %@\nDescription: %@\nAddress: %@\nStart Time: %@\nEnd Time: %@\nCost: %@",
+            _title,
+            _description,
+            _address,
+            startTime,
+            endTime,
+            _cost];
+}
+
 @end
