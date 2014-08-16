@@ -2,12 +2,14 @@ PODS:
   - Bolts (1.1.1)
   - Facebook-iOS-SDK (3.17.0):
     - Bolts
+  - Google-Maps-iOS-SDK (1.8.1)
   - iCarousel (1.8)
   - Parse (1.2.20):
     - Facebook-iOS-SDK (~> 3.11)
   - pop (1.0.6)
 
 DEPENDENCIES:
+  - Google-Maps-iOS-SDK (~> 1.8)
   - iCarousel (~> 1.8)
   - Parse (~> 1.2)
   - pop (~> 1.0)
@@ -15,6 +17,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Bolts: 0ca796081c3e7c139bd86d6903c27f1b83036a5d
   Facebook-iOS-SDK: f20274d809f112ba540842e2b6cbe50128d51b7b
+  Google-Maps-iOS-SDK: 4fe35d952dbd1e4dacfcfa178e9cce2f06d67ecc
   iCarousel: cf77aea48dfcde9a0cd85569a1d8a9b6dd543bd7
   Parse: 28c0dc54f30201a369d29a2f76c09fa43b2add16
   pop: e518794da38942c05255eb64b36d894e70cb4f00

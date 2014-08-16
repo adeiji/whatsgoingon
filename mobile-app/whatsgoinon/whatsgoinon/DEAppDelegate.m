@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "TestFlight.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation DEAppDelegate
 
@@ -23,6 +24,7 @@
     [PFFacebookUtils initializeFacebook];
     // start of your application:didFinishLaunchingWithOptions // ...
     [TestFlight takeOff:@"7dff8d72-f33d-4eb7-aa3f-632fff9c3f03"];
+    [GMSServices provideAPIKey:@"AIzaSyAChpei4sacCZDpzE4boq1lhftbBteTYak"];
     
     // Track statistics around application opens
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

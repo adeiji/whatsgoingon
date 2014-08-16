@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <GoogleMaps/GoogleMaps.h>
+#import <Parse/Parse.h>
 
 @interface DEEventView : UIView
-
+{
+    GMSMapView *mapView_;
+}
 #pragma mark - View Outlets
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgMainImage;
 @property (weak, nonatomic) IBOutlet UIView *viewStarRating;
-@property (weak, nonatomic) IBOutlet UIView *viewMapView;
+@property (weak, nonatomic) IBOutlet GMSMapView *viewMapView;
 @property (weak, nonatomic) IBOutlet UILabel *lblCost;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumberOfPeopleGoing;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeUntilStartOrEndOfEvent;
@@ -24,8 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnMaybe;
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
 
-
-
-
+- (void) loadMapViewWithLocation : (PFGeoPoint *) location;
 
 @end

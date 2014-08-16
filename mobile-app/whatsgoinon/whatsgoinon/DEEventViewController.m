@@ -24,7 +24,6 @@
     {
         [[_eventView btnGoing] setEnabled:NO];
         [[_eventView btnMaybe] setEnabled:NO];
-        
         [[_eventView lblNumberOfPeopleGoing] setText:0];
         UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
         [[_eventView imgMainImage] setImage:mainImage];
@@ -34,7 +33,6 @@
                                        target:self
                                        action:@selector(savePost)];
         self.navigationItem.rightBarButtonItem = postButton;
-
     }
     else {
         PFFile *file = [[_post images] firstObject];
@@ -52,6 +50,8 @@
     [[_eventView lblCost] setText:[[_post cost] stringValue]];
     
     [self showEventDetails:nil];
+    [_eventView loadMapViewWithLocation:_post.location];
+
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -131,6 +131,14 @@
         [[eventDetailsMoreView btnMiscategorized] setEnabled:YES];
         [[eventDetailsMoreView btnPostSomethingSimilar] setEnabled:YES];
         [[eventDetailsMoreView btnReportEvent] setEnabled:YES];
+    }
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue destinationViewController] isKindOfClass:[DEMapViewController class]])
+    {
+        DEMapViewController *mapViewController = [segue destinationViewController];
+        [mapViewController setLocation:[_post location]];
     }
 }
 

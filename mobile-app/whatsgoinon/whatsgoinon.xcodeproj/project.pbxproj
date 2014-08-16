@@ -67,6 +67,7 @@
 		F4774FB019996A9B00FCDE66 /* DEEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FAF19996A9B00FCDE66 /* DEEventView.m */; };
 		F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB219996E7B00FCDE66 /* DEEventViewController.m */; };
 		F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */; };
+		F483B07E199EDB3600C12FB2 /* DEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483B07D199EDB3600C12FB2 /* DEMapViewController.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -183,6 +184,8 @@
 		F4774FB219996E7B00FCDE66 /* DEEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventViewController.m; sourceTree = "<group>"; };
 		F4774FB4199974A600FCDE66 /* DEEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsViewController.h; sourceTree = "<group>"; };
 		F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsViewController.m; sourceTree = "<group>"; };
+		F483B07C199EDB3600C12FB2 /* DEMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMapViewController.h; sourceTree = "<group>"; };
+		F483B07D199EDB3600C12FB2 /* DEMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMapViewController.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
@@ -393,6 +396,7 @@
 		F437BFEE1991967300CF61E9 /* Event Objects */ = {
 			isa = PBXGroup;
 			children = (
+				F483B07B199EDB1F00C12FB2 /* Map View */,
 				F4C68D26199EAD5300AD0D36 /* More View */,
 				F437BFEF1991968200CF61E9 /* DEEvents.h */,
 				F437BFF01991968200CF61E9 /* DEEvents.m */,
@@ -528,6 +532,15 @@
 				F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */,
 			);
 			name = "View Post Details";
+			sourceTree = "<group>";
+		};
+		F483B07B199EDB1F00C12FB2 /* Map View */ = {
+			isa = PBXGroup;
+			children = (
+				F483B07C199EDB3600C12FB2 /* DEMapViewController.h */,
+				F483B07D199EDB3600C12FB2 /* DEMapViewController.m */,
+			);
+			name = "Map View";
 			sourceTree = "<group>";
 		};
 		F4AA5ADD199D90FB0035FEAF /* Sharing View */ = {
@@ -780,6 +793,7 @@
 				F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */,
 				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
 				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,
+				F483B07E199EDB3600C12FB2 /* DEMapViewController.m in Sources */,
 				F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
 				F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */,

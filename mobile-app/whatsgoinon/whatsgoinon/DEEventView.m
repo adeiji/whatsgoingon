@@ -28,15 +28,22 @@
 }
 */
 
-- (IBAction)showEventDetails:(id)sender {
+- (void) loadMapViewWithLocation : (PFGeoPoint *) location
+{
+    // Create a GMSCameraPosition that tells the map to display the
+    // coordinate -33.86,151.20 at zoom level 6.
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:location.latitude
+                                                            longitude:location.longitude
+                                                                 zoom:16];
+    _viewMapView.camera = camera;
+    _viewMapView.myLocationEnabled = YES;
+    _viewMapView.mapType = kGMSTypeHybrid;
+    // Creates a marker in the center of the map.
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(location.latitude, location.longitude);
+    marker.map = _viewMapView;
+    
 }
 
-- (IBAction)showEventComments:(id)sender {
-}
 
-- (IBAction)shareEvent:(id)sender {
-}
-
-- (IBAction)viewMoreForEvent:(id)sender {
-}
 @end
