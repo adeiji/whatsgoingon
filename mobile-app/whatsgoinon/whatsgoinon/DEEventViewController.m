@@ -50,8 +50,10 @@
     [[_eventView lblCost] setText:[[_post cost] stringValue]];
     
     [self showEventDetails:nil];
-    [_eventView loadMapViewWithLocation:_post.location];
-
+    
+    // Make this an asynchronous call
+    [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
+    
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -107,7 +109,6 @@
 - (IBAction)showEventComments:(id)sender
 {
     [self showView:[_eventDetailsViewController viewNoComments]];
-
 }
 - (IBAction)shareEvent:(id)sender
 {
