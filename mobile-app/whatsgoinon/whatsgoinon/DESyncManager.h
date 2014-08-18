@@ -16,4 +16,8 @@
 + (void) getAllValues;
 + (BOOL) savePost : (DEPost *) post;
 + (void) popToRootAndShowViewController : (UIViewController *) viewController;
++ (void) saveReportWithEventId : (NSString * )objectId
+                    WhatsWrong : (NSDictionary *) whatsWrong
+                         Other : (NSString *) other;
+
 @end

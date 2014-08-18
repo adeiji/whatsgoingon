@@ -7,22 +7,23 @@
 //
 
 #import "DEViewReportEvent.h"
+#import "Constants.h"
 
 @implementation DEViewReportEvent
 
 
 - (IBAction)cancelReport:(id)sender {
     [[self superview] removeFromSuperview];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void) willMoveToSuperview:(UIView *)newSuperview {
-    [self registerForKeyboardNotifications];
-    [self.txtNotes setDelegate:self];
-}
+
 
 - (void) registerForKeyboardNotifications
 {
-    //Make sure when writing the selector, you add the semicolon to the end, for ex, keyboardWasShown: not keyboardWasShown
+    [self.txtNotes setDelegate:self];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardDidShowNotification
@@ -31,7 +32,11 @@
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
 }
+
+
+
 
 - (void) keyboardWasShown : (NSNotification *) aNotification {
     [self scrollViewToTopOfKeyboard:(UIScrollView *)[self superview] Notification:aNotification View:self TextFieldOrView:activeField];
@@ -53,17 +58,54 @@
     [textView resignFirstResponder];
 }
 
-// Push the event up to the server as reported, and store the reason for the report as well
+
+// Create the report from the inputed data and then push the report to the server
 - (IBAction)reportEvent:(id)sender {
+    DEReport *report = [self getReport];
     
+    [DESyncManager saveReportWithEventId:_eventId WhatsWrong:report.whatsWrong      Other:report.other];
     
-    
+#warning Make sure that we display to the user that he saved the report
 }
+
+- (DEReport *) getReport {
+    NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:_switchAbusive.on], REPORT_VULGAR_OR_ABUSIVE_LANGUAGE, [NSNumber numberWithBool:_switchCrude.on], REPORT_CRUDE_CONTENT, [NSNumber numberWithBool:_switchInappropriate.on], REPORT_POST_NOT_APPROPRIATE, [NSNumber numberWithBool:_switchNotReal.on], REPORT_POST_NOT_APPROPRIATE, nil];
+    NSString *other = _txtNotes.text;
+    
+    DEReport *report = [DEReport new];
+    [report setWhatsWrong:dictionary];
+    [report setOther:other];
+    
+    return report;
+}
+
 - (IBAction)showReportDetailsTextView:(id)sender {
     
+}
+- (IBAction)enableReportDetailsTextView:(UISwitch *)sender {
+    if (sender.on)
+    {
+        [_txtNotes setBackgroundColor:[UIColor whiteColor]];
+        [_txtNotes setUserInteractionEnabled:YES];
+        [_txtNotes setTextColor:[UIColor blackColor]];
+    }
+    else {
+        [_txtNotes setBackgroundColor:[UIColor blueColor]];
+        [_txtNotes setUserInteractionEnabled:NO];
+        [_txtNotes setTextColor:[UIColor blueColor]];
+    }
+}
 
-    
+- (BOOL) textView: (UITextView*) textView shouldChangeTextInRange: (NSRange)range replacementText: (NSString*) text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    return YES;
 }
-- (IBAction)enableReportDetailsTextView:(id)sender {
-}
+@end
+
+@implementation DEReport
+
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIView+DEScrollOnShowKeyboard.h"
 #import "DEPost.h"
+#import "DESyncManager.h"
 
 @interface DEViewReportEvent : UIView <UITextViewDelegate>
 {
@@ -26,7 +27,13 @@
 - (IBAction)cancelReport:(id)sender;
 - (IBAction)reportEvent:(id)sender;
 - (IBAction)enableReportDetailsTextView:(id)sender;
+- (void) registerForKeyboardNotifications;
 
+@end
 
+@interface DEReport : NSObject
+
+@property (strong, nonatomic) NSString *other;
+@property (strong, nonatomic) NSDictionary *whatsWrong;
 
 @end

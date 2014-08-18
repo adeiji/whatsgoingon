@@ -22,6 +22,7 @@
                          Images : (NSArray *) images
                     Description : (NSString *) description;
 
+
 // Stores the current post when one post is being viewed, edited or created
 @property (strong, nonatomic) DEPost *currentPost;
 

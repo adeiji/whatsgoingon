@@ -16,7 +16,7 @@
 
 + (void) getAllValues {
     DEPostManager *sharedManager = [DEPostManager sharedManager];
-    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME];
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     //Get all the events that are currently active
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     
@@ -37,7 +37,7 @@
 
 
 + (BOOL) savePost : (DEPost *) post {
-    PFObject *postObject = [PFObject objectWithClassName:PARSE_CLASS_NAME];
+    PFObject *postObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_EVENT];
     
     postObject[PARSE_CLASS_EVENT_TITLE] = post.title;
     postObject[PARSE_CLASS_EVENT_ADDRESS] = @"8605 Blowing Pines Drive, Las Veags, NV 89143";
@@ -63,6 +63,25 @@
     return YES;
 }
 
++ (void) saveReportWithEventId : (NSString * )objectId
+                    WhatsWrong : (NSDictionary *) whatsWrong
+                         Other : (NSString *) other
+{
+    
+    PFObject *reportObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_REPORT];
+    
+    reportObject[PARSE_CLASS_REPORT_EVENT_ID] = objectId;
+    reportObject[PARSE_CLASS_REPORT_WHATS_WRONG] = whatsWrong;
+    reportObject[PARSE_CLASS_REPORT_OTHER] = other;
+    
+    [reportObject saveEventually:^(BOOL succeeded, NSError *error) {
+        if (succeeded)
+        {
+            NSLog(@"The report was saved to the server");
+        }
+    }];
+}
+
 + (NSMutableArray *) getImagesArrayWithArray : (NSArray *) imageArray
 {
     NSMutableArray *images = [NSMutableArray new];
@@ -77,6 +96,7 @@
     return images;
 }
 
+#warning This should not be here, it needs to be moved to the Screen Manager
 // Display the new view controller, but remove all other views from the View Controller stack first.
 + (void) popToRootAndShowViewController : (UIViewController *) viewController
 {

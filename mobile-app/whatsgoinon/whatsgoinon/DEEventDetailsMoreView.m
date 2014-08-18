@@ -33,6 +33,7 @@
 
     DEViewReportEvent *viewReportEvent = [[[NSBundle mainBundle] loadNibNamed:@"ViewReportEvent" owner:self options:nil] firstObject];
     [viewReportEvent setEventId:_eventId];
+    [viewReportEvent registerForKeyboardNotifications];
     
     CGRect frame = viewReportEvent.frame;
     
@@ -46,9 +47,12 @@
     [[[self superview] superview] addSubview:scrollView];
 }
 
+
 // Push to the server the fact that this post is miscategorized
 - (IBAction)setAsMiscategorized:(id)sender
 {
     
 }
+
+
 @end

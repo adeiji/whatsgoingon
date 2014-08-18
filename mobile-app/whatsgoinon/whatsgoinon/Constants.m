@@ -8,7 +8,7 @@
 
 #import "Constants.h"
 
-NSString *const PARSE_CLASS_NAME = @"Event";
+NSString *const PARSE_CLASS_NAME_EVENT = @"Event";
 NSString *const PARSE_CLASS_EVENT_ACTIVE = @"active";
 NSString *const PARSE_CLASS_EVENT_TITLE = @"name";
 NSString *const PARSE_CLASS_EVENT_ADDRESS = @"address";
@@ -22,3 +22,11 @@ NSString *const PARSE_CLASS_EVENT_USER = @"user";
 NSString *const PARSE_CLASS_EVENT_LOCATION = @"location";
 NSString *const PARSE_CLASS_EVENT_IMAGES = @"images";
 NSString *const PARSE_CLASS_EVENT_OBJECT_ID = @"ObjectId";
+NSString *const PARSE_CLASS_NAME_REPORT = @"Report";
+NSString *const REPORT_VULGAR_OR_ABUSIVE_LANGUAGE = @"Vulgar or Abusive Language";
+NSString *const REPORT_CRUDE_CONTENT = @"Crude Content";
+NSString *const REPORT_NOT_REAL_POST = @"Not a Real Post";
+NSString *const REPORT_POST_NOT_APPROPRIATE = @"Post is Simply Not Appropriate";
+NSString *const PARSE_CLASS_REPORT_WHATS_WRONG = @"whatswrong";
+NSString *const PARSE_CLASS_REPORT_OTHER = @"other";
+NSString *const PARSE_CLASS_REPORT_EVENT_ID = @"eventid";
