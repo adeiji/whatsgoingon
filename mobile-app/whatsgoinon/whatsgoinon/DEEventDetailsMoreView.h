@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPostSomethingSimilar;
 @property (weak, nonatomic) IBOutlet UIButton *btnReportEvent;
 @property (weak, nonatomic) IBOutlet UIButton *btnMiscategorized;
+@property (strong, nonatomic) NSString *eventId;
 
 - (IBAction)postSomethingSimilar:(id)sender;
 - (IBAction)reportEvent:(id)sender;

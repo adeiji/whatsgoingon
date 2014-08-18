@@ -132,6 +132,7 @@
         [[eventDetailsMoreView btnMiscategorized] setEnabled:YES];
         [[eventDetailsMoreView btnPostSomethingSimilar] setEnabled:YES];
         [[eventDetailsMoreView btnReportEvent] setEnabled:YES];
+        [eventDetailsMoreView setEventId:[_post objectId]];
     }
 }
 

@@ -68,6 +68,7 @@
 		F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB219996E7B00FCDE66 /* DEEventViewController.m */; };
 		F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */; };
 		F483B07E199EDB3600C12FB2 /* DEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483B07D199EDB3600C12FB2 /* DEMapViewController.m */; };
+		F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -186,6 +187,8 @@
 		F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsViewController.m; sourceTree = "<group>"; };
 		F483B07C199EDB3600C12FB2 /* DEMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMapViewController.h; sourceTree = "<group>"; };
 		F483B07D199EDB3600C12FB2 /* DEMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMapViewController.m; sourceTree = "<group>"; };
+		F483B08119A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DEScrollOnShowKeyboard.h"; sourceTree = "<group>"; };
+		F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DEScrollOnShowKeyboard.m"; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
@@ -300,6 +303,7 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F483B08019A27CAE00C12FB2 /* Categories */,
 				F4CCBD77199B0A4A00532E9B /* Constants */,
 				F4CCBD6D199AADBD00532E9B /* TestFlightSDK3.0.2 */,
 				F4CCBD6119997F9A00532E9B /* Add Value Screen */,
@@ -541,6 +545,15 @@
 				F483B07D199EDB3600C12FB2 /* DEMapViewController.m */,
 			);
 			name = "Map View";
+			sourceTree = "<group>";
+		};
+		F483B08019A27CAE00C12FB2 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F483B08119A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.h */,
+				F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		F4AA5ADD199D90FB0035FEAF /* Sharing View */ = {
@@ -790,6 +803,7 @@
 				F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */,
 				F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */,
 				F4CCBD6019997D6600532E9B /* DEEventDetailsView.m in Sources */,
+				F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */,
 				F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */,
 				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
 				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,

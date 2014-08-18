@@ -24,8 +24,6 @@
 - (IBAction)postSomethingSimilar:(id)sender {
     UINavigationController *navController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
     
-    [navController popToRootViewControllerAnimated:NO];
-    
     DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
     
     [navController pushViewController:createPostViewController animated:YES];
@@ -34,6 +32,7 @@
 - (IBAction)reportEvent:(id)sender {
 
     DEViewReportEvent *viewReportEvent = [[[NSBundle mainBundle] loadNibNamed:@"ViewReportEvent" owner:self options:nil] firstObject];
+    [viewReportEvent setEventId:_eventId];
     
     CGRect frame = viewReportEvent.frame;
     
@@ -41,6 +40,8 @@
     frame.origin.y = ([[UIScreen mainScreen] bounds].size.height - frame.size.height) / 2 - NAVIGATION_BAR_HEIGHT;
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
+    [scrollView setAlwaysBounceVertical:YES];
+    [scrollView setContentSize:CGSizeMake(frame.size.width, frame.size.height)];
     [scrollView addSubview:viewReportEvent];
     [[[self superview] superview] addSubview:scrollView];
 }

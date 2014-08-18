@@ -49,6 +49,7 @@
     post.cost = cost;
     post.images = images;
     post.description = description;
+
     
     return post;
 }

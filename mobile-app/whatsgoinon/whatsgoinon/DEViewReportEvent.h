@@ -7,19 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIView+DEScrollOnShowKeyboard.h"
+#import "DEPost.h"
 
-@interface DEViewReportEvent : UIView
-
+@interface DEViewReportEvent : UIView <UITextViewDelegate>
+{
+    UITextView *activeField;
+}
 @property (weak, nonatomic) IBOutlet UISwitch *switchAbusive;
 @property (weak, nonatomic) IBOutlet UISwitch *switchCrude;
 @property (weak, nonatomic) IBOutlet UISwitch *switchNotReal;
 @property (weak, nonatomic) IBOutlet UISwitch *switchInappropriate;
 @property (weak, nonatomic) IBOutlet UISwitch *switchOther;
-
 @property (weak, nonatomic) IBOutlet UITextView *txtNotes;
+
+@property (strong, nonatomic) NSString *eventId;
 
 - (IBAction)cancelReport:(id)sender;
 - (IBAction)reportEvent:(id)sender;
+- (IBAction)enableReportDetailsTextView:(id)sender;
 
 
 

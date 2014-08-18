@@ -21,3 +21,4 @@ NSString *const PARSE_CLASS_EVENT_POST_RANGE = @"postrange";
 NSString *const PARSE_CLASS_EVENT_USER = @"user";
 NSString *const PARSE_CLASS_EVENT_LOCATION = @"location";
 NSString *const PARSE_CLASS_EVENT_IMAGES = @"images";
+NSString *const PARSE_CLASS_EVENT_OBJECT_ID = @"ObjectId";

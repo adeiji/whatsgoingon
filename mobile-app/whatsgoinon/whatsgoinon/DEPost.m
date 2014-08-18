@@ -25,6 +25,7 @@
     post.active = object[PARSE_CLASS_EVENT_ACTIVE];
     post.title = object[PARSE_CLASS_EVENT_TITLE];
     post.description = object[PARSE_CLASS_EVENT_DESCRIPTION];
+    post.objectId = object.objectId;
     
     return post;
 }

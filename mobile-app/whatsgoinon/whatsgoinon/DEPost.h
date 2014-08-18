@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSNumber *cost;
 @property (strong, nonatomic) NSArray *images;
 @property (strong, nonatomic) NSString *description;
+@property (strong, nonatomic) NSString *objectId;
 @property BOOL active;
 
 + (DEPost *) getPostFromPFObject : (PFObject *) object;
