@@ -133,6 +133,7 @@
         [[eventDetailsMoreView btnPostSomethingSimilar] setEnabled:YES];
         [[eventDetailsMoreView btnReportEvent] setEnabled:YES];
         [eventDetailsMoreView setEventId:[_post objectId]];
+        [eventDetailsMoreView setCategory:[_post category]];
     }
 }
 

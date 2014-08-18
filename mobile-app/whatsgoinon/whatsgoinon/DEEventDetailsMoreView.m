@@ -51,7 +51,9 @@
 // Push to the server the fact that this post is miscategorized
 - (IBAction)setAsMiscategorized:(id)sender
 {
-    
+    // Post to the server that this event is miscategorized.
+    // Post : Category, Event Id
+    [DESyncManager saveEventAsMiscategorizedWithEventId:_eventId Category:_category];
 }
 
 

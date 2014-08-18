@@ -79,9 +79,6 @@
     return report;
 }
 
-- (IBAction)showReportDetailsTextView:(id)sender {
-    
-}
 - (IBAction)enableReportDetailsTextView:(UISwitch *)sender {
     if (sender.on)
     {

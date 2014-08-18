@@ -19,5 +19,6 @@
 + (void) saveReportWithEventId : (NSString * )objectId
                     WhatsWrong : (NSDictionary *) whatsWrong
                          Other : (NSString *) other;
-
++ (void) saveEventAsMiscategorizedWithEventId : (NSString *) objectId
+                                     Category : (NSString *) category;
 @end

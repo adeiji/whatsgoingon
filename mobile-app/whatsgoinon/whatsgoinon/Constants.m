@@ -30,3 +30,7 @@ NSString *const REPORT_POST_NOT_APPROPRIATE = @"Post is Simply Not Appropriate";
 NSString *const PARSE_CLASS_REPORT_WHATS_WRONG = @"whatswrong";
 NSString *const PARSE_CLASS_REPORT_OTHER = @"other";
 NSString *const PARSE_CLASS_REPORT_EVENT_ID = @"eventid";
+
+NSString *const PARSE_CLASS_NAME_MISCATEGORIZED_EVENT = @"MiscategorizedEvent";
+NSString *const PARSE_CLASS_MISCATEGORIZED_EVENT_CATEGORY = @"category";
+NSString *const PARSE_CLASS_MISCATEGORIZED_EVENT_ID = @"eventId";

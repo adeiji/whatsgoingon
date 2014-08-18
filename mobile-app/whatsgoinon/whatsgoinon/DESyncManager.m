@@ -63,6 +63,21 @@
     return YES;
 }
 
++ (void) saveEventAsMiscategorizedWithEventId : (NSString *) objectId
+                                     Category : (NSString *) category
+{
+    PFObject *miscategorizedEventObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_MISCATEGORIZED_EVENT];
+    miscategorizedEventObject[PARSE_CLASS_MISCATEGORIZED_EVENT_ID] = objectId;
+    miscategorizedEventObject[PARSE_CLASS_MISCATEGORIZED_EVENT_CATEGORY] = category;
+    
+    [miscategorizedEventObject saveEventually:^(BOOL succeeded, NSError *error){
+        if (succeeded)
+        {
+            NSLog(@"You set the current object as miscategorized successfully");
+        }
+    }];
+}
+
 + (void) saveReportWithEventId : (NSString * )objectId
                     WhatsWrong : (NSDictionary *) whatsWrong
                          Other : (NSString *) other
