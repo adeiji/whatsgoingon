@@ -12,13 +12,18 @@
 #import "DEScreenManager.h"
 #import "DELocationManager.h"
 #import "DESelectCategoryView.h"
+#import "DEViewMainMenu.h"
 
 @interface DEViewEventsViewController : UIViewController 
 {
     int postCounter;
+    DEViewMainMenu *viewMainMenu;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) NSArray *posts;
 @property BOOL *overlayDisplayed;
+
+
+- (IBAction)displayMainMenu:(id)sender;
 
 @end

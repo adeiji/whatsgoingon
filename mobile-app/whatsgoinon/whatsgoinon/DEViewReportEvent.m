@@ -65,6 +65,8 @@
     
     [DESyncManager saveReportWithEventId:_eventId WhatsWrong:report.whatsWrong      Other:report.other];
     
+    [[self superview] removeFromSuperview];
+    
 #warning Make sure that we display to the user that he saved the report
 }
 

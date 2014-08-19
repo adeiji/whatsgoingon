@@ -21,15 +21,6 @@
 
 @implementation DEViewEventsViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,6 +49,29 @@
     
     // Otherwise go straight to the viewing of the post
     
+    // Add the gesture recognizer which will be used to show and hide the main menu view
+    
+    UISwipeGestureRecognizer *swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showOrHideMainMenu:)];
+    [swipeRightGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
+
+    [[self view] addGestureRecognizer:swipeRightGestureRecognizer];
+    
+    UISwipeGestureRecognizer *swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showOrHideMainMenu:)];
+    [swipeLeftGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft];
+    
+    [[self view] addGestureRecognizer:swipeLeftGestureRecognizer];
+    
+    viewMainMenu = [[[NSBundle mainBundle] loadNibNamed:@"MainMenuView" owner:self options:nil] firstObject];
+}
+
+- (void) showOrHideMainMenu : (UISwipeGestureRecognizer *) gestureRecognizer {
+    if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight )
+    {
+        [[self view] addSubview:viewMainMenu];
+    }
+    else {
+        [viewMainMenu removeFromSuperview];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -67,6 +81,14 @@
     UIButton *button = [[screenManager values] objectForKey:@"viewCategoriesButton"];
     
     button.hidden = YES;
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIButton *button = [[screenManager values] objectForKey:@"viewCategoriesButton"];
+    
+    button.hidden = NO;
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -123,4 +145,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+// Display the main menu on the current screen
+
+- (IBAction)displayMainMenu:(id)sender {
+
+    
+    [[self view] addSubview:viewMainMenu];
+}
 @end

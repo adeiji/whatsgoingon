@@ -15,6 +15,7 @@
 
 typedef void (^completionBlock) (NSString *value);
 typedef void (^completionHandler) (PFGeoPoint *value);
+typedef void (^autocompleteCompletionBlock) (NSArray *values);
 
 - (PFGeoPoint *) geoPoint;
 + (id)sharedManager;
@@ -27,7 +28,8 @@ typedef void (^completionHandler) (PFGeoPoint *value);
                     CompletionBlock : (completionHandler) callback;
 + (void) getAddressFromLatLongValue : (PFGeoPoint *) location
                     CompletionBlock : (completionBlock) callback;
-
++ (void) getAutocompleteValuesFromString : (NSString *) input
+                         CompletionBlock : (autocompleteCompletionBlock)callback;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
