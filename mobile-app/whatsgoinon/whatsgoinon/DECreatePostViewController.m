@@ -35,6 +35,24 @@ static BOOL DEVELOPMENT = YES;
     _images = [NSMutableArray new];
     [[_createPostViewTwo txtDescription] setDelegate:self];
 
+    UIPickerView *postRangePickerView = [UIPickerView new];
+    [postRangePickerView setDelegate:self];
+    [postRangePickerView setDataSource:self];
+    
+    UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,320,44)];
+    [toolBar setBarStyle:UIBarStyleDefault];
+    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                      style:UIBarButtonItemStyleBordered target:self action:@selector(selectPostRange)];
+    toolBar.items = [[NSArray alloc] initWithObjects:barButtonDone,nil];
+    barButtonDone.tintColor=[UIColor blackColor];
+    [postRangePickerView addSubview:toolBar];
+    [_createPostViewOne.txtPostRange setInputView:postRangePickerView];
+    
+    postRanges = @[@"1 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius"];
+}
+
+- (void) selectPostRange {
+    _createPostViewOne.txtPostRange.text = postRange;
 }
 
 - (void) setImageCounterToZero {
@@ -171,6 +189,30 @@ static BOOL DEVELOPMENT = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+#pragma mark - UIPIckerViewDelegate Methods
+
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+- (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [postRanges count];
+}
+
+#pragma mark - UIPickerViewDataSource Methods
+
+- (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [postRanges objectAtIndex:row];
+}
+
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    NSRange range = [[postRanges objectAtIndex:row] rangeOfString:@" "];
+    _createPostViewOne.txtPostRange.text = [NSString stringWithFormat:@"%@ mi", [[postRanges objectAtIndex:row] substringToIndex:range.location] ];
+}
 
 #pragma mark - ImagePickerControllerDelegate Methods
 
@@ -213,4 +255,7 @@ static BOOL DEVELOPMENT = YES;
     return YES;
 }
 
+- (IBAction)togglePostRangeHelperView:(id)sender {
+    [_postRangeHelperView setHidden:!_postRangeHelperView.hidden];
+}
 @end

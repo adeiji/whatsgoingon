@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "DEScreenManager.h"
 #import <Parse/Parse.h>
+#import "DEViewComment.h"
 
 @interface DELocationManager : NSObject <CLLocationManagerDelegate, NSURLConnectionDelegate>
 

@@ -27,4 +27,15 @@
     return self;
 }
 
++ (void) addToWindowView : (UIView *) view {
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    
+    NSArray *subviews = [window subviews];
+    
+    if (![subviews containsObject:view])
+    {
+        [window addSubview:view];
+    }
+}
+
 @end

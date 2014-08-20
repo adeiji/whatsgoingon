@@ -31,7 +31,7 @@
 		F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFC9199053B000CF61E9 /* EventDetailsView.xib */; };
 		F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F437BFCB199185D000CF61E9 /* Posting.storyboard */; };
 		F437BFCE19918A4500CF61E9 /* InsertLocationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFCD19918A4500CF61E9 /* InsertLocationView.xib */; };
-		F437BFD019918B2200CF61E9 /* RateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFCF19918B2200CF61E9 /* RateView.xib */; };
+		F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */ = {isa = PBXBuildFile; fileRef = F437BFCF19918B2200CF61E9 /* ViewComment.xib */; };
 		F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFD419918DF800CF61E9 /* DESyncManager.m */; };
 		F437BFD71991906300CF61E9 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFD61991906300CF61E9 /* Parse.framework */; };
 		F437BFD9199190A100CF61E9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFD8199190A000CF61E9 /* Accounts.framework */; };
@@ -56,6 +56,7 @@
 		F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0161991CE7E00CF61E9 /* DEViewEventsViewController.m */; };
 		F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */ = {isa = PBXBuildFile; fileRef = F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */; };
 		F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7019A435A500645667 /* DESettingsAccount.m */; };
+		F448FE7C19A442D000645667 /* DEViewComment.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7B19A442D000645667 /* DEViewComment.m */; };
 		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
@@ -131,7 +132,7 @@
 		F437BFC9199053B000CF61E9 /* EventDetailsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventDetailsView.xib; sourceTree = "<group>"; };
 		F437BFCB199185D000CF61E9 /* Posting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Posting.storyboard; sourceTree = "<group>"; };
 		F437BFCD19918A4500CF61E9 /* InsertLocationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InsertLocationView.xib; sourceTree = "<group>"; };
-		F437BFCF19918B2200CF61E9 /* RateView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RateView.xib; sourceTree = "<group>"; };
+		F437BFCF19918B2200CF61E9 /* ViewComment.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewComment.xib; sourceTree = "<group>"; };
 		F437BFD319918DF800CF61E9 /* DESyncManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESyncManager.h; sourceTree = "<group>"; };
 		F437BFD419918DF800CF61E9 /* DESyncManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESyncManager.m; sourceTree = "<group>"; };
 		F437BFD61991906300CF61E9 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -167,6 +168,8 @@
 		F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewSettingsAccount.xib; sourceTree = "<group>"; };
 		F448FE6F19A435A500645667 /* DESettingsAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESettingsAccount.h; sourceTree = "<group>"; };
 		F448FE7019A435A500645667 /* DESettingsAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESettingsAccount.m; sourceTree = "<group>"; };
+		F448FE7A19A442D000645667 /* DEViewComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewComment.h; sourceTree = "<group>"; };
+		F448FE7B19A442D000645667 /* DEViewComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewComment.m; sourceTree = "<group>"; };
 		F4774F831992E38400FCDE66 /* DEAWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAWSManager.h; sourceTree = "<group>"; };
 		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
@@ -316,6 +319,7 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F448FE7919A442BD00645667 /* Comment */,
 				F485811519A2AFF500BD1CE7 /* Main Menu View */,
 				F483B08019A27CAE00C12FB2 /* Categories */,
 				F4CCBD77199B0A4A00532E9B /* Constants */,
@@ -389,7 +393,7 @@
 				F437BFC519904E4E00CF61E9 /* ViewEventsView.xib */,
 				F437BFC9199053B000CF61E9 /* EventDetailsView.xib */,
 				F437BFCD19918A4500CF61E9 /* InsertLocationView.xib */,
-				F437BFCF19918B2200CF61E9 /* RateView.xib */,
+				F437BFCF19918B2200CF61E9 /* ViewComment.xib */,
 				F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */,
 				F485811919A2B74900BD1CE7 /* ViewChangeCity.xib */,
 				F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */,
@@ -472,6 +476,15 @@
 				F448FE7019A435A500645667 /* DESettingsAccount.m */,
 			);
 			name = Settings/Account;
+			sourceTree = "<group>";
+		};
+		F448FE7919A442BD00645667 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				F448FE7A19A442D000645667 /* DEViewComment.h */,
+				F448FE7B19A442D000645667 /* DEViewComment.m */,
+			);
+			name = Comment;
 			sourceTree = "<group>";
 		};
 		F4774F821992E37A00FCDE66 /* AWS Services */ = {
@@ -772,7 +785,7 @@
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
-				F437BFD019918B2200CF61E9 /* RateView.xib in Resources */,
+				F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */,
 				F4CCBD75199AADBD00532E9B /* README.md in Resources */,
 				F437BFC619904E4E00CF61E9 /* ViewEventsView.xib in Resources */,
 				F437BFBA1990486500CF61E9 /* ViewPosts.storyboard in Resources */,
@@ -843,6 +856,7 @@
 				F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */,
 				F4774FA819956BBE00FCDE66 /* DECreateAccountViewController.m in Sources */,
 				F4C68D32199EB2E900AD0D36 /* DEViewReportEvent.m in Sources */,
+				F448FE7C19A442D000645667 /* DEViewComment.m in Sources */,
 				F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */,
 				F437C0061991A2C000CF61E9 /* DEPost.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,

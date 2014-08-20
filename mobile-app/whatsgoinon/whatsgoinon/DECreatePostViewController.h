@@ -14,9 +14,11 @@
 #import "DEAddValueViewController.h"
 
 
-@interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate>
+@interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     int imageCounter;
+    NSArray *postRanges;
+    NSString *postRange;
 }
 #pragma mark - Action Methods
 
@@ -26,10 +28,11 @@
 - (IBAction)gotoNextScreen:(id)sender;
 - (IBAction)takePicture:(id)sender;
 - (IBAction)goHome:(id)sender;
+- (IBAction)togglePostRangeHelperView:(id)sender;
 
-
-@property (strong, nonatomic) IBOutlet DECreatePostView *createPostViewOne;
-@property (strong, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;
+@property (weak, nonatomic) IBOutlet DECreatePostView *createPostViewOne;
+@property (weak, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;
+@property (weak, nonatomic) IBOutlet UIView *postRangeHelperView;
 
 @property (strong, nonatomic) DEPost *post;
 @property (strong, nonatomic) NSMutableArray *images;

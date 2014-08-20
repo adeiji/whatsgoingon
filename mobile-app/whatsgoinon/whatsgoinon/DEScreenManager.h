@@ -15,5 +15,6 @@
 @property (strong, nonatomic) NSMutableDictionary *values;
 
 + (id)sharedManager;
++ (void) addToWindowView : (UIView *) view;
 
 @end
