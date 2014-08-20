@@ -73,7 +73,9 @@
     if (postSaved)
     {
         _post = nil;
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
+        [createPostViewController.navigationItem setHidesBackButton:YES];
+        [self.navigationController pushViewController:createPostViewController animated:YES];
     }
 }
 

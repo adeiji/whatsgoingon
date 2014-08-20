@@ -39,6 +39,12 @@
 }
 
 - (IBAction)gotoAccountSettingsPage:(id)sender {
+    DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] init];
+
+    UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
+    [scrollView setContentSize:settingsAccount.frame.size];
+    [scrollView addSubview:settingsAccount];
+    [self addSubview:scrollView];
 }
 
 - (IBAction)hideMenu:(id)sender {

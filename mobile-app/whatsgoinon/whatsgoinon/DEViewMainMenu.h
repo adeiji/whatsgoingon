@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DECreatePostViewController.h"
 #import "DEViewChangeCity.h"
+#import "DESettingsAccount.h"
 
 @interface DEViewMainMenu : UIView
 

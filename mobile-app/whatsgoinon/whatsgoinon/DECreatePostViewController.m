@@ -167,6 +167,10 @@ static BOOL DEVELOPMENT = YES;
     }
 }
 
+- (IBAction)goHome:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 
 #pragma mark - ImagePickerControllerDelegate Methods
 
