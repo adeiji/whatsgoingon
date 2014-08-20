@@ -31,8 +31,16 @@
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     
     NSArray *subviews = [window subviews];
+    bool exist = NO;
     
-    if (![subviews containsObject:view])
+    for (UIView *subview in subviews) {
+        if (subview == view)
+        {
+            exist = YES;
+        }
+    }
+    
+    if (!exist)
     {
         [window addSubview:view];
     }

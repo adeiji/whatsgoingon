@@ -7,16 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DESyncManager.h"
+#import "DEPost.h"
+
+@class DEPost;
 
 @interface DEViewComment : UIView <UIPickerViewDataSource, UIPickerViewDelegate, UITextViewDelegate>
 {
     NSArray *options;
+    NSString *comment;
+    NSInteger ratingChange;
 }
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UILabel *lblPromptEntry;
+@property (strong, nonatomic) DEPost *post;
 
 - (IBAction)submitComment:(id)sender;
 - (IBAction)cancel:(id)sender;
 
+- (IBAction)thumbsUp:(id)sender;
+- (IBAction)thumbsDown:(id)sender;
 
 @end

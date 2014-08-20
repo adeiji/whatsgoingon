@@ -35,6 +35,26 @@
     
 }
 
++ (void) saveObjectFromDictionary:(NSDictionary *)dictionary
+{
+    
+}
+
++ (void) updateObjectWithId:(NSString *)objectId
+               UpdateValues:(NSDictionary *)values
+             ParseClassName:(NSString *) className;
+{
+    PFQuery *query = [PFQuery queryWithClassName:className];
+    
+    [query getObjectInBackgroundWithId:objectId block:^(PFObject *object, NSError *error) {
+        for (NSString *key in values) {
+            id value = [values objectForKey:key];
+            object[key] = value;
+        }
+        
+        [object saveInBackground];
+    }];
+}
 
 + (BOOL) savePost : (DEPost *) post {
     PFObject *postObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_EVENT];

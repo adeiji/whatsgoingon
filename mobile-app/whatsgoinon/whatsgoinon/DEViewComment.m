@@ -7,6 +7,7 @@
 //
 
 #import "DEViewComment.h"
+#import "Constants.h"
 
 @implementation DEViewComment
 
@@ -20,6 +21,9 @@
         
         _pickerView.delegate = self;
         _pickerView.dataSource = self;
+        
+        comment = [options objectAtIndex:[_pickerView selectedRowInComponent:0]];
+        ratingChange = 0;
     }
     
     return self;
@@ -46,17 +50,43 @@
 
 #pragma mark - Delegate Methods
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    
+    comment = [options objectAtIndex:row];
 }
 
 - (IBAction)submitComment:(id)sender {
-    [self removeFromSuperview];
+    
+    // Need to check and make sure that the user has picked thumbs up or down.  If not then prompt the user to do so.
+    if (ratingChange != 0)
+    {
+        NSMutableArray *comments = [NSMutableArray arrayWithArray:_post.comments];
+        [comments addObject:comment];
+        NSNumber *rating = _post.rating;
+        rating = [NSNumber numberWithInteger:rating.integerValue + ratingChange ];
+        NSDictionary *dictionary = @{PARSE_CLASS_EVENT_COMMENTS: comments, PARSE_CLASS_EVENT_RATING : rating };
+        
+        [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
+        
+        [self removeFromSuperview];
+    }
+    else {
+        [_lblPromptEntry setHidden:NO];
+    }
 }
 
 - (IBAction)cancel:(id)sender {
     [self removeFromSuperview];
+}
+
+- (IBAction)thumbsUp:(id)sender {
+    ratingChange = 5;
+    [_lblPromptEntry setHidden:YES];
+}
+
+- (IBAction)thumbsDown:(id)sender {
+    ratingChange = -5;
+    [_lblPromptEntry setHidden:YES];
 }
 
 @end

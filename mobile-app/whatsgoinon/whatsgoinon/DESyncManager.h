@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DEPost.h"
 #import "DEPostManager.h"
+#import "DEPost.h"
+
+@class DEPost;
 
 @interface DESyncManager : NSObject
 
@@ -21,4 +23,8 @@
                          Other : (NSString *) other;
 + (void) saveEventAsMiscategorizedWithEventId : (NSString *) objectId
                                      Category : (NSString *) category;
++ (void) saveObjectFromDictionary : (NSDictionary *) dictionary;
++ (void) updateObjectWithId : (NSString *) objectId
+               UpdateValues : (NSDictionary *) values
+             ParseClassName : (NSString *) className;
 @end

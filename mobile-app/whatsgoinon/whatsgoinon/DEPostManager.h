@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DEPost.h"
+#import <Parse/Parse.h>
 #import "DESyncManager.h"
+
+@class DEPost;
 
 @interface DEPostManager : NSObject
 

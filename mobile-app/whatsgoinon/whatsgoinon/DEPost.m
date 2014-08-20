@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 adeiji. All rights reserved.
 //
 
-#import "DEPost.h"
 #import "Constants.h"
+#import "DEPost.h"
 
 @implementation DEPost
 

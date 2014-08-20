@@ -12,6 +12,7 @@
 #import "DEScreenManager.h"
 #import "DELocationManager.h"
 #import "DEEventViewController.h"
+#import "DEViewComment.h"
 
 @interface DEViewEventsView : UIView <UIGestureRecognizerDelegate>
 

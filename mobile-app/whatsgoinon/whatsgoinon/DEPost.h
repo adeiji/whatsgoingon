@@ -23,6 +23,9 @@
 @property (strong, nonatomic) NSArray *images;
 @property (strong, nonatomic) NSString *description;
 @property (strong, nonatomic) NSString *objectId;
+@property (strong, nonatomic) NSArray *comments;
+@property (strong, nonatomic) NSNumber *rating;
+
 @property BOOL active;
 
 + (DEPost *) getPostFromPFObject : (PFObject *) object;

@@ -68,9 +68,6 @@
     DELocationManager *locationManager = [DELocationManager sharedManager];
     PFGeoPoint *currentLocation = [locationManager currentLocation];
     
-//    [DELocationManager getDistanceInMilesBetweenLocation:currentLocation LocationTwo:post.location CompletionBlock:^(NSString *distance) {
-//        self.lblDistance.text = distance;
-//    }];
 }
 
 - (void) renderViewWithPost : (DEPost *) myPost {
@@ -115,6 +112,11 @@
     [self displayDistanceToLocationWithPost : post];
     
     _post = myPost;
+    
+    // Show the comment view
+    DEViewComment *viewComment = [[DEViewComment alloc] init];
+    viewComment.post = myPost;
+    [DEScreenManager addToWindowView:viewComment];
 }
 
 // When the user taps this event twice it will take them to a screen to view all the details of the event.

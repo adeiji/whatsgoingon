@@ -27,10 +27,6 @@
 
     //Stop updating the location because now it is uneccesary
     [_locationManager stopUpdatingLocation];
-    
-    // Show the comment view
-    DEViewComment *viewComment = [[DEViewComment alloc] init];
-    [DEScreenManager addToWindowView:viewComment];
 }
 
 - (PFGeoPoint *) geoPoint {

@@ -42,6 +42,9 @@
                             <state key="normal" title="Thumbs Up">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="thumbsUp:" destination="1" eventType="touchUpInside" id="Qqq-jF-8lJ"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7k-e9-vcq">
                             <rect key="frame" x="148" y="103" width="112" height="33"/>
@@ -50,6 +53,9 @@
                             <state key="normal" title="Thumbs Down">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="thumbsDown:" destination="1" eventType="touchUpInside" id="70T-kP-Jwd"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6Q-py-I1i">
                             <rect key="frame" x="30" y="308" width="96" height="30"/>
@@ -73,6 +79,13 @@
                                 <action selector="cancel:" destination="1" eventType="touchUpInside" id="Ij8-gs-dHd"/>
                             </connections>
                         </button>
+                        <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="please select thumbs down or thumbs up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4k-cW-PU3">
+                            <rect key="frame" x="2" y="0.0" width="318" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="1" green="0.03113876489" blue="0.074984954940000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -81,6 +94,7 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <connections>
+                <outlet property="lblPromptEntry" destination="T4k-cW-PU3" id="Y99-xl-Brz"/>
                 <outlet property="pickerView" destination="1OP-da-BIo" id="li3-XZ-FnT"/>
             </connections>
         </view>

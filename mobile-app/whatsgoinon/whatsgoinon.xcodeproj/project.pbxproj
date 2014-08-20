@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1ADD77F251EC4AB29E379A83 /* libPods-whatsgoinon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36964091027C46C399137B26 /* libPods-whatsgoinon.a */; };
+		F40DF97719A5621F002B4419 /* DEPost.m in Sources */ = {isa = PBXBuildFile; fileRef = F40DF97519A561F6002B4419 /* DEPost.m */; };
 		F437BF851990452000CF61E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF841990452000CF61E9 /* Foundation.framework */; };
 		F437BF871990452000CF61E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF861990452000CF61E9 /* CoreGraphics.framework */; };
 		F437BF891990452000CF61E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF881990452000CF61E9 /* UIKit.framework */; };
@@ -48,7 +49,6 @@
 		F437BFF11991968200CF61E9 /* DEEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFF01991968200CF61E9 /* DEEvents.m */; };
 		F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFF419919B9B00CF61E9 /* DECreatePostViewController.m */; };
 		F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFFE19919F3200CF61E9 /* DECreatePostView.m */; };
-		F437C0061991A2C000CF61E9 /* DEPost.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0051991A2C000CF61E9 /* DEPost.m */; };
 		F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0081991A72E00CF61E9 /* DEPostManager.m */; };
 		F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C00C1991AB3D00CF61E9 /* DEMainViewController.m */; };
 		F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C00F1991CDEB00CF61E9 /* DEViewEventsView.m */; };
@@ -105,6 +105,8 @@
 /* Begin PBXFileReference section */
 		36964091027C46C399137B26 /* libPods-whatsgoinon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-whatsgoinon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D02BB448E8247C09D943B14 /* Pods-whatsgoinon.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatsgoinon.xcconfig"; path = "Pods/Pods-whatsgoinon.xcconfig"; sourceTree = "<group>"; };
+		F40DF97419A561F6002B4419 /* DEPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPost.h; sourceTree = "<group>"; };
+		F40DF97519A561F6002B4419 /* DEPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPost.m; sourceTree = "<group>"; };
 		F437BF811990452000CF61E9 /* whatsgoinon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whatsgoinon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F437BF841990452000CF61E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F437BF861990452000CF61E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -154,8 +156,6 @@
 		F437BFF419919B9B00CF61E9 /* DECreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECreatePostViewController.m; sourceTree = "<group>"; };
 		F437BFFD19919F3200CF61E9 /* DECreatePostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECreatePostView.h; sourceTree = "<group>"; };
 		F437BFFE19919F3200CF61E9 /* DECreatePostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECreatePostView.m; sourceTree = "<group>"; };
-		F437C0041991A2C000CF61E9 /* DEPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPost.h; sourceTree = "<group>"; };
-		F437C0051991A2C000CF61E9 /* DEPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPost.m; sourceTree = "<group>"; };
 		F437C0071991A72E00CF61E9 /* DEPostManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPostManager.h; sourceTree = "<group>"; };
 		F437C0081991A72E00CF61E9 /* DEPostManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPostManager.m; sourceTree = "<group>"; };
 		F437C00B1991AB3D00CF61E9 /* DEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMainViewController.h; sourceTree = "<group>"; };
@@ -456,8 +456,8 @@
 		F437C0031991A2B600CF61E9 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				F437C0041991A2C000CF61E9 /* DEPost.h */,
-				F437C0051991A2C000CF61E9 /* DEPost.m */,
+				F40DF97419A561F6002B4419 /* DEPost.h */,
+				F40DF97519A561F6002B4419 /* DEPost.m */,
 				F437C0071991A72E00CF61E9 /* DEPostManager.h */,
 				F437C0081991A72E00CF61E9 /* DEPostManager.m */,
 			);
@@ -852,6 +852,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40DF97719A5621F002B4419 /* DEPost.m in Sources */,
 				F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */,
 				F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */,
 				F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */,
@@ -870,7 +871,6 @@
 				F4C68D32199EB2E900AD0D36 /* DEViewReportEvent.m in Sources */,
 				F448FE7C19A442D000645667 /* DEViewComment.m in Sources */,
 				F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */,
-				F437C0061991A2C000CF61E9 /* DEPost.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
 				F4774FAB199575CE00FCDE66 /* DELoginView.m in Sources */,
 				F437C0131991CE0C00CF61E9 /* DEEventsTimeline.m in Sources */,
