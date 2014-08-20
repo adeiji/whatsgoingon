@@ -112,11 +112,6 @@
     [self displayDistanceToLocationWithPost : post];
     
     _post = myPost;
-    
-    // Show the comment view
-    DEViewComment *viewComment = [[DEViewComment alloc] init];
-    viewComment.post = myPost;
-    [DEScreenManager addToWindowView:viewComment];
 }
 
 // When the user taps this event twice it will take them to a screen to view all the details of the event.

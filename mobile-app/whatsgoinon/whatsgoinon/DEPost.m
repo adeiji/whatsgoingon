@@ -26,6 +26,8 @@
     post.title = object[PARSE_CLASS_EVENT_TITLE];
     post.description = object[PARSE_CLASS_EVENT_DESCRIPTION];
     post.objectId = object.objectId;
+    post.comments = object[PARSE_CLASS_EVENT_COMMENTS];
+    post.rating = object[PARSE_CLASS_EVENT_RATING];
     
     return post;
 }

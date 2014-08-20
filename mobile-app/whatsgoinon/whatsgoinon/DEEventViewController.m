@@ -54,6 +54,10 @@
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
     
+    // Show the comment view
+    DEViewComment *viewComment = [[DEViewComment alloc] init];
+    viewComment.post = _post;
+    [DEScreenManager addToWindowView:viewComment];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {

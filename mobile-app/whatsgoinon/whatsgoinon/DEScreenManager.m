@@ -34,7 +34,7 @@
     bool exist = NO;
     
     for (UIView *subview in subviews) {
-        if (subview == view)
+        if ([subview isKindOfClass:[view class]])
         {
             exist = YES;
         }

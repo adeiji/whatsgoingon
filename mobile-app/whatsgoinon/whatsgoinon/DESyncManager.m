@@ -52,7 +52,16 @@
             object[key] = value;
         }
         
-        [object saveInBackground];
+        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded)
+            {
+                NSLog(@"Saved successfully");
+            }
+            else
+            {
+                NSLog(@"%@", error.description);
+            }
+        }];
     }];
 }
 

@@ -64,7 +64,8 @@
         [comments addObject:comment];
         NSNumber *rating = _post.rating;
         rating = [NSNumber numberWithInteger:rating.integerValue + ratingChange ];
-        NSDictionary *dictionary = @{PARSE_CLASS_EVENT_COMMENTS: comments, PARSE_CLASS_EVENT_RATING : rating };
+        _post.rating = rating;
+        NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_COMMENTS : comments, PARSE_CLASS_EVENT_RATING : rating };
         
         [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
         
