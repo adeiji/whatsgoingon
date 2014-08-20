@@ -31,6 +31,9 @@
 // Stores all the posts that will be viewed currently
 @property (strong, nonatomic) NSArray *posts;
 
+// Stores all the post that you are going to for sure
+@property (strong, nonatomic) NSMutableArray *goingPost;
+@property (strong, nonatomic) NSMutableArray *maybeGoingPost;
 + (id)sharedManager;
 
 @end

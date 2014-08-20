@@ -19,15 +19,6 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 - (void) loadMapViewWithLocation : (PFGeoPoint *) location
 {
     // Create a GMSCameraPosition that tells the map to display the
@@ -45,5 +36,16 @@
     
 }
 
+- (IBAction)setEventAsGoing:(id)sender
+{
+    DEPostManager *postManager = [DEPostManager new];
+    [[postManager goingPost] addObject:_post];
+}
+
+- (IBAction)setEventAsMaybeGoing:(id)sender
+{
+    DEPostManager *postManager = [DEPostManager new];
+    [[postManager maybeGoingPost] addObject:_post];
+}
 
 @end

@@ -22,6 +22,7 @@
     
     if (_isPreview)
     {
+        [_eventView setPost:_post];
         [[_eventView btnGoing] setEnabled:NO];
         [[_eventView btnMaybe] setEnabled:NO];
         [[_eventView lblNumberOfPeopleGoing] setText:0];
@@ -150,5 +151,7 @@
         [mapViewController setLocation:[_post location]];
     }
 }
+
+
 
 @end

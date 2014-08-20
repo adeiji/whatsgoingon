@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
+#import "DEPostManager.h"
+#import "DEPost.h"
 
 @interface DEEventView : UIView
 {
@@ -26,7 +28,12 @@
 @property (weak, nonatomic) IBOutlet UITextView *txtDetails;
 @property (weak, nonatomic) IBOutlet UIButton *btnMaybe;
 @property (weak, nonatomic) IBOutlet UIView *detailsView;
+@property (strong, nonatomic) DEPost *post;
 
 - (void) loadMapViewWithLocation : (PFGeoPoint *) location;
+
+- (IBAction)setEventAsGoing:(id)sender;
+- (IBAction)setEventAsMaybeGoing:(id)sender;
+
 
 @end
