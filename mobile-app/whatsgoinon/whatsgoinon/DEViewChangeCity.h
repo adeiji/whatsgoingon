@@ -12,8 +12,13 @@
 @interface DEViewChangeCity : UIView <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *locations;
+    NSString *type;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSString *selection;
+
+- (void) initLocationsArray;
+- (void) setUpViewWithType : (NSString *) myType;
 
 @end

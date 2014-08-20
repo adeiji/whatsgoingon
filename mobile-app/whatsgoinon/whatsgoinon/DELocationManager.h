@@ -23,15 +23,21 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 + (id)sharedManager;
 - (void) startSignificantChangeUpdates;
 - (void) stopSignificantChangeUpdates;
+
 + (void) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
                                LocationTwo : (PFGeoPoint *) location2
                            CompletionBlock : (completionBlock) callback;
+
 + (void) getLatLongValueFromAddress : (NSString *) address
+
                     CompletionBlock : (completionHandler) callback;
 + (void) getAddressFromLatLongValue : (PFGeoPoint *) location
                     CompletionBlock : (completionBlock) callback;
+
 + (void) getAutocompleteValuesFromString : (NSString *) input
-                         CompletionBlock : (autocompleteCompletionBlock)callback;
+                          DataResultType : (NSString *) type
+                         CompletionBlock : (autocompleteCompletionBlock) callback;
+
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;

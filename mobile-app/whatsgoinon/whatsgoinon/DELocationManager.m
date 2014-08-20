@@ -13,7 +13,7 @@
 #define GOOGLE_MATRIX_DISTANCE_API @"https://maps.googleapis.com/maps/api/distancematrix/json?origins=%@&destinations=%@&sensor=false&units=imperial&key=AIzaSyDuVa4zdofqE5f7z4wkmi6dw--0HQYm5Ho"
 #define GOOGLE_GEOLOCATION_API_GET_COORDINATES @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 #define GOOGLE_GEOLOCATION_API_GET_ADDRESS @"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
-#define GOOGLE_PLACES_AUTOCOMPLETE @"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&types=(cities)&components=country:us&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
+#define GOOGLE_PLACES_AUTOCOMPLETE @"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&types=%@&components=country:us&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 
 // Do we need to make sure that the user is using location services or not upon application upload?
 
@@ -167,9 +167,10 @@
 }
 
 + (void) getAutocompleteValuesFromString : (NSString *) input
+                          DataResultType : (NSString *) type
                          CompletionBlock : (autocompleteCompletionBlock) callback {
     input = [input stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_PLACES_AUTOCOMPLETE, input]]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_PLACES_AUTOCOMPLETE, input, type]]];
     
     NSOperationQueue *queue = [NSOperationQueue new];
     queue.name = @"Google Places Queue";
@@ -183,8 +184,15 @@
         
         for (NSDictionary *dictionary in predictions) {
             NSArray *terms = [dictionary objectForKey:@"terms"];
+            // Get everything from the address except the unnecessary end pieces
+            NSString *location = [NSString stringWithFormat:@"%@", terms[0][@"value"]];
+
+            for (int i = 1; i < [terms count] -1; i ++)
+            {
+                location = [NSString stringWithFormat:@"%@ %@", location, terms[i][@"value"]];
+            }
             
-            [values addObject:[NSString stringWithFormat:@"%@, %@", terms[0][@"value"], terms[1][@"value"]]];
+            [values addObject:location];
         };
         
         dispatch_async(dispatch_get_main_queue(), ^{

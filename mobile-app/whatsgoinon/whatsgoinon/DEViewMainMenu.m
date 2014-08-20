@@ -7,6 +7,7 @@
 //
 
 #import "DEViewMainMenu.h"
+#import "Constants.h"
 
 @implementation DEViewMainMenu
 
@@ -30,7 +31,8 @@
 
 - (IBAction)gotoChangeCityPage:(id)sender {
 
-    DEViewChangeCity *changeCity = [[DEViewChangeCity alloc] init];
+    DEViewChangeCity *changeCity = [[DEViewChangeCity alloc] initWithFrame:CGRectMake(0, 0, 223, 568)];
+    [changeCity setUpViewWithType:PLACES_API_DATA_RESULT_TYPE_CITIES];
     
     [self addSubview:changeCity];
 }

@@ -34,3 +34,6 @@ NSString *const PARSE_CLASS_REPORT_EVENT_ID = @"eventid";
 NSString *const PARSE_CLASS_NAME_MISCATEGORIZED_EVENT = @"MiscategorizedEvent";
 NSString *const PARSE_CLASS_MISCATEGORIZED_EVENT_CATEGORY = @"category";
 NSString *const PARSE_CLASS_MISCATEGORIZED_EVENT_ID = @"eventId";
+
+NSString *const PLACES_API_DATA_RESULT_TYPE_CITIES = @"(cities)";
+NSString *const PLACES_API_DATA_RESULT_TYPE_GEOCODE = @"geocode";

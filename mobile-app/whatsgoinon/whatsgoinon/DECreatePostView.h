@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DEScreenManager.h"
+#import "DEViewChangeCity.h"
 
 @interface DECreatePostView : UIView <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UINavigationControllerDelegate>
+{
+    UITextField *activeField;
+}
+
 
 #pragma mark - View Outlets
 
@@ -20,8 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnInfo;
 @property (weak, nonatomic) IBOutlet UITextField *txtPostRange;
 @property (weak, nonatomic) IBOutlet UITextField *txtAddress;
-@property (weak, nonatomic) IBOutlet UIButton *btnCurrentLocation;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
+@property (weak, nonatomic) IBOutlet UISwitch *switchUseCurrentLocation;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
 
@@ -35,5 +41,11 @@
 
 @property (strong, nonatomic) NSArray *categories;
 @property (strong, nonatomic) UIPickerView *categoriesPicker;
+
+#pragma mark - Button Actions
+
+- (IBAction)enableOrDisableAddressBox:(id)sender;
+
+- (void) displayCurrentLocation;
 
 @end

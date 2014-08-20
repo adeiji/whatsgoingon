@@ -49,6 +49,8 @@ static BOOL DEVELOPMENT = YES;
     [_createPostViewOne.txtPostRange setInputView:postRangePickerView];
     
     postRanges = @[@"1 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius"];
+    
+    [_createPostViewOne displayCurrentLocation];
 }
 
 - (void) selectPostRange {
@@ -72,15 +74,6 @@ static BOOL DEVELOPMENT = YES;
             [view resignFirstResponder];
         }
     }
-}
-
-- (IBAction)displayCurrentLocation:(id)sender {
-    
-    DELocationManager *locationManager = [DELocationManager sharedManager];
-    [DELocationManager getAddressFromLatLongValue:[locationManager geoPoint] CompletionBlock:^(NSString *value) {
-        _createPostViewOne.txtAddress.text = value;
-    }];
-    
 }
 
 // Here we set the rest of the values for the post

@@ -57,6 +57,7 @@
 		F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */ = {isa = PBXBuildFile; fileRef = F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */; };
 		F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7019A435A500645667 /* DESettingsAccount.m */; };
 		F448FE7C19A442D000645667 /* DEViewComment.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7B19A442D000645667 /* DEViewComment.m */; };
+		F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = F448FE7D19A538C700645667 /* ViewAutocomplete.xib */; };
 		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
@@ -170,6 +171,7 @@
 		F448FE7019A435A500645667 /* DESettingsAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESettingsAccount.m; sourceTree = "<group>"; };
 		F448FE7A19A442D000645667 /* DEViewComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewComment.h; sourceTree = "<group>"; };
 		F448FE7B19A442D000645667 /* DEViewComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewComment.m; sourceTree = "<group>"; };
+		F448FE7D19A538C700645667 /* ViewAutocomplete.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAutocomplete.xib; sourceTree = "<group>"; };
 		F4774F831992E38400FCDE66 /* DEAWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAWSManager.h; sourceTree = "<group>"; };
 		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */,
 				F485811919A2B74900BD1CE7 /* ViewChangeCity.xib */,
 				F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */,
+				F448FE7D19A538C700645667 /* ViewAutocomplete.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 		F437BFF219919B7200CF61E9 /* Posting */ = {
 			isa = PBXGroup;
 			children = (
+				F448FE7F19A539D800645667 /* Address Autocomplete */,
 				F4AA5ADD199D90FB0035FEAF /* Sharing View */,
 				F4CCBD7B199BD6DF00532E9B /* Categories */,
 				F4774FAD19996A7D00FCDE66 /* View Post Details */,
@@ -485,6 +489,13 @@
 				F448FE7B19A442D000645667 /* DEViewComment.m */,
 			);
 			name = Comment;
+			sourceTree = "<group>";
+		};
+		F448FE7F19A539D800645667 /* Address Autocomplete */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Address Autocomplete";
 			sourceTree = "<group>";
 		};
 		F4774F821992E37A00FCDE66 /* AWS Services */ = {
@@ -784,6 +795,7 @@
 				F437BFBE199048AF00CF61E9 /* WelcomeEventsView.xib in Resources */,
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
+				F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */,
 				F4CCBD75199AADBD00532E9B /* README.md in Resources */,

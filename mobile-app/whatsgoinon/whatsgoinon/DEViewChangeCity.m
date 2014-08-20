@@ -10,22 +10,31 @@
 
 @implementation DEViewChangeCity
 
-- (id) init {
-    self = [super init];
+
+
+- (id) initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self)
     {
         // Initialization code.
-        //
         self = [[[NSBundle mainBundle] loadNibNamed:@"ViewChangeCity" owner:self options:nil] firstObject];
-        [self.searchBar setDelegate:self];
-        [self.tableView setDataSource:self];
-        [self.tableView setDelegate:self];
-        
-        [self.searchBar becomeFirstResponder];
-        
-        locations = [NSArray new];
+        self.frame = frame;
     }
     return self;
+}
+
+- (void) setUpViewWithType:(NSString *)myType {
+    [self.searchBar setDelegate:self];
+    [self.tableView setDataSource:self];
+    [self.tableView setDelegate:self];
+    
+    type = myType;
+    
+    [self initLocationsArray];
+}
+
+- (void) initLocationsArray {
+    locations = [NSArray new];
 }
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -33,17 +42,12 @@
 }
 
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    [DELocationManager getAutocompleteValuesFromString:searchText CompletionBlock:^(NSArray *values) {
+    [DELocationManager getAutocompleteValuesFromString:searchText DataResultType:type CompletionBlock:^(NSArray *values) {
         locations = values;
         [_tableView reloadData];
     }];
     
     searchBar.text = searchText;
-}
-
-- (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-{
-    
 }
 
 #pragma mark - Data Source
@@ -82,7 +86,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Set the lat/long values to whatever was selected and then reload the post age with the necessary post that correspond to the city that was just selected
-    
+    _selection = [locations objectAtIndex:indexPath.row];
     [self removeFromSuperview];
     
 }

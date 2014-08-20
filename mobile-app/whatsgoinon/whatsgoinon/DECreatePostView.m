@@ -7,6 +7,7 @@
 //
 
 #import "DECreatePostView.h"
+#import "Constants.h"
 
 @implementation DECreatePostView
 
@@ -36,6 +37,8 @@
     _txtStartTime.delegate = self;
     [_txtEndTime setInputView:timePicker];
     _txtEndTime.delegate = self;
+    
+    _txtAddress.delegate = self;
 
 }
 
@@ -80,6 +83,8 @@
 #pragma mark - UITextField Delegate Methods
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
+    activeField = textField;
+    
     [_categoriesPicker reloadAllComponents];
     [_categoriesPicker selectRow:1 inComponent:0 animated:YES];
     
@@ -92,8 +97,14 @@
     else if ([textField isEqual:_txtStartTime] || [textField isEqual:_txtEndTime]) {
         [self updateTimeTextField:(UIDatePicker *)textField.inputView];
     }
+    else if ([textField isEqual:_txtAddress])
+    {
+        DEViewChangeCity *viewPostAddress = [[DEViewChangeCity alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+        [viewPostAddress setUpViewWithType:PLACES_API_DATA_RESULT_TYPE_GEOCODE];
 
-    
+        [activeField resignFirstResponder];
+        [self addSubview:viewPostAddress];
+    }
 }
 
 #pragma mark -
@@ -126,13 +137,33 @@ numberOfRowsInComponent:(NSInteger)component
     self.txtCategory.text = [_categories objectAtIndex:row];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void) willRemoveSubview:(UIView *)subview {
+    if ([subview isKindOfClass:[DEViewChangeCity class]])
+    {
+        _txtAddress.text = ((DEViewChangeCity *) subview).selection;
+    }
 }
-*/
 
+
+- (IBAction)enableOrDisableAddressBox:(UISwitch *)sender {
+    
+    [_txtAddress setEnabled:!sender.on];
+    
+    if (sender.on)
+    {
+        [self displayCurrentLocation];
+    }
+    else
+    {
+        _txtAddress.text = @"";
+    }
+}
+
+- (void) displayCurrentLocation
+{
+    DELocationManager *locationManager = [DELocationManager sharedManager];
+    [DELocationManager getAddressFromLatLongValue:[locationManager geoPoint] CompletionBlock:^(NSString *value) {
+        _txtAddress.text = value;
+    }];
+}
 @end
