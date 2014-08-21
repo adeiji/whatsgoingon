@@ -66,7 +66,6 @@
 - (void) displayDistanceToLocationWithPost : (DEPost *) post
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
-    PFGeoPoint *currentLocation = [locationManager currentLocation];
     
 }
 
