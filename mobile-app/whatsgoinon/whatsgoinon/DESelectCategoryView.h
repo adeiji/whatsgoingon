@@ -11,6 +11,7 @@
 #import "DERotaryProtocol.h"
 #import "DEScreenManager.h"
 #import <iCarousel/iCarousel.h>
+#import "DEOrbButton.h"
 
 @interface DESelectCategoryView : UIView <UIGestureRecognizerDelegate, iCarouselDelegate, iCarouselDataSource>
 {

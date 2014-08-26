@@ -93,7 +93,7 @@
 
     dispatch_async(queue, ^{
         self.lblTitle.text = post.title;
-        self.imgMainImageView.backgroundColor = [UIColor greenColor];
+//        self.imgMainImageView.backgroundColor = [UIColor greenColor];
         
         if ([post.images count] > 0)
         {

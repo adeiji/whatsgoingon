@@ -29,6 +29,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    
+    for (UIView *button in self.buttons) {
+        [button.layer setCornerRadius:6.0f];
+    }
+    CGSize size = self.titleView.frame.size;
+    UIImage *image = [UIImage imageNamed:@"HappSnapp-caption"];
+    UIGraphicsBeginImageContext( size );
+    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
+    UIImage* smallerImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [self.titleView setBackgroundColor:[UIColor colorWithPatternImage:smallerImage]];
 }
 
 - (void)didReceiveMemoryWarning

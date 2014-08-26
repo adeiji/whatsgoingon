@@ -18,8 +18,9 @@ static float deltaAngle;
 #define BUTTON_HOME_LOC_Y 518
 #define NUMBER_OF_SECTIONS 13
 #define VIEW_WIDTH 250
-#define BUTTON_HEIGHT 40
-#define BUTTON_WIDTH 40
+#define BUTTON_HEIGHT 50
+#define BUTTON_WIDTH 50
+#define BLUE_ORB_IMAGE @""
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -33,15 +34,16 @@ static float deltaAngle;
 - (void) loadView {
     
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIButton *viewCategories = [[screenManager values] objectForKey:@"viewCategoriesButton"];
+    DEOrbButton *viewCategories = [[screenManager values] objectForKey:@"viewCategoriesButton"];
     
     if (![[screenManager values] objectForKey:@"viewCategoriesButton"])
     {
         UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
         
-        viewCategories = [[UIButton alloc] initWithFrame:CGRectMake(320 - 60, 568 - 60, BUTTON_WIDTH, BUTTON_HEIGHT)];
-        [viewCategories setBackgroundColor:[UIColor blueColor]];
+        viewCategories = [[DEOrbButton alloc] initWithFrame:CGRectMake(320 - 60, 568 - 60, BUTTON_WIDTH, BUTTON_HEIGHT)];
+        [viewCategories setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:BLUE_ORB_IMAGE]]];
         [viewCategories addTarget:self action:@selector(displayCategoryWheel:) forControlEvents:UIControlEventTouchUpInside];
+        [viewCategories setOpaque:NO];
         [window addSubview:viewCategories];
         [[screenManager values] setObject:viewCategories forKey:@"viewCategoriesButton"];
     }

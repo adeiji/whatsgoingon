@@ -33,6 +33,14 @@
     [DELocationManager sharedManager];
     [DEScreenManager sharedManager];
     
+    UIWindow *window = [self window];
+    
+    UIImageView *blurredImageView = [UIImageView new];
+    [blurredImageView setImage:[UIImage imageNamed:@"HappSnap-bg.png"]];
+    [blurredImageView setFrame:window.frame];
+    
+    [window addSubview:blurredImageView];
+    
     return YES;
 }
 							

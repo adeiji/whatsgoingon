@@ -58,6 +58,8 @@
 		F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7019A435A500645667 /* DESettingsAccount.m */; };
 		F448FE7C19A442D000645667 /* DEViewComment.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7B19A442D000645667 /* DEViewComment.m */; };
 		F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = F448FE7D19A538C700645667 /* ViewAutocomplete.xib */; };
+		F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */ = {isa = PBXBuildFile; fileRef = F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */; };
+		F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A019AC6EFD007705F9 /* DEOrbButton.m */; };
 		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
@@ -90,6 +92,7 @@
 		F4CCBD7A199B0A9900532E9B /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD79199B0A9900532E9B /* Constants.m */; };
 		F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD7D199BD6F500532E9B /* DESelectCategoryView.m */; };
 		F4CCBD81199BF30200532E9B /* DESector.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD80199BF30200532E9B /* DESector.m */; };
+		F4D9C97819ABF26200855094 /* HappSnap-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D9C97719ABF26200855094 /* HappSnap-bg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,7 +162,7 @@
 		F437C0071991A72E00CF61E9 /* DEPostManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPostManager.h; sourceTree = "<group>"; };
 		F437C0081991A72E00CF61E9 /* DEPostManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPostManager.m; sourceTree = "<group>"; };
 		F437C00B1991AB3D00CF61E9 /* DEMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMainViewController.h; sourceTree = "<group>"; };
-		F437C00C1991AB3D00CF61E9 /* DEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMainViewController.m; sourceTree = "<group>"; };
+		F437C00C1991AB3D00CF61E9 /* DEMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DEMainViewController.m; sourceTree = "<group>"; };
 		F437C00E1991CDEB00CF61E9 /* DEViewEventsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewEventsView.h; sourceTree = "<group>"; };
 		F437C00F1991CDEB00CF61E9 /* DEViewEventsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewEventsView.m; sourceTree = "<group>"; };
 		F437C0111991CE0C00CF61E9 /* DEEventsTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventsTimeline.h; sourceTree = "<group>"; };
@@ -172,6 +175,9 @@
 		F448FE7A19A442D000645667 /* DEViewComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewComment.h; sourceTree = "<group>"; };
 		F448FE7B19A442D000645667 /* DEViewComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewComment.m; sourceTree = "<group>"; };
 		F448FE7D19A538C700645667 /* ViewAutocomplete.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAutocomplete.xib; sourceTree = "<group>"; };
+		F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HappSnapp-caption.png"; sourceTree = "<group>"; };
+		F45E609F19AC6EFD007705F9 /* DEOrbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEOrbButton.h; sourceTree = "<group>"; };
+		F45E60A019AC6EFD007705F9 /* DEOrbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEOrbButton.m; sourceTree = "<group>"; };
 		F4774F831992E38400FCDE66 /* DEAWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAWSManager.h; sourceTree = "<group>"; };
 		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
@@ -234,6 +240,7 @@
 		F4CCBD7F199BF30200532E9B /* DESector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESector.h; sourceTree = "<group>"; };
 		F4CCBD80199BF30200532E9B /* DESector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESector.m; sourceTree = "<group>"; };
 		F4CCBD82199BF6C300532E9B /* DERotaryProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DERotaryProtocol.h; sourceTree = "<group>"; };
+		F4D9C97719ABF26200855094 /* HappSnap-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HappSnap-bg.png"; path = "images/HappSnap-bg.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +328,7 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F4D9C97619ABF15600855094 /* Images */,
 				F448FE7919A442BD00645667 /* Comment */,
 				F485811519A2AFF500BD1CE7 /* Main Menu View */,
 				F483B08019A27CAE00C12FB2 /* Categories */,
@@ -342,6 +350,8 @@
 				F437BF9A1990452000CF61E9 /* DEViewController.m */,
 				F437BF9C1990452000CF61E9 /* Images.xcassets */,
 				F437BF8B1990452000CF61E9 /* Supporting Files */,
+				F45E609F19AC6EFD007705F9 /* DEOrbButton.h */,
+				F45E60A019AC6EFD007705F9 /* DEOrbButton.m */,
 			);
 			path = whatsgoinon;
 			sourceTree = "<group>";
@@ -699,6 +709,15 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		F4D9C97619ABF15600855094 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */,
+				F4D9C97719ABF26200855094 /* HappSnap-bg.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -788,7 +807,9 @@
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
 				F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */,
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
+				F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
+				F4D9C97819ABF26200855094 /* HappSnap-bg.png in Resources */,
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,
 				F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */,
 				F4CCBD76199AADBD00532E9B /* release_notes.md in Resources */,
@@ -854,6 +875,7 @@
 			files = (
 				F40DF97719A5621F002B4419 /* DEPost.m in Sources */,
 				F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */,
+				F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */,
 				F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */,
 				F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */,
 				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,

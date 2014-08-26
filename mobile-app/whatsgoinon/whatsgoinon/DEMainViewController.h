@@ -12,6 +12,10 @@
 #import "DELoginViewController.h"
 
 @interface DEMainViewController : UIViewController
+
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+@property (weak, nonatomic) IBOutlet UIView *titleView;
+
 - (IBAction)viewWhatsGoingOnNow:(id)sender;
 
 - (IBAction)showCreatePostView:(id)sender;

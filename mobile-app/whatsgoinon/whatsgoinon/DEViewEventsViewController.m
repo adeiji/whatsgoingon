@@ -13,7 +13,7 @@
 
 @end
 
-#define POST_HEIGHT 216
+#define POST_HEIGHT 278
 #define POST_WIDTH 140
 #define IPHONE_DEVICE_WIDTH 320
 #define TOP_MARGIN 20
@@ -62,6 +62,8 @@
     [[self view] addGestureRecognizer:swipeLeftGestureRecognizer];
     
     viewMainMenu = [[[NSBundle mainBundle] loadNibNamed:@"MainMenuView" owner:self options:nil] firstObject];
+    
+    [self.view setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void) showOrHideMainMenu : (UISwipeGestureRecognizer *) gestureRecognizer {
@@ -109,11 +111,13 @@
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
         
-        CGRect frame = CGRectMake((column * POST_WIDTH) + (10 * (column + 1)),TOP_MARGIN + POST_HEIGHT * postCounter, POST_WIDTH, POST_HEIGHT);
+        CGRect frame = CGRectMake((column * POST_WIDTH) + (10 * (column + 1)),(TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter), POST_WIDTH, POST_HEIGHT);
         viewEventsView.frame = frame;
         DEPost *post = [DEPost getPostFromPFObject:obj];
         
         [viewEventsView renderViewWithPost:post];
+        
+        [[viewEventsView layer] setCornerRadius:5.0f];
         
         [_scrollView addSubview:viewEventsView];
         
