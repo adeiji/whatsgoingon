@@ -9,6 +9,7 @@
 #import "DESelectCategoryView.h"
 #import <QuartzCore/QuartzCore.h>
 #import <POP.h>
+#import "Constants.h"
 
 static float deltaAngle;
 
@@ -18,8 +19,10 @@ static float deltaAngle;
 #define BUTTON_HOME_LOC_Y 518
 #define NUMBER_OF_SECTIONS 13
 #define VIEW_WIDTH 250
-#define BUTTON_HEIGHT 50
-#define BUTTON_WIDTH 50
+#define BUTTON_HEIGHT 40
+#define BUTTON_WIDTH 40
+#define BUTTON_OUTER_CIRCLE_HEIGHT 60
+#define BUTTON_OUTER_CIRCLE_WIDTH 60
 #define BLUE_ORB_IMAGE @""
 
 - (id)initWithFrame:(CGRect)frame
@@ -34,22 +37,50 @@ static float deltaAngle;
 - (void) loadView {
     
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    DEOrbButton *viewCategories = [[screenManager values] objectForKey:@"viewCategoriesButton"];
+    UIView *outerView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
-    if (![[screenManager values] objectForKey:@"viewCategoriesButton"])
+    if (![[screenManager values] objectForKey:ORB_BUTTON_VIEW])
     {
+        UIColor *orbColor = [UIColor colorWithRed: 0.161 green: 0.502 blue: 0.725 alpha: 1];
+        UIButton *viewCategories = [UIButton new];
         UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        UIView *outerView = [[UIView alloc] initWithFrame:CGRectMake(320 - 90, 568 - 90, BUTTON_OUTER_CIRCLE_WIDTH, BUTTON_OUTER_CIRCLE_HEIGHT)];
         
-        viewCategories = [[DEOrbButton alloc] initWithFrame:CGRectMake(320 - 60, 568 - 60, BUTTON_WIDTH, BUTTON_HEIGHT)];
-        [viewCategories setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:BLUE_ORB_IMAGE]]];
-        [viewCategories addTarget:self action:@selector(displayCategoryWheel:) forControlEvents:UIControlEventTouchUpInside];
-        [viewCategories setOpaque:NO];
-        [window addSubview:viewCategories];
-        [[screenManager values] setObject:viewCategories forKey:@"viewCategoriesButton"];
+        viewCategories = [[UIButton alloc] initWithFrame:CGRectMake((BUTTON_OUTER_CIRCLE_HEIGHT / 2.0) - (BUTTON_WIDTH / 2), (BUTTON_OUTER_CIRCLE_WIDTH / 2.0) - (BUTTON_HEIGHT / 2), BUTTON_WIDTH, BUTTON_HEIGHT)];
+        
+        // Outer View Group
+        {
+            [[outerView layer] setBackgroundColor:[UIColor clearColor].CGColor];
+            [[outerView layer] setCornerRadius:BUTTON_OUTER_CIRCLE_HEIGHT / 2.0f];
+            [[outerView layer] setBorderColor:orbColor.CGColor];
+            [[outerView layer] setBorderWidth:2.0f];
+        }
+        
+        // View Categories Button Group
+        {
+            [[viewCategories layer] setCornerRadius:BUTTON_HEIGHT / 2.0f];
+            [viewCategories setBackgroundColor:orbColor];
+            [viewCategories addTarget:self action:@selector(displayCategoryWheel:) forControlEvents:UIControlEventTouchUpInside];
+            [viewCategories setOpaque:NO];
+        }
+        [outerView addSubview:viewCategories];
+        [window addSubview:outerView];
+        
+        // Animation
+        {
+            [UIView animateWithDuration:0.8f delay:0.0f options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
+                
+                outerView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+                viewCategories.transform = CGAffineTransformMakeScale(.9, .9);
+                
+            } completion:NULL];
+        }
+        
+        [[screenManager values] setObject:outerView forKey:ORB_BUTTON_VIEW];
     }
     else
     {
-        viewCategories.hidden = NO;
+        outerView.hidden = NO;
     }
     
     isActive = false;
@@ -82,8 +113,8 @@ static float deltaAngle;
     if (isActive)
     {
         DEScreenManager *screenManager = [DEScreenManager sharedManager];
-        UIButton *viewCategories = [[screenManager values] objectForKey:@"viewCategoriesButton"];
-        if (CGRectContainsPoint(viewCategories.frame, point))
+        UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+        if (CGRectContainsPoint(orbView.frame, point))
         {
             return NO;
         }

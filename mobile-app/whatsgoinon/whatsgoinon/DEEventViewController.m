@@ -62,12 +62,7 @@
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
-//    if (!_isPreview)
-//    {
-//        DEScreenManager *sharedManager = [DEScreenManager sharedManager];
-//        UIButton *button = [[sharedManager values] objectForKey:@"viewCategoriesButton"];
-//        button.hidden = YES;
-//    }
+
 }
 
 - (void) savePost {

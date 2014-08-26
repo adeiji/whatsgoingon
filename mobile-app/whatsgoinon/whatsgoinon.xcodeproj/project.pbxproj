@@ -60,6 +60,7 @@
 		F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = F448FE7D19A538C700645667 /* ViewAutocomplete.xib */; };
 		F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */ = {isa = PBXBuildFile; fileRef = F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */; };
 		F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A019AC6EFD007705F9 /* DEOrbButton.m */; };
+		F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */; };
 		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
@@ -178,6 +179,8 @@
 		F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HappSnapp-caption.png"; sourceTree = "<group>"; };
 		F45E609F19AC6EFD007705F9 /* DEOrbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEOrbButton.h; sourceTree = "<group>"; };
 		F45E60A019AC6EFD007705F9 /* DEOrbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEOrbButton.m; sourceTree = "<group>"; };
+		F45E60A319AD3287007705F9 /* DEHappSnapTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEHappSnapTitleView.h; sourceTree = "<group>"; };
+		F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEHappSnapTitleView.m; sourceTree = "<group>"; };
 		F4774F831992E38400FCDE66 /* DEAWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAWSManager.h; sourceTree = "<group>"; };
 		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
@@ -350,8 +353,6 @@
 				F437BF9A1990452000CF61E9 /* DEViewController.m */,
 				F437BF9C1990452000CF61E9 /* Images.xcassets */,
 				F437BF8B1990452000CF61E9 /* Supporting Files */,
-				F45E609F19AC6EFD007705F9 /* DEOrbButton.h */,
-				F45E60A019AC6EFD007705F9 /* DEOrbButton.m */,
 			);
 			path = whatsgoinon;
 			sourceTree = "<group>";
@@ -399,6 +400,7 @@
 		F437BFBC199048A100CF61E9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F45E60A219AD3263007705F9 /* Graphical Views - Paint Code */,
 				F437BFBD199048AF00CF61E9 /* WelcomeEventsView.xib */,
 				F437BFC1199049D300CF61E9 /* SelectCategoryView.xib */,
 				F437BFC319904A4200CF61E9 /* MainMenuView.xib */,
@@ -506,6 +508,17 @@
 			children = (
 			);
 			name = "Address Autocomplete";
+			sourceTree = "<group>";
+		};
+		F45E60A219AD3263007705F9 /* Graphical Views - Paint Code */ = {
+			isa = PBXGroup;
+			children = (
+				F45E609F19AC6EFD007705F9 /* DEOrbButton.h */,
+				F45E60A019AC6EFD007705F9 /* DEOrbButton.m */,
+				F45E60A319AD3287007705F9 /* DEHappSnapTitleView.h */,
+				F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */,
+			);
+			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
 		};
 		F4774F821992E37A00FCDE66 /* AWS Services */ = {
@@ -910,6 +923,7 @@
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
 				F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */,
 				F4CCBD6C199980B800532E9B /* DEAddValueView.m in Sources */,
+				F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */,
 				F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */,
 				F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */,
 				F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */,

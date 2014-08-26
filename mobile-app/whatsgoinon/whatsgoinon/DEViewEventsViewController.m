@@ -80,17 +80,17 @@
     [super viewWillDisappear:animated];
     
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIButton *button = [[screenManager values] objectForKey:@"viewCategoriesButton"];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
-    button.hidden = YES;
+    orbView.hidden = YES;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIButton *button = [[screenManager values] objectForKey:@"viewCategoriesButton"];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
-    button.hidden = NO;
+    orbView.hidden = NO;
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
