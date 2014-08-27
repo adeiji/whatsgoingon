@@ -19,6 +19,7 @@
     BOOL isActive;
     NSArray *categories;
     iCarousel *myCarousel;
+    UIColor *orbColor;
 }
 
 #pragma mark - Outlets

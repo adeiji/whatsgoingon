@@ -23,7 +23,8 @@ static float deltaAngle;
 #define BUTTON_WIDTH 40
 #define BUTTON_OUTER_CIRCLE_HEIGHT 60
 #define BUTTON_OUTER_CIRCLE_WIDTH 60
-#define BLUE_ORB_IMAGE @""
+#define OUTER_VIEW_X_POS 320 - 90
+#define OUTER_VIEW_Y_POS 568 - 90
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -41,10 +42,10 @@ static float deltaAngle;
     
     if (![[screenManager values] objectForKey:ORB_BUTTON_VIEW])
     {
-        UIColor *orbColor = [UIColor colorWithRed: 0.161 green: 0.502 blue: 0.725 alpha: 1];
+        orbColor = [UIColor colorWithRed: 0.161 green: 0.502 blue: 0.725 alpha: 1];
         UIButton *viewCategories = [UIButton new];
         UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        UIView *outerView = [[UIView alloc] initWithFrame:CGRectMake(320 - 90, 568 - 90, BUTTON_OUTER_CIRCLE_WIDTH, BUTTON_OUTER_CIRCLE_HEIGHT)];
+        UIView *outerView = [[UIView alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_OUTER_CIRCLE_WIDTH, BUTTON_OUTER_CIRCLE_HEIGHT)];
         
         viewCategories = [[UIButton alloc] initWithFrame:CGRectMake((BUTTON_OUTER_CIRCLE_HEIGHT / 2.0) - (BUTTON_WIDTH / 2), (BUTTON_OUTER_CIRCLE_WIDTH / 2.0) - (BUTTON_HEIGHT / 2), BUTTON_WIDTH, BUTTON_HEIGHT)];
         
@@ -89,17 +90,15 @@ static float deltaAngle;
 
 - (void) renderView {
     
-    UIView *wheelView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
-    container = [[UIView alloc] initWithFrame:wheelView.frame];
     
     categories = [NSArray arrayWithObjects:@"Featured", @"Under 21", @"Party", @"Classy", @"Over 21", @"Crazy", @"Funny", @"Music", @"Environmental", @"Ridiculous", @"Dancing", @"Nerdy", @"Pricy", nil];
     
-    myCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(self.frame.size.width - 320, self.frame.size.height - 400, 320, 500)];
+    myCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(self.frame.size.width - 320, self.frame.size.height - 400, 360, 550)];
     myCarousel.type = iCarouselTypeWheel;
     myCarousel.delegate = self;
     myCarousel.dataSource = self;
     [myCarousel reloadData];
-    myCarousel.contentOffset = CGSizeMake(130, -50);
+    myCarousel.contentOffset = CGSizeMake(40, -140);
     
     [self addSubview:myCarousel];
 }
@@ -126,16 +125,51 @@ static float deltaAngle;
     }
 }
 
+- (void) showOrbsAnimation
+{
+    UIView *wheelView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
+    container = [[UIView alloc] initWithFrame:wheelView.frame];
+    
+    categories = [NSArray arrayWithObjects:@"Featured", @"Under 21", @"Party", @"Classy", @"Over 21", @"Crazy", @"Funny", @"Music", @"Environmental", @"Ridiculous", @"Dancing", @"Nerdy", @"Pricy", nil];
+    
+    myCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_WIDTH, BUTTON_HEIGHT)];
+    myCarousel.type = iCarouselTypeWheel;
+    myCarousel.delegate = self;
+    myCarousel.dataSource = self;
+    [myCarousel reloadData];
+    
+    [self addSubview:myCarousel];
+    
+    {
+        [UIView animateWithDuration:.2f animations:^{
+        
+            myCarousel.transform = CGAffineTransformMakeScale(2, 2);
+            //myCarousel.contentOffset = CGSizeMake(0, -80);
+            myCarousel.contentOffset = CGSizeMake(5, -myCarousel.frame.size.height + 15);
+            NSLog(@"Carousel Center %@", NSStringFromCGPoint(myCarousel.center));
+            [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.9]];
+        } completion:^(BOOL finished) {
+            [myCarousel setFrame:CGRectMake(0, 150, 320, 418)];
+            myCarousel.type = iCarouselTypeWheel;
+            myCarousel.delegate = self;
+            myCarousel.dataSource = self;
+            [myCarousel reloadData];
+            myCarousel.contentOffset = CGSizeMake(50, 4.5);
+            NSLog(@"Carousel Center %@", NSStringFromCGPoint(myCarousel.center));
+        }];
+    }
+}
+
 - (IBAction)displayCategoryWheel:(UIButton *)sender {
     
     if (!isActive)
     {
         isActive = true;
         
-        [self renderView];
-        [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.9]];
+        [self showOrbsAnimation];
 
-        [[sender layer ]setZPosition:20];
+        // Push the orb view above everything else
+        [[[sender superview] layer ]setZPosition:20];
         self.lblCategory.hidden = NO;
     }
     else {
@@ -161,10 +195,10 @@ static float deltaAngle;
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, BUTTON_HEIGHT, BUTTON_WIDTH)];
+        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, BUTTON_HEIGHT / 2, BUTTON_WIDTH / 2)];
         view.contentMode = UIViewContentModeCenter;
-        
-        [view setBackgroundColor:[UIColor blueColor]];
+        [[view layer] setCornerRadius:view.frame.size.height / 2.0f];
+        [view setBackgroundColor:orbColor];
 
     }
     else
