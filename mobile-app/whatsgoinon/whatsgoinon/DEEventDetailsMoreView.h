@@ -22,6 +22,7 @@
 - (IBAction)reportEvent:(id)sender;
 - (IBAction)setAsMiscategorized:(id)sender;
 
+- (void) loadView;
 
 
 

@@ -13,12 +13,15 @@
 
 @interface DEViewMainMenu : UIView
 
+@property (strong, nonatomic) UIView *viewToCutThrough;
+
 - (IBAction)goHome:(id)sender;
 - (IBAction)gotoPostPage:(id)sender;
 - (IBAction)gotoChangeCityPage:(id)sender;
 - (IBAction)showFeedbackPage:(id)sender;
 - (IBAction)gotoAccountSettingsPage:(id)sender;
 - (IBAction)hideMenu:(id)sender;
+
 
 
 @end

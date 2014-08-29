@@ -61,6 +61,11 @@
 		F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */ = {isa = PBXBuildFile; fileRef = F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */; };
 		F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A019AC6EFD007705F9 /* DEOrbButton.m */; };
 		F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */; };
+		F45E60AC19AD7222007705F9 /* DEMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60AB19AD7222007705F9 /* DEMenuButton.m */; };
+		F45E60B219AD7C71007705F9 /* DEClearRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60B119AD7C71007705F9 /* DEClearRectView.m */; };
+		F45E60B519AD8AB6007705F9 /* DEMagnifyingGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60B419AD8AB6007705F9 /* DEMagnifyingGlass.m */; };
+		F45E60B819AD8CAF007705F9 /* DEPostView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60B719AD8CAF007705F9 /* DEPostView.m */; };
+		F45E60BB19AD8F22007705F9 /* DELocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60BA19AD8F22007705F9 /* DELocationView.m */; };
 		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
@@ -83,6 +88,9 @@
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
 		F4C68D32199EB2E900AD0D36 /* DEViewReportEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D31199EB2E900AD0D36 /* DEViewReportEvent.m */; };
+		F4CB0B9819AFF33600AABD12 /* DETwitterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB0B9719AFF33600AABD12 /* DETwitterButton.m */; };
+		F4CB0B9B19AFF3ED00AABD12 /* DEFacebookButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB0B9A19AFF3ED00AABD12 /* DEFacebookButton.m */; };
+		F4CB0B9E19AFFA8200AABD12 /* DEGoogleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB0B9D19AFFA8200AABD12 /* DEGoogleButton.m */; };
 		F4CCBD6019997D6600532E9B /* DEEventDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */; };
 		F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD6619997FCF00532E9B /* DEAddValueViewController.m */; };
 		F4CCBD6919997FCF00532E9B /* DEAddValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CCBD6719997FCF00532E9B /* DEAddValueViewController.xib */; };
@@ -181,6 +189,16 @@
 		F45E60A019AC6EFD007705F9 /* DEOrbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEOrbButton.m; sourceTree = "<group>"; };
 		F45E60A319AD3287007705F9 /* DEHappSnapTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEHappSnapTitleView.h; sourceTree = "<group>"; };
 		F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEHappSnapTitleView.m; sourceTree = "<group>"; };
+		F45E60AA19AD7222007705F9 /* DEMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMenuButton.h; sourceTree = "<group>"; };
+		F45E60AB19AD7222007705F9 /* DEMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMenuButton.m; sourceTree = "<group>"; };
+		F45E60B019AD7C71007705F9 /* DEClearRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEClearRectView.h; sourceTree = "<group>"; };
+		F45E60B119AD7C71007705F9 /* DEClearRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEClearRectView.m; sourceTree = "<group>"; };
+		F45E60B319AD8AB6007705F9 /* DEMagnifyingGlass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMagnifyingGlass.h; sourceTree = "<group>"; };
+		F45E60B419AD8AB6007705F9 /* DEMagnifyingGlass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMagnifyingGlass.m; sourceTree = "<group>"; };
+		F45E60B619AD8CAF007705F9 /* DEPostView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPostView.h; sourceTree = "<group>"; };
+		F45E60B719AD8CAF007705F9 /* DEPostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPostView.m; sourceTree = "<group>"; };
+		F45E60B919AD8F22007705F9 /* DELocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationView.h; sourceTree = "<group>"; };
+		F45E60BA19AD8F22007705F9 /* DELocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationView.m; sourceTree = "<group>"; };
 		F4774F831992E38400FCDE66 /* DEAWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAWSManager.h; sourceTree = "<group>"; };
 		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
@@ -223,6 +241,12 @@
 		F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewReportEvent.xib; sourceTree = "<group>"; };
 		F4C68D30199EB2E900AD0D36 /* DEViewReportEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewReportEvent.h; sourceTree = "<group>"; };
 		F4C68D31199EB2E900AD0D36 /* DEViewReportEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewReportEvent.m; sourceTree = "<group>"; };
+		F4CB0B9619AFF33600AABD12 /* DETwitterButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DETwitterButton.h; sourceTree = "<group>"; };
+		F4CB0B9719AFF33600AABD12 /* DETwitterButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETwitterButton.m; sourceTree = "<group>"; };
+		F4CB0B9919AFF3ED00AABD12 /* DEFacebookButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEFacebookButton.h; sourceTree = "<group>"; };
+		F4CB0B9A19AFF3ED00AABD12 /* DEFacebookButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEFacebookButton.m; sourceTree = "<group>"; };
+		F4CB0B9C19AFFA8200AABD12 /* DEGoogleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGoogleButton.h; sourceTree = "<group>"; };
+		F4CB0B9D19AFFA8200AABD12 /* DEGoogleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGoogleButton.m; sourceTree = "<group>"; };
 		F4CCBD5E19997D6600532E9B /* DEEventDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsView.h; sourceTree = "<group>"; };
 		F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsView.m; sourceTree = "<group>"; };
 		F4CCBD6519997FCF00532E9B /* DEAddValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAddValueViewController.h; sourceTree = "<group>"; };
@@ -517,6 +541,22 @@
 				F45E60A019AC6EFD007705F9 /* DEOrbButton.m */,
 				F45E60A319AD3287007705F9 /* DEHappSnapTitleView.h */,
 				F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */,
+				F45E60AA19AD7222007705F9 /* DEMenuButton.h */,
+				F45E60AB19AD7222007705F9 /* DEMenuButton.m */,
+				F45E60B019AD7C71007705F9 /* DEClearRectView.h */,
+				F45E60B119AD7C71007705F9 /* DEClearRectView.m */,
+				F45E60B319AD8AB6007705F9 /* DEMagnifyingGlass.h */,
+				F45E60B419AD8AB6007705F9 /* DEMagnifyingGlass.m */,
+				F45E60B619AD8CAF007705F9 /* DEPostView.h */,
+				F45E60B719AD8CAF007705F9 /* DEPostView.m */,
+				F45E60B919AD8F22007705F9 /* DELocationView.h */,
+				F45E60BA19AD8F22007705F9 /* DELocationView.m */,
+				F4CB0B9619AFF33600AABD12 /* DETwitterButton.h */,
+				F4CB0B9719AFF33600AABD12 /* DETwitterButton.m */,
+				F4CB0B9919AFF3ED00AABD12 /* DEFacebookButton.h */,
+				F4CB0B9A19AFF3ED00AABD12 /* DEFacebookButton.m */,
+				F4CB0B9C19AFFA8200AABD12 /* DEGoogleButton.h */,
+				F4CB0B9D19AFFA8200AABD12 /* DEGoogleButton.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
@@ -891,20 +931,27 @@
 				F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */,
 				F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */,
 				F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */,
+				F4CB0B9819AFF33600AABD12 /* DETwitterButton.m in Sources */,
 				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
 				F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */,
+				F45E60BB19AD8F22007705F9 /* DELocationView.m in Sources */,
 				F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */,
 				F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */,
+				F45E60B819AD8CAF007705F9 /* DEPostView.m in Sources */,
 				F4CCBD7A199B0A9900532E9B /* Constants.m in Sources */,
+				F45E60AC19AD7222007705F9 /* DEMenuButton.m in Sources */,
 				F437BF911990452000CF61E9 /* main.m in Sources */,
 				F4774FB019996A9B00FCDE66 /* DEEventView.m in Sources */,
 				F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */,
 				F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */,
+				F45E60B519AD8AB6007705F9 /* DEMagnifyingGlass.m in Sources */,
 				F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */,
 				F4774FA819956BBE00FCDE66 /* DECreateAccountViewController.m in Sources */,
 				F4C68D32199EB2E900AD0D36 /* DEViewReportEvent.m in Sources */,
 				F448FE7C19A442D000645667 /* DEViewComment.m in Sources */,
+				F4CB0B9E19AFFA8200AABD12 /* DEGoogleButton.m in Sources */,
+				F45E60B219AD7C71007705F9 /* DEClearRectView.m in Sources */,
 				F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
 				F4774FAB199575CE00FCDE66 /* DELoginView.m in Sources */,
@@ -912,6 +959,7 @@
 				F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */,
 				F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */,
 				F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */,
+				F4CB0B9B19AFF3ED00AABD12 /* DEFacebookButton.m in Sources */,
 				F4CCBD6019997D6600532E9B /* DEEventDetailsView.m in Sources */,
 				F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */,
 				F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */,

@@ -52,4 +52,10 @@
 - (IBAction)hideMenu:(id)sender {
     [self removeFromSuperview];
 }
+
+- (void) drawRect:(CGRect)rect
+{
+    
+
+}
 @end

@@ -18,6 +18,7 @@
 #define IPHONE_DEVICE_WIDTH 320
 #define TOP_MARGIN 20
 #define SCROLL_VIEW_DISTANCE_FROM_TOP 20
+#define NAV_BAR_HEIGHT 50
 
 @implementation DEViewEventsViewController
 
@@ -64,15 +65,48 @@
     viewMainMenu = [[[NSBundle mainBundle] loadNibNamed:@"MainMenuView" owner:self options:nil] firstObject];
     
     [self.view setBackgroundColor:[UIColor clearColor]];
+    
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void) showOrHideMainMenu : (UISwipeGestureRecognizer *) gestureRecognizer {
+
+    [[[self view] superview] addSubview:viewMainMenu];
+    CGRect frame = viewMainMenu.frame;
+    frame.origin.y = NAV_BAR_HEIGHT;
+    frame.origin.x = -frame.size.width;
+    viewMainMenu.frame = frame;
+    
     if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight )
     {
-        [[self view] addSubview:viewMainMenu];
+        [UIView animateWithDuration:.5f animations:^{
+
+            // Move the main menu over to the right
+            CGRect frame = self.view.frame;
+            frame.origin.x = viewMainMenu.frame.size.width;
+            
+            self.view.frame = frame;
+            
+            frame = viewMainMenu.frame;
+            frame.origin.x = 0;
+            viewMainMenu.frame = frame;
+        }];
     }
     else {
-        [viewMainMenu removeFromSuperview];
+        [UIView animateWithDuration:.5f animations:^{
+            // Move the main menu back to the left side
+            CGRect frame = self.view.frame;
+            frame.origin.x = 0;
+            
+            self.view.frame = frame;
+            
+            frame = viewMainMenu.frame;
+            frame.origin.x = -(viewMainMenu.frame.size.width);
+            viewMainMenu.frame = frame;
+        } completion:^(BOOL finished) {
+            [viewMainMenu removeFromSuperview];
+        }];
+
     }
 }
 

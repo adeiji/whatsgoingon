@@ -41,3 +41,5 @@ NSString *const PARSE_CLASS_MISCATEGORIZED_EVENT_ID = @"eventId";
 NSString *const PLACES_API_DATA_RESULT_TYPE_CITIES = @"(cities)";
 NSString *const PLACES_API_DATA_RESULT_TYPE_GEOCODE = @"geocode";
 NSString *const ORB_BUTTON_VIEW = @"orbButtonView";
+
+CGFloat const BUTTON_CORNER_RADIUS = 6.0f;

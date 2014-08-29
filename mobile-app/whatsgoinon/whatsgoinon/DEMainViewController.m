@@ -37,14 +37,18 @@
     for (UIView *button in self.buttons) {
         [button.layer setCornerRadius:6.0f];
     }
-//    CGSize size = self.titleView.frame.size;
-//    UIImage *image = [UIImage imageNamed:@"HappSnapp-caption"];
-//    UIGraphicsBeginImageContext( size );
-//    [image drawInRect:CGRectMake(0,0,size.width,size.height)];
-//    UIImage* smallerImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
-//    [self.titleView setBackgroundColor:[UIColor colorWithPatternImage:smallerImage]];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view setAlpha:0];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.view setAlpha:1.0f];
 }
 
 - (void)didReceiveMemoryWarning

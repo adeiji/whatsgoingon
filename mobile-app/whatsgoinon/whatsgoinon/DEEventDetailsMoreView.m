@@ -7,6 +7,7 @@
 //
 
 #import "DEEventDetailsMoreView.h"
+#import "Constants.h"
 
 @implementation DEEventDetailsMoreView
 
@@ -19,6 +20,12 @@
         // Initialization code
     }
     return self;
+}
+
+- (void) loadView {
+    [[self.btnMiscategorized layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    [[self.btnPostSomethingSimilar layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    [[self.btnReportEvent layer] setCornerRadius:BUTTON_CORNER_RADIUS];
 }
 
 - (IBAction)postSomethingSimilar:(id)sender {

@@ -136,6 +136,8 @@ static float deltaAngle;
     myCarousel.type = iCarouselTypeWheel;
     myCarousel.delegate = self;
     myCarousel.dataSource = self;
+    myCarousel.decelerationRate = .98f;
+    myCarousel.centerItemWhenSelected = YES;
     [myCarousel reloadData];
     
     [self addSubview:myCarousel];

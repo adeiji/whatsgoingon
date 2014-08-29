@@ -56,9 +56,9 @@
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
     
     // Show the comment view
-    DEViewComment *viewComment = [[DEViewComment alloc] init];
-    viewComment.post = _post;
-    [DEScreenManager addToWindowView:viewComment];
+//    DEViewComment *viewComment = [[DEViewComment alloc] init];
+//    viewComment.post = _post;
+//    [DEScreenManager addToWindowView:viewComment];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -129,7 +129,7 @@
 - (IBAction)viewMoreForEvent:(id)sender
 {
     DEEventDetailsMoreView *eventDetailsMoreView = (DEEventDetailsMoreView *)[self showView:[_eventDetailsViewController viewMore]];
-    
+    [eventDetailsMoreView loadView];
     if (!_isPreview) {
         [[eventDetailsMoreView btnMiscategorized] setEnabled:YES];
         [[eventDetailsMoreView btnPostSomethingSimilar] setEnabled:YES];
