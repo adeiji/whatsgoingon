@@ -54,15 +54,20 @@
     
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
-    
-    // Show the comment view
-//    DEViewComment *viewComment = [[DEViewComment alloc] init];
-//    viewComment.post = _post;
-//    [DEScreenManager addToWindowView:viewComment];
 }
 
-- (void) viewDidDisappear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.view.hidden = NO;
+}
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    self.view.hidden = YES;
 }
 
 - (void) savePost {
@@ -104,9 +109,9 @@
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
     
     [[detailsView txtDescription] setText:_post.description];
-    [[detailsView lblCost] setText:[_post.cost stringValue]];
+    [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
     [[detailsView lblNumberGoing] setText:@"0"];
-    [[detailsView lblTimeUntilStartsOrEnds] setText:@"3 hrs"];
+    [[detailsView lblTimeUntilStartsOrEnds] setText:@"3"];
 }
 - (IBAction)showEventComments:(id)sender
 {
@@ -137,6 +142,10 @@
         [eventDetailsMoreView setEventId:[_post objectId]];
         [eventDetailsMoreView setCategory:[_post category]];
     }
+}
+
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

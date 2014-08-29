@@ -117,6 +117,8 @@
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
     orbView.hidden = YES;
+    
+    self.view.hidden = YES;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -125,6 +127,7 @@
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
     orbView.hidden = NO;
+    self.view.hidden = NO;
 }
 
 - (void) viewDidDisappear:(BOOL)animated {

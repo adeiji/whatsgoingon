@@ -33,8 +33,14 @@
 @property (weak, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;
 @property (weak, nonatomic) IBOutlet UIView *postRangeHelperView;
 
+@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
+@property (weak, nonatomic) IBOutlet UIButton *btnNext;
+
+
 @property (strong, nonatomic) DEPost *post;
 @property (strong, nonatomic) NSMutableArray *images;
 @property (strong, nonatomic) PFGeoPoint *location;
+
+
 
 @end

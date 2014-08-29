@@ -29,5 +29,6 @@
 - (IBAction)showEventComments:(id)sender;
 - (IBAction)shareEvent:(id)sender;
 - (IBAction)viewMoreForEvent:(id)sender;
+- (IBAction)goBack:(id)sender;
 
 @end

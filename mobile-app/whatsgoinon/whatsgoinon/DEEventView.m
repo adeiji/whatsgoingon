@@ -28,7 +28,7 @@
                                                                  zoom:16];
     _viewMapView.camera = camera;
     _viewMapView.myLocationEnabled = YES;
-    _viewMapView.mapType = kGMSTypeHybrid;
+    _viewMapView.mapType = kGMSTypeNormal;
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.position = CLLocationCoordinate2DMake(location.latitude, location.longitude);

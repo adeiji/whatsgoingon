@@ -91,6 +91,7 @@
 		F4CB0B9819AFF33600AABD12 /* DETwitterButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB0B9719AFF33600AABD12 /* DETwitterButton.m */; };
 		F4CB0B9B19AFF3ED00AABD12 /* DEFacebookButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB0B9A19AFF3ED00AABD12 /* DEFacebookButton.m */; };
 		F4CB0B9E19AFFA8200AABD12 /* DEGoogleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB0B9D19AFFA8200AABD12 /* DEGoogleButton.m */; };
+		F4CB0BA119B0008600AABD12 /* DEBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CB0BA019B0008600AABD12 /* DEBackButton.m */; };
 		F4CCBD6019997D6600532E9B /* DEEventDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */; };
 		F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD6619997FCF00532E9B /* DEAddValueViewController.m */; };
 		F4CCBD6919997FCF00532E9B /* DEAddValueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CCBD6719997FCF00532E9B /* DEAddValueViewController.xib */; };
@@ -247,6 +248,8 @@
 		F4CB0B9A19AFF3ED00AABD12 /* DEFacebookButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEFacebookButton.m; sourceTree = "<group>"; };
 		F4CB0B9C19AFFA8200AABD12 /* DEGoogleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEGoogleButton.h; sourceTree = "<group>"; };
 		F4CB0B9D19AFFA8200AABD12 /* DEGoogleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEGoogleButton.m; sourceTree = "<group>"; };
+		F4CB0B9F19B0008600AABD12 /* DEBackButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEBackButton.h; sourceTree = "<group>"; };
+		F4CB0BA019B0008600AABD12 /* DEBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEBackButton.m; sourceTree = "<group>"; };
 		F4CCBD5E19997D6600532E9B /* DEEventDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsView.h; sourceTree = "<group>"; };
 		F4CCBD5F19997D6600532E9B /* DEEventDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsView.m; sourceTree = "<group>"; };
 		F4CCBD6519997FCF00532E9B /* DEAddValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAddValueViewController.h; sourceTree = "<group>"; };
@@ -557,6 +560,8 @@
 				F4CB0B9A19AFF3ED00AABD12 /* DEFacebookButton.m */,
 				F4CB0B9C19AFFA8200AABD12 /* DEGoogleButton.h */,
 				F4CB0B9D19AFFA8200AABD12 /* DEGoogleButton.m */,
+				F4CB0B9F19B0008600AABD12 /* DEBackButton.h */,
+				F4CB0BA019B0008600AABD12 /* DEBackButton.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
@@ -961,6 +966,7 @@
 				F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */,
 				F4CB0B9B19AFF3ED00AABD12 /* DEFacebookButton.m in Sources */,
 				F4CCBD6019997D6600532E9B /* DEEventDetailsView.m in Sources */,
+				F4CB0BA119B0008600AABD12 /* DEBackButton.m in Sources */,
 				F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */,
 				F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */,
 				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
