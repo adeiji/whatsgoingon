@@ -39,6 +39,10 @@
     _txtEndTime.delegate = self;
     
     _txtAddress.delegate = self;
+    
+    [[_btnTakePicture layer] setBorderWidth:2.0f];
+    [[_btnTakePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[_btnTakePicture layer] setCornerRadius:20.0f];
 
 }
 

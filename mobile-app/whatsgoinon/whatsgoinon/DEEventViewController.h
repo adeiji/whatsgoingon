@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DEPost.h"
 #import "DEEventView.h"
 #import "DEEventDetailsViewController.h"
 #import "DEEventDetailsView.h"
@@ -15,6 +14,9 @@
 #import "DEScreenManager.h"
 #import "DEEventDetailsMoreView.h"
 #import "DEMapViewController.h"
+#import "DESharingView.h"
+
+@class DEPost, DEEventView;
 
 @interface DEEventViewController : UIViewController
 

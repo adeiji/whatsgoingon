@@ -18,6 +18,7 @@
 {
     int postCounter;
     DEViewMainMenu *viewMainMenu;
+    BOOL menuDisplayed;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) NSArray *posts;
@@ -25,6 +26,7 @@
 
 
 - (IBAction)displayMainMenu:(id)sender;
+- (IBAction)goHome:(id)sender;
 
 
 @end

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DEScreenManager.h"
 #import "DEViewChangeCity.h"
+#import "DECameraButton.h"
 
 @interface DECreatePostView : UIView <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UINavigationControllerDelegate>
 {
@@ -28,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtAddress;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UISwitch *switchUseCurrentLocation;
+@property (weak, nonatomic) IBOutlet DECameraButton *btnTakePicture;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
 

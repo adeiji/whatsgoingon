@@ -63,50 +63,64 @@
     [[self view] addGestureRecognizer:swipeLeftGestureRecognizer];
     
     viewMainMenu = [[[NSBundle mainBundle] loadNibNamed:@"MainMenuView" owner:self options:nil] firstObject];
-    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    [screenManager setMainMenu:viewMainMenu];
     [self.view setBackgroundColor:[UIColor clearColor]];
     
     [self.navigationController setNavigationBarHidden:YES];
 }
 
-- (void) showOrHideMainMenu : (UISwipeGestureRecognizer *) gestureRecognizer {
-
+- (void) showMainMenu
+{
     [[[self view] superview] addSubview:viewMainMenu];
     CGRect frame = viewMainMenu.frame;
     frame.origin.y = NAV_BAR_HEIGHT;
     frame.origin.x = -frame.size.width;
     viewMainMenu.frame = frame;
     
+    [UIView animateWithDuration:.5f animations:^{
+        
+        // Move the main menu over to the right
+        CGRect frame = self.view.frame;
+        frame.origin.x = viewMainMenu.frame.size.width;
+        
+        self.view.frame = frame;
+        
+        frame = viewMainMenu.frame;
+        frame.origin.x = 0;
+        viewMainMenu.frame = frame;
+    }];
+    
+    menuDisplayed = YES;
+}
+
+- (void) hideMainMenu
+{
+    [UIView animateWithDuration:.5f animations:^{
+        // Move the main menu back to the left side
+        CGRect frame = self.view.frame;
+        frame.origin.x = 0;
+        
+        self.view.frame = frame;
+        
+        frame = viewMainMenu.frame;
+        frame.origin.x = -(viewMainMenu.frame.size.width);
+        viewMainMenu.frame = frame;
+    } completion:^(BOOL finished) {
+        [viewMainMenu removeFromSuperview];
+    }];
+    
+    menuDisplayed = NO;
+}
+
+- (void) showOrHideMainMenu : (UISwipeGestureRecognizer *) gestureRecognizer {
+    
     if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight )
     {
-        [UIView animateWithDuration:.5f animations:^{
-
-            // Move the main menu over to the right
-            CGRect frame = self.view.frame;
-            frame.origin.x = viewMainMenu.frame.size.width;
-            
-            self.view.frame = frame;
-            
-            frame = viewMainMenu.frame;
-            frame.origin.x = 0;
-            viewMainMenu.frame = frame;
-        }];
+        [self showMainMenu];
     }
     else {
-        [UIView animateWithDuration:.5f animations:^{
-            // Move the main menu back to the left side
-            CGRect frame = self.view.frame;
-            frame.origin.x = 0;
-            
-            self.view.frame = frame;
-            
-            frame = viewMainMenu.frame;
-            frame.origin.x = -(viewMainMenu.frame.size.width);
-            viewMainMenu.frame = frame;
-        } completion:^(BOOL finished) {
-            [viewMainMenu removeFromSuperview];
-        }];
-
+        [self hideMainMenu];
     }
 }
 
@@ -148,7 +162,7 @@
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
         
-        CGRect frame = CGRectMake((column * POST_WIDTH) + (10 * (column + 1)),(TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter), POST_WIDTH, POST_HEIGHT);
+        CGRect frame = CGRectMake((column * POST_WIDTH) + (13 * (column + 1)),(TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter), POST_WIDTH, POST_HEIGHT);
         viewEventsView.frame = frame;
         DEPost *post = [DEPost getPostFromPFObject:obj];
         
@@ -190,7 +204,23 @@
 
 - (IBAction)displayMainMenu:(id)sender {
 
+    if (!menuDisplayed)
+    {
+        [self showMainMenu];
+    }
+    else {
+        [self hideMainMenu];
+    }
+}
+
+- (IBAction)goHome:(id)sender {
     
-    [[self view] addSubview:viewMainMenu];
+    if (menuDisplayed)
+    {
+        [viewMainMenu removeFromSuperview];
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 @end

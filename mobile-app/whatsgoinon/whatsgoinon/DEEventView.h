@@ -10,7 +10,8 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import "DEPostManager.h"
-#import "DEPost.h"
+
+@class DEPost;
 
 @interface DEEventView : UIView
 {

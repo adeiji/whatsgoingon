@@ -16,6 +16,12 @@
 
     UINavigationController *nc = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
     
+    if ([[DEScreenManager sharedManager] mainMenu])
+    {
+        [[[DEScreenManager sharedManager] mainMenu] removeFromSuperview];
+        [[DEScreenManager sharedManager] setMainMenu:nil];
+    }
+    
     [nc popToRootViewControllerAnimated:YES];
 }
 

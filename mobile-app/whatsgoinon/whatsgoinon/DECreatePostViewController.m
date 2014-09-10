@@ -53,6 +53,8 @@ static BOOL DEVELOPMENT = YES;
     
     [_createPostViewOne displayCurrentLocation];
     
+    [[self.navigationController navigationBar] setHidden:NO];
+    
     [self setUpViews];
 }
 
