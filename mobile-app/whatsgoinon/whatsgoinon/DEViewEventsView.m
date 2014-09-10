@@ -97,12 +97,17 @@
         
         if ([post.images count] > 0)
         {
-            PFFile *imageFile = post.images[0];
-            NSData *imageData = [imageFile getData];
-            UIImage *image = [UIImage imageWithData:imageData];
-            
             //Load the images on the main thread asynchronously
             dispatch_sync(dispatch_get_main_queue(), ^{
+                PFFile *imageFile = post.images[0];
+                NSData *imageData = [imageFile getData];
+                UIImage *image = [UIImage imageWithData:imageData];
+                self.imgMainImageView.image = image;
+            });
+        }
+        else {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                UIImage *image = [UIImage imageNamed:@"circle-placeholder-01.png"];
                 self.imgMainImageView.image = image;
             });
         }

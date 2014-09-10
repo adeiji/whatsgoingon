@@ -27,7 +27,7 @@
     [self.searchBar setDelegate:self];
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
-    
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
     type = myType;
     
     [self initLocationsArray];
@@ -38,6 +38,11 @@
 }
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    // Set all the views that are behind this view to visible
+    for (UIView *view in self.superview.subviews) {
+        view.hidden = NO;
+    }
+    
     [self removeFromSuperview];
 }
 
@@ -76,7 +81,9 @@
         cell = [[UITableViewCell alloc] init];
     }
 
+    [cell setBackgroundColor:[UIColor clearColor]];
     cell.textLabel.text = [locations objectAtIndex:indexPath.row];
+    [cell.textLabel setTextColor:[UIColor whiteColor]];
     
     return cell;
 }

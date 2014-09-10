@@ -76,6 +76,10 @@
 		F45E60B519AD8AB6007705F9 /* DEMagnifyingGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60B419AD8AB6007705F9 /* DEMagnifyingGlass.m */; };
 		F45E60B819AD8CAF007705F9 /* DEPostView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60B719AD8CAF007705F9 /* DEPostView.m */; };
 		F45E60BB19AD8F22007705F9 /* DELocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60BA19AD8F22007705F9 /* DELocationView.m */; };
+		F46B944B19C1135F00B41D8C /* circle-placeholder-01.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B944A19C1135F00B41D8C /* circle-placeholder-01.png */; };
+		F46B944F19C116DA00B41D8C /* DEViewImGoing.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B944E19C116DA00B41D8C /* DEViewImGoing.m */; };
+		F46B945219C1181800B41D8C /* DEViewDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B945119C1181800B41D8C /* DEViewDistance.m */; };
+		F46B945519C1196B00B41D8C /* DEViewLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B945419C1196B00B41D8C /* DEViewLocation.m */; };
 		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
@@ -221,6 +225,13 @@
 		F45E60B719AD8CAF007705F9 /* DEPostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPostView.m; sourceTree = "<group>"; };
 		F45E60B919AD8F22007705F9 /* DELocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationView.h; sourceTree = "<group>"; };
 		F45E60BA19AD8F22007705F9 /* DELocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationView.m; sourceTree = "<group>"; };
+		F46B944A19C1135F00B41D8C /* circle-placeholder-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-placeholder-01.png"; sourceTree = "<group>"; };
+		F46B944D19C116DA00B41D8C /* DEViewImGoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewImGoing.h; sourceTree = "<group>"; };
+		F46B944E19C116DA00B41D8C /* DEViewImGoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewImGoing.m; sourceTree = "<group>"; };
+		F46B945019C1181800B41D8C /* DEViewDistance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewDistance.h; sourceTree = "<group>"; };
+		F46B945119C1181800B41D8C /* DEViewDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewDistance.m; sourceTree = "<group>"; };
+		F46B945319C1196B00B41D8C /* DEViewLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewLocation.h; sourceTree = "<group>"; };
+		F46B945419C1196B00B41D8C /* DEViewLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewLocation.m; sourceTree = "<group>"; };
 		F4774F831992E38400FCDE66 /* DEAWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAWSManager.h; sourceTree = "<group>"; };
 		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
@@ -586,6 +597,12 @@
 				F40E0E0819BFF5FE00D2C3A0 /* DEHomeButton.m */,
 				F40E0E1519C0093000D2C3A0 /* DECameraButton.h */,
 				F40E0E1619C0093000D2C3A0 /* DECameraButton.m */,
+				F46B944D19C116DA00B41D8C /* DEViewImGoing.h */,
+				F46B944E19C116DA00B41D8C /* DEViewImGoing.m */,
+				F46B945019C1181800B41D8C /* DEViewDistance.h */,
+				F46B945119C1181800B41D8C /* DEViewDistance.m */,
+				F46B945319C1196B00B41D8C /* DEViewLocation.h */,
+				F46B945419C1196B00B41D8C /* DEViewLocation.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
@@ -794,6 +811,7 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F46B944A19C1135F00B41D8C /* circle-placeholder-01.png */,
 				F45030A819C015E80061F362 /* location-icon.png */,
 				F45030A619C014AB0061F362 /* clock-icon 44x44.png */,
 				F45030A219C013B40061F362 /* calendar-icon 44x44.png */,
@@ -917,6 +935,7 @@
 				F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */,
 				F4CCBD75199AADBD00532E9B /* README.md in Resources */,
 				F437BFC619904E4E00CF61E9 /* ViewEventsView.xib in Resources */,
+				F46B944B19C1135F00B41D8C /* circle-placeholder-01.png in Resources */,
 				F437BFBA1990486500CF61E9 /* ViewPosts.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1011,17 +1030,20 @@
 				F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */,
 				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
 				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,
+				F46B945219C1181800B41D8C /* DEViewDistance.m in Sources */,
 				F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */,
 				F483B07E199EDB3600C12FB2 /* DEMapViewController.m in Sources */,
 				F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
 				F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */,
 				F4CCBD6C199980B800532E9B /* DEAddValueView.m in Sources */,
+				F46B944F19C116DA00B41D8C /* DEViewImGoing.m in Sources */,
 				F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */,
 				F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */,
 				F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */,
 				F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */,
 				F4CCBD81199BF30200532E9B /* DESector.m in Sources */,
+				F46B945519C1196B00B41D8C /* DEViewLocation.m in Sources */,
 				F4774F9F1995629500FCDE66 /* DELoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

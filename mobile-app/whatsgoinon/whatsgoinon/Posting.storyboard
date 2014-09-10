@@ -147,6 +147,9 @@
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mSc-7a-kYf">
                                                 <rect key="frame" x="224" y="288" width="51" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <connections>
+                                                    <action selector="enableOrDisableAddressBox:" destination="Ts4-l1-T70" eventType="valueChanged" id="8gL-hO-ieb"/>
+                                                </connections>
                                             </switch>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use Current Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Rp-JB-xPG">
                                                 <rect key="frame" x="48" y="293" width="143" height="21"/>
@@ -178,7 +181,7 @@
                                                 <rect key="frame" x="15" y="158" width="25" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="D08B61BE-6EC4-4817-A5EA-2EAEBE7BBC49" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="8673355D-EE6C-4A60-A02C-D9ACCADFBFC0" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="374" width="17" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -495,7 +498,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="D08B61BE-6EC4-4817-A5EA-2EAEBE7BBC49" width="140" height="211">
+        <image name="8673355D-EE6C-4A60-A02C-D9ACCADFBFC0" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
