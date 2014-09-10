@@ -64,6 +64,10 @@
 		F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7019A435A500645667 /* DESettingsAccount.m */; };
 		F448FE7C19A442D000645667 /* DEViewComment.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7B19A442D000645667 /* DEViewComment.m */; };
 		F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */ = {isa = PBXBuildFile; fileRef = F448FE7D19A538C700645667 /* ViewAutocomplete.xib */; };
+		F45030A119C00F500061F362 /* HappSnap-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A019C00F500061F362 /* HappSnap-bg.png */; };
+		F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A219C013B40061F362 /* calendar-icon 44x44.png */; };
+		F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A619C014AB0061F362 /* clock-icon 44x44.png */; };
+		F45030A919C015E80061F362 /* location-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A819C015E80061F362 /* location-icon.png */; };
 		F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */ = {isa = PBXBuildFile; fileRef = F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */; };
 		F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A019AC6EFD007705F9 /* DEOrbButton.m */; };
 		F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */; };
@@ -108,7 +112,6 @@
 		F4CCBD7A199B0A9900532E9B /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD79199B0A9900532E9B /* Constants.m */; };
 		F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD7D199BD6F500532E9B /* DESelectCategoryView.m */; };
 		F4CCBD81199BF30200532E9B /* DESector.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD80199BF30200532E9B /* DESector.m */; };
-		F4D9C97819ABF26200855094 /* HappSnap-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F4D9C97719ABF26200855094 /* HappSnap-bg.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +202,10 @@
 		F448FE7A19A442D000645667 /* DEViewComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewComment.h; sourceTree = "<group>"; };
 		F448FE7B19A442D000645667 /* DEViewComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewComment.m; sourceTree = "<group>"; };
 		F448FE7D19A538C700645667 /* ViewAutocomplete.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAutocomplete.xib; sourceTree = "<group>"; };
+		F45030A019C00F500061F362 /* HappSnap-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HappSnap-bg.png"; sourceTree = "<group>"; };
+		F45030A219C013B40061F362 /* calendar-icon 44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-icon 44x44.png"; sourceTree = "<group>"; };
+		F45030A619C014AB0061F362 /* clock-icon 44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock-icon 44x44.png"; sourceTree = "<group>"; };
+		F45030A819C015E80061F362 /* location-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon.png"; sourceTree = "<group>"; };
 		F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HappSnapp-caption.png"; sourceTree = "<group>"; };
 		F45E609F19AC6EFD007705F9 /* DEOrbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEOrbButton.h; sourceTree = "<group>"; };
 		F45E60A019AC6EFD007705F9 /* DEOrbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEOrbButton.m; sourceTree = "<group>"; };
@@ -284,7 +291,6 @@
 		F4CCBD7F199BF30200532E9B /* DESector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESector.h; sourceTree = "<group>"; };
 		F4CCBD80199BF30200532E9B /* DESector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESector.m; sourceTree = "<group>"; };
 		F4CCBD82199BF6C300532E9B /* DERotaryProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DERotaryProtocol.h; sourceTree = "<group>"; };
-		F4D9C97719ABF26200855094 /* HappSnap-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "HappSnap-bg.png"; path = "images/HappSnap-bg.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -788,12 +794,15 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F45030A819C015E80061F362 /* location-icon.png */,
+				F45030A619C014AB0061F362 /* clock-icon 44x44.png */,
+				F45030A219C013B40061F362 /* calendar-icon 44x44.png */,
+				F45030A019C00F500061F362 /* HappSnap-bg.png */,
 				F40E0E1219C007D100D2C3A0 /* camera-icon 178x141.png */,
 				F40E0E0E19BFFFA000D2C3A0 /* money-icon 28x28.png */,
 				F40E0E0C19BFFECC00D2C3A0 /* clock-icon 23x23.png */,
 				F40E0E0A19BFFD9F00D2C3A0 /* going-icon 23x23.png */,
 				F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */,
-				F4D9C97719ABF26200855094 /* HappSnap-bg.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -888,18 +897,21 @@
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
 				F40E0E0B19BFFD9F00D2C3A0 /* going-icon 23x23.png in Resources */,
 				F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */,
+				F45030A919C015E80061F362 /* location-icon.png in Resources */,
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
+				F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */,
 				F40E0E1319C007D100D2C3A0 /* camera-icon 178x141.png in Resources */,
 				F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
-				F4D9C97819ABF26200855094 /* HappSnap-bg.png in Resources */,
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,
 				F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */,
 				F4CCBD76199AADBD00532E9B /* release_notes.md in Resources */,
 				F437BFBE199048AF00CF61E9 /* WelcomeEventsView.xib in Resources */,
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
+				F45030A119C00F500061F362 /* HappSnap-bg.png in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
 				F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */,
+				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,
 				F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */,

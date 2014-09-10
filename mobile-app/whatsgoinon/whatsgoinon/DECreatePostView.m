@@ -43,7 +43,11 @@
     [[_btnTakePicture layer] setBorderWidth:2.0f];
     [[_btnTakePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
     [[_btnTakePicture layer] setCornerRadius:20.0f];
+    [[_btnPreview layer] setCornerRadius:5.0f];
 
+    [[_btnInfo layer] setCornerRadius:_btnInfo.frame.size.height / 2.0f];
+    [[_btnInfo layer] setBorderWidth:1.0f];
+    [[_btnInfo layer] setBorderColor:[UIColor whiteColor].CGColor];
 }
 
 - (void) updateTimeTextField : (UIDatePicker *) sender {

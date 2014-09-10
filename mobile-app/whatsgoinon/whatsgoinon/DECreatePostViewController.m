@@ -58,6 +58,19 @@ static BOOL DEVELOPMENT = YES;
     [self setUpViews];
 }
 
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.view setHidden:YES];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.view setHidden:NO];
+}
+
 - (void) setUpViews {
     for (UITextField *textField in self.textFields) {
         
@@ -258,17 +271,17 @@ static BOOL DEVELOPMENT = YES;
 
 #pragma mark - Text View Delegate Methods
 
-- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
     DEAddValueViewController *addValueViewController = [DEAddValueViewController new];
-    addValueViewController.inputView = textView;
+    addValueViewController.inputView = textField;
 
     [self.navigationController pushViewController:addValueViewController animated:YES];
 #warning Do not leave with this String, this is hard coded, instead we want to put a placeholder here instead of actual text
-    if (![textView.text isEqualToString:@"Enter a description"])
+    if (![textField.text isEqualToString:@"Enter a description"])
     {
         DEAddValueView *view = (DEAddValueView *) addValueViewController.view;
-        view.txtValue.text = textView.text;
+        view.txtValue.text = textField.text;
     }
     
     return YES;

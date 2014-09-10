@@ -126,7 +126,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diT-2q-BjY">
                                 <rect key="frame" x="238" y="424" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="18"/>
                                 <state key="normal" title="?">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -155,6 +157,26 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calendar-icon 44x44.png" translatesAutoresizingMaskIntoConstraints="NO" id="vfR-uh-Uyh">
+                                <rect key="frame" x="15" y="175" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clock-icon 44x44.png" translatesAutoresizingMaskIntoConstraints="NO" id="03s-Jy-lQF">
+                                <rect key="frame" x="155" y="175" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="clock-icon 44x44.png" translatesAutoresizingMaskIntoConstraints="NO" id="scQ-e8-nrK">
+                                <rect key="frame" x="155" y="214" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calendar-icon 44x44.png" translatesAutoresizingMaskIntoConstraints="NO" id="Doi-KX-BBw">
+                                <rect key="frame" x="15" y="214" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="location-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="fft-W2-vOK">
+                                <rect key="frame" x="19" y="388" width="17" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <connections>
                             <outlet property="btnInfo" destination="diT-2q-BjY" id="ZyU-fa-elP"/>
@@ -222,6 +244,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="yte-Ni-6PL" id="Anw-aG-GV7"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIF-lh-AFU" customClass="DECameraButton">
                                 <rect key="frame" x="71" y="162" width="178" height="141"/>
@@ -284,6 +309,7 @@
                             <outlet property="btnPreview" destination="COG-BM-FZz" id="eAo-Ee-2fC"/>
                             <outlet property="btnTakePicture" destination="JIF-lh-AFU" id="att-HT-TdQ"/>
                             <outlet property="txtCost" destination="Wza-IE-Ajb" id="d1D-w9-vjx"/>
+                            <outlet property="txtDescription" destination="4AV-Qp-c9v" id="2DL-LZ-Kem"/>
                             <outlet property="txtTitle" destination="pDi-Kc-q72" id="YTY-sZ-sxt"/>
                             <outletCollection property="imageViews" destination="EtD-MX-bXP" id="VSS-h2-Dwf"/>
                             <outletCollection property="imageViews" destination="PaI-3o-CvM" id="xmL-Vn-oAj"/>
@@ -365,6 +391,11 @@
             <point key="canvasLocation" x="977" y="-276"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="calendar-icon 44x44.png" width="180" height="179"/>
+        <image name="clock-icon 44x44.png" width="181" height="181"/>
+        <image name="location-icon.png" width="140" height="211"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

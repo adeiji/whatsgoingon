@@ -36,7 +36,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *imageViews;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtCost;
-@property (weak, nonatomic) IBOutlet UITextView *txtDescription;
+@property (weak, nonatomic) IBOutlet UITextField *txtDescription;
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;
 
 #pragma mark - UIPickerView Properties
