@@ -90,6 +90,7 @@ static BOOL DEVELOPMENT = YES;
     }
 
     [self.btnNext.layer setCornerRadius:BUTTON_CORNER_RADIUS];
+    [self.btnHome.layer setCornerRadius:BUTTON_CORNER_RADIUS];
 }
 
 - (void) selectPostRange {
@@ -289,5 +290,11 @@ static BOOL DEVELOPMENT = YES;
 
 - (IBAction)togglePostRangeHelperView:(id)sender {
     [_postRangeHelperView setHidden:!_postRangeHelperView.hidden];
+}
+
+- (IBAction)goBack:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 @end

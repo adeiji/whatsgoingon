@@ -24,6 +24,7 @@
 @property (strong, nonatomic) DEPost *post;
 @property (strong, nonatomic) IBOutlet DEEventView *eventView;
 @property (strong, nonatomic) DEEventDetailsViewController *eventDetailsViewController;
+@property (weak, nonatomic) IBOutlet UIButton *btnPost;
 
 #pragma mark - Button Action Methods
 
@@ -32,5 +33,5 @@
 - (IBAction)shareEvent:(id)sender;
 - (IBAction)viewMoreForEvent:(id)sender;
 - (IBAction)goBack:(id)sender;
-
+- (IBAction)savePost:(id)sender;
 @end

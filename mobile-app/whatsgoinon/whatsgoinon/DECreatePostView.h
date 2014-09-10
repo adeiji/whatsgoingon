@@ -10,6 +10,7 @@
 #import "DEScreenManager.h"
 #import "DEViewChangeCity.h"
 #import "DECameraButton.h"
+#import "UIView+DEScrollOnShowKeyboard.h"
 
 @interface DECreatePostView : UIView <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UINavigationControllerDelegate>
 {
@@ -19,6 +20,7 @@
 
 #pragma mark - View Outlets
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *txtCategory;
 @property (weak, nonatomic) IBOutlet UITextField *txtStartDate;
 @property (weak, nonatomic) IBOutlet UITextField *txtStartTime;
@@ -30,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UISwitch *switchUseCurrentLocation;
 @property (weak, nonatomic) IBOutlet DECameraButton *btnTakePicture;
+@property (weak, nonatomic) IBOutlet UITextField *txtQuickDescription;
 
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
 

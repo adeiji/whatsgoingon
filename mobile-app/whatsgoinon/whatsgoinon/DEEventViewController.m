@@ -28,12 +28,7 @@
         [[_eventView lblNumberOfPeopleGoing] setText:0];
         UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
         [[_eventView imgMainImage] setImage:mainImage];
-        UIBarButtonItem *postButton = [[UIBarButtonItem alloc]
-                                       initWithTitle:@"Post!"
-                                       style:UIBarButtonItemStyleBordered
-                                       target:self
-                                       action:@selector(savePost)];
-        self.navigationItem.rightBarButtonItem = postButton;
+        _btnPost.hidden = NO;
     }
     else {
         PFFile *file = [[_post images] firstObject];
@@ -70,7 +65,7 @@
     self.view.hidden = YES;
 }
 
-- (void) savePost {
+- (IBAction) savePost : (id)sender {
     
     //For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
     BOOL postSaved = [DESyncManager savePost:_post];

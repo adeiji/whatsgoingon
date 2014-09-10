@@ -39,7 +39,7 @@
     CGRect aRect = rect;
     aRect.size.height -= kbSize.height;
     if(!CGRectContainsPoint(aRect, origin)) {
-        CGPoint scrollPoint = CGPointMake(0.0, origin.y - kbSize.height);
+        CGPoint scrollPoint = CGPointMake(0.0, origin.y - (kbSize.height - 30));
         [scrollView setContentOffset:scrollPoint animated:YES];
     }
 }

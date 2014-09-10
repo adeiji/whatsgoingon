@@ -15,30 +15,34 @@
     _categoriesPicker = [UIPickerView new];
     _categoriesPicker.dataSource = self;
     _categoriesPicker.delegate = self;
-    
     _categories = @[@"Under 21", @"Indie", @"Classy", @"Nerdy", @"Party", @"Family Friendly", @"Everything"];
     _txtCategory.inputView = _categoriesPicker;
-    _txtCategory.delegate = self;
     
     UIDatePicker *datePicker = [UIDatePicker new];
     datePicker.datePickerMode = UIDatePickerModeDate;
     [datePicker addTarget:self action:@selector(updateDateTextField:)
          forControlEvents:UIControlEventValueChanged];
-    
+
     [_txtStartDate setInputView:datePicker];
-    _txtStartDate.delegate = self;
     [_txtEndDate setInputView:datePicker];
-    _txtEndDate.delegate = self;
-    
     UIDatePicker *timePicker = [UIDatePicker new];
     timePicker.datePickerMode = UIDatePickerModeTime;
     [timePicker addTarget:self action:@selector(updateTimeTextField:) forControlEvents:UIControlEventValueChanged];
     [_txtStartTime setInputView:timePicker];
-    _txtStartTime.delegate = self;
     [_txtEndTime setInputView:timePicker];
-    _txtEndTime.delegate = self;
     
+    _txtStartTime.delegate = self;
+    _txtEndTime.delegate = self;
     _txtAddress.delegate = self;
+    _txtPostRange.delegate = self;
+    _txtEndDate.delegate = self;
+    _txtStartDate.delegate = self;
+    _txtCategory.delegate = self;
+    _txtTitle.delegate = self;
+    _txtCost.delegate = self;
+    _txtDescription.delegate = self;
+    _txtQuickDescription.delegate = self;
+
     
     [[_btnTakePicture layer] setBorderWidth:2.0f];
     [[_btnTakePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
@@ -48,6 +52,48 @@
     [[_btnInfo layer] setCornerRadius:_btnInfo.frame.size.height / 2.0f];
     [[_btnInfo layer] setBorderWidth:1.0f];
     [[_btnInfo layer] setBorderColor:[UIColor whiteColor].CGColor];
+    
+    [self registerForKeyboardNotifications];
+    [self displayCurrentLocation];
+}
+
+- (void) registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void) keyboardWasShown : (NSNotification *) aNotification {
+    [self scrollViewToTopOfKeyboard:_scrollView Notification:aNotification View:self TextFieldOrView:activeField];
+}
+
+- (void) keyboardWillBeHidden : (NSNotification *) aNotification {
+    [self scrollViewToBottom:_scrollView Notification:aNotification];
+}
+
+- (UIView *) createInputAccessoryView {
+    UIView *inputAccView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 60.0f)];
+    [inputAccView setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.8f]];
+    
+    UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnDone setFrame:CGRectMake(10, 10, 50.0f, 40.0f)];
+    [btnDone setTitle:@"Done" forState:UIControlStateNormal];
+    [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnDone addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchUpInside];
+    
+    [inputAccView addSubview:btnDone];
+    return inputAccView;
+}
+
+- (void) hideKeyboard
+{
+    [activeField resignFirstResponder];
 }
 
 - (void) updateTimeTextField : (UIDatePicker *) sender {
@@ -63,7 +109,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setTimeStyle:NSDateFormatterShortStyle];
     
-    textField.text = [dateFormat stringFromDate:sender.date];
+    activeField.text = [dateFormat stringFromDate:sender.date];
     
     NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
 }
@@ -81,11 +127,15 @@
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"EEEE MMMM d, YYYY"];
-    textField.text = [dateFormat stringFromDate:sender.date];
+    activeField.text = [dateFormat stringFromDate:sender.date];
     
     NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
 }
 
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [activeField resignFirstResponder];
+}
 
 
 #pragma mark - UITextField Delegate Methods
@@ -93,6 +143,8 @@
 {
     activeField = textField;
     
+    UIView *accessoryView = [self createInputAccessoryView];
+    [activeField setInputAccessoryView:accessoryView];
     [_categoriesPicker reloadAllComponents];
     [_categoriesPicker selectRow:1 inComponent:0 animated:YES];
     

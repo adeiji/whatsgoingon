@@ -28,6 +28,7 @@
 - (IBAction)takePicture:(id)sender;
 - (IBAction)goHome:(id)sender;
 - (IBAction)togglePostRangeHelperView:(id)sender;
+- (IBAction)goBack:(id)sender;
 
 @property (weak, nonatomic) IBOutlet DECreatePostView *createPostViewOne;
 @property (weak, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;
@@ -35,6 +36,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
+@property (weak, nonatomic) IBOutlet UIButton *btnHome;
 
 
 @property (strong, nonatomic) DEPost *post;
