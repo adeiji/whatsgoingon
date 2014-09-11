@@ -10,6 +10,8 @@
 #import "DEPost.h"
 #import "DEUserManager.h"
 
+@class DEPost;
+
 @interface DESharingView : UIView
 
 @property (strong, nonatomic) UIImage *image;

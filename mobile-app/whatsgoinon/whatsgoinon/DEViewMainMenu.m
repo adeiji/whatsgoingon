@@ -11,6 +11,19 @@
 
 @implementation DEViewMainMenu
 
+- (void) setUpView {
+    [[_txtSearch layer] setCornerRadius:5.0f];
+    UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+    [_txtSearch setLeftViewMode:UITextFieldViewModeAlways];
+    [_txtSearch setLeftView:spacerView];
+    _txtSearch.attributedPlaceholder = [[NSAttributedString alloc] initWithString:_txtSearch.placeholder attributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
+    
+    for (UIView *view in _viewCollection) {
+        UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 1, view.frame.size.width, 1)];
+        [bottomBorder setBackgroundColor:[UIColor whiteColor]];
+        [view addSubview:bottomBorder];
+    }
+}
 
 - (IBAction)goHome:(id)sender {
 

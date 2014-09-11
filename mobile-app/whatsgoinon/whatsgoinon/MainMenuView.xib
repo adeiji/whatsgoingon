@@ -11,15 +11,15 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <scrollView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZXC-2F-TmY">
-                    <rect key="frame" x="0.0" y="44" width="259" height="524"/>
+                    <rect key="frame" x="0.0" y="57" width="259" height="511"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oln-Vb-TmX">
-                            <rect key="frame" x="0.0" y="0.0" width="259" height="524"/>
+                            <rect key="frame" x="0.0" y="0.0" width="259" height="511"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPc-Oo-U47">
-                                    <rect key="frame" x="49" y="20" width="190" height="44"/>
+                                    <rect key="frame" x="50" y="0.0" width="190" height="58"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -32,7 +32,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yf-n8-lqY">
-                                    <rect key="frame" x="49" y="77" width="190" height="44"/>
+                                    <rect key="frame" x="50" y="57" width="190" height="58"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -45,7 +45,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDK-e8-07f">
-                                    <rect key="frame" x="49" y="134" width="190" height="44"/>
+                                    <rect key="frame" x="50" y="114" width="190" height="58"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -58,7 +58,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4og-16-nF6">
-                                    <rect key="frame" x="49" y="191" width="190" height="44"/>
+                                    <rect key="frame" x="50" y="171" width="190" height="58"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -71,7 +71,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iid-vy-eBb">
-                                    <rect key="frame" x="49" y="248" width="190" height="44"/>
+                                    <rect key="frame" x="50" y="228" width="190" height="58"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -84,7 +84,7 @@
                                     </connections>
                                 </button>
                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLk-Dw-xRg">
-                                    <rect key="frame" x="20" y="11" width="46" height="30"/>
+                                    <rect key="frame" x="23" y="448" width="46" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Back">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -93,31 +93,67 @@
                                         <action selector="hideMenu:" destination="M14-mQ-Lru" eventType="touchUpInside" id="S0H-yz-Y9n"/>
                                     </connections>
                                 </button>
-                                <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FS2-MA-UjW" customClass="DEMagnifyingGlass">
-                                    <rect key="frame" x="20" y="29" width="25" height="25"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </view>
                                 <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ABg-b3-xHl" customClass="DEPostView">
-                                    <rect key="frame" x="20" y="87" width="25" height="25"/>
+                                    <rect key="frame" x="21" y="73" width="25" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </view>
-                                <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="csx-0a-4TU" customClass="DELocationView">
-                                    <rect key="frame" x="17" y="141" width="30" height="30"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="House-icon 25x25.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q2Q-4L-hW5">
+                                    <rect key="frame" x="21" y="16" width="25" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </view>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment-Feedback icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-vh-Akh">
+                                    <rect key="frame" x="20" y="188" width="27" height="23"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="location-icon-empty.png" translatesAutoresizingMaskIntoConstraints="NO" id="OfI-HY-nqH">
+                                    <rect key="frame" x="24" y="129" width="18" height="27"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="SettingsAccount Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="RgK-ga-28U">
+                                    <rect key="frame" x="21" y="244" width="25" height="25"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
                             </subviews>
                         </view>
                     </subviews>
                 </scrollView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2GT-iR-Xb4">
-                    <rect key="frame" x="34" y="6" width="169" height="30"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JHi-co-I3l">
+                    <rect key="frame" x="50" y="0.0" width="189" height="58"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.59024389382999742" green="0.60548510820627632" blue="0.61224489795918369" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
+                    <subviews>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2GT-iR-Xb4">
+                            <rect key="frame" x="-1" y="12" width="190" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.59024389382999742" green="0.60548510820627632" blue="0.61224489795918369" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Magnifying Glass Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ka7-wQ-3Rl">
+                    <rect key="frame" x="20" y="16" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="txtSearch" destination="2GT-iR-Xb4" id="Bph-8s-P1B"/>
+                <outletCollection property="viewCollection" destination="LPc-Oo-U47" id="j4j-xX-DOu"/>
+                <outletCollection property="viewCollection" destination="1yf-n8-lqY" id="4Fb-ce-hmF"/>
+                <outletCollection property="viewCollection" destination="oDK-e8-07f" id="5Kd-Wi-FgP"/>
+                <outletCollection property="viewCollection" destination="4og-16-nF6" id="EsM-Qy-jBQ"/>
+                <outletCollection property="viewCollection" destination="iid-vy-eBb" id="eze-Wy-g0y"/>
+                <outletCollection property="viewCollection" destination="JHi-co-I3l" id="nol-RD-eb2"/>
+            </connections>
         </view>
     </objects>
+    <resources>
+        <image name="Comment-Feedback icon.png" width="107" height="93"/>
+        <image name="House-icon 25x25.png" width="111" height="105"/>
+        <image name="Magnifying Glass Icon.png" width="108" height="110"/>
+        <image name="SettingsAccount Icon.png" width="105" height="106"/>
+        <image name="location-icon-empty.png" width="71" height="108"/>
+    </resources>
 </document>

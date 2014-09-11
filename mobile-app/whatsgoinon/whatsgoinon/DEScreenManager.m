@@ -27,7 +27,6 @@
     return self;
 }
 
-
 + (void) addToWindowView : (UIView *) view {
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     

@@ -14,6 +14,9 @@
 @interface DEViewMainMenu : UIView
 
 @property (strong, nonatomic) UIView *viewToCutThrough;
+@property (weak, nonatomic) IBOutlet UITextField *txtSearch;
+@property (strong, nonatomic) IBOutletCollection(id) NSArray *viewCollection;
+
 
 - (IBAction)goHome:(id)sender;
 - (IBAction)gotoPostPage:(id)sender;
@@ -22,6 +25,7 @@
 - (IBAction)gotoAccountSettingsPage:(id)sender;
 - (IBAction)hideMenu:(id)sender;
 
+- (void) setUpView;
 
 
 @end

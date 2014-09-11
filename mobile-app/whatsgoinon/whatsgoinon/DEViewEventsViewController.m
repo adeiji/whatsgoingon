@@ -63,6 +63,7 @@
     [[self view] addGestureRecognizer:swipeLeftGestureRecognizer];
     
     viewMainMenu = [[[NSBundle mainBundle] loadNibNamed:@"MainMenuView" owner:self options:nil] firstObject];
+    [viewMainMenu setUpView];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     [screenManager setMainMenu:viewMainMenu];
     [self.view setBackgroundColor:[UIColor clearColor]];

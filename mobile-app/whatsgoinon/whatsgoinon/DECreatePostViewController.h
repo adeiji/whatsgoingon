@@ -13,7 +13,6 @@
 #import "DEEventViewController.h"
 #import "DEAddValueViewController.h"
 
-
 @interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 {
     int imageCounter;

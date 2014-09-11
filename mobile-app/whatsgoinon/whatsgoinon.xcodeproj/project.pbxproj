@@ -80,6 +80,11 @@
 		F46B944F19C116DA00B41D8C /* DEViewImGoing.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B944E19C116DA00B41D8C /* DEViewImGoing.m */; };
 		F46B945219C1181800B41D8C /* DEViewDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B945119C1181800B41D8C /* DEViewDistance.m */; };
 		F46B945519C1196B00B41D8C /* DEViewLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B945419C1196B00B41D8C /* DEViewLocation.m */; };
+		F46B945719C24F7500B41D8C /* House-icon 25x25.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B945619C24F7500B41D8C /* House-icon 25x25.png */; };
+		F46B945919C2508F00B41D8C /* Comment-Feedback icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B945819C2508F00B41D8C /* Comment-Feedback icon.png */; };
+		F46B945B19C2518500B41D8C /* SettingsAccount Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B945A19C2518500B41D8C /* SettingsAccount Icon.png */; };
+		F46B946119C2543400B41D8C /* location-icon-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B946019C2543400B41D8C /* location-icon-empty.png */; };
+		F46B946319C2551000B41D8C /* Magnifying Glass Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B946219C2551000B41D8C /* Magnifying Glass Icon.png */; };
 		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
@@ -232,6 +237,11 @@
 		F46B945119C1181800B41D8C /* DEViewDistance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewDistance.m; sourceTree = "<group>"; };
 		F46B945319C1196B00B41D8C /* DEViewLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewLocation.h; sourceTree = "<group>"; };
 		F46B945419C1196B00B41D8C /* DEViewLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewLocation.m; sourceTree = "<group>"; };
+		F46B945619C24F7500B41D8C /* House-icon 25x25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "House-icon 25x25.png"; sourceTree = "<group>"; };
+		F46B945819C2508F00B41D8C /* Comment-Feedback icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Comment-Feedback icon.png"; sourceTree = "<group>"; };
+		F46B945A19C2518500B41D8C /* SettingsAccount Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingsAccount Icon.png"; sourceTree = "<group>"; };
+		F46B946019C2543400B41D8C /* location-icon-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon-empty.png"; sourceTree = "<group>"; };
+		F46B946219C2551000B41D8C /* Magnifying Glass Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Magnifying Glass Icon.png"; sourceTree = "<group>"; };
 		F4774F831992E38400FCDE66 /* DEAWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAWSManager.h; sourceTree = "<group>"; };
 		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
@@ -811,6 +821,11 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F46B946019C2543400B41D8C /* location-icon-empty.png */,
+				F46B946219C2551000B41D8C /* Magnifying Glass Icon.png */,
+				F46B945A19C2518500B41D8C /* SettingsAccount Icon.png */,
+				F46B945819C2508F00B41D8C /* Comment-Feedback icon.png */,
+				F46B945619C24F7500B41D8C /* House-icon 25x25.png */,
 				F46B944A19C1135F00B41D8C /* circle-placeholder-01.png */,
 				F45030A819C015E80061F362 /* location-icon.png */,
 				F45030A619C014AB0061F362 /* clock-icon 44x44.png */,
@@ -913,11 +928,15 @@
 				F485811A19A2B74900BD1CE7 /* ViewChangeCity.xib in Resources */,
 				F40E0E0F19BFFFA000D2C3A0 /* money-icon 28x28.png in Resources */,
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
+				F46B946319C2551000B41D8C /* Magnifying Glass Icon.png in Resources */,
 				F40E0E0B19BFFD9F00D2C3A0 /* going-icon 23x23.png in Resources */,
+				F46B946119C2543400B41D8C /* location-icon-empty.png in Resources */,
 				F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */,
 				F45030A919C015E80061F362 /* location-icon.png in Resources */,
+				F46B945B19C2518500B41D8C /* SettingsAccount Icon.png in Resources */,
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
 				F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */,
+				F46B945719C24F7500B41D8C /* House-icon 25x25.png in Resources */,
 				F40E0E1319C007D100D2C3A0 /* camera-icon 178x141.png in Resources */,
 				F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
@@ -932,6 +951,7 @@
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,
+				F46B945919C2508F00B41D8C /* Comment-Feedback icon.png in Resources */,
 				F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */,
 				F4CCBD75199AADBD00532E9B /* README.md in Resources */,
 				F437BFC619904E4E00CF61E9 /* ViewEventsView.xib in Resources */,
