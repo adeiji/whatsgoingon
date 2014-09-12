@@ -34,6 +34,8 @@
     
     //if active text field is hidden by keyboard, scroll so it's visible
     CGPoint origin = [activeField convertPoint:view.frame.origin toView:nil];
+    origin.y = origin.y + activeField.frame.size.height;
+    
     CGRect rect = [view convertRect:view.frame toView:nil];
     
     CGRect aRect = rect;

@@ -13,16 +13,21 @@
 
 
 - (IBAction)cancelReport:(id)sender {
-    [[self superview] removeFromSuperview];
+
+    [self removeView];
+}
+
+- (void) removeView
+{    
+    [DEAnimationManager fadeOutRemoveView:[self superview] FromView:[[self superview] superview]];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
-
 - (void) registerForKeyboardNotifications
 {
     [self.txtNotes setDelegate:self];
+    [[self.txtNotes layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     for (UIView *view in _buttons) {
         [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     }
@@ -37,8 +42,6 @@
                                                object:nil];
     
 }
-
-
 
 
 - (void) keyboardWasShown : (NSNotification *) aNotification {
@@ -68,7 +71,7 @@
     
     [DESyncManager saveReportWithEventId:_eventId WhatsWrong:report.whatsWrong      Other:report.other];
     
-    [[self superview] removeFromSuperview];
+    [self removeFromSuperview];
     
 #warning Make sure that we display to the user that he saved the report
 }
@@ -87,14 +90,15 @@
 - (IBAction)enableReportDetailsTextView:(UISwitch *)sender {
     if (sender.on)
     {
-        [_txtNotes setBackgroundColor:[UIColor whiteColor]];
         [_txtNotes setUserInteractionEnabled:YES];
-        [_txtNotes setTextColor:[UIColor blackColor]];
+        [_txtNotes setBackgroundColor:[UIColor clearColor]];
+        [_txtNotes setTextColor:[UIColor whiteColor]];
+        [_txtNotes becomeFirstResponder];
     }
     else {
-        [_txtNotes setBackgroundColor:[UIColor blueColor]];
         [_txtNotes setUserInteractionEnabled:NO];
-        [_txtNotes setTextColor:[UIColor blueColor]];
+        [_txtNotes setBackgroundColor:[UIColor colorWithRed:102.0f/255.0f green:102.0f/255.0f blue:102.0f/255.0f alpha:.3f]];
+        [_txtNotes setTextColor:[UIColor clearColor]];
     }
 }
 

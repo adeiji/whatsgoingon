@@ -10,6 +10,7 @@
 #import "UIView+DEScrollOnShowKeyboard.h"
 #import "DEPost.h"
 #import "DESyncManager.h"
+#import "DEAnimationManager.h"
 
 @interface DEViewReportEvent : UIView <UITextViewDelegate>
 {
