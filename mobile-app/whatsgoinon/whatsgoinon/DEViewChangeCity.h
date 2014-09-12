@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DELocationManager.h"
+#import "DEAnimationManager.h"
 
 @interface DEViewChangeCity : UIView <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 {

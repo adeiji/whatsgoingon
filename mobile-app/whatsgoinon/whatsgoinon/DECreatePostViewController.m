@@ -72,22 +72,7 @@ static BOOL DEVELOPMENT = YES;
 }
 
 - (void) setUpViews {
-    for (UITextField *textField in self.textFields) {
-        
-        [textField.layer setCornerRadius:BUTTON_CORNER_RADIUS];
-        UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
-        [textField setLeftViewMode:UITextFieldViewModeAlways];
-        [textField setLeftView:spacerView];
-        
-        if ([textField respondsToSelector:@selector(setAttributedPlaceholder:)])
-        {
-            textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:textField.placeholder attributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
-        }
-        else    // Prior to 6.0
-        {
-            
-        }
-    }
+    [DEScreenManager setUpTextFields:self.textFields];
 
     [self.btnNext.layer setCornerRadius:BUTTON_CORNER_RADIUS];
     [self.btnHome.layer setCornerRadius:BUTTON_CORNER_RADIUS];

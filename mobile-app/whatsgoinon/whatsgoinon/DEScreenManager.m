@@ -7,6 +7,7 @@
 //
 
 #import "DEScreenManager.h"
+#import "Constants.h"
 
 @implementation DEScreenManager
 
@@ -43,6 +44,26 @@
     if (!exist)
     {
         [window addSubview:view];
+    }
+}
+
++ (void) setUpTextFields : (NSArray *) textFields
+{
+    for (UITextField *textField in textFields) {
+        
+        [textField.layer setCornerRadius:BUTTON_CORNER_RADIUS];
+        UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
+        [textField setLeftViewMode:UITextFieldViewModeAlways];
+        [textField setLeftView:spacerView];
+        
+        if ([textField respondsToSelector:@selector(setAttributedPlaceholder:)])
+        {
+            textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:textField.placeholder attributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
+        }
+        else    // Prior to 6.0
+        {
+            
+        }
     }
 }
 

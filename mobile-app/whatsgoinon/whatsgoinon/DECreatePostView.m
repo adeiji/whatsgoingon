@@ -165,10 +165,6 @@
         [activeField resignFirstResponder];
         [self addSubview:viewPostAddress];
         
-        for (UIView *view in self.subviews) {
-            view.hidden = YES;
-        }
-        
         viewPostAddress.hidden = NO;
     }
 }

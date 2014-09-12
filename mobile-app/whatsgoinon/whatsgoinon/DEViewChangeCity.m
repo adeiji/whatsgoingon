@@ -28,6 +28,7 @@
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
+
     type = myType;
     
     [self initLocationsArray];
@@ -38,12 +39,8 @@
 }
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    // Set all the views that are behind this view to visible
-    for (UIView *view in self.superview.subviews) {
-        view.hidden = NO;
-    }
-    
-    [self removeFromSuperview];
+
+    [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];
 }
 
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {

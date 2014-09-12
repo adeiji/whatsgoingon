@@ -12,7 +12,7 @@
 @implementation DEViewMainMenu
 
 - (void) setUpView {
-    [[_txtSearch layer] setCornerRadius:5.0f];
+    [[_txtSearch layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
     [_txtSearch setLeftViewMode:UITextFieldViewModeAlways];
     [_txtSearch setLeftView:spacerView];
@@ -42,7 +42,13 @@
     
     UINavigationController *nc = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
     
-    [nc popToRootViewControllerAnimated:NO];
+    if ([[DEScreenManager sharedManager] mainMenu])
+    {
+        [[[DEScreenManager sharedManager] mainMenu] removeFromSuperview];
+        [[DEScreenManager sharedManager] setMainMenu:nil];
+    }
+
+//    [nc popToRootViewControllerAnimated:NO];
     
     DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
     [nc pushViewController:createPostViewController animated:YES];
@@ -50,10 +56,14 @@
 
 - (IBAction)gotoChangeCityPage:(id)sender {
 
-    DEViewChangeCity *changeCity = [[DEViewChangeCity alloc] initWithFrame:CGRectMake(0, 0, 223, 568)];
-    [changeCity setUpViewWithType:PLACES_API_DATA_RESULT_TYPE_CITIES];
+    DEViewChangeCity *changeCity = [[DEViewChangeCity alloc] init];
     
-    [self addSubview:changeCity];
+    CGRect frame = self.frame;
+    frame.origin.y = -10;
+
+    [changeCity setFrame:frame];
+    [DEAnimationManager fadeOutWithView:self ViewToAdd:changeCity];
+    [changeCity setUpViewWithType:PLACES_API_DATA_RESULT_TYPE_CITIES];
 }
 
 - (IBAction)showFeedbackPage:(id)sender {
@@ -66,6 +76,8 @@
     [scrollView setContentSize:settingsAccount.frame.size];
     [scrollView addSubview:settingsAccount];
     [self addSubview:scrollView];
+    
+    [settingsAccount hideView : self];
 }
 
 - (IBAction)hideMenu:(id)sender {

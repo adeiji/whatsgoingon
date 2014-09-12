@@ -10,6 +10,7 @@
 #import "DECreatePostViewController.h"
 #import "DEViewChangeCity.h"
 #import "DESettingsAccount.h"
+#import "DEAnimationManager.h"
 
 @interface DEViewMainMenu : UIView
 

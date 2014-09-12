@@ -85,7 +85,8 @@
 		F46B945B19C2518500B41D8C /* SettingsAccount Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B945A19C2518500B41D8C /* SettingsAccount Icon.png */; };
 		F46B946119C2543400B41D8C /* location-icon-empty.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B946019C2543400B41D8C /* location-icon-empty.png */; };
 		F46B946319C2551000B41D8C /* Magnifying Glass Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B946219C2551000B41D8C /* Magnifying Glass Icon.png */; };
-		F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F841992E38400FCDE66 /* DEAWSManager.m */; };
+		F46B946619C2659C00B41D8C /* DELargeCameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B946519C2659C00B41D8C /* DELargeCameraButton.m */; };
+		F46B946A19C26E7900B41D8C /* DEAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B946919C26E7900B41D8C /* DEAnimationManager.m */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
@@ -242,8 +243,10 @@
 		F46B945A19C2518500B41D8C /* SettingsAccount Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SettingsAccount Icon.png"; sourceTree = "<group>"; };
 		F46B946019C2543400B41D8C /* location-icon-empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon-empty.png"; sourceTree = "<group>"; };
 		F46B946219C2551000B41D8C /* Magnifying Glass Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Magnifying Glass Icon.png"; sourceTree = "<group>"; };
-		F4774F831992E38400FCDE66 /* DEAWSManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAWSManager.h; sourceTree = "<group>"; };
-		F4774F841992E38400FCDE66 /* DEAWSManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAWSManager.m; sourceTree = "<group>"; };
+		F46B946419C2659C00B41D8C /* DELargeCameraButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELargeCameraButton.h; sourceTree = "<group>"; };
+		F46B946519C2659C00B41D8C /* DELargeCameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELargeCameraButton.m; sourceTree = "<group>"; };
+		F46B946819C26E7900B41D8C /* DEAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAnimationManager.h; sourceTree = "<group>"; };
+		F46B946919C26E7900B41D8C /* DEAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAnimationManager.m; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
 		F4774F881992E40C00FCDE66 /* DELocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationManager.m; sourceTree = "<group>"; };
 		F4774F8F1994398F00FCDE66 /* UDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDIDGenerator.h; path = ../../../../12WeekFitness/Resources/UDIDGenerator.h; sourceTree = "<group>"; };
@@ -613,17 +616,19 @@
 				F46B945119C1181800B41D8C /* DEViewDistance.m */,
 				F46B945319C1196B00B41D8C /* DEViewLocation.h */,
 				F46B945419C1196B00B41D8C /* DEViewLocation.m */,
+				F46B946419C2659C00B41D8C /* DELargeCameraButton.h */,
+				F46B946519C2659C00B41D8C /* DELargeCameraButton.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
 		};
-		F4774F821992E37A00FCDE66 /* AWS Services */ = {
+		F46B946719C26E5800B41D8C /* Animation Manager */ = {
 			isa = PBXGroup;
 			children = (
-				F4774F831992E38400FCDE66 /* DEAWSManager.h */,
-				F4774F841992E38400FCDE66 /* DEAWSManager.m */,
+				F46B946819C26E7900B41D8C /* DEAnimationManager.h */,
+				F46B946919C26E7900B41D8C /* DEAnimationManager.m */,
 			);
-			name = "AWS Services";
+			name = "Animation Manager";
 			sourceTree = "<group>";
 		};
 		F4774F8E199438DD00FCDE66 /* Dephyned Classes */ = {
@@ -647,9 +652,9 @@
 		F4774F9619955E0B00FCDE66 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F46B946719C26E5800B41D8C /* Animation Manager */,
 				F4774F9819955E3700FCDE66 /* User Manager */,
 				F437BFD219918DE700CF61E9 /* Sync Manager */,
-				F4774F821992E37A00FCDE66 /* AWS Services */,
 				F4774F9719955E1A00FCDE66 /* Location Manager */,
 				F4774F9219944B8400FCDE66 /* Global Screen Manager */,
 			);
@@ -1011,9 +1016,9 @@
 				F40DF97719A5621F002B4419 /* DEPost.m in Sources */,
 				F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */,
 				F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */,
-				F4774F851992E38400FCDE66 /* DEAWSManager.m in Sources */,
 				F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */,
 				F4CB0B9819AFF33600AABD12 /* DETwitterButton.m in Sources */,
+				F46B946A19C26E7900B41D8C /* DEAnimationManager.m in Sources */,
 				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
 				F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */,
@@ -1057,6 +1062,7 @@
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
 				F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */,
 				F4CCBD6C199980B800532E9B /* DEAddValueView.m in Sources */,
+				F46B946619C2659C00B41D8C /* DELargeCameraButton.m in Sources */,
 				F46B944F19C116DA00B41D8C /* DEViewImGoing.m in Sources */,
 				F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */,
 				F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */,

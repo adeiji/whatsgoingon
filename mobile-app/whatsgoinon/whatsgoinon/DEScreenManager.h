@@ -19,5 +19,6 @@
 
 + (id)sharedManager;
 + (void) addToWindowView : (UIView *) view;
++ (void) setUpTextFields : (NSArray *) textFields;
 
 @end

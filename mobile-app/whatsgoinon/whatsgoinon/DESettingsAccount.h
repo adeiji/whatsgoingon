@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DEScreenManager.h"
 @interface DESettingsAccount : UIView
 
 #pragma mark - View Outlets
@@ -17,6 +17,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UISwitch *switchFacebook;
 @property (weak, nonatomic) IBOutlet UISwitch *switchGoogle;
+@property (weak, nonatomic) IBOutlet UISwitch *switchTwitter;
+@property (weak, nonatomic) IBOutlet UIButton *btnTakePicture;
+@property (weak, nonatomic) IBOutlet UIButton *btnSendFeedback;
+@property (weak, nonatomic) IBOutlet UIButton *btnSignOut;
+@property (strong, nonatomic) UIView *viewToHide;
+
 
 #pragma mark - Button Actions
 
@@ -24,5 +30,9 @@
 - (IBAction)sendFeedback:(id)sender;
 - (IBAction)signOut:(id)sender;
 - (IBAction)goBack:(id)sender;
+
+#pragma mark - Private methods
+
+- (void) hideView : (UIView *) myView;
 
 @end
