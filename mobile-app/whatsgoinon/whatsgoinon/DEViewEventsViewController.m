@@ -18,7 +18,7 @@
 #define IPHONE_DEVICE_WIDTH 320
 #define TOP_MARGIN 20
 #define SCROLL_VIEW_DISTANCE_FROM_TOP 20
-#define NAV_BAR_HEIGHT 50
+#define MAIN_MENU_Y_POS 25
 
 @implementation DEViewEventsViewController
 
@@ -75,7 +75,7 @@
 {
     [[[self view] superview] addSubview:viewMainMenu];
     CGRect frame = viewMainMenu.frame;
-    frame.origin.y = NAV_BAR_HEIGHT;
+    frame.origin.y = MAIN_MENU_Y_POS;
     frame.origin.x = -frame.size.width;
     viewMainMenu.frame = frame;
     
@@ -93,6 +93,7 @@
     }];
     
     menuDisplayed = YES;
+    [[DEScreenManager sharedManager] setMainMenu:viewMainMenu];
 }
 
 - (void) hideMainMenu

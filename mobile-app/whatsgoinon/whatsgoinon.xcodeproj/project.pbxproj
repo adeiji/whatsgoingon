@@ -87,6 +87,11 @@
 		F46B946319C2551000B41D8C /* Magnifying Glass Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B946219C2551000B41D8C /* Magnifying Glass Icon.png */; };
 		F46B946619C2659C00B41D8C /* DELargeCameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B946519C2659C00B41D8C /* DELargeCameraButton.m */; };
 		F46B946A19C26E7900B41D8C /* DEAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B946919C26E7900B41D8C /* DEAnimationManager.m */; };
+		F46B946D19C27E2C00B41D8C /* ok.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B946B19C27E2C00B41D8C /* ok.png */; };
+		F46B946E19C27E2C00B41D8C /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B946C19C27E2C00B41D8C /* cancel.png */; };
+		F46B947219C355E500B41D8C /* DEActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B947119C355E500B41D8C /* DEActionButton.m */; };
+		F46B947619C3657900B41D8C /* email-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947519C3657900B41D8C /* email-icon.png */; };
+		F46B947819C3674E00B41D8C /* password-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947719C3674E00B41D8C /* password-icon.png */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
@@ -247,6 +252,12 @@
 		F46B946519C2659C00B41D8C /* DELargeCameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELargeCameraButton.m; sourceTree = "<group>"; };
 		F46B946819C26E7900B41D8C /* DEAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAnimationManager.h; sourceTree = "<group>"; };
 		F46B946919C26E7900B41D8C /* DEAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAnimationManager.m; sourceTree = "<group>"; };
+		F46B946B19C27E2C00B41D8C /* ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ok.png; sourceTree = "<group>"; };
+		F46B946C19C27E2C00B41D8C /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
+		F46B947019C355E500B41D8C /* DEActionButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEActionButton.h; sourceTree = "<group>"; };
+		F46B947119C355E500B41D8C /* DEActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEActionButton.m; sourceTree = "<group>"; };
+		F46B947519C3657900B41D8C /* email-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email-icon.png"; sourceTree = "<group>"; };
+		F46B947719C3674E00B41D8C /* password-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password-icon.png"; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
 		F4774F881992E40C00FCDE66 /* DELocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationManager.m; sourceTree = "<group>"; };
 		F4774F8F1994398F00FCDE66 /* UDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDIDGenerator.h; path = ../../../../12WeekFitness/Resources/UDIDGenerator.h; sourceTree = "<group>"; };
@@ -471,6 +482,7 @@
 		F437BFBC199048A100CF61E9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F46B946F19C355CE00B41D8C /* Buttons */,
 				F45E60A219AD3263007705F9 /* Graphical Views - Paint Code */,
 				F437BFBD199048AF00CF61E9 /* WelcomeEventsView.xib */,
 				F437BFC1199049D300CF61E9 /* SelectCategoryView.xib */,
@@ -629,6 +641,15 @@
 				F46B946919C26E7900B41D8C /* DEAnimationManager.m */,
 			);
 			name = "Animation Manager";
+			sourceTree = "<group>";
+		};
+		F46B946F19C355CE00B41D8C /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				F46B947019C355E500B41D8C /* DEActionButton.h */,
+				F46B947119C355E500B41D8C /* DEActionButton.m */,
+			);
+			name = Buttons;
 			sourceTree = "<group>";
 		};
 		F4774F8E199438DD00FCDE66 /* Dephyned Classes */ = {
@@ -826,6 +847,10 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F46B947719C3674E00B41D8C /* password-icon.png */,
+				F46B947519C3657900B41D8C /* email-icon.png */,
+				F46B946B19C27E2C00B41D8C /* ok.png */,
+				F46B946C19C27E2C00B41D8C /* cancel.png */,
 				F46B946019C2543400B41D8C /* location-icon-empty.png */,
 				F46B946219C2551000B41D8C /* Magnifying Glass Icon.png */,
 				F46B945A19C2518500B41D8C /* SettingsAccount Icon.png */,
@@ -938,6 +963,7 @@
 				F46B946119C2543400B41D8C /* location-icon-empty.png in Resources */,
 				F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */,
 				F45030A919C015E80061F362 /* location-icon.png in Resources */,
+				F46B947619C3657900B41D8C /* email-icon.png in Resources */,
 				F46B945B19C2518500B41D8C /* SettingsAccount Icon.png in Resources */,
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
 				F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */,
@@ -952,14 +978,17 @@
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F45030A119C00F500061F362 /* HappSnap-bg.png in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
+				F46B946D19C27E2C00B41D8C /* ok.png in Resources */,
 				F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */,
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,
 				F46B945919C2508F00B41D8C /* Comment-Feedback icon.png in Resources */,
 				F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */,
+				F46B947819C3674E00B41D8C /* password-icon.png in Resources */,
 				F4CCBD75199AADBD00532E9B /* README.md in Resources */,
 				F437BFC619904E4E00CF61E9 /* ViewEventsView.xib in Resources */,
+				F46B946E19C27E2C00B41D8C /* cancel.png in Resources */,
 				F46B944B19C1135F00B41D8C /* circle-placeholder-01.png in Resources */,
 				F437BFBA1990486500CF61E9 /* ViewPosts.storyboard in Resources */,
 			);
@@ -1018,6 +1047,7 @@
 				F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */,
 				F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */,
 				F4CB0B9819AFF33600AABD12 /* DETwitterButton.m in Sources */,
+				F46B947219C355E500B41D8C /* DEActionButton.m in Sources */,
 				F46B946A19C26E7900B41D8C /* DEAnimationManager.m in Sources */,
 				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,

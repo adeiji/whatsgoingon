@@ -40,7 +40,6 @@
     _txtCategory.delegate = self;
     _txtTitle.delegate = self;
     _txtCost.delegate = self;
-    _txtDescription.delegate = self;
     _txtQuickDescription.delegate = self;
 
     
@@ -77,19 +76,6 @@
     [self scrollViewToBottom:_scrollView Notification:aNotification];
 }
 
-- (UIView *) createInputAccessoryView {
-    UIView *inputAccView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 60.0f)];
-    [inputAccView setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.8f]];
-    
-    UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btnDone setFrame:CGRectMake(10, 10, 50.0f, 40.0f)];
-    [btnDone setTitle:@"Done" forState:UIControlStateNormal];
-    [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnDone addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchUpInside];
-    
-    [inputAccView addSubview:btnDone];
-    return inputAccView;
-}
 
 - (void) hideKeyboard
 {
@@ -143,8 +129,6 @@
 {
     activeField = textField;
     
-    UIView *accessoryView = [self createInputAccessoryView];
-    [activeField setInputAccessoryView:accessoryView];
     [_categoriesPicker reloadAllComponents];
     [_categoriesPicker selectRow:1 inComponent:0 animated:YES];
     

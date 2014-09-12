@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DEScreenManager.h"
+#import "DEAnimationManager.h"
+
 @interface DESettingsAccount : UIView
 
 #pragma mark - View Outlets
@@ -31,8 +33,5 @@
 - (IBAction)signOut:(id)sender;
 - (IBAction)goBack:(id)sender;
 
-#pragma mark - Private methods
-
-- (void) hideView : (UIView *) myView;
 
 @end

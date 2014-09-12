@@ -7,6 +7,7 @@
 //
 
 #import "DELoginViewController.h"
+#import "Constants.h"
 
 @interface DELoginViewController ()
 
@@ -21,6 +22,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    for (UIView *view in _buttons) {
+        [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    }
+    
+    [DEScreenManager setUpTextFields:_textFields];
 }
 
 

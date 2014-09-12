@@ -34,16 +34,6 @@
     [DEScreenManager setUpTextFields:array];
 }
 
-- (void) hideView : (UIView *) myView
-{
-    for (UIView *view in [myView subviews]) {
-        view.hidden = YES;
-    }
-    self.hidden = NO;
-    [[self superview] setHidden:NO];
-    _viewToHide = myView;
-}
-
 - (IBAction)takePicture:(id)sender {
 }
 
@@ -54,10 +44,10 @@
 }
 
 - (IBAction)goBack:(id)sender {
-    for (UIView *view in [_viewToHide subviews]) {
-        view.hidden = NO;
-    }
-    [[self superview] removeFromSuperview];
-    
+//    for (UIView *view in [_viewToHide subviews]) {
+//        view.hidden = NO;
+//    }
+//    [[self superview] removeFromSuperview];
+    [DEAnimationManager fadeOutRemoveView:[self superview] FromView:[[self superview] superview]];
 }
 @end

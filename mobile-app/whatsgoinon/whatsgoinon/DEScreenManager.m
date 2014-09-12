@@ -55,7 +55,8 @@
         UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
         [textField setLeftViewMode:UITextFieldViewModeAlways];
         [textField setLeftView:spacerView];
-        
+        [textField setKeyboardAppearance:UIKeyboardAppearanceDark];
+        [textField setInputAccessoryView:[self createInputAccessoryView]];
         if ([textField respondsToSelector:@selector(setAttributedPlaceholder:)])
         {
             textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:textField.placeholder attributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }];
@@ -66,5 +67,25 @@
         }
     }
 }
+
++ (UIView *) createInputAccessoryView {
+    UIView *inputAccView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 60.0f)];
+    [inputAccView setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.8f]];
+    
+    UIButton *btnDone = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnDone setFrame:CGRectMake(10, 10, 50.0f, 40.0f)];
+    [btnDone setTitle:@"Done" forState:UIControlStateNormal];
+    [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnDone addTarget:self action:@selector(hideKeyboard) forControlEvents:UIControlEventTouchUpInside];
+    [inputAccView addSubview:btnDone];
+    return inputAccView;
+}
+
++ (void) hideKeyboard
+{
+    UIViewController *navController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [navController.view endEditing:YES];
+}
+
 
 @end

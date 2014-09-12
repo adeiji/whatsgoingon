@@ -30,6 +30,11 @@
     DEAddValueView *view = (DEAddValueView *) self.view;
     
     [view.txtValue becomeFirstResponder];
+    [[view.btnCancel layer] setCornerRadius:view.btnCancel.frame.size.height / 2.0f];
+    [[view.btnOk layer] setCornerRadius:view.btnOk.frame.size.height / 2.0f];
+    
+    [view.btnCancel setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [view.btnOk setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,6 +56,28 @@
     // Simply go back to the previous screen
     
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    
+    if (newLength > 0)
+    {
+        [UIView animateWithDuration:.2 animations:^{
+            [_overlayView setAlpha:0.0f];
+        }];
+    }
+    else
+    {
+        [UIView animateWithDuration:.2 animations:^{
+            [_overlayView setAlpha:1.0f];
+        }];
+    }
+    
+    self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 150 - newLength];
+    
+    return  YES;
 }
 
 @end

@@ -75,9 +75,7 @@
     UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
     [scrollView setContentSize:settingsAccount.frame.size];
     [scrollView addSubview:settingsAccount];
-    [self addSubview:scrollView];
-    
-    [settingsAccount hideView : self];
+    [DEAnimationManager fadeOutWithView:self ViewToAdd:scrollView];
 }
 
 - (IBAction)hideMenu:(id)sender {
