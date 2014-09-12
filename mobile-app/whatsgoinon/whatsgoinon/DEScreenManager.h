@@ -17,8 +17,14 @@
 @property (strong, nonatomic) NSMutableDictionary *values;
 @property (strong, nonatomic) DEViewMainMenu *mainMenu;
 
+#pragma mark - Public Methods
+
 + (id)sharedManager;
 + (void) addToWindowView : (UIView *) view;
 + (void) setUpTextFields : (NSArray *) textFields;
+
+#pragma mark - Private Methods
+
+- (void) gotoNextScreen;
 
 @end

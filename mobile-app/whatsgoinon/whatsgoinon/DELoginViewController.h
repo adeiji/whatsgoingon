@@ -20,5 +20,6 @@
 #pragma mark - Button Press Methods
 
 - (IBAction)createAnAccount:(id)sender;
+- (IBAction)goBack:(id)sender;
 
 @end

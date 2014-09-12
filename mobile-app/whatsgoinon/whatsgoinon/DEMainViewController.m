@@ -99,6 +99,7 @@
 
 - (BOOL) isLoggedIn {
     DEUserManager *userManager = [DEUserManager sharedManager];
+
     
     if (![userManager isLoggedIn])
     {

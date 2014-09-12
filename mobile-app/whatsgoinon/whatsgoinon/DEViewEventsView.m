@@ -91,7 +91,7 @@
     [[_overlayView layer] setOpacity:0];
     
     // THREADING
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
 
     dispatch_async(queue, ^{
         self.lblTitle.text = post.title;
@@ -100,18 +100,22 @@
         if ([post.images count] > 0)
         {
             //Load the images on the main thread asynchronously
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                PFFile *imageFile = post.images[0];
-                NSData *imageData = [imageFile getData];
-                UIImage *image = [UIImage imageWithData:imageData];
-                self.imgMainImageView.image = image;
+            PFFile *imageFile = post.images[0];
+            NSData *imageData = [imageFile getData];
+            UIImage *image = [UIImage imageWithData:imageData];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+               self.imgMainImageView.image = image;
             });
+            
         }
         else {
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                UIImage *image = [UIImage imageNamed:@"circle-placeholder-01.png"];
+            UIImage *image = [UIImage imageNamed:@"circle-placeholder-01.png"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
                 self.imgMainImageView.image = image;
             });
+            
         }
     });
     

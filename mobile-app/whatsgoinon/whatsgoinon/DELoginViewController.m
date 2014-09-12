@@ -30,6 +30,12 @@
     [DEScreenManager setUpTextFields:_textFields];
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.view setHidden:NO];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -40,10 +46,7 @@
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    if ([self.view isKindOfClass:[DECreateAccountView class]])
-    {
-        [[self navigationController] setNavigationBarHidden:YES animated:YES];
-    }
+    [self.view setHidden:YES];
 }
 
 #pragma mark - Button Press Methods
@@ -53,9 +56,17 @@
     DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:CREATE_ACCOUNT_VIEW_CONTROLLER];
     
     [[self navigationController] pushViewController:loginViewController animated:YES];
-    [[loginViewController navigationController] setNavigationBarHidden:NO];
     
     [(DECreateAccountView *) loginViewController.view setUpView];
-    
 }
+
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)showNextScreen:(id)sender {
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    [screenManager gotoNextScreen];
+}
+
 @end

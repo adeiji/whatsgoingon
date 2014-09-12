@@ -83,8 +83,15 @@
 
 + (void) hideKeyboard
 {
-    UIViewController *navController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    [navController.view endEditing:YES];
+    UIViewController *viewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    [viewController.view endEditing:YES];
+}
+
+- (void) gotoNextScreen {
+    UINavigationController *navController = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    [navController popToRootViewControllerAnimated:NO];
+    [navController pushViewController:_nextScreen animated:YES];
 }
 
 
