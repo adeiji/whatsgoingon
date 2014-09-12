@@ -44,14 +44,16 @@
     
     CGRect frame = viewReportEvent.frame;
     
-    frame.origin.x = ([[UIScreen mainScreen] bounds].size.width - frame.size.width) / 2;
-    frame.origin.y = ([[UIScreen mainScreen] bounds].size.height - frame.size.height) / 2 - NAVIGATION_BAR_HEIGHT;
+//    frame.origin.x = ([[UIScreen mainScreen] bounds].size.width - frame.size.width) / 2;
+//    frame.origin.y = ([[UIScreen mainScreen] bounds].size.height - frame.size.height) / 2 - NAVIGATION_BAR_HEIGHT;
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
     [scrollView setAlwaysBounceVertical:YES];
     [scrollView setContentSize:CGSizeMake(frame.size.width, frame.size.height)];
     [scrollView addSubview:viewReportEvent];
-    [[[self superview] superview] addSubview:scrollView];
+    
+    [DEAnimationManager fadeOutWithView:[[self superview] superview] ViewToAdd:scrollView];
+//    [[[self superview] superview] addSubview:scrollView];
 }
 
 

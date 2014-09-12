@@ -25,6 +25,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    
 	// Do any additional setup after loading the view.
     
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
@@ -44,23 +47,12 @@
     [self displayPost];
     
     // Check to see if this is their first time going to this part of the application
-    
     // If it is their first time then show the welcome screen.
     
     
     // Otherwise go straight to the viewing of the post
-    
     // Add the gesture recognizer which will be used to show and hide the main menu view
-    
-    UISwipeGestureRecognizer *swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showOrHideMainMenu:)];
-    [swipeRightGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
-
-    [[self view] addGestureRecognizer:swipeRightGestureRecognizer];
-    
-    UISwipeGestureRecognizer *swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showOrHideMainMenu:)];
-    [swipeLeftGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft];
-    
-    [[self view] addGestureRecognizer:swipeLeftGestureRecognizer];
+    [self addGestureRecognizers];
     
     viewMainMenu = [[[NSBundle mainBundle] loadNibNamed:@"MainMenuView" owner:self options:nil] firstObject];
     [viewMainMenu setUpView];
@@ -69,6 +61,20 @@
     [self.view setBackgroundColor:[UIColor clearColor]];
     
     [self.navigationController setNavigationBarHidden:YES];
+}
+
+- (void) addGestureRecognizers
+{
+    UISwipeGestureRecognizer *swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showOrHideMainMenu:)];
+    [swipeRightGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
+    
+    [[self view] addGestureRecognizer:swipeRightGestureRecognizer];
+    
+    UISwipeGestureRecognizer *swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showOrHideMainMenu:)];
+    [swipeLeftGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft];
+    
+    [[self view] addGestureRecognizer:swipeLeftGestureRecognizer];
+
 }
 
 - (void) showMainMenu

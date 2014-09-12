@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *switchInappropriate;
 @property (weak, nonatomic) IBOutlet UISwitch *switchOther;
 @property (weak, nonatomic) IBOutlet UITextView *txtNotes;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 
 @property (strong, nonatomic) NSString *eventId;
 

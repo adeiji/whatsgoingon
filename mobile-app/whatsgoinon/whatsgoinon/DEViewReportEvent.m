@@ -23,6 +23,9 @@
 - (void) registerForKeyboardNotifications
 {
     [self.txtNotes setDelegate:self];
+    for (UIView *view in _buttons) {
+        [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)

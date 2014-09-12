@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DECreatePostViewController.h"
 #import "DEViewReportEvent.h"
+#import "DEAnimationManager.h"
 
 @interface DEEventDetailsMoreView : UIView
 
