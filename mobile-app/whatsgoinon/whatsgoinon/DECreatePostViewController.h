@@ -13,7 +13,7 @@
 #import "DEEventViewController.h"
 #import "DEAddValueViewController.h"
 
-@interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate>
 {
     int imageCounter;
     NSArray *postRanges;
@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet DECreatePostView *createPostViewOne;
 @property (weak, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;
 @property (weak, nonatomic) IBOutlet UIView *postRangeHelperView;
+@property (strong, nonatomic) UIButton *currentButton;
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;

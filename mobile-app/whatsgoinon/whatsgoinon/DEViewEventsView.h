@@ -18,8 +18,11 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgMainImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
-@property (weak, nonatomic) IBOutlet UILabel *lblSubtitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblAddress;
 @property (weak, nonatomic) IBOutlet UILabel *lblDistance;
+@property (weak, nonatomic) IBOutlet UILabel *lblSubtitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblNumGoing;
+
 @property (weak, nonatomic) DEEventsTimeline *overlayView;
 @property (strong, nonatomic) DEPost *post;
 

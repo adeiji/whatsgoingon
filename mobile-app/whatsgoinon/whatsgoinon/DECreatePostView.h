@@ -33,11 +33,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *switchUseCurrentLocation;
 @property (weak, nonatomic) IBOutlet DECameraButton *btnTakePicture;
 @property (weak, nonatomic) IBOutlet UITextField *txtQuickDescription;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
-
-@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *imageViews;
-
 @property (weak, nonatomic) IBOutlet UITextField *txtCost;
 @property (weak, nonatomic) IBOutlet UITextField *txtDescription;
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;

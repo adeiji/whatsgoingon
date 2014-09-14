@@ -24,8 +24,8 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Desert Breeze" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfb-u1-i4Q">
-                    <rect key="frame" x="29" y="223" width="101" height="14"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="101" translatesAutoresizingMaskIntoConstraints="NO" id="dfb-u1-i4Q">
+                    <rect key="frame" x="29" y="209" width="101" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -62,7 +62,7 @@
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L5I-6n-mVu" customClass="DEViewLocation">
-                    <rect key="frame" x="4" y="218" width="25" height="25"/>
+                    <rect key="frame" x="4" y="215" width="25" height="25"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -73,8 +73,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="imgMainImageView" destination="MJ0-LB-RQz" id="eGy-qr-vHd"/>
+                <outlet property="lblAddress" destination="dfb-u1-i4Q" id="jan-Bk-Q5Y"/>
                 <outlet property="lblDistance" destination="Ali-rf-U8v" id="Ohv-nv-uSm"/>
-                <outlet property="lblSubtitle" destination="dfb-u1-i4Q" id="PAb-t8-a9E"/>
+                <outlet property="lblNumGoing" destination="wIg-bV-ff8" id="R2D-OY-Oez"/>
+                <outlet property="lblSubtitle" destination="kW7-t4-DET" id="XHW-lK-SBe"/>
                 <outlet property="lblTitle" destination="Rdq-Pp-4T2" id="lYf-Hm-poA"/>
             </connections>
         </view>

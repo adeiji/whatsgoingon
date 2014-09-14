@@ -10,4 +10,10 @@
 
 @interface DECameraButton : UIButton
 
+typedef enum {
+    LARGE = 0,
+    SMALL = 1
+} ButtonType;
+
+
 @end

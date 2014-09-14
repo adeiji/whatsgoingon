@@ -22,7 +22,8 @@
                           Title : (NSString *) title
                            Cost : (NSNumber *) cost
                          Images : (NSArray *) images
-                    Description : (NSString *) description;
+                    Description : (NSString *) description
+                        Address : (NSString *) address;
 
 
 // Stores the current post when one post is being viewed, edited or created

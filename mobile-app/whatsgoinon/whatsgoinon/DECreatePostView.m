@@ -112,7 +112,7 @@
     }
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"EEEE MMMM d, YYYY"];
+    [dateFormat setDateFormat:@"MM/dd/YY"];
     activeField.text = [dateFormat stringFromDate:sender.date];
     
     NSLog(@"%@", [dateFormat stringFromDate:sender.date]);

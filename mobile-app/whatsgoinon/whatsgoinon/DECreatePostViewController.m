@@ -127,7 +127,7 @@ static BOOL DEVELOPMENT = YES;
     else {
         // Production
         _post.cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
-        _post.description = _createPostViewTwo.txtDescription.text;
+        _post.description =
         _post.title = self.createPostViewTwo.txtTitle.text;
         _post.images = _images;
     }
@@ -144,7 +144,7 @@ static BOOL DEVELOPMENT = YES;
     DELocationManager *locationManager = [DELocationManager sharedManager];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"EEEE MMMM d, YYYY HH:mm a"];
+    [dateFormatter setDateFormat:@"MM/dd/YY HH:mm a"];
     
     NSDate *startDate = [dateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtStartDate.text, _createPostViewOne.txtStartTime.text]];
 
@@ -165,7 +165,8 @@ static BOOL DEVELOPMENT = YES;
                                                       Title:nil
                                                        Cost:nil
                                                      Images:nil
-                                                Description:nil];
+                                                Description:nil
+                                                    Address:_createPostViewOne.txtAddress.text];
     
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
@@ -180,20 +181,46 @@ static BOOL DEVELOPMENT = YES;
 
 - (IBAction)takePicture:(id)sender {
     
-    if (imageCounter < 4)
+    _currentButton = (UIButton *) sender;
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        if (imageCounter < 4)
+        {
+            
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose From Photo Library", @"Take a Picture",nil];
+            
+            [actionSheet showInView:self.view];
+        }
+        else {
+        #warning - Let the user know that he's taken too many pictures
+            // let the user know that he's taken too many pictures
+        }
+    }
+    else {
+        #warning - Let the user know that they need a camera to take a photo
+    }
+}
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    
+    if (buttonIndex == 1)
     {
         // Let the user take a picture and store it
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         
         [self presentViewController:picker animated:YES completion:NULL];
     }
-    else {
-    #warning Let the user know that he's taken too many pictures
-        // let the user know that he's taken too many pictures
+    else if (buttonIndex == 0)
+    {
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:picker animated:YES completion:NULL];
     }
+    
 }
 
 - (IBAction)goHome:(id)sender {
@@ -237,16 +264,40 @@ static BOOL DEVELOPMENT = YES;
     [image drawInRect:CGRectMake(0,0,70,56)];
     UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    UIImageView  *imageView = [self.createPostViewTwo.imageViews objectAtIndex:imageCounter];
 
-    imageView.image = newImage;
     //Increment the imageCounter so that we display on the next image
     imageCounter ++;
+    [_currentButton setHighlighted:NO];
+    UIButton *button = (UIButton *) [self.view viewWithTag:imageCounter];
+    [button setHighlighted:YES];
     
     [_images addObject:UIImageJPEGRepresentation(image, .1)];
+    [_currentButton setBackgroundImage:[self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image] forState:UIControlStateNormal];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+- (UIImage *) roundImageCornersWithButton : (UIButton *) button
+                               Image : (UIImage *) image
+{
+    // Begin a new image that will be the new image with the rounded corners
+    // (here with the size of an UIImageView)
+    UIGraphicsBeginImageContextWithOptions(button.bounds.size, NO, [UIScreen mainScreen].scale);
     
+    // Add a clip before drawing anything, in the shape of an rounded rect
+    [[UIBezierPath bezierPathWithRoundedRect:button.bounds
+                                cornerRadius:20.0] addClip];
+    // Draw your image
+    [image drawInRect:button.bounds];
+    
+    // Get the image, here setting the UIImageView image
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Lets forget about that we were drawing
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 #pragma mark - Text View Delegate Methods

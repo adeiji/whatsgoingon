@@ -38,8 +38,10 @@
                            Cost:(NSNumber *)cost
                          Images:(NSArray *)images
                     Description:(NSString *)description
+                        Address:(NSString *)address
 {
     DEPost *post = [DEPost new];
+    post.address = address;
     post.category = category;
     post.startTime = startTime;
     post.endTime = endTime;

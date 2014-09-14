@@ -28,6 +28,7 @@
     post.objectId = object.objectId;
     post.comments = object[PARSE_CLASS_EVENT_COMMENTS];
     post.rating = object[PARSE_CLASS_EVENT_RATING];
+    post.address = object[PARSE_CLASS_EVENT_ADDRESS];
     
     return post;
 }
