@@ -28,7 +28,9 @@
     return self;
 }
 
-+ (void) addToWindowView : (UIView *) view {
++ (void) showCommentView {
+    
+    DEViewComment *view = [[DEViewComment alloc] init];
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     
     NSArray *subviews = [window subviews];
@@ -43,7 +45,19 @@
     
     if (!exist)
     {
-        [window addSubview:view];
+        [DEAnimationManager fadeOutWithView:[[window rootViewController] view]  ViewToAdd:view];
+    }
+}
+
++ (void) hideCommentView
+{
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+
+    for (UIView *view in [[[window rootViewController] view] subviews]) {
+        if ([view isKindOfClass:[DEViewComment class]])
+        {
+            [DEAnimationManager fadeOutRemoveView:view FromView:[[window rootViewController] view]];
+        }
     }
 }
 
@@ -55,7 +69,6 @@
         UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];
         [textField setLeftViewMode:UITextFieldViewModeAlways];
         [textField setLeftView:spacerView];
-        [textField setKeyboardAppearance:UIKeyboardAppearanceDark];
         [textField setInputAccessoryView:[self createInputAccessoryView]];
         if ([textField respondsToSelector:@selector(setAttributedPlaceholder:)])
         {

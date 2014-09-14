@@ -28,7 +28,7 @@
     [self.tableView setDataSource:self];
     [self.tableView setDelegate:self];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
-
+    
     type = myType;
     
     [self initLocationsArray];

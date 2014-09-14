@@ -41,8 +41,10 @@
     CGRect aRect = rect;
     aRect.size.height -= kbSize.height;
     if(!CGRectContainsPoint(aRect, origin)) {
-        CGPoint scrollPoint = CGPointMake(0.0, origin.y - (kbSize.height - 30));
-        [scrollView setContentOffset:scrollPoint animated:YES];
+        CGPoint scrollPoint = CGPointMake(0.0, origin.y - (kbSize.height));
+        [UIView animateWithDuration:.3 animations:^{
+           [scrollView setContentOffset:scrollPoint];
+        }];
     }
 }
 
@@ -50,9 +52,11 @@
 - (void) scrollViewToBottom : (UIScrollView *) scrollView
                Notification : (NSNotification *)aNotification
 {
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    scrollView.contentInset = contentInsets;
-    scrollView.scrollIndicatorInsets = contentInsets;
+    [UIView animateWithDuration:.2 animations:^{
+        UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+        scrollView.scrollIndicatorInsets = contentInsets;
+        scrollView.contentInset = contentInsets;
+    }];
 }
 
 

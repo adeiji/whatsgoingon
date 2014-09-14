@@ -92,6 +92,8 @@
 		F46B947219C355E500B41D8C /* DEActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B947119C355E500B41D8C /* DEActionButton.m */; };
 		F46B947619C3657900B41D8C /* email-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947519C3657900B41D8C /* email-icon.png */; };
 		F46B947819C3674E00B41D8C /* password-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947719C3674E00B41D8C /* password-icon.png */; };
+		F46B947B19C39D0600B41D8C /* thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947919C39D0600B41D8C /* thumbs-down.png */; };
+		F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947A19C39D0600B41D8C /* thumbs-up.png */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
@@ -258,6 +260,8 @@
 		F46B947119C355E500B41D8C /* DEActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEActionButton.m; sourceTree = "<group>"; };
 		F46B947519C3657900B41D8C /* email-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email-icon.png"; sourceTree = "<group>"; };
 		F46B947719C3674E00B41D8C /* password-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password-icon.png"; sourceTree = "<group>"; };
+		F46B947919C39D0600B41D8C /* thumbs-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down.png"; sourceTree = "<group>"; };
+		F46B947A19C39D0600B41D8C /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
 		F4774F881992E40C00FCDE66 /* DELocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationManager.m; sourceTree = "<group>"; };
 		F4774F8F1994398F00FCDE66 /* UDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDIDGenerator.h; path = ../../../../12WeekFitness/Resources/UDIDGenerator.h; sourceTree = "<group>"; };
@@ -847,6 +851,8 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F46B947919C39D0600B41D8C /* thumbs-down.png */,
+				F46B947A19C39D0600B41D8C /* thumbs-up.png */,
 				F46B947719C3674E00B41D8C /* password-icon.png */,
 				F46B947519C3657900B41D8C /* email-icon.png */,
 				F46B946B19C27E2C00B41D8C /* ok.png */,
@@ -978,8 +984,10 @@
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F45030A119C00F500061F362 /* HappSnap-bg.png in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
+				F46B947B19C39D0600B41D8C /* thumbs-down.png in Resources */,
 				F46B946D19C27E2C00B41D8C /* ok.png in Resources */,
 				F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */,
+				F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */,
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,

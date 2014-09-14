@@ -11,6 +11,7 @@
 #import "DEViewChangeCity.h"
 #import "DESettingsAccount.h"
 #import "DEAnimationManager.h"
+#import "DEScreenManager.h"
 
 @interface DEViewMainMenu : UIView
 

@@ -24,6 +24,12 @@
         
         comment = [options objectAtIndex:[_pickerView selectedRowInComponent:0]];
         ratingChange = 0;
+        
+        for (UIView *view in _buttons) {
+            [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        }
+        
+        [[_txtComment layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     }
     
     return self;
@@ -37,6 +43,21 @@
 - (NSString *) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     return [options objectAtIndex:row];
+}
+
+- (UIView *) pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    
+    UIView *myView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, pickerView.frame.size.width, 50.0f)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(myView.center.x - 35, myView.center.y - 25, 200, 50)];
+    
+    [label setFont:[UIFont fontWithName:@"Avenir Roman" size:14.0f]];
+    [label setTextColor:[UIColor whiteColor]];
+    
+    [label setText:@"Yo Mama"];
+    [myView addSubview:label];
+    
+    return myView;
 }
 
 - (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
@@ -77,15 +98,20 @@
 }
 
 - (IBAction)cancel:(id)sender {
-    [self removeFromSuperview];
+    [DEScreenManager hideCommentView];
 }
 
-- (IBAction)thumbsUp:(id)sender {
+- (IBAction)thumbsUp:(UIButton *)sender {
     ratingChange = 5;
     [_lblPromptEntry setHidden:YES];
+    
+    [[sender layer] setBorderColor:[UIColor colorWithRed:0.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0].CGColor];
+    [[sender layer] setBorderWidth:1.5f];
+    [[sender layer] setCornerRadius:5.0f];
+    
 }
 
-- (IBAction)thumbsDown:(id)sender {
+- (IBAction)thumbsDown:(UIButton *)sender {
     ratingChange = -5;
     [_lblPromptEntry setHidden:YES];
 }

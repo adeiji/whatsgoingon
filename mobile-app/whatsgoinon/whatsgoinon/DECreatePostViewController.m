@@ -39,14 +39,6 @@ static BOOL DEVELOPMENT = YES;
     UIPickerView *postRangePickerView = [UIPickerView new];
     [postRangePickerView setDelegate:self];
     [postRangePickerView setDataSource:self];
-    
-    UIToolbar *toolBar= [[UIToolbar alloc] initWithFrame:CGRectMake(0,0,320,44)];
-    [toolBar setBarStyle:UIBarStyleDefault];
-    UIBarButtonItem *barButtonDone = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                      style:UIBarButtonItemStyleBordered target:self action:@selector(selectPostRange)];
-    toolBar.items = [[NSArray alloc] initWithObjects:barButtonDone,nil];
-    barButtonDone.tintColor=[UIColor blackColor];
-    [postRangePickerView addSubview:toolBar];
     [_createPostViewOne.txtPostRange setInputView:postRangePickerView];
     
     postRanges = @[@"1 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius"];
@@ -199,6 +191,7 @@ static BOOL DEVELOPMENT = YES;
         [self presentViewController:picker animated:YES completion:NULL];
     }
     else {
+    #warning Let the user know that he's taken too many pictures
         // let the user know that he's taken too many pictures
     }
 }
@@ -231,6 +224,7 @@ static BOOL DEVELOPMENT = YES;
     NSRange range = [[postRanges objectAtIndex:row] rangeOfString:@" "];
     _createPostViewOne.txtPostRange.text = [NSString stringWithFormat:@"%@ mi", [[postRanges objectAtIndex:row] substringToIndex:range.location] ];
 }
+
 
 #pragma mark - ImagePickerControllerDelegate Methods
 

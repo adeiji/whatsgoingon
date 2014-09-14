@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DEViewComment.h"
+#import "DEAnimationManager.h"
 
 @class DEViewMainMenu;
 
@@ -20,7 +22,8 @@
 #pragma mark - Public Methods
 
 + (id)sharedManager;
-+ (void) addToWindowView : (UIView *) view;
++ (void) showCommentView;
++ (void) hideCommentView;
 + (void) setUpTextFields : (NSArray *) textFields;
 
 #pragma mark - Private Methods

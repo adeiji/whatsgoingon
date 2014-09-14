@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UILabel *lblPromptEntry;
 @property (strong, nonatomic) DEPost *post;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+@property (weak, nonatomic) IBOutlet UITextView *txtComment;
 
 - (IBAction)submitComment:(id)sender;
 - (IBAction)cancel:(id)sender;

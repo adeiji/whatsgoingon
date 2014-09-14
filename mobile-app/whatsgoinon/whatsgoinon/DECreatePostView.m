@@ -59,8 +59,8 @@
 - (void) registerForKeyboardNotifications
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
@@ -68,7 +68,7 @@
                                                object:nil];
 }
 
-- (void) keyboardWasShown : (NSNotification *) aNotification {
+- (void) keyboardWillShow : (NSNotification *) aNotification {
     [self scrollViewToTopOfKeyboard:_scrollView Notification:aNotification View:self TextFieldOrView:activeField];
 }
 

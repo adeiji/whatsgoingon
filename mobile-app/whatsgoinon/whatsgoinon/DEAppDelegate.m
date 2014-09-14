@@ -41,6 +41,8 @@
     
     [window addSubview:blurredImageView];
     
+    [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
+
     return YES;
 }
 							
