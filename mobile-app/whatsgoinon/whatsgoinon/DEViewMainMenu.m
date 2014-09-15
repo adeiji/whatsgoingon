@@ -17,7 +17,7 @@
     [DEScreenManager setUpTextFields:array];
     
     for (UIView *view in _viewCollection) {
-        UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 1, view.frame.size.width, 1)];
+        UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - 1, view.frame.size.width, .5)];
         [bottomBorder setBackgroundColor:[UIColor whiteColor]];
         [view addSubview:bottomBorder];
     }

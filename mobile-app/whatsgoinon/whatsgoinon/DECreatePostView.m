@@ -152,12 +152,10 @@
     else if ([textField isEqual:_txtAddress])
     {
         DEViewChangeCity *viewPostAddress = [[DEViewChangeCity alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+        [DEAnimationManager fadeOutWithView:self ViewToAdd:viewPostAddress];
         [viewPostAddress setUpViewWithType:PLACES_API_DATA_RESULT_TYPE_GEOCODE];
 
         [activeField resignFirstResponder];
-        [self addSubview:viewPostAddress];
-        
-        viewPostAddress.hidden = NO;
     }
 }
 

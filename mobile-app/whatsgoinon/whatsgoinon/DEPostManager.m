@@ -24,7 +24,8 @@
 
 - (id)init {
     if (self = [super init]) {
-     
+        #warning - This needs to be stored to memory before closing
+        _goingPost = [NSMutableArray new];
     }
     return self;
 }

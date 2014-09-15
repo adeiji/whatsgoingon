@@ -39,7 +39,6 @@
 }
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-
     [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];
 }
 
@@ -91,8 +90,7 @@
 {
     // Set the lat/long values to whatever was selected and then reload the post age with the necessary post that correspond to the city that was just selected
     _selection = [locations objectAtIndex:indexPath.row];
-    [self removeFromSuperview];
-    
+    [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];    
 }
 
 @end

@@ -185,7 +185,7 @@
 
             for (int i = 1; i < [terms count] -1; i ++)
             {
-                location = [NSString stringWithFormat:@"%@ %@", location, terms[i][@"value"]];
+               // location = [NSString stringWithFormat:@"%@ %@", location, terms[i][@"value"]];
             }
             
             [values addObject:location];

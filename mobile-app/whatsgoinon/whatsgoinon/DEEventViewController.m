@@ -167,26 +167,24 @@
 - (IBAction)setEventAsGoing:(id)sender {
     
     static BOOL going = NO;
+    DEPostManager *postManager = [DEPostManager sharedManager];
     
-    if (!going)
+    if ( ![[postManager goingPost] containsObject:_post] )
     {
-        DEPostManager *postManager = [DEPostManager new];
-        
         int numGoing = [_post.numberGoing intValue];
         numGoing ++;
         _post.numberGoing = [NSNumber numberWithInt:numGoing];
         NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
-        
         [[postManager goingPost] addObject:_post];
-        
         [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
-        
         [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
-        // Set this back to zero so that the user cannot keep saying they're going
-        
         [DEAnimationManager savedAnimationWithView];
         
         going = YES;
+        
+        
+        DEEventDetailsView *eventView = (DEEventDetailsView *) _eventView.detailsView.subviews[0];
+        [[eventView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
     }
     
 }
