@@ -220,6 +220,7 @@ static BOOL DEVELOPMENT = YES;
     else if (buttonIndex == 0)
     {
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.delegate = self;
         [self presentViewController:picker animated:YES completion:NULL];
     }
     
@@ -278,6 +279,8 @@ static BOOL DEVELOPMENT = YES;
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
+
+
 
 
 - (UIImage *) roundImageCornersWithButton : (UIButton *) button
