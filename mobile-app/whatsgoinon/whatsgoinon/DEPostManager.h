@@ -26,6 +26,10 @@
                         Address : (NSString *) address
                    QuickDescription : (NSString *) quickDescription;
 
++ (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post;
++ (BOOL) isBeforeEvent : (DEPost *) post;
++ (NSNumber *) getDurationOfEvent : (DEPost *) event;
+
 
 // Stores the current post when one post is being viewed, edited or created
 @property (strong, nonatomic) DEPost *currentPost;

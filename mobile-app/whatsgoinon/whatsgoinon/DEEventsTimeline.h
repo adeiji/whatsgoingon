@@ -10,4 +10,8 @@
 
 @interface DEEventsTimeline : UIView
 
+@property (weak, nonatomic) IBOutlet UILabel *lblTimeUntilStartsOrEnds;
+@property (weak, nonatomic) IBOutlet UILabel *lblEndsInStartsIn;
+@property (weak, nonatomic) IBOutlet UILabel *lblDuration;
+
 @end

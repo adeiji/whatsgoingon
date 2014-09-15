@@ -58,6 +58,58 @@
     return post;
 }
 
++ (BOOL) isBeforeEvent : (DEPost *) post
+{
+    // Has already started
+    if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending)
+    {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+    return nil;
+}
+
++ (NSNumber *) getDurationOfEvent : (DEPost *) event
+{
+    NSTimeInterval secondsOfEvent = [[event endTime] timeIntervalSinceDate:[event startTime]];
+    
+    NSNumber *hours = [NSNumber numberWithDouble:secondsOfEvent / 3600];
+    
+    return hours;
+}
+
++ (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post
+{
+    // Event has already started
+    if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending)
+    {
+        // Get the amount of seconds until the end of the event
+        NSTimeInterval distanceBetweenDates = [[post endTime] timeIntervalSinceDate:[NSDate date]];
+        return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
+    }
+    else
+    {
+        // Get the amount of seconds until the end of the event
+        NSTimeInterval distanceBetweenDates = [[post startTime] timeIntervalSinceDate:[NSDate date]];
+        return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
+    }
+    return nil;
+}
+
+
++ (NSString *) convertToHoursAndMinutesFromSeconds : (NSTimeInterval) seconds
+{
+    NSInteger secondsInMinute = 60;
+    NSInteger minutesUntilEnd = seconds / secondsInMinute;
+    
+    NSInteger hours = minutesUntilEnd / 60;
+    NSInteger minutes = minutesUntilEnd % 60;
+    
+    return [NSString stringWithFormat:@"%ld:%02ld", (long)hours, (long)minutes];
+}
 
 
 @end

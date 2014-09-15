@@ -107,39 +107,19 @@
     [[detailsView txtDescription] setText:_post.description];
     [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
     [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
-    [[detailsView lblTimeUntilStartsOrEnds] setText:[self getTimeLeft : detailsView]];
-}
-
-- (NSString *) getTimeLeft : (DEEventDetailsView *) view
-{
-    // Event has already started
-    if ([[_post startTime] compare:[NSDate date]] == NSOrderedAscending)
+    
+    if ([DEPostManager isBeforeEvent:_post])
     {
-        // Get the amount of seconds until the end of the event
-        NSTimeInterval distanceBetweenDates = [[_post endTime] timeIntervalSinceDate:[NSDate date]];
-        view.lblEndsInStartsIn.text = @"Ends In";
-        return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
+        [[detailsView lblEndsInStartsIn] setText:@"Starts In"];
     }
     else
     {
-        // Get the amount of seconds until the end of the event
-        NSTimeInterval distanceBetweenDates = [[_post startTime] timeIntervalSinceDate:[NSDate date]];
-        view.lblEndsInStartsIn.text = @"Starts In";
-        return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
+        [[detailsView lblEndsInStartsIn] setText:@"Ends In"];
     }
-    return nil;
+    
+    [[detailsView lblTimeUntilStartsOrEnds] setText:[DEPostManager getTimeUntilStartOrFinishFromPost:_post]];
 }
 
-- (NSString *) convertToHoursAndMinutesFromSeconds : (NSTimeInterval) seconds
-{
-    NSInteger secondsInMinute = 60;
-    NSInteger minutesUntilEnd = seconds / secondsInMinute;
-    
-    NSInteger hours = minutesUntilEnd / 60;
-    NSInteger minutes = minutesUntilEnd % 60;
-    
-    return [NSString stringWithFormat:@"%ld:%ld", (long)hours, (long)minutes];
-}
 
 - (IBAction)showEventComments:(id)sender
 {

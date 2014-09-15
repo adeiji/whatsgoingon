@@ -23,6 +23,28 @@
     return self;
 }
 
+- (void) setUpOverlayViewWithSuperview : (DEViewEventsView *) eventView
+{
+    if ([DEPostManager isBeforeEvent:eventView.post])
+    {
+        [[eventView.overlayView lblEndsInStartsIn] setText:@"Starts In"];
+        [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
+        NSNumber *hours = [DEPostManager getDurationOfEvent:eventView.post];
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        [formatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+        
+        NSString *timeString = [NSString stringWithFormat:@"Duration: %@ hr(s)", [formatter stringFromNumber:hours]];
+        
+        [[eventView.overlayView lblDuration] setText:timeString];
+    }
+    else
+    {
+        [[eventView.overlayView lblEndsInStartsIn] setText:@"Ends In"];
+        [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0f]];
+    }
+    
+    [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post]];
+}
 
 - (void) showOverlayView : (UILongPressGestureRecognizer *) sender {
     
@@ -37,7 +59,8 @@
             if ([view isKindOfClass:[DEEventsTimeline class]])
             {
                 DEEventsTimeline *overlayView = (DEEventsTimeline *) view;
-                
+                [self setUpOverlayViewWithSuperview:(DEViewEventsView *)[overlayView superview]];
+
                 if (sender.state == UIGestureRecognizerStateBegan)
                 {
                     if (!overlayDisplayed)
@@ -94,7 +117,7 @@
     [self addGestureRecognizers];
     
     _overlayView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:OVERLAY_VIEW];
-    [_overlayView setFrame:CGRectMake(0, 0, 140, 216)];
+    [_overlayView setFrame:CGRectMake(0, 0, 140, 140)];
     [self addSubview:_overlayView];
     [[_overlayView layer] setOpacity:0];
     
