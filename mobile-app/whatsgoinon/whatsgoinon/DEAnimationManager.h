@@ -15,5 +15,6 @@
 
 + (void) fadeOutRemoveView : (UIView *) view
                   FromView : (UIView *) superview;
++ (void) savedAnimationWithView;
 
 @end

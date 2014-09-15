@@ -33,8 +33,4 @@
 
 - (void) loadMapViewWithLocation : (PFGeoPoint *) location;
 
-- (IBAction)setEventAsGoing:(id)sender;
-- (IBAction)setEventAsMaybeGoing:(id)sender;
-
-
 @end

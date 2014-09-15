@@ -94,6 +94,7 @@
 		F46B947819C3674E00B41D8C /* password-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947719C3674E00B41D8C /* password-icon.png */; };
 		F46B947B19C39D0600B41D8C /* thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947919C39D0600B41D8C /* thumbs-down.png */; };
 		F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947A19C39D0600B41D8C /* thumbs-up.png */; };
+		F46B948019C769E200B41D8C /* going-indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947F19C769E200B41D8C /* going-indicator.png */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
@@ -262,6 +263,7 @@
 		F46B947719C3674E00B41D8C /* password-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password-icon.png"; sourceTree = "<group>"; };
 		F46B947919C39D0600B41D8C /* thumbs-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down.png"; sourceTree = "<group>"; };
 		F46B947A19C39D0600B41D8C /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
+		F46B947F19C769E200B41D8C /* going-indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "going-indicator.png"; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
 		F4774F881992E40C00FCDE66 /* DELocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationManager.m; sourceTree = "<group>"; };
 		F4774F8F1994398F00FCDE66 /* UDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDIDGenerator.h; path = ../../../../12WeekFitness/Resources/UDIDGenerator.h; sourceTree = "<group>"; };
@@ -851,6 +853,7 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F46B947F19C769E200B41D8C /* going-indicator.png */,
 				F46B947919C39D0600B41D8C /* thumbs-down.png */,
 				F46B947A19C39D0600B41D8C /* thumbs-up.png */,
 				F46B947719C3674E00B41D8C /* password-icon.png */,
@@ -990,6 +993,7 @@
 				F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */,
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
+				F46B948019C769E200B41D8C /* going-indicator.png in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,
 				F46B945919C2508F00B41D8C /* Comment-Feedback icon.png in Resources */,
 				F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */,

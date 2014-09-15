@@ -7,6 +7,7 @@
 //
 
 #import "DEEventViewController.h"
+#import "Constants.h"
 
 @interface DEEventViewController ()
 
@@ -105,9 +106,41 @@
     
     [[detailsView txtDescription] setText:_post.description];
     [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
-    [[detailsView lblNumberGoing] setText:@"0"];
-    [[detailsView lblTimeUntilStartsOrEnds] setText:@"3"];
+    [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
+    [[detailsView lblTimeUntilStartsOrEnds] setText:[self getTimeLeft : detailsView]];
 }
+
+- (NSString *) getTimeLeft : (DEEventDetailsView *) view
+{
+    // Event has already started
+    if ([[_post startTime] compare:[NSDate date]] == NSOrderedAscending)
+    {
+        // Get the amount of seconds until the end of the event
+        NSTimeInterval distanceBetweenDates = [[_post endTime] timeIntervalSinceDate:[NSDate date]];
+        view.lblEndsInStartsIn.text = @"Ends In";
+        return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
+    }
+    else
+    {
+        // Get the amount of seconds until the end of the event
+        NSTimeInterval distanceBetweenDates = [[_post startTime] timeIntervalSinceDate:[NSDate date]];
+        view.lblEndsInStartsIn.text = @"Starts In";
+        return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
+    }
+    return nil;
+}
+
+- (NSString *) convertToHoursAndMinutesFromSeconds : (NSTimeInterval) seconds
+{
+    NSInteger secondsInMinute = 60;
+    NSInteger minutesUntilEnd = seconds / secondsInMinute;
+    
+    NSInteger hours = minutesUntilEnd / 60;
+    NSInteger minutes = minutesUntilEnd % 60;
+    
+    return [NSString stringWithFormat:@"%ld:%ld", (long)hours, (long)minutes];
+}
+
 - (IBAction)showEventComments:(id)sender
 {
     [self showView:[_eventDetailsViewController viewNoComments]];
@@ -151,6 +184,36 @@
     }
 }
 
+- (IBAction)setEventAsGoing:(id)sender {
+    
+    static BOOL going = NO;
+    
+    if (!going)
+    {
+        DEPostManager *postManager = [DEPostManager new];
+        
+        int numGoing = [_post.numberGoing intValue];
+        numGoing ++;
+        _post.numberGoing = [NSNumber numberWithInt:numGoing];
+        NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
+        
+        [[postManager goingPost] addObject:_post];
+        
+        [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
+        
+        [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
+        // Set this back to zero so that the user cannot keep saying they're going
+        
+        [DEAnimationManager savedAnimationWithView];
+        
+        going = YES;
+    }
+    
+}
+- (IBAction)setEventAsMaybeGoing:(id)sender {
+    DEPostManager *postManager = [DEPostManager new];
+    [[postManager maybeGoingPost] addObject:_post];
+}
 
 
 @end

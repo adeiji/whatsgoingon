@@ -15,13 +15,15 @@
 #import "DEEventDetailsMoreView.h"
 #import "DEMapViewController.h"
 #import "DESharingView.h"
+#import "DEViewEventsView.h"
 
-@class DEPost, DEEventView;
+@class DEPost, DEViewEventsView;
 
 @interface DEEventViewController : UIViewController
 
 @property BOOL isPreview;
 @property (strong, nonatomic) DEPost *post;
+@property (strong, nonatomic) DEViewEventsView *viewEventView;
 @property (strong, nonatomic) IBOutlet DEEventView *eventView;
 @property (strong, nonatomic) DEEventDetailsViewController *eventDetailsViewController;
 @property (weak, nonatomic) IBOutlet UIButton *btnPost;

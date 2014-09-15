@@ -7,6 +7,7 @@
 //
 
 #import "DEEventView.h"
+#import "Constants.h"
 
 @implementation DEEventView
 
@@ -34,18 +35,6 @@
     marker.position = CLLocationCoordinate2DMake(location.latitude, location.longitude);
     marker.map = _viewMapView;
     
-}
-
-- (IBAction)setEventAsGoing:(id)sender
-{
-    DEPostManager *postManager = [DEPostManager new];
-    [[postManager goingPost] addObject:_post];
-}
-
-- (IBAction)setEventAsMaybeGoing:(id)sender
-{
-    DEPostManager *postManager = [DEPostManager new];
-    [[postManager maybeGoingPost] addObject:_post];
 }
 
 @end

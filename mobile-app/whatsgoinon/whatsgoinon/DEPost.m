@@ -30,6 +30,7 @@
     post.rating = object[PARSE_CLASS_EVENT_RATING];
     post.address = object[PARSE_CLASS_EVENT_ADDRESS];
     post.quickDescription = object[PARSE_CLASS_EVENT_QUICK_DESCRIPTION];
+    post.numberGoing = object[PARSE_CLASS_EVENT_NUMBER_GOING];
     
     return post;
 }

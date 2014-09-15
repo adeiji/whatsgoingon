@@ -24,7 +24,7 @@
                          Images : (NSArray *) images
                     Description : (NSString *) description
                         Address : (NSString *) address
-               QuickDescription : (NSString *) quickDescription;
+                   QuickDescription : (NSString *) quickDescription;
 
 
 // Stores the current post when one post is being viewed, edited or created

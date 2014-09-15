@@ -26,6 +26,7 @@
 @property (strong, nonatomic) NSArray *comments;
 @property (strong, nonatomic) NSNumber *rating;
 @property (strong, nonatomic) NSString *quickDescription;
+@property (strong, nonatomic) NSNumber *numberGoing;
 
 @property BOOL active;
 

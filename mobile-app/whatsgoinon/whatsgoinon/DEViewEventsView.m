@@ -85,7 +85,6 @@
     tapGestureRecognizer.numberOfTapsRequired = 2;
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
-
 }
 
 - (void) renderViewWithPost : (DEPost *) myPost {
@@ -106,22 +105,25 @@
         self.lblTitle.text = post.title;
         self.lblAddress.text = post.address;
         self.lblSubtitle.text = post.quickDescription;
-        
+        [self.imgMainImageView setAlpha:0.0];
+        self.lblNumGoing.text = [NSString stringWithFormat:@"%@", post.numberGoing];
         if ([post.images count] > 0)
         {
             //Load the images on the main thread asynchronously
             PFFile *imageFile = post.images[0];
             NSData *imageData = [imageFile getData];
-            UIImage *image = [UIImage imageWithData:imageData];
 
             dispatch_async(dispatch_get_main_queue(), ^{
-               self.imgMainImageView.image = image;
+                UIImage *image = [UIImage imageWithData:imageData];
+                self.imgMainImageView.image = image;
+                [UIView animateWithDuration:0.7f animations:^{
+                    [self.imgMainImageView setAlpha:1.0f];
+                }];
             });
         
         }
         else {
             UIImage *image = [UIImage imageNamed:@"circle-placeholder-01.png"];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.imgMainImageView.image = image;
             });
@@ -141,6 +143,7 @@
     DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateInitialViewController];
     eventViewController.post = _post;
     eventViewController.isPreview = NO;
+    eventViewController.viewEventView = self;
     [navigationController pushViewController:eventViewController animated:YES];
 }
 

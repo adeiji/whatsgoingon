@@ -53,6 +53,7 @@
     post.images = images;
     post.description = description;
     post.quickDescription = quickDescription;
+    post.numberGoing = [NSNumber numberWithInt:0];
     
     return post;
 }

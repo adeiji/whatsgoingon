@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblCost;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumberGoing;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeUntilStartsOrEnds;
+@property (weak, nonatomic) IBOutlet UILabel *lblEndsInStartsIn;
 
 @end

@@ -82,6 +82,7 @@
     postObject[PARSE_CLASS_EVENT_LOCATION] = post.location;
     postObject[PARSE_CLASS_EVENT_IMAGES] = [self getImagesArrayWithArray:post.images];
     postObject[PARSE_CLASS_EVENT_QUICK_DESCRIPTION] = post.quickDescription;
+    postObject[PARSE_CLASS_EVENT_NUMBER_GOING] = post.numberGoing;
     
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

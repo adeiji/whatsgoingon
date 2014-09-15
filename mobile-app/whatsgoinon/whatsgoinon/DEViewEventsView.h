@@ -27,5 +27,5 @@
 @property (strong, nonatomic) DEPost *post;
 
 - (void) renderViewWithPost : (DEPost *) post;
-
+- (void) refreshView;
 @end
