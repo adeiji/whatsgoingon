@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSString *objectId;
 @property (strong, nonatomic) NSArray *comments;
 @property (strong, nonatomic) NSNumber *rating;
+@property (strong, nonatomic) NSString *quickDescription;
 
 @property BOOL active;
 

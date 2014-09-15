@@ -24,7 +24,7 @@ NSString *const PARSE_CLASS_EVENT_IMAGES = @"images";
 NSString *const PARSE_CLASS_EVENT_OBJECT_ID = @"ObjectId";
 NSString *const PARSE_CLASS_EVENT_COMMENTS = @"comments";
 NSString *const PARSE_CLASS_EVENT_RATING = @"rating";
-
+NSString *const PARSE_CLASS_EVENT_QUICK_DESCRIPTION = @"quickDescription";
 NSString *const PARSE_CLASS_NAME_REPORT = @"Report";
 NSString *const REPORT_VULGAR_OR_ABUSIVE_LANGUAGE = @"Vulgar or Abusive Language";
 NSString *const REPORT_CRUDE_CONTENT = @"Crude Content";

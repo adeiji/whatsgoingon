@@ -67,6 +67,7 @@
 }
 
 + (BOOL) savePost : (DEPost *) post {
+    DEPostManager *sharedManager = [DEPostManager sharedManager];
     PFObject *postObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_EVENT];
     
     postObject[PARSE_CLASS_EVENT_TITLE] = post.title;
@@ -80,13 +81,17 @@
     postObject[PARSE_CLASS_EVENT_POST_RANGE] = post.postRange;
     postObject[PARSE_CLASS_EVENT_LOCATION] = post.location;
     postObject[PARSE_CLASS_EVENT_IMAGES] = [self getImagesArrayWithArray:post.images];
+    postObject[PARSE_CLASS_EVENT_QUICK_DESCRIPTION] = post.quickDescription;
     
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded)
         {
             NSLog(@"Post Saved to Parse Server");
-            [self getAllValues];
+            NSMutableArray *array = [NSMutableArray arrayWithArray : [sharedManager posts]];
+            [array addObject:postObject];
+            
+            [sharedManager setPosts:array];
         }
     }];
     

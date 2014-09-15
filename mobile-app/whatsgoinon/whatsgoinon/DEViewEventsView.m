@@ -68,14 +68,14 @@
 - (void) displayDistanceToLocationWithPost : (DEPost *) post
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
-    
+    [DELocationManager getDistanceInMilesBetweenLocation:post.location LocationTwo:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
+        self.lblDistance.text = value;
+    }];
 }
 
 
-- (void) renderViewWithPost : (DEPost *) myPost {
-    
-    __block DEPost *post = myPost;
-    
+- (void) addGestureRecognizers
+{
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showOverlayView:)];
     longPressGestureRecognizer.minimumPressDuration = .2;
     longPressGestureRecognizer.delegate = self;
@@ -85,6 +85,14 @@
     tapGestureRecognizer.numberOfTapsRequired = 2;
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
+
+}
+
+- (void) renderViewWithPost : (DEPost *) myPost {
+    
+    __block DEPost *post = myPost;
+    
+    [self addGestureRecognizers];
     
     _overlayView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:OVERLAY_VIEW];
     [_overlayView setFrame:CGRectMake(0, 0, 140, 216)];
@@ -97,6 +105,7 @@
     dispatch_async(queue, ^{
         self.lblTitle.text = post.title;
         self.lblAddress.text = post.address;
+        self.lblSubtitle.text = post.quickDescription;
         
         if ([post.images count] > 0)
         {
@@ -108,7 +117,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                self.imgMainImageView.image = image;
             });
-            
+        
         }
         else {
             UIImage *image = [UIImage imageNamed:@"circle-placeholder-01.png"];

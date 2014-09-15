@@ -39,6 +39,7 @@
                          Images:(NSArray *)images
                     Description:(NSString *)description
                         Address:(NSString *)address
+               QuickDescription:(NSString *)quickDescription
 {
     DEPost *post = [DEPost new];
     post.address = address;
@@ -51,7 +52,7 @@
     post.cost = cost;
     post.images = images;
     post.description = description;
-
+    post.quickDescription = quickDescription;
     
     return post;
 }

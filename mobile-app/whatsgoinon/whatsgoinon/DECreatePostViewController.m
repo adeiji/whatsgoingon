@@ -123,6 +123,7 @@ static BOOL DEVELOPMENT = YES;
         _post.description = view.txtDescription.text;
         _post.active = YES;
         _post.location = sharedManager.storedLocation;
+        _post.quickDescription = view.txtQuickDescription.text;
     }
     else {
         // Production
@@ -168,7 +169,8 @@ static BOOL DEVELOPMENT = YES;
                                                        Cost:nil
                                                      Images:nil
                                                 Description:nil
-                                                    Address:_createPostViewOne.txtAddress.text];
+                                                    Address:_createPostViewOne.txtAddress.text
+                                           QuickDescription:nil];
     
     
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
