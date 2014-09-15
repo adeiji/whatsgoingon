@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DEPost.h"
 
 @interface DEEventDetailsView : UIView
 @property (weak, nonatomic) IBOutlet UITextView *txtDescription;

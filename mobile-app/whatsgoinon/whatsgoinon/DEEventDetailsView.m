@@ -19,4 +19,20 @@
     return self;
 }
 
+- (void) loadView : (DEPost *) post
+{
+    // Event has already started
+    if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending)
+    {
+        NSTimeInterval distanceBetweenDates = [[post startTime] timeIntervalSinceDate:[NSDate date]];
+        
+        NSInteger secondsInMinute = 60;
+        NSInteger minutesUntilEnd = distanceBetweenDates / secondsInMinute;
+        
+    }
+    else    // Event has not started
+    {
+        
+    }
+}
 @end

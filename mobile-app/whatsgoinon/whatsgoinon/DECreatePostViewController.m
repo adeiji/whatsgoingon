@@ -144,11 +144,13 @@ static BOOL DEVELOPMENT = YES;
     DELocationManager *locationManager = [DELocationManager sharedManager];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/YY HH:mm a"];
+    [dateFormatter setDateFormat:@"MM/d/yy h:mm a"];
     
-    NSDate *startDate = [dateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtStartDate.text, _createPostViewOne.txtStartTime.text]];
+    NSString *startDateString = [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtStartDate.text, _createPostViewOne.txtStartTime.text];
+    NSDate *startDate = [dateFormatter dateFromString: startDateString];
 
-    NSDate *endDate = [dateFormatter dateFromString: [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtEndDate.text, _createPostViewOne.txtEndTime.text]];
+    NSString *endDateString = [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtEndDate.text, _createPostViewOne.txtEndTime.text];
+    NSDate *endDate = [dateFormatter dateFromString: endDateString];
     
     NSLog(@"Captured Date %@", [startDate description]);
     
