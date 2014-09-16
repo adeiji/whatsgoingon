@@ -31,6 +31,7 @@
     post.address = object[PARSE_CLASS_EVENT_ADDRESS];
     post.quickDescription = object[PARSE_CLASS_EVENT_QUICK_DESCRIPTION];
     post.numberGoing = object[PARSE_CLASS_EVENT_NUMBER_GOING];
+    post.comments = object[PARSE_CLASS_EVENT_COMMENTS];
     
     return post;
 }

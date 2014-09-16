@@ -138,6 +138,7 @@ static float deltaAngle;
     myCarousel.dataSource = self;
     myCarousel.decelerationRate = .98f;
     myCarousel.centerItemWhenSelected = YES;
+    myCarousel.ignorePerpendicularSwipes = NO;
     [myCarousel reloadData];
     
     [self addSubview:myCarousel];

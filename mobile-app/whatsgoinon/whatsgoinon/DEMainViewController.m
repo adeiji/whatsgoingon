@@ -36,9 +36,7 @@
     
     for (UIView *button in self.buttons) {
         [button.layer setCornerRadius:6.0f];
-    }
-    
-//    [DEScreenManager showCommentView];
+    }    
 }
 
 - (void) viewWillDisappear:(BOOL)animated

@@ -25,6 +25,7 @@
 + (void) showCommentView;
 + (void) hideCommentView;
 + (void) setUpTextFields : (NSArray *) textFields;
++ (UIView *) createInputAccessoryView;
 
 #pragma mark - Private Methods
 

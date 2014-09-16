@@ -11,6 +11,10 @@
 
 @implementation DEViewComment
 
+#define AWESOME 0
+#define MEH 1
+#define SUCKS 2
+
 - (id) init {
     self = [super init];
     
@@ -29,7 +33,18 @@
             [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
         }
         
+        for (UIView *view in _commentButtons) {
+            [[view layer] setCornerRadius:view.frame.size.height / 2];
+            [[view layer] setBorderColor:[UIColor whiteColor].CGColor];
+            [[view layer] setBorderWidth:1.5f];
+        }
+        [_txtComment setInputAccessoryView:[DEScreenManager createInputAccessoryView]];
         [[_txtComment layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        [_txtComment setDelegate:self];
+        [[_txtComment layer] setBorderColor:[UIColor whiteColor].CGColor];
+        [[_txtComment layer] setBorderWidth:1.5f];
+        [self registerForKeyboardNotifications];
+        ratingChange = 0;
     }
     
     return self;
@@ -73,7 +88,7 @@
 
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    comment = [options objectAtIndex:row];
+     //[comment appendString:[options objectAtIndex:row]];
 }
 
 - (IBAction)submitComment:(id)sender {
@@ -82,7 +97,7 @@
     if (ratingChange != 0)
     {
         NSMutableArray *comments = [NSMutableArray arrayWithArray:_post.comments];
-        [comments addObject:comment];
+        [comments addObject:_txtComment.text];
         NSNumber *rating = _post.rating;
         rating = [NSNumber numberWithInteger:rating.integerValue + ratingChange ];
         _post.rating = rating;
@@ -90,10 +105,28 @@
         
         [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
         
-        [self removeFromSuperview];
+        [DEScreenManager hideCommentView];
     }
     else {
         [_lblPromptEntry setHidden:NO];
+    }
+}
+
+
+- (IBAction)setComment:(UIButton *)sender {
+    
+    switch (sender.tag) {
+        case AWESOME:
+            _txtComment.text = @"Awesome!";
+            break;
+        case MEH:
+            _txtComment.text = @"Meh...";
+            break;
+        case SUCKS:
+            _txtComment.text = @"Sucks!";
+            break;
+        default:
+            break;
     }
 }
 
@@ -114,6 +147,35 @@
 - (IBAction)thumbsDown:(UIButton *)sender {
     ratingChange = -5;
     [_lblPromptEntry setHidden:YES];
+}
+
+#pragma mark - Keyboard Methods
+- (void) removeFromSuperview
+{
+    [super removeFromSuperview];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void) registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void) keyboardWillShow : (NSNotification *) aNotification {
+    [self scrollViewToTopOfKeyboard:(UIScrollView *)[self superview] Notification:aNotification View:self TextFieldOrView:_txtComment];
+}
+
+- (void) keyboardWillBeHidden : (NSNotification *) aNotification {
+    [self scrollViewToBottom:(UIScrollView *)[self superview] Notification:aNotification];
 }
 
 @end

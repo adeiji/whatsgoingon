@@ -31,8 +31,13 @@
 + (void) showCommentView {
     
     DEViewComment *view = [[DEViewComment alloc] init];
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    DEPostManager *postManager = [DEPostManager sharedManager];
+    DEPost *post = [DEPost getPostFromPFObject:[postManager posts][0]];
+    [view setPost:post];
     
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:window.bounds];
+    [scrollView addSubview:view];
     NSArray *subviews = [window subviews];
     bool exist = NO;
     
@@ -45,7 +50,7 @@
     
     if (!exist)
     {
-        [DEAnimationManager fadeOutWithView:[[window rootViewController] view]  ViewToAdd:view];
+        [DEAnimationManager fadeOutWithView:[[window rootViewController] view]  ViewToAdd:scrollView];
     }
 }
 
@@ -54,7 +59,8 @@
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
 
     for (UIView *view in [[[window rootViewController] view] subviews]) {
-        if ([view isKindOfClass:[DEViewComment class]])
+    #warning Right now we're hardcoding in the UIScrollView detection, but that should probably be done differently
+        if ([view isKindOfClass:[UIScrollView class]])
         {
             [DEAnimationManager fadeOutRemoveView:view FromView:[[window rootViewController] view]];
         }

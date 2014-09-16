@@ -156,6 +156,7 @@
         [viewPostAddress setUpViewWithType:PLACES_API_DATA_RESULT_TYPE_GEOCODE];
 
         [activeField resignFirstResponder];
+        [viewPostAddress.searchBar becomeFirstResponder];
     }
 }
 
@@ -192,7 +193,9 @@ numberOfRowsInComponent:(NSInteger)component
 - (void) willRemoveSubview:(UIView *)subview {
     if ([subview isKindOfClass:[DEViewChangeCity class]])
     {
-        _txtAddress.text = ((DEViewChangeCity *) subview).selection;
+        NSString *fullAddress = ((DEViewChangeCity *) subview).selection;
+        NSString *shortAddress = [fullAddress substringToIndex:[fullAddress rangeOfString:@","].location];
+        _txtAddress.text = shortAddress;
     }
 }
 

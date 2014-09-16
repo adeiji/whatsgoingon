@@ -55,6 +55,7 @@
     post.description = description;
     post.quickDescription = quickDescription;
     post.numberGoing = [NSNumber numberWithInt:0];
+    post.comments = [NSArray new];
     
     return post;
 }

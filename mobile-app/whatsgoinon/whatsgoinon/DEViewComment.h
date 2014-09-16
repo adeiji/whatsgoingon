@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "DESyncManager.h"
+#import "DEScreenManager.h"
 #import "DEPost.h"
+#import "UIView+DEScrollOnShowKeyboard.h"
 
 @class DEPost;
 
@@ -24,6 +26,7 @@
 @property (strong, nonatomic) DEPost *post;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (weak, nonatomic) IBOutlet UITextView *txtComment;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *commentButtons;
 
 - (IBAction)submitComment:(id)sender;
 - (IBAction)cancel:(id)sender;

@@ -57,7 +57,7 @@
     DEViewChangeCity *changeCity = [[DEViewChangeCity alloc] init];
     
     CGRect frame = self.frame;
-    frame.origin.y = -10;
+    frame.origin.y = 10;
 
     [changeCity setFrame:frame];
     [DEAnimationManager fadeOutWithView:self ViewToAdd:changeCity];

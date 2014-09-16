@@ -214,7 +214,7 @@ static BOOL DEVELOPMENT = YES;
     {
         // Let the user take a picture and store it
         picker.delegate = self;
-        picker.allowsEditing = YES;
+        picker.allowsEditing = NO;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         
         [self presentViewController:picker animated:YES completion:NULL];

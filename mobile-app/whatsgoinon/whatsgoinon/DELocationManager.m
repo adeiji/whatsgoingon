@@ -181,12 +181,12 @@
         for (NSDictionary *dictionary in predictions) {
             NSArray *terms = [dictionary objectForKey:@"terms"];
             // Get everything from the address except the unnecessary end pieces
-            NSString *location = [NSString stringWithFormat:@"%@", terms[0][@"value"]];
+            NSString *location = [dictionary objectForKey:@"description"];
 
-            for (int i = 1; i < [terms count] -1; i ++)
-            {
-               // location = [NSString stringWithFormat:@"%@ %@", location, terms[i][@"value"]];
-            }
+//            for (int i = 1; i < [terms count] -1; i ++)
+//            {
+//               // location = [NSString stringWithFormat:@"%@ %@", location, terms[i][@"value"]];
+//            }
             
             [values addObject:location];
         };

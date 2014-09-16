@@ -27,7 +27,11 @@
             [sharedManager setPosts:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
             
-            NSLog(@"Retreived all objects from server");
+            if ([objects count] != 0)
+            {
+                NSLog(@"Retreived all objects from server");
+//                [DEScreenManager showCommentView];
+            }
         }
         else {
             // The find failed, let the customer know
@@ -83,6 +87,7 @@
     postObject[PARSE_CLASS_EVENT_IMAGES] = [self getImagesArrayWithArray:post.images];
     postObject[PARSE_CLASS_EVENT_QUICK_DESCRIPTION] = post.quickDescription;
     postObject[PARSE_CLASS_EVENT_NUMBER_GOING] = post.numberGoing;
+    postObject[PARSE_CLASS_EVENT_COMMENTS] = post.comments;
     
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
