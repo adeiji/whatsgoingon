@@ -28,6 +28,7 @@
     UIDatePicker *timePicker = [UIDatePicker new];
     timePicker.datePickerMode = UIDatePickerModeTime;
     [timePicker addTarget:self action:@selector(updateTimeTextField:) forControlEvents:UIControlEventValueChanged];
+    [timePicker setMinuteInterval:30];
     [_txtStartTime setInputView:timePicker];
     [_txtEndTime setInputView:timePicker];
     
