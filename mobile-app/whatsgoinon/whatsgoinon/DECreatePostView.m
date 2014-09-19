@@ -105,6 +105,16 @@
     
     activeField.text = [dateFormat stringFromDate:sender.date];
     
+    // If the current field is the start time, then automatically set the end time to three hours from now
+    if ([activeField isEqual:_txtStartTime])
+    {
+       
+        NSTimeInterval threeHours = (3 * 60 * 60) - 1;
+        NSDate *endTime = [sender.date dateByAddingTimeInterval:threeHours];
+        _txtEndTime.text = [dateFormat stringFromDate:endTime];
+        
+    }
+    
     NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
 }
 
@@ -122,6 +132,12 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"MM/dd/YY"];
     activeField.text = [dateFormat stringFromDate:sender.date];
+    
+    // If the current field is the start date, then automatically set the end date to the same day
+    if ([activeField isEqual:_txtStartDate])
+    {
+        _txtEndDate.text = activeField.text;
+    }
     
     NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
 }
