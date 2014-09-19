@@ -26,14 +26,9 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-    
 	// Do any additional setup after loading the view.
-    
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
-    [self loadPosts];
-    //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
-    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, ((POST_HEIGHT + TOP_MARGIN) * (([_posts count] / 2) + ([_posts count] % 2))) + SCROLL_VIEW_DISTANCE_FROM_TOP);
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
     
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     
@@ -44,7 +39,6 @@
     [window addSubview:selectCategoryView];
 
     [self resetPostCounter];
-    [self displayPost];
     
     // Check to see if this is their first time going to this part of the application
     // If it is their first time then show the welcome screen.
@@ -166,6 +160,12 @@
 
 - (void) displayPost {
     __block int column = 0;
+    
+    [self loadPosts];
+    
+    //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
+    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, ((POST_HEIGHT + TOP_MARGIN) * (([_posts count] / 2) + ([_posts count] % 2))) + SCROLL_VIEW_DISTANCE_FROM_TOP);
+    
     
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];

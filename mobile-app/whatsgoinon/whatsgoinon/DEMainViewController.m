@@ -56,8 +56,28 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)viewWhatsGoingOnLater:(id)sender {
+    if ([self isLoggedIn])
+    {
+        // Do any additional setup after loading the view.
+        UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
+        DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
+        
+        [self.navigationController pushViewController:viewEventsViewController animated:YES];
+    }
+    else {
+        UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
+        DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
+        
+        [self setNextScreenWithViewController:viewEventsViewController];
+    }
+
+    [DESyncManager getAllValuesForNow:NO];
+
+}
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
+    
     if ([self isLoggedIn])
     {
         // Do any additional setup after loading the view.
@@ -72,6 +92,9 @@
         
         [self setNextScreenWithViewController:viewEventsViewController];
     }
+    
+    [DESyncManager getAllValuesForNow:YES];
+
 }
 
 - (void) setNextScreenWithViewController : (UIViewController *) viewController {

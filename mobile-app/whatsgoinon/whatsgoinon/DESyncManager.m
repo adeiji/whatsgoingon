@@ -14,24 +14,29 @@
 @implementation DESyncManager
 
 
-+ (void) getAllValues {
-    DEPostManager *sharedManager = [DEPostManager sharedManager];
++ (void) getAllValuesForNow : (BOOL) now {
+    __block DEPostManager *sharedManager = [DEPostManager sharedManager];
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     //Get all the events that are currently active
+    NSDate *date = [NSDate date];
+    NSTimeInterval threeHours = (3 * 60 * 60) - 1;
+    NSDate *later = [date dateByAddingTimeInterval:threeHours];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
-    [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+    if (now)
+    {
+        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
+    }
+    else
+    {
+        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:later];
+    }
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
             //The find succeeded, now do something with it
             [sharedManager setPosts:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-            
-            if ([objects count] != 0)
-            {
-                NSLog(@"Retreived all objects from server");
-//                [DEScreenManager showCommentView];
-            }
         }
         else {
             // The find failed, let the customer know

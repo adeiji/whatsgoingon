@@ -29,7 +29,6 @@
     // Track statistics around application opens
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [DESyncManager getAllValues];
     [DELocationManager sharedManager];
     [DEScreenManager sharedManager];
     

@@ -413,6 +413,9 @@ static BOOL DEVELOPMENT = YES;
         
         [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
     }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)continueGoingBack:(id)sender {

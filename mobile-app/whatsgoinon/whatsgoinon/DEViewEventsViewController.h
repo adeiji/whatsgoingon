@@ -14,6 +14,8 @@
 #import "DESelectCategoryView.h"
 #import "DEViewMainMenu.h"
 
+@class DEViewMainMenu;
+
 @interface DEViewEventsViewController : UIViewController 
 {
     int postCounter;
@@ -27,6 +29,7 @@
 
 - (IBAction)displayMainMenu:(id)sender;
 - (IBAction)goHome:(id)sender;
+- (void) displayPost;
 
 
 @end

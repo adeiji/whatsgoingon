@@ -63,6 +63,9 @@
                                     <color key="titleColor" red="0.97448979589999996" green="0.97448979589999996" blue="0.97448979589999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="viewWhatsGoingOnLater:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9PP-zO-iYA"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fT-UB-jEz">
                                 <rect key="frame" x="48" y="490" width="225" height="40"/>
