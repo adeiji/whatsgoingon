@@ -49,7 +49,15 @@
     [self.inputView performSelector:@selector(setText:) withObject:view.txtValue.text];
     
     DEPost *post = [[DEPostManager sharedManager] currentPost];
-    post.description = view.txtValue.text;
+    
+    if (_isQuickDescription)
+    {
+        post.quickDescription = view.txtValue.text;
+    }
+    else
+    {
+        post.description = view.txtValue.text;
+    }
 
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -78,7 +86,37 @@
         }];
     }
     
-    self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 150 - newLength];
+    // Get how many characters are available to be entered after the data is pasted
+    int targetLength = 150 - (int) newLength;
+    
+    if (!_isQuickDescription && targetLength > -1)
+    {
+        self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 150 - newLength];
+    }
+    else
+    {
+        self.lblMinCharacters.text = @"0";
+    }
+    
+    targetLength = 50 - (int) newLength;
+    
+    if (_isQuickDescription)
+    {
+        if (targetLength < 0)
+        {
+            NSMutableString *allText = [NSMutableString new];
+            [allText appendString:textView.text];
+            [allText appendString:text];
+            
+            textView.text = [allText substringToIndex:50];
+            
+            return NO;
+        }
+        else
+        {
+            self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 50 - newLength];
+        }
+    }
     
     return  YES;
 }

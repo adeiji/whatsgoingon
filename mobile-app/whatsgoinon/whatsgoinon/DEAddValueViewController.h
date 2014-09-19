@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblMinCharacters;
 @property (weak, nonatomic) IBOutlet UILabel *lblTutorial;
 @property (weak, nonatomic) IBOutlet UIView *overlayView;
-
+@property BOOL isQuickDescription;
 #pragma mark - Outlet Button Methods
 
 - (IBAction)okPressed:(id)sender;

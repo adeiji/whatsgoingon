@@ -41,6 +41,7 @@ static BOOL DEVELOPMENT = YES;
     }
     
     [[_createPostViewTwo txtDescription] setDelegate:self];
+    [[_createPostViewTwo txtQuickDescription] setDelegate:self];
 
     UIPickerView *postRangePickerView = [UIPickerView new];
     [postRangePickerView setDelegate:self];
@@ -390,8 +391,17 @@ static BOOL DEVELOPMENT = YES;
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
     DEAddValueViewController *addValueViewController = [DEAddValueViewController new];
-    addValueViewController.inputView = textField;
 
+    // Let the Add Value View Controller knowh which text field was pressed so that the text displayed will be different
+    if ([textField isEqual:_createPostViewTwo.txtQuickDescription])
+    {
+        [addValueViewController setIsQuickDescription:YES];
+    }
+    else
+    {
+        [addValueViewController setIsQuickDescription:NO];
+    }
+    
     [self.navigationController pushViewController:addValueViewController animated:YES];
 #warning Do not leave with this String, this is hard coded, instead we want to put a placeholder here instead of actual text
     if (![textField.text isEqualToString:@"Enter a description"])

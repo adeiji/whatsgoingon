@@ -41,8 +41,6 @@
     _txtCategory.delegate = self;
     _txtTitle.delegate = self;
     _txtCost.delegate = self;
-    _txtQuickDescription.delegate = self;
-
     
     [[_btnTakePicture layer] setBorderWidth:2.0f];
     [[_btnTakePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
