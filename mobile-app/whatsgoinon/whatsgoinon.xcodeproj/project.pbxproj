@@ -15,6 +15,7 @@
 		F40E0E0F19BFFFA000D2C3A0 /* money-icon 28x28.png in Resources */ = {isa = PBXBuildFile; fileRef = F40E0E0E19BFFFA000D2C3A0 /* money-icon 28x28.png */; };
 		F40E0E1319C007D100D2C3A0 /* camera-icon 178x141.png in Resources */ = {isa = PBXBuildFile; fileRef = F40E0E1219C007D100D2C3A0 /* camera-icon 178x141.png */; };
 		F40E0E1719C0093000D2C3A0 /* DECameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F40E0E1619C0093000D2C3A0 /* DECameraButton.m */; };
+		F412BC9E19CBB6650088F265 /* ViewAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = F412BC9D19CBB6650088F265 /* ViewAlert.xib */; };
 		F437BF851990452000CF61E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF841990452000CF61E9 /* Foundation.framework */; };
 		F437BF871990452000CF61E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF861990452000CF61E9 /* CoreGraphics.framework */; };
 		F437BF891990452000CF61E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF881990452000CF61E9 /* UIKit.framework */; };
@@ -155,6 +156,7 @@
 		F40E0E1219C007D100D2C3A0 /* camera-icon 178x141.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "camera-icon 178x141.png"; path = "../../../spec/graphics/icons/camera-icon 178x141.png"; sourceTree = "<group>"; };
 		F40E0E1519C0093000D2C3A0 /* DECameraButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECameraButton.h; sourceTree = "<group>"; };
 		F40E0E1619C0093000D2C3A0 /* DECameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECameraButton.m; sourceTree = "<group>"; };
+		F412BC9D19CBB6650088F265 /* ViewAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAlert.xib; sourceTree = "<group>"; };
 		F437BF811990452000CF61E9 /* whatsgoinon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whatsgoinon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F437BF841990452000CF61E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F437BF861990452000CF61E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -501,6 +503,7 @@
 				F485811919A2B74900BD1CE7 /* ViewChangeCity.xib */,
 				F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */,
 				F448FE7D19A538C700645667 /* ViewAutocomplete.xib */,
+				F412BC9D19CBB6650088F265 /* ViewAlert.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -984,6 +987,7 @@
 				F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */,
 				F4CCBD76199AADBD00532E9B /* release_notes.md in Resources */,
 				F437BFBE199048AF00CF61E9 /* WelcomeEventsView.xib in Resources */,
+				F412BC9E19CBB6650088F265 /* ViewAlert.xib in Resources */,
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F45030A119C00F500061F362 /* HappSnap-bg.png in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,

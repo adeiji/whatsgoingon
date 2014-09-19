@@ -312,6 +312,7 @@ static BOOL DEVELOPMENT = YES;
 
 - (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+
     if (viewController.view != _createPostViewTwo)
     {
         [self savePostDetails];
@@ -348,6 +349,8 @@ static BOOL DEVELOPMENT = YES;
         _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
         _createPostViewTwo.txtDescription.text = post.description;
     }
+    
+    
 }
 
 - (UIImage *) roundImageCornersWithButton : (UIButton *) button
@@ -395,8 +398,29 @@ static BOOL DEVELOPMENT = YES;
 }
 
 - (IBAction)goBack:(id)sender {
+    NSArray *viewControllers = self.navigationController.viewControllers;
     
+    if ([viewControllers count] == 2)
+    {
+        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewAlert" owner:self options:nil] firstObject];
+        
+        for (UIView *subview in [view subviews]) {
+            if([subview isKindOfClass:[UIButton class]])
+            {
+                [[subview layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+            }
+        }
+        
+        [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
+    }
+}
+
+- (IBAction)continueGoingBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-    
+}
+
+- (IBAction)cancel:(id)sender {
+    UIView *view = [[self.view subviews] lastObject];
+    [DEAnimationManager fadeOutRemoveView:view FromView:self.view];
 }
 @end
