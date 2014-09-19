@@ -29,7 +29,7 @@
     }
     else
     {
-        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:later];
+        [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
     }
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)

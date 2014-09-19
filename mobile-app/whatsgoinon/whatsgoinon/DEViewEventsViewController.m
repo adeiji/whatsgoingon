@@ -152,6 +152,8 @@
     for (__strong UIView *view in [_scrollView subviews]) {
         view = nil;
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) loadPosts {

@@ -159,7 +159,17 @@ static BOOL DEVELOPMENT = YES;
     NSDate *startDate = [dateFormatter dateFromString: startDateString];
 
     NSString *endDateString = [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtEndDate.text, _createPostViewOne.txtEndTime.text];
-    NSDate *endDate = [dateFormatter dateFromString: endDateString];
+    NSDate *endDate;
+    
+    if ([[_createPostViewOne.txtEndTime.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+    {
+        NSTimeInterval threeHours = (3 * 60 * 60) - 1;
+        endDate = [startDate dateByAddingTimeInterval:threeHours];
+    }
+    else
+    {
+        endDate = [dateFormatter dateFromString: endDateString];
+    }
     
     NSLog(@"Captured Date %@", [startDate description]);
     
