@@ -34,6 +34,12 @@ static BOOL DEVELOPMENT = YES;
 	// Do any additional setup after loading the view.
     
     _images = [NSMutableArray new];
+    
+    // Make sure that we have an array of four empty objects, this ensures that we can save the images where they need to be located
+    for (int i = 0; i < 4; i++) {
+        [_images addObject:[NSData new]];
+    }
+    
     [[_createPostViewTwo txtDescription] setDelegate:self];
 
     UIPickerView *postRangePickerView = [UIPickerView new];
@@ -46,6 +52,7 @@ static BOOL DEVELOPMENT = YES;
     [_createPostViewOne displayCurrentLocation];
     
     [[self.navigationController navigationBar] setHidden:YES];
+    [self.navigationController setDelegate:self];
     
     [self setUpViews];
 }
@@ -124,6 +131,7 @@ static BOOL DEVELOPMENT = YES;
         _post.active = YES;
         _post.location = sharedManager.storedLocation;
         _post.quickDescription = view.txtQuickDescription.text;
+        _post.images = _images;
     }
     else {
         // Production
@@ -267,7 +275,6 @@ static BOOL DEVELOPMENT = YES;
     //Shrink the size of the image.
     UIGraphicsBeginImageContext( CGSizeMake(70, 56) );
     [image drawInRect:CGRectMake(0,0,70,56)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
     //Increment the imageCounter so that we display on the next image
@@ -276,14 +283,72 @@ static BOOL DEVELOPMENT = YES;
     UIButton *button = (UIButton *) [self.view viewWithTag:imageCounter];
     [button setHighlighted:YES];
     
-    [_images addObject:UIImageJPEGRepresentation(image, .1)];
-    [_currentButton setBackgroundImage:[self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image] forState:UIControlStateNormal];
+    // Set the image at the correct location so that it can be restored later to this same exact location
+    _images[_currentButton.tag] = UIImageJPEGRepresentation(image, .1);
+    [_currentButton setHighlighted:NO];
+    image = [self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image];
+    [_currentButton setBackgroundImage:image forState:UIControlStateNormal];
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+- (void) savePostDetails
+{
+    DEPostManager *postManager = [DEPostManager sharedManager];
 
+    DEPost *post = [DEPost new];
+    post.title = _createPostViewTwo.txtTitle.text;
+    post.images = _images;
+    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber * cost = [formatter numberFromString:_createPostViewTwo.txtCost.text];
+    post.cost = cost;
+    post.quickDescription = _createPostViewTwo.txtQuickDescription.text;
+    post.description = _createPostViewTwo.txtDescription.text;
+    
+    [postManager setCurrentPost:post];
+    
+}
 
+- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (viewController.view != _createPostViewTwo)
+    {
+        [self savePostDetails];
+    }
+    else
+    {
+        DEPost *post = [[DEPostManager sharedManager] currentPost];
+        _createPostViewTwo.txtTitle.text = post.title;
+    
+        // Reload the images if there are any images to load
+        _images = (NSMutableArray *) post.images;
+        
+        if ([_images count] != 0)
+        {
+            NSData *imageData = _images[0];
+            UIImage *image = [UIImage imageWithData:imageData];
+            UIButton *button = _createPostViewTwo.btnTakePicture;
+            [button setHighlighted:NO];
+            [button setBackgroundImage:[self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image] forState:UIControlStateNormal];
+            
+            for (int i = 1; i < [_images count]; i++) {
+                UIButton *button = (UIButton *) [_createPostViewTwo viewWithTag:i];
+                NSData *imageData = _images[i];
+                UIImage *image = [UIImage imageWithData:imageData];
+                image = [self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image];
+                if (image != nil)
+                {
+                    [button setBackgroundImage:image forState:UIControlStateNormal];
+                }
+            }
+        }
+        
+        _createPostViewTwo.txtCost.text = [post.cost stringValue];
+        _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
+        _createPostViewTwo.txtDescription.text = post.description;
+    }
+}
 
 - (UIImage *) roundImageCornersWithButton : (UIButton *) button
                                Image : (UIImage *) image
@@ -297,7 +362,7 @@ static BOOL DEVELOPMENT = YES;
                                 cornerRadius:20.0] addClip];
     // Draw your image
     [image drawInRect:button.bounds];
-    
+
     // Get the image, here setting the UIImageView image
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     

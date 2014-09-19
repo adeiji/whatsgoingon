@@ -47,6 +47,9 @@
 {
     DEAddValueView *view = (DEAddValueView *) self.view;
     [self.inputView performSelector:@selector(setText:) withObject:view.txtValue.text];
+    
+    DEPost *post = [[DEPostManager sharedManager] currentPost];
+    post.description = view.txtValue.text;
 
     [self.navigationController popViewControllerAnimated:YES];
 }
