@@ -37,6 +37,7 @@
             //The find succeeded, now do something with it
             [sharedManager setPosts:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+            NSLog(@"Notification sent, events loaded");
         }
         else {
             // The find failed, let the customer know

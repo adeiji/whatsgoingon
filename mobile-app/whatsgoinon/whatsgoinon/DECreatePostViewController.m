@@ -32,13 +32,8 @@ static BOOL DEVELOPMENT = YES;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    _images = [NSMutableArray new];
-    
-    // Make sure that we have an array of four empty objects, this ensures that we can save the images where they need to be located
-    for (int i = 0; i < 4; i++) {
-        [_images addObject:[NSData new]];
-    }
+    DEPostManager *postManager = [DEPostManager sharedManager];
+    _post = [postManager currentPost];
     
     [[_createPostViewTwo txtDescription] setDelegate:self];
     [[_createPostViewTwo txtQuickDescription] setDelegate:self];
@@ -60,15 +55,17 @@ static BOOL DEVELOPMENT = YES;
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [self.view setHidden:YES];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.view setHidden:NO];
+    
+    [self loadPostDetails];
 }
 
 - (void) setUpViews {
@@ -112,9 +109,8 @@ static BOOL DEVELOPMENT = YES;
     DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
     
     eventViewController.isPreview = YES;
-
-    [self saveNewInfoToPost];
     eventViewController.post = _post;
+    [[DEPostManager sharedManager] setCurrentPost:_post];
     [self.navigationController pushViewController:eventViewController animated:YES];
 }
 
@@ -127,19 +123,21 @@ static BOOL DEVELOPMENT = YES;
         // Development
         _post.title = view.txtTitle.text;
         _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
-        _post.images = _images;
+        _post.images = [[[DEPostManager sharedManager] currentPost] images];
         _post.description = view.txtDescription.text;
         _post.active = YES;
         _post.location = sharedManager.storedLocation;
         _post.quickDescription = view.txtQuickDescription.text;
-        _post.images = _images;
+        _post.images = [[[DEPostManager sharedManager] currentPost] images];
+        
+        [[DEPostManager sharedManager] setCurrentPost:_post];
     }
     else {
         // Production
         _post.cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
         _post.description =
         _post.title = self.createPostViewTwo.txtTitle.text;
-        _post.images = _images;
+        _post.images = [[[DEPostManager sharedManager] currentPost] images];
     }
 }
 
@@ -179,27 +177,18 @@ static BOOL DEVELOPMENT = YES;
         sharedManager.storedLocation = value;
     }];
     
-    DEPost *newPost = [DEPostManager createPostWithCategory:_createPostViewOne.txtCategory.text
-                                                  StartTime:startDate
-                                                    EndTime:endDate
-                                                   Location:[locationManager geoPoint]
-                                                  PostRange:[NSNumber numberWithInt:[_createPostViewOne.txtPostRange.text intValue]]
-                                                      Title:nil
-                                                       Cost:nil
-                                                     Images:nil
-                                                Description:nil
-                                                    Address:_createPostViewOne.txtAddress.text
-                                           QuickDescription:nil];
-    
-    
+    _post.startTime = startDate;
+    _post.endTime = endDate;
+    _post.location = [locationManager geoPoint];
+    _post.postRange = [NSNumber numberWithInt:[_createPostViewOne.txtPostRange.text intValue]];
+    _post.address = _createPostViewOne.txtAddress.text;
+    _post.category = _createPostViewOne.txtCategory.text;
+
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
     DECreatePostViewController *createPostViewController = [sb instantiateViewControllerWithIdentifier:@"CreatePostDetailTwo"];
-    
-    [self.navigationController pushViewController:createPostViewController animated:YES];
     // Pass the new view controller the new post that was just created.
-    createPostViewController.post = newPost;
-    newPost = nil;
-    postManager = nil;
+    [self.navigationController pushViewController:createPostViewController animated:YES];
+    [postManager setCurrentPost:_post];
 }
 
 - (IBAction)takePicture:(id)sender {
@@ -235,13 +224,14 @@ static BOOL DEVELOPMENT = YES;
         picker.delegate = self;
         picker.allowsEditing = NO;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        
+        [self savePostDetails];
         [self presentViewController:picker animated:YES completion:NULL];
     }
     else if (buttonIndex == 0)
     {
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         picker.delegate = self;
+        [self savePostDetails];
         [self presentViewController:picker animated:YES completion:NULL];
     }
     
@@ -294,8 +284,11 @@ static BOOL DEVELOPMENT = YES;
     UIButton *button = (UIButton *) [self.view viewWithTag:imageCounter];
     [button setHighlighted:YES];
     
+    NSArray *storedImages = [[[DEPostManager sharedManager] currentPost] images];
+    NSMutableArray *images = [NSMutableArray arrayWithArray:storedImages];
     // Set the image at the correct location so that it can be restored later to this same exact location
-    _images[_currentButton.tag] = UIImageJPEGRepresentation(image, .1);
+    images[_currentButton.tag] = UIImageJPEGRepresentation(image, .1);
+    [_post setImages:images];
     [_currentButton setHighlighted:NO];
     image = [self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image];
     [_currentButton setBackgroundImage:image forState:UIControlStateNormal];
@@ -307,9 +300,9 @@ static BOOL DEVELOPMENT = YES;
 {
     DEPostManager *postManager = [DEPostManager sharedManager];
 
-    DEPost *post = [DEPost new];
+    DEPost *post = [[DEPostManager sharedManager] currentPost];
     post.title = _createPostViewTwo.txtTitle.text;
-    post.images = _images;
+    post.images = _post.images;
     NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber * cost = [formatter numberFromString:_createPostViewTwo.txtCost.text];
@@ -318,50 +311,39 @@ static BOOL DEVELOPMENT = YES;
     post.description = _createPostViewTwo.txtDescription.text;
     
     [postManager setCurrentPost:post];
-    
 }
 
-- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+- (void) loadPostDetails
 {
-
-    if (viewController.view != _createPostViewTwo)
-    {
-        [self savePostDetails];
-    }
-    else
-    {
-        DEPost *post = [[DEPostManager sharedManager] currentPost];
-        _createPostViewTwo.txtTitle.text = post.title;
+    DEPost *post = [[DEPostManager sharedManager] currentPost];
+    _createPostViewTwo.txtTitle.text = post.title;
     
-        // Reload the images if there are any images to load
-        _images = (NSMutableArray *) post.images;
+    // Reload the images if there are any images to load
+    NSArray *images = (NSMutableArray *) post.images;
+    
+    if ([images count] != 0)
+    {
+        NSData *imageData = images[0];
+        UIImage *image = [UIImage imageWithData:imageData];
+        UIButton *button = _createPostViewTwo.btnTakePicture;
+        [button setHighlighted:NO];
+        [button setBackgroundImage:[self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image] forState:UIControlStateNormal];
         
-        if ([_images count] != 0)
-        {
-            NSData *imageData = _images[0];
+        for (int i = 1; i < [images count]; i++) {
+            UIButton *button = (UIButton *) [_createPostViewTwo viewWithTag:i];
+            NSData *imageData = images[i];
             UIImage *image = [UIImage imageWithData:imageData];
-            UIButton *button = _createPostViewTwo.btnTakePicture;
-            [button setHighlighted:NO];
-            [button setBackgroundImage:[self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image] forState:UIControlStateNormal];
-            
-            for (int i = 1; i < [_images count]; i++) {
-                UIButton *button = (UIButton *) [_createPostViewTwo viewWithTag:i];
-                NSData *imageData = _images[i];
-                UIImage *image = [UIImage imageWithData:imageData];
-                image = [self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image];
-                if (image != nil)
-                {
-                    [button setBackgroundImage:image forState:UIControlStateNormal];
-                }
+            image = [self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image];
+            if (image != nil)
+            {
+                [button setBackgroundImage:image forState:UIControlStateNormal];
             }
         }
-        
-        _createPostViewTwo.txtCost.text = [post.cost stringValue];
-        _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
-        _createPostViewTwo.txtDescription.text = post.description;
     }
     
-    
+    _createPostViewTwo.txtCost.text = [post.cost stringValue];
+    _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
+    _createPostViewTwo.txtDescription.text = post.description;
 }
 
 - (UIImage *) roundImageCornersWithButton : (UIButton *) button
@@ -391,7 +373,7 @@ static BOOL DEVELOPMENT = YES;
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
     DEAddValueViewController *addValueViewController = [DEAddValueViewController new];
-
+    [self savePostDetails];
     // Let the Add Value View Controller knowh which text field was pressed so that the text displayed will be different
     if ([textField isEqual:_createPostViewTwo.txtQuickDescription])
     {
@@ -434,6 +416,7 @@ static BOOL DEVELOPMENT = YES;
         [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
     }
     else {
+        [self savePostDetails];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

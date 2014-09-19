@@ -42,7 +42,6 @@
 
 
 @property (strong, nonatomic) DEPost *post;
-@property (strong, nonatomic) NSMutableArray *images;
 @property (strong, nonatomic) PFGeoPoint *location;
 
 
