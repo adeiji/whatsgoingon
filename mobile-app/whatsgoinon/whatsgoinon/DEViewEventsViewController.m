@@ -53,8 +53,8 @@
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     [screenManager setMainMenu:viewMainMenu];
     [self.view setBackgroundColor:[UIColor clearColor]];
-    
     [self.navigationController setNavigationBarHidden:YES];
+    [self.scrollView setDelegate:self];
 }
 
 - (void) addGestureRecognizers
@@ -195,6 +195,8 @@
         
         [self getDistanceFromCurrentLocationOfEvent:obj];
     }];
+    
+    [self loadVisiblePost:_scrollView];
 }
 
 
@@ -233,6 +235,26 @@
     }
     
     [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+#pragma mark - Scroll View Delegate Methods
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self loadVisiblePost:scrollView];
+}
+
+- (void) loadVisiblePost : (UIScrollView *) scrollView
+{
+    for (UIView *view in [scrollView subviews]) {
+        if ([view isKindOfClass:[DEViewEventsView class]])
+        {
+            if (CGRectIntersectsRect(scrollView.bounds, view.frame) && ![((DEViewEventsView *) view) isImageLoaded])
+            {
+                [((DEViewEventsView *) view) loadImage];
+            }
+        }
+    }
     
 }
 @end

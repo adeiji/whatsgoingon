@@ -130,33 +130,31 @@
         self.lblSubtitle.text = post.quickDescription;
         [self.imgMainImageView setAlpha:0.0];
         self.lblNumGoing.text = [NSString stringWithFormat:@"%@", post.numberGoing];
-        if ([post.images count] > 0)
-        {
-            //Load the images on the main thread asynchronously
-            PFFile *imageFile = post.images[0];
-            NSData *imageData = [imageFile getData];
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIImage *image = [UIImage imageWithData:imageData];
-                self.imgMainImageView.image = image;
-                [UIView animateWithDuration:0.7f animations:^{
-                    [self.imgMainImageView setAlpha:1.0f];
-                }];
-            });
-        
-        }
-        else {
-            UIImage *image = [UIImage imageNamed:@"circle-placeholder-01.png"];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imgMainImageView.image = image;
-            });
-            
-        }
     });
     
     [self displayDistanceToLocationWithPost : post];
     
     _post = myPost;
+}
+
+- (void) loadImage
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Load the images on the main thread asynchronously
+        PFFile *imageFile = _post.images[0];
+
+        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            NSData *imageData = data;
+            
+            UIImage *image = [UIImage imageWithData:imageData];
+            self.imgMainImageView.image = image;
+            [UIView animateWithDuration:0.7f animations:^{
+                [self.imgMainImageView setAlpha:1.0f];
+            }];
+        }];
+    });
+    
+    _isImageLoaded = YES;
 }
 
 // When the user taps this event twice it will take them to a screen to view all the details of the event.

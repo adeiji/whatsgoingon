@@ -22,10 +22,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblDistance;
 @property (weak, nonatomic) IBOutlet UILabel *lblSubtitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumGoing;
-
+@property BOOL isImageLoaded;
 @property (weak, nonatomic) DEEventsTimeline *overlayView;
 @property (strong, nonatomic) DEPost *post;
 
 - (void) renderViewWithPost : (DEPost *) post;
 - (void) refreshView;
+- (void) loadImage;
 @end

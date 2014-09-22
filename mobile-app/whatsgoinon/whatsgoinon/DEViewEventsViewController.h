@@ -16,7 +16,7 @@
 
 @class DEViewMainMenu;
 
-@interface DEViewEventsViewController : UIViewController 
+@interface DEViewEventsViewController : UIViewController <UIScrollViewDelegate>
 {
     int postCounter;
     DEViewMainMenu *viewMainMenu;
