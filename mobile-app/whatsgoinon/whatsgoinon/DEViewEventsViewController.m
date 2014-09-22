@@ -138,20 +138,25 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    
+    NSLog(@"View Events View Controller - Method: viewWillAppear Begin");
+    
     [super viewWillAppear:animated];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
     orbView.hidden = NO;
     self.view.hidden = NO;
+    
+    NSLog(@"View Events View Controller - Method: viewWillAppear End");
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    for (__strong UIView *view in [_scrollView subviews]) {
-        view = nil;
-    }
+//    for (__strong UIView *view in [_scrollView subviews]) {
+//        view = nil;
+//    }
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

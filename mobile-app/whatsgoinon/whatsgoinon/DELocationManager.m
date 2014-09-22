@@ -78,7 +78,7 @@
 }
 
 + (void) getLatLongValueFromAddress:(NSString *)address CompletionBlock:(completionHandler)callback {
-    NSLog(@"The address to get the lat/long value is: %@", address);
+//    NSLog(@"The address to get the lat/long value is: %@", address);
     address = [address stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API_GET_COORDINATES, address]]];
     
@@ -94,7 +94,7 @@
         location.latitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lat"] doubleValue];
         location.longitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lng"] doubleValue];
         
-        NSLog(@"%@", location);
+//        NSLog(@"%@", location);
         dispatch_async(dispatch_get_main_queue(), ^{
             // Make sure that we call this method on the main thread so that it updates properly as supposed to
             callback(location);
@@ -118,15 +118,15 @@
     queue.name = @"Google Matrix Queue";
     queue.maxConcurrentOperationCount = 3;
     
-    NSLog(@"Active and pending operations: %@", queue.operations);
-    NSLog(@"Count of operations: %lu", (unsigned long) queue.operationCount);
+//    NSLog(@"Active and pending operations: %@", queue.operations);
+//    NSLog(@"Count of operations: %lu", (unsigned long) queue.operationCount);
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSError *error;
         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
         NSString *distance = jsonData[@"rows"][0][@"elements"][0][@"distance"][@"text"];
-        NSLog(@"Distance from location1 to location2 is %@", jsonData[@"rows"][0][@"elements"][0][@"distance"][@"text"]);
+//        NSLog(@"Distance from location1 to location2 is %@", jsonData[@"rows"][0][@"elements"][0][@"distance"][@"text"]);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Make sure that we call this method on the main thread so that it updates properly as supposed to
@@ -136,7 +136,7 @@
 }
 
 + (void) getAddressFromLatLongValue:(PFGeoPoint *)location CompletionBlock:(completionBlock)callback {
-    NSLog(@"The lat/long value to get the address is: %@", location);
+//    NSLog(@"The lat/long value to get the address is: %@", location);
     
     NSString *latLong = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API_GET_ADDRESS, latLong]]];
@@ -149,15 +149,18 @@
         NSError *error;
         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
-        NSString *addressNumber = jsonData[@"results"][0][@"address_components"][0][@"short_name"];
-        NSString *street = jsonData[@"results"][0][@"address_components"][1][@"short_name"];
-        NSString *address = [NSString stringWithFormat:@"%@ %@", addressNumber, street];
-        
-        NSLog(@"%@", address);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Make sure that we call this method on the main thread so that it updates properly as supposed to
-            callback(address);
-        });
+        if (![jsonData[@"status"] isEqualToString:@"ZERO_RESULTS"])
+        {
+            NSString *addressNumber = jsonData[@"results"][0][@"address_components"][0][@"short_name"];
+            NSString *street = jsonData[@"results"][0][@"address_components"][1][@"short_name"];
+            NSString *address = [NSString stringWithFormat:@"%@ %@", addressNumber, street];
+            
+//            NSLog(@"%@", address);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Make sure that we call this method on the main thread so that it updates properly as supposed to
+                callback(address);
+            });
+        }
     }];
 
 }

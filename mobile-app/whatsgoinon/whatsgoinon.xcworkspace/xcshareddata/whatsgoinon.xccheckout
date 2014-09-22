@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>3ABA42FC-B346-4C2E-A413-4297C666AE37</string>
+	<string>A884C052-298D-492E-A411-1EDD1FEE53BE</string>
 	<key>IDESourceControlProjectName</key>
 	<string>whatsgoinon</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -17,17 +17,27 @@
 	<string>mobile-app/whatsgoinon/whatsgoinon.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>76393E73-243F-4123-9C96-103A589EE48A</key>
+		<string>../../../../12WeekFitness</string>
 		<key>C4579557-30D1-4503-8FB6-73E3C90327E1</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/adeiji/whatsgoingon.git</string>
+	<string>https://github.com/adeiji/dephyned.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
 	<string>C4579557-30D1-4503-8FB6-73E3C90327E1</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>76393E73-243F-4123-9C96-103A589EE48A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>12WeekFitness</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

@@ -41,14 +41,16 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
+    NSLog("%@ - Method: viewWillDisappear Begin", self);
     [super viewWillDisappear:animated];
-    [self.view setAlpha:0];
+    [self.view setHidden:YES];
+    NSLog("%@ - Method: viewWillDisappear End", self);
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view setAlpha:1.0f];
+    [self.view setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning

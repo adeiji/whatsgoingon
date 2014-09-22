@@ -293,6 +293,11 @@ static BOOL DEVELOPMENT = YES;
     image = [self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image];
     [_currentButton setBackgroundImage:image forState:UIControlStateNormal];
     
+    if (![_currentButton isEqual:_createPostViewTwo.btnTakePicture])
+    {
+        [[_currentButton layer] setBorderColor:[UIColor whiteColor].CGColor];
+        [[_currentButton layer] setBorderWidth:1.0f];
+    }
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -349,23 +354,23 @@ static BOOL DEVELOPMENT = YES;
 - (UIImage *) roundImageCornersWithButton : (UIButton *) button
                                Image : (UIImage *) image
 {
-    // Begin a new image that will be the new image with the rounded corners
-    // (here with the size of an UIImageView)
-    UIGraphicsBeginImageContextWithOptions(button.bounds.size, NO, [UIScreen mainScreen].scale);
+//    // Begin a new image that will be the new image with the rounded corners
+//    // (here with the size of an UIImageView)
+//    UIGraphicsBeginImageContextWithOptions(button.bounds.size, NO, [UIScreen mainScreen].scale);
+//    
+//    // Add a clip before drawing anything, in the shape of an rounded rect
+//    [[UIBezierPath bezierPathWithRoundedRect:button.bounds
+//                                cornerRadius:20.0] addClip];
+//    // Draw your image
+//    [image drawInRect:button.bounds];
+//
+//    // Get the image, here setting the UIImageView image
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    
+//    // Lets forget about that we were drawing
+//    UIGraphicsEndImageContext();
     
-    // Add a clip before drawing anything, in the shape of an rounded rect
-    [[UIBezierPath bezierPathWithRoundedRect:button.bounds
-                                cornerRadius:20.0] addClip];
-    // Draw your image
-    [image drawInRect:button.bounds];
-
-    // Get the image, here setting the UIImageView image
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    // Lets forget about that we were drawing
-    UIGraphicsEndImageContext();
-    
-    return newImage;
+    return image;
 }
 
 #pragma mark - Text View Delegate Methods
@@ -423,6 +428,8 @@ static BOOL DEVELOPMENT = YES;
 
 - (IBAction)continueGoingBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+    
+    [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
 }
 
 - (IBAction)cancel:(id)sender {
