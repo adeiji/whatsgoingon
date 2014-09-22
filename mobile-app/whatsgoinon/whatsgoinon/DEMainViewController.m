@@ -41,16 +41,14 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    NSLog("%@ - Method: viewWillDisappear Begin", self);
-    [super viewWillDisappear:animated];
     [self.view setHidden:YES];
-    NSLog("%@ - Method: viewWillDisappear End", self);
+    [super viewWillDisappear:animated];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
     [self.view setHidden:NO];
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -124,7 +122,6 @@
 
 - (BOOL) isLoggedIn {
     DEUserManager *userManager = [DEUserManager sharedManager];
-
     
     if (![userManager isLoggedIn])
     {
