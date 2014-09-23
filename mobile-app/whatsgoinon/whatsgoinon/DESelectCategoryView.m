@@ -11,8 +11,6 @@
 #import <POP.h>
 #import "Constants.h"
 
-static float deltaAngle;
-
 @implementation DESelectCategoryView
 
 #define BUTTON_HOME_LOC_X 270

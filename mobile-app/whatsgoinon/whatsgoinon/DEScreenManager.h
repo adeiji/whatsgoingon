@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "DEViewComment.h"
 #import "DEAnimationManager.h"
+#import <MessageUI/MessageUI.h>
 
 @class DEViewMainMenu;
 
-@interface DEScreenManager : NSObject
+@interface DEScreenManager : NSObject <MFMailComposeViewControllerDelegate>
 
 @property BOOL overlayDisplayed;
 @property (strong, nonatomic) UIViewController *nextScreen;
@@ -26,9 +27,11 @@
 + (void) hideCommentView;
 + (void) setUpTextFields : (NSArray *) textFields;
 + (UIView *) createInputAccessoryView;
++ (UINavigationController *) getMainNavigationController;
 
 #pragma mark - Private Methods
 
 - (void) gotoNextScreen;
+- (void) showEmail;
 
 @end

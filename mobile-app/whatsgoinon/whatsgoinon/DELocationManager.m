@@ -29,6 +29,11 @@
     [_locationManager stopUpdatingLocation];
 }
 
+- (void) startTimer
+{
+
+}
+
 - (PFGeoPoint *) geoPoint {
     return _currentLocation;
 }

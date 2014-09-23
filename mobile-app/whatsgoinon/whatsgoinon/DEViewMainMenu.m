@@ -66,6 +66,22 @@
 }
 
 - (IBAction)showFeedbackPage:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email Feedback", @"Write a Review",nil];
+    
+    [[DEScreenManager sharedManager] setNextScreen:[[DEScreenManager getMainNavigationController] topViewController]];
+    [actionSheet showInView:self];
+}
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [[DEScreenManager sharedManager] showEmail];
+    }
+    else
+    {
+        
+    }
 }
 
 - (IBAction)gotoAccountSettingsPage:(id)sender {

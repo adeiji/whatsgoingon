@@ -16,7 +16,7 @@
 
 @class DEViewMainMenu;
 
-@interface DEViewEventsViewController : UIViewController <UIScrollViewDelegate>
+@interface DEViewEventsViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate>
 {
     int postCounter;
     DEViewMainMenu *viewMainMenu;

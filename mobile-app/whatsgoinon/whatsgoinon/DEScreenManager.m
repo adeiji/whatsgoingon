@@ -113,5 +113,52 @@
     [navController pushViewController:_nextScreen animated:YES];
 }
 
++ (UINavigationController *) getMainNavigationController
+{
+    return (UINavigationController *) [[[UIApplication sharedApplication] keyWindow] rootViewController];
+}
+
+
+- (void) showEmail
+{
+    // Subject
+    NSString *emailTitle = @"HappSnap Feedback";
+    
+    // Content
+    NSString *messageBody = @"";
+    
+    //To address
+    NSArray *toRecipients = [NSArray arrayWithObject:@"adebayoiji@gmail.com"];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setToRecipients:toRecipients];
+    
+    [[[DEScreenManager sharedManager] nextScreen] presentViewController:mc animated:YES completion:NULL];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail Cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail Saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail Sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    [[[DEScreenManager sharedManager] nextScreen] dismissViewControllerAnimated:YES completion:NULL];
+}
 
 @end

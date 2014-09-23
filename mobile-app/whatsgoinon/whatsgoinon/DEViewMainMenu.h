@@ -13,7 +13,7 @@
 #import "DEAnimationManager.h"
 #import "DEScreenManager.h"
 
-@interface DEViewMainMenu : UIView
+@interface DEViewMainMenu : UIView <UIActionSheetDelegate>
 
 @property (strong, nonatomic) UIView *viewToCutThrough;
 @property (weak, nonatomic) IBOutlet UITextField *txtSearch;

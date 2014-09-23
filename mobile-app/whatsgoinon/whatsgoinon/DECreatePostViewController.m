@@ -204,10 +204,6 @@ static BOOL DEVELOPMENT = YES;
             
             [actionSheet showInView:self.view];
         }
-        else {
-        #warning - Let the user know that he's taken too many pictures
-            // let the user know that he's taken too many pictures
-        }
     }
     else {
         #warning - Let the user know that they need a camera to take a photo
@@ -290,7 +286,7 @@ static BOOL DEVELOPMENT = YES;
     images[_currentButton.tag] = UIImageJPEGRepresentation(image, .1);
     [_post setImages:images];
     [_currentButton setHighlighted:NO];
-    image = [self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image];
+
     [_currentButton setBackgroundImage:image forState:UIControlStateNormal];
     
     if (![_currentButton isEqual:_createPostViewTwo.btnTakePicture])
@@ -332,13 +328,13 @@ static BOOL DEVELOPMENT = YES;
         UIImage *image = [UIImage imageWithData:imageData];
         UIButton *button = _createPostViewTwo.btnTakePicture;
         [button setHighlighted:NO];
-        [button setBackgroundImage:[self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image] forState:UIControlStateNormal];
+        [button setBackgroundImage:image forState:UIControlStateNormal];
         
         for (int i = 1; i < [images count]; i++) {
             UIButton *button = (UIButton *) [_createPostViewTwo viewWithTag:i];
             NSData *imageData = images[i];
             UIImage *image = [UIImage imageWithData:imageData];
-            image = [self roundImageCornersWithButton:_createPostViewTwo.btnTakePicture Image:image];
+
             if (image != nil)
             {
                 [button setBackgroundImage:image forState:UIControlStateNormal];
@@ -351,27 +347,6 @@ static BOOL DEVELOPMENT = YES;
     _createPostViewTwo.txtDescription.text = post.description;
 }
 
-- (UIImage *) roundImageCornersWithButton : (UIButton *) button
-                               Image : (UIImage *) image
-{
-//    // Begin a new image that will be the new image with the rounded corners
-//    // (here with the size of an UIImageView)
-//    UIGraphicsBeginImageContextWithOptions(button.bounds.size, NO, [UIScreen mainScreen].scale);
-//    
-//    // Add a clip before drawing anything, in the shape of an rounded rect
-//    [[UIBezierPath bezierPathWithRoundedRect:button.bounds
-//                                cornerRadius:20.0] addClip];
-//    // Draw your image
-//    [image drawInRect:button.bounds];
-//
-//    // Get the image, here setting the UIImageView image
-//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-//    
-//    // Lets forget about that we were drawing
-//    UIGraphicsEndImageContext();
-    
-    return image;
-}
 
 #pragma mark - Text View Delegate Methods
 

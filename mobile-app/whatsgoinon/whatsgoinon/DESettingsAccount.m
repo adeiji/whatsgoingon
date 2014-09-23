@@ -34,20 +34,30 @@
     [DEScreenManager setUpTextFields:array];
 }
 
-- (IBAction)takePicture:(id)sender {
-}
 
 - (IBAction)sendFeedback:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email Feedback", @"Write a Review",nil];
+    
+    [[DEScreenManager sharedManager] setNextScreen:[[DEScreenManager getMainNavigationController] topViewController]];
+    [actionSheet showInView:self];
+}
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [[DEScreenManager sharedManager] showEmail];
+    }
+    else
+    {
+        
+    }
 }
 
 - (IBAction)signOut:(id)sender {
 }
 
 - (IBAction)goBack:(id)sender {
-//    for (UIView *view in [_viewToHide subviews]) {
-//        view.hidden = NO;
-//    }
-//    [[self superview] removeFromSuperview];
     [DEAnimationManager fadeOutRemoveView:[self superview] FromView:[[self superview] superview]];
 }
 @end
