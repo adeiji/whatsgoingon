@@ -62,10 +62,10 @@
 
 - (void) removeFromSuperview
 {
-    [super removeFromSuperview];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    
+    [super removeFromSuperview];
 }
 
 - (void) registerForKeyboardNotifications

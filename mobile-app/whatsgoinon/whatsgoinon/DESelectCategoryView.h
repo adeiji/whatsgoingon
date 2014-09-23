@@ -12,6 +12,7 @@
 #import "DEScreenManager.h"
 #import <iCarousel/iCarousel.h>
 #import "DEOrbButton.h"
+#import "DEPostManager.h"
 
 @interface DESelectCategoryView : UIView <UIGestureRecognizerDelegate, iCarouselDelegate, iCarouselDataSource>
 {
@@ -20,6 +21,7 @@
     NSArray *categories;
     iCarousel *myCarousel;
     UIColor *orbColor;
+    NSString *category;
 }
 
 #pragma mark - Outlets

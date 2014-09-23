@@ -167,6 +167,10 @@
     
     [self loadPosts];
     
+    for (UIView *subview in [_scrollView subviews]) {
+        [subview removeFromSuperview];
+    }
+    postCounter = 0;
     //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
     _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, ((POST_HEIGHT + TOP_MARGIN) * (([_posts count] / 2) + ([_posts count] % 2))) + SCROLL_VIEW_DISTANCE_FROM_TOP);
     

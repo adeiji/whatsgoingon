@@ -130,7 +130,7 @@ static float deltaAngle;
     UIView *wheelView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
     container = [[UIView alloc] initWithFrame:wheelView.frame];
     
-    categories = [NSArray arrayWithObjects:@"Featured", @"Under 21", @"Party", @"Classy", @"Over 21", @"Crazy", @"Funny", @"Music", @"Environmental", @"Ridiculous", @"Dancing", @"Nerdy", @"Pricy", nil];
+    categories = [NSArray arrayWithObjects:@"Featured", @"Under 21", @"Party", @"Classy", @"Over 21", @"Crazy", @"Funny", @"Music", @"Environmental", @"Ridiculous", @"Dancing", @"Nerdy", @"Pricy", @"Indie", nil];
     
     myCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_WIDTH, BUTTON_HEIGHT)];
     myCarousel.type = iCarouselTypeWheel;
@@ -180,12 +180,30 @@ static float deltaAngle;
         [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
         self.lblCategory.hidden = YES;
         
+        [self reloadEvents];
+        
         isActive = false;
     }
 }
 
-- (void) wheelDidChangeValue: (int) index {
+- (void) reloadEvents
+{
+    NSArray *events = [[DEPostManager sharedManager] allEvents];
+    NSMutableArray *eventsInCategory = [NSMutableArray new];
+    [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        DEPost *event = [DEPost getPostFromPFObject:obj];
+        
+        if ([event.category isEqualToString:category])
+        {
+            [eventsInCategory addObject:obj];
+        }
+    }];
     
+    [[DEPostManager sharedManager] setPosts:eventsInCategory];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+}
+
+- (void) wheelDidChangeValue: (int) index {
     self.lblCategory.text = [categories objectAtIndex:index];
 }
 
@@ -235,6 +253,7 @@ static float deltaAngle;
 }
 
 - (void) carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
+    category = [categories objectAtIndex:carousel.currentItemIndex];
     self.lblCategory.text = categories[carousel.currentItemIndex];
 }
 

@@ -36,6 +36,7 @@
         {
             //The find succeeded, now do something with it
             [sharedManager setPosts:objects];
+            [sharedManager setAllEvents:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
             NSLog(@"Notification sent, events loaded");
         }
