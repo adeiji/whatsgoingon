@@ -207,8 +207,6 @@ static float deltaAngle;
     self.lblCategory.text = [categories objectAtIndex:index];
 }
 
-
-
 - (UIView *)carousel:(__unused iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
     UILabel *label = nil;

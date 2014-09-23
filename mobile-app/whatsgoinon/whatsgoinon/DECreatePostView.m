@@ -15,7 +15,12 @@
     _categoriesPicker = [UIPickerView new];
     _categoriesPicker.dataSource = self;
     _categoriesPicker.delegate = self;
-    _categories = @[@"Under 21", @"Indie", @"Classy", @"Nerdy", @"Party", @"Family Friendly", @"Everything"];
+    
+
+    NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
+    
+    _categories = [plistData allKeys];
+    
     _txtCategory.inputView = _categoriesPicker;
     
     UIDatePicker *datePicker = [UIDatePicker new];
