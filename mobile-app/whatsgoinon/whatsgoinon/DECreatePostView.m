@@ -12,11 +12,36 @@
 @implementation DECreatePostView
 
 - (void) willMoveToSuperview:(UIView *)newSuperview {
+    [super willMoveToSuperview:newSuperview];
+    [self setPickers];
+    [self setDelegates];
+    [self setButtons];
+    [self registerForKeyboardNotifications];
+    [self displayCurrentLocation];
+}
+
+- (void) setButtons {
+    [[_btnTakePicture layer] setBorderWidth:2.0f];
+    [[_btnTakePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[_btnTakePicture layer] setCornerRadius:20.0f];
+    
+    for (UIView *view in _btnSmallPictureButtons) {
+        [[view layer] setCornerRadius:5.0f];
+    }
+    
+    [[_btnPreview layer] setCornerRadius:5.0f];
+    
+    [[_btnInfo layer] setCornerRadius:_btnInfo.frame.size.height / 2.0f];
+    [[_btnInfo layer] setBorderWidth:1.0f];
+    [[_btnInfo layer] setBorderColor:[UIColor whiteColor].CGColor];
+}
+
+- (void) setPickers
+{
     _categoriesPicker = [UIPickerView new];
     _categoriesPicker.dataSource = self;
     _categoriesPicker.delegate = self;
     
-
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
     
     _categories = [plistData allKeys];
@@ -27,7 +52,7 @@
     datePicker.datePickerMode = UIDatePickerModeDate;
     [datePicker addTarget:self action:@selector(updateDateTextField:)
          forControlEvents:UIControlEventValueChanged];
-
+    
     [_txtStartDate setInputView:datePicker];
     [_txtEndDate setInputView:datePicker];
     UIDatePicker *timePicker = [UIDatePicker new];
@@ -36,7 +61,10 @@
     [timePicker setMinuteInterval:30];
     [_txtStartTime setInputView:timePicker];
     [_txtEndTime setInputView:timePicker];
-    
+}
+
+- (void) setDelegates
+{
     _txtStartTime.delegate = self;
     _txtEndTime.delegate = self;
     _txtAddress.delegate = self;
@@ -46,23 +74,6 @@
     _txtCategory.delegate = self;
     _txtTitle.delegate = self;
     _txtCost.delegate = self;
-    
-    [[_btnTakePicture layer] setBorderWidth:2.0f];
-    [[_btnTakePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
-    [[_btnTakePicture layer] setCornerRadius:20.0f];
-    
-    for (UIView *view in _btnSmallPictureButtons) {
-        [[view layer] setCornerRadius:5.0f];
-    }
-    
-    [[_btnPreview layer] setCornerRadius:5.0f];
-
-    [[_btnInfo layer] setCornerRadius:_btnInfo.frame.size.height / 2.0f];
-    [[_btnInfo layer] setBorderWidth:1.0f];
-    [[_btnInfo layer] setBorderColor:[UIColor whiteColor].CGColor];
-    
-    [self registerForKeyboardNotifications];
-    [self displayCurrentLocation];
 }
 
 - (void) removeFromSuperview

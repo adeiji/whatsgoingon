@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Temp4</key>
+	<string></string>
+	<key>Temp5</key>
+	<string></string>
+	<key>Temp6</key>
+	<string></string>
+	<key>Temp7</key>
+	<string></string>
+	<key>Temp3</key>
+	<string></string>
+	<key>Temp2</key>
+	<string></string>
+	<key>Temp</key>
+	<string></string>
 	<key>Everything</key>
 	<string>Everything</string>
 	<key>Family Friendly</key>
