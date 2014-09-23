@@ -149,6 +149,7 @@
         [[eventDetailsMoreView btnReportEvent] setEnabled:YES];
         [eventDetailsMoreView setEventId:[_post objectId]];
         [eventDetailsMoreView setCategory:[_post category]];
+        [[DEPostManager sharedManager] setCurrentPost:_post];
     }
 }
 

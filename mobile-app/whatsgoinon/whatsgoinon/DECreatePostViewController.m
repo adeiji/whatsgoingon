@@ -324,20 +324,24 @@ static BOOL DEVELOPMENT = YES;
     
     if ([images count] != 0)
     {
-        NSData *imageData = images[0];
-        UIImage *image = [UIImage imageWithData:imageData];
-        UIButton *button = _createPostViewTwo.btnTakePicture;
-        [button setHighlighted:NO];
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        
-        for (int i = 1; i < [images count]; i++) {
-            UIButton *button = (UIButton *) [_createPostViewTwo viewWithTag:i];
-            NSData *imageData = images[i];
+        // Make sure that this is not a PFFile class which would mean that the current post is from an already existing one
+        if (![images[0] isKindOfClass:[PFFile class]])
+        {
+            NSData *imageData = images[0];
             UIImage *image = [UIImage imageWithData:imageData];
+            UIButton *button = _createPostViewTwo.btnTakePicture;
+            [button setHighlighted:NO];
+            [button setBackgroundImage:image forState:UIControlStateNormal];
+            
+            for (int i = 1; i < [images count]; i++) {
+                UIButton *button = (UIButton *) [_createPostViewTwo viewWithTag:i];
+                NSData *imageData = images[i];
+                UIImage *image = [UIImage imageWithData:imageData];
 
-            if (image != nil)
-            {
-                [button setBackgroundImage:image forState:UIControlStateNormal];
+                if (image != nil)
+                {
+                    [button setBackgroundImage:image forState:UIControlStateNormal];
+                }
             }
         }
     }

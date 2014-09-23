@@ -30,7 +30,7 @@
 
 - (IBAction)postSomethingSimilar:(id)sender {
     UINavigationController *navController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    
+        
     DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
     
     [navController pushViewController:createPostViewController animated:YES];
