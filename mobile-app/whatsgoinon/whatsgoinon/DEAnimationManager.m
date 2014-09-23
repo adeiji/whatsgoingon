@@ -46,11 +46,11 @@
 
 }
 
-+ (void) savedAnimationWithView {
++ (void) savedAnimationWithImage : (NSString *) imageName {
     
     UIView *view = [[[UIApplication sharedApplication] delegate] window];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"going-indicator.png"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
     CGRect frame = CGRectMake(60, 180, 200, 200);
     
     imageView.frame = frame;
@@ -58,7 +58,7 @@
     
     if ([view subviews])
         
-        [UIView animateWithDuration:1.0 animations:^{
+        [UIView animateWithDuration:1.8 animations:^{
             [imageView.layer setOpacity:0.0];
         } completion:^(BOOL finished) {
             [imageView removeFromSuperview];

@@ -178,7 +178,7 @@
         [[postManager goingPost] addObject:_post];
         [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
         [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
-        [DEAnimationManager savedAnimationWithView];
+        [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
         
         going = YES;
         
@@ -191,6 +191,8 @@
 - (IBAction)setEventAsMaybeGoing:(id)sender {
     DEPostManager *postManager = [DEPostManager new];
     [[postManager maybeGoingPost] addObject:_post];
+    
+    [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
 }
 
 

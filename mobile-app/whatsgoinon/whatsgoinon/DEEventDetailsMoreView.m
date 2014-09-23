@@ -59,6 +59,7 @@
     // Post to the server that this event is miscategorized.
     // Post : Category, Event Id
     [DESyncManager saveEventAsMiscategorizedWithEventId:_eventId Category:_category];
+    [DEAnimationManager savedAnimationWithImage:@"miscategorized-indicator-icon.png"];
 }
 
 

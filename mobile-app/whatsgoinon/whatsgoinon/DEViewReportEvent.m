@@ -71,7 +71,8 @@
     
     [DESyncManager saveReportWithEventId:_eventId WhatsWrong:report.whatsWrong      Other:report.other];
     
-    [self removeFromSuperview];
+    [self removeView];
+    [DEAnimationManager savedAnimationWithImage:@"event-reported-indicator-icon.png"];
     
 #warning Make sure that we display to the user that he saved the report
 }

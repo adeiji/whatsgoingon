@@ -95,7 +95,6 @@
 		F46B947819C3674E00B41D8C /* password-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947719C3674E00B41D8C /* password-icon.png */; };
 		F46B947B19C39D0600B41D8C /* thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947919C39D0600B41D8C /* thumbs-down.png */; };
 		F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947A19C39D0600B41D8C /* thumbs-up.png */; };
-		F46B948019C769E200B41D8C /* going-indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947F19C769E200B41D8C /* going-indicator.png */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
@@ -133,6 +132,10 @@
 		F4CCBD81199BF30200532E9B /* DESector.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD80199BF30200532E9B /* DESector.m */; };
 		F4EEB03519D20E400072B683 /* categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03419D20E400072B683 /* categories.plist */; };
 		F4EEB03719D21F720072B683 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EEB03619D21F720072B683 /* MessageUI.framework */; };
+		F4EEB03919D22A300072B683 /* going-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03819D22A300072B683 /* going-indicator-icon.png */; };
+		F4EEB03B19D22A440072B683 /* maybe-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */; };
+		F4EEB03D19D22AF80072B683 /* event-reported-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */; };
+		F4EEB04119D22BEF0072B683 /* miscategorized-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -267,7 +270,6 @@
 		F46B947719C3674E00B41D8C /* password-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password-icon.png"; sourceTree = "<group>"; };
 		F46B947919C39D0600B41D8C /* thumbs-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down.png"; sourceTree = "<group>"; };
 		F46B947A19C39D0600B41D8C /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
-		F46B947F19C769E200B41D8C /* going-indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "going-indicator.png"; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
 		F4774F881992E40C00FCDE66 /* DELocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationManager.m; sourceTree = "<group>"; };
 		F4774F8F1994398F00FCDE66 /* UDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDIDGenerator.h; path = ../../../../12WeekFitness/Resources/UDIDGenerator.h; sourceTree = "<group>"; };
@@ -338,6 +340,10 @@
 		F4CCBD82199BF6C300532E9B /* DERotaryProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DERotaryProtocol.h; sourceTree = "<group>"; };
 		F4EEB03419D20E400072B683 /* categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = categories.plist; path = "supporting files/categories.plist"; sourceTree = "<group>"; };
 		F4EEB03619D21F720072B683 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		F4EEB03819D22A300072B683 /* going-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "going-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/going-indicator-icon.png"; sourceTree = "<group>"; };
+		F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "maybe-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/maybe-indicator-icon.png"; sourceTree = "<group>"; };
+		F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-reported-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/event-reported-indicator-icon.png"; sourceTree = "<group>"; };
+		F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miscategorized-indicator-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -863,7 +869,10 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				F46B947F19C769E200B41D8C /* going-indicator.png */,
+				F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */,
+				F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */,
+				F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */,
+				F4EEB03819D22A300072B683 /* going-indicator-icon.png */,
 				F46B947919C39D0600B41D8C /* thumbs-down.png */,
 				F46B947A19C39D0600B41D8C /* thumbs-up.png */,
 				F46B947719C3674E00B41D8C /* password-icon.png */,
@@ -982,6 +991,7 @@
 				F40E0E0B19BFFD9F00D2C3A0 /* going-icon 23x23.png in Resources */,
 				F46B946119C2543400B41D8C /* location-icon-empty.png in Resources */,
 				F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */,
+				F4EEB04119D22BEF0072B683 /* miscategorized-indicator-icon.png in Resources */,
 				F45030A919C015E80061F362 /* location-icon.png in Resources */,
 				F46B947619C3657900B41D8C /* email-icon.png in Resources */,
 				F46B945B19C2518500B41D8C /* SettingsAccount Icon.png in Resources */,
@@ -989,9 +999,11 @@
 				F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */,
 				F46B945719C24F7500B41D8C /* House-icon 25x25.png in Resources */,
 				F40E0E1319C007D100D2C3A0 /* camera-icon 178x141.png in Resources */,
+				F4EEB03B19D22A440072B683 /* maybe-indicator-icon.png in Resources */,
 				F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,
+				F4EEB03D19D22AF80072B683 /* event-reported-indicator-icon.png in Resources */,
 				F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */,
 				F4CCBD76199AADBD00532E9B /* release_notes.md in Resources */,
 				F437BFBE199048AF00CF61E9 /* WelcomeEventsView.xib in Resources */,
@@ -1005,7 +1017,6 @@
 				F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */,
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
-				F46B948019C769E200B41D8C /* going-indicator.png in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,
 				F46B945919C2508F00B41D8C /* Comment-Feedback icon.png in Resources */,
 				F437BFD019918B2200CF61E9 /* ViewComment.xib in Resources */,
@@ -1015,6 +1026,7 @@
 				F46B946E19C27E2C00B41D8C /* cancel.png in Resources */,
 				F46B944B19C1135F00B41D8C /* circle-placeholder-01.png in Resources */,
 				F437BFBA1990486500CF61E9 /* ViewPosts.storyboard in Resources */,
+				F4EEB03919D22A300072B683 /* going-indicator-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
