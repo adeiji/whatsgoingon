@@ -96,20 +96,28 @@
     // Need to check and make sure that the user has picked thumbs up or down.  If not then prompt the user to do so.
     if (ratingChange != 0)
     {
-        NSMutableArray *comments = [NSMutableArray arrayWithArray:_post.comments];
+        NSMutableArray *comments = [NSMutableArray arrayWithArray:post.comments];
         [comments addObject:_txtComment.text];
-        NSNumber *rating = _post.rating;
+        NSNumber *rating = post.rating;
         rating = [NSNumber numberWithInteger:rating.integerValue + ratingChange ];
-        _post.rating = rating;
+        post.rating = rating;
         NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_COMMENTS : comments, PARSE_CLASS_EVENT_RATING : rating };
         
-        [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
+        [DESyncManager updateObjectWithId:post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
         
         [DEScreenManager hideCommentView];
     }
     else {
         [_lblPromptEntry setHidden:NO];
     }
+}
+
+- (void) setPost:(DEPost *)myPost
+{
+    post = myPost;
+    
+    NSString *header = [NSString stringWithFormat:@"%@ @ %@", myPost.title, myPost.address];
+    _lblHeader.text = header;
 }
 
 

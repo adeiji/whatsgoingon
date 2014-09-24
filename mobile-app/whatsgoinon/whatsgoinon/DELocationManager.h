@@ -13,7 +13,9 @@
 #import "DEViewComment.h"
 
 @interface DELocationManager : NSObject <CLLocationManagerDelegate, NSURLConnectionDelegate>
-
+{
+    NSTimer *timer;
+}
 
 typedef void (^completionBlock) (NSString *value);
 typedef void (^completionHandler) (PFGeoPoint *value);
@@ -23,7 +25,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 + (id)sharedManager;
 - (void) startSignificantChangeUpdates;
 - (void) stopSignificantChangeUpdates;
-
+- (void) startTimer;
 + (void) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
                                LocationTwo : (PFGeoPoint *) location2
                            CompletionBlock : (completionBlock) callback;

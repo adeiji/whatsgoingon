@@ -183,12 +183,14 @@
         
         going = YES;
         
-        
-        DEEventDetailsView *eventView = (DEEventDetailsView *) _eventView.detailsView.subviews[0];
-        [[eventView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
+        if ([_eventView.detailsView.subviews[0] isKindOfClass:[DEEventDetailsView class]])
+        {
+            DEEventDetailsView *eventView = (DEEventDetailsView *) _eventView.detailsView.subviews[0];
+            [[eventView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
+        }
     }
-    
 }
+
 - (IBAction)setEventAsMaybeGoing:(id)sender {
     DEPostManager *postManager = [DEPostManager new];
     [[postManager maybeGoingPost] addObject:_post];

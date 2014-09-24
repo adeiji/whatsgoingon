@@ -28,11 +28,9 @@
     return self;
 }
 
-+ (void) showCommentView {
++ (void) showCommentView : (DEPost *) post {
     
     DEViewComment *view = [[DEViewComment alloc] init];
-    DEPostManager *postManager = [DEPostManager sharedManager];
-    DEPost *post = [DEPost getPostFromPFObject:[postManager posts][0]];
     [view setPost:post];
     
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];

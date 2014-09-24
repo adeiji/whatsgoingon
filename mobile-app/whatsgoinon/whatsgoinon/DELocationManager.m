@@ -24,14 +24,43 @@
     //Get the latitude and longitude values of the current user
     _currentLocation.latitude = [[locations objectAtIndex:0] coordinate].latitude;
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
+    NSMutableArray *postToDeleteFromGoing = [NSMutableArray new];
+    
+    for (DEPost *post in [[DEPostManager sharedManager] goingPost]) {
 
+        CLLocationDegrees latitude = [[locations objectAtIndex:0] coordinate].latitude;
+        CLLocationDegrees longitude = [[locations objectAtIndex:0] coordinate].longitude;
+        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+        
+        latitude = post.location.latitude;
+        longitude = post.location.longitude;
+        CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+        
+        CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
+        NSLog(@"Distance to event: %f", distance);
+        
+        if (distance < 500)
+        {
+            [DEScreenManager showCommentView : post];
+            [postToDeleteFromGoing addObject:post];
+        }
+    }
+    
+    // Remove the posts that the user was asked to comment on
+    for (DEPost *post in postToDeleteFromGoing) {
+        NSMutableArray *goingPost = [[DEPostManager sharedManager] goingPost];
+        [goingPost removeObject:post];
+    }
+    
     //Stop updating the location because now it is uneccesary
     [_locationManager stopUpdatingLocation];
 }
 
 - (void) startTimer
 {
-
+    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:YES];
+    
+    [timer fire];
 }
 
 - (PFGeoPoint *) geoPoint {
@@ -75,7 +104,9 @@
     }
     
     _locationManager.delegate = self;
-    [_locationManager startMonitoringSignificantLocationChanges];
+#warning Make sure to uncomment this in production
+//    [_locationManager startMonitoringSignificantLocationChanges];
+    [_locationManager startUpdatingLocation];
 }
 
 - (void) stopSignificantChangeUpdates {

@@ -29,7 +29,8 @@
     // Track statistics around application opens
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [DELocationManager sharedManager];
+    DELocationManager *locManager = [DELocationManager sharedManager];
+    [locManager startTimer];
     [DEScreenManager sharedManager];
     
     UIWindow *window = [self window];

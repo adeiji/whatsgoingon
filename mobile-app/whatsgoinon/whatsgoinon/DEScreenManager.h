@@ -26,7 +26,7 @@
 #pragma mark - Public Methods
 
 + (id)sharedManager;
-+ (void) showCommentView;
++ (void) showCommentView : (DEPost *) post;
 + (void) hideCommentView;
 + (void) setUpTextFields : (NSArray *) textFields;
 + (UIView *) createInputAccessoryView;

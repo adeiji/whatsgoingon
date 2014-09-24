@@ -19,19 +19,22 @@
     NSArray *options;
     NSString *comment;
     NSInteger ratingChange;
+    DEPost *post;
 }
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UILabel *lblPromptEntry;
-@property (strong, nonatomic) DEPost *post;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (weak, nonatomic) IBOutlet UITextView *txtComment;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *commentButtons;
+@property (weak, nonatomic) IBOutlet UILabel *lblHeader;
 
 - (IBAction)submitComment:(id)sender;
 - (IBAction)cancel:(id)sender;
 
 - (IBAction)thumbsUp:(id)sender;
 - (IBAction)thumbsDown:(id)sender;
+
+- (void) setPost : (DEPost *) myPost;
 
 @end

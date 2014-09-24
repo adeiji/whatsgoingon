@@ -176,7 +176,6 @@
             [[DEScreenManager sharedManager] stopActivitySpinner];
         }
     }
-    
 }
 
 - (void) displayPost {
