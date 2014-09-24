@@ -136,6 +136,9 @@
 		F4EEB03B19D22A440072B683 /* maybe-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */; };
 		F4EEB03D19D22AF80072B683 /* event-reported-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */; };
 		F4EEB04119D22BEF0072B683 /* miscategorized-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */; };
+		F4EEB04B19D236E70072B683 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EEB04A19D236E70072B683 /* Reachability.m */; };
+		F4EEB04F19D241670072B683 /* ViewNoInternet.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB04E19D241670072B683 /* ViewNoInternet.xib */; };
+		F4EEB05119D241CE0072B683 /* no-internet.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB05019D241CE0072B683 /* no-internet.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -344,6 +347,10 @@
 		F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "maybe-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/maybe-indicator-icon.png"; sourceTree = "<group>"; };
 		F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-reported-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/event-reported-indicator-icon.png"; sourceTree = "<group>"; };
 		F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miscategorized-indicator-icon.png"; sourceTree = "<group>"; };
+		F4EEB04919D236E70072B683 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		F4EEB04A19D236E70072B683 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		F4EEB04E19D241670072B683 /* ViewNoInternet.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewNoInternet.xib; sourceTree = "<group>"; };
+		F4EEB05019D241CE0072B683 /* no-internet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-internet.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -517,6 +524,7 @@
 				F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */,
 				F448FE7D19A538C700645667 /* ViewAutocomplete.xib */,
 				F412BC9D19CBB6650088F265 /* ViewAlert.xib */,
+				F4EEB04E19D241670072B683 /* ViewNoInternet.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -695,6 +703,7 @@
 		F4774F9619955E0B00FCDE66 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				F4EEB04219D232650072B683 /* Reachability Manager */,
 				F46B946719C26E5800B41D8C /* Animation Manager */,
 				F4774F9819955E3700FCDE66 /* User Manager */,
 				F437BFD219918DE700CF61E9 /* Sync Manager */,
@@ -869,6 +878,7 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F4EEB05019D241CE0072B683 /* no-internet.png */,
 				F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */,
 				F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */,
 				F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */,
@@ -896,6 +906,15 @@
 				F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		F4EEB04219D232650072B683 /* Reachability Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F4EEB04919D236E70072B683 /* Reachability.h */,
+				F4EEB04A19D236E70072B683 /* Reachability.m */,
+			);
+			name = "Reachability Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -982,6 +1001,7 @@
 			files = (
 				F4EEB03519D20E400072B683 /* categories.plist in Resources */,
 				F437BFCE19918A4500CF61E9 /* InsertLocationView.xib in Resources */,
+				F4EEB04F19D241670072B683 /* ViewNoInternet.xib in Resources */,
 				F4CCBD6919997FCF00532E9B /* DEAddValueViewController.xib in Resources */,
 				F437BFC419904A4200CF61E9 /* MainMenuView.xib in Resources */,
 				F485811A19A2B74900BD1CE7 /* ViewChangeCity.xib in Resources */,
@@ -1015,6 +1035,7 @@
 				F46B946D19C27E2C00B41D8C /* ok.png in Resources */,
 				F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */,
 				F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */,
+				F4EEB05119D241CE0072B683 /* no-internet.png in Resources */,
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,
@@ -1112,6 +1133,7 @@
 				F437C0131991CE0C00CF61E9 /* DEEventsTimeline.m in Sources */,
 				F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */,
 				F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */,
+				F4EEB04B19D236E70072B683 /* Reachability.m in Sources */,
 				F437C00D1991AB3D00CF61E9 /* DEMainViewController.m in Sources */,
 				F4CB0B9B19AFF3ED00AABD12 /* DEFacebookButton.m in Sources */,
 				F40E0E0919BFF5FE00D2C3A0 /* DEHomeButton.m in Sources */,

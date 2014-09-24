@@ -14,6 +14,9 @@
 @class DEViewMainMenu;
 
 @interface DEScreenManager : NSObject <MFMailComposeViewControllerDelegate>
+{
+    UIActivityIndicatorView *spinner;
+}
 
 @property BOOL overlayDisplayed;
 @property (strong, nonatomic) UIViewController *nextScreen;
@@ -33,5 +36,7 @@
 
 - (void) gotoNextScreen;
 - (void) showEmail;
+- (void) stopActivitySpinner;
+- (void) startActivitySpinner;
 
 @end

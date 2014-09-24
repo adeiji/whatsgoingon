@@ -67,6 +67,22 @@
     }
 }
 
+- (void) startActivitySpinner
+{
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center = window.center;
+    spinner.hidesWhenStopped = YES;
+    [window addSubview:spinner];
+    [spinner startAnimating];
+}
+
+- (void) stopActivitySpinner {
+    [spinner stopAnimating];
+}
+
+
+
 + (void) setUpTextFields : (NSArray *) textFields
 {
     for (UITextField *textField in textFields) {

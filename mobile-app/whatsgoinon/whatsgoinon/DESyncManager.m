@@ -9,12 +9,17 @@
 #import "DESyncManager.h"
 #import <Parse/Parse.h>
 #import "Constants.h"
-
+#import "Reachability.h"
 
 @implementation DESyncManager
 
 
 + (void) getAllValuesForNow : (BOOL) now {
+    
+    [self checkForInternet];
+    
+    [[DEScreenManager sharedManager] startActivitySpinner];
+    
     __block DEPostManager *sharedManager = [DEPostManager sharedManager];
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     //Get all the events that are currently active
@@ -39,12 +44,21 @@
             [sharedManager setAllEvents:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
             NSLog(@"Notification sent, events loaded");
+            [[DEScreenManager sharedManager] stopActivitySpinner];
         }
         else {
             // The find failed, let the customer know
+            NSLog(@"Error: %@", [error description]);
         }
     }];
+}
+
++ (void) checkForInternet
+{
+    Reachability *reach = [Reachability reachabilityWithHostName:@"www.google.com"];
     
+    // Start the notifier, which will case the reachability object to retain itself
+    [reach startNotifier];
 }
 
 + (void) saveObjectFromDictionary:(NSDictionary *)dictionary

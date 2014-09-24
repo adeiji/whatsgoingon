@@ -8,6 +8,7 @@
 
 #import "DEViewEventsViewController.h"
 #import "Constants.h"
+#import "Reachability.h"
 
 @interface DEViewEventsViewController ()
 
@@ -29,7 +30,7 @@
 	// Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     
     // Add the select category view to the window so that we completely cover the screen including the navigation bar.
@@ -162,6 +163,22 @@
     _posts = [[DEPostManager sharedManager] posts];
 }
 
+- (void) showNoInternetConnectionScreen : (NSNotification *) object {
+    Reachability *reach = [object valueForKey:@"object"];
+    
+    if ([reach currentReachabilityStatus] == NotReachable)
+    {
+        if ([[_scrollView subviews] count] == 2)
+        {
+            UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewNoInternet" owner:self options:nil] firstObject];
+            
+            [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
+            [[DEScreenManager sharedManager] stopActivitySpinner];
+        }
+    }
+    
+}
+
 - (void) displayPost {
     __block int column = 0;
     
@@ -173,7 +190,7 @@
     postCounter = 0;
     //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
     _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, ((POST_HEIGHT + TOP_MARGIN) * (([_posts count] / 2) + ([_posts count] % 2))) + SCROLL_VIEW_DISTANCE_FROM_TOP);
-    
+
     
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
