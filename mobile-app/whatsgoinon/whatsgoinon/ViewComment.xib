@@ -145,7 +145,7 @@
         </view>
     </objects>
     <resources>
-        <image name="thumbs-down.png" width="156" height="168"/>
+        <image name="thumbs-down.png" width="154" height="167"/>
         <image name="thumbs-up.png" width="154" height="167"/>
     </resources>
 </document>

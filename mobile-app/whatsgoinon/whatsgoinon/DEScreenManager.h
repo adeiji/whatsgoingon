@@ -13,7 +13,7 @@
 
 @class DEViewMainMenu;
 
-@interface DEScreenManager : NSObject <MFMailComposeViewControllerDelegate>
+@interface DEScreenManager : NSObject <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 {
     UIActivityIndicatorView *spinner;
 }
@@ -36,6 +36,7 @@
 
 - (void) gotoNextScreen;
 - (void) showEmail;
+- (void) showTextWithMessage : (NSString *) message ;
 - (void) stopActivitySpinner;
 - (void) startActivitySpinner;
 

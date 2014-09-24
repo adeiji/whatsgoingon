@@ -190,6 +190,9 @@
                         <color key="titleColor" red="0.90196078431372551" green="0.49411764705882355" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="shareText:" destination="dVy-5Y-raG" eventType="touchUpInside" id="wvr-Iz-oJV"/>
+                    </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeZ-5M-p2p">
                     <rect key="frame" x="149" y="87" width="22" height="21"/>
@@ -209,6 +212,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="btnShareFacebook" destination="jVU-gf-wYK" id="ahF-g0-H7z"/>
+                <outlet property="btnShareText" destination="SbS-Nl-1yR" id="EtA-vr-j4L"/>
                 <outlet property="btnShareTwitter" destination="HK1-RX-LfG" id="XfB-KH-V13"/>
             </connections>
         </view>

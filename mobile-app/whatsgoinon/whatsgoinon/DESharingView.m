@@ -21,15 +21,6 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 - (void) getAddress {
     [DELocationManager getAddressFromLatLongValue:_post.location CompletionBlock:^(NSString *value) {
         [_post setAddress:value];
@@ -70,5 +61,11 @@
         }];
     }
 }
+
+- (IBAction)shareText:(id)sender {
+    [[DEScreenManager sharedManager] showTextWithMessage:_btnShareText.titleLabel.text];
+}
+
+
 
 @end

@@ -16,6 +16,7 @@
 #import "DESharingView.h"
 #import "DEViewEventsView.h"
 #import "DEEventView.h"
+#import "DEViewComments.h"
 
 @class DEPost, DEViewEventsView, DEEventView;
 

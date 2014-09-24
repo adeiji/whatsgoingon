@@ -153,6 +153,34 @@
     [[[DEScreenManager sharedManager] nextScreen] presentViewController:mc animated:YES completion:NULL];
 }
 
+- (void) showTextWithMessage : (NSString *) message
+{
+    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+    picker.messageComposeDelegate = self;
+    picker.body = message;
+    [[DEScreenManager sharedManager] setNextScreen:[DEScreenManager getMainNavigationController].topViewController];
+    [[[DEScreenManager sharedManager] nextScreen] presentViewController:picker animated:YES completion:NULL];
+}
+
+- (void) messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    switch (result) {
+        case MessageComposeResultCancelled:
+            NSLog(@"Message Cancelled");
+            break;
+        case MessageComposeResultSent:
+            NSLog(@"Message saved");
+            break;
+        case MessageComposeResultFailed:
+            NSLog(@"Message send failure");
+            break;
+        default:
+            break;
+    }
+    
+    [[[DEScreenManager sharedManager] nextScreen] dismissViewControllerAnimated:YES completion:NULL];
+}
+
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     switch (result) {

@@ -118,6 +118,8 @@
         [self setNextScreenWithViewController:createPostViewController];
     }
     
+    [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
+    
 }
 
 - (BOOL) isLoggedIn {

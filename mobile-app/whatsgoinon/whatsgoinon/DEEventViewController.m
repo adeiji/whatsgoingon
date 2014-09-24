@@ -123,7 +123,16 @@
 
 - (IBAction)showEventComments:(id)sender
 {
-    [self showView:[_eventDetailsViewController viewNoComments]];
+    if ([[_post comments] count] == 0)
+    {
+        [self showView:[_eventDetailsViewController viewNoComments]];
+    }
+    else
+    {
+        DEViewComments *viewComments = (DEViewComments *) [self showView:[_eventDetailsViewController viewComments]];
+        [viewComments setPost:_post];
+        [viewComments.tableView reloadData];
+    }
 }
 - (IBAction)shareEvent:(id)sender
 {

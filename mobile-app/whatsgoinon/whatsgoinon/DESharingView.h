@@ -12,7 +12,7 @@
 
 @class DEPost;
 
-@interface DESharingView : UIView
+@interface DESharingView : UIView <MFMessageComposeViewControllerDelegate>
 
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) DEPost *post;
@@ -21,17 +21,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnShareFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnShareInstagram;
 @property (weak, nonatomic) IBOutlet UIButton *btnShareTwitter;
+@property (weak, nonatomic) IBOutlet UIButton *btnShareText;
 
 #pragma mark - Button Action Methods
 
 - (IBAction)shareFacebook:(id)sender;
 - (IBAction)shareInstagram:(id)sender;
 - (IBAction)shareTwitter:(id)sender;
+- (IBAction)shareText:(id)sender;
 
 #pragma mark - Instance Methods
-- (BOOL) postToTwitter;
-- (BOOL) postToFacebook;
-- (BOOL) postToInstagram;
 - (void) getAddress;
 
 @end

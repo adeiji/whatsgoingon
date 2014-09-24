@@ -21,6 +21,7 @@
         self.viewNoComments = [[[NSBundle mainBundle] loadNibNamed:nibNameOrNil owner:self options:nil] objectAtIndex:0];
         self.viewShare = [[[NSBundle mainBundle] loadNibNamed:nibNameOrNil owner:self options:nil] objectAtIndex:1];
         self.viewMore = [[[NSBundle mainBundle] loadNibNamed:nibNameOrNil owner:self options:nil] objectAtIndex:2];
+        self.viewComments = [[[NSBundle mainBundle] loadNibNamed:@"ViewMadeComments" owner:self options:nil] firstObject];
         self.viewSocialNetworkShare = [[[NSBundle mainBundle] loadNibNamed:nibNameOrNil owner:self options:nil] objectAtIndex:3];
         self.viewInfo = [[[NSBundle mainBundle] loadNibNamed:nibNameOrNil owner:self options:nil] objectAtIndex:4];
     }
