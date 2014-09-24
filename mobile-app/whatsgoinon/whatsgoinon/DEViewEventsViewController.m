@@ -82,6 +82,7 @@
     
     [UIView animateWithDuration:.5f animations:^{
         
+
         // Move the main menu over to the right
         CGRect frame = self.view.frame;
         frame.origin.x = viewMainMenu.frame.size.width;
