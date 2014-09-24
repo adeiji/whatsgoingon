@@ -37,6 +37,9 @@ static BOOL DEVELOPMENT = YES;
     
     [[_createPostViewTwo txtDescription] setDelegate:self];
     [[_createPostViewTwo txtQuickDescription] setDelegate:self];
+    
+    [_createPostViewTwo setupView];
+    [_createPostViewOne setupView];
 
     UIPickerView *postRangePickerView = [UIPickerView new];
     [postRangePickerView setDelegate:self];
@@ -48,7 +51,6 @@ static BOOL DEVELOPMENT = YES;
     [_createPostViewOne displayCurrentLocation];
     
     [[self.navigationController navigationBar] setHidden:YES];
-    [self.navigationController setDelegate:self];
     
     [self setUpViews];
 }
@@ -56,6 +58,8 @@ static BOOL DEVELOPMENT = YES;
 - (void) viewWillDisappear:(BOOL)animated
 {
     [self.view setHidden:YES];
+    [[NSNotificationCenter defaultCenter] removeObserver:_createPostViewOne];
+    [[NSNotificationCenter defaultCenter] removeObserver:_createPostViewTwo];
     
     [super viewWillDisappear:animated];
 }
@@ -136,7 +140,7 @@ static BOOL DEVELOPMENT = YES;
         // Production
         _post.cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
         _post.description =
-        _post.title = self.createPostViewTwo.txtTitle.text;
+        _post.title = view.txtTitle.text;
         _post.images = [[[DEPostManager sharedManager] currentPost] images];
     }
 }

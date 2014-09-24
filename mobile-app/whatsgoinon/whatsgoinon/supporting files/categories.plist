@@ -2,19 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Temp4</key>
+	<key>Wealthy</key>
 	<string></string>
-	<key>Temp5</key>
+	<key>Grungy</key>
 	<string></string>
-	<key>Temp6</key>
+	<key>Artsy</key>
 	<string></string>
-	<key>Temp7</key>
+	<key>Hipster</key>
 	<string></string>
-	<key>Temp3</key>
+	<key>Funny</key>
 	<string></string>
-	<key>Temp2</key>
+	<key>Vintage</key>
 	<string></string>
-	<key>Temp</key>
+	<key>Quiet</key>
 	<string></string>
 	<key>Everything</key>
 	<string>Everything</string>

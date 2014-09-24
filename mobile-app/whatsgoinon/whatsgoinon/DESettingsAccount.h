@@ -10,8 +10,9 @@
 #import "DEScreenManager.h"
 #import "DEAnimationManager.h"
 #import "MessageUI/MessageUI.h"
+#import "DEUserManager.h"
 
-@interface DESettingsAccount : UIView <UIActionSheetDelegate>
+@interface DESettingsAccount : UIView <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 #pragma mark - View Outlets
 

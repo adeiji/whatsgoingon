@@ -51,5 +51,5 @@
 - (IBAction)enableOrDisableAddressBox:(id)sender;
 
 - (void) displayCurrentLocation;
-
+- (void) setupView;
 @end

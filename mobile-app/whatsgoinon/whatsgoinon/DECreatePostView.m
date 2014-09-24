@@ -11,8 +11,7 @@
 
 @implementation DECreatePostView
 
-- (void) willMoveToSuperview:(UIView *)newSuperview {
-    [super willMoveToSuperview:newSuperview];
+- (void) setupView {
     [self setPickers];
     [self setDelegates];
     [self setButtons];
@@ -74,14 +73,6 @@
     _txtCategory.delegate = self;
     _txtTitle.delegate = self;
     _txtCost.delegate = self;
-}
-
-- (void) removeFromSuperview
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    
-    [super removeFromSuperview];
 }
 
 - (void) registerForKeyboardNotifications

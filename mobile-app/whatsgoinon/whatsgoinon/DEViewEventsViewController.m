@@ -127,6 +127,7 @@
     }
 }
 
+
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
@@ -134,8 +135,8 @@
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
     orbView.hidden = YES;
-    
     self.view.hidden = YES;
+    [_scrollView setDelegate:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
