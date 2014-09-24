@@ -9,6 +9,7 @@
 #import "DEViewEventsViewController.h"
 #import "Constants.h"
 #import "Reachability.h"
+#import <Masonry/Masonry.h>
 
 @interface DEViewEventsViewController ()
 
@@ -82,14 +83,13 @@
     
     [UIView animateWithDuration:.5f animations:^{
         
-
+        [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(viewMainMenu.frame.size.width);
+            make.top.mas_equalTo(0);
+        }];
+        
         // Move the main menu over to the right
-        CGRect frame = self.view.frame;
-        frame.origin.x = viewMainMenu.frame.size.width;
-        
-        self.view.frame = frame;
-        
-        frame = viewMainMenu.frame;
+        CGRect frame = viewMainMenu.frame;
         frame.origin.x = 0;
         viewMainMenu.frame = frame;
     }];
@@ -101,13 +101,12 @@
 - (void) hideMainMenu
 {
     [UIView animateWithDuration:.5f animations:^{
-        // Move the main menu back to the left side
-        CGRect frame = self.view.frame;
-        frame.origin.x = 0;
+        [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(0);
+            make.top.mas_equalTo(0);
+        }];
         
-        self.view.frame = frame;
-        
-        frame = viewMainMenu.frame;
+        CGRect frame = viewMainMenu.frame;
         frame.origin.x = -(viewMainMenu.frame.size.width);
         viewMainMenu.frame = frame;
     } completion:^(BOOL finished) {
