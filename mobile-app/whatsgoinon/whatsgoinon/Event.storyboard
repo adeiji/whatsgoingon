@@ -53,8 +53,8 @@
                                     <action selector="setEventAsMaybeGoing:" destination="6zc-FM-Gmr" eventType="touchUpInside" id="N8P-oz-09M"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fpN-wj-vJZ">
-                                <rect key="frame" x="10" y="89" width="127" height="110"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fpN-wj-vJZ">
+                                <rect key="frame" x="12" y="136" width="81" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="vTB-fE-chW">

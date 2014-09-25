@@ -22,7 +22,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     _eventDetailsViewController = [[DEEventDetailsViewController alloc] initWithNibName:@"EventDetailsView" bundle:[NSBundle mainBundle]];
-    
+    [[[_eventView imgMainImage] layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    [[[_eventView imgMainImage] layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[[_eventView imgMainImage] layer] setBorderWidth:2.0f];
     if (_isPreview)
     {
         [_eventView setPost:_post];
@@ -220,6 +222,7 @@
     }
     
     [self updateViewToGoing];
+    [[_eventView imgMainImage] setHidden:YES];
 }
 
 - (void) updateViewToGoing
