@@ -15,6 +15,8 @@
 
 @implementation DEEventViewController
 
+#define GOOGLE_MAPS_APP_URL @"comgooglemaps://?saddr=&daddr=%@&center=%f,%f&zoom=10"
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,7 +53,10 @@
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
     
-
+    if (_isGoing && _mapView)
+    {
+        [self updateViewToGoing];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -172,11 +177,10 @@
     if ([[segue identifier] isEqualToString:@"viewMap"])
     {
         DEEventViewController *mapViewController = [segue destinationViewController];
+        mapViewController.isGoing = _isGoing;
         mapViewController.post = _post;
     }
 }
-
-
 
 - (IBAction)setEventAsGoing:(id)sender {
     
@@ -213,6 +217,40 @@
         [viewController shareEvent:nil];
         
         [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    [self updateViewToGoing];
+}
+
+- (void) updateViewToGoing
+{
+    UIButton *button = [_eventView btnGoing];
+    [button setTitle:@"Map It" forState:UIControlStateNormal];
+    [button removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
+
+    [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
+    _isGoing = YES;
+}
+- (void) mapIt
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Get Directions To Event" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use Google Maps", @"Use Apple Maps", nil];
+    
+    [actionSheet showInView:self.view];
+}
+
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        NSString *urlString = [NSString stringWithFormat:GOOGLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], _post.location.longitude, _post.location.latitude ];
+        if ([[UIApplication sharedApplication] canOpenURL:
+             [NSURL URLWithString:@"comgooglemaps://"]]) {
+            [[UIApplication sharedApplication] openURL:
+             [NSURL URLWithString:urlString]];
+        } else {
+            NSLog(@"Can't use comgooglemaps://");
+        }
     }
 }
 

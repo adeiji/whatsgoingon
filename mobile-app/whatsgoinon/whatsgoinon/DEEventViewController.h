@@ -19,7 +19,7 @@
 
 @class DEPost, DEViewEventsView, DEEventView;
 
-@interface DEEventViewController : UIViewController
+@interface DEEventViewController : UIViewController <UIActionSheetDelegate>
 
 @property BOOL isPreview;
 @property (strong, nonatomic) DEPost *post;
@@ -28,6 +28,7 @@
 @property (strong, nonatomic) DEEventDetailsViewController *eventDetailsViewController;
 @property (weak, nonatomic) IBOutlet UIButton *btnPost;
 @property (weak, nonatomic) IBOutlet DEEventView *mapView;
+@property BOOL isGoing;
 
 #pragma mark - Button Action Methods
 

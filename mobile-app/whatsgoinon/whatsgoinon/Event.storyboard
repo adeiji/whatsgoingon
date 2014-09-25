@@ -227,6 +227,8 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
+                            <outlet property="btnGoing" destination="v8V-4e-r6T" id="Byk-UZ-QIg"/>
+                            <outlet property="btnMaybe" destination="WTm-Gk-3XI" id="nI8-DG-vLc"/>
                             <outlet property="viewMapView" destination="hJ9-XQ-7vX" id="CBn-TS-SZ0"/>
                         </connections>
                     </view>
