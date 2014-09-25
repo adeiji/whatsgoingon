@@ -57,10 +57,6 @@
                                 <rect key="frame" x="12" y="136" width="81" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="vTB-fE-chW">
-                                <rect key="frame" x="0.0" y="255" width="320" height="233"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="TjW-V4-bsr" customClass="DEBackButton">
                                 <rect key="frame" x="12" y="16" width="42" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -146,11 +142,15 @@
                                     <action selector="savePost:" destination="6zc-FM-Gmr" eventType="touchUpInside" id="Jst-Dq-WVC"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" id="Hka-7K-0uG">
+                                <rect key="frame" x="0.0" y="254" width="320" height="236"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                         </subviews>
                         <connections>
                             <outlet property="btnGoing" destination="iD5-yh-YDX" id="Hqp-kK-dR6"/>
                             <outlet property="btnMaybe" destination="9qi-fd-hCu" id="kdG-cL-v1T"/>
-                            <outlet property="detailsView" destination="vTB-fE-chW" id="4Z5-Zj-VKo"/>
+                            <outlet property="detailsView" destination="Hka-7K-0uG" id="7FD-r2-k20"/>
                             <outlet property="imgMainImage" destination="fpN-wj-vJZ" id="Tr4-dn-q0p"/>
                             <outlet property="viewMapView" destination="5Lu-Dv-3Od" id="Xg1-jO-OiJ"/>
                         </connections>

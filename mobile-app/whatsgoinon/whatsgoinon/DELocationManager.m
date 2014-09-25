@@ -41,8 +41,10 @@
         
         if (distance < 500)
         {
-            [DEScreenManager showCommentView : post];
-            [postToDeleteFromGoing addObject:post];
+            [timer invalidate];
+            [timer setFireDate:[NSDate distantFuture]];
+            [self startTimerForFeedback];
+            _eventPersonAt = post;
         }
     }
     
@@ -58,7 +60,22 @@
 
 - (void) startTimer
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:300 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:YES];
+    
+    [timer fire];
+}
+
+- (void) promptUserForFeedback
+{
+    [DEScreenManager showCommentView : _eventPersonAt];
+    [[[DEPostManager sharedManager] goingPost] removeObject:_eventPersonAt];
+    
+    [self startTimer];
+}
+
+- (void) startTimerForFeedback
+{
+    timer = [NSTimer scheduledTimerWithTimeInterval:600 target:self selector:@selector(promptUserForFeedback) userInfo:nil repeats:NO];
     
     [timer fire];
 }

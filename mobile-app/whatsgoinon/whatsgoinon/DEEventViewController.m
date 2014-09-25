@@ -97,9 +97,12 @@
 }
 
 - (UIView *) showView : (UIView *) newView {
-    UIView *view = [[[_eventView detailsView] subviews] lastObject];
-    [view removeFromSuperview];
-    view = [_eventView detailsView];
+    
+    for (UIView *view in [[_eventView detailsView] subviews]) {
+        [view removeFromSuperview];
+    }
+    
+    UIView *view = [_eventView detailsView];
     [view addSubview:newView];
     
     return newView;

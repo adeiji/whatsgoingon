@@ -45,5 +45,6 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) NSMutableData *responseData;
 @property (strong, nonatomic) PFGeoPoint *storedLocation;
+@property (strong, nonatomic) DEPost *eventPersonAt;
 
 @end
