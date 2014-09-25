@@ -28,14 +28,18 @@
                                                             longitude:location.longitude
                                                                  zoom:16];
     _viewMapView.camera = camera;
-    _viewMapView.myLocationEnabled = YES;
+    _viewMapView.myLocationEnabled = NO;
     _viewMapView.mapType = kGMSTypeNormal;
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.position = CLLocationCoordinate2DMake(location.latitude, location.longitude);
-    marker.snippet = [[[DEPostManager sharedManager] currentPost] address];
+    marker.title = [[[DEPostManager sharedManager] currentPost] address];
+    marker.snippet = [[DEPostManager sharedManager] distanceFromEvent];
+    marker.infoWindowAnchor = CGPointMake(0, 1);
     marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.map = _viewMapView;
+    
+    [_viewMapView setSelectedMarker:marker];
 }
 
 @end

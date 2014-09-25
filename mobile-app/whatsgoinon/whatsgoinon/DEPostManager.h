@@ -30,7 +30,6 @@
 + (BOOL) isBeforeEvent : (DEPost *) post;
 + (NSNumber *) getDurationOfEvent : (DEPost *) event;
 
-
 // Stores the current post when one post is being viewed, edited or created
 @property (strong, nonatomic) DEPost *currentPost;
 
@@ -40,6 +39,7 @@
 @property (strong, nonatomic) NSMutableArray *goingPost;
 @property (strong, nonatomic) NSMutableArray *maybeGoingPost;
 @property (strong, nonatomic) NSArray *allEvents;
+@property (strong, nonatomic) NSString *distanceFromEvent;
 + (id)sharedManager;
 
 @end

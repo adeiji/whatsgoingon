@@ -166,6 +166,7 @@
     eventViewController.isPreview = NO;
     eventViewController.viewEventView = self;
     [[DEPostManager sharedManager] setCurrentPost:_post];
+    [[DEPostManager sharedManager] setDistanceFromEvent:self.lblDistance.text];
     [navigationController pushViewController:eventViewController animated:YES];
 }
 
