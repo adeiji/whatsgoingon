@@ -202,6 +202,18 @@
             [[eventView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
         }
     }
+    
+    if (!_mapView)
+    {
+        [self shareEvent:nil];
+    }
+    else {
+        NSInteger indexOfViewController = self.navigationController.viewControllers.count - 2;
+        DEEventViewController *viewController = [self.navigationController.viewControllers objectAtIndex:indexOfViewController];
+        [viewController shareEvent:nil];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)setEventAsMaybeGoing:(id)sender {
