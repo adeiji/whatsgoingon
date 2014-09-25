@@ -165,6 +165,7 @@
     eventViewController.post = _post;
     eventViewController.isPreview = NO;
     eventViewController.viewEventView = self;
+    [[DEPostManager sharedManager] setCurrentPost:_post];
     [navigationController pushViewController:eventViewController animated:YES];
 }
 

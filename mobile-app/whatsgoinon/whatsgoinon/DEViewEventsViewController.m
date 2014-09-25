@@ -57,6 +57,18 @@
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.navigationController setNavigationBarHidden:YES];
     [self.scrollView setDelegate:self];
+
+    [_scrollView removeConstraints:[_scrollView constraints]];
+    
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(_scrollView.superview.mas_top).offset(74);
+        make.left.equalTo(_scrollView.superview.mas_left);
+        make.bottom.equalTo(_scrollView.superview.mas_bottom);
+        make.right.equalTo(_scrollView.superview.mas_right);
+    }];
+    
+    [_scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
 }
 
 - (void) addGestureRecognizers
@@ -84,8 +96,8 @@
     [UIView animateWithDuration:.5f animations:^{
         
         [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(viewMainMenu.frame.size.width);
-            make.top.mas_equalTo(0);
+            make.left.offset(viewMainMenu.frame.size.width);
+            make.top.offset(0);
         }];
         
         // Move the main menu over to the right
@@ -101,7 +113,7 @@
 - (void) hideMainMenu
 {
     [UIView animateWithDuration:.5f animations:^{
-        [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
+        [self.view mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(0);
             make.top.mas_equalTo(0);
         }];
@@ -187,6 +199,7 @@
     for (UIView *subview in [_scrollView subviews]) {
         [subview removeFromSuperview];
     }
+
     postCounter = 0;
     //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
     _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, ((POST_HEIGHT + TOP_MARGIN) * (([_posts count] / 2) + ([_posts count] % 2))) + SCROLL_VIEW_DISTANCE_FROM_TOP);

@@ -12,7 +12,6 @@
 #import "DESyncManager.h"
 #import "DEScreenManager.h"
 #import "DEEventDetailsMoreView.h"
-#import "DEMapViewController.h"
 #import "DESharingView.h"
 #import "DEViewEventsView.h"
 #import "DEEventView.h"
@@ -28,6 +27,7 @@
 @property (strong, nonatomic) IBOutlet DEEventView *eventView;
 @property (strong, nonatomic) DEEventDetailsViewController *eventDetailsViewController;
 @property (weak, nonatomic) IBOutlet UIButton *btnPost;
+@property (weak, nonatomic) IBOutlet DEEventView *mapView;
 
 #pragma mark - Button Action Methods
 

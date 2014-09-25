@@ -9,14 +9,14 @@
             <objects>
                 <viewController id="IJq-25-4RC" customClass="DEViewEventsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="N8b-nZ-kCY"/>
-                        <viewControllerLayoutGuide type="bottom" id="8VP-O7-Add"/>
+                        <viewControllerLayoutGuide type="top" id="H2Q-oU-1yb"/>
+                        <viewControllerLayoutGuide type="bottom" id="BOL-og-cs8"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OzN-Tk-2AE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFX-Ym-bdg">
+                            <scrollView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFX-Ym-bdg">
                                 <rect key="frame" x="0.0" y="74" width="320" height="494"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
@@ -48,12 +48,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <constraints>
-                            <constraint firstItem="8VP-O7-Add" firstAttribute="top" secondItem="oFX-Ym-bdg" secondAttribute="bottom" id="BAT-tS-3IX"/>
-                            <constraint firstItem="oFX-Ym-bdg" firstAttribute="top" secondItem="OzN-Tk-2AE" secondAttribute="top" constant="74" id="X8r-vQ-b6r"/>
-                            <constraint firstItem="oFX-Ym-bdg" firstAttribute="leading" secondItem="OzN-Tk-2AE" secondAttribute="leading" id="ZPp-00-FpX"/>
-                            <constraint firstAttribute="trailing" secondItem="oFX-Ym-bdg" secondAttribute="trailing" id="lYx-Ye-z3v"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="scrollView" destination="oFX-Ym-bdg" id="5vw-tq-pS6"/>

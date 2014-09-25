@@ -50,6 +50,8 @@
     
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
+    
+
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -167,12 +169,14 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue destinationViewController] isKindOfClass:[DEMapViewController class]])
+    if ([[segue identifier] isEqualToString:@"viewMap"])
     {
-        DEMapViewController *mapViewController = [segue destinationViewController];
-        [mapViewController setLocation:[_post location]];
+        DEEventViewController *mapViewController = [segue destinationViewController];
+        mapViewController.post = _post;
     }
 }
+
+
 
 - (IBAction)setEventAsGoing:(id)sender {
     

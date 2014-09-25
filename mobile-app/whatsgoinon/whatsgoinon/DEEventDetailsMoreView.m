@@ -34,6 +34,9 @@
     DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
     
     [navController pushViewController:createPostViewController animated:YES];
+    
+    DEPost *post = [[DEPostManager sharedManager] currentPost];
+    post.images = nil;
 }
 
 - (IBAction)reportEvent:(id)sender {

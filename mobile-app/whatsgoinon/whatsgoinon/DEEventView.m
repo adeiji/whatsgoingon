@@ -33,8 +33,9 @@
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.position = CLLocationCoordinate2DMake(location.latitude, location.longitude);
+    marker.snippet = [[[DEPostManager sharedManager] currentPost] address];
+    marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.map = _viewMapView;
-    
 }
 
 @end

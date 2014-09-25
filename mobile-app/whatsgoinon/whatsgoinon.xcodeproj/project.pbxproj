@@ -106,7 +106,6 @@
 		F4774FB019996A9B00FCDE66 /* DEEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FAF19996A9B00FCDE66 /* DEEventView.m */; };
 		F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB219996E7B00FCDE66 /* DEEventViewController.m */; };
 		F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */; };
-		F483B07E199EDB3600C12FB2 /* DEMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F483B07D199EDB3600C12FB2 /* DEMapViewController.m */; };
 		F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */; };
 		F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F485811719A2B00F00BD1CE7 /* DEViewMainMenu.m */; };
 		F485811A19A2B74900BD1CE7 /* ViewChangeCity.xib in Resources */ = {isa = PBXBuildFile; fileRef = F485811919A2B74900BD1CE7 /* ViewChangeCity.xib */; };
@@ -300,8 +299,6 @@
 		F4774FB219996E7B00FCDE66 /* DEEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventViewController.m; sourceTree = "<group>"; };
 		F4774FB4199974A600FCDE66 /* DEEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsViewController.h; sourceTree = "<group>"; };
 		F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsViewController.m; sourceTree = "<group>"; };
-		F483B07C199EDB3600C12FB2 /* DEMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMapViewController.h; sourceTree = "<group>"; };
-		F483B07D199EDB3600C12FB2 /* DEMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMapViewController.m; sourceTree = "<group>"; };
 		F483B08119A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DEScrollOnShowKeyboard.h"; sourceTree = "<group>"; };
 		F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DEScrollOnShowKeyboard.m"; sourceTree = "<group>"; };
 		F485811619A2B00F00BD1CE7 /* DEViewMainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewMainMenu.h; sourceTree = "<group>"; };
@@ -778,8 +775,6 @@
 		F483B07B199EDB1F00C12FB2 /* Map View */ = {
 			isa = PBXGroup;
 			children = (
-				F483B07C199EDB3600C12FB2 /* DEMapViewController.h */,
-				F483B07D199EDB3600C12FB2 /* DEMapViewController.m */,
 			);
 			name = "Map View";
 			sourceTree = "<group>";
@@ -1172,7 +1167,6 @@
 				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,
 				F46B945219C1181800B41D8C /* DEViewDistance.m in Sources */,
 				F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */,
-				F483B07E199EDB3600C12FB2 /* DEMapViewController.m in Sources */,
 				F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
 				F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */,

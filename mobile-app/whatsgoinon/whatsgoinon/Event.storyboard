@@ -28,7 +28,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Pp2-S5-zRI" kind="push" id="IMu-7m-A7C"/>
+                                    <segue destination="Pp2-S5-zRI" kind="push" identifier="viewMap" id="IMu-7m-A7C"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iD5-yh-YDX">
@@ -168,24 +168,85 @@
             </objects>
             <point key="canvasLocation" x="21" y="-58"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Event View Controller-->
         <scene sceneID="dIr-mH-44p">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pp2-S5-zRI" customClass="DEMapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pp2-S5-zRI" customClass="DEEventViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Twg-Lj-Jln"/>
                         <viewControllerLayoutGuide type="bottom" id="gbG-SA-x5c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4uj-JY-5KX">
+                    <view key="view" contentMode="scaleToFill" id="4uj-JY-5KX" customClass="DEEventView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJ9-XQ-7vX" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="59" width="320" height="431"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NfX-4o-j1K" customClass="DEBackButton">
+                                <rect key="frame" x="16" y="16" width="42" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goBack:" destination="6zc-FM-Gmr" eventType="touchUpInside" id="UVZ-6w-aja"/>
+                                    <action selector="goBack:" destination="Pp2-S5-zRI" eventType="touchUpInside" id="y8C-wJ-uXQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Movie at the Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MU-eT-AlI">
+                                <rect key="frame" x="66" y="29" width="197" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v8V-4e-r6T">
+                                <rect key="frame" x="0.0" y="488" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                <state key="normal" title="I'm Going">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setEventAsGoing:" destination="6zc-FM-Gmr" eventType="touchUpInside" id="AT7-0u-deL"/>
+                                    <action selector="setEventAsGoing:" destination="Pp2-S5-zRI" eventType="touchUpInside" id="dfD-Gc-uhY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WTm-Gk-3XI">
+                                <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                <state key="normal" title="Maybe">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="setEventAsMaybeGoing:" destination="Pp2-S5-zRI" eventType="touchUpInside" id="dkW-75-xc2"/>
+                                    <action selector="setEventAsMaybeGoing:" destination="6zc-FM-Gmr" eventType="touchUpInside" id="kLT-rd-A0y"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="viewMapView" destination="hJ9-XQ-7vX" id="CBn-TS-SZ0"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="hP6-Bh-cBi"/>
+                    <connections>
+                        <outlet property="eventView" destination="4uj-JY-5KX" id="ZTk-7R-a7a"/>
+                        <outlet property="mapView" destination="hJ9-XQ-7vX" id="nYO-uZ-1MR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gi5-hg-b1E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="480" y="-36"/>
+            <point key="canvasLocation" x="481" y="-58"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
