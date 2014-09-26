@@ -279,6 +279,11 @@
     [self loadVisiblePost:scrollView];
 }
 
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self loadVisiblePost:scrollView];
+}
+
 - (void) loadVisiblePost : (UIScrollView *) scrollView
 {
     for (UIView *view in [scrollView subviews]) {

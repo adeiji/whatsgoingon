@@ -148,7 +148,7 @@
             
             UIImage *image = [UIImage imageWithData:imageData];
             self.imgMainImageView.image = image;
-            [UIView animateWithDuration:0.7f animations:^{
+            [UIView animateWithDuration:0.3f animations:^{
                 [self.imgMainImageView setAlpha:1.0f];
             }];
         }];

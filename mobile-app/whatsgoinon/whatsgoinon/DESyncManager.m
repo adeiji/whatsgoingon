@@ -21,7 +21,7 @@
     [[DEScreenManager sharedManager] startActivitySpinner];
     
     __block DEPostManager *sharedManager = [DEPostManager sharedManager];
-    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    __block PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     //Get all the events that are currently active
     NSDate *date = [NSDate date];
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
@@ -39,12 +39,32 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
-            //The find succeeded, now do something with it
-            [sharedManager setPosts:objects];
-            [sharedManager setAllEvents:objects];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-            NSLog(@"Notification sent, events loaded");
-            [[DEScreenManager sharedManager] stopActivitySpinner];
+            if ([objects count] < 10)
+            {
+                query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+                [query setLimit:10];
+                [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
+                [sharedManager setPosts:objects];
+                
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    //The find succeeded, now do something with it
+                    NSMutableArray *array = (NSMutableArray *) [sharedManager posts];
+                    [array addObjectsFromArray:objects];
+                    [sharedManager setPosts:array];
+                    [sharedManager setAllEvents:array];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+                    NSLog(@"Notification sent, events loaded");
+                    [[DEScreenManager sharedManager] stopActivitySpinner];
+                }];
+            }
+            else {
+                //The find succeeded, now do something with it
+                [sharedManager setPosts:objects];
+                [sharedManager setAllEvents:objects];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+                NSLog(@"Notification sent, events loaded");
+                [[DEScreenManager sharedManager] stopActivitySpinner];
+            }
         }
         else {
             // The find failed, let the customer know
