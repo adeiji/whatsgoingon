@@ -17,7 +17,6 @@
 
 @implementation DECreatePostViewController
 
-static BOOL DEVELOPMENT = YES;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,9 +36,6 @@ static BOOL DEVELOPMENT = YES;
     
     [[_createPostViewTwo txtDescription] setDelegate:self];
     [[_createPostViewTwo txtQuickDescription] setDelegate:self];
-    
-    [_createPostViewTwo setupView];
-    [_createPostViewOne setupView];
 
     UIPickerView *postRangePickerView = [UIPickerView new];
     [postRangePickerView setDelegate:self];
@@ -70,6 +66,8 @@ static BOOL DEVELOPMENT = YES;
     [super viewWillAppear:animated];
     [self.view setHidden:NO];
     
+    [_createPostViewTwo setupView];
+    [_createPostViewOne setupView];
     [self loadPostDetails];
 }
 
