@@ -61,7 +61,7 @@
         }
     }];
 }
-
+// Get the values for later if there are not more than 50 in the now events
 + (void) getValuesForLater : (PFQuery *) query
                    Objects : (NSArray *) objects
 {
@@ -96,16 +96,16 @@
 
 + (void) loadBestEventsInPastWeekWithQuery : (PFQuery *) query
 {
-    query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
-    [query orderByAscending:PARSE_CLASS_EVENT_NUMBER_GOING];
-    
     NSDate *startDate = [NSDate date];
     // Seconds in one week
     NSTimeInterval timeInterval = -60 * 60 * 24 * 7;
     startDate = [startDate dateByAddingTimeInterval:timeInterval];
     
+    query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThanOrEqualTo:startDate];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThanOrEqualTo:[NSDate date]];
+    [query setLimit:10];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
@@ -126,7 +126,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     CGFloat miles = 25;
     
-    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    __block PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    
     NSDate *date = [NSDate date];
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
@@ -149,7 +150,9 @@
         {
             if ([objects count] < 10)
             {
-                
+                query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+                [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:geoPoint withinMiles:miles];
+                [self getValuesForLater:query Objects:objects];
             }
             [[DEPostManager sharedManager] setPosts:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];

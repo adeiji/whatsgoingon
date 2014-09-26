@@ -105,6 +105,15 @@
     UIView *view = [_eventView detailsView];
     [view addSubview:newView];
     
+    if ([newView isKindOfClass:[DEViewComments class]])
+    {
+        ((UIScrollView *) view).scrollEnabled = NO;
+    }
+    else
+    {
+        ((UIScrollView *) view).scrollEnabled = YES;
+    }
+    
     return newView;
 }
 

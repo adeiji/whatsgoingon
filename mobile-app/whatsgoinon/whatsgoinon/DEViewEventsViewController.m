@@ -194,8 +194,9 @@
 {
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] lastObject];
     [_scrollView addSubview:view];
-    [self setUpScrollViewForPostsWithTopMargin:0];
-    [self addEventsToScreen : 0];
+    [self loadPosts];
+    [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
+    [self addEventsToScreen : view.frame.size.height + 15];
     [self loadVisiblePost:_scrollView];
 }
 
