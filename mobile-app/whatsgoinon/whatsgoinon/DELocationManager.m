@@ -200,19 +200,22 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSError *error;
-        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-        
-        if (![jsonData[@"status"] isEqualToString:@"ZERO_RESULTS"])
+        if (data != nil)
         {
-            NSString *addressNumber = jsonData[@"results"][0][@"address_components"][0][@"short_name"];
-            NSString *street = jsonData[@"results"][0][@"address_components"][1][@"short_name"];
-            NSString *address = [NSString stringWithFormat:@"%@ %@", addressNumber, street];
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             
-//            NSLog(@"%@", address);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // Make sure that we call this method on the main thread so that it updates properly as supposed to
-                callback(address);
-            });
+            if (![jsonData[@"status"] isEqualToString:@"ZERO_RESULTS"])
+            {
+                NSString *addressNumber = jsonData[@"results"][0][@"address_components"][0][@"short_name"];
+                NSString *street = jsonData[@"results"][0][@"address_components"][1][@"short_name"];
+                NSString *address = [NSString stringWithFormat:@"%@ %@", addressNumber, street];
+                
+    //            NSLog(@"%@", address);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Make sure that we call this method on the main thread so that it updates properly as supposed to
+                    callback(address);
+                });
+            }
         }
     }];
 

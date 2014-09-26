@@ -185,10 +185,25 @@
         {
             UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewNoInternet" owner:self options:nil] firstObject];
             
+            for (UIView *subview in [view subviews]) {
+                if ([subview isKindOfClass:[UIButton class]])
+                {
+                    UIButton *button = (UIButton *) subview;
+                    [[button layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+                    
+                    [button addTarget:self action:@selector(goHome:) forControlEvents:UIControlEventTouchUpInside];
+                }
+            }
+            
             [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
             [[DEScreenManager sharedManager] stopActivitySpinner];
         }
     }
+    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+    
+    orbView.hidden = YES;
 }
 
 - (void) displayPost {
@@ -275,6 +290,11 @@
 
 #pragma mark - Scroll View Delegate Methods
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self loadVisiblePost:scrollView];
+}
+
+- (void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
 {
     [self loadVisiblePost:scrollView];
 }
