@@ -88,8 +88,9 @@
 
 - (void) renderView {
     
+    NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
     
-    categories = [NSArray arrayWithObjects:@"Featured", @"Under 21", @"Party", @"Classy", @"Over 21", @"Crazy", @"Funny", @"Music", @"Environmental", @"Ridiculous", @"Dancing", @"Nerdy", @"Pricy", nil];
+    categories = [plistData allKeys];
     
     myCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(self.frame.size.width - 320, self.frame.size.height - 400, 360, 550)];
     myCarousel.type = iCarouselTypeWheel;
@@ -189,17 +190,25 @@
 {
     NSArray *events = [[DEPostManager sharedManager] allEvents];
     NSMutableArray *eventsInCategory = [NSMutableArray new];
-    [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        DEPost *event = [DEPost getPostFromPFObject:obj];
-        
-        if ([event.category isEqualToString:category])
-        {
-            [eventsInCategory addObject:obj];
-        }
-    }];
     
-    [[DEPostManager sharedManager] setPosts:eventsInCategory];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    if (![category isEqualToString:@"Everything"])
+    {
+        [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            DEPost *event = [DEPost getPostFromPFObject:obj];
+            
+            if ([event.category isEqualToString:category])
+            {
+                [eventsInCategory addObject:obj];
+            }
+        }];
+        
+        [[DEPostManager sharedManager] setPosts:eventsInCategory];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    }
+    else {  // If the user selects everything then pull back every posts
+        [[DEPostManager sharedManager] setPosts:[[DEPostManager sharedManager] allEvents]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    }
 }
 
 - (void) wheelDidChangeValue: (int) index {

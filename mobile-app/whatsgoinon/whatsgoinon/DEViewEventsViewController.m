@@ -141,7 +141,6 @@
 
 
 - (void) viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
     
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
@@ -149,6 +148,9 @@
     orbView.hidden = YES;
     self.view.hidden = YES;
     [_scrollView setDelegate:nil];
+    
+    [super viewWillDisappear:animated];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -158,6 +160,8 @@
     
     orbView.hidden = NO;
     self.view.hidden = NO;
+    [_scrollView setDelegate:self];
+
     
     [super viewWillAppear:animated];
 }
@@ -198,12 +202,12 @@
             [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
             [[DEScreenManager sharedManager] stopActivitySpinner];
         }
+        
+        DEScreenManager *screenManager = [DEScreenManager sharedManager];
+        UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+        
+        orbView.hidden = YES;
     }
-    
-    DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
-    
-    orbView.hidden = YES;
 }
 
 - (void) displayPost {

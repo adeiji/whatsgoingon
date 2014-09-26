@@ -121,29 +121,18 @@ static BOOL DEVELOPMENT = YES;
 
 - (void) saveNewInfoToPost {
     DECreatePostView *view = self.createPostViewTwo;
-    DELocationManager *sharedManager = [DELocationManager sharedManager];
     
-    if (DEVELOPMENT)
-    {
-        // Development
-        _post.title = view.txtTitle.text;
-        _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
-        _post.images = [[[DEPostManager sharedManager] currentPost] images];
-        _post.description = view.txtDescription.text;
-        _post.active = YES;
-        _post.location = sharedManager.storedLocation;
-        _post.quickDescription = view.txtQuickDescription.text;
-        _post.images = [[[DEPostManager sharedManager] currentPost] images];
-        
-        [[DEPostManager sharedManager] setCurrentPost:_post];
-    }
-    else {
-        // Production
-        _post.cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
-        _post.description =
-        _post.title = view.txtTitle.text;
-        _post.images = [[[DEPostManager sharedManager] currentPost] images];
-    }
+    // Development
+    _post.title = view.txtTitle.text;
+    _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
+    _post.images = [[[DEPostManager sharedManager] currentPost] images];
+    _post.description = view.txtDescription.text;
+    _post.active = YES;
+    _post.quickDescription = view.txtQuickDescription.text;
+    _post.images = [[[DEPostManager sharedManager] currentPost] images];
+    
+    [[DEPostManager sharedManager] setCurrentPost:_post];
+
 }
 
 
@@ -154,7 +143,6 @@ static BOOL DEVELOPMENT = YES;
 
 - (IBAction)gotoNextScreen:(id)sender {
     DEPostManager *postManager = [DEPostManager sharedManager];
-    DELocationManager *locationManager = [DELocationManager sharedManager];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/d/yy h:mm a"];
@@ -184,7 +172,9 @@ static BOOL DEVELOPMENT = YES;
     
     _post.startTime = startDate;
     _post.endTime = endDate;
-    _post.location = [locationManager geoPoint];
+    [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
+        _post.location = value;
+    }];
     _post.postRange = [NSNumber numberWithInt:[_createPostViewOne.txtPostRange.text intValue]];
     _post.address = _createPostViewOne.txtAddress.text;
     _post.category = _createPostViewOne.txtCategory.text;
