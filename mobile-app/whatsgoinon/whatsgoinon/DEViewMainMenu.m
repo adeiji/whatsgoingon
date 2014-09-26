@@ -66,6 +66,10 @@
 }
 
 - (IBAction)showFeedbackPage:(id)sender {
+    
+    DEViewEventsViewController *viewController = (DEViewEventsViewController *)[DEScreenManager getMainNavigationController].topViewController;
+    [viewController hideMainMenu];
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email Feedback", @"Write a Review",nil];
     
     [[DEScreenManager sharedManager] setNextScreen:[[DEScreenManager getMainNavigationController] topViewController]];

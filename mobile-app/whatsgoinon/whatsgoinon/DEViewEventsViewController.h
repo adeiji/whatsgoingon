@@ -13,6 +13,7 @@
 #import "DELocationManager.h"
 #import "DESelectCategoryView.h"
 #import "DEViewMainMenu.h"
+#import <Masonry/Masonry.h>
 
 @class DEViewMainMenu;
 

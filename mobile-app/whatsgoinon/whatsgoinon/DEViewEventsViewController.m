@@ -9,7 +9,7 @@
 #import "DEViewEventsViewController.h"
 #import "Constants.h"
 #import "Reachability.h"
-#import <Masonry/Masonry.h>
+
 
 @interface DEViewEventsViewController ()
 
@@ -96,14 +96,19 @@
     frame.origin.y = MAIN_MENU_Y_POS;
     frame.origin.x = -frame.size.width;
     viewMainMenu.frame = frame;
+
+    [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.offset(viewMainMenu.frame.size.width);
+        make.top.offset(0);
+    }];
+    
+    // tell constraints they need updating
+    [self.view setNeedsUpdateConstraints];
+    // update constraints now so we can animate the change
+    [self.view updateConstraintsIfNeeded];
     
     [UIView animateWithDuration:.5f animations:^{
-        
-        [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.offset(viewMainMenu.frame.size.width);
-            make.top.offset(0);
-        }];
-        
+        [self.view layoutIfNeeded];
         // Move the main menu over to the right
         CGRect frame = viewMainMenu.frame;
         frame.origin.x = 0;
@@ -117,7 +122,7 @@
 - (void) hideMainMenu
 {
     [UIView animateWithDuration:.5f animations:^{
-        [self.view mas_remakeConstraints:^(MASConstraintMaker *make) {
+        [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(0);
             make.top.mas_equalTo(0);
         }];
