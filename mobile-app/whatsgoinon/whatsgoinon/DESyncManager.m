@@ -26,7 +26,9 @@
     NSDate *date = [NSDate date];
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
+    
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
+    
     if (now)
     {
         [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
@@ -42,20 +44,7 @@
             if ([objects count] < 10)
             {
                 query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
-                [query setLimit:10];
-                [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
-                [sharedManager setPosts:objects];
-                
-                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    //The find succeeded, now do something with it
-                    NSMutableArray *array = (NSMutableArray *) [sharedManager posts];
-                    [array addObjectsFromArray:objects];
-                    [sharedManager setPosts:array];
-                    [sharedManager setAllEvents:array];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-                    NSLog(@"Notification sent, events loaded");
-                    [[DEScreenManager sharedManager] stopActivitySpinner];
-                }];
+                [self getValuesForLater:query Objects:objects];
             }
             else {
                 //The find succeeded, now do something with it
@@ -71,6 +60,63 @@
             NSLog(@"Error: %@", [error description]);
         }
     }];
+}
+
++ (void) getValuesForLater : (PFQuery *) query
+                   Objects : (NSArray *) objects
+{
+    NSDate *date = [NSDate date];
+    NSTimeInterval threeHours = (3 * 60 * 60) - 1;
+    NSDate *later = [date dateByAddingTimeInterval:threeHours];
+    
+    [query setLimit:10];
+    [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
+    [[DEPostManager sharedManager] setPosts:objects];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if ([objects count] == 0)
+        {
+            [self loadBestEventsInPastWeekWithQuery : query];
+        }
+        else
+        {
+            //The find succeeded, now do something with it
+            NSMutableArray *array = (NSMutableArray *) [[DEPostManager sharedManager] posts];
+            [array addObjectsFromArray:objects];
+            [[DEPostManager sharedManager] setPosts:array];
+            [[DEPostManager sharedManager] setAllEvents:array];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+            NSLog(@"Notification sent, events loaded");
+            [[DEScreenManager sharedManager] stopActivitySpinner];
+        }
+    }];
+
+}
+
++ (void) loadBestEventsInPastWeekWithQuery : (PFQuery *) query
+{
+    query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    [query orderByAscending:PARSE_CLASS_EVENT_NUMBER_GOING];
+    
+    NSDate *startDate = [NSDate date];
+    // Seconds in one week
+    NSTimeInterval timeInterval = -60 * 60 * 24 * 7;
+    startDate = [startDate dateByAddingTimeInterval:timeInterval];
+    
+    [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThanOrEqualTo:startDate];
+    [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThanOrEqualTo:[NSDate date]];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            [[DEPostManager sharedManager] setPosts:objects];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NO_DATA object:nil];
+            
+            [[DEScreenManager sharedManager] stopActivitySpinner];
+        }
+    }];
+
 }
 
 + (void) getAllValuesNearGeoPoint : (PFGeoPoint *) geoPoint
@@ -94,11 +140,17 @@
         [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
         [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
     }
+  
     [query setLimit:30];
     [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:geoPoint withinMiles:miles];
+    // Get all the objects that are either now or later
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
+            if ([objects count] < 10)
+            {
+                
+            }
             [[DEPostManager sharedManager] setPosts:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
             [[DEScreenManager sharedManager] stopActivitySpinner];

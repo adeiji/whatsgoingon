@@ -46,3 +46,4 @@ NSString *const ORB_BUTTON_VIEW = @"orbButtonView";
 CGFloat const BUTTON_CORNER_RADIUS = 6.0f;
 NSString *const NOTIFICATION_CENTER_ALL_EVENTS_LOADED = @"allEventsLoaded";
 NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"cityChanged";
+NSString *const NOTIFICATION_CENTER_NO_DATA = @"noData";

@@ -33,6 +33,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
+    
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     
     // Add the select category view to the window so that we completely cover the screen including the navigation bar.
@@ -188,6 +190,15 @@
     }
 }
 
+- (void) displayNoData
+{
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] lastObject];
+    [_scrollView addSubview:view];
+    [self setUpScrollViewForPostsWithTopMargin:0];
+    [self addEventsToScreen : 0];
+    [self loadVisiblePost:_scrollView];
+}
+
 - (void) showNoInternetConnectionScreen : (NSNotification *) object {
     Reachability *reach = [object valueForKey:@"object"];
     
@@ -219,23 +230,32 @@
 }
 
 - (void) displayPost {
-    __block int column = 0;
     
     [self loadPosts];
     
     for (UIView *subview in [_scrollView subviews]) {
         [subview removeFromSuperview];
     }
-
-    postCounter = 0;
-    //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
-    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, ((POST_HEIGHT + TOP_MARGIN) * (([_posts count] / 2) + ([_posts count] % 2))) + SCROLL_VIEW_DISTANCE_FROM_TOP);
-
     
+    [self setUpScrollViewForPostsWithTopMargin:0];
+    [self addEventsToScreen : 0];
+    [self loadVisiblePost:_scrollView];
+}
+
+- (void) setUpScrollViewForPostsWithTopMargin : (NSInteger) topMargin
+{
+    //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
+    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, topMargin + ((POST_HEIGHT + TOP_MARGIN) * (([_posts count] / 2) + ([_posts count] % 2))) + SCROLL_VIEW_DISTANCE_FROM_TOP);
+}
+
+- (void) addEventsToScreen : (NSInteger) topMargin
+{
+    __block int column = 0;
+    postCounter = 0;
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
         
-        CGRect frame = CGRectMake((column * POST_WIDTH) + (13 * (column + 1)),(TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter), POST_WIDTH, POST_HEIGHT);
+        CGRect frame = CGRectMake((column * POST_WIDTH) + (13 * (column + 1)), topMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter), POST_WIDTH, POST_HEIGHT);
         viewEventsView.frame = frame;
         DEPost *post = [DEPost getPostFromPFObject:obj];
         
@@ -256,8 +276,6 @@
         
         [self getDistanceFromCurrentLocationOfEvent:obj];
     }];
-    
-    [self loadVisiblePost:_scrollView];
 }
 
 
