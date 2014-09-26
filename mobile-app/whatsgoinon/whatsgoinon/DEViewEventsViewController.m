@@ -272,8 +272,9 @@
     
 }
 
+
 #pragma mark - Scroll View Delegate Methods
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self loadVisiblePost:scrollView];
 }
