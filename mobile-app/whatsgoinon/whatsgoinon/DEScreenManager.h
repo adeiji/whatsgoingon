@@ -22,6 +22,7 @@
 @property (strong, nonatomic) UIViewController *nextScreen;
 @property (strong, nonatomic) NSMutableDictionary *values;
 @property (strong, nonatomic) DEViewMainMenu *mainMenu;
+@property BOOL isLater;
 
 #pragma mark - Public Methods
 

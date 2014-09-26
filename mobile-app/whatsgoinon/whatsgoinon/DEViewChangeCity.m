@@ -90,7 +90,11 @@
 {
     // Set the lat/long values to whatever was selected and then reload the post age with the necessary post that correspond to the city that was just selected
     _selection = [locations objectAtIndex:indexPath.row];
-    [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];    
+    [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];
+    [[DELocationManager sharedManager] setCity:_selection];
+    DEViewEventsViewController *viewController = (DEViewEventsViewController *) [[DEScreenManager getMainNavigationController] topViewController];
+    [viewController hideMainMenu];
+    
 }
 
 @end

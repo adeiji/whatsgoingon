@@ -32,6 +32,7 @@
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     
     // Add the select category view to the window so that we completely cover the screen including the navigation bar.
@@ -178,6 +179,13 @@
 
 - (void) loadPosts {
     _posts = [[DEPostManager sharedManager] posts];
+}
+
+- (void) displayPostFromNewCity
+{
+    for (UIView *subview in [_scrollView subviews]) {
+        [subview removeFromSuperview];
+    }
 }
 
 - (void) showNoInternetConnectionScreen : (NSNotification *) object {

@@ -73,6 +73,7 @@
     }
 
     [DESyncManager getAllValuesForNow:NO];
+    [[DEScreenManager sharedManager] setIsLater:YES];
 
 }
 
@@ -94,7 +95,7 @@
     }
     
     [DESyncManager getAllValuesForNow:YES];
-
+    [[DEScreenManager sharedManager] setIsLater:NO];
 }
 
 - (void) setNextScreenWithViewController : (UIViewController *) viewController {

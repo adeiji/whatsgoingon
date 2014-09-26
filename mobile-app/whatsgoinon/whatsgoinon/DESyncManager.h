@@ -27,4 +27,6 @@
 + (void) updateObjectWithId : (NSString *) objectId
                UpdateValues : (NSDictionary *) values
              ParseClassName : (NSString *) className;
++ (void) getAllValuesNearGeoPoint : (PFGeoPoint *) geoPoint;
+
 @end

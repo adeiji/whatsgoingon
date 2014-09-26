@@ -73,6 +73,39 @@
     }];
 }
 
++ (void) getAllValuesNearGeoPoint : (PFGeoPoint *) geoPoint
+{
+    [[DEScreenManager sharedManager] startActivitySpinner];
+    // Let the necessary objects know that the city has just been changed
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
+    CGFloat miles = 25;
+    
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    NSDate *date = [NSDate date];
+    NSTimeInterval threeHours = (3 * 60 * 60) - 1;
+    NSDate *later = [date dateByAddingTimeInterval:threeHours];
+    
+    if ([[DEScreenManager sharedManager] isLater])
+    {
+        [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
+    }
+    else
+    {
+        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
+    }
+    [query setLimit:30];
+    [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:geoPoint withinMiles:miles];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            [[DEPostManager sharedManager] setPosts:objects];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+            [[DEScreenManager sharedManager] stopActivitySpinner];
+        }
+    }];
+}
+
 + (void) checkForInternet
 {
     Reachability *reach = [Reachability reachabilityWithHostName:@"www.google.com"];

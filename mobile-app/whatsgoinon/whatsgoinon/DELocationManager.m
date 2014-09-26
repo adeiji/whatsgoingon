@@ -80,6 +80,15 @@
     [timer fire];
 }
 
+- (void) setCity:(NSString *)city
+{
+    _city = city;
+    [DELocationManager getLatLongValueFromAddress:city CompletionBlock:^(PFGeoPoint *value) {
+        _cityLocation = value;
+        [DESyncManager getAllValuesNearGeoPoint:value];
+    }];
+}
+
 - (PFGeoPoint *) geoPoint {
     return _currentLocation;
 }
