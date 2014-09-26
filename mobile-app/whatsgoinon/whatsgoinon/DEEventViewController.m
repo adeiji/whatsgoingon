@@ -16,6 +16,7 @@
 @implementation DEEventViewController
 
 #define GOOGLE_MAPS_APP_URL @"comgooglemaps://?saddr=&daddr=%@&center=%f,%f&zoom=10"
+#define APPLE_MAPS_APP_URL @"http://maps.apple.com/?daddr=%@&saddr=%@"
 
 - (void)viewDidLoad
 {
@@ -244,7 +245,16 @@
     [button removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
 
-    [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
+    CGRect frame = button.frame;
+    frame.origin.y += 40;
+    [button setFrame:frame];
+   // [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
+    [[_eventView btnMaybe] setHidden:YES];
+    
+    frame = _mapView.frame;
+    frame.size.height += 40;
+    [_mapView setFrame:frame];
+    
     _isGoing = YES;
 }
 - (void) mapIt
@@ -266,6 +276,14 @@
         } else {
             NSLog(@"Can't use comgooglemaps://");
         }
+    }
+    else if (buttonIndex == 1)
+    {
+        [DELocationManager getAddressFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSString *value) {
+            NSString *urlString = [NSString stringWithFormat:APPLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], [value stringByReplacingOccurrencesOfString:@" " withString:@"+"] ];
+
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+        }];
     }
 }
 

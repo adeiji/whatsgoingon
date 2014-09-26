@@ -202,13 +202,21 @@
             }
         }];
         
-        [[DEPostManager sharedManager] setPosts:eventsInCategory];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+        if ([eventsInCategory count] > 0)
+        {
+            [[DEPostManager sharedManager] setPosts:eventsInCategory];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+        }
+        else
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
+        }
     }
     else {  // If the user selects everything then pull back every posts
         [[DEPostManager sharedManager] setPosts:[[DEPostManager sharedManager] allEvents]];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
     }
+    
 }
 
 - (void) wheelDidChangeValue: (int) index {

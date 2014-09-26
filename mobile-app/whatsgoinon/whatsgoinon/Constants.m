@@ -47,3 +47,4 @@ CGFloat const BUTTON_CORNER_RADIUS = 6.0f;
 NSString *const NOTIFICATION_CENTER_ALL_EVENTS_LOADED = @"allEventsLoaded";
 NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"cityChanged";
 NSString *const NOTIFICATION_CENTER_NO_DATA = @"noData";
+NSString *const NOTIFICATION_CENTER_NONE_IN_CATEGORY = @"noneInCategory";

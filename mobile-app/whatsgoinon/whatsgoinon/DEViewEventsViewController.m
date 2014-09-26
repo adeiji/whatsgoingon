@@ -34,6 +34,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
     
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     
@@ -198,6 +199,25 @@
     [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
     [self addEventsToScreen : view.frame.size.height + 15];
     [self loadVisiblePost:_scrollView];
+    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+    
+    orbView.hidden = YES;
+}
+
+- (void) displayNoDataInCategory
+{
+    for (UIView *subview in [_scrollView subviews]) {
+        [subview removeFromSuperview];
+    }
+    
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
+    [_scrollView addSubview:view];
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+    
+    orbView.hidden = NO;
 }
 
 - (void) showNoInternetConnectionScreen : (NSNotification *) object {
@@ -241,6 +261,11 @@
     [self setUpScrollViewForPostsWithTopMargin:0];
     [self addEventsToScreen : 0];
     [self loadVisiblePost:_scrollView];
+    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+    
+    orbView.hidden = NO;
 }
 
 - (void) setUpScrollViewForPostsWithTopMargin : (NSInteger) topMargin
