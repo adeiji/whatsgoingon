@@ -37,6 +37,20 @@
     
     DEPost *post = [[DEPostManager sharedManager] currentPost];
     post.images = nil;
+    
+    // Get all the categories
+    NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
+    
+    NSArray *categories = [plistData allKeys];
+    NSInteger indexOfCategory = 0;
+    for (NSString *category in categories) {
+        if ([category isEqualToString:post.category])
+        {
+            break;
+        }
+        
+        indexOfCategory ++;
+    }
 }
 
 - (IBAction)reportEvent:(id)sender {

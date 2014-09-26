@@ -49,6 +49,7 @@ static BOOL DEVELOPMENT = YES;
     postRanges = @[@"1 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius"];
     
     [_createPostViewOne displayCurrentLocation];
+    _createPostViewOne.txtCategory.text = [[[DEPostManager sharedManager] currentPost] category];
     
     [[self.navigationController navigationBar] setHidden:YES];
     
