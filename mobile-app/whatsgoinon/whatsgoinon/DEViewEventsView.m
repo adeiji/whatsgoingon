@@ -63,20 +63,17 @@
 
                 if (sender.state == UIGestureRecognizerStateBegan)
                 {
-                    if (!overlayDisplayed)
-                    {
-                        [UIView animateWithDuration:.3 animations:^{
-                            [[overlayView layer] setOpacity:.8];
-                            [screenManager setOverlayDisplayed:YES];
-                        }];
-                    }
-                    else
-                    {
-                        [UIView animateWithDuration:.3 animations:^{
-                            [[overlayView layer] setOpacity:0];
-                            [screenManager setOverlayDisplayed:NO];
-                        }];
-                    }
+                    [UIView animateWithDuration:.3 animations:^{
+                        [[overlayView layer] setOpacity:.8];
+                        [screenManager setOverlayDisplayed:YES];
+                    }];
+                }
+                else if (sender.state == UIGestureRecognizerStateEnded)
+                {
+                    [UIView animateWithDuration:.3 animations:^{
+                        [[overlayView layer] setOpacity:0];
+                        [screenManager setOverlayDisplayed:NO];
+                    }];
                 }
             }
         }
