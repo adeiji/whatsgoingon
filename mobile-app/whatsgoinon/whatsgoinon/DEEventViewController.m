@@ -26,6 +26,8 @@
     [[[_eventView imgMainImage] layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     [[[_eventView imgMainImage] layer] setBorderColor:[UIColor whiteColor].CGColor];
     [[[_eventView imgMainImage] layer] setBorderWidth:2.0f];
+    [[_eventView lblTitle] setText:_post.title];
+
     if (_isPreview)
     {
         [_eventView setPost:_post];

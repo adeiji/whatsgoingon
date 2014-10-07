@@ -196,7 +196,7 @@
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *event = [DEPost getPostFromPFObject:obj];
             
-            if ([event.category isEqualToString:category])
+            if ([event.category isEqualToString:category] || [event.category isEqualToString:@"Everything"])
             {
                 [eventsInCategory addObject:obj];
             }

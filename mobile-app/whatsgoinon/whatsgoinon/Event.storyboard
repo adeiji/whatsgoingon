@@ -152,6 +152,7 @@
                             <outlet property="btnMaybe" destination="9qi-fd-hCu" id="kdG-cL-v1T"/>
                             <outlet property="detailsView" destination="Hka-7K-0uG" id="7FD-r2-k20"/>
                             <outlet property="imgMainImage" destination="fpN-wj-vJZ" id="Tr4-dn-q0p"/>
+                            <outlet property="lblTitle" destination="Tpk-QC-Gf9" id="7br-K6-lBz"/>
                             <outlet property="viewMapView" destination="5Lu-Dv-3Od" id="Xg1-jO-OiJ"/>
                         </connections>
                     </view>

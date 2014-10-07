@@ -105,6 +105,11 @@
 
 + (NSString *) convertToHoursAndMinutesFromSeconds : (NSTimeInterval) seconds
 {
+    if (seconds < 0)
+    {
+        return @"DONE";
+    }
+    
     NSInteger secondsInMinute = 60;
     NSInteger minutesUntilEnd = seconds / secondsInMinute;
     

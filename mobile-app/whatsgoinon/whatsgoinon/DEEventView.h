@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnMaybe;
 @property (weak, nonatomic) IBOutlet UIScrollView *detailsView;
 @property (strong, nonatomic) DEPost *post;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 
 - (void) loadMapViewWithLocation : (PFGeoPoint *) location;
 
