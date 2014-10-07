@@ -260,7 +260,8 @@
 
 - (void) carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
-    [[carousel itemViewAtIndex:index] setBackgroundColor:[UIColor purpleColor]];
+    [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:orbColor];
+    [[carousel itemViewAtIndex:index] setBackgroundColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0]];
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
