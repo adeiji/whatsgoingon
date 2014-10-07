@@ -32,31 +32,32 @@
         {
             //// Bezier 2 Drawing
             UIBezierPath* bezier2Path = UIBezierPath.bezierPath;
-            [bezier2Path moveToPoint: CGPointMake(7.9, 8.6)];
-            [bezier2Path addLineToPoint: CGPointMake(38, 8.6)];
+            [bezier2Path moveToPoint: CGPointMake(11.9, 12.6)];
+            [bezier2Path addLineToPoint: CGPointMake(35, 12.6)];
             [color0 setStroke];
-            bezier2Path.lineWidth = 5;
+            bezier2Path.lineWidth = 2;
             [bezier2Path stroke];
             
             
             //// Bezier 4 Drawing
             UIBezierPath* bezier4Path = UIBezierPath.bezierPath;
-            [bezier4Path moveToPoint: CGPointMake(7.9, 21)];
-            [bezier4Path addLineToPoint: CGPointMake(38, 21)];
+            [bezier4Path moveToPoint: CGPointMake(11.9, 22)];
+            [bezier4Path addLineToPoint: CGPointMake(35, 22)];
             [color0 setStroke];
-            bezier4Path.lineWidth = 5;
+            bezier4Path.lineWidth = 2;
             [bezier4Path stroke];
             
             
             //// Bezier 6 Drawing
             UIBezierPath* bezier6Path = UIBezierPath.bezierPath;
-            [bezier6Path moveToPoint: CGPointMake(7.9, 33.4)];
-            [bezier6Path addLineToPoint: CGPointMake(38, 33.4)];
+            [bezier6Path moveToPoint: CGPointMake(11.9, 31.4)];
+            [bezier6Path addLineToPoint: CGPointMake(35, 31.4)];
             [color0 setStroke];
-            bezier6Path.lineWidth = 5;
+            bezier6Path.lineWidth = 2;
             [bezier6Path stroke];
         }
     }
+
 }
 
 

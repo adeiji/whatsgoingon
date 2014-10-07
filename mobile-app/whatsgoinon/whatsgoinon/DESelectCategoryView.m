@@ -17,12 +17,12 @@
 #define BUTTON_HOME_LOC_Y 518
 #define NUMBER_OF_SECTIONS 13
 #define VIEW_WIDTH 250
-#define BUTTON_HEIGHT 40
-#define BUTTON_WIDTH 40
-#define BUTTON_OUTER_CIRCLE_HEIGHT 60
-#define BUTTON_OUTER_CIRCLE_WIDTH 60
-#define OUTER_VIEW_X_POS 320 - 90
-#define OUTER_VIEW_Y_POS 568 - 90
+#define BUTTON_HEIGHT 30
+#define BUTTON_WIDTH 30
+#define BUTTON_OUTER_CIRCLE_HEIGHT 40
+#define BUTTON_OUTER_CIRCLE_WIDTH 40
+#define OUTER_VIEW_X_POS 320 - 60
+#define OUTER_VIEW_Y_POS 568 - 60
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -65,7 +65,7 @@
         [outerView addSubview:viewCategories];
         [window addSubview:outerView];
         
-        // Animation
+        // Animation for when orb is simply sitting there
         {
             [UIView animateWithDuration:0.8f delay:0.0f options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
                 
@@ -136,7 +136,7 @@
     myCarousel.type = iCarouselTypeWheel;
     myCarousel.delegate = self;
     myCarousel.dataSource = self;
-    myCarousel.decelerationRate = .98f;
+    myCarousel.decelerationRate = .88f;
     myCarousel.centerItemWhenSelected = YES;
     myCarousel.ignorePerpendicularSwipes = NO;
     [myCarousel reloadData];
@@ -146,7 +146,7 @@
     {
         [UIView animateWithDuration:.2f animations:^{
         
-            myCarousel.transform = CGAffineTransformMakeScale(2, 2);
+            myCarousel.transform = CGAffineTransformMakeScale(2.54, 2.52);
             //myCarousel.contentOffset = CGSizeMake(0, -80);
             myCarousel.contentOffset = CGSizeMake(5, -myCarousel.frame.size.height + 15);
             NSLog(@"Carousel Center %@", NSStringFromCGPoint(myCarousel.center));
@@ -230,7 +230,7 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, BUTTON_HEIGHT / 2, BUTTON_WIDTH / 2)];
+        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, BUTTON_HEIGHT / 1.8, BUTTON_WIDTH / 1.8)];
         view.contentMode = UIViewContentModeCenter;
         [[view layer] setCornerRadius:view.frame.size.height / 2.0f];
         [view setBackgroundColor:orbColor];
@@ -241,6 +241,7 @@
         //get a reference to the label in the recycled view
         label = (UILabel *)[view viewWithTag:1];
     }
+    
     
     //set item label
     //remember to always set any properties of your carousel item
@@ -255,6 +256,11 @@
 - (NSInteger)numberOfItemsInCarousel:(__unused iCarousel *)carousel
 {
     return (NSInteger)[categories count];
+}
+
+- (void) carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
+{
+    [[carousel itemViewAtIndex:index] setBackgroundColor:[UIColor purpleColor]];
 }
 
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
