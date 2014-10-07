@@ -14,5 +14,9 @@
 
 @property (strong, nonatomic) DEPost *post;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *comments;
+@property (weak, nonatomic) IBOutlet UILabel *lblThumbsUp;
+@property (weak, nonatomic) IBOutlet UILabel *lblThumbsDown;
+
 
 @end

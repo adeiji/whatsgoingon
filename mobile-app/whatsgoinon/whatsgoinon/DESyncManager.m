@@ -103,7 +103,11 @@
         // Post a notification saying that the comments have been loaded
        if (!error)
        {
-           [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
+           [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED
+                                                               object:nil
+                                                             userInfo:@{
+                                                                        @"comments": objects
+                                                                        }];
            [[DEPostManager sharedManager] setComments:objects];
        }
     }];
@@ -274,6 +278,7 @@
     PFObject *commentObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_COMMENT];
     commentObject[PARSE_CLASS_COMMENT_COMMENT] = comment;
     commentObject[PARSE_CLASS_COMMENT_USER] = [PFUser currentUser];
+    commentObject[PARSE_CLASS_COMMENT_EVENT_ID] = objectId;
     
     if (rating > 0)
     {

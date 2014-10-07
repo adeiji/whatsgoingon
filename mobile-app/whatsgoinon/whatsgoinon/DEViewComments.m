@@ -7,6 +7,7 @@
 //
 
 #import "DEViewComments.h"
+#import "Constants.h"
 
 @implementation DEViewComments
 
@@ -26,15 +27,34 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_post.comments count];
+    return [_comments count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DECommentTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"ViewMadeComments" owner:self options:nil] objectAtIndex:1];
     
+    if (_comments[indexPath.row][PARSE_CLASS_COMMENT_THUMBS_UP] == [NSNumber numberWithBool:NO])
+    {
+        CGRect frame = cell.lblComment.frame;
+        frame.origin.x = 20;
+        [cell.lblComment setFrame:frame];
+        
+        frame = cell.imgProfileView.frame;
+        frame.origin.x = 185;
+        [cell.imgProfileView setFrame:frame];
+        
+        frame = cell.imgThumbView.frame;
+        frame.origin.x = 278;
+        [cell.imgThumbView setFrame:frame];
+        
+        [cell.imgThumbView setImage:[UIImage imageNamed:@"thumbs-down.png"]];
+    }
+    
+    [cell layoutSubviews];
+    
     [cell setBackgroundColor:[UIColor clearColor]];
-    cell.lblComment.text = _post.comments[indexPath.row];
+    cell.lblComment.text = _comments[indexPath.row][PARSE_CLASS_COMMENT_COMMENT];
     [[cell.imgProfileView layer] setCornerRadius:cell.imgProfileView.frame.size.height / 2.0f];
     [cell.imgProfileView setImage:[UIImage imageNamed:@"profile-pic.jpg"]];
     [cell.imgProfileView setClipsToBounds:YES];

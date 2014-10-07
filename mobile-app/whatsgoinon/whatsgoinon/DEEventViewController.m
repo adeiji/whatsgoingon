@@ -21,6 +21,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadComments:) name:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
+    // Load all the comments so that by the time the user clicks to view the comments they are already loaded.
+    [DESyncManager getAllCommentsForEventId:_post.objectId];
+    
 	// Do any additional setup after loading the view.
     _eventDetailsViewController = [[DEEventDetailsViewController alloc] initWithNibName:@"EventDetailsView" bundle:[NSBundle mainBundle]];
     [[[_eventView imgMainImage] layer] setCornerRadius:BUTTON_CORNER_RADIUS];
@@ -30,25 +35,10 @@
 
     if (_isPreview)
     {
-        [_eventView setPost:_post];
-        [[_eventView btnGoing] setEnabled:NO];
-        [[_eventView btnMaybe] setEnabled:NO];
-        [[_eventView lblNumberOfPeopleGoing] setText:0];
-        UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
-        [[_eventView imgMainImage] setImage:mainImage];
-        _btnPost.hidden = NO;
+        [self loadPreview];
     }
     else {
-        PFFile *file = [[_post images] firstObject];
-        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            if (!error)
-            {
-                UIImage *mainImage = [UIImage imageWithData:data];
-                [[_eventView imgMainImage] setImage:mainImage];
-            }
-        } progressBlock:^(int percentDone) {
-            //Display to the user how much has been loaded
-        }];
+        [self loadNonPreview];
     }
     
     [[_eventView lblCost] setText:[[_post cost] stringValue]];
@@ -62,6 +52,31 @@
     {
         [self updateViewToGoing];
     }
+}
+
+- (void) loadNonPreview
+{
+    PFFile *file = [[_post images] firstObject];
+    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error)
+        {
+            UIImage *mainImage = [UIImage imageWithData:data];
+            [[_eventView imgMainImage] setImage:mainImage];
+        }
+    } progressBlock:^(int percentDone) {
+        //Display to the user how much has been loaded
+    }];
+}
+
+- (void) loadPreview
+{
+    [_eventView setPost:_post];
+    [[_eventView btnGoing] setEnabled:NO];
+    [[_eventView btnMaybe] setEnabled:NO];
+    [[_eventView lblNumberOfPeopleGoing] setText:0];
+    UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
+    [[_eventView imgMainImage] setImage:mainImage];
+    _btnPost.hidden = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -120,6 +135,36 @@
     return newView;
 }
 
+- (void) loadComments : (NSNotification *) notification
+{
+    DEViewComments *view = (DEViewComments *) [_eventDetailsViewController viewComments];
+    [view setComments:notification.userInfo[@"comments"]];
+    
+    if ([view.comments count] > 0)
+    {
+        DEViewComments *viewComments = (DEViewComments *) [_eventDetailsViewController viewComments];
+        [viewComments setPost:_post];
+        [viewComments.tableView reloadData];
+    }
+    
+    int thumbsUp = 0;
+    int thumbsDown = 0;
+    
+    for (PFObject *object in view.comments) {
+        if ([object[PARSE_CLASS_COMMENT_THUMBS_UP] isEqual:[NSNumber numberWithBool:YES]])
+        {
+            thumbsUp ++;
+        }
+        else
+        {
+            thumbsDown ++;
+        }
+    }
+    
+    [view.lblThumbsUp setText:[[NSNumber numberWithInt:thumbsUp] stringValue]];
+    [view.lblThumbsDown setText:[[NSNumber numberWithInt:thumbsDown] stringValue]];
+}
+
 #pragma mark - Button Action Methods
 
 - (IBAction)showEventDetails:(id)sender
@@ -147,7 +192,9 @@
 
 - (IBAction)showEventComments:(id)sender
 {
-    if ([[_post comments] count] == 0)
+    DEViewComments *view = (DEViewComments *) [_eventDetailsViewController viewComments];
+
+    if ([view.comments count] == 0)
     {
         [self showView:[_eventDetailsViewController viewNoComments]];
     }

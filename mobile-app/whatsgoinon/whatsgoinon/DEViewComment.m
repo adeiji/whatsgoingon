@@ -96,7 +96,7 @@
     // Need to check and make sure that the user has picked thumbs up or down.  If not then prompt the user to do so.
     if (ratingChange != 0)
     {
-        [DESyncManager saveCommentWithEventId:[post objectId] Comment:_txtComment.text Rating:ratingChange];
+        [DESyncManager saveCommentWithEventId:[[[DEPostManager sharedManager] currentPost] objectId] Comment:_txtComment.text Rating:ratingChange];
         [DEScreenManager hideCommentView];
     }
     else {

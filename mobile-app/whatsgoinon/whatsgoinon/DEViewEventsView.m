@@ -105,7 +105,7 @@
     [self addGestureRecognizer:longPressGestureRecognizer];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayEventDetails:)];
-    tapGestureRecognizer.numberOfTapsRequired = 2;
+    tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
 }
