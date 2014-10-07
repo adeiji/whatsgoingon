@@ -96,18 +96,7 @@
     // Need to check and make sure that the user has picked thumbs up or down.  If not then prompt the user to do so.
     if (ratingChange != 0)
     {
-        
-        [DESyncManager saveCommentWithEventId:[post objectId] Comment:_txtComment.text];
-        
-        NSMutableArray *comments = [NSMutableArray arrayWithArray:post.comments];
-        [comments addObject:_txtComment.text];
-        NSNumber *rating = post.rating;
-        rating = [NSNumber numberWithInteger:rating.integerValue + ratingChange ];
-        post.rating = rating;
-        NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_COMMENTS : comments, PARSE_CLASS_EVENT_RATING : rating };
-        
-        [DESyncManager updateObjectWithId:post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
-        
+        [DESyncManager saveCommentWithEventId:[post objectId] Comment:_txtComment.text Rating:ratingChange];
         [DEScreenManager hideCommentView];
     }
     else {

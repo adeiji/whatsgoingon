@@ -269,10 +269,20 @@
 
 + (void) saveCommentWithEventId : (NSString *) objectId
                         Comment : (NSString *) comment
+                         Rating : (NSInteger) rating
 {
     PFObject *commentObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_COMMENT];
     commentObject[PARSE_CLASS_COMMENT_COMMENT] = comment;
     commentObject[PARSE_CLASS_COMMENT_USER] = [PFUser currentUser];
+    
+    if (rating > 0)
+    {
+        commentObject[PARSE_CLASS_COMMENT_THUMBS_UP] = [NSNumber numberWithBool:YES];
+    }
+    else
+    {
+        commentObject[PARSE_CLASS_COMMENT_THUMBS_UP] = [NSNumber numberWithBool:NO];
+    }
     
     [commentObject saveEventually:^(BOOL succeeded, NSError *error) {
        if (succeeded)

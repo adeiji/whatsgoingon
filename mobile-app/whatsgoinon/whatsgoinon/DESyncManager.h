@@ -29,6 +29,7 @@
              ParseClassName : (NSString *) className;
 + (void) getAllValuesNearGeoPoint : (PFGeoPoint *) geoPoint;
 + (void) saveCommentWithEventId : (NSString *) objectId
-                        Comment : (NSString *) comment;
+                        Comment : (NSString *) comment
+                         Rating : (NSInteger) rating;
 
 @end
