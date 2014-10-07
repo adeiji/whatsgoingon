@@ -91,7 +91,24 @@
             [[DEScreenManager sharedManager] stopActivitySpinner];
         }
     }];
+}
 
+// Pull all the comments for this specific event
++ (NSArray *) getAllCommentsForEventId : (NSString *) objectId
+{
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_COMMENT];
+    [query whereKey:PARSE_CLASS_COMMENT_EVENT_ID equalTo:objectId];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        // Post a notification saying that the comments have been loaded
+       if (!error)
+       {
+           [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
+           [[DEPostManager sharedManager] setComments:objects];
+       }
+    }];
+    
+    return nil;
 }
 
 + (void) loadBestEventsInPastWeekWithQuery : (PFQuery *) query
@@ -245,6 +262,27 @@
         {
             NSLog(@"You set the current object as miscategorized successfully");
         }
+    }];
+}
+
+// Save the comment with the Event's id, and the actual comment, along with the user information
+
++ (void) saveCommentWithEventId : (NSString *) objectId
+                        Comment : (NSString *) comment
+{
+    PFObject *commentObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_COMMENT];
+    commentObject[PARSE_CLASS_COMMENT_COMMENT] = comment;
+    commentObject[PARSE_CLASS_COMMENT_USER] = [PFUser currentUser];
+    
+    [commentObject saveEventually:^(BOOL succeeded, NSError *error) {
+       if (succeeded)
+       {
+           NSLog(@"The comment was saved to the database");
+       }
+       else
+       {
+           NSLog(@"Error saving the comment: %@", [error description]);
+       }
     }];
 }
 

@@ -96,6 +96,9 @@
     // Need to check and make sure that the user has picked thumbs up or down.  If not then prompt the user to do so.
     if (ratingChange != 0)
     {
+        
+        [DESyncManager saveCommentWithEventId:[post objectId] Comment:_txtComment.text];
+        
         NSMutableArray *comments = [NSMutableArray arrayWithArray:post.comments];
         [comments addObject:_txtComment.text];
         NSNumber *rating = post.rating;

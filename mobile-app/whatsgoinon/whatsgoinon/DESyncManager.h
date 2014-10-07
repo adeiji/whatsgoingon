@@ -28,5 +28,7 @@
                UpdateValues : (NSDictionary *) values
              ParseClassName : (NSString *) className;
 + (void) getAllValuesNearGeoPoint : (PFGeoPoint *) geoPoint;
++ (void) saveCommentWithEventId : (NSString *) objectId
+                        Comment : (NSString *) comment;
 
 @end

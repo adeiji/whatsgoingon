@@ -40,6 +40,8 @@
 @property (strong, nonatomic) NSMutableArray *maybeGoingPost;
 @property (strong, nonatomic) NSArray *allEvents;
 @property (strong, nonatomic) NSString *distanceFromEvent;
+@property (strong, nonatomic) NSArray *comments;
+
 + (id)sharedManager;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "Constants.h"
 
+// Parse - Event Class
+
 NSString *const PARSE_CLASS_NAME_EVENT = @"Event";
 NSString *const PARSE_CLASS_EVENT_ACTIVE = @"active";
 NSString *const PARSE_CLASS_EVENT_TITLE = @"name";
@@ -27,6 +29,9 @@ NSString *const PARSE_CLASS_EVENT_RATING = @"rating";
 NSString *const PARSE_CLASS_EVENT_QUICK_DESCRIPTION = @"quickDescription";
 NSString *const PARSE_CLASS_NAME_REPORT = @"Report";
 NSString *const PARSE_CLASS_EVENT_NUMBER_GOING = @"numberGoing";
+
+// Parse - Report
+
 NSString *const REPORT_VULGAR_OR_ABUSIVE_LANGUAGE = @"Vulgar or Abusive Language";
 NSString *const REPORT_CRUDE_CONTENT = @"Crude Content";
 NSString *const REPORT_NOT_REAL_POST = @"Not a Real Post";
@@ -35,16 +40,35 @@ NSString *const PARSE_CLASS_REPORT_WHATS_WRONG = @"whatswrong";
 NSString *const PARSE_CLASS_REPORT_OTHER = @"other";
 NSString *const PARSE_CLASS_REPORT_EVENT_ID = @"eventid";
 
+// Parse - Miscategorized
+
 NSString *const PARSE_CLASS_NAME_MISCATEGORIZED_EVENT = @"MiscategorizedEvent";
 NSString *const PARSE_CLASS_MISCATEGORIZED_EVENT_CATEGORY = @"category";
 NSString *const PARSE_CLASS_MISCATEGORIZED_EVENT_ID = @"eventId";
 
+// Parse - Comment
+
+NSString *const PARSE_CLASS_NAME_COMMENT = @"Comment";
+NSString *const PARSE_CLASS_COMMENT_COMMENT = @"comment";
+NSString *const PARSE_CLASS_COMMENT_USER = @"user";
+NSString *const PARSE_CLASS_COMMENT_THUMBS_UP = @"thumbs_up";
+NSString *const PARSE_CLASS_COMMENT_EVENT_ID = @"event_id";
+
+// Geocoding
+
 NSString *const PLACES_API_DATA_RESULT_TYPE_CITIES = @"(cities)";
 NSString *const PLACES_API_DATA_RESULT_TYPE_GEOCODE = @"geocode";
+
+// Orb Button
+
 NSString *const ORB_BUTTON_VIEW = @"orbButtonView";
 
+// Notifications
+
 CGFloat const BUTTON_CORNER_RADIUS = 6.0f;
+
 NSString *const NOTIFICATION_CENTER_ALL_EVENTS_LOADED = @"allEventsLoaded";
 NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"cityChanged";
 NSString *const NOTIFICATION_CENTER_NO_DATA = @"noData";
 NSString *const NOTIFICATION_CENTER_NONE_IN_CATEGORY = @"noneInCategory";
+NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"allCommentsLoaded";
