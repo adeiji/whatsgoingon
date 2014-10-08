@@ -57,7 +57,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)viewWhatsGoingOnLater:(id)sender {
-    if ([self isLoggedIn])
+    if ([self isLoggedIn : NO])
     {
         // Do any additional setup after loading the view.
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
@@ -79,7 +79,7 @@
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
     
-    if ([self isLoggedIn])
+    if ([self isLoggedIn : NO])
     {
         // Do any additional setup after loading the view.
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
@@ -105,7 +105,7 @@
 
 
 - (IBAction)showCreatePostView:(id)sender {
-    if ([self isLoggedIn])
+    if ([self isLoggedIn : YES])
     {
         UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
         DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
@@ -123,7 +123,7 @@
     
 }
 
-- (BOOL) isLoggedIn {
+- (BOOL) isLoggedIn : (BOOL) posting {
     DEUserManager *userManager = [DEUserManager sharedManager];
     
     if (![userManager isLoggedIn])
@@ -132,6 +132,9 @@
         
         [[self navigationController] pushViewController:loginViewController animated:YES];
         [[loginViewController navigationController] setNavigationBarHidden:YES animated:YES];
+        
+        // If the user pressed post it then we don't want them to be able to skip this section
+        loginViewController.posting = posting;
         
         return NO;
     }

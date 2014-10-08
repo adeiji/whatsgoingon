@@ -39,6 +39,7 @@
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UIButton *btnHome;
+@property (weak, nonatomic) IBOutlet UIView *infoView;
 
 
 @property (strong, nonatomic) DEPost *post;

@@ -16,7 +16,8 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
-
+@property (weak, nonatomic) IBOutlet UIButton *btnSkip;
+@property BOOL posting;
 #pragma mark - Button Press Methods
 
 - (IBAction)createAnAccount:(id)sender;

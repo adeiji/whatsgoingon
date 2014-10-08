@@ -36,25 +36,6 @@
                                             <userLayoutGuide location="272" affinity="minX"/>
                                         </userGuides>
                                         <subviews>
-                                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKe-wM-5P2">
-                                                <rect key="frame" x="47" y="314" width="197" height="130"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This limits how far from the event this post can be seen" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="159" translatesAutoresizingMaskIntoConstraints="NO" id="QhM-3r-m2c">
-                                                        <rect key="frame" x="18" y="8" width="159" height="40"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If you change the range from &quot;All&quot;, this event will never show up on the featured page" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="159" translatesAutoresizingMaskIntoConstraints="NO" id="McR-it-gMB">
-                                                        <rect key="frame" x="20" y="56" width="159" height="66"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select a Category" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aiE-Tl-xcY">
                                                 <rect key="frame" x="48" y="72" width="224" height="33"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -131,10 +112,10 @@
                                                     <action selector="gotoNextScreen:" destination="TtG-65-4oM" eventType="touchUpInside" id="qhG-PA-v4b"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ntw-IL-If7">
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ntw-IL-If7">
                                                 <rect key="frame" x="238" y="368" width="35" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="18"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                                 <state key="normal" title="?">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -181,10 +162,33 @@
                                                 <rect key="frame" x="15" y="158" width="25" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="6FE3F7CD-4F26-479E-ADBC-1C974609EC0C" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="8D1D6944-7DC6-42B6-8288-07FF12517CA1" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="374" width="17" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
+                                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKe-wM-5P2">
+                                                <rect key="frame" x="47" y="321" width="183" height="118"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This limits how far from the event this post can be seen" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="159" translatesAutoresizingMaskIntoConstraints="NO" id="QhM-3r-m2c">
+                                                        <rect key="frame" x="12" y="6" width="159" height="40"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If you change the range from &quot;All&quot;, this event will never show up on the featured page" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="159" translatesAutoresizingMaskIntoConstraints="NO" id="McR-it-gMB">
+                                                        <rect key="frame" x="12" y="46" width="159" height="66"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="510" id="Er1-Wn-ldk"/>
@@ -243,6 +247,7 @@
                     <connections>
                         <outlet property="btnNext" destination="xfG-Kf-tqf" id="tnV-QN-3cY"/>
                         <outlet property="createPostViewOne" destination="Ts4-l1-T70" id="t6L-sH-T7u"/>
+                        <outlet property="infoView" destination="pKe-wM-5P2" id="qMF-lv-XI2"/>
                         <outlet property="postRangeHelperView" destination="ntw-IL-If7" id="aHL-ne-eiY"/>
                         <outletCollection property="textFields" destination="aiE-Tl-xcY" id="Q7x-Sp-brc"/>
                         <outletCollection property="textFields" destination="JT0-Z2-p8Y" id="GAh-D2-0Sg"/>
@@ -513,7 +518,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="6FE3F7CD-4F26-479E-ADBC-1C974609EC0C" width="140" height="211">
+        <image name="8D1D6944-7DC6-42B6-8288-07FF12517CA1" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

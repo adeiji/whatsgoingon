@@ -28,6 +28,10 @@
     }
     
     [DEScreenManager setUpTextFields:_textFields];
+    if (_posting)
+    {
+        [_btnSkip setHidden:YES];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated

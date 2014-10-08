@@ -76,6 +76,7 @@
 
     [self.btnNext.layer setCornerRadius:BUTTON_CORNER_RADIUS];
     [self.btnHome.layer setCornerRadius:BUTTON_CORNER_RADIUS];
+    [[_infoView layer] setCornerRadius:BUTTON_CORNER_RADIUS];
 }
 
 - (void) selectPostRange {
@@ -136,6 +137,65 @@
 
 - (IBAction)displayInfo:(id)sender {
     
+    if (!_infoView.hidden)
+    {
+        [self animateHideInfoView];
+    }
+    else
+    {
+        [self animateDisplayInfoView];
+    }
+}
+
+- (void) animateDisplayInfoView
+{
+    CGRect frame = _infoView.frame;
+
+    int height = 118;
+    int width = 183;
+    int xPos = 47;
+    int yPos = 321;
+    
+    frame.origin.x  = frame.origin.x + frame.size.width;
+    frame.origin.y = yPos + (height / 2);
+    frame.size.height = 2;
+    frame.size.width = 2;
+    [_infoView setFrame:frame];
+    _infoView.hidden = NO;
+    
+    [UIView animateWithDuration:.2 animations:^{
+        CGRect frame = _infoView.frame;
+        frame.size.width = width;
+        frame.origin.x = xPos;
+        [_infoView setFrame:frame];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.2 animations:^{
+            CGRect frame = _infoView.frame;
+            frame.size.height = height;
+            frame.origin.y = yPos;
+            [_infoView setFrame:frame];
+        }];
+    }];
+}
+
+- (void) animateHideInfoView
+{
+    
+    [UIView animateWithDuration:.2 animations:^{
+        CGRect frame = _infoView.frame;
+        frame.origin.y = frame.origin.y + (frame.size.height / 2.0);
+        frame.size.height = 2;
+        [_infoView setFrame:frame];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.2 animations:^{
+            CGRect frame = _infoView.frame;
+            frame.origin.x = frame.origin.x + (frame.size.width);
+            frame.size.width = 2;
+            [_infoView setFrame:frame];
+        } completion:^(BOOL finished) {
+            [_infoView setHidden:YES];
+        }];
+    }];
 }
 
 
@@ -373,7 +433,7 @@
 }
 
 - (IBAction)togglePostRangeHelperView:(id)sender {
-    [_postRangeHelperView setHidden:!_postRangeHelperView.hidden];
+//    [_postRangeHelperView setHidden:!_postRangeHelperView.hidden];
 }
 
 - (IBAction)goBack:(id)sender {

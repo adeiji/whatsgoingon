@@ -23,8 +23,6 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadComments:) name:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
-    // Load all the comments so that by the time the user clicks to view the comments they are already loaded.
-    [DESyncManager getAllCommentsForEventId:_post.objectId];
     
 	// Do any additional setup after loading the view.
     _eventDetailsViewController = [[DEEventDetailsViewController alloc] initWithNibName:@"EventDetailsView" bundle:[NSBundle mainBundle]];
@@ -66,6 +64,9 @@
     } progressBlock:^(int percentDone) {
         //Display to the user how much has been loaded
     }];
+    
+    // Load all the comments so that by the time the user clicks to view the comments they are already loaded.
+    [DESyncManager getAllCommentsForEventId:[[DEPostManager sharedManager] currentPost].objectId];
 }
 
 - (void) loadPreview
