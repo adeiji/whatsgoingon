@@ -72,5 +72,11 @@
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     [screenManager gotoNextScreen];
 }
+- (IBAction)loginWithFacebook:(id)sender {
+    [[DEUserManager sharedManager] loginWithFacebook];
+}
+- (IBAction)loginWithTwitter:(id)sender {
+    [[DEUserManager sharedManager] loginWithTwitter];
+}
 
 @end
