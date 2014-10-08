@@ -25,6 +25,7 @@
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
     
+    [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     
     if (now)
@@ -70,7 +71,7 @@
     [query setLimit:10];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
     [[DEPostManager sharedManager] setPosts:objects];
-    
+    [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if ([objects count] == 0)

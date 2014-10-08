@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtUsernameOrEmail;
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (strong, nonatomic) UIViewController *nextScreen;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
 - (void) showNextScreen;
 

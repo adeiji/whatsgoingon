@@ -54,6 +54,15 @@ NSString *const PARSE_CLASS_COMMENT_USER = @"user";
 NSString *const PARSE_CLASS_COMMENT_THUMBS_UP = @"thumbs_up";
 NSString *const PARSE_CLASS_COMMENT_EVENT_ID = @"event_id";
 
+// Parse - User
+
+NSString *const PARSE_CLASS_NAME_USER = @"User";
+NSString *const PARSE_CLASS_USER_USERNAME = @"username";
+NSString *const PARSE_CLASS_USER_EMAIL = @"email";
+NSString *const PARSE_CLASS_USER_PASSWORD = @"password";
+NSString *const PARSE_CLASS_USER_EMAIL_VERIFIED = @"emailVerified";
+
+
 // Geocoding
 
 NSString *const PLACES_API_DATA_RESULT_TYPE_CITIES = @"(cities)";

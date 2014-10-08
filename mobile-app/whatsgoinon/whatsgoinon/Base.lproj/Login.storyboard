@@ -434,6 +434,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
+                            <outlet property="errorLabel" destination="Let-sw-RAp" id="tWY-s9-444"/>
                             <outlet property="txtPassword" destination="4Zr-kz-pOF" id="piu-Gl-stc"/>
                             <outlet property="txtUsernameOrEmail" destination="tHW-DT-VCQ" id="xbt-h2-gIm"/>
                         </connections>

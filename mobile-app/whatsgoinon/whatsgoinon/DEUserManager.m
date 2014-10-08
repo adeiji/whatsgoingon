@@ -7,6 +7,7 @@
 //
 
 #import "DEUserManager.h"
+#import "Constants.h"
 
 @implementation DEUserManager
 
@@ -57,6 +58,7 @@
 - (NSError *) loginWithUsername : (NSString *) username
                        Password : (NSString *) password
                  ViewController : (UIViewController *)viewController
+                     ErrorLabel : (UILabel *)label
 {
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
         if (user)
@@ -64,11 +66,32 @@
             [DESyncManager popToRootAndShowViewController:viewController];
         }
         else {
-            // Login failed, check error to see why.
+            [self usernameExist:username ErrorLabel:label];
         }
     }];
     
     return nil;
+}
+
+- (BOOL) usernameExist : (NSString *) username
+            ErrorLabel : (UILabel *) label
+{
+    PFQuery *query = [PFUser query];
+
+    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:username];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if ([objects count] > 0)
+        {
+            [label setText:@"Incorrect password"];
+        }
+        else {
+            [label setText:@"Username does not exist"];
+        }
+        
+        [label setHidden:NO];
+    }];
+    
+    return NO;
 }
 
 - (NSError *) loginWithTwitter {

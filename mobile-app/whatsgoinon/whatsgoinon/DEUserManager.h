@@ -19,7 +19,8 @@
 
 - (NSError *) loginWithUsername : (NSString *) username
                        Password : (NSString *) password
-                 ViewController : (UIViewController *) viewController;
+                 ViewController : (UIViewController *) viewController
+                     ErrorLabel : (UILabel *) label;
 
 - (BOOL) isLoggedIn;
 

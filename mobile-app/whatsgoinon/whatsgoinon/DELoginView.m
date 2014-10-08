@@ -31,7 +31,8 @@
 - (IBAction)signIn:(id)sender {
     DEUserManager *userManager = [DEUserManager sharedManager];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    [userManager loginWithUsername:_txtUsernameOrEmail.text Password:_txtPassword.text ViewController:[screenManager nextScreen]];
+
+    [userManager loginWithUsername:_txtUsernameOrEmail.text Password:_txtPassword.text ViewController:[screenManager nextScreen] ErrorLabel:_errorLabel];
 }
 
 @end
