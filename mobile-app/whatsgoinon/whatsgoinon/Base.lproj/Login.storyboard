@@ -85,7 +85,7 @@
                                 </connections>
                             </button>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-WC-yP6" customClass="DEHappSnapTitleView">
-                                <rect key="frame" x="48" y="40" width="225" height="163"/>
+                                <rect key="frame" x="90" y="86" width="141" height="195"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                         </subviews>
