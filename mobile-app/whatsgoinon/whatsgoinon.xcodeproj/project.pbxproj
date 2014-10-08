@@ -16,6 +16,7 @@
 		F40E0E1319C007D100D2C3A0 /* camera-icon 178x141.png in Resources */ = {isa = PBXBuildFile; fileRef = F40E0E1219C007D100D2C3A0 /* camera-icon 178x141.png */; };
 		F40E0E1719C0093000D2C3A0 /* DECameraButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F40E0E1619C0093000D2C3A0 /* DECameraButton.m */; };
 		F412770A19E4F8390092CD67 /* HappSnap-image-only-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = F412770919E4F8390092CD67 /* HappSnap-image-only-logo.png */; };
+		F412770C19E5037A0092CD67 /* main-vc-background.png in Resources */ = {isa = PBXBuildFile; fileRef = F412770B19E5037A0092CD67 /* main-vc-background.png */; };
 		F412BC9E19CBB6650088F265 /* ViewAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = F412BC9D19CBB6650088F265 /* ViewAlert.xib */; };
 		F437BF851990452000CF61E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF841990452000CF61E9 /* Foundation.framework */; };
 		F437BF871990452000CF61E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF861990452000CF61E9 /* CoreGraphics.framework */; };
@@ -169,6 +170,7 @@
 		F40E0E1519C0093000D2C3A0 /* DECameraButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECameraButton.h; sourceTree = "<group>"; };
 		F40E0E1619C0093000D2C3A0 /* DECameraButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECameraButton.m; sourceTree = "<group>"; };
 		F412770919E4F8390092CD67 /* HappSnap-image-only-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HappSnap-image-only-logo.png"; sourceTree = "<group>"; };
+		F412770B19E5037A0092CD67 /* main-vc-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-vc-background.png"; sourceTree = "<group>"; };
 		F412BC9D19CBB6650088F265 /* ViewAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAlert.xib; sourceTree = "<group>"; };
 		F437BF811990452000CF61E9 /* whatsgoinon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whatsgoinon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F437BF841990452000CF61E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -887,6 +889,7 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F412770B19E5037A0092CD67 /* main-vc-background.png */,
 				F412770919E4F8390092CD67 /* HappSnap-image-only-logo.png */,
 				F4EEB06319D276F00072B683 /* profile-pic.jpg */,
 				F4EEB05C19D26D1C0072B683 /* thumbs-down.png */,
@@ -1061,6 +1064,7 @@
 				F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */,
 				F4EEB05119D241CE0072B683 /* no-internet.png in Resources */,
 				F4EEB05D19D26D1C0072B683 /* thumbs-down.png in Resources */,
+				F412770C19E5037A0092CD67 /* main-vc-background.png in Resources */,
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,
