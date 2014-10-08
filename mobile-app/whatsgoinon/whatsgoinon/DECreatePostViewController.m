@@ -157,7 +157,7 @@
     int yPos = 321;
     
     frame.origin.x  = frame.origin.x + frame.size.width;
-    frame.origin.y = yPos + (height / 2);
+    frame.origin.y = _btnPostRangeHelperView.center.y;
     frame.size.height = 2;
     frame.size.width = 2;
     [_infoView setFrame:frame];
@@ -183,7 +183,7 @@
     
     [UIView animateWithDuration:.2 animations:^{
         CGRect frame = _infoView.frame;
-        frame.origin.y = frame.origin.y + (frame.size.height / 2.0);
+        frame.origin.y = _btnPostRangeHelperView.center.y;
         frame.size.height = 2;
         [_infoView setFrame:frame];
     } completion:^(BOOL finished) {
