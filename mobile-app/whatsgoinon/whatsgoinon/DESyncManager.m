@@ -18,8 +18,6 @@
     
     [self checkForInternet];
     
-    [[DEScreenManager sharedManager] startActivitySpinner];
-    
     __block DEPostManager *sharedManager = [DEPostManager sharedManager];
     __block PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     //Get all the events that are currently active

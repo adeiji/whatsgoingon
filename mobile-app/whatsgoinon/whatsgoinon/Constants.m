@@ -72,3 +72,7 @@ NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"cityChanged";
 NSString *const NOTIFICATION_CENTER_NO_DATA = @"noData";
 NSString *const NOTIFICATION_CENTER_NONE_IN_CATEGORY = @"noneInCategory";
 NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"allCommentsLoaded";
+
+// View Controllers
+
+NSString *const PROMPT_LOGIN_VIEW_CONTROLLER = @"promptLogin";

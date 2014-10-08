@@ -8,6 +8,7 @@
 
 #import "DEMainViewController.h"
 #import "DECreatePostViewController.h"
+#import "Constants.h"
 
 @interface DEMainViewController ()
 
@@ -15,7 +16,6 @@
 
 @implementation DEMainViewController
 
-#define PROMPT_LOGIN_VIEW_CONTROLLER @"promptLogin"
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,6 +78,7 @@
 }
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
+    [DESyncManager getAllValuesForNow:YES];
     
     if ([self isLoggedIn : NO])
     {
@@ -86,6 +87,7 @@
         DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
     
         [self.navigationController pushViewController:viewEventsViewController animated:YES];
+        [[DEScreenManager sharedManager] startActivitySpinner];
     }
     else {
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];

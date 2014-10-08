@@ -30,26 +30,36 @@
 
 - (IBAction)postSomethingSimilar:(id)sender {
     UINavigationController *navController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    if ([[DEUserManager sharedManager] isLoggedIn])
+    {
+        DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
         
-    DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
-    
-    [navController pushViewController:createPostViewController animated:YES];
-    
-    DEPost *post = [[DEPostManager sharedManager] currentPost];
-    post.images = nil;
-    
-    // Get all the categories
-    NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
-    
-    NSArray *categories = [plistData allKeys];
-    NSInteger indexOfCategory = 0;
-    for (NSString *category in categories) {
-        if ([category isEqualToString:post.category])
-        {
-            break;
+        [navController pushViewController:createPostViewController animated:YES];
+        
+        DEPost *post = [[DEPostManager sharedManager] currentPost];
+        post.images = nil;
+        
+        // Get all the categories
+        NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
+        
+        NSArray *categories = [plistData allKeys];
+        NSInteger indexOfCategory = 0;
+        for (NSString *category in categories) {
+            if ([category isEqualToString:post.category])
+            {
+                break;
+            }
+            
+            indexOfCategory ++;
         }
+    }
+    else
+    {
+        DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:PROMPT_LOGIN_VIEW_CONTROLLER];
         
-        indexOfCategory ++;
+        loginViewController.posting = YES;
+        [[DEScreenManager getMainNavigationController] pushViewController:loginViewController animated:YES];
     }
 }
 

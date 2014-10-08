@@ -72,6 +72,7 @@
     }];
     
     [_scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self displayPost];
     
 }
 
