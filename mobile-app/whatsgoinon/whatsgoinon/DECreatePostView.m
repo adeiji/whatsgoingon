@@ -17,6 +17,20 @@
     [self setButtons];
     [self registerForKeyboardNotifications];
     [self displayCurrentLocation];
+    [self addFreeButtonToCostTextField];
+    
+    costText = [NSString new];
+}
+
+- (void) addFreeButtonToCostTextField
+{
+    UIButton *btnFree = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnFree setFrame:CGRectMake(70, 10, 50.0f, 40.0f)];
+    [btnFree setTitle:@"Free" forState:UIControlStateNormal];
+    [btnFree setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btnFree addTarget:self action:@selector(setCostToFree) forControlEvents:UIControlEventTouchUpInside];
+
+    [_txtCost.inputAccessoryView addSubview:btnFree];
 }
 
 - (void) setButtons {
@@ -73,6 +87,13 @@
     _txtCategory.delegate = self;
     _txtTitle.delegate = self;
     _txtCost.delegate = self;
+}
+
+- (void) setCostToFree
+{
+    _txtCost.text = @"FREE";
+    costText = @"";
+    [self hideKeyboard];
 }
 
 - (void) registerForKeyboardNotifications
@@ -156,6 +177,44 @@
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [activeField resignFirstResponder];
+}
+
+- (void) textFieldDidChange : (id) sender
+{
+
+}
+
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([textField isEqual:_txtCost])
+    {
+        if ([string isEqualToString:@""])
+        {
+            if ([costText length] > 0)
+            {
+                costText = [costText substringToIndex:[costText length] - 1];
+            }
+            if ([textField.text isEqualToString:@"FREE"])
+            {
+                textField.text = @"00.00";
+            }
+        }
+        else
+        {
+            costText = [NSString stringWithFormat:@"%@%@", costText, string];
+        }
+
+        NSNumber *cost = [NSNumber numberWithDouble:([costText doubleValue] / 100.0f)];
+        NSNumberFormatter *formatter = [NSNumberFormatter new];
+        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+        NSString *costString = [formatter stringFromNumber:cost];
+        
+        _txtCost.text = costString;
+        
+        return NO;
+    }
+    
+    return YES;
 }
 
 

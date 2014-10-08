@@ -116,7 +116,7 @@
     {
         UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
         DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
-    
+
         [self.navigationController pushViewController:createPostViewController animated:YES];
     }
     else {

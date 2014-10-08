@@ -57,6 +57,7 @@
     [self.view setHidden:YES];
     [[NSNotificationCenter defaultCenter] removeObserver:_createPostViewOne];
     [[NSNotificationCenter defaultCenter] removeObserver:_createPostViewTwo];
+    [self savePostDetails];
     
     [super viewWillDisappear:animated];
 }

@@ -15,6 +15,7 @@
 @interface DECreatePostView : UIView <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UINavigationControllerDelegate>
 {
     UITextField *activeField;
+    NSString *costText;
 }
 
 

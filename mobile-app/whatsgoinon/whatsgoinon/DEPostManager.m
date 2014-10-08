@@ -119,5 +119,13 @@
     return [NSString stringWithFormat:@"%ld:%02ld", (long)hours, (long)minutes];
 }
 
+- (DEPost *) getCurrentPost {
+    if (_currentPost == nil)
+    {
+        _currentPost = [DEPost new];
+    }
+    
+    return _currentPost;
+}
 
 @end

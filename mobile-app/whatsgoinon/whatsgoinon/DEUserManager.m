@@ -44,7 +44,7 @@
                        Password : (NSString *) password
                           Email : (NSString *) email
 {
-    _user.username = userName;
+    _user.username = [userName lowercaseString];
     _user.password = password;
     _user.email = email;
     
@@ -60,13 +60,13 @@
                  ViewController : (UIViewController *)viewController
                      ErrorLabel : (UILabel *)label
 {
-    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser *user, NSError *error) {
+    [PFUser logInWithUsernameInBackground:[username lowercaseString] password:password block:^(PFUser *user, NSError *error) {
         if (user)
         {
             [DESyncManager popToRootAndShowViewController:viewController];
         }
         else {
-            [self usernameExist:username ErrorLabel:label];
+            [self usernameExist:[username lowercaseString] ErrorLabel:label];
         }
     }];
     
@@ -78,7 +78,7 @@
 {
     PFQuery *query = [PFUser query];
 
-    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:username];
+    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[username lowercaseString]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if ([objects count] > 0)
         {
