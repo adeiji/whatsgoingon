@@ -85,8 +85,6 @@
 }
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
-    [DESyncManager getAllValuesForNow:YES];
-    
     if ([self isLoggedIn : NO])
     {
         // Do any additional setup after loading the view.
@@ -146,11 +144,11 @@
         loginViewController.posting = posting;
         
         return NO;
-    }
+    }  //  Link Twitter and Facebook accounts
     else {
         DEUserManager *userManager = [DEUserManager sharedManager];
-        [userManager linkWithTwitter];
-        [userManager loginWithFacebook];
+//        [userManager linkWithTwitter];
+//        [userManager loginWithFacebook];
     }
     
     return YES;

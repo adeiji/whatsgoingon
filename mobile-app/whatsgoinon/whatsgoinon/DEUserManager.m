@@ -75,11 +75,18 @@
     [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
         if (!user) {
             NSLog(@"Uh oh. The user cancelled the Twitter login.");
+            [[DEScreenManager sharedManager] stopActivitySpinner];
             return;
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in with Twitter!");
+            DEScreenManager *screenManager = [DEScreenManager sharedManager];
+            [screenManager gotoNextScreen];
+            [[DEScreenManager sharedManager] stopActivitySpinner];
         } else {
             NSLog(@"User logged in with Twitter!");
+            DEScreenManager *screenManager = [DEScreenManager sharedManager];
+            [screenManager gotoNextScreen];
+            [[DEScreenManager sharedManager] stopActivitySpinner];
         }
     }];
     
@@ -116,17 +123,25 @@
             if (!user) {
                 if (!error) {
                     NSLog(@"The user cancelled the Facebook login.");
+                    [[DEScreenManager sharedManager] stopActivitySpinner];
                 }
                 else {
                     NSLog(@"An error occured: %@", error);
+                    [[DEScreenManager sharedManager] stopActivitySpinner];
                 }
             }
             else if (user.isNew)
             {
                 NSLog(@"User with facebook signed up and logged in");
+                DEScreenManager *screenManager = [DEScreenManager sharedManager];
+                [screenManager gotoNextScreen];
+                [[DEScreenManager sharedManager] stopActivitySpinner];
             }
             else {
                 NSLog(@"User with facebook logged in!");
+                DEScreenManager *screenManager = [DEScreenManager sharedManager];
+                [screenManager gotoNextScreen];
+                [[DEScreenManager sharedManager] stopActivitySpinner];
             }
         }];
     }

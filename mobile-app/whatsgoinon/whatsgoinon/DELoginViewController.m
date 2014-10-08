@@ -73,9 +73,11 @@
     [screenManager gotoNextScreen];
 }
 - (IBAction)loginWithFacebook:(id)sender {
+    [[DEScreenManager sharedManager] startActivitySpinner];
     [[DEUserManager sharedManager] loginWithFacebook];
 }
 - (IBAction)loginWithTwitter:(id)sender {
+    [[DEScreenManager sharedManager] startActivitySpinner];
     [[DEUserManager sharedManager] loginWithTwitter];
 }
 

@@ -20,7 +20,7 @@
     // Connect our app to Parse
     [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
                   clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
-    [PFTwitterUtils initializeWithConsumerKey:@"Pg6HkvcmVVsrfyrWLKswRBisa" consumerSecret:@"xXP4I1IPUEhalMSBdHNaO5zGl1IshaAbyh4FDoTcXwzdSEjDdW"];
+    [PFTwitterUtils initializeWithConsumerKey:@"TFcHVbGMjgBiXuSUpE16untPd" consumerSecret:@"alxo7PP08tyyG2mR3QFm8n8XHdJBcTzGw1u7BKW7A13AaeCWe8"];
     [PFFacebookUtils initializeFacebook];
     // start of your application:didFinishLaunchingWithOptions // ...
     [TestFlight takeOff:@"7dff8d72-f33d-4eb7-aa3f-632fff9c3f03"];
