@@ -22,6 +22,7 @@
     iCarousel *myCarousel;
     UIColor *orbColor;
     NSString *category;
+    NSInteger previousIndex;
 }
 
 #pragma mark - Outlets

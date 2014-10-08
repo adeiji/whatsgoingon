@@ -221,6 +221,20 @@
 
 - (void) wheelDidChangeValue: (int) index {
     self.lblCategory.text = [categories objectAtIndex:index];
+    [[myCarousel itemViewAtIndex:index] setBackgroundColor:orbColor];
+}
+
+- (void) carouselDidEndDecelerating:(iCarousel *)carousel
+{
+    [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0]];
+}
+
+
+- (void) carouselDidScroll:(iCarousel *)carousel
+{
+    [[carousel itemViewAtIndex:previousIndex] setBackgroundColor:orbColor];
+    [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0]];
+    previousIndex = [carousel currentItemIndex];
 }
 
 - (UIView *)carousel:(__unused iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
