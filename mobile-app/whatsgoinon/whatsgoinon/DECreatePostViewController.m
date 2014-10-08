@@ -57,7 +57,11 @@
     [self.view setHidden:YES];
     [[NSNotificationCenter defaultCenter] removeObserver:_createPostViewOne];
     [[NSNotificationCenter defaultCenter] removeObserver:_createPostViewTwo];
-    [self savePostDetails];
+    
+    if ([self.view isEqual:_createPostViewTwo])
+    {
+        [self savePostDetails];
+    }
     
     [super viewWillDisappear:animated];
 }
@@ -358,9 +362,7 @@
     DEPost *post = [[DEPostManager sharedManager] currentPost];
     post.title = _createPostViewTwo.txtTitle.text;
     post.images = _post.images;
-    NSNumberFormatter * formatter = [[NSNumberFormatter alloc] init];
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber * cost = [formatter numberFromString:_createPostViewTwo.txtCost.text];
+    NSNumber * cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
     post.cost = cost;
     post.quickDescription = _createPostViewTwo.txtQuickDescription.text;
     post.description = _createPostViewTwo.txtDescription.text;
@@ -400,7 +402,10 @@
         }
     }
     
-    _createPostViewTwo.txtCost.text = [post.cost stringValue];
+    if (![post.cost isEqual:@0])
+    {
+        _createPostViewTwo.txtCost.text = [post.cost stringValue];
+    }
     _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
     _createPostViewTwo.txtDescription.text = post.description;
 }
