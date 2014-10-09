@@ -7,6 +7,7 @@
 //
 
 #import "DEAddProfileImageViewController.h"
+#import "Constants.h"
 
 @interface DEAddProfileImageViewController ()
 
@@ -27,6 +28,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    [[_btnProfilePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[_btnProfilePicture layer] setBorderWidth:2.0f];
+    [[_btnProfilePicture layer] setCornerRadius:BUTTON_CORNER_RADIUS * 2];
+    
+    [[_btnContinue layer] setCornerRadius:BUTTON_CORNER_RADIUS];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,14 +46,13 @@
 
 - (IBAction)gotoNextScreen:(id)sender {
     [[DEScreenManager sharedManager] gotoNextScreen];
+    self.view.hidden = YES;
 }
 - (IBAction)takeProfileImagePicture:(id)sender {
     
-    #warning - make sure that the user has a camera on this device
-    
+    // Make sure that they have a camera on this device
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
     {
-            
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose From Photo Library", @"Take a Picture",nil];
             
         [actionSheet showInView:self.view];
@@ -76,8 +82,21 @@
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    //Shrink the size of the image.
+    UIGraphicsBeginImageContext( CGSizeMake(70, 56) );
+    [image drawInRect:CGRectMake(0,0,70,56)];
+    UIGraphicsEndImageContext();
+    
+    [_btnProfilePicture setBackgroundImage:image forState:UIControlStateNormal];
+
+    NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *encodedImageData = [NSKeyedArchiver archivedDataWithRootObject:imageData];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:image forKey:@"profile-picture"];
+    [userDefaults setObject:encodedImageData forKey:@"profile-picture"];
+    [userDefaults synchronize];
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 

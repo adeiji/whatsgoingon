@@ -49,8 +49,14 @@
     _user.email = email;
     
     NSError *error;
+    
 #warning This will block the main thread, so you may need to change before production
-    [_user signUp:&error];
+    [_user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+       if (!error)
+       {
+           NSLog(@"User logged in");
+       }
+    }];
 
     return error;
 }
@@ -111,13 +117,15 @@
             return;
         } else if (user.isNew) {
             NSLog(@"User signed up and logged in with Twitter!");
-            DEScreenManager *screenManager = [DEScreenManager sharedManager];
-            [screenManager gotoNextScreen];
+            [[[[DEScreenManager getMainNavigationController] topViewController] view] setHidden:YES];
+            [[DEScreenManager sharedManager] gotoNextScreen];
+            [[DEScreenManager sharedManager] stopActivitySpinner];
             [[DEScreenManager sharedManager] stopActivitySpinner];
         } else {
             NSLog(@"User logged in with Twitter!");
-            DEScreenManager *screenManager = [DEScreenManager sharedManager];
-            [screenManager gotoNextScreen];
+            [[[[DEScreenManager getMainNavigationController] topViewController] view] setHidden:YES];
+            [[DEScreenManager sharedManager] gotoNextScreen];
+            [[DEScreenManager sharedManager] stopActivitySpinner];
             [[DEScreenManager sharedManager] stopActivitySpinner];
         }
     }];
@@ -165,14 +173,15 @@
             else if (user.isNew)
             {
                 NSLog(@"User with facebook signed up and logged in");
-                DEScreenManager *screenManager = [DEScreenManager sharedManager];
-                [screenManager gotoNextScreen];
+                [[[[DEScreenManager getMainNavigationController] topViewController] view] setHidden:YES];
+                [[DEScreenManager sharedManager] gotoNextScreen];
+                [[DEScreenManager sharedManager] stopActivitySpinner];
                 [[DEScreenManager sharedManager] stopActivitySpinner];
             }
             else {
                 NSLog(@"User with facebook logged in!");
-                DEScreenManager *screenManager = [DEScreenManager sharedManager];
-                [screenManager gotoNextScreen];
+                [[[[DEScreenManager getMainNavigationController] topViewController] view] setHidden:YES];
+                [[DEScreenManager sharedManager] gotoNextScreen];
                 [[DEScreenManager sharedManager] stopActivitySpinner];
             }
         }];

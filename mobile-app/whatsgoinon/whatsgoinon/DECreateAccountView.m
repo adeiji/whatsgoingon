@@ -7,6 +7,7 @@
 //
 
 #import "DECreateAccountView.h"
+#import "Constants.h"
 
 @implementation DECreateAccountView
 
@@ -60,6 +61,10 @@
         _lblUsernameError.text = error.userInfo[@"error"];
         _lblUsernameError.hidden = NO;
     }
+    
+    DELoginViewController *profileImageViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER];
+    
+    [[DEScreenManager getMainNavigationController] pushViewController:profileImageViewController animated:YES];
 }
 
 @end
