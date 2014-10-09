@@ -43,8 +43,8 @@
         {
             [timer invalidate];
             [timer setFireDate:[NSDate distantFuture]];
-            [self startTimerForFeedback];
             _eventPersonAt = post;
+            [self startTimerForFeedback];
         }
     }
     

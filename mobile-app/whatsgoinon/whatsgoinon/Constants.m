@@ -87,3 +87,6 @@ NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"allCommentsLoaded";
 
 NSString *const PROMPT_LOGIN_VIEW_CONTROLLER = @"promptLogin";
 NSString *const LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER = @"addProfileImageViewControler";
+
+// NSUserDefaults
+NSString *const NSUSER_DEFAULTS_PROFILE_PICTURE = @"profile-picture";

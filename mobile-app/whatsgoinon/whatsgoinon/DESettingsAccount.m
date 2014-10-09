@@ -47,8 +47,18 @@
         else {
             _switchTwitter.on = NO;
         }
+        
+        [self displayProfilePicture];
     }
     return self;
+}
+
+- (void) displayProfilePicture
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *imageData = [userDefaults objectForKey:@"profile-picture"];
+    UIImage *image = [UIImage imageWithData:imageData];
+    [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
 }
 
 - (void) setUpTextFields
@@ -112,7 +122,8 @@
     
     if ([[DEUserManager sharedManager] isLoggedIn])
     {
-
+        [PFUser logOut];
+        [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
     }
     else
     {

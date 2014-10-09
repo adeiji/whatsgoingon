@@ -55,8 +55,23 @@
     
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.lblComment.text = _comments[indexPath.row][PARSE_CLASS_COMMENT_COMMENT];
-    [[cell.imgProfileView layer] setCornerRadius:cell.imgProfileView.frame.size.height / 2.0f];
-    [cell.imgProfileView setImage:[UIImage imageNamed:@"profile-pic.jpg"]];
+    [[cell.imgProfileView layer] setCornerRadius:cell.imgProfileView.frame.size.height / 2.0f];;
+    
+    PFObject *user = (PFObject *) _comments[indexPath.row][PARSE_CLASS_COMMENT_USER];
+    [user fetchIfNeeded];
+    if (!user[PARSE_CLASS_USER_PROFILE_PICTURE])
+    {
+        [cell.imgProfileView setImage:[UIImage imageNamed:@"profile-pic.jpg"]];
+    }
+    else
+    {
+        PFFile *profileImage = _comments[indexPath.row][PARSE_CLASS_COMMENT_USER][PARSE_CLASS_USER_PROFILE_PICTURE];
+        
+        [profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            UIImage *image = [UIImage imageWithData:data];
+            [cell.imgProfileView setImage:image];
+        }];
+    }
     [cell.imgProfileView setClipsToBounds:YES];
     
     return cell;
