@@ -162,6 +162,8 @@
 
 - (void) getTwitterProfilePicture : (NSString *) username
 {
+    
+    // Call the twitter API and get the profile image
     NSError *error;
     NSString *requestString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/users/show.json?user_id=%@", username];
     NSURL *verify = [NSURL URLWithString:requestString];
@@ -178,6 +180,7 @@
         NSURL *url = [NSURL URLWithString:imageURLString];
         NSData *data = [NSData dataWithContentsOfURL:url];
         
+        // Add the profile image from twitter
         [DEUserManager addProfileImage:data];
     }
 }
