@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DEScreenManager.h"
 #import "DECameraButton.h"
+#import "DEUserManager.h"
 
 @interface DEAddProfileImageViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+{
+    NSData *profileImageData;
+}
 
 @property (weak, nonatomic) IBOutlet DECameraButton *btnProfilePicture;
 @property (weak, nonatomic) IBOutlet UIButton *btnContinue;

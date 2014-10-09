@@ -14,8 +14,10 @@
 @interface DEUserManager : NSObject
 
 - (NSError *) createUserWithUserName : (NSString *) userName
-                       Password : (NSString *) password
-                          Email : (NSString *) email;
+                            Password : (NSString *) password
+                               Email : (NSString *) email
+                      ViewController : (UIViewController *) viewController
+                          ErrorLabel : (UILabel *) label;
 
 - (NSError *) loginWithUsername : (NSString *) username
                        Password : (NSString *) password
@@ -31,6 +33,8 @@
 
 - (BOOL) isLinkedWithTwitter;
 - (BOOL) isLinkedWithFacebook;
+
++ (void) addProfileImage : (NSData *) profileImageData;
 
 @property (strong, nonatomic) PFUser *user;
 

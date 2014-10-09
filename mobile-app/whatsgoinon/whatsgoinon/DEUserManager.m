@@ -41,8 +41,10 @@
 }
 
 - (NSError *) createUserWithUserName : (NSString *) userName
-                       Password : (NSString *) password
-                          Email : (NSString *) email
+                            Password : (NSString *) password
+                               Email : (NSString *) email
+                      ViewController : (UIViewController *) viewController
+                          ErrorLabel : (UILabel *) label;
 {
     _user.username = [userName lowercaseString];
     _user.password = password;
@@ -50,15 +52,41 @@
     
     NSError *error;
     
-#warning This will block the main thread, so you may need to change before production
+    [[DEScreenManager sharedManager] startActivitySpinner];
+    
     [_user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-       if (!error)
-       {
-           NSLog(@"User logged in");
-       }
+        if (!error)
+        {
+            [[DEScreenManager getMainNavigationController] pushViewController:viewController animated:YES];
+        }
+        else
+        {
+            label.hidden = NO;
+            label.text = error.userInfo[@"error"];
+        }
+        
+        [[DEScreenManager sharedManager] stopActivitySpinner];
     }];
-
+    
     return error;
+}
+
++ (void) addProfileImage : (NSData *) profileImageData
+{
+    PFObject *myUser = [PFUser currentUser];
+    PFFile *imageFile = [PFFile fileWithData:profileImageData];
+    myUser[PARSE_CLASS_USER_PROFILE_PICTURE] = imageFile;
+    
+    [myUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error)
+        {
+            NSLog(@"Sweet! The profile picture saved");
+        }
+        else
+        {
+            NSLog(@"Error saving the profile picture: %@", [error description]);
+        }
+    }];
 }
 
 - (NSError *) loginWithUsername : (NSString *) username

@@ -47,6 +47,8 @@
 - (IBAction)gotoNextScreen:(id)sender {
     [[DEScreenManager sharedManager] gotoNextScreen];
     self.view.hidden = YES;
+    
+    [DEUserManager addProfileImage:profileImageData];
 }
 - (IBAction)takeProfileImagePicture:(id)sender {
     
@@ -89,12 +91,14 @@
     
     [_btnProfilePicture setBackgroundImage:image forState:UIControlStateNormal];
 
-    NSData *imageData = UIImagePNGRepresentation(image);
+    NSData *imageData = UIImageJPEGRepresentation(image, .1);
     NSData *encodedImageData = [NSKeyedArchiver archivedDataWithRootObject:imageData];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:encodedImageData forKey:@"profile-picture"];
     [userDefaults synchronize];
+    
+    profileImageData = imageData;
     
     [picker dismissViewControllerAnimated:YES completion:nil];
 }

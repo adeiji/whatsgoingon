@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DEUserManager.h"
+#import "DEAddProfileImageViewController.h"
 
 @interface DECreateAccountView : UIView <UITextFieldDelegate>
 

@@ -51,20 +51,13 @@
 
 - (IBAction)signUp:(id)sender {
     
-    _lblUsernameError.hidden = YES;
-    DEUserManager *userManager = [DEUserManager sharedManager];
+    DEAddProfileImageViewController *profileImageViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER];
     
-    NSError *error = [userManager createUserWithUserName:_txtUsername.text Password:_txtPassword.text Email:_txtEmail.text];
-    
-    if (error)
-    {
-        _lblUsernameError.text = error.userInfo[@"error"];
-        _lblUsernameError.hidden = NO;
-    }
-    
-    DELoginViewController *profileImageViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER];
-    
-    [[DEScreenManager getMainNavigationController] pushViewController:profileImageViewController animated:YES];
+    [[DEUserManager sharedManager] createUserWithUserName:_txtUsername.text
+                                                                   Password:_txtPassword.text
+                                                                      Email:_txtEmail.text
+                                                             ViewController:profileImageViewController
+                                                                 ErrorLabel:_lblUsernameError];
 }
 
 @end
