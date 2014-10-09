@@ -81,6 +81,9 @@
         if (!error)
         {
             NSLog(@"Sweet! The profile picture saved");
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:profileImageData forKey:@"profile-picture"];
+            [userDefaults synchronize];
         }
         else
         {
@@ -143,22 +146,40 @@
             NSLog(@"Uh oh. The user cancelled the Twitter login.");
             [[DEScreenManager sharedManager] stopActivitySpinner];
             return;
-        } else if (user.isNew) {
-            NSLog(@"User signed up and logged in with Twitter!");
+        } else
+        {
             [[[[DEScreenManager getMainNavigationController] topViewController] view] setHidden:YES];
             [[DEScreenManager sharedManager] gotoNextScreen];
             [[DEScreenManager sharedManager] stopActivitySpinner];
             [[DEScreenManager sharedManager] stopActivitySpinner];
-        } else {
-            NSLog(@"User logged in with Twitter!");
-            [[[[DEScreenManager getMainNavigationController] topViewController] view] setHidden:YES];
-            [[DEScreenManager sharedManager] gotoNextScreen];
-            [[DEScreenManager sharedManager] stopActivitySpinner];
-            [[DEScreenManager sharedManager] stopActivitySpinner];
+            
+            [self getTwitterProfilePicture : [PFTwitterUtils twitter].userId];
         }
     }];
     
     return nil;
+}
+
+- (void) getTwitterProfilePicture : (NSString *) username
+{
+    NSError *error;
+    NSString *requestString = [NSString stringWithFormat:@"https://api.twitter.com/1.1/users/show.json?user_id=%@", username];
+    NSURL *verify = [NSURL URLWithString:requestString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:verify];
+    [[PFTwitterUtils twitter] signRequest:request];
+    NSURLResponse *response = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    if (!error)
+    {
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+        
+        NSString *imageURLString = result[@"profile_image_url_https"];
+        NSURL *url = [NSURL URLWithString:imageURLString];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        [DEUserManager addProfileImage:data];
+    }
 }
 
 - (NSError *) linkWithTwitter
@@ -198,19 +219,15 @@
                     [[DEScreenManager sharedManager] stopActivitySpinner];
                 }
             }
-            else if (user.isNew)
+            else
             {
                 NSLog(@"User with facebook signed up and logged in");
                 [[[[DEScreenManager getMainNavigationController] topViewController] view] setHidden:YES];
                 [[DEScreenManager sharedManager] gotoNextScreen];
                 [[DEScreenManager sharedManager] stopActivitySpinner];
-                [[DEScreenManager sharedManager] stopActivitySpinner];
-            }
-            else {
-                NSLog(@"User with facebook logged in!");
-                [[[[DEScreenManager getMainNavigationController] topViewController] view] setHidden:YES];
-                [[DEScreenManager sharedManager] gotoNextScreen];
-                [[DEScreenManager sharedManager] stopActivitySpinner];
+                
+                // Get the Facebook Profile Picture
+                [self getFacebookProfilePicture];
             }
         }];
     }
@@ -218,5 +235,19 @@
     return nil;
 }
 
+// Get the Facebook Profile Picture
+- (void) getFacebookProfilePicture
+{
+    [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error)
+        {
+            NSString *facebookId = [result objectForKey:@"id"];
+            NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", facebookId]];
+            
+            NSData *imageData = [NSData dataWithContentsOfURL:profilePictureURL];
+            [DEUserManager addProfileImage:imageData];
+        }
+    }];
+}
 
 @end

@@ -92,11 +92,6 @@
     [_btnProfilePicture setBackgroundImage:image forState:UIControlStateNormal];
 
     NSData *imageData = UIImageJPEGRepresentation(image, .1);
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:imageData forKey:@"profile-picture"];
-    [userDefaults synchronize];
-    
     profileImageData = imageData;
     
     [picker dismissViewControllerAnimated:YES completion:nil];
