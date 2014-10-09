@@ -402,9 +402,13 @@
         }
     }
     
-    if (![post.cost isEqual:@0])
+    if (![post.cost isEqual:@0] && post.cost != nil)    // If the cost is not free or has not been entered yet
     {
         _createPostViewTwo.txtCost.text = [post.cost stringValue];
+    }
+    else    // If the cost is free then make sure that's displayed
+    {
+        _createPostViewTwo.txtCost.text = @"FREE";
     }
     _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
     _createPostViewTwo.txtDescription.text = post.description;

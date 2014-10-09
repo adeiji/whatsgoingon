@@ -207,7 +207,8 @@
         NSNumber *cost = [NSNumber numberWithDouble:([costText doubleValue] / 100.0f)];
         NSNumberFormatter *formatter = [NSNumberFormatter new];
         [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-        NSString *costString = [formatter stringFromNumber:cost];
+        // Make sure that the $ sign is not displayed in the text box
+        NSString *costString = [[formatter stringFromNumber:cost] substringFromIndex:1];
         
         _txtCost.text = costString;
         

@@ -162,7 +162,7 @@
                                                 <rect key="frame" x="15" y="158" width="25" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="B6C4D6DE-A80C-4CC9-A4E1-E77C3B1DB360" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="B421BDA0-E25A-4C55-9DF3-DB54F8B3C604" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
@@ -353,7 +353,7 @@
                                                     <action selector="takePicture:" destination="yte-Ni-6PL" eventType="touchUpInside" id="oeH-kq-CdV"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Cost" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g64-bY-Vd5">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="FREE" placeholder="Cost" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g64-bY-Vd5">
                                                 <rect key="frame" x="48" y="322" width="79" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
@@ -531,7 +531,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="B6C4D6DE-A80C-4CC9-A4E1-E77C3B1DB360" width="140" height="211">
+        <image name="B421BDA0-E25A-4C55-9DF3-DB54F8B3C604" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

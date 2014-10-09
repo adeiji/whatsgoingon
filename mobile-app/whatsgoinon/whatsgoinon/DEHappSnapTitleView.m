@@ -27,6 +27,7 @@
     UIColor* color2 = [UIColor colorWithRed: 0.222 green: 0.699 blue: 0.312 alpha: 1];
     UIColor* color1 = [UIColor colorWithRed: 0.075 green: 0.606 blue: 0.915 alpha: 1];
     UIColor* color0 = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
+    UIColor* color = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
     
     //// Layer_2
     {
@@ -113,8 +114,12 @@
         
         [@"nap" drawInRect: rectangle10Rect withAttributes: rectangle10FontAttributes];
     }
-
-
+    
+    
+    //// Oval Drawing
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(86, 152, 43, 10)];
+    [color setFill];
+    [ovalPath fill];
 }
 
 @end

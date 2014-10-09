@@ -25,6 +25,28 @@
         [[_btnSignOut layer] setCornerRadius:BUTTON_CORNER_RADIUS];
         
         [self setUpTextFields];
+        
+        if (![[DEUserManager sharedManager] isLoggedIn])
+        {
+            [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
+        }
+        
+        if ([[DEUserManager sharedManager] isLinkedWithFacebook])
+        {
+            _switchFacebook.on = YES;
+        }
+        else
+        {
+            _switchFacebook.on = NO;
+        }
+        
+        if ([[DEUserManager sharedManager] isLinkedWithTwitter])
+        {
+            _switchTwitter.on = YES;
+        }
+        else {
+            _switchTwitter.on = NO;
+        }
     }
     return self;
 }
@@ -87,6 +109,19 @@
 }
 
 - (IBAction)signOut:(id)sender {
+    
+    if ([[DEUserManager sharedManager] isLoggedIn])
+    {
+
+    }
+    else
+    {
+        DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:PROMPT_LOGIN_VIEW_CONTROLLER];
+        
+        loginViewController.btnSkip.hidden = YES;
+        [[DEScreenManager getMainNavigationController] pushViewController:loginViewController animated:YES];
+    }
+    
 }
 
 - (IBAction)goBack:(id)sender {

@@ -94,6 +94,15 @@
     return NO;
 }
 
+- (BOOL) isLinkedWithTwitter
+{
+    return [PFTwitterUtils isLinkedWithUser:[PFUser user]];
+}
+
+- (BOOL) isLinkedWithFacebook
+{
+    return [PFFacebookUtils isLinkedWithUser:[PFUser user]];
+}
 - (NSError *) loginWithTwitter {
     [PFTwitterUtils logInWithBlock:^(PFUser *user, NSError *error) {
         if (!user) {

@@ -29,6 +29,9 @@
 - (NSError *) linkWithTwitter;
 - (NSError *) loginWithFacebook;
 
+- (BOOL) isLinkedWithTwitter;
+- (BOOL) isLinkedWithFacebook;
+
 @property (strong, nonatomic) PFUser *user;
 
 @end
