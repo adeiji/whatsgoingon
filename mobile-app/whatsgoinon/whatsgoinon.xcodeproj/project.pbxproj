@@ -45,6 +45,7 @@
 		F41277C519E611570092CD67 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F41277A919E611570092CD67 /* Default@2x.png */; };
 		F41277C619E611570092CD67 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = F41277AA19E611570092CD67 /* iTunesArtwork */; };
 		F41277C719E611570092CD67 /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = F41277AB19E611570092CD67 /* iTunesArtwork@2x */; };
+		F41277CA19E614770092CD67 /* DEAddProfileImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41277C919E614770092CD67 /* DEAddProfileImageViewController.m */; };
 		F412BC9E19CBB6650088F265 /* ViewAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = F412BC9D19CBB6650088F265 /* ViewAlert.xib */; };
 		F437BF851990452000CF61E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF841990452000CF61E9 /* Foundation.framework */; };
 		F437BF871990452000CF61E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF861990452000CF61E9 /* CoreGraphics.framework */; };
@@ -227,6 +228,8 @@
 		F41277A919E611570092CD67 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "icon-images/Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		F41277AA19E611570092CD67 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = "icon-images/iTunesArtwork"; sourceTree = SOURCE_ROOT; };
 		F41277AB19E611570092CD67 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; name = "iTunesArtwork@2x"; path = "icon-images/iTunesArtwork@2x"; sourceTree = SOURCE_ROOT; };
+		F41277C819E614770092CD67 /* DEAddProfileImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAddProfileImageViewController.h; sourceTree = "<group>"; };
+		F41277C919E614770092CD67 /* DEAddProfileImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAddProfileImageViewController.m; sourceTree = "<group>"; };
 		F412BC9D19CBB6650088F265 /* ViewAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAlert.xib; sourceTree = "<group>"; };
 		F437BF811990452000CF61E9 /* whatsgoinon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whatsgoinon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F437BF841990452000CF61E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -849,6 +852,8 @@
 				F4774FA719956BBE00FCDE66 /* DECreateAccountViewController.m */,
 				F4774FA9199575CE00FCDE66 /* DELoginView.h */,
 				F4774FAA199575CE00FCDE66 /* DELoginView.m */,
+				F41277C819E614770092CD67 /* DEAddProfileImageViewController.h */,
+				F41277C919E614770092CD67 /* DEAddProfileImageViewController.m */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -1277,6 +1282,7 @@
 				F4CB0B9E19AFFA8200AABD12 /* DEGoogleButton.m in Sources */,
 				F45E60B219AD7C71007705F9 /* DEClearRectView.m in Sources */,
 				F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */,
+				F41277CA19E614770092CD67 /* DEAddProfileImageViewController.m in Sources */,
 				F40E0E1719C0093000D2C3A0 /* DECameraButton.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
 				F4774FAB199575CE00FCDE66 /* DELoginView.m in Sources */,
