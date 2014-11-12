@@ -252,6 +252,7 @@
     static BOOL going = NO;
     DEPostManager *postManager = [DEPostManager sharedManager];
     
+    // If the user has not already selected this post as going then we set this post as going for the user and save that to the server.
     if ( ![[postManager goingPost] containsObject:_post] )
     {
         int numGoing = [_post.numberGoing intValue];
@@ -264,6 +265,8 @@
         [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
         
         going = YES;
+        // Save this item as going for the user to the server
+        [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_GOING];
         
         if ([_eventView.detailsView.subviews[0] isKindOfClass:[DEEventDetailsView class]])
         {
@@ -286,6 +289,14 @@
     
     [self updateViewToGoing];
     [[_eventView imgMainImage] setHidden:YES];
+}
+
+- (IBAction)setEventAsMaybeGoing:(id)sender {
+    DEPostManager *postManager = [DEPostManager new];
+    [[postManager maybeGoingPost] addObject:_post];
+    // Save this item as maybe going for the user to the server
+    [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
+    [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
 }
 
 - (void) updateViewToGoing
@@ -337,12 +348,7 @@
     }
 }
 
-- (IBAction)setEventAsMaybeGoing:(id)sender {
-    DEPostManager *postManager = [DEPostManager new];
-    [[postManager maybeGoingPost] addObject:_post];
-    
-    [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
-}
+
 
 
 @end

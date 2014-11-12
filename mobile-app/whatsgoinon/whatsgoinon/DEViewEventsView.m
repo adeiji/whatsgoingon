@@ -51,8 +51,6 @@
     NSArray *allViews = [[super superview] subviews];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     
-    BOOL overlayDisplayed = [screenManager overlayDisplayed];
-    
     //Get all the sibling DEEventTimeline views and display them on the screen
     for (UIView *superView in allViews) {
         for (UIView *view in [superView subviews]) {
@@ -164,6 +162,12 @@
     eventViewController.viewEventView = self;
     [[DEPostManager sharedManager] setCurrentPost:_post];
     [[DEPostManager sharedManager] setDistanceFromEvent:self.lblDistance.text];
+    
+    if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
+    {
+        eventViewController.isGoing = YES;
+    }
+    
     [navigationController pushViewController:eventViewController animated:YES];
 }
 

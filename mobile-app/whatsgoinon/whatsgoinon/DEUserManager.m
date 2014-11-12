@@ -33,6 +33,21 @@
     
     if (currentUser) {
         _user = currentUser;
+        
+        
+        // Set the going and maybegoing post for the current user to be able to detect how events should be displayed later on.
+        PFQuery *userQuery = [PFUser query];
+        [userQuery whereKey:PARSE_CLASS_USER_USERNAME equalTo:currentUser.username];
+        [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error)
+            {
+                PFObject *user = [objects firstObject];
+                [[DEPostManager sharedManager] setGoingPost:user[PARSE_CLASS_USER_EVENTS_GOING]];
+                [[DEPostManager sharedManager] setMaybeGoingPost:user[PARSE_CLASS_USER_EVENTS_MAYBE]];
+                NSLog(@"Retrieved the user from the server");
+            }
+        }];
+
         return YES;
     }
     else {
@@ -69,6 +84,30 @@
     }];
     
     return error;
+}
+
+
+//Save an item to an array on parse.
+//It is essential that whatever the column
+//the user is saving is be an array,
+//otherwise this will not work properly.
+
+- (void) saveItemToArray : (NSString *) item
+         ParseColumnName : (NSString *) columnName
+{
+    PFObject *myUser = [PFUser currentUser];
+    [myUser addObject:item forKey:columnName];
+    
+    [myUser saveEventually:^(BOOL succeeded, NSError *error) {
+       if (succeeded)
+       {
+           NSLog(@"Yeah!! You saved the item to an array on parse!");
+       }
+       else
+       {
+           NSLog(@"Uh oh, something happened and the item didn't save to the array");
+       }
+    }];
 }
 
 + (void) addProfileImage : (NSData *) profileImageData

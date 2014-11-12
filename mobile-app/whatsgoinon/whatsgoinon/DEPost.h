@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSNumber *cost;
 @property (strong, nonatomic) NSArray *images;
-@property (strong, nonatomic) NSString *description;
+@property (strong, nonatomic) NSString *myDescription;
 @property (strong, nonatomic) NSString *objectId;
 @property (strong, nonatomic) NSArray *comments;
 @property (strong, nonatomic) NSNumber *rating;

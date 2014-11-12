@@ -37,7 +37,7 @@
     post.images = object[PARSE_CLASS_EVENT_IMAGES];
     post.active = object[PARSE_CLASS_EVENT_ACTIVE];
     post.title = object[PARSE_CLASS_EVENT_TITLE];
-    post.description = object[PARSE_CLASS_EVENT_DESCRIPTION];
+    post.myDescription = object[PARSE_CLASS_EVENT_DESCRIPTION];
     post.objectId = object.objectId;
     post.comments = object[PARSE_CLASS_EVENT_COMMENTS];
     post.rating = object[PARSE_CLASS_EVENT_RATING];
@@ -58,7 +58,7 @@
     
     return [NSString stringWithFormat:@"HaxS \nTitle: %@\nDescription: %@\nAddress: %@\nStart Time: %@\nEnd Time: %@\nCost: %@",
             _title,
-            _description,
+            _myDescription,
             _address,
             startTime,
             endTime,

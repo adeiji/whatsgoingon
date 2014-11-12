@@ -33,9 +33,10 @@
 
 - (BOOL) isLinkedWithTwitter;
 - (BOOL) isLinkedWithFacebook;
+- (void) saveItemToArray : (NSString *) item
+         ParseColumnName : (NSString *) columnName;
 
 + (void) addProfileImage : (NSData *) profileImageData;
-
 @property (strong, nonatomic) PFUser *user;
 
 @end

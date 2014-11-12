@@ -56,7 +56,7 @@
     }
     else
     {
-        post.description = view.txtValue.text;
+        post.myDescription = view.txtValue.text;
     }
 
     [self.navigationController popViewControllerAnimated:YES];

@@ -62,6 +62,9 @@ NSString *const PARSE_CLASS_USER_EMAIL = @"email";
 NSString *const PARSE_CLASS_USER_PASSWORD = @"password";
 NSString *const PARSE_CLASS_USER_EMAIL_VERIFIED = @"emailVerified";
 NSString *const PARSE_CLASS_USER_PROFILE_PICTURE = @"profilePicture";
+NSString *const PARSE_CLASS_USER_EVENTS_GOING = @"eventsGoing";
+NSString *const PARSE_CLASS_USER_EVENTS_MAYBE = @"eventsMaybe";
+
 
 
 // Geocoding

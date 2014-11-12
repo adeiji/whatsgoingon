@@ -130,7 +130,7 @@
     _post.title = view.txtTitle.text;
     _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
     _post.images = [[[DEPostManager sharedManager] currentPost] images];
-    _post.description = view.txtDescription.text;
+    _post.myDescription = view.txtDescription.text;
     _post.active = YES;
     _post.quickDescription = view.txtQuickDescription.text;
     _post.images = [[[DEPostManager sharedManager] currentPost] images];
@@ -365,7 +365,7 @@
     NSNumber * cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
     post.cost = cost;
     post.quickDescription = _createPostViewTwo.txtQuickDescription.text;
-    post.description = _createPostViewTwo.txtDescription.text;
+    post.myDescription = _createPostViewTwo.txtDescription.text;
     
     [postManager setCurrentPost:post];
 }
@@ -411,7 +411,7 @@
         _createPostViewTwo.txtCost.text = @"FREE";
     }
     _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
-    _createPostViewTwo.txtDescription.text = post.description;
+    _createPostViewTwo.txtDescription.text = post.myDescription;
 }
 
 

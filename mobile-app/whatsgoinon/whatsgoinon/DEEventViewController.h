@@ -38,4 +38,5 @@
 - (IBAction)viewMoreForEvent:(id)sender;
 - (IBAction)goBack:(id)sender;
 - (IBAction)savePost:(id)sender;
+- (IBAction)setEventAsGoing:(id)sender;
 @end
