@@ -24,9 +24,20 @@
     //Get the latitude and longitude values of the current user
     _currentLocation.latitude = [[locations objectAtIndex:0] coordinate].latitude;
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
-    NSMutableArray *postToDeleteFromGoing = [NSMutableArray new];
+
+    NSMutableArray *goingPosts = [NSMutableArray new];
+
+    // Get all the actual posts that are set as is going by this user.
+    for (PFObject *post in [[DEPostManager sharedManager] posts]) {
+        for (NSString *postId in [[DEPostManager sharedManager] goingPost]) {
+            if ([postId isEqualToString:post.objectId])
+            {
+                [goingPosts addObject:[DEPost getPostFromPFObject:post]];
+            }
+        }
+    }
     
-    for (DEPost *post in [[DEPostManager sharedManager] goingPost]) {
+    for (DEPost *post in goingPosts) {
 
         CLLocationDegrees latitude = [[locations objectAtIndex:0] coordinate].latitude;
         CLLocationDegrees longitude = [[locations objectAtIndex:0] coordinate].longitude;
@@ -48,11 +59,6 @@
         }
     }
     
-    // Remove the posts that the user was asked to comment on
-    for (DEPost *post in postToDeleteFromGoing) {
-        NSMutableArray *goingPost = [[DEPostManager sharedManager] goingPost];
-        [goingPost removeObject:post];
-    }
     
     //Stop updating the location because now it is uneccesary
     [_locationManager stopUpdatingLocation];
@@ -60,7 +66,7 @@
 
 - (void) startTimer
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:500 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:YES];
     
     [timer fire];
 }
@@ -68,7 +74,8 @@
 - (void) promptUserForFeedback
 {
     [DEScreenManager showCommentView : _eventPersonAt];
-    [[[DEPostManager sharedManager] goingPost] removeObject:_eventPersonAt];
+    #warning - Must make sure that we set the post as prompted for comment and save this.
+//    [[[DEPostManager sharedManager] goingPost] removeObject:_eventPersonAt.objectId];
     
     [self startTimer];
 }

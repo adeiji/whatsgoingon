@@ -163,12 +163,14 @@
     [[DEPostManager sharedManager] setCurrentPost:_post];
     [[DEPostManager sharedManager] setDistanceFromEvent:self.lblDistance.text];
     
+    [navigationController pushViewController:eventViewController animated:YES];
+    
+    // If this event is already saved as going, then we need to display that in the view.
     if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
     {
         eventViewController.isGoing = YES;
+        [eventViewController updateViewToGoing];
     }
-    
-    [navigationController pushViewController:eventViewController animated:YES];
 }
 
 

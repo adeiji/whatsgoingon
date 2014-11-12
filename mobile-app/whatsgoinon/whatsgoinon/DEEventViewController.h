@@ -39,4 +39,8 @@
 - (IBAction)goBack:(id)sender;
 - (IBAction)savePost:(id)sender;
 - (IBAction)setEventAsGoing:(id)sender;
+
+#pragma mark - Private Methods
+- (void) updateViewToGoing;
+
 @end

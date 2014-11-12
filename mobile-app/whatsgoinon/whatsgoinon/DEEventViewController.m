@@ -46,7 +46,7 @@
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
     
-    if (_isGoing && _mapView)
+    if (_isGoing)
     {
         [self updateViewToGoing];
     }
