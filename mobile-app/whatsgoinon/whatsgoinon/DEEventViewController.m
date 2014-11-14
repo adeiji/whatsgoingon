@@ -179,17 +179,15 @@
     CGSize sizeThatFitsTextView = [[detailsView txtDescription] sizeThatFits:CGSizeMake([detailsView txtDescription].frame.size.width, 1000)];
     CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - [detailsView heightConstraint].constant;
     [detailsView heightConstraint].constant = ceilf(sizeThatFitsTextView.height);
-    [[detailsView txtDescription] layoutIfNeeded];
     
     CGRect frame = detailsView.frame;
     frame.size.height += heightDifference;
     [detailsView setFrame:frame];
-    [detailsView layoutIfNeeded];
     [[_eventView detailsView] setContentSize:detailsView.frame.size];
     
     [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
     [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
-    
+    [detailsView layoutIfNeeded];
     
     if ([DEPostManager isBeforeEvent:_post])
     {

@@ -35,8 +35,7 @@
     marker.position = CLLocationCoordinate2DMake(location.latitude, location.longitude);
     marker.title = [[[DEPostManager sharedManager] currentPost] address];
     marker.snippet = [[DEPostManager sharedManager] distanceFromEvent];
-    marker.infoWindowAnchor = CGPointMake(0, 1);
-    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.infoWindowAnchor = CGPointMake(.5, 1.2);
     marker.map = _viewMapView;
     
     [_viewMapView setSelectedMarker:marker];

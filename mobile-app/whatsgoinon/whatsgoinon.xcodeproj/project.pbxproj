@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1ADD77F251EC4AB29E379A83 /* libPods-whatsgoinon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36964091027C46C399137B26 /* libPods-whatsgoinon.a */; };
+		F40A4F911A1687450041FDD2 /* maybe-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */; };
 		F40DF97719A5621F002B4419 /* DEPost.m in Sources */ = {isa = PBXBuildFile; fileRef = F40DF97519A561F6002B4419 /* DEPost.m */; };
 		F40E0E0919BFF5FE00D2C3A0 /* DEHomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F40E0E0819BFF5FE00D2C3A0 /* DEHomeButton.m */; };
 		F40E0E0B19BFFD9F00D2C3A0 /* going-icon 23x23.png in Resources */ = {isa = PBXBuildFile; fileRef = F40E0E0A19BFFD9F00D2C3A0 /* going-icon 23x23.png */; };
@@ -162,7 +163,6 @@
 		F4EEB03519D20E400072B683 /* categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03419D20E400072B683 /* categories.plist */; };
 		F4EEB03719D21F720072B683 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EEB03619D21F720072B683 /* MessageUI.framework */; };
 		F4EEB03919D22A300072B683 /* going-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03819D22A300072B683 /* going-indicator-icon.png */; };
-		F4EEB03B19D22A440072B683 /* maybe-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */; };
 		F4EEB03D19D22AF80072B683 /* event-reported-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */; };
 		F4EEB04119D22BEF0072B683 /* miscategorized-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */; };
 		F4EEB04B19D236E70072B683 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EEB04A19D236E70072B683 /* Reachability.m */; };
@@ -188,6 +188,7 @@
 /* Begin PBXFileReference section */
 		36964091027C46C399137B26 /* libPods-whatsgoinon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-whatsgoinon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D02BB448E8247C09D943B14 /* Pods-whatsgoinon.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatsgoinon.xcconfig"; path = "Pods/Pods-whatsgoinon.xcconfig"; sourceTree = "<group>"; };
+		F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maybe-indicator-icon.png"; sourceTree = "<group>"; };
 		F40DF97419A561F6002B4419 /* DEPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPost.h; sourceTree = "<group>"; };
 		F40DF97519A561F6002B4419 /* DEPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPost.m; sourceTree = "<group>"; };
 		F40E0E0719BFF5FE00D2C3A0 /* DEHomeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEHomeButton.h; sourceTree = "<group>"; };
@@ -407,7 +408,6 @@
 		F4EEB03419D20E400072B683 /* categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = categories.plist; path = "supporting files/categories.plist"; sourceTree = "<group>"; };
 		F4EEB03619D21F720072B683 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F4EEB03819D22A300072B683 /* going-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "going-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/going-indicator-icon.png"; sourceTree = "<group>"; };
-		F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "maybe-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/maybe-indicator-icon.png"; sourceTree = "<group>"; };
 		F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "event-reported-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/event-reported-indicator-icon.png"; sourceTree = "<group>"; };
 		F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "miscategorized-indicator-icon.png"; sourceTree = "<group>"; };
 		F4EEB04919D236E70072B683 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -986,6 +986,7 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */,
 				F412770B19E5037A0092CD67 /* main-vc-background.png */,
 				F412770919E4F8390092CD67 /* HappSnap-image-only-logo.png */,
 				F4EEB06319D276F00072B683 /* profile-pic.jpg */,
@@ -993,7 +994,6 @@
 				F4EEB05019D241CE0072B683 /* no-internet.png */,
 				F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */,
 				F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */,
-				F4EEB03A19D22A440072B683 /* maybe-indicator-icon.png */,
 				F4EEB03819D22A300072B683 /* going-indicator-icon.png */,
 				F46B947A19C39D0600B41D8C /* thumbs-up.png */,
 				F46B947719C3674E00B41D8C /* password-icon.png */,
@@ -1155,7 +1155,6 @@
 				F46B945719C24F7500B41D8C /* House-icon 25x25.png in Resources */,
 				F40E0E1319C007D100D2C3A0 /* camera-icon 178x141.png in Resources */,
 				F41277B819E611570092CD67 /* appicon-Small@2x.png in Resources */,
-				F4EEB03B19D22A440072B683 /* maybe-indicator-icon.png in Resources */,
 				F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
 				F41277BC19E611570092CD67 /* Default-568h@2x.png in Resources */,
@@ -1188,6 +1187,7 @@
 				F41277C619E611570092CD67 /* iTunesArtwork in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F41277AF19E611570092CD67 /* appicon-72.png in Resources */,
+				F40A4F911A1687450041FDD2 /* maybe-indicator-icon.png in Resources */,
 				F41277C219E611570092CD67 /* Default-Portrait.png in Resources */,
 				F40E0E0D19BFFECC00D2C3A0 /* clock-icon 23x23.png in Resources */,
 				F46B945919C2508F00B41D8C /* Comment-Feedback icon.png in Resources */,

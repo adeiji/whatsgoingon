@@ -225,7 +225,7 @@
     
     postObject[PARSE_CLASS_EVENT_TITLE] = post.title;
     postObject[PARSE_CLASS_EVENT_ADDRESS] = post.address;
-    postObject[PARSE_CLASS_EVENT_DESCRIPTION] = post.description;
+    postObject[PARSE_CLASS_EVENT_DESCRIPTION] = post.myDescription;
     postObject[PARSE_CLASS_EVENT_START_TIME] = post.startTime;
     postObject[PARSE_CLASS_EVENT_END_TIME] = post.endTime;
     postObject[PARSE_CLASS_EVENT_COST] = post.cost;
