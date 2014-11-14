@@ -259,7 +259,7 @@
         numGoing ++;
         _post.numberGoing = [NSNumber numberWithInt:numGoing];
         NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
-        [[postManager goingPost] addObject:_post];
+        [[postManager goingPost] addObject:_post.objectId];
         [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
         [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
         [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
@@ -293,7 +293,7 @@
 
 - (IBAction)setEventAsMaybeGoing:(id)sender {
     DEPostManager *postManager = [DEPostManager new];
-    [[postManager maybeGoingPost] addObject:_post];
+    [[postManager maybeGoingPost] addObject:_post.objectId];
     // Save this item as maybe going for the user to the server
     [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
     [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
