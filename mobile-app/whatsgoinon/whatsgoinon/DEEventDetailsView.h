@@ -15,5 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblNumberGoing;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeUntilStartsOrEnds;
 @property (weak, nonatomic) IBOutlet UILabel *lblEndsInStartsIn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 
 @end

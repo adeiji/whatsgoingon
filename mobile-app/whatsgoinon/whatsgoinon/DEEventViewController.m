@@ -123,7 +123,7 @@
     
     UIView *view = [_eventView detailsView];
     [view addSubview:newView];
-    
+    ((UIScrollView *) view).contentSize = newView.frame.size;
     if ([newView isKindOfClass:[DEViewComments class]])
     {
         ((UIScrollView *) view).scrollEnabled = NO;
@@ -174,9 +174,22 @@
     
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
     
-    [[detailsView txtDescription] setText:_post.description];
+    [[detailsView txtDescription] setText:_post.myDescription];
+    // Set the height of the UITextView for the description to the necessary height to fit all the information
+    CGSize sizeThatFitsTextView = [[detailsView txtDescription] sizeThatFits:CGSizeMake([detailsView txtDescription].frame.size.width, 1000)];
+    CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - [detailsView heightConstraint].constant;
+    [detailsView heightConstraint].constant = ceilf(sizeThatFitsTextView.height);
+    [[detailsView txtDescription] layoutIfNeeded];
+    
+    CGRect frame = detailsView.frame;
+    frame.size.height += heightDifference;
+    [detailsView setFrame:frame];
+    [detailsView layoutIfNeeded];
+    [[_eventView detailsView] setContentSize:detailsView.frame.size];
+    
     [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
     [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
+    
     
     if ([DEPostManager isBeforeEvent:_post])
     {
