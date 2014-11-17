@@ -98,7 +98,7 @@
         self.lblMinCharacters.text = @"0";
     }
     
-    targetLength = 50 - (int) newLength;
+    targetLength = 150 - (int) newLength;
     
     if (_isQuickDescription)
     {
@@ -108,13 +108,13 @@
             [allText appendString:textView.text];
             [allText appendString:text];
             
-            textView.text = [allText substringToIndex:50];
+            textView.text = [allText substringToIndex:150];
             
             return NO;
         }
         else
         {
-            self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 50 - newLength];
+            self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 150 - newLength];
         }
     }
     

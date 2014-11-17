@@ -24,6 +24,11 @@
 
 @implementation DEViewEventsViewController
 
+struct TopMargin {
+    int column;
+    int height;
+};
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -290,25 +295,46 @@
 {
     __block int column = 0;
     postCounter = 0;
+    __block CGFloat columnOneMargin = 0;
+    __block CGFloat columnTwoMargin = 0;
+    __block CGFloat margin = 0;
+    
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
-        
-        CGRect frame = CGRectMake((column * POST_WIDTH) + (13 * (column + 1)), topMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter), POST_WIDTH, POST_HEIGHT);
-        viewEventsView.frame = frame;
         DEPost *post = [DEPost getPostFromPFObject:obj];
         
         [viewEventsView renderViewWithPost:post];
-        
         [[viewEventsView layer] setCornerRadius:5.0f];
+    
+        // Set the height of the UITextView for the description to the necessary height to fit all the information
+        CGSize sizeThatFitsTextView = [[viewEventsView lblSubtitle] sizeThatFits:CGSizeMake([viewEventsView lblSubtitle].frame.size.width, 1000)];
+        CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - [viewEventsView lblSubtitle].frame.size.height;
+
+        if (column == 0)
+        {
+            margin = columnOneMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter);
+        }
+        else {
+            margin = columnTwoMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter);
+        }
         
+        CGRect frame = CGRectMake((column * POST_WIDTH) + (13 * (column + 1)), topMargin + margin, POST_WIDTH, POST_HEIGHT + heightDifference);
+        viewEventsView.frame = frame;
+        
+        frame = viewEventsView.lblSubtitle.frame;
+        frame.size.height += heightDifference;
+        [[viewEventsView lblSubtitle] setFrame:frame];
+
         [_scrollView addSubview:viewEventsView];
-        
+    
         if (column == 0)
         {
             column = 1;
+            columnOneMargin += heightDifference;
         }
         else {
             column = 0;
+            columnTwoMargin += heightDifference;
             postCounter ++;
         }
         
