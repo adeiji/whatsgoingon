@@ -70,7 +70,7 @@ struct TopMargin {
     [_scrollView removeConstraints:[_scrollView constraints]];
     
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_scrollView.superview.mas_top).offset(74);
+        make.top.equalTo(_scrollView.superview.mas_top).offset(112);
         make.left.equalTo(_scrollView.superview.mas_left);
         make.bottom.equalTo(_scrollView.superview.mas_bottom);
         make.right.equalTo(_scrollView.superview.mas_right);
@@ -191,7 +191,16 @@ struct TopMargin {
     [self showOrbView];
     self.view.hidden = NO;
     [_scrollView setDelegate:self];
-
+    [self.searchBar setBackgroundImage:[UIImage new]];
+    
+    for (UIView *view in self.searchBar.subviews) {
+        for (UIView *subview in view.subviews) {
+            if ([subview isKindOfClass:[UITextField class]])
+            {
+                [subview setBackgroundColor:[UIColor colorWithRed:0.0/255.0f green:0.0/255.0f blue:0.0/255.0f alpha:.30]];
+            }
+        }
+    }
     
     [super viewWillAppear:animated];
 }

@@ -24,6 +24,7 @@
     BOOL menuDisplayed;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *posts;
 @property BOOL overlayDisplayed;
 
