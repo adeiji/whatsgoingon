@@ -116,7 +116,12 @@
     NSInteger hours = minutesUntilEnd / 60;
     NSInteger minutes = minutesUntilEnd % 60;
     
-    return [NSString stringWithFormat:@"%ld:%02ld", (long)hours, (long)minutes];
+    if (hours != 0)
+    {
+        return [NSString stringWithFormat:@"%ldhr%02ld", (long)hours, (long)minutes];
+    }
+    
+    return [NSString stringWithFormat:@"%02ldmins", (long)minutes];
 }
 
 - (DEPost *) getCurrentPost {
