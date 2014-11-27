@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1ADD77F251EC4AB29E379A83 /* libPods-whatsgoinon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36964091027C46C399137B26 /* libPods-whatsgoinon.a */; };
 		F40A4F911A1687450041FDD2 /* maybe-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */; };
+		F40A4F951A1AC7750041FDD2 /* HPStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F40A4F941A1AC7750041FDD2 /* HPStyleKit.m */; };
+		F40A4F991A1AC79C0041FDD2 /* DEAmbassadorFlag.m in Sources */ = {isa = PBXBuildFile; fileRef = F40A4F981A1AC79C0041FDD2 /* DEAmbassadorFlag.m */; };
 		F40DF97719A5621F002B4419 /* DEPost.m in Sources */ = {isa = PBXBuildFile; fileRef = F40DF97519A561F6002B4419 /* DEPost.m */; };
 		F40E0E0919BFF5FE00D2C3A0 /* DEHomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F40E0E0819BFF5FE00D2C3A0 /* DEHomeButton.m */; };
 		F40E0E0B19BFFD9F00D2C3A0 /* going-icon 23x23.png in Resources */ = {isa = PBXBuildFile; fileRef = F40E0E0A19BFFD9F00D2C3A0 /* going-icon 23x23.png */; };
@@ -189,6 +191,10 @@
 		36964091027C46C399137B26 /* libPods-whatsgoinon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-whatsgoinon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D02BB448E8247C09D943B14 /* Pods-whatsgoinon.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatsgoinon.xcconfig"; path = "Pods/Pods-whatsgoinon.xcconfig"; sourceTree = "<group>"; };
 		F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maybe-indicator-icon.png"; sourceTree = "<group>"; };
+		F40A4F931A1AC7750041FDD2 /* HPStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HPStyleKit.h; path = stylekit/HPStyleKit.h; sourceTree = "<group>"; };
+		F40A4F941A1AC7750041FDD2 /* HPStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HPStyleKit.m; path = stylekit/HPStyleKit.m; sourceTree = "<group>"; };
+		F40A4F971A1AC79C0041FDD2 /* DEAmbassadorFlag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAmbassadorFlag.h; sourceTree = "<group>"; };
+		F40A4F981A1AC79C0041FDD2 /* DEAmbassadorFlag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAmbassadorFlag.m; sourceTree = "<group>"; };
 		F40DF97419A561F6002B4419 /* DEPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPost.h; sourceTree = "<group>"; };
 		F40DF97519A561F6002B4419 /* DEPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPost.m; sourceTree = "<group>"; };
 		F40E0E0719BFF5FE00D2C3A0 /* DEHomeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEHomeButton.h; sourceTree = "<group>"; };
@@ -462,6 +468,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F40A4F921A1AC71C0041FDD2 /* Style Kit */ = {
+			isa = PBXGroup;
+			children = (
+				F40A4F931A1AC7750041FDD2 /* HPStyleKit.h */,
+				F40A4F941A1AC7750041FDD2 /* HPStyleKit.m */,
+			);
+			name = "Style Kit";
+			sourceTree = "<group>";
+		};
+		F40A4F961A1AC77E0041FDD2 /* Flat View */ = {
+			isa = PBXGroup;
+			children = (
+				F40A4F971A1AC79C0041FDD2 /* DEAmbassadorFlag.h */,
+				F40A4F981A1AC79C0041FDD2 /* DEAmbassadorFlag.m */,
+			);
+			name = "Flat View";
+			sourceTree = "<group>";
+		};
 		F412771F19E6093A0092CD67 /* Launch-Icon Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +569,7 @@
 		F437BF8A1990452000CF61E9 /* whatsgoinon */ = {
 			isa = PBXGroup;
 			children = (
+				F40A4F921A1AC71C0041FDD2 /* Style Kit */,
 				F412771F19E6093A0092CD67 /* Launch-Icon Images */,
 				F4D9C97619ABF15600855094 /* Images */,
 				F448FE7919A442BD00645667 /* Comment */,
@@ -616,6 +641,7 @@
 		F437BFBC199048A100CF61E9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F40A4F961A1AC77E0041FDD2 /* Flat View */,
 				F46B946F19C355CE00B41D8C /* Buttons */,
 				F45E60A219AD3263007705F9 /* Graphical Views - Paint Code */,
 				F437BFBD199048AF00CF61E9 /* WelcomeEventsView.xib */,
@@ -1298,6 +1324,8 @@
 				F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */,
 				F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */,
 				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
+				F40A4F991A1AC79C0041FDD2 /* DEAmbassadorFlag.m in Sources */,
+				F40A4F951A1AC7750041FDD2 /* HPStyleKit.m in Sources */,
 				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,
 				F46B945219C1181800B41D8C /* DEViewDistance.m in Sources */,
 				F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */,

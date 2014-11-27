@@ -247,10 +247,22 @@
             [array addObject:postObject];
             
             [sharedManager setPosts:array];
+            [self updatePostCountForUser];
         }
     }];
     
     return YES;
+}
+
++ (void) updatePostCountForUser {
+    PFQuery *query = [PFUser query];
+    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[[PFUser currentUser] username]];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        int postCount = [object[PARSE_CLASS_USER_POST_COUNT] intValue];
+        object[PARSE_CLASS_USER_POST_COUNT] = [NSNumber numberWithInt:postCount + 1];
+        [object saveInBackground];
+    }];
 }
 
 + (void) saveEventAsMiscategorizedWithEventId : (NSString *) objectId
@@ -316,6 +328,22 @@
         {
             NSLog(@"The report was saved to the server");
         }
+    }];
+}
+
++ (void) getNumberOfPostByUser {
+    PFQuery *query = [PFUser query];
+    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[[PFUser currentUser] username]];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        NSNumber *postCount = object[PARSE_CLASS_USER_POST_COUNT];
+        
+        if (postCount == nil)
+        {
+            postCount = [NSNumber numberWithInt:0];
+        }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_EVENTS_COUNT : postCount  } ];
     }];
 }
 

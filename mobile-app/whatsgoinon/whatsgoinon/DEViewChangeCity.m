@@ -93,7 +93,7 @@
     [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];
     [[DELocationManager sharedManager] setCity:_selection];
     DEViewEventsViewController *viewController = (DEViewEventsViewController *) [[DEScreenManager getMainNavigationController] topViewController];
-    [viewController hideMainMenu];
+//    [viewController hideMainMenu];
     
 }
 

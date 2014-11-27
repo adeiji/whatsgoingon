@@ -112,13 +112,18 @@
     
     NSInteger secondsInMinute = 60;
     NSInteger minutesUntilEnd = seconds / secondsInMinute;
-    
     NSInteger hours = minutesUntilEnd / 60;
+    NSInteger days = hours / 24;
+    NSInteger hoursUntilEnd = hours % 24;
     NSInteger minutes = minutesUntilEnd % 60;
     
-    if (hours != 0)
+    if (days != 0)
     {
-        return [NSString stringWithFormat:@"%ldhr%02ld", (long)hours, (long)minutes];
+        return [NSString stringWithFormat:@"%lddays", (long)days];
+    }
+    else if (hours != 0)
+    {
+        return [NSString stringWithFormat:@"%ldhr%02ld", (long)hoursUntilEnd, (long)minutes];
     }
     
     return [NSString stringWithFormat:@"%02ldmins", (long)minutes];

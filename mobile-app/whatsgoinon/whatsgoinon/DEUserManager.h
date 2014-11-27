@@ -37,6 +37,8 @@
          ParseColumnName : (NSString *) columnName;
 
 + (void) addProfileImage : (NSData *) profileImageData;
++ (void) getUserRank;
+
 @property (strong, nonatomic) PFUser *user;
 
 @end

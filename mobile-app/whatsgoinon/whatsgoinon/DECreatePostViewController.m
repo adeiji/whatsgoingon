@@ -48,8 +48,12 @@
     _createPostViewOne.txtCategory.text = [[[DEPostManager sharedManager] currentPost] category];
     
     [[self.navigationController navigationBar] setHidden:YES];
-    
     [self setUpViews];
+    [self addObservers];
+}
+
+- (void) addObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrHideWebsiteInfoTextField:) name:NOTIFICATION_CENTER_USER_RANK_RETRIEVED object:nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -130,7 +134,10 @@
     _post.title = view.txtTitle.text;
     _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
     _post.images = [[[DEPostManager sharedManager] currentPost] images];
-    _post.myDescription = view.txtDescription.text;
+    
+    NSString *description = [NSString stringWithFormat:@"%@ /n%@", _createPostViewTwo.txtDescription.text, _createPostViewTwo.txtWebsite.text];
+    _post.myDescription = description;
+    
     _post.active = YES;
     _post.quickDescription = view.txtQuickDescription.text;
     _post.images = [[[DEPostManager sharedManager] currentPost] images];
@@ -247,7 +254,20 @@
     // Pass the new view controller the new post that was just created.
     [self.navigationController pushViewController:createPostViewController animated:YES];
     [postManager setCurrentPost:_post];
+    
+    // Check to see what the rank of the user is and if the user is simply standard, then we want to disable the ability to add a website to the information
+    [DEUserManager getUserRank];
 }
+
+
+// We get the user rank from the notification, and if the user is a standard user then we want to keep the website text field hidden.
+- (void) showOrHideWebsiteInfoTextField : (NSNotification *) notification {
+    if (![notification.userInfo[kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO] isEqualToString:USER_RANK_STANDARD])
+    {
+        _createPostViewTwo.txtWebsite.hidden = NO;
+    }
+}
+
 
 - (IBAction)takePicture:(id)sender {
     
@@ -341,7 +361,7 @@
     NSArray *storedImages = [[[DEPostManager sharedManager] currentPost] images];
     NSMutableArray *images = [NSMutableArray arrayWithArray:storedImages];
     // Set the image at the correct location so that it can be restored later to this same exact location
-    images[_currentButton.tag] = UIImageJPEGRepresentation(image, .1);
+    images[_currentButton.tag] = UIImageJPEGRepresentation(image, .01);
     [_post setImages:images];
     [_currentButton setHighlighted:NO];
 
@@ -365,7 +385,8 @@
     NSNumber * cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
     post.cost = cost;
     post.quickDescription = _createPostViewTwo.txtQuickDescription.text;
-    post.myDescription = _createPostViewTwo.txtDescription.text;
+    NSString *description = [NSString stringWithFormat:@"%@ \n%@", _createPostViewTwo.txtDescription.text, _createPostViewTwo.txtWebsite.text];
+    post.myDescription = description;
     
     [postManager setCurrentPost:post];
 }

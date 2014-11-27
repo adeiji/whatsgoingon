@@ -33,7 +33,7 @@
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FcG-da-MAS">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="aaaaaaaaa" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FcG-da-MAS">
                     <rect key="frame" x="20" y="314" width="280" height="30"/>
                     <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -103,25 +103,25 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User Since" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hGM-sH-5Bv">
-                    <rect key="frame" x="28" y="206" width="206" height="21"/>
+                    <rect key="frame" x="28" y="206" width="150" height="21"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Post Count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYx-Re-4r6">
-                    <rect key="frame" x="28" y="241" width="206" height="21"/>
+                    <rect key="frame" x="28" y="241" width="150" height="21"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="9/14" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duH-8J-71V">
-                    <rect key="frame" x="243" y="200" width="57" height="33"/>
+                    <rect key="frame" x="193" y="200" width="107" height="33"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdt-HD-GKB">
-                    <rect key="frame" x="243" y="235" width="57" height="33"/>
+                    <rect key="frame" x="193" y="235" width="107" height="33"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -132,12 +132,20 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yfv-1H-Vsm" customClass="DEAmbassadorFlag">
+                    <rect key="frame" x="229" y="134" width="14" height="21"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="ambassadorFlag" destination="Yfv-1H-Vsm" id="hrf-23-eso"/>
                 <outlet property="btnSendFeedback" destination="XBN-Q4-bFe" id="OQq-pD-jsQ"/>
                 <outlet property="btnSignOut" destination="Ony-rI-kOe" id="CXS-Ns-iyB"/>
                 <outlet property="btnTakePicture" destination="z6h-3d-K53" id="gad-S1-NP7"/>
+                <outlet property="lblMemberSince" destination="duH-8J-71V" id="E7y-ap-zXO"/>
+                <outlet property="lblNumberOfPosts" destination="mdt-HD-GKB" id="w8O-VU-EWI"/>
+                <outlet property="lblRank" destination="tcN-WP-kyB" id="D16-gj-90j"/>
                 <outlet property="switchFacebook" destination="DZ4-Jn-fXZ" id="S5f-TX-T8P"/>
                 <outlet property="switchTwitter" destination="16r-g3-B7T" id="faB-Oo-F8y"/>
                 <outlet property="txtEmail" destination="ghI-HX-qfG" id="v69-qJ-fqO"/>

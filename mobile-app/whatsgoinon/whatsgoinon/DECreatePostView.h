@@ -37,8 +37,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTitle;
 @property (weak, nonatomic) IBOutlet UITextField *txtCost;
 @property (weak, nonatomic) IBOutlet UITextField *txtDescription;
+@property (weak, nonatomic) IBOutlet UITextField *txtWebsite;
 @property (strong, nonatomic) IBOutletCollection(DECameraButton) NSArray *btnSmallPictureButtons;
-
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;
 

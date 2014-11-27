@@ -34,7 +34,6 @@
     if (currentUser) {
         _user = currentUser;
         
-        
         // Set the going and maybegoing post for the current user to be able to detect how events should be displayed later on.
         PFQuery *userQuery = [PFUser query];
         [userQuery whereKey:PARSE_CLASS_USER_USERNAME equalTo:currentUser.username];
@@ -53,6 +52,22 @@
     else {
         return NO;
     }
+}
+// Each user has its own rank.  This gets the rank of the current user from Parse.
++ (void) getUserRank
+{
+    PFQuery *query = [PFUser query];
+    
+    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[[PFUser currentUser] username]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (object != nil)
+        {
+            if (object[PARSE_CLASS_USER_RANK])
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USER_RANK_RETRIEVED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO : object[PARSE_CLASS_USER_RANK] }];
+            }
+        }
+    }];
 }
 
 - (NSError *) createUserWithUserName : (NSString *) userName
@@ -82,10 +97,22 @@
         
         [[DEScreenManager sharedManager] stopActivitySpinner];
     }];
-    
+
     return error;
 }
 
+// Set the user as standard.
+- (void) setUserRankToStandard {
+    PFQuery *query = [PFUser query];
+    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[[PFUser currentUser] username]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (object == nil)
+        {
+            object[PARSE_CLASS_USER_RANK] = USER_RANK_STANDARD;
+            [object saveEventually];
+        }
+    }];
+}
 
 //Save an item to an array on parse.
 //It is essential that whatever the column

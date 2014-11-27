@@ -78,6 +78,7 @@ struct TopMargin {
     
     [_scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self displayPost];
+    [self.searchBar setInputAccessoryView:[DEScreenManager createInputAccessoryView]];
     
 }
 
@@ -279,14 +280,16 @@ struct TopMargin {
     }
 }
 
-- (void) displayPost {
-    
-    [self loadPosts];
-    
+- (void) removeAllPostFromScreen {
     for (UIView *subview in [_scrollView subviews]) {
         [subview removeFromSuperview];
     }
+}
+
+- (void) displayPost {
     
+    [self loadPosts];
+    [self removeAllPostFromScreen];
     [self setUpScrollViewForPostsWithTopMargin:0];
     [self addEventsToScreen : 0];
     [self loadVisiblePost:_scrollView];
@@ -349,6 +352,18 @@ struct TopMargin {
         
         [self getDistanceFromCurrentLocationOfEvent:obj];
     }];
+    
+    CGSize size = _scrollView.contentSize;
+    if (columnOneMargin > columnTwoMargin)
+    {
+        size.height += columnOneMargin;
+    }
+    else {
+        size.height += columnTwoMargin;
+    }
+    
+    [_scrollView setContentSize:size];
+    
 }
 
 
@@ -419,6 +434,44 @@ struct TopMargin {
         }
     }
     
+}
+
+- (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    _searchPosts = [_posts mutableCopy];
+    _postsCopy = [_posts copy];
+}
+
+- (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    _posts = _postsCopy;
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+}
+
+#pragma mark - Search Bar Delegate Methods
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+
+    [_searchPosts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        DEPost *post = [DEPost getPostFromPFObject:obj];
+        if ([post.myDescription rangeOfString:searchText].location == NSNotFound &&
+            [post.title rangeOfString:searchText].location == NSNotFound &&
+            [post.address rangeOfString:searchText].location == NSNotFound &&
+            [post.category rangeOfString:searchText].location == NSNotFound &&
+            [post.quickDescription rangeOfString:searchText].location == NSNotFound
+            )
+        {
+            [_searchPosts removeObject:obj];
+        }
+    }];
+
+    
+    if ([_searchPosts count] != 0)
+    {
+        _posts = _searchPosts;
+        [self removeAllPostFromScreen];
+        [self addEventsToScreen:0];
+    }
 }
 
 @end

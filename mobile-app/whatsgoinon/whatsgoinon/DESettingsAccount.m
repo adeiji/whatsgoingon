@@ -17,40 +17,79 @@
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] firstObject];
         
-        [[_btnTakePicture layer] setCornerRadius:_btnTakePicture.frame.size.height / 2.0f];
-        [[_btnTakePicture layer] setBorderWidth:2.0f];
-        [[_btnTakePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
-        [_btnTakePicture setClipsToBounds:YES];
-        [[_btnSendFeedback layer] setCornerRadius:BUTTON_CORNER_RADIUS];
-        [[_btnSignOut layer] setCornerRadius:BUTTON_CORNER_RADIUS];
-        
+        [self setUpButtons];
+        [self addObservers];
+        [DEUserManager getUserRank];
+        [DESyncManager getNumberOfPostByUser];
+        self.lblRank.text = @"";
+        self.ambassadorFlag.hidden = YES;
+        [self displayMemberSince];
         [self setUpTextFields];
-        
-        if (![[DEUserManager sharedManager] isLoggedIn])
-        {
-            [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
-        }
-        
-        if ([[DEUserManager sharedManager] isLinkedWithFacebook])
-        {
-            _switchFacebook.on = YES;
-        }
-        else
-        {
-            _switchFacebook.on = NO;
-        }
-        
-        if ([[DEUserManager sharedManager] isLinkedWithTwitter])
-        {
-            _switchTwitter.on = YES;
-        }
-        else {
-            _switchTwitter.on = NO;
-        }
-        
+        [self setUpSocialNetworkingIcons];
         [self displayProfilePicture];
     }
-    return self;
+    return self;    
+}
+
+- (void) setUpSocialNetworkingIcons {
+    if (![[DEUserManager sharedManager] isLoggedIn])
+    {
+        [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
+    }
+    
+    if ([[DEUserManager sharedManager] isLinkedWithFacebook])
+    {
+        _switchFacebook.on = YES;
+    }
+    else
+    {
+        _switchFacebook.on = NO;
+    }
+    
+    if ([[DEUserManager sharedManager] isLinkedWithTwitter])
+    {
+        _switchTwitter.on = YES;
+    }
+    else {
+        _switchTwitter.on = NO;
+    }
+}
+
+- (void) setUpButtons {
+    [[_btnTakePicture layer] setCornerRadius:_btnTakePicture.frame.size.height / 2.0f];
+    [[_btnTakePicture layer] setBorderWidth:2.0f];
+    [[_btnTakePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [_btnTakePicture setClipsToBounds:YES];
+    [[_btnSendFeedback layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    [[_btnSignOut layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+}
+
+- (void) addObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNumberOfPostForUser:) name:NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUserRank:) name:NOTIFICATION_CENTER_USER_RANK_RETRIEVED object:nil];
+}
+
+- (void) displayUserRank : (NSNotification *) notification {
+    NSString *userRank = notification.userInfo[kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO];
+    if ([userRank isEqualToString:USER_RANK_AMBASSADOR])
+    {
+        self.ambassadorFlag.hidden = NO;
+    }
+    self.lblRank.text = [notification.userInfo[kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO] capitalizedString];
+}
+
+
+- (void) displayMemberSince {
+    NSDate *date = [[PFUser currentUser] createdAt];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM/dd/yyyy"];
+    self.lblMemberSince.text = [formatter stringFromDate:date];
+}
+
+- (void) displayNumberOfPostForUser:(NSNotification *) notification
+{
+    NSNumber *numberOfPost = [notification.userInfo objectForKey:kNOTIFICATION_CENTER_USER_INFO_USER_EVENTS_COUNT];
+    self.lblNumberOfPosts.text = [numberOfPost stringValue];
 }
 
 - (void) displayProfilePicture
@@ -137,5 +176,6 @@
 
 - (IBAction)goBack:(id)sender {
     [DEAnimationManager fadeOutRemoveView:[self superview] FromView:[[self superview] superview]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

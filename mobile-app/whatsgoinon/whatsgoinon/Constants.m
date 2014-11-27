@@ -64,8 +64,8 @@ NSString *const PARSE_CLASS_USER_EMAIL_VERIFIED = @"emailVerified";
 NSString *const PARSE_CLASS_USER_PROFILE_PICTURE = @"profilePicture";
 NSString *const PARSE_CLASS_USER_EVENTS_GOING = @"eventsGoing";
 NSString *const PARSE_CLASS_USER_EVENTS_MAYBE = @"eventsMaybe";
-
-
+NSString *const PARSE_CLASS_USER_POST_COUNT = @"postCount";
+NSString *const PARSE_CLASS_USER_RANK = @"rank";
 
 // Geocoding
 
@@ -85,6 +85,12 @@ NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"cityChanged";
 NSString *const NOTIFICATION_CENTER_NO_DATA = @"noData";
 NSString *const NOTIFICATION_CENTER_NONE_IN_CATEGORY = @"noneInCategory";
 NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"allCommentsLoaded";
+NSString *const NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED = @"postFromUserRetrieved";
+NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_EVENTS_COUNT = @"eventCount";
+NSString *const NOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
+
+NSString *const kNOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
+NSString *const kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO = @"userRankObjectInfo";
 
 // View Controllers
 
@@ -93,3 +99,8 @@ NSString *const LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER = @"addProfileImageViewC
 
 // NSUserDefaults
 NSString *const NSUSER_DEFAULTS_PROFILE_PICTURE = @"profile-picture";
+
+// User Ranks
+NSString *const USER_RANK_AMBASSADOR = @"ambassador";
+NSString *const USER_RANK_ADMIN = @"admin";
+NSString *const USER_RANK_STANDARD = @"standard";

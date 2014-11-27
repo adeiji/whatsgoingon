@@ -84,6 +84,22 @@
     
     isActive = false;
     self.lblCategory.hidden = YES;
+    
+    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(categoryLabelTapped:)];
+    longGestureRecognizer.minimumPressDuration = .1;
+    [self.lblCategory addGestureRecognizer:longGestureRecognizer];
+}
+
+- (void) categoryLabelTapped : (UITapGestureRecognizer *) recognizer {
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan)
+    {
+        [self.lblCategory setTextColor:[UIColor greenColor]];
+    }
+    else if (recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        [self.lblCategory setTextColor:[UIColor whiteColor]];
+    }
 }
 
 - (void) renderView {
@@ -185,6 +201,7 @@
         isActive = false;
     }
 }
+
 
 - (void) reloadEvents
 {

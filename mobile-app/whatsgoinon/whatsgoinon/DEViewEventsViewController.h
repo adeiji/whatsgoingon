@@ -17,7 +17,7 @@
 
 @class DEViewMainMenu;
 
-@interface DEViewEventsViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate>
+@interface DEViewEventsViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate, UISearchBarDelegate>
 {
     int postCounter;
     DEViewMainMenu *viewMainMenu;
@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *posts;
+@property (strong, nonatomic) NSMutableArray *postsCopy;
+@property (strong, nonatomic) NSMutableArray *searchPosts;
 @property BOOL overlayDisplayed;
 
 - (IBAction)displayMainMenu:(id)sender;

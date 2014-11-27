@@ -31,6 +31,7 @@
 + (void) saveCommentWithEventId : (NSString *) objectId
                         Comment : (NSString *) comment
                          Rating : (NSInteger) rating;
++ (void) getNumberOfPostByUser;
 // Pull all the comments for this specific event
 + (NSArray *) getAllCommentsForEventId : (NSString *) objectId;
 @end
