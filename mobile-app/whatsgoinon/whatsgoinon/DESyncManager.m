@@ -13,6 +13,37 @@
 
 @implementation DESyncManager
 
+// Get all the future values from the server and store this information, then when the user wants to get Now or Later events, they will come from this list rather then be pulled down from the server
++ (void) getAllValues {
+    [self checkForInternet];
+    
+    __block DEPostManager *sharedManager = [DEPostManager sharedManager];
+    __block PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    //Get all the events that are currently active
+    NSDate *nowDate = [NSDate date];
+    
+    [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
+    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
+    [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:nowDate];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            //Store the events pulled down from the server
+            [sharedManager setPosts:objects];
+            [sharedManager setAllEvents:objects];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+            NSLog(@"Notification sent, events loaded");
+            [[DEScreenManager sharedManager] stopActivitySpinner];
+
+        }
+        else {
+            // The find failed, let the customer know
+            NSLog(@"Error: %@", [error description]);
+        }
+    }];
+
+}
 
 + (void) getAllValuesForNow : (BOOL) now {
     

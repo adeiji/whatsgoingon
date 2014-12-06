@@ -32,6 +32,7 @@
 + (void) setUpTextFields : (NSArray *) textFields;
 + (UIView *) createInputAccessoryView;
 + (UINavigationController *) getMainNavigationController;
++ (void) setBackgroundWithImageURL : (NSString *) imageUrl;
 
 #pragma mark - Private Methods
 

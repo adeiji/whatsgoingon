@@ -48,8 +48,10 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [self.view setHidden:NO];
     [super viewWillAppear:animated];
+    [self.view setHidden:NO];
+    
+    [DEScreenManager setBackgroundWithImageURL:@"main-vc-background.png"];
 }
 
 - (void)didReceiveMemoryWarning

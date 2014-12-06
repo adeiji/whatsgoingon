@@ -33,13 +33,7 @@
     [locManager startTimer];
     [DEScreenManager sharedManager];
     
-    UIWindow *window = [self window];
-    
-    UIImageView *blurredImageView = [UIImageView new];
-    [blurredImageView setImage:[UIImage imageNamed:@"main-vc-background.png"]];
-    [blurredImageView setFrame:window.frame];
-    
-    [window addSubview:blurredImageView];
+
     
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
 

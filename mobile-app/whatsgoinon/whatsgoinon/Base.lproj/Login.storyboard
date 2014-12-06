@@ -29,7 +29,7 @@
                         <viewControllerLayoutGuide type="top" id="JBh-5V-QCE"/>
                         <viewControllerLayoutGuide type="bottom" id="bZu-wL-LDZ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>

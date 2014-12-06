@@ -48,7 +48,7 @@ struct TopMargin {
     [selectCategoryView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
     [selectCategoryView loadView];
     [window addSubview:selectCategoryView];
-
+    [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
     [self resetPostCounter];
     
     // Check to see if this is their first time going to this part of the application
@@ -79,7 +79,6 @@ struct TopMargin {
     [_scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self displayPost];
     [self.searchBar setInputAccessoryView:[DEScreenManager createInputAccessoryView]];
-    
 }
 
 - (void) addGestureRecognizers

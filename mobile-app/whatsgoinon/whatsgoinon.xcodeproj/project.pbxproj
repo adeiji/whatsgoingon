@@ -103,7 +103,7 @@
 		F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A219C013B40061F362 /* calendar-icon 44x44.png */; };
 		F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A619C014AB0061F362 /* clock-icon 44x44.png */; };
 		F45030A919C015E80061F362 /* location-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A819C015E80061F362 /* location-icon.png */; };
-		F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */ = {isa = PBXBuildFile; fileRef = F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */; };
+		F45BC4D61A33C0E4001197CD /* main-screen-background-small.png in Resources */ = {isa = PBXBuildFile; fileRef = F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */; };
 		F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A019AC6EFD007705F9 /* DEOrbButton.m */; };
 		F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */; };
 		F45E60AC19AD7222007705F9 /* DEMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60AB19AD7222007705F9 /* DEMenuButton.m */; };
@@ -307,7 +307,7 @@
 		F45030A219C013B40061F362 /* calendar-icon 44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-icon 44x44.png"; sourceTree = "<group>"; };
 		F45030A619C014AB0061F362 /* clock-icon 44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock-icon 44x44.png"; sourceTree = "<group>"; };
 		F45030A819C015E80061F362 /* location-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon.png"; sourceTree = "<group>"; };
-		F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HappSnapp-caption.png"; sourceTree = "<group>"; };
+		F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-screen-background-small.png"; sourceTree = "<group>"; };
 		F45E609F19AC6EFD007705F9 /* DEOrbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEOrbButton.h; sourceTree = "<group>"; };
 		F45E60A019AC6EFD007705F9 /* DEOrbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEOrbButton.m; sourceTree = "<group>"; };
 		F45E60A319AD3287007705F9 /* DEHappSnapTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEHappSnapTitleView.h; sourceTree = "<group>"; };
@@ -1012,6 +1012,7 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */,
 				F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */,
 				F412770B19E5037A0092CD67 /* main-vc-background.png */,
 				F412770919E4F8390092CD67 /* HappSnap-image-only-logo.png */,
@@ -1040,7 +1041,6 @@
 				F40E0E0E19BFFFA000D2C3A0 /* money-icon 28x28.png */,
 				F40E0E0C19BFFECC00D2C3A0 /* clock-icon 23x23.png */,
 				F40E0E0A19BFFD9F00D2C3A0 /* going-icon 23x23.png */,
-				F45E609D19ABFAF9007705F9 /* HappSnapp-caption.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1179,9 +1179,9 @@
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
 				F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */,
 				F46B945719C24F7500B41D8C /* House-icon 25x25.png in Resources */,
+				F45BC4D61A33C0E4001197CD /* main-screen-background-small.png in Resources */,
 				F40E0E1319C007D100D2C3A0 /* camera-icon 178x141.png in Resources */,
 				F41277B819E611570092CD67 /* appicon-Small@2x.png in Resources */,
-				F45E609E19ABFAF9007705F9 /* HappSnapp-caption.png in Resources */,
 				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
 				F41277BC19E611570092CD67 /* Default-568h@2x.png in Resources */,
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,

@@ -50,6 +50,9 @@
     [[self.navigationController navigationBar] setHidden:YES];
     [self setUpViews];
     [self addObservers];
+    
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    window.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"HappSnap-bg.png"]];
 }
 
 - (void) addObservers {

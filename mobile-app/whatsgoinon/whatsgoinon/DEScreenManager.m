@@ -28,6 +28,30 @@
     return self;
 }
 
++ (void) setBackgroundWithImageURL:(NSString *)imageUrl
+{
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    UIImageView *blurredImageView = nil;
+    
+    for (UIView *subview in [window subviews]) {
+        // Check to see if there is a UIImageView alreay in the view hierarchy
+        if ([subview isKindOfClass:[UIImageView class]])
+        {
+            blurredImageView = (UIImageView *) subview;
+        }
+    }
+    // If there is no blurred image view in the window view hierarchy then add it now
+    if (!blurredImageView)
+    {
+        blurredImageView = [UIImageView new];
+        [window addSubview:blurredImageView];
+        [[blurredImageView layer] setZPosition:-1];
+    }
+    // Set the new background
+    [blurredImageView setImage:[UIImage imageNamed:imageUrl]];
+    [blurredImageView setFrame:window.frame];
+}
+
 + (void) showCommentView : (DEPost *) post {
     
     DEViewComment *view = [[DEViewComment alloc] init];
@@ -202,5 +226,7 @@
     
     [[[DEScreenManager sharedManager] nextScreen] dismissViewControllerAnimated:YES completion:NULL];
 }
+
+
 
 @end
