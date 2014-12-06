@@ -90,7 +90,9 @@
             [[DEScreenManager sharedManager] stopActivitySpinner];
         }
     }];
+    
 }
+
 
 // Pull all the comments for this specific event
 + (NSArray *) getAllCommentsForEventId : (NSString *) objectId

@@ -168,7 +168,6 @@ struct TopMargin {
     [_scrollView setDelegate:nil];
     
     [super viewWillDisappear:animated];
-
 }
 
 - (void) hideOrbView
@@ -202,17 +201,12 @@ struct TopMargin {
             }
         }
     }
-    
+
     [super viewWillAppear:animated];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    
-    for (__strong UIView *view in [_scrollView subviews]) {
-        view = nil;
-    }
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

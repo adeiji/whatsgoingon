@@ -361,7 +361,7 @@
     NSArray *storedImages = [[[DEPostManager sharedManager] currentPost] images];
     NSMutableArray *images = [NSMutableArray arrayWithArray:storedImages];
     // Set the image at the correct location so that it can be restored later to this same exact location
-    images[_currentButton.tag] = UIImageJPEGRepresentation(image, .01);
+    images[_currentButton.tag] = UIImageJPEGRepresentation(image, .02);
     [_post setImages:images];
     [_currentButton setHighlighted:NO];
 

@@ -146,7 +146,13 @@
             [UIView animateWithDuration:0.5f animations:^{
                 [self.imgMainImageView setAlpha:1.0f];
             }];
+            
+            data = nil;
+            image = nil;
+            imageData = nil;
         }];
+        
+        imageFile = nil;
     });
     
     _isImageLoaded = YES;

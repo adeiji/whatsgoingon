@@ -38,12 +38,6 @@
         [button.layer setCornerRadius:6.0f];
     }
     
-    UIImageView *imageView = [UIImageView new];
-    [imageView setImage:[UIImage imageNamed:@"main-vc-background.png"]];
-    [[imageView layer] setZPosition:-2];
-    [imageView setFrame:[[[UIApplication sharedApplication] delegate] window].frame];
-    [self.view addSubview:imageView];
-    
 }
 
 - (void) viewWillDisappear:(BOOL)animated
