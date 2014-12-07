@@ -14,6 +14,9 @@
 #import "DEAmbassadorFlag.h"
 
 @interface DESettingsAccount : UIView <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+{
+    BOOL isPublic;
+}
 
 #pragma mark - View Outlets
 
@@ -30,9 +33,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSignOut;
 @property (weak, nonatomic) IBOutlet UILabel *lblRank;
 @property (weak, nonatomic) IBOutlet DEAmbassadorFlag *ambassadorFlag;
+@property (weak, nonatomic) IBOutlet UILabel *lblFacebook;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblConnected;
 @property (strong, nonatomic) UIView *viewToHide;
-
+@property (weak, nonatomic) IBOutlet UILabel *lblTwitter;
 
 #pragma mark - Button Actions
 

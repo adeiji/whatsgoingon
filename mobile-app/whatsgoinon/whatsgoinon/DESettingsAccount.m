@@ -31,6 +31,24 @@
     return self;    
 }
 
+- (void) setIsPublic:(BOOL)myIsPublic
+{
+    if (myIsPublic)
+    {
+        _txtEmail.hidden = YES;
+        _txtPassword.hidden = YES;
+        _btnSendFeedback.hidden = YES;
+        _btnSignOut.hidden = YES;
+        _lblConnected.hidden = YES;
+        _lblTwitter.hidden = YES;
+        _lblFacebook.hidden = YES;
+        _switchFacebook.hidden = YES;
+        _switchTwitter.hidden = YES;
+    }
+    
+    isPublic = myIsPublic;
+}
+
 - (void) setUpSocialNetworkingIcons {
     if (![[DEUserManager sharedManager] isLoggedIn])
     {

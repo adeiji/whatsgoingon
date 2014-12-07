@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -143,9 +143,12 @@
                 <outlet property="btnSendFeedback" destination="XBN-Q4-bFe" id="OQq-pD-jsQ"/>
                 <outlet property="btnSignOut" destination="Ony-rI-kOe" id="CXS-Ns-iyB"/>
                 <outlet property="btnTakePicture" destination="z6h-3d-K53" id="gad-S1-NP7"/>
+                <outlet property="lblConnected" destination="FD5-5L-HIF" id="OlX-3c-CmB"/>
+                <outlet property="lblFacebook" destination="8aF-5a-Off" id="to1-c8-PCn"/>
                 <outlet property="lblMemberSince" destination="duH-8J-71V" id="E7y-ap-zXO"/>
                 <outlet property="lblNumberOfPosts" destination="mdt-HD-GKB" id="w8O-VU-EWI"/>
                 <outlet property="lblRank" destination="tcN-WP-kyB" id="D16-gj-90j"/>
+                <outlet property="lblTwitter" destination="jH0-hs-Nku" id="Zw4-Ch-w7l"/>
                 <outlet property="switchFacebook" destination="DZ4-Jn-fXZ" id="S5f-TX-T8P"/>
                 <outlet property="switchTwitter" destination="16r-g3-B7T" id="faB-Oo-F8y"/>
                 <outlet property="txtEmail" destination="ghI-HX-qfG" id="v69-qJ-fqO"/>
