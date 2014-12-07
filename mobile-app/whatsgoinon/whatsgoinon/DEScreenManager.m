@@ -38,6 +38,7 @@
         if ([subview isKindOfClass:[UIImageView class]])
         {
             blurredImageView = (UIImageView *) subview;
+            [blurredImageView setImage:nil];
         }
     }
     // If there is no blurred image view in the window view hierarchy then add it now
@@ -48,7 +49,8 @@
         [[blurredImageView layer] setZPosition:-1];
     }
     // Set the new background
-    [blurredImageView setImage:[UIImage imageNamed:imageUrl]];
+    UIImage *image = ImageWithPath(ResourcePath(imageUrl)); // Uses imageWithContentsOfFile so that the image is not cached
+    [blurredImageView setImage:image];
     [blurredImageView setFrame:window.frame];
 }
 

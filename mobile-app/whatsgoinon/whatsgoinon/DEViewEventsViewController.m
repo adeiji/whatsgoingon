@@ -29,17 +29,21 @@ struct TopMargin {
     int height;
 };
 
+- (void) addObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
 	// Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
+    [self addObservers];
     
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     
@@ -53,8 +57,6 @@ struct TopMargin {
     
     // Check to see if this is their first time going to this part of the application
     // If it is their first time then show the welcome screen.
-    
-    
     // Otherwise go straight to the viewing of the post
     // Add the gesture recognizer which will be used to show and hide the main menu view
     [self addGestureRecognizers];
@@ -77,7 +79,6 @@ struct TopMargin {
     }];
     
     [_scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self displayPost];
     [self.searchBar setInputAccessoryView:[DEScreenManager createInputAccessoryView]];
 }
 
@@ -207,7 +208,21 @@ struct TopMargin {
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    // Check to see if the this View Controller is still in the view controller hierarchy, if not then we remove all the images
+    if (![self.navigationController.viewControllers containsObject:self])
+    {
+        for (UIView *subview in [_scrollView subviews]) {
+            if ([subview isKindOfClass:[DEViewEventsView class]])
+            {
+                ((DEViewEventsView *) subview).imgMainImageView.image = nil;
+                [subview removeFromSuperview];
+            }
+
+        }
+    }
 }
+
 
 - (void) loadPosts {
     _posts = [[DEPostManager sharedManager] posts];

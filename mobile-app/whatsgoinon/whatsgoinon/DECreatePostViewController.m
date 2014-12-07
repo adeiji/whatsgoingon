@@ -52,7 +52,7 @@
     [self addObservers];
     
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    window.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"HappSnap-bg.png"]];
+    [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
 }
 
 - (void) addObservers {

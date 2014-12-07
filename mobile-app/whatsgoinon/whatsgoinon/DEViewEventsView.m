@@ -139,20 +139,18 @@
         PFFile *imageFile = _post.images[0];
 
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            NSData *imageData = data;
             
-            UIImage *image = [UIImage imageWithData:imageData];
-            self.imgMainImageView.image = image;
-            [UIView animateWithDuration:0.5f animations:^{
-                [self.imgMainImageView setAlpha:1.0f];
-            }];
-            
-            data = nil;
-            image = nil;
-            imageData = nil;
+            @autoreleasepool {
+                NSData *imageData = data;
+                UIImage *image = [UIImage imageWithData:imageData];
+                self.imgMainImageView.image = image;
+                [UIView animateWithDuration:0.5f animations:^{
+                    [self.imgMainImageView setAlpha:1.0f];
+                }];
+                
+                image = nil;
+            }
         }];
-        
-        imageFile = nil;
     });
     
     _isImageLoaded = YES;
