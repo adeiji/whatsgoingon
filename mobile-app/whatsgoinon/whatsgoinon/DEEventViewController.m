@@ -30,7 +30,7 @@
     [[[_eventView imgMainImage] layer] setBorderColor:[UIColor whiteColor].CGColor];
     [[[_eventView imgMainImage] layer] setBorderWidth:2.0f];
     [[_eventView lblTitle] setText:_post.title];
-
+    
     if (_isPreview)
     {
         [self loadPreview];
@@ -41,7 +41,9 @@
     
     [[_eventView lblCost] setText:[[_post cost] stringValue]];
     
+    // Display the Event Details View and then set up the Username Button click action
     [self showEventDetails:nil];
+    [self setUsernameButtonClickAction];
     
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
@@ -56,6 +58,23 @@
 }
 
 
+- (void) setUsernameButtonClickAction {
+    DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
+
+    [detailsView.btnUsername addTarget:self action:@selector(usernameButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+}
+
+// Take the user to a profile page where they can see limited information about this user
+
+- (void) usernameButtonClicked {
+    DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:user];
+    
+    UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
+    [scrollView setContentSize:settingsAccount.frame.size];
+    [scrollView addSubview:settingsAccount];
+    [DEAnimationManager fadeOutWithView:self.view ViewToAdd:scrollView];
+    [settingsAccount setIsPublic:YES];
+}
 
 - (void) loadNonPreview
 {
@@ -174,6 +193,7 @@
 
 - (void) showAmbassador : (NSNotification *) notification {
     PFObject *object = [notification.userInfo objectForKey:NOTIFICATION_CENTER_USER_RETRIEVED];
+    user = (PFUser *) object;
     if ([object[PARSE_CLASS_USER_RANK] isEqualToString:USER_RANK_AMBASSADOR])
     {
         userIsAmbassador = YES;
@@ -199,7 +219,6 @@
                 image = nil;
             }
         }];
-
     }
 }
 
@@ -213,11 +232,13 @@
     
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
     
-    detailsView.lblUsername.text = _post.username;
+    [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
+    
     if (userIsAmbassador)
     {
         detailsView.ambassadorFlagView.hidden = NO;
     }
+    
     [[detailsView txtDescription] setText:_post.myDescription];
     // Set the height of the UITextView for the description to the necessary height to fit all the information
     CGSize sizeThatFitsTextView = [[detailsView txtDescription] sizeThatFits:CGSizeMake([detailsView txtDescription].frame.size.width, 1000)];

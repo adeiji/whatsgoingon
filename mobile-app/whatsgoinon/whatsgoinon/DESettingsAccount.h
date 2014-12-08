@@ -16,6 +16,7 @@
 @interface DESettingsAccount : UIView <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     BOOL isPublic;
+    PFUser *user;
 }
 
 #pragma mark - View Outlets
@@ -41,10 +42,11 @@
 
 #pragma mark - Button Actions
 
+- (id) initWithUser : (PFUser *) user;
 - (IBAction)takePicture:(id)sender;
 - (IBAction)sendFeedback:(id)sender;
 - (IBAction)signOut:(id)sender;
 - (IBAction)goBack:(id)sender;
-
+- (void) setIsPublic:(BOOL)myIsPublic;
 
 @end

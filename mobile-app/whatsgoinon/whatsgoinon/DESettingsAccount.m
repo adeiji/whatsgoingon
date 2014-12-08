@@ -11,12 +11,12 @@
 
 @implementation DESettingsAccount
 
-- (id)init
+- (id)initWithUser : (PFUser *) myUser
 {
     self = [super init];
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] firstObject];
-        
+        user = myUser;
         [self setUpButtons];
         [self addObservers];
         [DEUserManager getUserRank];
@@ -98,7 +98,7 @@
 
 
 - (void) displayMemberSince {
-    NSDate *date = [[PFUser currentUser] createdAt];
+    NSDate *date = [user createdAt];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM/dd/yyyy"];
     self.lblMemberSince.text = [formatter stringFromDate:date];
@@ -112,10 +112,27 @@
 
 - (void) displayProfilePicture
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSData *imageData = [userDefaults objectForKey:@"profile-picture"];
-    UIImage *image = [UIImage imageWithData:imageData];
-    [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
+    
+    if (!isPublic)
+    {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        NSData *imageData = [userDefaults objectForKey:@"profile-picture"];
+        UIImage *image = [UIImage imageWithData:imageData];
+        [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
+    }
+    else {
+        PFFile *imageFile = user[PARSE_CLASS_USER_PROFILE_PICTURE];
+        
+        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            
+            @autoreleasepool {
+                NSData *imageData = data;
+                UIImage *image = [UIImage imageWithData:imageData];
+                [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];                
+                image = nil;
+            }
+        }];
+    }
 }
 
 - (void) setUpTextFields
@@ -123,9 +140,9 @@
     NSArray *array = [NSArray arrayWithObjects:_txtEmail, _txtPassword, _txtUsername, nil];
     [DEScreenManager setUpTextFields:array];
     
-    _txtUsername.text = [[PFUser currentUser] username];
-    _txtPassword.text = [[PFUser currentUser] password];
-    _txtEmail.text = [[PFUser currentUser] email];
+    _txtUsername.text = user[PARSE_CLASS_USER_USERNAME];
+    _txtPassword.text = user[PARSE_CLASS_USER_PASSWORD];
+    _txtEmail.text = user[PARSE_CLASS_USER_EMAIL];
 }
 
 

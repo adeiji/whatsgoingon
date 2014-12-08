@@ -67,6 +67,7 @@ NSString *const PARSE_CLASS_USER_EVENTS_GOING = @"eventsGoing";
 NSString *const PARSE_CLASS_USER_EVENTS_MAYBE = @"eventsMaybe";
 NSString *const PARSE_CLASS_USER_POST_COUNT = @"postCount";
 NSString *const PARSE_CLASS_USER_RANK = @"rank";
+NSString *const PARSE_CLASS_USER_CREATED_AT = @"createdAt";
 
 // Geocoding
 

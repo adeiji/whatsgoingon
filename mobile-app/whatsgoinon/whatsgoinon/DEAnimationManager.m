@@ -37,7 +37,7 @@
         [self setSubviewsOfView:view ToAlpha:0.0f];
         
     } completion:^(BOOL finished) {
-        // Set the subviews of the new view to zero to ensure that nothing appears when it's first added
+        // Set the subviews of the new view alpha to zero to ensure that the views appear on screen
         [view removeFromSuperview];
         [UIView animateWithDuration:.3 animations:^{
             [self setSubviewsOfView:superview ToAlpha:1.0f];

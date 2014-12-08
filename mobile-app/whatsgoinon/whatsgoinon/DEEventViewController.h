@@ -16,12 +16,14 @@
 #import "DEViewEventsView.h"
 #import "DEEventView.h"
 #import "DEViewComments.h"
+#import "DESettingsAccount.h"
 
 @class DEPost, DEViewEventsView, DEEventView;
 
 @interface DEEventViewController : UIViewController <UIActionSheetDelegate>
 {
     BOOL userIsAmbassador;
+    PFUser *user;
 }
 @property BOOL isPreview;
 @property (weak, nonatomic) DEPost *post;
