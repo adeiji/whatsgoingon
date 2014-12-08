@@ -42,7 +42,8 @@
 
 #pragma mark - Button Actions
 
-- (id) initWithUser : (PFUser *) user;
+- (id) initWithUser : (PFUser *) user
+           IsPublic : (BOOL) myIsPublic;
 - (IBAction)takePicture:(id)sender;
 - (IBAction)sendFeedback:(id)sender;
 - (IBAction)signOut:(id)sender;

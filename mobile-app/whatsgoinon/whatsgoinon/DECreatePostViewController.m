@@ -53,6 +53,11 @@
     
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
+    
+    if ([[[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_RANK] isEqualToString:USER_RANK_STANDARD])
+    {
+        _createPostViewTwo.txtWebsite.hidden = YES;
+    }
 }
 
 - (void) addObservers {

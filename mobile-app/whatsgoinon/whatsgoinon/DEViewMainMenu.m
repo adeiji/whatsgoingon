@@ -89,7 +89,7 @@
 }
 
 - (IBAction)gotoAccountSettingsPage:(id)sender {
-    DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:[PFUser currentUser]];
+    DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:[PFUser currentUser] IsPublic:NO];
 
     UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
     [scrollView setContentSize:settingsAccount.frame.size];

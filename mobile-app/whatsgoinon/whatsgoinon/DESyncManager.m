@@ -365,7 +365,7 @@
     }];
 }
 
-+ (void) getNumberOfPostByUser {
++ (void) getNumberOfPostByUser : (NSString *) username {
     PFQuery *query = [PFUser query];
     [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[[PFUser currentUser] username]];
     

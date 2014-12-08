@@ -41,5 +41,6 @@
 + (void) getUserFromUsername : (NSString *) username;
 
 @property (strong, nonatomic) PFUser *user;
+@property (strong, nonatomic) PFObject *userObject;
 
 @end

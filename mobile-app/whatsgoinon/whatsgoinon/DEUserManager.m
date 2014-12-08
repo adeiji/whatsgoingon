@@ -33,7 +33,7 @@
     
     if (currentUser) {
         _user = currentUser;
-        
+        _userObject = _user;
         // Set the going and maybegoing post for the current user to be able to detect how events should be displayed later on.
         PFQuery *userQuery = [PFUser query];
         [userQuery whereKey:PARSE_CLASS_USER_USERNAME equalTo:currentUser.username];
@@ -88,6 +88,9 @@
         if (!error)
         {
             [[DEScreenManager getMainNavigationController] pushViewController:viewController animated:YES];
+            _userObject = _user;
+            _userObject[PARSE_CLASS_USER_RANK] = USER_RANK_STANDARD;
+            [_userObject saveEventually];
         }
         else
         {

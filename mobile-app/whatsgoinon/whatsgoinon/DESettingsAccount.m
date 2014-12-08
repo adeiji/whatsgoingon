@@ -12,15 +12,17 @@
 @implementation DESettingsAccount
 
 - (id)initWithUser : (PFUser *) myUser
+          IsPublic : (BOOL) myIsPublic
 {
     self = [super init];
     if (self) {
         self = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] firstObject];
         user = myUser;
+        isPublic = myIsPublic;
         [self setUpButtons];
         [self addObservers];
         [DEUserManager getUserRank];
-        [DESyncManager getNumberOfPostByUser];
+        [DESyncManager getNumberOfPostByUser : myUser.username];
         self.lblRank.text = @"";
         self.ambassadorFlag.hidden = YES;
         [self displayMemberSince];
@@ -44,6 +46,9 @@
         _lblFacebook.hidden = YES;
         _switchFacebook.hidden = YES;
         _switchTwitter.hidden = YES;
+        _btnTakePicture.enabled = NO;
+        _txtEmail.enabled = NO;
+        _txtUsername.enabled = NO;
     }
     
     isPublic = myIsPublic;
@@ -112,7 +117,6 @@
 
 - (void) displayProfilePicture
 {
-    
     if (!isPublic)
     {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

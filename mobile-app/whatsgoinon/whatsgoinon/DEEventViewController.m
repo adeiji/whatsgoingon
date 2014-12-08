@@ -59,6 +59,7 @@
     
     userIsAmbassador = NO;
     [DEUserManager getUserFromUsername:_post.username];
+
 }
 
 
@@ -71,7 +72,7 @@
 // Take the user to a profile page where they can see limited information about this user
 
 - (void) usernameButtonClicked {
-    DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:user];
+    DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:user IsPublic:YES];
     
     UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
     [scrollView setContentSize:settingsAccount.frame.size];
@@ -208,9 +209,7 @@
     
     UIView *topView = [[[_eventView detailsView] subviews] firstObject];
     if ([topView isKindOfClass:[DEEventDetailsView class]])
-    {
-        ((DEEventDetailsView *) topView).ambassadorFlagView.hidden = NO;
-//        
+    {        
         PFFile *imageFile = object[PARSE_CLASS_USER_PROFILE_PICTURE];
         
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -224,6 +223,8 @@
             }
         }];
     }
+    
+    [[((DEEventDetailsView *) topView).profileImageView layer] setCornerRadius:((DEEventDetailsView *) topView).profileImageView.frame.size.height / 2.0];
 }
 
 
@@ -241,6 +242,9 @@
     if (userIsAmbassador)
     {
         detailsView.ambassadorFlagView.hidden = NO;
+    }
+    else {
+        detailsView.ambassadorFlagView.hidden = YES;
     }
     
     [[detailsView txtDescription] setText:_post.myDescription];
