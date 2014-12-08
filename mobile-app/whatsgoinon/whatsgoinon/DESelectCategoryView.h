@@ -27,10 +27,12 @@
 
 #pragma mark - Outlets
 
-@property (weak, nonatomic) IBOutlet UILabel *lblCategory;
+@property (weak, nonatomic) IBOutlet UIButton *btnCategory;
 
 #pragma mark - Category Functions
 - (IBAction)displayCategoryWheel:(id)sender;
+- (IBAction)categoryButtonClicked:(id)sender;
+
 
 #pragma mark - Instance Methods
 

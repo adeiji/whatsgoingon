@@ -83,23 +83,7 @@
     }
     
     isActive = false;
-    self.lblCategory.hidden = YES;
-    
-    UILongPressGestureRecognizer *longGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(categoryLabelTapped:)];
-    longGestureRecognizer.minimumPressDuration = .1;
-    [self.lblCategory addGestureRecognizer:longGestureRecognizer];
-}
-
-- (void) categoryLabelTapped : (UITapGestureRecognizer *) recognizer {
-    
-    if (recognizer.state == UIGestureRecognizerStateBegan)
-    {
-        [self.lblCategory setTextColor:[UIColor greenColor]];
-    }
-    else if (recognizer.state == UIGestureRecognizerStateEnded)
-    {
-        [self.lblCategory setTextColor:[UIColor whiteColor]];
-    }
+    self.btnCategory.hidden = YES;
 }
 
 - (void) renderView {
@@ -186,20 +170,29 @@
         isActive = true;
         
         [self showOrbsAnimation];
+        
+        [[_btnCategory layer] setZPosition:1.0f];
 
-        // Push the orb view above everything else
-        [[[sender superview] layer ]setZPosition:20];
-        self.lblCategory.hidden = NO;
+        self.btnCategory.hidden = NO;
     }
     else {
-        [myCarousel removeFromSuperview];
-        [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
-        self.lblCategory.hidden = YES;
-        
-        [self reloadEvents];
-        
-        isActive = false;
+        [self hideCategoryScreen];
     }
+}
+
+- (void) hideCategoryScreen {
+    [myCarousel removeFromSuperview];
+    [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+    self.btnCategory.hidden = YES;
+    
+    [self reloadEvents];
+    
+    isActive = false;
+}
+
+- (IBAction)categoryButtonClicked:(id)sender {
+    
+    [self hideCategoryScreen];
 }
 
 
@@ -237,7 +230,7 @@
 }
 
 - (void) wheelDidChangeValue: (int) index {
-    self.lblCategory.text = [categories objectAtIndex:index];
+    [self.btnCategory setTitle:[categories objectAtIndex:index] forState:UIControlStateNormal];
     [[myCarousel itemViewAtIndex:index] setBackgroundColor:orbColor];
 }
 
@@ -306,7 +299,7 @@
 
 - (void) carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
     category = [categories objectAtIndex:carousel.currentItemIndex];
-    self.lblCategory.text = categories[carousel.currentItemIndex];
+    [self.btnCategory setTitle:categories[carousel.currentItemIndex] forState:UIControlStateNormal];
 }
 
 

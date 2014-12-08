@@ -296,6 +296,8 @@ struct TopMargin {
             ((DEViewEventsView *) subview).imgMainImageView.image = nil;
             [subview removeFromSuperview];
         }
+        
+        [subview removeFromSuperview];
     }
 }
 
