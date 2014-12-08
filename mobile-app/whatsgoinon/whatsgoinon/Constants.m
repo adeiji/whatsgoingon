@@ -29,6 +29,7 @@ NSString *const PARSE_CLASS_EVENT_RATING = @"rating";
 NSString *const PARSE_CLASS_EVENT_QUICK_DESCRIPTION = @"quickDescription";
 NSString *const PARSE_CLASS_NAME_REPORT = @"Report";
 NSString *const PARSE_CLASS_EVENT_NUMBER_GOING = @"numberGoing";
+NSString *const PARSE_CLASS_EVENT_USERNAME = @"username";
 
 // Parse - Report
 
@@ -88,6 +89,7 @@ NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"allCommentsLoaded";
 NSString *const NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED = @"postFromUserRetrieved";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_EVENTS_COUNT = @"eventCount";
 NSString *const NOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
+NSString *const NOTIFICATION_CENTER_USER_RETRIEVED = @"retrievedUsername";
 
 NSString *const kNOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
 NSString *const kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO = @"userRankObjectInfo";

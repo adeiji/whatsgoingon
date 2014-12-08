@@ -2,21 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Everything</key>
-	<string>Everything</string>
-	<key>Wealthy</key>
+	<key>Pricey</key>
 	<string></string>
-	<key>Grungy</key>
-	<string></string>
-	<key>Artsy</key>
+	<key>Over 21</key>
 	<string></string>
 	<key>Hipster</key>
 	<string></string>
-	<key>Funny</key>
-	<string></string>
-	<key>Vintage</key>
-	<string></string>
-	<key>Quiet</key>
+	<key>Anything</key>
+	<string>Everything</string>
+	<key>Chill</key>
 	<string></string>
 	<key>Family Friendly</key>
 	<array>

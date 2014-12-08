@@ -15,16 +15,17 @@
 @interface DEPostManager : NSObject
 
 + (DEPost *) createPostWithCategory : (NSString *) category
-                      StartTime : (NSDate *) startTime
-                        EndTime : (NSDate *) endTime
-                       Location : (PFGeoPoint *) location
-                      PostRange : (NSNumber *) postRange
-                          Title : (NSString *) title
-                           Cost : (NSNumber *) cost
-                         Images : (NSArray *) images
-                    Description : (NSString *) description
-                        Address : (NSString *) address
-                   QuickDescription : (NSString *) quickDescription;
+                          StartTime : (NSDate *) startTime
+                            EndTime : (NSDate *) endTime
+                           Location : (PFGeoPoint *) location
+                          PostRange : (NSNumber *) postRange
+                              Title : (NSString *) title
+                               Cost : (NSNumber *) cost
+                             Images : (NSArray *) images
+                        Description : (NSString *) description
+                            Address : (NSString *) address
+                   QuickDescription : (NSString *) quickDescription
+                           username : (NSString *) username;
 
 + (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post;
 + (BOOL) isBeforeEvent : (DEPost *) post;

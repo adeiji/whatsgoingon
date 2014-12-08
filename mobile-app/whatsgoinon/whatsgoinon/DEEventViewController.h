@@ -20,7 +20,9 @@
 @class DEPost, DEViewEventsView, DEEventView;
 
 @interface DEEventViewController : UIViewController <UIActionSheetDelegate>
-
+{
+    BOOL userIsAmbassador;
+}
 @property BOOL isPreview;
 @property (weak, nonatomic) DEPost *post;
 @property (weak, nonatomic) DEViewEventsView *viewEventView;

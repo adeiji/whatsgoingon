@@ -270,6 +270,7 @@
     postObject[PARSE_CLASS_EVENT_QUICK_DESCRIPTION] = post.quickDescription;
     postObject[PARSE_CLASS_EVENT_NUMBER_GOING] = post.numberGoing;
     postObject[PARSE_CLASS_EVENT_COMMENTS] = post.comments;
+    postObject[PARSE_CLASS_EVENT_USERNAME] = [[PFUser currentUser] username];
     
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

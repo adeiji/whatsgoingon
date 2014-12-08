@@ -27,6 +27,7 @@
 @property (strong, nonatomic) NSNumber *rating;
 @property (strong, nonatomic) NSString *quickDescription;
 @property (strong, nonatomic) NSNumber *numberGoing;
+@property (strong, nonatomic) NSString *username;
 
 @property BOOL active;
 

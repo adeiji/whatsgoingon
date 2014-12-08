@@ -101,6 +101,22 @@
     return error;
 }
 
++ (void) getUserFromUsername:(NSString *)username
+{
+    PFQuery *query = [PFUser query];
+    
+    if (username)
+    {    
+        [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[username lowercaseString]];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if ([objects count] > 0)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USER_RETRIEVED object:nil userInfo:@{ NOTIFICATION_CENTER_USER_RETRIEVED : objects[0]  }];
+            }
+        }];
+    }
+}
+
 // Set the user as standard.
 - (void) setUserRankToStandard {
     PFQuery *query = [PFUser query];
@@ -158,6 +174,8 @@
     }];
 }
 
+
+
 - (NSError *) loginWithUsername : (NSString *) username
                        Password : (NSString *) password
                  ViewController : (UIViewController *)viewController
@@ -175,6 +193,7 @@
     
     return nil;
 }
+
 
 - (BOOL) usernameExist : (NSString *) username
             ErrorLabel : (UILabel *) label

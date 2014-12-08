@@ -32,16 +32,17 @@
 }
 
 + (DEPost *) createPostWithCategory:(NSString *)category
-                      StartTime:(NSDate *)startTime
-                        EndTime:(NSDate *)endTime
-                       Location:(PFGeoPoint *)location
-                      PostRange:(NSNumber *)postRange
-                          Title:(NSString *)title
-                           Cost:(NSNumber *)cost
-                         Images:(NSArray *)images
-                    Description:(NSString *)description
-                        Address:(NSString *)address
-               QuickDescription:(NSString *)quickDescription
+                          StartTime:(NSDate *)startTime
+                            EndTime:(NSDate *)endTime
+                           Location:(PFGeoPoint *)location
+                          PostRange:(NSNumber *)postRange
+                              Title:(NSString *)title
+                               Cost:(NSNumber *)cost
+                             Images:(NSArray *)images
+                        Description:(NSString *)description
+                            Address:(NSString *)address
+                   QuickDescription:(NSString *)quickDescription
+                           Username:(NSString *) username
 {
     DEPost *post = [DEPost new];
     post.address = address;
@@ -57,6 +58,7 @@
     post.quickDescription = quickDescription;
     post.numberGoing = [NSNumber numberWithInt:0];
     post.comments = [NSArray new];
+    post.username = [[PFUser currentUser] username];
     
     return post;
 }

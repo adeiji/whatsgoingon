@@ -23,7 +23,7 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadComments:) name:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAmbassador:) name:NOTIFICATION_CENTER_USER_RETRIEVED object:nil];
 	// Do any additional setup after loading the view.
     _eventDetailsViewController = [[DEEventDetailsViewController alloc] initWithNibName:@"EventDetailsView" bundle:[NSBundle mainBundle]];
     [[[_eventView imgMainImage] layer] setCornerRadius:BUTTON_CORNER_RADIUS];
@@ -50,7 +50,12 @@
     {
         [self updateViewToGoing];
     }
+    
+    userIsAmbassador = NO;
+    [DEUserManager getUserFromUsername:_post.username];
 }
+
+
 
 - (void) loadNonPreview
 {
@@ -167,6 +172,39 @@
     [view.lblThumbsDown setText:[[NSNumber numberWithInt:thumbsDown] stringValue]];
 }
 
+- (void) showAmbassador : (NSNotification *) notification {
+    PFObject *object = [notification.userInfo objectForKey:NOTIFICATION_CENTER_USER_RETRIEVED];
+    if ([object[PARSE_CLASS_USER_RANK] isEqualToString:USER_RANK_AMBASSADOR])
+    {
+        userIsAmbassador = YES;
+    }
+    else {
+        userIsAmbassador = NO;
+    }
+    
+    UIView *topView = [[[_eventView detailsView] subviews] firstObject];
+    if ([topView isKindOfClass:[DEEventDetailsView class]])
+    {
+        ((DEEventDetailsView *) topView).ambassadorFlagView.hidden = NO;
+//        
+        PFFile *imageFile = object[PARSE_CLASS_USER_PROFILE_PICTURE];
+        
+        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            
+            @autoreleasepool {
+                NSData *imageData = data;
+                UIImage *image = [UIImage imageWithData:imageData];
+                ((DEEventDetailsView *) topView).profileImageView.image = image;
+                
+                image = nil;
+            }
+        }];
+
+    }
+}
+
+
+
 #pragma mark - Button Action Methods
 
 - (IBAction)showEventDetails:(id)sender
@@ -175,6 +213,11 @@
     
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
     
+    detailsView.lblUsername.text = _post.username;
+    if (userIsAmbassador)
+    {
+        detailsView.ambassadorFlagView.hidden = NO;
+    }
     [[detailsView txtDescription] setText:_post.myDescription];
     // Set the height of the UITextView for the description to the necessary height to fit all the information
     CGSize sizeThatFitsTextView = [[detailsView txtDescription] sizeThatFits:CGSizeMake([detailsView txtDescription].frame.size.width, 1000)];

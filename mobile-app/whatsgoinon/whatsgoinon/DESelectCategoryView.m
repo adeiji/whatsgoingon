@@ -208,12 +208,12 @@
     NSArray *events = [[DEPostManager sharedManager] allEvents];
     NSMutableArray *eventsInCategory = [NSMutableArray new];
     
-    if (![category isEqualToString:@"Everything"])
+    if (![category isEqualToString:@"Anything"])
     {
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *event = [DEPost getPostFromPFObject:obj];
             
-            if ([event.category isEqualToString:category] || [event.category isEqualToString:@"Everything"])
+            if ([event.category isEqualToString:category] || [event.category isEqualToString:@"Anything"])
             {
                 [eventsInCategory addObject:obj];
             }
