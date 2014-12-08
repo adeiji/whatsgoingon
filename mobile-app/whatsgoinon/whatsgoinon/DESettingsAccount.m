@@ -128,7 +128,7 @@
             @autoreleasepool {
                 NSData *imageData = data;
                 UIImage *image = [UIImage imageWithData:imageData];
-                [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];                
+                [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
                 image = nil;
             }
         }];

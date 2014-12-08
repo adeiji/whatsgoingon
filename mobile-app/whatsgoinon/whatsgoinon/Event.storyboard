@@ -147,6 +147,10 @@
                                 <rect key="frame" x="0.0" y="254" width="320" height="236"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </scrollView>
+                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" id="Tsa-CC-E1Z" customClass="DEMaybeCheckmarkView">
+                                <rect key="frame" x="261" y="530" width="46" height="35"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
                         </subviews>
                         <connections>
                             <outlet property="btnGoing" destination="iD5-yh-YDX" id="Hqp-kK-dR6"/>
@@ -160,6 +164,7 @@
                     <connections>
                         <outlet property="btnPost" destination="177-jK-Otc" id="ejo-73-ZqD"/>
                         <outlet property="eventView" destination="OQg-c0-tjK" id="5as-B5-hgk"/>
+                        <outlet property="maybeCheckmarkView" destination="Tsa-CC-E1Z" id="CmA-yo-lgI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6MW-zH-xds" userLabel="First Responder" sceneMemberID="firstResponder"/>

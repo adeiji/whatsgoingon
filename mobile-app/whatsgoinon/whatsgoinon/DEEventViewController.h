@@ -17,6 +17,7 @@
 #import "DEEventView.h"
 #import "DEViewComments.h"
 #import "DESettingsAccount.h"
+#import "DEMaybeCheckmarkView.h"
 
 @class DEPost, DEViewEventsView, DEEventView;
 
@@ -31,9 +32,10 @@
 @property (weak, nonatomic) IBOutlet DEEventView *eventView;
 @property (weak, nonatomic) IBOutlet UIButton *btnPost;
 @property (weak, nonatomic) IBOutlet DEEventView *mapView;
-
+@property (weak, nonatomic) IBOutlet DEMaybeCheckmarkView *maybeCheckmarkView;
 @property (strong, nonatomic) DEEventDetailsViewController *eventDetailsViewController;
 @property BOOL isGoing;
+@property BOOL isMaybeGoing;
 
 #pragma mark - Button Action Methods
 

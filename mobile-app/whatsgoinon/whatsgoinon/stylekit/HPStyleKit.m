@@ -77,4 +77,37 @@
     }
 }
 
++ (void) drawMaybeCheckmark
+{
+    //// General Declarations
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    //// Color Declarations
+    UIColor* color = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
+    
+    //// Rectangle Drawing
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 13.54, 12.86);
+    CGContextRotateCTM(context, 45 * M_PI / 180);
+    
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRect: CGRectMake(0, 0, 15, 5)];
+    [color setFill];
+    [rectanglePath fill];
+    
+    CGContextRestoreGState(context);
+    
+    
+    //// Rectangle 2 Drawing
+    CGContextSaveGState(context);
+    CGContextTranslateCTM(context, 38.75, 9.79);
+    CGContextRotateCTM(context, 135 * M_PI / 180);
+    
+    UIBezierPath* rectangle2Path = [UIBezierPath bezierPathWithRect: CGRectMake(0, 0, 25, 5)];
+    [color setFill];
+    [rectangle2Path fill];
+    
+    CGContextRestoreGState(context);
+}
+
+
 @end

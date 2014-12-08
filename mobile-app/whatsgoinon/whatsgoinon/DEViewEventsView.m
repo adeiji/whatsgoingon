@@ -156,7 +156,7 @@
     _isImageLoaded = YES;
 }
 
-// When the user taps this event twice it will take them to a screen to view all the details of the event.
+// When the user taps this event it will take them to a screen to view all the details of the event.
 - (void) displayEventDetails : (id) sender {
     UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
     
@@ -174,6 +174,10 @@
     {
         eventViewController.isGoing = YES;
         [eventViewController updateViewToGoing];
+    }
+    else if ([[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post.objectId])
+    {
+        eventViewController.isMaybeGoing = YES;
     }
 }
 

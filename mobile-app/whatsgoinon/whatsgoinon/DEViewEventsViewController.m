@@ -288,9 +288,14 @@ struct TopMargin {
     }
 }
 
+// Remove all the events/posts currently on the screen and free the images from memory
 - (void) removeAllPostFromScreen {
     for (UIView *subview in [_scrollView subviews]) {
-        [subview removeFromSuperview];
+        if ([subview isKindOfClass:[DEViewEventsView class]])
+        {
+            ((DEViewEventsView *) subview).imgMainImageView.image = nil;
+            [subview removeFromSuperview];
+        }
     }
 }
 

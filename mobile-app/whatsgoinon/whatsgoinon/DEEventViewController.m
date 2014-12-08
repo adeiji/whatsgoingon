@@ -52,6 +52,10 @@
     {
         [self updateViewToGoing];
     }
+    if (_isMaybeGoing)
+    {
+        self.maybeCheckmarkView.hidden = NO;
+    }
     
     userIsAmbassador = NO;
     [DEUserManager getUserFromUsername:_post.username];
@@ -372,6 +376,7 @@
     [[postManager maybeGoingPost] addObject:_post.objectId];
     // Save this item as maybe going for the user to the server
     [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
+    self.maybeCheckmarkView.hidden = NO;
     [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
 }
 

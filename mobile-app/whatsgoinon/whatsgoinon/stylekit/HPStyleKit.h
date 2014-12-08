@@ -16,5 +16,6 @@
 
 // Drawing Methods
 + (void) drawAmbassadorFlagInRect: (CGRect)frame;
++ (void) drawMaybeCheckmark;
 
 @end
