@@ -85,6 +85,7 @@
                                 <rect key="frame" x="56" y="94" width="209" height="220"/>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.57000000000000006" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="j5M-pl-9Ue" firstAttribute="centerX" secondItem="M8F-ic-t46" secondAttribute="centerX" id="2EF-d5-eaH"/>
                             <constraint firstItem="M8F-ic-t46" firstAttribute="top" secondItem="j5M-pl-9Ue" secondAttribute="bottom" constant="10" id="34U-21-wIy"/>

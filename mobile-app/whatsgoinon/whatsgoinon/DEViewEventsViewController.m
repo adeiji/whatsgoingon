@@ -40,7 +40,7 @@ struct TopMargin {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
 	// Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [self addObservers];
@@ -68,17 +68,7 @@ struct TopMargin {
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.navigationController setNavigationBarHidden:YES];
     [self.scrollView setDelegate:self];
-
-    [_scrollView removeConstraints:[_scrollView constraints]];
     
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_scrollView.superview.mas_top).offset(112);
-        make.left.equalTo(_scrollView.superview.mas_left);
-        make.bottom.equalTo(_scrollView.superview.mas_bottom);
-        make.right.equalTo(_scrollView.superview.mas_right);
-    }];
-    
-    [_scrollView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.searchBar setInputAccessoryView:[DEScreenManager createInputAccessoryView]];
 }
 
@@ -104,10 +94,9 @@ struct TopMargin {
     frame.origin.x = -frame.size.width;
     viewMainMenu.frame = frame;
 
-    [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(viewMainMenu.frame.size.width);
-        make.top.offset(0);
-    }];
+
+    self.mainViewLeftConstraint.constant = self.mainViewLeftConstraint.constant + frame.size.width;
+    self.mainViewRightConstraint.constant = self.mainViewRightConstraint.constant - frame.size.width;
     
     // tell constraints they need updating
     [self.view setNeedsUpdateConstraints];
@@ -129,12 +118,11 @@ struct TopMargin {
 
 - (void) hideMainMenu
 {
+    self.mainViewLeftConstraint.constant = -16;
+    self.mainViewRightConstraint.constant = -16;
+    
     [UIView animateWithDuration:.5f animations:^{
-        [self.view mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(0);
-            make.top.mas_equalTo(0);
-        }];
-        
+        [self.view layoutIfNeeded];
         CGRect frame = viewMainMenu.frame;
         frame.origin.x = -(viewMainMenu.frame.size.width);
         viewMainMenu.frame = frame;
@@ -159,6 +147,8 @@ struct TopMargin {
 
 
 - (void) viewWillDisappear:(BOOL)animated {
+
+    [super viewWillDisappear:animated];
     
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
@@ -166,8 +156,6 @@ struct TopMargin {
     orbView.hidden = YES;
     self.view.hidden = YES;
     [_scrollView setDelegate:nil];
-    
-    [super viewWillDisappear:animated];
 }
 
 - (void) hideOrbView
@@ -187,6 +175,7 @@ struct TopMargin {
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self showOrbView];
     self.view.hidden = NO;
@@ -201,13 +190,11 @@ struct TopMargin {
             }
         }
     }
-
-    [super viewWillAppear:animated];
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     
     // Check to see if the this View Controller is still in the view controller hierarchy, if not then we remove all the images
     if (![self.navigationController.viewControllers containsObject:self])
@@ -220,6 +207,8 @@ struct TopMargin {
             }
 
         }
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
 }
 
@@ -453,7 +442,7 @@ struct TopMargin {
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    _searchPosts = [_posts mutableCopy];
+    _searchPosts = [NSMutableArray new];
     _postsCopy = [_posts copy];
 }
 
@@ -466,24 +455,26 @@ struct TopMargin {
 #pragma mark - Search Bar Delegate Methods
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-
-    [_searchPosts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        DEPost *post = [DEPost getPostFromPFObject:obj];
-        if ([post.myDescription rangeOfString:searchText].location == NSNotFound &&
-            [post.title rangeOfString:searchText].location == NSNotFound &&
-            [post.address rangeOfString:searchText].location == NSNotFound &&
-            [post.category rangeOfString:searchText].location == NSNotFound &&
-            [post.quickDescription rangeOfString:searchText].location == NSNotFound
-            )
-        {
-            [_searchPosts removeObject:obj];
-        }
-    }];
-
     
-    if ([_searchPosts count] != 0)
+    _posts = _postsCopy;
+    
+    if (![[searchText stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""])
     {
+        [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            DEPost *post = [DEPost getPostFromPFObject:obj];
+            if ([[post.myDescription lowercaseString] rangeOfString:[searchText lowercaseString] ].location != NSNotFound ||
+                [[post.title lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound ||
+                [[post.address lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound ||
+                [[post.category lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound ||
+                [[post.quickDescription lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound
+                )
+            {
+                [_searchPosts addObject:obj];
+            }
+        }];
+
         _posts = _searchPosts;
+        _searchPosts = [NSMutableArray new];
         [self removeAllPostFromScreen];
         [self addEventsToScreen:0];
     }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IJq-25-4RC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="IJq-25-4RC">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Events View Controller-->
@@ -16,43 +18,83 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFX-Ym-bdg">
-                                <rect key="frame" x="0.0" y="112" width="320" height="456"/>
-                            </scrollView>
-                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSd-il-cuu" customClass="DEMenuButton">
-                                <rect key="frame" x="11" y="22" width="40" height="40"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="displayMainMenu:" destination="IJq-25-4RC" eventType="touchUpInside" id="8cS-FB-KPi"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aC-rG-TRw" customClass="DEHomeButton">
-                                <rect key="frame" x="268" y="23" width="40" height="40"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="goHome:" destination="IJq-25-4RC" eventType="touchUpInside" id="0dm-hv-qcS"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Featured" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o38-TD-LuS">
-                                <rect key="frame" x="112" y="26" width="97" height="33"/>
-                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uV7-Rb-gZj">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="IJq-25-4RC" id="Ovw-Lh-TDj"/>
-                                </connections>
-                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-Gs-pv6">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSd-il-cuu" customClass="DEMenuButton">
+                                        <rect key="frame" x="12" y="15" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="8lk-Uh-8k1"/>
+                                            <constraint firstAttribute="height" constant="40" id="OAh-do-Bpi"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="displayMainMenu:" destination="IJq-25-4RC" eventType="touchUpInside" id="8cS-FB-KPi"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Featured" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o38-TD-LuS">
+                                        <rect key="frame" x="112" y="18" width="97" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="97" id="1Pv-DD-k2z"/>
+                                            <constraint firstAttribute="height" constant="33" id="f3z-lk-5TX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <scrollView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFX-Ym-bdg">
+                                        <rect key="frame" x="0.0" y="108" width="320" height="461"/>
+                                    </scrollView>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="uV7-Rb-gZj">
+                                        <rect key="frame" x="1" y="64" width="320" height="44"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="IJq-25-4RC" id="Ovw-Lh-TDj"/>
+                                        </connections>
+                                    </searchBar>
+                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aC-rG-TRw" customClass="DEHomeButton">
+                                        <rect key="frame" x="273" y="20" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="MMC-6N-jOw"/>
+                                            <constraint firstAttribute="width" constant="40" id="ctC-EV-V1d"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goHome:" destination="IJq-25-4RC" eventType="touchUpInside" id="0dm-hv-qcS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="TSd-il-cuu" firstAttribute="leading" secondItem="7G2-Gs-pv6" secondAttribute="leading" constant="12" id="3mQ-Bv-BAq"/>
+                                    <constraint firstItem="TSd-il-cuu" firstAttribute="centerY" secondItem="o38-TD-LuS" secondAttribute="centerY" constant="0.5" id="5z2-Re-Wbe"/>
+                                    <constraint firstAttribute="centerX" secondItem="o38-TD-LuS" secondAttribute="centerX" constant="-0.5" id="FvE-cl-Aob"/>
+                                    <constraint firstItem="oFX-Ym-bdg" firstAttribute="top" secondItem="uV7-Rb-gZj" secondAttribute="bottom" id="Lql-Pe-fgs"/>
+                                    <constraint firstItem="oFX-Ym-bdg" firstAttribute="leading" secondItem="7G2-Gs-pv6" secondAttribute="leading" id="MEZ-oU-VLx"/>
+                                    <constraint firstItem="uV7-Rb-gZj" firstAttribute="top" secondItem="o38-TD-LuS" secondAttribute="bottom" constant="13" id="Mhc-JE-xJz"/>
+                                    <constraint firstItem="TSd-il-cuu" firstAttribute="top" secondItem="7G2-Gs-pv6" secondAttribute="top" constant="15" id="Ouc-4q-S8c"/>
+                                    <constraint firstAttribute="bottom" secondItem="oFX-Ym-bdg" secondAttribute="bottom" constant="-1" id="PRy-Tr-ZZQ"/>
+                                    <constraint firstItem="o38-TD-LuS" firstAttribute="centerY" secondItem="0aC-rG-TRw" secondAttribute="centerY" constant="-5.5" id="kbh-P6-wjH"/>
+                                    <constraint firstAttribute="trailing" secondItem="uV7-Rb-gZj" secondAttribute="trailing" constant="-1" id="lbM-ku-xdy"/>
+                                    <constraint firstAttribute="trailing" secondItem="oFX-Ym-bdg" secondAttribute="trailing" id="nFK-kE-BV1"/>
+                                    <constraint firstItem="uV7-Rb-gZj" firstAttribute="leading" secondItem="7G2-Gs-pv6" secondAttribute="leading" constant="1" id="xh2-zf-jcM"/>
+                                    <constraint firstAttribute="trailing" secondItem="0aC-rG-TRw" secondAttribute="trailing" constant="7" id="yYi-Z8-39C"/>
+                                </constraints>
+                            </view>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="7G2-Gs-pv6" firstAttribute="leading" secondItem="OzN-Tk-2AE" secondAttribute="leadingMargin" constant="-16" id="4Yd-Oh-xk2"/>
+                            <constraint firstItem="BOL-og-cs8" firstAttribute="top" secondItem="7G2-Gs-pv6" secondAttribute="bottom" id="CZ5-aE-FBi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7G2-Gs-pv6" secondAttribute="trailing" constant="-16" id="bYD-ht-0Xv"/>
+                            <constraint firstItem="7G2-Gs-pv6" firstAttribute="top" secondItem="H2Q-oU-1yb" secondAttribute="bottom" constant="-20" id="w8o-hr-meS"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="mainViewLeftConstraint" destination="4Yd-Oh-xk2" id="mss-Hg-8qF"/>
+                        <outlet property="mainViewRightConstraint" destination="bYD-ht-0Xv" id="Vyi-jf-dFU"/>
                         <outlet property="scrollView" destination="oFX-Ym-bdg" id="5vw-tq-pS6"/>
                         <outlet property="searchBar" destination="uV7-Rb-gZj" id="kCv-zg-uhC"/>
                     </connections>

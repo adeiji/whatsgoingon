@@ -106,7 +106,7 @@
 }
 
 - (void) renderViewWithPost : (DEPost *) myPost {
-    
+
     __block DEPost *post = myPost;
     
     [self addGestureRecognizers];
