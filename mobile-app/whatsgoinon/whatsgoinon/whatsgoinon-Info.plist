@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location services must enabled to allow the app to know where you&apos;re at, and where other events are relative to you.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -45,7 +47,7 @@
 	<key>FacebookAppID</key>
 	<string>484984924975378</string>
 	<key>FacebookDisplayName</key>
-	<string>What's Happening Now</string>
+	<string>What&apos;s Happening Now</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchImages</key>

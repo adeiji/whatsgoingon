@@ -150,12 +150,6 @@ struct TopMargin {
 
     [super viewWillDisappear:animated];
     
-    DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
-    
-    orbView.hidden = YES;
-    self.view.hidden = YES;
-    [_scrollView setDelegate:nil];
 }
 
 - (void) hideOrbView
@@ -210,6 +204,13 @@ struct TopMargin {
         
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
+    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+    
+    orbView.hidden = YES;
+    self.view.hidden = YES;
+    [_scrollView setDelegate:nil];
 }
 
 

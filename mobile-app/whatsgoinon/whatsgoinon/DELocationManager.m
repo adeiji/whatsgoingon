@@ -107,6 +107,8 @@
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[self alloc] init];
     });
+    
+    
     return sharedMyManager;
 }
 
@@ -121,6 +123,11 @@
         _locationManager.desiredAccuracy = 500; //Meters
         
         [_locationManager startUpdatingLocation];
+        
+        // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager requestWhenInUseAuthorization];
+        }
         
         _currentLocation = [PFGeoPoint new];
     }
