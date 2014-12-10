@@ -59,7 +59,6 @@
 		F437BF951990452000CF61E9 /* DEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BF941990452000CF61E9 /* DEAppDelegate.m */; };
 		F437BF981990452000CF61E9 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F437BF961990452000CF61E9 /* Login.storyboard */; };
 		F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BF9A1990452000CF61E9 /* DEViewController.m */; };
-		F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F437BF9C1990452000CF61E9 /* Images.xcassets */; };
 		F437BFA41990452000CF61E9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFA31990452000CF61E9 /* XCTest.framework */; };
 		F437BFA51990452000CF61E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF841990452000CF61E9 /* Foundation.framework */; };
 		F437BFA61990452000CF61E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF881990452000CF61E9 /* UIKit.framework */; };
@@ -141,6 +140,7 @@
 		F4774FB019996A9B00FCDE66 /* DEEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FAF19996A9B00FCDE66 /* DEEventView.m */; };
 		F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB219996E7B00FCDE66 /* DEEventViewController.m */; };
 		F4774FB6199974A600FCDE66 /* DEEventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */; };
+		F47EA7EC1A37D0F1005B7B79 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F47EA7EB1A37D0F1005B7B79 /* Images.xcassets */; };
 		F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */; };
 		F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F485811719A2B00F00BD1CE7 /* DEViewMainMenu.m */; };
 		F485811A19A2B74900BD1CE7 /* ViewChangeCity.xib in Resources */ = {isa = PBXBuildFile; fileRef = F485811919A2B74900BD1CE7 /* ViewChangeCity.xib */; };
@@ -254,7 +254,6 @@
 		F437BF971990452000CF61E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		F437BF991990452000CF61E9 /* DEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DEViewController.h; sourceTree = "<group>"; };
 		F437BF9A1990452000CF61E9 /* DEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DEViewController.m; sourceTree = "<group>"; };
-		F437BF9C1990452000CF61E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F437BFA21990452000CF61E9 /* whatsgoinonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = whatsgoinonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F437BFA31990452000CF61E9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F437BFAB1990452000CF61E9 /* whatsgoinonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "whatsgoinonTests-Info.plist"; sourceTree = "<group>"; };
@@ -372,6 +371,7 @@
 		F4774FB219996E7B00FCDE66 /* DEEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventViewController.m; sourceTree = "<group>"; };
 		F4774FB4199974A600FCDE66 /* DEEventDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsViewController.h; sourceTree = "<group>"; };
 		F4774FB5199974A600FCDE66 /* DEEventDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsViewController.m; sourceTree = "<group>"; };
+		F47EA7EB1A37D0F1005B7B79 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F483B08119A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DEScrollOnShowKeyboard.h"; sourceTree = "<group>"; };
 		F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DEScrollOnShowKeyboard.m"; sourceTree = "<group>"; };
 		F485811619A2B00F00BD1CE7 /* DEViewMainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewMainMenu.h; sourceTree = "<group>"; };
@@ -603,7 +603,6 @@
 				F437BF941990452000CF61E9 /* DEAppDelegate.m */,
 				F437BF991990452000CF61E9 /* DEViewController.h */,
 				F437BF9A1990452000CF61E9 /* DEViewController.m */,
-				F437BF9C1990452000CF61E9 /* Images.xcassets */,
 				F437BF8B1990452000CF61E9 /* Supporting Files */,
 			);
 			path = whatsgoinon;
@@ -653,6 +652,7 @@
 		F437BFBC199048A100CF61E9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F47EA7EB1A37D0F1005B7B79 /* Images.xcassets */,
 				F401BBFA1A35471F00AE5BB7 /* Maybe Checkmark View */,
 				F40A4F961A1AC77E0041FDD2 /* Flat View */,
 				F46B946F19C355CE00B41D8C /* Buttons */,
@@ -1195,7 +1195,6 @@
 				F45BC4D61A33C0E4001197CD /* main-screen-background-small.png in Resources */,
 				F40E0E1319C007D100D2C3A0 /* camera-icon 178x141.png in Resources */,
 				F41277B819E611570092CD67 /* appicon-Small@2x.png in Resources */,
-				F437BF9D1990452000CF61E9 /* Images.xcassets in Resources */,
 				F41277BC19E611570092CD67 /* Default-568h@2x.png in Resources */,
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,
 				F41277B419E611570092CD67 /* appicon-Small-40@2x.png in Resources */,
@@ -1224,6 +1223,7 @@
 				F412770C19E5037A0092CD67 /* main-vc-background.png in Resources */,
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F41277C619E611570092CD67 /* iTunesArtwork in Resources */,
+				F47EA7EC1A37D0F1005B7B79 /* Images.xcassets in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
 				F41277AF19E611570092CD67 /* appicon-72.png in Resources */,
 				F40A4F911A1687450041FDD2 /* maybe-indicator-icon.png in Resources */,
@@ -1480,6 +1480,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5D02BB448E8247C09D943B14 /* Pods-whatsgoinon.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Adebayo Ijidakinro (HJPTQ3N75W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adebayo Ijidakinro (HJPTQ3N75W)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1503,6 +1505,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5D02BB448E8247C09D943B14 /* Pods-whatsgoinon.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Adebayo Ijidakinro (HJPTQ3N75W)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adebayo Ijidakinro (HJPTQ3N75W)";
 				FRAMEWORK_SEARCH_PATHS = (
