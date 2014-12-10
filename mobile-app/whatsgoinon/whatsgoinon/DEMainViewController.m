@@ -38,6 +38,26 @@
         [button.layer setCornerRadius:6.0f];
     }
     
+    [self transitionFromSplashScreen];
+}
+
+// Display the splash image and then fade into the first screen of the application
+
+- (void) transitionFromSplashScreen {
+    UIImageView *imageView = [UIImageView new];
+    UIImage *launchImage = [UIImage imageNamed:@"splashimage.png"];
+    
+    [imageView setFrame:CGRectMake(0, 0, 320, 568)];
+    [imageView setImage:launchImage];
+    
+    [UIView animateWithDuration:1.2f animations:^{
+        [imageView setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [imageView setImage:nil];
+        [imageView removeFromSuperview];
+    }];
+     
+    [self.view addSubview:imageView];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
