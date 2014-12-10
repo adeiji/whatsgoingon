@@ -23,6 +23,7 @@
 #define BUTTON_OUTER_CIRCLE_WIDTH 40
 #define OUTER_VIEW_X_POS 320 - 60
 #define OUTER_VIEW_Y_POS 568 - 60
+#define CATEGORY_FEATURED @"Featured"
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -124,15 +125,31 @@
     }
 }
 
+// Load all the categories from the categories.plist file and then order them by name
+
+- (void) loadCategories {
+    
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
+    categories = [dictionary allKeys];
+    categories = [categories sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    
+}
+
 - (void) showOrbsAnimation
 {
     UIView *wheelView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
     container = [[UIView alloc] initWithFrame:wheelView.frame];
     
-    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
-    categories = [dictionary allKeys];
+    [self loadCategories];
     
-    myCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_WIDTH, BUTTON_HEIGHT)];
+    if (!myCarousel)
+    {
+        myCarousel = [[iCarousel alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_WIDTH, BUTTON_HEIGHT)];
+        myCarousel.type = iCarouselTypeWheel;
+        myCarousel.delegate = self;
+        myCarousel.dataSource = self;
+        [myCarousel scrollToItemAtIndex:(NSInteger)[categories indexOfObject:CATEGORY_FEATURED] animated:NO];
+    }
     myCarousel.type = iCarouselTypeWheel;
     myCarousel.delegate = self;
     myCarousel.dataSource = self;
@@ -200,6 +217,7 @@
 {
     NSArray *events = [[DEPostManager sharedManager] allEvents];
     NSMutableArray *eventsInCategory = [NSMutableArray new];
+    NSDictionary *categoryDictionary = @{ kNOTIFICATION_CENTER_USER_INFO_CATEGORY : category };
     
     if (![category isEqualToString:@"Anything"])
     {
@@ -215,17 +233,19 @@
         if ([eventsInCategory count] > 0)
         {
             [[DEPostManager sharedManager] setPosts:eventsInCategory];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:categoryDictionary];
         }
         else
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil userInfo:categoryDictionary];
         }
     }
     else {  // If the user selects everything then pull back every posts
         [[DEPostManager sharedManager] setPosts:[[DEPostManager sharedManager] allEvents]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:categoryDictionary];
     }
+    
+    
     
 }
 
@@ -287,6 +307,7 @@
     [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:orbColor];
     [[carousel itemViewAtIndex:index] setBackgroundColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0]];
 }
+
 
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
 {

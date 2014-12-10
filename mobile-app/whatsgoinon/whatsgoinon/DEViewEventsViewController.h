@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainViewLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainViewRightConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *lblCategoryHeader;
 @property (strong, nonatomic) NSArray *posts;
 @property (strong, nonatomic) NSMutableArray *postsCopy;
 @property (strong, nonatomic) NSMutableArray *searchPosts;

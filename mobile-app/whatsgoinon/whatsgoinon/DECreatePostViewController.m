@@ -42,7 +42,7 @@
     [postRangePickerView setDataSource:self];
     [_createPostViewOne.txtPostRange setInputView:postRangePickerView];
     
-    postRanges = @[@"1 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius"];
+    postRanges = @[@"1 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius", @"ALL"];
     
     [_createPostViewOne displayCurrentLocation];
     _createPostViewOne.txtCategory.text = [[[DEPostManager sharedManager] currentPost] category];

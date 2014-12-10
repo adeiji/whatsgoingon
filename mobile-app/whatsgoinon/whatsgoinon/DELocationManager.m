@@ -66,7 +66,7 @@
 
 - (void) startTimer
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval:500 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:YES];
+    timer = [NSTimer scheduledTimerWithTimeInterval:900 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:NO];
     
     [timer fire];
 }
@@ -82,7 +82,7 @@
 
 - (void) startTimerForFeedback
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(promptUserForFeedback) userInfo:nil repeats:NO];
+    timer = [NSTimer scheduledTimerWithTimeInterval:180 target:self selector:@selector(promptUserForFeedback) userInfo:nil repeats:NO];
     
     [timer fire];
 }

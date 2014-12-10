@@ -30,11 +30,11 @@ struct TopMargin {
 };
 
 - (void) addObservers {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory:) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
 }
 
 - (void)viewDidLoad
@@ -240,8 +240,13 @@ struct TopMargin {
     orbView.hidden = YES;
 }
 
-- (void) displayNoDataInCategory
+- (void) displayNoDataInCategory : (NSNotification *) notification
 {
+    if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY])
+    {
+        [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
+    }
+    
     for (UIView *subview in [_scrollView subviews]) {
         [subview removeFromSuperview];
     }
@@ -278,8 +283,14 @@ struct TopMargin {
     }
 }
 
+- (void) displayCategory : (NSString *) category
+{
+    self.lblCategoryHeader.text = category;
+}
+
 // Remove all the events/posts currently on the screen and free the images from memory
 - (void) removeAllPostFromScreen {
+    
     for (UIView *subview in [_scrollView subviews]) {
         if ([subview isKindOfClass:[DEViewEventsView class]])
         {
@@ -291,7 +302,12 @@ struct TopMargin {
     }
 }
 
-- (void) displayPost {
+- (void) displayPost : (NSNotification *) notification {
+    
+    if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY])
+    {
+        [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
+    }
     
     [self loadPosts];
     [self removeAllPostFromScreen];

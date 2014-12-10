@@ -35,9 +35,9 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Featured" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o38-TD-LuS">
-                                        <rect key="frame" x="112" y="27" width="97" height="33"/>
+                                        <rect key="frame" x="60" y="27" width="205" height="33"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="97" id="1Pv-DD-k2z"/>
+                                            <constraint firstAttribute="width" constant="205" id="1Pv-DD-k2z"/>
                                             <constraint firstAttribute="height" constant="33" id="f3z-lk-5TX"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
@@ -71,7 +71,7 @@
                                 <constraints>
                                     <constraint firstItem="TSd-il-cuu" firstAttribute="leading" secondItem="7G2-Gs-pv6" secondAttribute="leading" constant="12" id="3mQ-Bv-BAq"/>
                                     <constraint firstItem="TSd-il-cuu" firstAttribute="centerY" secondItem="o38-TD-LuS" secondAttribute="centerY" constant="-0.5" id="5z2-Re-Wbe"/>
-                                    <constraint firstAttribute="centerX" secondItem="o38-TD-LuS" secondAttribute="centerX" constant="-0.5" id="FvE-cl-Aob"/>
+                                    <constraint firstAttribute="centerX" secondItem="o38-TD-LuS" secondAttribute="centerX" constant="-2.5" id="FvE-cl-Aob"/>
                                     <constraint firstItem="oFX-Ym-bdg" firstAttribute="top" secondItem="uV7-Rb-gZj" secondAttribute="bottom" id="Lql-Pe-fgs"/>
                                     <constraint firstItem="oFX-Ym-bdg" firstAttribute="leading" secondItem="7G2-Gs-pv6" secondAttribute="leading" id="MEZ-oU-VLx"/>
                                     <constraint firstItem="uV7-Rb-gZj" firstAttribute="top" secondItem="o38-TD-LuS" secondAttribute="bottom" constant="4" id="Mhc-JE-xJz"/>
@@ -93,6 +93,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lblCategoryHeader" destination="o38-TD-LuS" id="bLE-JZ-cMH"/>
                         <outlet property="mainViewLeftConstraint" destination="4Yd-Oh-xk2" id="mss-Hg-8qF"/>
                         <outlet property="mainViewRightConstraint" destination="bYD-ht-0Xv" id="Vyi-jf-dFU"/>
                         <outlet property="scrollView" destination="oFX-Ym-bdg" id="5vw-tq-pS6"/>

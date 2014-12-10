@@ -88,12 +88,12 @@ NSString *const NOTIFICATION_CENTER_NO_DATA = @"noData";
 NSString *const NOTIFICATION_CENTER_NONE_IN_CATEGORY = @"noneInCategory";
 NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"allCommentsLoaded";
 NSString *const NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED = @"postFromUserRetrieved";
-NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_EVENTS_COUNT = @"eventCount";
 NSString *const NOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
 NSString *const NOTIFICATION_CENTER_USER_RETRIEVED = @"retrievedUsername";
-
+NSString *const kNOTIFICATION_CENTER_USER_INFO_CATEGORY = @"category";
 NSString *const kNOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
 NSString *const kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO = @"userRankObjectInfo";
+NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_EVENTS_COUNT = @"eventCount";
 
 // View Controllers
 
