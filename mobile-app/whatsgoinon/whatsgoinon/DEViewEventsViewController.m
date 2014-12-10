@@ -111,10 +111,23 @@ struct TopMargin {
 
 }
 
+- (void) enableClickOnEvents : (BOOL) clickable {
+    for (UIView *subview in [_scrollView subviews]) {
+        if (clickable) {
+            [subview setUserInteractionEnabled:YES];
+        }
+        else {
+            [subview setUserInteractionEnabled:NO];
+        }
+    }
+}
+
 - (void) showMainMenu
 {
-    [[[self view] superview] addSubview:viewMainMenu];
-    CGRect frame = viewMainMenu.frame;
+    [self enableClickOnEvents:NO];
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    [[[self view] superview] addSubview:[screenManager mainMenu]];
+    CGRect frame = [screenManager mainMenu].frame;
     frame.origin.y = MAIN_MENU_Y_POS;
     frame.origin.x = -frame.size.width;
     viewMainMenu.frame = frame;
@@ -129,28 +142,29 @@ struct TopMargin {
     [UIView animateWithDuration:.5f animations:^{
         [self.view layoutIfNeeded];
         // Move the main menu over to the right
-        CGRect frame = viewMainMenu.frame;
+        CGRect frame = [screenManager mainMenu].frame;
         frame.origin.x = 0;
-        viewMainMenu.frame = frame;
+        [screenManager mainMenu].frame = frame;
     }];
     
     menuDisplayed = YES;
     [self hideOrbView];
-    [[DEScreenManager sharedManager] setMainMenu:viewMainMenu];
 }
 
 - (void) hideMainMenu
 {
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    [self enableClickOnEvents:YES];
     self.mainViewLeftConstraint.constant = 0;
     self.mainViewRightConstraint.constant = 0;
     
     [UIView animateWithDuration:.5f animations:^{
         [self.view layoutIfNeeded];
-        CGRect frame = viewMainMenu.frame;
-        frame.origin.x = -(viewMainMenu.frame.size.width);
-        viewMainMenu.frame = frame;
+        CGRect frame = [screenManager mainMenu].frame;
+        frame.origin.x = -([screenManager mainMenu].frame.size.width);
+        [screenManager mainMenu].frame = frame;
     } completion:^(BOOL finished) {
-        [viewMainMenu removeFromSuperview];
+        [[screenManager mainMenu] removeFromSuperview];
     }];
     
     menuDisplayed = NO;
@@ -196,6 +210,14 @@ struct TopMargin {
     
     [self showOrbView];
     self.view.hidden = NO;
+    
+    if (menuDisplayed && ![[[DEScreenManager sharedManager] mainMenu] superview])
+    {
+        DEScreenManager *screenManager = [DEScreenManager sharedManager];
+        [[self view] addSubview:[screenManager mainMenu]];
+        [[[DEScreenManager sharedManager] mainMenu] setHidden:NO];
+        [self hideOrbView];
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated {

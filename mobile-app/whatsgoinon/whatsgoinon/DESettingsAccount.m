@@ -21,8 +21,15 @@
         isPublic = myIsPublic;
         [self setUpButtons];
         [self addObservers];
-        [DEUserManager getUserRank];
-        [DESyncManager getNumberOfPostByUser : myUser.username];
+        
+        if ([PFUser currentUser])
+        {
+            [DEUserManager getUserRank];
+            [DESyncManager getNumberOfPostByUser : myUser.username];
+        }
+        else {
+
+        }
         self.lblRank.text = @"";
         self.ambassadorFlag.hidden = YES;
         [self displayMemberSince];

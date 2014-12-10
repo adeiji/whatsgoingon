@@ -58,7 +58,7 @@
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
     
     // Remove the featured option from the picker
-    NSMutableArray *array = (NSMutableArray *) [plistData allKeys];
+    NSMutableArray *array = [[plistData allKeys] mutableCopy];
     [array removeObject:@"Featured"];
     _categories = array;
     array = nil;
