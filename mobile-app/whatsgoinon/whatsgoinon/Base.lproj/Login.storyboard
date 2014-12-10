@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="40" id="wyp-b3-Vjl"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                <state key="normal" title="What's Goin' On Now">
+                                <state key="normal" title="What's Happening Now">
                                     <color key="titleColor" red="0.97448979589999996" green="0.97448979589999996" blue="0.97448979589999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -57,7 +57,7 @@
                                     <constraint firstAttribute="width" constant="225" id="6MG-rZ-Mfe"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
-                                <state key="normal" title="What's Goin' On Later">
+                                <state key="normal" title="What's Happening Later">
                                     <color key="titleColor" red="0.97448979589999996" green="0.97448979589999996" blue="0.97448979589999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -174,7 +174,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="btnSkip" destination="sOg-xW-kcO" id="OMR-EX-Bsx"/>
@@ -302,7 +302,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
                         <connections>
                             <outlet property="lblUsernameError" destination="a2G-iE-HaE" id="P0c-fr-fjy"/>
                             <outlet property="txtEmail" destination="n8l-Wv-9gm" id="EV3-nk-XHw"/>
@@ -370,7 +370,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="btnContinue" destination="9cm-xc-UqK" id="lke-Y3-QVr"/>
@@ -491,7 +491,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
                         <connections>
                             <outlet property="errorLabel" destination="Let-sw-RAp" id="tWY-s9-444"/>
                             <outlet property="txtPassword" destination="4Zr-kz-pOF" id="piu-Gl-stc"/>
