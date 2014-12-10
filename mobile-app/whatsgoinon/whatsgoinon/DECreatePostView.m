@@ -57,7 +57,11 @@
     
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
     
-    _categories = [plistData allKeys];
+    // Remove the featured option from the picker
+    NSMutableArray *array = (NSMutableArray *) [plistData allKeys];
+    [array removeObject:@"Featured"];
+    _categories = array;
+    array = nil;
     
     _txtCategory.inputView = _categoriesPicker;
     

@@ -40,10 +40,18 @@ struct TopMargin {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [self addObservers];
+    
+    if (_now)
+    {
+        [DESyncManager getAllValuesForNow:YES];
+    }
+    else {
+        [DESyncManager getAllValuesForNow:NO];
+    }
+    
     
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     
@@ -55,10 +63,10 @@ struct TopMargin {
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
     [self resetPostCounter];
     
-    // Check to see if this is their first time going to this part of the application
-    // If it is their first time then show the welcome screen.
-    // Otherwise go straight to the viewing of the post
-    // Add the gesture recognizer which will be used to show and hide the main menu view
+    /* Check to see if this is their first time going to this part of the application
+     If it is their first time then show the welcome screen.
+     Otherwise go straight to the viewing of the post
+     Add the gesture recognizer which will be used to show and hide the main menu view*/
     [self addGestureRecognizers];
     
     viewMainMenu = [[[NSBundle mainBundle] loadNibNamed:@"MainMenuView" owner:self options:nil] firstObject];
@@ -69,7 +77,24 @@ struct TopMargin {
     [self.navigationController setNavigationBarHidden:YES];
     [self.scrollView setDelegate:self];
     
+    [_scrollView setDelegate:self];
+    [self setUpSearchBar];
+
+}
+
+- (void) setUpSearchBar
+{
     [self.searchBar setInputAccessoryView:[DEScreenManager createInputAccessoryView]];
+    [self.searchBar setBackgroundImage:[UIImage new]];
+    
+    for (UIView *view in self.searchBar.subviews) {
+        for (UIView *subview in view.subviews) {
+            if ([subview isKindOfClass:[UITextField class]])
+            {
+                [subview setBackgroundColor:[UIColor colorWithRed:0.0/255.0f green:0.0/255.0f blue:0.0/255.0f alpha:.30]];
+            }
+        }
+    }
 }
 
 - (void) addGestureRecognizers
@@ -93,14 +118,12 @@ struct TopMargin {
     frame.origin.y = MAIN_MENU_Y_POS;
     frame.origin.x = -frame.size.width;
     viewMainMenu.frame = frame;
-
-
-    self.mainViewLeftConstraint.constant = self.mainViewLeftConstraint.constant + frame.size.width;
-    self.mainViewRightConstraint.constant = self.mainViewRightConstraint.constant - frame.size.width;
     
-    // tell constraints they need updating
+    self.mainViewRightConstraint.constant = self.mainViewRightConstraint.constant - frame.size.width;
+    self.mainViewLeftConstraint.constant = self.mainViewLeftConstraint.constant + frame.size.width;
+    
+    // tell constraints they need updating and update constraints now so we can animate the change
     [self.view setNeedsUpdateConstraints];
-    // update constraints now so we can animate the change
     [self.view updateConstraintsIfNeeded];
     
     [UIView animateWithDuration:.5f animations:^{
@@ -118,8 +141,8 @@ struct TopMargin {
 
 - (void) hideMainMenu
 {
-    self.mainViewLeftConstraint.constant = -16;
-    self.mainViewRightConstraint.constant = -16;
+    self.mainViewLeftConstraint.constant = 0;
+    self.mainViewRightConstraint.constant = 0;
     
     [UIView animateWithDuration:.5f animations:^{
         [self.view layoutIfNeeded];
@@ -173,17 +196,6 @@ struct TopMargin {
     
     [self showOrbView];
     self.view.hidden = NO;
-    [_scrollView setDelegate:self];
-    [self.searchBar setBackgroundImage:[UIImage new]];
-    
-    for (UIView *view in self.searchBar.subviews) {
-        for (UIView *subview in view.subviews) {
-            if ([subview isKindOfClass:[UITextField class]])
-            {
-                [subview setBackgroundColor:[UIColor colorWithRed:0.0/255.0f green:0.0/255.0f blue:0.0/255.0f alpha:.30]];
-            }
-        }
-    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated {

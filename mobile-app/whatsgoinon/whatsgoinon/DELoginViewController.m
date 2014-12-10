@@ -31,6 +31,7 @@
     if (_posting)
     {
         [_btnSkip setHidden:YES];
+        // Change the text to display that the user needs to login to post and then move the two visible buttons down.
         _lblLoginMessage.text = @"Posting an event to HappSnap is free but an account is required. It also only takes a few seconds and then you can get right to it.";
         _createAccountButtonToBottomConstraint.constant = _skipButtonToBottomConstraint.constant;
     }

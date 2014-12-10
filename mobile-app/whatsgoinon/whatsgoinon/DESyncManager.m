@@ -51,7 +51,8 @@
     
     __block DEPostManager *sharedManager = [DEPostManager sharedManager];
     __block PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
-    //Get all the events that are currently active
+    
+    //Get all the events that are currently active and less than three hours away to start
     NSDate *date = [NSDate date];
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];

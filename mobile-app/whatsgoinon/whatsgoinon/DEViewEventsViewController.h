@@ -32,6 +32,7 @@
 @property (strong, nonatomic) NSMutableArray *postsCopy;
 @property (strong, nonatomic) NSMutableArray *searchPosts;
 @property BOOL overlayDisplayed;
+@property BOOL now;
 
 - (IBAction)displayMainMenu:(id)sender;
 - (IBAction)goHome:(id)sender;

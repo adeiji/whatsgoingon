@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Events View Controller-->
@@ -18,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-Gs-pv6">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-Gs-pv6" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSd-il-cuu" customClass="DEMenuButton">
@@ -49,6 +48,9 @@
                                     </scrollView>
                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="uV7-Rb-gZj">
                                         <rect key="frame" x="1" y="64" width="320" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Lcr-ut-DNU"/>
+                                        </constraints>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="IJq-25-4RC" id="Ovw-Lh-TDj"/>
@@ -86,9 +88,9 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="7G2-Gs-pv6" firstAttribute="leading" secondItem="OzN-Tk-2AE" secondAttribute="leadingMargin" constant="-16" id="4Yd-Oh-xk2"/>
+                            <constraint firstItem="7G2-Gs-pv6" firstAttribute="leading" secondItem="OzN-Tk-2AE" secondAttribute="leading" id="4Yd-Oh-xk2"/>
                             <constraint firstItem="BOL-og-cs8" firstAttribute="top" secondItem="7G2-Gs-pv6" secondAttribute="bottom" id="CZ5-aE-FBi"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7G2-Gs-pv6" secondAttribute="trailing" constant="-16" id="bYD-ht-0Xv"/>
+                            <constraint firstAttribute="trailing" secondItem="7G2-Gs-pv6" secondAttribute="trailing" id="bYD-ht-0Xv"/>
                             <constraint firstItem="7G2-Gs-pv6" firstAttribute="top" secondItem="H2Q-oU-1yb" secondAttribute="bottom" constant="-20" id="w8o-hr-meS"/>
                         </constraints>
                     </view>

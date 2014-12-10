@@ -85,8 +85,8 @@
         // Do any additional setup after loading the view.
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
         DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
-        
         [self.navigationController pushViewController:viewEventsViewController animated:YES];
+        viewEventsViewController.now = NO;
     }
     else {
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
@@ -95,7 +95,6 @@
         [self setNextScreenWithViewController:viewEventsViewController];
     }
 
-    [DESyncManager getAllValuesForNow:NO];
     [[DEScreenManager sharedManager] setIsLater:YES];
 
 }
@@ -106,8 +105,8 @@
         // Do any additional setup after loading the view.
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
         DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
-    
         [self.navigationController pushViewController:viewEventsViewController animated:YES];
+        viewEventsViewController.now = YES;
         [[DEScreenManager sharedManager] startActivitySpinner];
     }
     else {
@@ -117,7 +116,6 @@
         [self setNextScreenWithViewController:viewEventsViewController];
     }
     
-    [DESyncManager getAllValuesForNow:YES];
     [[DEScreenManager sharedManager] setIsLater:NO];
 }
 
@@ -161,11 +159,6 @@
         loginViewController.posting = posting;
         
         return NO;
-    }  //  Link Twitter and Facebook accounts
-    else {
-        DEUserManager *userManager = [DEUserManager sharedManager];
-//        [userManager linkWithTwitter];
-//        [userManager loginWithFacebook];
     }
     
     return YES;
