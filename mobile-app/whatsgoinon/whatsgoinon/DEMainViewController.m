@@ -146,13 +146,14 @@
     
 }
 
+// (BOOL) posting - Let's us know whether the user is trying to post an event or not
+
 - (BOOL) isLoggedIn : (BOOL) posting {
     DEUserManager *userManager = [DEUserManager sharedManager];
     
     if (![userManager isLoggedIn])
     {
         DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:PROMPT_LOGIN_VIEW_CONTROLLER];
-        
         [[self navigationController] pushViewController:loginViewController animated:YES];
         [[loginViewController navigationController] setNavigationBarHidden:YES animated:YES];
         

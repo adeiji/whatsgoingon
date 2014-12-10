@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -120,9 +121,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gA-wp-YpU">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gA-wp-YpU">
                                 <rect key="frame" x="48" y="439" width="225" height="40"/>
                                 <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ezY-fL-Wb6"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                                 <state key="normal" title="Create an Account">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,9 +136,12 @@
                                     <action selector="createAnAccount:" destination="pGV-Sb-Wve" eventType="touchUpInside" id="zJ3-ds-Da4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOg-xW-kcO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOg-xW-kcO">
                                 <rect key="frame" x="48" y="490" width="225" height="40"/>
                                 <color key="backgroundColor" red="0.59215686270000001" green="0.60392156860000001" blue="0.60784313729999995" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="hJZ-6R-NYy"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                                 <state key="normal" title="Skip">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -144,9 +151,12 @@
                                     <action selector="showNextScreen:" destination="pGV-Sb-Wve" eventType="touchUpInside" id="g2G-sq-BlK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-iA-bvz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XdF-iA-bvz">
                                 <rect key="frame" x="48" y="389" width="225" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="nvQ-3r-PYb"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                                 <state key="normal" title="Already Have a Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -175,9 +185,23 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XdF-iA-bvz" firstAttribute="trailing" secondItem="6gA-wp-YpU" secondAttribute="trailing" id="2vE-4m-cBv"/>
+                            <constraint firstItem="6gA-wp-YpU" firstAttribute="leading" secondItem="teW-GG-kPW" secondAttribute="leadingMargin" constant="32" id="FcP-Mv-HjK"/>
+                            <constraint firstItem="ymb-vf-H3D" firstAttribute="top" secondItem="6gA-wp-YpU" secondAttribute="bottom" constant="89" id="Mfc-3Q-mGt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6gA-wp-YpU" secondAttribute="trailing" constant="31" id="PaW-b1-LWZ"/>
+                            <constraint firstItem="6gA-wp-YpU" firstAttribute="top" secondItem="XdF-iA-bvz" secondAttribute="bottom" constant="10" id="RUu-2X-rkX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sOg-xW-kcO" secondAttribute="trailing" constant="31" id="aD7-7b-9DM"/>
+                            <constraint firstItem="ymb-vf-H3D" firstAttribute="top" secondItem="sOg-xW-kcO" secondAttribute="bottom" constant="38" id="cdc-2F-Uhf"/>
+                            <constraint firstItem="sOg-xW-kcO" firstAttribute="leading" secondItem="teW-GG-kPW" secondAttribute="leadingMargin" constant="32" id="dea-5C-mGa"/>
+                            <constraint firstItem="XdF-iA-bvz" firstAttribute="leading" secondItem="6gA-wp-YpU" secondAttribute="leading" id="gpd-0m-oTk"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="btnSkip" destination="sOg-xW-kcO" id="OMR-EX-Bsx"/>
+                        <outlet property="createAccountButtonToBottomConstraint" destination="Mfc-3Q-mGt" id="8Si-8J-Wva"/>
+                        <outlet property="lblLoginMessage" destination="a2c-3L-tC3" id="YPb-s9-22L"/>
+                        <outlet property="skipButtonToBottomConstraint" destination="cdc-2F-Uhf" id="JdN-2n-HsY"/>
                         <outletCollection property="buttons" destination="XdF-iA-bvz" id="loZ-vX-Jv6"/>
                         <outletCollection property="buttons" destination="6gA-wp-YpU" id="Pnb-65-tGu"/>
                         <outletCollection property="buttons" destination="sOg-xW-kcO" id="56u-St-Ya1"/>
