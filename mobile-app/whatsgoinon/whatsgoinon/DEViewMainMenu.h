@@ -27,7 +27,5 @@
 - (IBAction)gotoAccountSettingsPage:(id)sender;
 - (IBAction)hideMenu:(id)sender;
 
-- (void) setUpView;
-
-
+- (void) setupView;
 @end

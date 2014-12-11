@@ -36,7 +36,7 @@
 
 - (IBAction)displayMainMenu:(id)sender;
 - (IBAction)goHome:(id)sender;
-- (void) displayPost;
+- (void) displayPost : (NSNotification *) notification;
 - (void) showMainMenu;
 - (void) hideMainMenu;
 
