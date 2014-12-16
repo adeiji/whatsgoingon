@@ -20,6 +20,7 @@
     int imageCounter;
     NSArray *postRanges;
     NSString *postRange;
+    NSDictionary *dictionary;
 }
 #pragma mark - Action Methods
 

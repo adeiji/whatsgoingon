@@ -11,6 +11,7 @@
 #import "DEScreenManager.h"
 #import <Parse/Parse.h>
 #import "DEViewComment.h"
+#import "Constants.h"
 
 @interface DELocationManager : NSObject <CLLocationManagerDelegate, NSURLConnectionDelegate>
 {

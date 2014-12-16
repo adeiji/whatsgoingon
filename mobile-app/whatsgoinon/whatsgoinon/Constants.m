@@ -73,6 +73,7 @@ NSString *const PARSE_CLASS_USER_CREATED_AT = @"createdAt";
 
 NSString *const PLACES_API_DATA_RESULT_TYPE_CITIES = @"(cities)";
 NSString *const PLACES_API_DATA_RESULT_TYPE_GEOCODE = @"geocode";
+NSString *const PLACES_API_NO_RESULTS = @"ZERO_RESULTS";
 
 // Orb Button
 

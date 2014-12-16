@@ -166,15 +166,20 @@
         NSError *error;
         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
-        PFGeoPoint *location = [PFGeoPoint new];
-        location.latitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lat"] doubleValue];
-        location.longitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lng"] doubleValue];
-        
-//        NSLog(@"%@", location);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Make sure that we call this method on the main thread so that it updates properly as supposed to
-            callback(location);
-        });
+        if (![jsonData[@"status"] isEqualToString:PLACES_API_NO_RESULTS])
+        {
+            PFGeoPoint *location = [PFGeoPoint new];
+            location.latitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lat"] doubleValue];
+            location.longitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lng"] doubleValue];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Make sure that we call this method on the main thread so that it updates properly as supposed to
+                callback(location);
+            });
+        }
+        else {
+            callback(nil);
+        }
     }];
 }
 

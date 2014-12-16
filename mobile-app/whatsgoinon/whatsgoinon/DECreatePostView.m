@@ -18,8 +18,35 @@
     [self registerForKeyboardNotifications];
     [self displayCurrentLocation];
     [self addFreeButtonToCostTextField];
-    
+    [self setUpValidators];
     costText = [NSString new];
+}
+
+#pragma mark - Text Field Validation
+
+- (void) setUpValidators {
+    [_txtCategory addRegx:@"^(?!\\s*$).+" withMsg:@"Must select a category"];
+    [_txtStartDate addRegx:@"^(?!\\s*$).+" withMsg:@"Must select a start date"];
+    [_txtStartTime addRegx:@"^(?!\\s*$).+" withMsg:@"Must select a start time"];
+    [_txtEndDate addRegx:@"^(?!\\s*$).+" withMsg:@"Must select an end date"];
+    [_txtEndTime addRegx:@"^(?!\\s*$).+" withMsg:@"Must select an end time"];
+    [_txtAddress addRegx:@"^(?!\\s*$).+" withMsg:@"Must select a valid address"];
+}
+
+- (BOOL) validateTextFields
+{
+    if ([_txtCategory validate] &
+        [_txtStartDate validate] &
+        [_txtStartTime validate] &
+        [_txtEndDate validate] &
+        [_txtEndTime validate] &
+        [_txtAddress validate])
+    {
+        // Success
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void) addFreeButtonToCostTextField

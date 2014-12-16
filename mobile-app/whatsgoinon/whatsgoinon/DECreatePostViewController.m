@@ -33,22 +33,12 @@
 	// Do any additional setup after loading the view.
     DEPostManager *postManager = [DEPostManager sharedManager];
     _post = [postManager currentPost];
-    
-    [[_createPostViewTwo txtDescription] setDelegate:self];
-    [[_createPostViewTwo txtQuickDescription] setDelegate:self];
-
-    UIPickerView *postRangePickerView = [UIPickerView new];
-    [postRangePickerView setDelegate:self];
-    [postRangePickerView setDataSource:self];
-    [_createPostViewOne.txtPostRange setInputView:postRangePickerView];
-    
+    [self setUpViews];
     postRanges = @[@"1 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius", @"ALL"];
     
     [_createPostViewOne displayCurrentLocation];
     _createPostViewOne.txtCategory.text = [[[DEPostManager sharedManager] currentPost] category];
-    
     [[self.navigationController navigationBar] setHidden:YES];
-    [self setUpViews];
     [self addObservers];
     
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
@@ -58,7 +48,10 @@
     {
         _createPostViewTwo.txtWebsite.hidden = YES;
     }
+    
 }
+
+
 
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrHideWebsiteInfoTextField:) name:NOTIFICATION_CENTER_USER_RANK_RETRIEVED object:nil];
@@ -89,6 +82,15 @@
 }
 
 - (void) setUpViews {
+    
+    [[_createPostViewTwo txtDescription] setDelegate:self];
+    [[_createPostViewTwo txtQuickDescription] setDelegate:self];
+    
+    UIPickerView *postRangePickerView = [UIPickerView new];
+    [postRangePickerView setDelegate:self];
+    [postRangePickerView setDataSource:self];
+    [_createPostViewOne.txtPostRange setInputView:postRangePickerView];
+    
     [DEScreenManager setUpTextFields:self.textFields];
 
     [self.btnNext.layer setCornerRadius:BUTTON_CORNER_RADIUS];
@@ -220,7 +222,6 @@
 
 
 - (IBAction)gotoNextScreen:(id)sender {
-    DEPostManager *postManager = [DEPostManager sharedManager];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/d/yy h:mm a"];
@@ -243,10 +244,9 @@
     
     NSLog(@"Captured Date %@", [startDate description]);
     
-    [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
-        DELocationManager *sharedManager = [DELocationManager sharedManager];
-        sharedManager.storedLocation = value;
-    }];
+    // Check address availability
+    
+    [self checkAddressAvailability];
     
     _post.startTime = startDate;
     _post.endTime = endDate;
@@ -257,6 +257,20 @@
     _post.address = _createPostViewOne.txtAddress.text;
     _post.category = _createPostViewOne.txtCategory.text;
 
+    if ([_createPostViewOne validateTextFields])
+    {
+        [self displayNextScreen];
+    }
+}
+
+/*
+
+Display the second screen for the post details
+ 
+*/
+- (void) displayNextScreen {
+    
+    DEPostManager *postManager = [DEPostManager sharedManager];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
     DECreatePostViewController *createPostViewController = [sb instantiateViewControllerWithIdentifier:@"CreatePostDetailTwo"];
     // Pass the new view controller the new post that was just created.
@@ -267,6 +281,20 @@
     [DEUserManager getUserRank];
 }
 
+
+- (void) checkAddressAvailability
+{
+    [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
+        DELocationManager *sharedManager = [DELocationManager sharedManager];
+        if (value)
+        {
+            sharedManager.storedLocation = value;
+        }
+        else {
+            _btnNext.enabled = NO;
+        }
+    }];
+}
 
 // We get the user rank from the notification, and if the user is a standard user then we want to keep the website text field hidden.
 - (void) showOrHideWebsiteInfoTextField : (NSNotification *) notification {

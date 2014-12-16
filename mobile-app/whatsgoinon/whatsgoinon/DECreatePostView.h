@@ -11,6 +11,7 @@
 #import "DEViewChangeCity.h"
 #import "DECameraButton.h"
 #import "UIView+DEScrollOnShowKeyboard.h"
+#import "TextFieldValidator.h"
 
 @interface DECreatePostView : UIView <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UINavigationControllerDelegate>
 {
@@ -22,22 +23,22 @@
 #pragma mark - View Outlets
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UITextField *txtCategory;
-@property (weak, nonatomic) IBOutlet UITextField *txtStartDate;
-@property (weak, nonatomic) IBOutlet UITextField *txtStartTime;
-@property (weak, nonatomic) IBOutlet UITextField *txtEndDate;
-@property (weak, nonatomic) IBOutlet UITextField *txtEndTime;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtCategory;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtStartDate;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtStartTime;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtEndDate;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtEndTime;
 @property (weak, nonatomic) IBOutlet UIButton *btnInfo;
-@property (weak, nonatomic) IBOutlet UITextField *txtPostRange;
-@property (weak, nonatomic) IBOutlet UITextField *txtAddress;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtPostRange;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtAddress;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UISwitch *switchUseCurrentLocation;
 @property (weak, nonatomic) IBOutlet DECameraButton *btnTakePicture;
-@property (weak, nonatomic) IBOutlet UITextField *txtQuickDescription;
-@property (weak, nonatomic) IBOutlet UITextField *txtTitle;
-@property (weak, nonatomic) IBOutlet UITextField *txtCost;
-@property (weak, nonatomic) IBOutlet UITextField *txtDescription;
-@property (weak, nonatomic) IBOutlet UITextField *txtWebsite;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtQuickDescription;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtTitle;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtCost;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtDescription;
+@property (weak, nonatomic) IBOutlet TextFieldValidator *txtWebsite;
 @property (strong, nonatomic) IBOutletCollection(DECameraButton) NSArray *btnSmallPictureButtons;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;
@@ -53,4 +54,5 @@
 
 - (void) displayCurrentLocation;
 - (void) setupView;
+- (BOOL) validateTextFields;
 @end
