@@ -34,7 +34,7 @@
     DEPostManager *postManager = [DEPostManager sharedManager];
     _post = [postManager currentPost];
     [self setUpViews];
-    postRanges = @[@"1 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius", @"ALL"];
+    postRanges = @[@"1 mile radius", @"2 mile radius", @"3 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius", @"ALL"];
     
     [_createPostViewOne displayCurrentLocation];
     _createPostViewOne.txtCategory.text = [[[DEPostManager sharedManager] currentPost] category];
@@ -121,20 +121,20 @@
     }
 }
 
-// Here we set the rest of the values for the post
-// ** Development
-// We're going to push directly to the Parse server
-
 // ** Production
 // We display the post to allow the user to view the post before he actually makes it live
 - (IBAction)displayPreview:(id)sender {
     
-    DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
-    
-    eventViewController.isPreview = YES;
-    eventViewController.post = _post;
-    [[DEPostManager sharedManager] setCurrentPost:_post];
-    [self.navigationController pushViewController:eventViewController animated:YES];
+    if ([_createPostViewTwo page2ValidateTextFields])
+    {
+        //  Display the event preview
+        DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
+        
+        eventViewController.isPreview = YES;
+        eventViewController.post = _post;
+        [[DEPostManager sharedManager] setCurrentPost:_post];
+        [self.navigationController pushViewController:eventViewController animated:YES];
+    }
 }
 
 - (void) saveNewInfoToPost {
@@ -373,7 +373,15 @@ Display the second screen for the post details
 - (void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     NSRange range = [[postRanges objectAtIndex:row] rangeOfString:@" "];
-    _createPostViewOne.txtPostRange.text = [NSString stringWithFormat:@"%@ mi", [[postRanges objectAtIndex:row] substringToIndex:range.location] ];
+    
+    // If there is a space within this field meaning that the user did not select 'ALL'
+    if (range.length != 0)
+    {
+        _createPostViewOne.txtPostRange.text = [NSString stringWithFormat:@"%@ mi", [[postRanges objectAtIndex:row] substringToIndex:range.location] ];
+    }
+    else {
+        _createPostViewOne.txtPostRange.text = [NSString stringWithFormat:@"%@", [postRanges objectAtIndex:row] ];
+    }
 }
 
 

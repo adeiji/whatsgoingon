@@ -30,7 +30,11 @@
     [_txtStartTime addRegx:@"^(?!\\s*$).+" withMsg:@"Must select a start time"];
     [_txtEndDate addRegx:@"^(?!\\s*$).+" withMsg:@"Must select an end date"];
     [_txtEndTime addRegx:@"^(?!\\s*$).+" withMsg:@"Must select an end time"];
-    [_txtAddress addRegx:@"^(?!\\s*$).+" withMsg:@"Must select a valid address"];
+    [_txtAddress addRegx:@"^(?!\\s*$).+" withMsg:@"Must enter a valid address"];
+    [_txtTitle addRegx:@"^(?!\\s*$).+" withMsg:@"Must enter a valid title"];
+    [_txtCost addRegx:@"^(?!\\s*$).+" withMsg:@"Must enter a valid price"];
+    [_txtDescription addRegx:@"^(?!\\s*$).+" withMsg:@"Must enter a description"];
+    [_txtQuickDescription addRegx:@"^(?!\\s*$).+" withMsg:@"Must enter a valid quick description"];
 }
 
 - (BOOL) validateTextFields
@@ -41,6 +45,20 @@
         [_txtEndDate validate] &
         [_txtEndTime validate] &
         [_txtAddress validate])
+    {
+        // Success
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL) page2ValidateTextFields {
+    
+    if ([_txtTitle validate] &
+        [_txtCost validate] &
+        [_txtDescription validate] &
+        [_txtQuickDescription validate])
     {
         // Success
         return YES;

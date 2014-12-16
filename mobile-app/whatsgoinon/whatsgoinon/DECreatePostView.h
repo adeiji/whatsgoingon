@@ -54,5 +54,16 @@
 
 - (void) displayCurrentLocation;
 - (void) setupView;
+/*
+ 
+ Check to see if the text fields on the first page were entered correctly
+ 
+ */
 - (BOOL) validateTextFields;
+/*
+ 
+Check to see if the text fields on the second page were entered correctly
+ 
+*/
+- (BOOL) page2ValidateTextFields;
 @end
