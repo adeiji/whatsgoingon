@@ -16,7 +16,6 @@
     [self setDelegates];
     [self setButtons];
     [self registerForKeyboardNotifications];
-    [self displayCurrentLocation];
     [self addFreeButtonToCostTextField];
     [self setUpValidators];
     costText = [NSString new];

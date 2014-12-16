@@ -87,7 +87,7 @@
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert"/>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter the address of the event" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AI2-qX-GSR" customClass="TextFieldValidator">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter the address of the event" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AI2-qX-GSR" customClass="TextFieldValidator">
                                                 <rect key="frame" x="48" y="323" width="224" height="33"/>
                                                 <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -118,7 +118,7 @@
                                                     <action selector="togglePostRangeHelperView:" destination="TtG-65-4oM" eventType="touchUpInside" id="x9U-hX-tEk"/>
                                                 </connections>
                                             </button>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mSc-7a-kYf">
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mSc-7a-kYf">
                                                 <rect key="frame" x="224" y="288" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="enableOrDisableAddressBox:" destination="Ts4-l1-T70" eventType="valueChanged" id="8gL-hO-ieb"/>
@@ -148,7 +148,7 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calendar-icon 44x44.png" translatesAutoresizingMaskIntoConstraints="NO" id="cwj-fD-cOD">
                                                 <rect key="frame" x="15" y="148" width="25" height="25"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="2683174C-C3D1-4706-A214-6D243F55EB92" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="97D53DC7-470D-40BF-84FE-1A697ED9B711" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                             </imageView>
                                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKe-wM-5P2">
@@ -486,7 +486,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="2683174C-C3D1-4706-A214-6D243F55EB92" width="140" height="211">
+        <image name="97D53DC7-470D-40BF-84FE-1A697ED9B711" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

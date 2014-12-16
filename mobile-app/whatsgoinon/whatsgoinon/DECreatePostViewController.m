@@ -36,7 +36,11 @@
     [self setUpViews];
     postRanges = @[@"1 mile radius", @"2 mile radius", @"3 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius", @"ALL"];
     
-    [_createPostViewOne displayCurrentLocation];
+    if (_createPostViewOne.switchUseCurrentLocation.on)
+    {
+        [_createPostViewOne displayCurrentLocation];
+    }
+
     _createPostViewOne.txtCategory.text = [[[DEPostManager sharedManager] currentPost] category];
     [[self.navigationController navigationBar] setHidden:YES];
     [self addObservers];
@@ -289,9 +293,10 @@ Display the second screen for the post details
         if (value)
         {
             sharedManager.storedLocation = value;
+            _btnNext.userInteractionEnabled = YES;
         }
         else {
-            _btnNext.enabled = NO;
+            _btnNext.userInteractionEnabled = NO;
         }
     }];
 }
