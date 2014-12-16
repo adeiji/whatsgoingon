@@ -10,6 +10,7 @@
 #import "DEViewComment.h"
 #import "DEAnimationManager.h"
 #import <MessageUI/MessageUI.h>
+#import "DEMainViewController.h"
 
 @class DEViewMainMenu;
 

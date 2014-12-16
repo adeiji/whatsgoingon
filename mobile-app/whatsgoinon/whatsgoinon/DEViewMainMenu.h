@@ -12,6 +12,7 @@
 #import "DESettingsAccount.h"
 #import "DEAnimationManager.h"
 #import "DEScreenManager.h"
+#import "DEMainViewController.h"
 
 @interface DEViewMainMenu : UIView <UIActionSheetDelegate>
 

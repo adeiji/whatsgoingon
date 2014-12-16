@@ -184,13 +184,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" id="LYK-Gz-UJr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.26000000000000001" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" id="hJ9-XQ-7vX" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="59" width="320" height="431"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NfX-4o-j1K" customClass="DEBackButton">
-                                <rect key="frame" x="16" y="16" width="42" height="47"/>
+                                <rect key="frame" x="12" y="14" width="42" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button">
                                     <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -202,7 +207,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie at the Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7MU-eT-AlI">
-                                <rect key="frame" x="66" y="29" width="197" height="21"/>
+                                <rect key="frame" x="62" y="28" width="197" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -247,6 +252,7 @@
                     <navigationItem key="navigationItem" id="hP6-Bh-cBi"/>
                     <connections>
                         <outlet property="eventView" destination="4uj-JY-5KX" id="ZTk-7R-a7a"/>
+                        <outlet property="lblEventTitle" destination="7MU-eT-AlI" id="bTI-I4-aog"/>
                         <outlet property="mapView" destination="hJ9-XQ-7vX" id="nYO-uZ-1MR"/>
                     </connections>
                 </viewController>

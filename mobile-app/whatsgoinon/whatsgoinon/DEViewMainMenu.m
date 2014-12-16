@@ -35,15 +35,50 @@
 
 - (IBAction)gotoPostPage:(id)sender {
     
-    UINavigationController *nc = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    
-    if ([[DEScreenManager sharedManager] mainMenu])
+    if ([self isLoggedIn:YES])
     {
+    
+        UINavigationController *nc = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        
+        if ([[DEScreenManager sharedManager] mainMenu])
+        {
+            [[[DEScreenManager sharedManager] mainMenu] removeFromSuperview];
+        }
+        
+        DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
+        [nc pushViewController:createPostViewController animated:YES];
+    }
+    else {
+        UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+        DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+        
+        [self setNextScreenWithViewController:createPostViewController];
+    }
+}
+
+- (BOOL) isLoggedIn : (BOOL) posting {
+    DEUserManager *userManager = [DEUserManager sharedManager];
+    
+    if (![userManager isLoggedIn])
+    {
+        UINavigationController *nc = [DEScreenManager getMainNavigationController];
+        DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:PROMPT_LOGIN_VIEW_CONTROLLER];
+        [nc pushViewController:loginViewController animated:YES];
         [[[DEScreenManager sharedManager] mainMenu] removeFromSuperview];
+        [[loginViewController navigationController] setNavigationBarHidden:YES animated:YES];
+        
+        // If the user pressed post it then we don't want them to be able to skip this section
+        loginViewController.posting = posting;
+        
+        return NO;
     }
     
-    DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
-    [nc pushViewController:createPostViewController animated:YES];
+    return YES;
+}
+
+- (void) setNextScreenWithViewController : (UIViewController *) viewController {
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    screenManager.nextScreen = viewController;
 }
 
 - (IBAction)gotoChangeCityPage:(id)sender {
@@ -83,12 +118,20 @@
 }
 
 - (IBAction)gotoAccountSettingsPage:(id)sender {
-    DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:[PFUser currentUser] IsPublic:NO];
+    
+    if ([self isLoggedIn:NO])
+    {
+        DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:[PFUser currentUser] IsPublic:NO];
 
-    UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
-    [scrollView setContentSize:settingsAccount.frame.size];
-    [scrollView addSubview:settingsAccount];
-    [DEAnimationManager fadeOutWithView:[self superview] ViewToAdd:scrollView];
+        UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
+        [scrollView setContentSize:settingsAccount.frame.size];
+        [scrollView addSubview:settingsAccount];
+        [DEAnimationManager fadeOutWithView:[self superview] ViewToAdd:scrollView];
+    }
+    else {
+        DEMainViewController *mainViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateInitialViewController];
+        [[DEScreenManager sharedManager] setNextScreen:mainViewController];
+    }
 }
 
 - (IBAction)hideMenu:(id)sender {

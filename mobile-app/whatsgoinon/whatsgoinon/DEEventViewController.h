@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPost;
 @property (weak, nonatomic) IBOutlet DEEventView *mapView;
 @property (weak, nonatomic) IBOutlet DEMaybeCheckmarkView *maybeCheckmarkView;
+@property (weak, nonatomic) IBOutlet UILabel *lblEventTitle;
 @property (strong, nonatomic) DEEventDetailsViewController *eventDetailsViewController;
 @property BOOL isGoing;
 @property BOOL isMaybeGoing;

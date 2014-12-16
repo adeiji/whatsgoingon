@@ -146,11 +146,20 @@
     [viewController.view endEditing:YES];
 }
 
+// Gotos the stored next screen.  If the next screen that should be gone to is the main menu screen than we pop all the view controllers off the stack
+
 - (void) gotoNextScreen {
     UINavigationController *navController = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
     
     [navController popToRootViewControllerAnimated:NO];
-    [navController pushViewController:_nextScreen animated:YES];
+    
+    if (![_nextScreen isKindOfClass:[DEMainViewController class]])
+    {
+        [navController pushViewController:_nextScreen animated:YES];
+    }
+    else {
+        [navController popToRootViewControllerAnimated:YES];
+    }
 }
 
 + (UINavigationController *) getMainNavigationController

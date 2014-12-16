@@ -30,6 +30,7 @@
     [[[_eventView imgMainImage] layer] setBorderColor:[UIColor whiteColor].CGColor];
     [[[_eventView imgMainImage] layer] setBorderWidth:2.0f];
     [[_eventView lblTitle] setText:_post.title];
+    [_lblEventTitle setText:_post.title];
     
     if (_isPreview)
     {

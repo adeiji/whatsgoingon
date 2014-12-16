@@ -209,6 +209,7 @@
     {
         [PFUser logOut];
         [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
+        [DEAnimationManager fadeOutRemoveView:[self superview] FromView:[[self superview] superview]];
     }
     else
     {
