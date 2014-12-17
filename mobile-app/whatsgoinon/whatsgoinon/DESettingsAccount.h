@@ -17,6 +17,7 @@
 {
     BOOL isPublic;
     PFUser *user;
+    UIView *promptView;
 }
 
 #pragma mark - View Outlets
@@ -49,5 +50,7 @@
 - (IBAction)signOut:(id)sender;
 - (IBAction)goBack:(id)sender;
 - (void) setIsPublic:(BOOL)myIsPublic;
+- (IBAction)signOutUser:(id)sender;
+- (IBAction)goBackToAccountScreen:(id)sender;
 
 @end

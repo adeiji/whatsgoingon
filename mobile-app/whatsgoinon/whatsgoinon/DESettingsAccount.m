@@ -203,13 +203,19 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
+/*
+
+ Display a prompt asking if the user wants to quit for sure
+
+ */
 - (IBAction)signOut:(id)sender {
     
     if ([[DEUserManager sharedManager] isLoggedIn])
     {
-        [PFUser logOut];
-        [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
-        [DEAnimationManager fadeOutRemoveView:[self superview] FromView:[[self superview] superview]];
+        promptView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
+        [DEAnimationManager fadeOutWithView:self ViewToAdd:promptView];
+        // Set up the view of the prompt screen
+        [self setUpPromptViewButtons];
     }
     else
     {
@@ -218,6 +224,16 @@
         loginViewController.btnSkip.hidden = YES;
         [[DEScreenManager getMainNavigationController] pushViewController:loginViewController animated:YES];
     }
+}
+
+- (void) setUpPromptViewButtons {
+    
+    for (UIView *view in [promptView subviews]) {
+        if ([view isKindOfClass:[UIButton class]])
+        {
+            [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        }
+    }
     
 }
 
@@ -225,4 +241,19 @@
     [DEAnimationManager fadeOutRemoveView:[self superview] FromView:[[self superview] superview]];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+
+- (IBAction)signOutUser:(id)sender {
+    
+    [PFUser logOut];
+    [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
+    [promptView removeFromSuperview];
+    [[DEScreenManager getMainNavigationController] popToRootViewControllerAnimated:YES];
+    
+}
+
+- (IBAction)goBackToAccountScreen:(id)sender {
+    [DEAnimationManager fadeOutRemoveView:promptView FromView:self];
+}
+
 @end

@@ -123,7 +123,7 @@
     {
         DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:[PFUser currentUser] IsPublic:NO];
 
-        UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
+        UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] objectAtIndex:1];
         [scrollView setContentSize:settingsAccount.frame.size];
         [scrollView addSubview:settingsAccount];
         [DEAnimationManager fadeOutWithView:[self superview] ViewToAdd:scrollView];
