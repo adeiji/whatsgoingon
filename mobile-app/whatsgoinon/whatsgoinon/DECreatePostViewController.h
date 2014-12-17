@@ -21,6 +21,7 @@
     NSArray *postRanges;
     NSString *postRange;
     NSDictionary *dictionary;
+    NSString *website;
 }
 #pragma mark - Action Methods
 

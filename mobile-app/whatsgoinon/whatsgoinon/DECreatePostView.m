@@ -234,34 +234,24 @@
 
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if ([textField isEqual:_txtCost])
+ 
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    int maxLength;
+    
+    if ([textField isEqual:_txtTitle])
     {
-        if ([string isEqualToString:@""])
-        {
-            if ([costText length] > 0)
-            {
-                costText = [costText substringToIndex:[costText length] - 1];
-            }
-            if ([textField.text isEqualToString:@"FREE"])
-            {
-                textField.text = @"00.00";
-            }
-        }
-        else
-        {
-            costText = [NSString stringWithFormat:@"%@%@", costText, string];
-        }
-
-        NSNumber *cost = [NSNumber numberWithDouble:([costText doubleValue] / 100.0f)];
-        NSNumberFormatter *formatter = [NSNumberFormatter new];
-        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-        // Make sure that the $ sign is not displayed in the text box
-        NSString *costString = [[formatter stringFromNumber:cost] substringFromIndex:1];
-        
-        _txtCost.text = costString;
-        
+        maxLength = 20;
+    }
+    else {
+        maxLength = 2;
+    }
+    
+    if (newLength > maxLength)
+    {
         return NO;
     }
+    
     
     return YES;
 }

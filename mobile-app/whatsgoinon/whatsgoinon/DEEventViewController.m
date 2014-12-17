@@ -127,6 +127,11 @@
 
 - (IBAction) savePost : (id)sender {
     
+    if (_isPreview && ![_post.website isEqualToString:@""])
+    {
+        _post.myDescription = [NSString stringWithFormat:@"%@\n %@", _post.myDescription, _post.website];
+    }
+    
     #warning - For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
     BOOL postSaved = [DESyncManager savePost:[[DEPostManager sharedManager] currentPost]];
     
@@ -247,8 +252,14 @@
     else {
         detailsView.ambassadorFlagView.hidden = YES;
     }
-    
-    [[detailsView txtDescription] setText:_post.myDescription];
+    if (_isPreview && ![_post.website isEqualToString:@""])
+    {
+        NSString *temporaryDescription = [NSString stringWithFormat:@"%@\n %@", _post.myDescription, _post.website];
+        [[detailsView txtDescription] setText:temporaryDescription];
+    }
+    else {
+        [[detailsView txtDescription] setText:_post.myDescription];
+    }
     // Set the height of the UITextView for the description to the necessary height to fit all the information
     CGSize sizeThatFitsTextView = [[detailsView txtDescription] sizeThatFits:CGSizeMake([detailsView txtDescription].frame.size.width, 1000)];
     CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - [detailsView heightConstraint].constant;

@@ -133,9 +133,10 @@
     {
         //  Display the event preview
         DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
-        
+        _post.website = website;
         eventViewController.isPreview = YES;
         eventViewController.post = _post;
+        [self savePostDetails];
         [[DEPostManager sharedManager] setCurrentPost:_post];
         [self.navigationController pushViewController:eventViewController animated:YES];
     }
@@ -434,7 +435,8 @@ Display the second screen for the post details
     NSNumber * cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
     post.cost = cost;
     post.quickDescription = _createPostViewTwo.txtQuickDescription.text;
-    NSString *description = [NSString stringWithFormat:@"%@ \n%@", _createPostViewTwo.txtDescription.text, _createPostViewTwo.txtWebsite.text];
+    NSString *description = [NSString stringWithFormat:@"%@", _createPostViewTwo.txtDescription.text];
+    website = _createPostViewTwo.txtWebsite.text;
     post.myDescription = description;
     
     [postManager setCurrentPost:post];
@@ -482,6 +484,7 @@ Display the second screen for the post details
     }
     _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
     _createPostViewTwo.txtDescription.text = post.myDescription;
+    _createPostViewTwo.txtWebsite.text = website;
 }
 
 
