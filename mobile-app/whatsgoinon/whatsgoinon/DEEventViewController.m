@@ -26,9 +26,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAmbassador:) name:NOTIFICATION_CENTER_USER_RETRIEVED object:nil];
 	// Do any additional setup after loading the view.
     _eventDetailsViewController = [[DEEventDetailsViewController alloc] initWithNibName:@"EventDetailsView" bundle:[NSBundle mainBundle]];
-    [[[_eventView imgMainImage] layer] setCornerRadius:BUTTON_CORNER_RADIUS];
-    [[[_eventView imgMainImage] layer] setBorderColor:[UIColor whiteColor].CGColor];
-    [[[_eventView imgMainImage] layer] setBorderWidth:2.0f];
+    [[[_eventView btnMainImage] layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    [[[_eventView btnMainImage] layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[[_eventView btnMainImage] layer] setBorderWidth:2.0f];
     [[_eventView lblTitle] setText:_post.title];
     [_lblEventTitle setText:_post.title];
     
@@ -89,7 +89,7 @@
         if (!error)
         {
             UIImage *mainImage = [UIImage imageWithData:data];
-            [[_eventView imgMainImage] setImage:mainImage];
+            [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
         }
     } progressBlock:^(int percentDone) {
         //Display to the user how much has been loaded
@@ -106,7 +106,7 @@
     [[_eventView btnMaybe] setEnabled:NO];
     [[_eventView lblNumberOfPeopleGoing] setText:0];
     UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
-    [[_eventView imgMainImage] setImage:mainImage];
+    [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
     _btnPost.hidden = NO;
 }
 
@@ -311,7 +311,7 @@
         [[shareView btnShareTwitter] setEnabled:YES];
         [[shareView btnShareFacebook] setEnabled:YES];
         [[shareView btnShareInstagram] setEnabled:YES];
-        [shareView setImage:[[_eventView imgMainImage] image]];
+        [shareView setImage:[[_eventView btnMainImage] backgroundImageForState:UIControlStateNormal]];
         [shareView setPost:_post];
         [shareView getAddress];
     }
@@ -384,7 +384,32 @@
     }
     
     [self updateViewToGoing];
-    [[_eventView imgMainImage] setHidden:YES];
+    [[_eventView btnMainImage] setHidden:YES];
+}
+
+#pragma mark - Buttons
+
+/*
+
+ Show a view controller with all the images as the user can see
+ 
+ */
+- (IBAction)showImages:(id)sender {
+    
+    DEViewImagesViewController *pageViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewImages"];
+    NSMutableArray *viewControllers = [NSMutableArray new];
+    
+    for (int i = 0; i < [_post.images count]; i ++) {
+        DEViewImageViewController *viewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewImage"];
+        [viewController setImage:_post.images[i]];
+        [viewController setIndex:i];
+        [viewControllers addObject:viewController];
+    }
+    
+    [pageViewController setMyViewControllers:viewControllers];
+    [self.navigationController pushViewController:pageViewController animated:YES];
+    
+    
 }
 
 - (IBAction)setEventAsMaybeGoing:(id)sender {

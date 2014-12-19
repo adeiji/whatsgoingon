@@ -19,7 +19,7 @@
 }
 #pragma mark - View Outlets
 
-@property (weak, nonatomic) IBOutlet UIImageView *imgMainImage;
+@property (weak, nonatomic) IBOutlet UIButton *btnMainImage;
 @property (weak, nonatomic) IBOutlet UIView *viewStarRating;
 @property (weak, nonatomic) IBOutlet GMSMapView *viewMapView;
 @property (weak, nonatomic) IBOutlet UILabel *lblCost;

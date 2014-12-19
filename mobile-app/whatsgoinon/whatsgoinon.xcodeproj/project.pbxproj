@@ -144,6 +144,9 @@
 		F47EA7EE1A37E016005B7B79 /* splashimage.png in Resources */ = {isa = PBXBuildFile; fileRef = F47EA7ED1A37E016005B7B79 /* splashimage.png */; };
 		F47EA7F21A40E44E005B7B79 /* TextFieldValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = F47EA7F11A40E44E005B7B79 /* TextFieldValidator.m */; };
 		F47EA7F81A40F62A005B7B79 /* error-01.png in Resources */ = {isa = PBXBuildFile; fileRef = F47EA7F71A40F62A005B7B79 /* error-01.png */; };
+		F47EA7FC1A411EA1005B7B79 /* DEViewImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47EA7FB1A411EA1005B7B79 /* DEViewImagesViewController.m */; };
+		F47EA7FF1A4121DC005B7B79 /* DEViewImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F47EA7FE1A4121DC005B7B79 /* DEViewImageViewController.m */; };
+		F47EA8011A439C7D005B7B79 /* happ-snap-logo-in-app.png in Resources */ = {isa = PBXBuildFile; fileRef = F47EA8001A439C7D005B7B79 /* happ-snap-logo-in-app.png */; };
 		F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */; };
 		F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F485811719A2B00F00BD1CE7 /* DEViewMainMenu.m */; };
 		F485811A19A2B74900BD1CE7 /* ViewChangeCity.xib in Resources */ = {isa = PBXBuildFile; fileRef = F485811919A2B74900BD1CE7 /* ViewChangeCity.xib */; };
@@ -379,6 +382,11 @@
 		F47EA7F01A40E44E005B7B79 /* TextFieldValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldValidator.h; sourceTree = "<group>"; };
 		F47EA7F11A40E44E005B7B79 /* TextFieldValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldValidator.m; sourceTree = "<group>"; };
 		F47EA7F71A40F62A005B7B79 /* error-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "error-01.png"; sourceTree = "<group>"; };
+		F47EA7FA1A411EA1005B7B79 /* DEViewImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewImagesViewController.h; sourceTree = "<group>"; };
+		F47EA7FB1A411EA1005B7B79 /* DEViewImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewImagesViewController.m; sourceTree = "<group>"; };
+		F47EA7FD1A4121DC005B7B79 /* DEViewImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewImageViewController.h; sourceTree = "<group>"; };
+		F47EA7FE1A4121DC005B7B79 /* DEViewImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewImageViewController.m; sourceTree = "<group>"; };
+		F47EA8001A439C7D005B7B79 /* happ-snap-logo-in-app.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "happ-snap-logo-in-app.png"; sourceTree = "<group>"; };
 		F483B08119A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+DEScrollOnShowKeyboard.h"; sourceTree = "<group>"; };
 		F483B08219A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+DEScrollOnShowKeyboard.m"; sourceTree = "<group>"; };
 		F485811619A2B00F00BD1CE7 /* DEViewMainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewMainMenu.h; sourceTree = "<group>"; };
@@ -702,6 +710,7 @@
 		F437BFEE1991967300CF61E9 /* Event Objects */ = {
 			isa = PBXGroup;
 			children = (
+				F47EA7F91A411E81005B7B79 /* View Images Page View Controller */,
 				F4EEB05219D269350072B683 /* Comments View */,
 				F483B07B199EDB1F00C12FB2 /* Map View */,
 				F4C68D26199EAD5300AD0D36 /* More View */,
@@ -929,6 +938,17 @@
 			name = TextFieldValidator;
 			sourceTree = "<group>";
 		};
+		F47EA7F91A411E81005B7B79 /* View Images Page View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F47EA7FA1A411EA1005B7B79 /* DEViewImagesViewController.h */,
+				F47EA7FB1A411EA1005B7B79 /* DEViewImagesViewController.m */,
+				F47EA7FD1A4121DC005B7B79 /* DEViewImageViewController.h */,
+				F47EA7FE1A4121DC005B7B79 /* DEViewImageViewController.m */,
+			);
+			name = "View Images Page View Controller";
+			sourceTree = "<group>";
+		};
 		F483B07B199EDB1F00C12FB2 /* Map View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1042,6 +1062,7 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F47EA8001A439C7D005B7B79 /* happ-snap-logo-in-app.png */,
 				F47EA7F71A40F62A005B7B79 /* error-01.png */,
 				F47EA7ED1A37E016005B7B79 /* splashimage.png */,
 				F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */,
@@ -1231,6 +1252,7 @@
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F45030A119C00F500061F362 /* HappSnap-bg.png in Resources */,
 				F41277AE19E611570092CD67 /* appicon-60@3x.png in Resources */,
+				F47EA8011A439C7D005B7B79 /* happ-snap-logo-in-app.png in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
 				F46B946D19C27E2C00B41D8C /* ok.png in Resources */,
 				F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */,
@@ -1315,6 +1337,7 @@
 			files = (
 				F40DF97719A5621F002B4419 /* DEPost.m in Sources */,
 				F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */,
+				F47EA7FC1A411EA1005B7B79 /* DEViewImagesViewController.m in Sources */,
 				F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */,
 				F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */,
 				F4CB0B9819AFF33600AABD12 /* DETwitterButton.m in Sources */,
@@ -1360,6 +1383,7 @@
 				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
 				F401BBFD1A35473400AE5BB7 /* DEMaybeCheckmarkView.m in Sources */,
 				F40A4F991A1AC79C0041FDD2 /* DEAmbassadorFlag.m in Sources */,
+				F47EA7FF1A4121DC005B7B79 /* DEViewImageViewController.m in Sources */,
 				F40A4F951A1AC7750041FDD2 /* HPStyleKit.m in Sources */,
 				F4774FA21995653D00FCDE66 /* DEPromptLoginView.m in Sources */,
 				F46B945219C1181800B41D8C /* DEViewDistance.m in Sources */,

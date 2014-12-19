@@ -18,6 +18,8 @@
 #import "DEViewComments.h"
 #import "DESettingsAccount.h"
 #import "DEMaybeCheckmarkView.h"
+#import "DEViewImagesViewController.h"
+#import "DEViewImageViewController.h"
 
 @class DEPost, DEViewEventsView, DEEventView;
 
@@ -47,6 +49,7 @@
 - (IBAction)goBack:(id)sender;
 - (IBAction)savePost:(id)sender;
 - (IBAction)setEventAsGoing:(id)sender;
+- (IBAction)showImages:(id)sender;
 
 #pragma mark - Private Methods
 - (void) updateViewToGoing;

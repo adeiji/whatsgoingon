@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HPStyleKit.h"
 
 @interface DELargeCameraButton : UIButton
+
+@property BOOL noProfileImage;
 
 @end

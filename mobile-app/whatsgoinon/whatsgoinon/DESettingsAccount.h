@@ -12,6 +12,7 @@
 #import "MessageUI/MessageUI.h"
 #import "DEUserManager.h"
 #import "DEAmbassadorFlag.h"
+#import "DELargeCameraButton.h"
 
 @interface DESettingsAccount : UIView <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
@@ -30,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *switchFacebook;
 @property (weak, nonatomic) IBOutlet UISwitch *switchGoogle;
 @property (weak, nonatomic) IBOutlet UISwitch *switchTwitter;
-@property (weak, nonatomic) IBOutlet UIButton *btnTakePicture;
+@property (weak, nonatomic) IBOutlet DELargeCameraButton *btnTakePicture;
 @property (weak, nonatomic) IBOutlet UIButton *btnSendFeedback;
 @property (weak, nonatomic) IBOutlet UIButton *btnSignOut;
 @property (weak, nonatomic) IBOutlet UILabel *lblRank;

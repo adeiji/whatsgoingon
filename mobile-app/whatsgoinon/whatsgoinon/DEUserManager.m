@@ -76,6 +76,7 @@
                       ViewController : (UIViewController *) viewController
                           ErrorLabel : (UILabel *) label;
 {
+    _user = [PFUser new];
     _user.username = [userName lowercaseString];
     _user.password = password;
     _user.email = email;
@@ -188,6 +189,8 @@
         if (user)
         {
             [DESyncManager popToRootAndShowViewController:viewController];
+            // Clear user image defaults
+            [self clearUserImageDefaults];
         }
         else {
             [self usernameExist:[username lowercaseString] ErrorLabel:label];
@@ -195,6 +198,12 @@
     }];
     
     return nil;
+}
+
+- (void) clearUserImageDefaults {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:nil forKey:@"profile-picture"];
+    [userDefaults synchronize];
 }
 
 
@@ -242,6 +251,8 @@
             [[DEScreenManager sharedManager] stopActivitySpinner];
             
             [self getTwitterProfilePicture : [PFTwitterUtils twitter].userId];
+            [[PFUser currentUser] setUsername:[PFTwitterUtils twitter].screenName];
+            [[PFUser currentUser] saveInBackground];
         }
     }];
     
@@ -337,6 +348,7 @@
             
             NSData *imageData = [NSData dataWithContentsOfURL:profilePictureURL];
             [DEUserManager addProfileImage:imageData];
+            
         }
     }];
 }

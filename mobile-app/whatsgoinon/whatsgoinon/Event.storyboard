@@ -59,10 +59,6 @@
                                     <action selector="setEventAsMaybeGoing:" destination="6zc-FM-Gmr" eventType="touchUpInside" id="N8P-oz-09M"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="fpN-wj-vJZ">
-                                <rect key="frame" x="12" y="136" width="81" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="TjW-V4-bsr" customClass="DEBackButton">
                                 <rect key="frame" x="12" y="14" width="42" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -156,12 +152,22 @@
                                 <rect key="frame" x="261" y="530" width="46" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="7Ba-ho-i5t">
+                                <rect key="frame" x="10" y="136" width="81" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showImages:" destination="6zc-FM-Gmr" eventType="touchUpInside" id="JjG-wK-hb6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <connections>
                             <outlet property="btnGoing" destination="iD5-yh-YDX" id="Hqp-kK-dR6"/>
+                            <outlet property="btnMainImage" destination="7Ba-ho-i5t" id="Cn7-kY-CPA"/>
                             <outlet property="btnMaybe" destination="9qi-fd-hCu" id="kdG-cL-v1T"/>
                             <outlet property="detailsView" destination="Hka-7K-0uG" id="7FD-r2-k20"/>
-                            <outlet property="imgMainImage" destination="fpN-wj-vJZ" id="Tr4-dn-q0p"/>
                             <outlet property="lblTitle" destination="Tpk-QC-Gf9" id="7br-K6-lBz"/>
                             <outlet property="viewMapView" destination="5Lu-Dv-3Od" id="Xg1-jO-OiJ"/>
                         </connections>
@@ -259,6 +265,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gi5-hg-b1E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="481" y="-58"/>
+        </scene>
+        <!--View Images View Controller-->
+        <scene sceneID="HKW-BA-NHZ">
+            <objects>
+                <pageViewController storyboardIdentifier="viewImages" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="OXt-cD-y5N" customClass="DEViewImagesViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="vq1-oN-rvX"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s1c-cQ-YlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="21" y="644"/>
+        </scene>
+        <!--View Image View Controller-->
+        <scene sceneID="7SQ-ZT-1Yh">
+            <objects>
+                <viewController storyboardIdentifier="viewImage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0tJ-Kd-fk7" customClass="DEViewImageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sta-3m-cAu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yt1-UP-mJz">
+                                <rect key="frame" x="37" y="146" width="247" height="275"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="yt1-UP-mJz" id="BLa-Gd-eXq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DMg-Wp-2lC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="461" y="644"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

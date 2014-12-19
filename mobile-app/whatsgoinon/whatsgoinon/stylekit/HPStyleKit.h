@@ -17,5 +17,7 @@
 // Drawing Methods
 + (void) drawAmbassadorFlagInRect: (CGRect)frame;
 + (void) drawMaybeCheckmark;
++ (void) drawHappSnapIcon : (CGRect) frame;
++ (void) drawLargeCameraButton : (CGRect) frame;
 
 @end

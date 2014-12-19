@@ -129,7 +129,16 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSData *imageData = [userDefaults objectForKey:@"profile-picture"];
         UIImage *image = [UIImage imageWithData:imageData];
-        [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
+        
+        if (!image)
+        {
+            [_btnTakePicture setNoProfileImage:YES];
+        }
+        else
+        {
+            [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
+        }
+        
     }
     else {
         PFFile *imageFile = user[PARSE_CLASS_USER_PROFILE_PICTURE];
