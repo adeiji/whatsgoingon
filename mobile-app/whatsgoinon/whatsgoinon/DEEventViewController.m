@@ -75,11 +75,13 @@
 - (void) usernameButtonClicked {
     DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:user IsPublic:YES];
     
-    UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
+    UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] objectAtIndex:1];
     [scrollView setContentSize:settingsAccount.frame.size];
     [scrollView addSubview:settingsAccount];
     [DEAnimationManager fadeOutWithView:self.view ViewToAdd:scrollView];
     [settingsAccount setIsPublic:YES];
+    [settingsAccount.lblTitle setText:[user username]];
+    
 }
 
 - (void) loadNonPreview

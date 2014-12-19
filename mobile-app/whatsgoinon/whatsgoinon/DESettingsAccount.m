@@ -44,7 +44,6 @@
 {
     if (myIsPublic)
     {
-        _txtEmail.hidden = YES;
         _txtPassword.hidden = YES;
         _btnSendFeedback.hidden = YES;
         _btnSignOut.hidden = YES;
@@ -54,7 +53,6 @@
         _switchFacebook.hidden = YES;
         _switchTwitter.hidden = YES;
         _btnTakePicture.enabled = NO;
-        _txtEmail.enabled = NO;
         _txtUsername.enabled = NO;
     }
     
@@ -148,7 +146,15 @@
             @autoreleasepool {
                 NSData *imageData = data;
                 UIImage *image = [UIImage imageWithData:imageData];
-                [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
+                
+                if (image)
+                {
+                    [_btnTakePicture setNoProfileImage:NO];
+                    [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
+                }
+                else {
+                    [_btnTakePicture setNoProfileImage:YES];
+                }
                 image = nil;
             }
         }];
@@ -157,12 +163,11 @@
 
 - (void) setUpTextFields
 {
-    NSArray *array = [NSArray arrayWithObjects:_txtEmail, _txtPassword, _txtUsername, nil];
+    NSArray *array = [NSArray arrayWithObjects:_txtPassword, _txtUsername, nil];
     [DEScreenManager setUpTextFields:array];
     
     _txtUsername.text = user[PARSE_CLASS_USER_USERNAME];
     _txtPassword.text = user[PARSE_CLASS_USER_PASSWORD];
-    _txtEmail.text = user[PARSE_CLASS_USER_EMAIL];
 }
 
 

@@ -21,12 +21,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    
-    if (!_noProfileImage)
+    if (_noProfileImage)
     {
-        [HPStyleKit drawLargeCameraButton:rect];
-    }
-    else {
         [HPStyleKit drawHappSnapIcon:rect];
     }
 }

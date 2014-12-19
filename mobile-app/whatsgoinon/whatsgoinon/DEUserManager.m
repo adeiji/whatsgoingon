@@ -111,7 +111,7 @@
     
     if (username)
     {    
-        [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[username lowercaseString]];
+        [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:username];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if ([objects count] > 0)
             {

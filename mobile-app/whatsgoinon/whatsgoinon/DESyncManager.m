@@ -368,7 +368,7 @@
 
 + (void) getNumberOfPostByUser : (NSString *) username {
     PFQuery *query = [PFUser query];
-    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[[PFUser currentUser] username]];
+    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:username];
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         NSNumber *postCount = object[PARSE_CLASS_USER_POST_COUNT];

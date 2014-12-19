@@ -27,7 +27,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtPassword;
 @property (weak, nonatomic) IBOutlet UILabel *lblMemberSince;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumberOfPosts;
-@property (weak, nonatomic) IBOutlet UITextField *txtEmail;
 @property (weak, nonatomic) IBOutlet UISwitch *switchFacebook;
 @property (weak, nonatomic) IBOutlet UISwitch *switchGoogle;
 @property (weak, nonatomic) IBOutlet UISwitch *switchTwitter;
@@ -41,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblConnected;
 @property (strong, nonatomic) UIView *viewToHide;
 @property (weak, nonatomic) IBOutlet UILabel *lblTwitter;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 
 #pragma mark - Button Actions
 
