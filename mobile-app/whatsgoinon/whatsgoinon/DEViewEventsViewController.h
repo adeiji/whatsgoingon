@@ -23,7 +23,8 @@
     DEViewMainMenu *viewMainMenu;
     BOOL menuDisplayed;
 }
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainViewLeftConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mainViewRightConstraint;

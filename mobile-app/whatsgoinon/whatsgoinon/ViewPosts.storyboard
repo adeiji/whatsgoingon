@@ -95,6 +95,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="7G2-Gs-pv6" id="o3C-k8-eE1"/>
                         <outlet property="lblCategoryHeader" destination="o38-TD-LuS" id="bLE-JZ-cMH"/>
                         <outlet property="mainViewLeftConstraint" destination="4Yd-Oh-xk2" id="mss-Hg-8qF"/>
                         <outlet property="mainViewRightConstraint" destination="bYD-ht-0Xv" id="Vyi-jf-dFU"/>

@@ -183,10 +183,59 @@ struct TopMargin {
 }
 
 
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    // Check to see if the this View Controller is still in the view controller hierarchy, if not then we remove all the images
+    if (![self.navigationController.viewControllers containsObject:self])
+    {
+        for (UIView *subview in [_scrollView subviews]) {
+            if ([subview isKindOfClass:[DEViewEventsView class]])
+            {
+                ((DEViewEventsView *) subview).imgMainImageView.image = nil;
+                [subview removeFromSuperview];
+            }
+            
+        }
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+    
+    orbView.hidden = YES;
+    self.view.hidden = YES;
+    [_scrollView setDelegate:nil];
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
 
     [super viewWillDisappear:animated];
+    [self.scrollView removeFromSuperview];
     
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self showOrbView];
+    self.view.hidden = NO;
+    
+    if (menuDisplayed && ![[[DEScreenManager sharedManager] mainMenu] superview])
+    {
+        DEScreenManager *screenManager = [DEScreenManager sharedManager];
+        [[self view] addSubview:[screenManager mainMenu]];
+        [[[DEScreenManager sharedManager] mainMenu] setHidden:NO];
+        [self hideOrbView];
+    }
+    
+    if (![_scrollView superview])
+    {
+        [_containerView addSubview:_scrollView];
+        [_scrollView setTranslatesAutoresizingMaskIntoConstraints:YES];
+        [_scrollView setDelegate:self];
+    }
 }
 
 - (void) hideOrbView
@@ -205,47 +254,8 @@ struct TopMargin {
     orbView.hidden = NO;
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self showOrbView];
-    self.view.hidden = NO;
-    
-    if (menuDisplayed && ![[[DEScreenManager sharedManager] mainMenu] superview])
-    {
-        DEScreenManager *screenManager = [DEScreenManager sharedManager];
-        [[self view] addSubview:[screenManager mainMenu]];
-        [[[DEScreenManager sharedManager] mainMenu] setHidden:NO];
-        [self hideOrbView];
-    }
-}
 
-- (void) viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
 
-    
-    // Check to see if the this View Controller is still in the view controller hierarchy, if not then we remove all the images
-    if (![self.navigationController.viewControllers containsObject:self])
-    {
-        for (UIView *subview in [_scrollView subviews]) {
-            if ([subview isKindOfClass:[DEViewEventsView class]])
-            {
-                ((DEViewEventsView *) subview).imgMainImageView.image = nil;
-                [subview removeFromSuperview];
-            }
-
-        }
-        
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }
-    
-    DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
-    
-    orbView.hidden = YES;
-    self.view.hidden = YES;
-    [_scrollView setDelegate:nil];
-}
 
 
 - (void) loadPosts {
@@ -482,9 +492,12 @@ struct TopMargin {
     for (UIView *view in [scrollView subviews]) {
         if ([view isKindOfClass:[DEViewEventsView class]])
         {
-            if (CGRectIntersectsRect(scrollView.bounds, view.frame) && ![((DEViewEventsView *) view) isImageLoaded])
+            if (CGRectIntersectsRect(scrollView.bounds, view.frame))
             {
                 [((DEViewEventsView *) view) loadImage];
+            }
+            else if (!CGRectIntersectsRect(scrollView.bounds, view.frame)) {
+                [((DEViewEventsView *) view) removeImage];
             }
         }
     }

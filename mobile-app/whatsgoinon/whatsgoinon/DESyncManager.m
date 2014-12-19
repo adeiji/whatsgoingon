@@ -62,8 +62,9 @@
     
     if (now)
     {
-        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+//        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
         [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
+        #warning Remove before sending to test
     }
     else
     {

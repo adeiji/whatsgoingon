@@ -30,4 +30,5 @@
 - (void) renderViewWithPost : (DEPost *) post;
 - (void) refreshView;
 - (void) loadImage;
+- (void) removeImage;
 @end

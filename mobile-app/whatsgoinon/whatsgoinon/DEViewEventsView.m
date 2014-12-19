@@ -86,9 +86,10 @@
 - (void) displayDistanceToLocationWithPost : (DEPost *) post
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
-    [DELocationManager getDistanceInMilesBetweenLocation:post.location LocationTwo:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
-        self.lblDistance.text = value;
-    }];
+#warning - Enable these commented lines before sending
+//    [DELocationManager getDistanceInMilesBetweenLocation:post.location LocationTwo:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
+//        self.lblDistance.text = value;
+//    }];
 }
 
 
@@ -132,28 +133,45 @@
     _post = myPost;
 }
 
+- (void) removeImage {
+    [self.imgMainImageView setImage:nil];
+    // Set the alpha to zero so that we still have the cool fade in affect when the user comes back to this post
+    [self.imgMainImageView setAlpha:0.0f];
+}
+
 - (void) loadImage
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        //Load the images on the main thread asynchronously
-        PFFile *imageFile = _post.images[0];
+        // Load the images on the main thread asynchronously
+        // Make sure that this post actually has an image
+        if ([_post.images count] != 0)
+        {
+            PFFile *imageFile = _post.images[0];
 
-        [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            
-            @autoreleasepool {
-                NSData *imageData = data;
-                UIImage *image = [UIImage imageWithData:imageData];
-                self.imgMainImageView.image = image;
-                [UIView animateWithDuration:0.5f animations:^{
-                    [self.imgMainImageView setAlpha:1.0f];
-                }];
+            [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                 
-                image = nil;
-            }
-        }];
+                @autoreleasepool {
+                    NSData *imageData = data;
+                    UIImage *image = [UIImage imageWithData:imageData];
+                    self.imgMainImageView.image = image;
+                    [UIView animateWithDuration:0.5f animations:^{
+                        [self.imgMainImageView setAlpha:1.0f];
+                    }];
+                    
+                    image = nil;
+                }
+            }];
+        }
+        else { // If there is no image related to this event then use our placeholder image
+            UIImage *image = ImageWithPath(ResourcePath(@"happ-snap-logo-in-app.png"));
+            self.imgMainImageView.image = image;
+            [UIView animateWithDuration:0.5f animations:^{
+                [self.imgMainImageView setAlpha:1.0f];
+            }];
+            
+            image = nil;
+        }
     });
-    
-    _isImageLoaded = YES;
 }
 
 // When the user taps this event it will take them to a screen to view all the details of the event.
