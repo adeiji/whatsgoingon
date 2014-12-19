@@ -269,7 +269,7 @@
         <!--View Images View Controller-->
         <scene sceneID="HKW-BA-NHZ">
             <objects>
-                <pageViewController storyboardIdentifier="viewImages" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="OXt-cD-y5N" customClass="DEViewImagesViewController" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="viewImages" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="OXt-cD-y5N" customClass="DEViewImagesViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="vq1-oN-rvX"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s1c-cQ-YlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -285,14 +285,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="yt1-UP-mJz">
-                                <rect key="frame" x="37" y="146" width="247" height="275"/>
+                                <rect key="frame" x="16" y="103" width="288" height="406"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="vXJ-iH-hlA" customClass="DEBackButton">
+                                <rect key="frame" x="12" y="14" width="42" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goBack:" destination="0tJ-Kd-fk7" eventType="touchUpInside" id="qae-hc-CLq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie at the Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a3N-2t-35T">
+                                <rect key="frame" x="62" y="28" width="197" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="yt1-UP-mJz" id="BLa-Gd-eXq"/>
+                        <outlet property="lblTitle" destination="a3N-2t-35T" id="RwZ-pT-hEX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DMg-Wp-2lC" userLabel="First Responder" sceneMemberID="firstResponder"/>

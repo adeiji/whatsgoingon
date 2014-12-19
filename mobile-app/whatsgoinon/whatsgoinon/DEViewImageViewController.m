@@ -27,7 +27,11 @@
             
         }
     }];
-
+    
+    [[_imageView layer] setCornerRadius:BUTTON_CORNER_RADIUS * 2];
+    [[_imageView layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[_imageView layer] setBorderWidth:2.0f];
+    [_lblTitle setText:_postTitle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,4 +40,7 @@
 }
 
 
+- (IBAction)goBack:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

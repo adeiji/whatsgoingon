@@ -73,15 +73,17 @@
 // Take the user to a profile page where they can see limited information about this user
 
 - (void) usernameButtonClicked {
-    DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:user IsPublic:YES];
-    
-    UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] objectAtIndex:1];
-    [scrollView setContentSize:settingsAccount.frame.size];
-    [scrollView addSubview:settingsAccount];
-    [DEAnimationManager fadeOutWithView:self.view ViewToAdd:scrollView];
-    [settingsAccount setIsPublic:YES];
-    [settingsAccount.lblTitle setText:[user username]];
-    
+    if (user)
+    {
+        DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:user IsPublic:YES];
+        
+        UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] objectAtIndex:1];
+        [scrollView setContentSize:settingsAccount.frame.size];
+        [scrollView addSubview:settingsAccount];
+        [DEAnimationManager fadeOutWithView:self.view ViewToAdd:scrollView];
+        [settingsAccount setIsPublic:YES];
+        [settingsAccount.lblTitle setText:[user username]];
+    }
 }
 
 - (void) loadNonPreview
@@ -405,7 +407,7 @@
         DEViewImageViewController *viewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewImage"];
         [viewController setImage:_post.images[i]];
         [viewController setIndex:i];
-        
+        [viewController setPostTitle:_post.title];
         [viewControllers addObject:viewController];
     }
     
