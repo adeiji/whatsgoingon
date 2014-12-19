@@ -253,6 +253,8 @@
             [self getTwitterProfilePicture : [PFTwitterUtils twitter].userId];
             [[PFUser currentUser] setUsername:[PFTwitterUtils twitter].screenName];
             [[PFUser currentUser] saveInBackground];
+            [self clearUserImageDefaults];
+
         }
     }];
     
@@ -329,7 +331,8 @@
                 [[DEScreenManager sharedManager] stopActivitySpinner];
                 
                 // Get the Facebook Profile Picture
-                [self getFacebookProfilePicture];
+                [self clearUserImageDefaults];
+                [self getFacebookProfileInformation];
             }
         }];
     }
@@ -338,7 +341,7 @@
 }
 
 // Get the Facebook Profile Picture
-- (void) getFacebookProfilePicture
+- (void) getFacebookProfileInformation
 {
     [[FBRequest requestForMe] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error)
@@ -349,6 +352,9 @@
             NSData *imageData = [NSData dataWithContentsOfURL:profilePictureURL];
             [DEUserManager addProfileImage:imageData];
             
+            // Set the current user's name to the name that is on their social network profile
+            [[PFUser currentUser] setUsername:result[@"name"]];
+            [[PFUser currentUser] saveInBackground];
         }
     }];
 }
