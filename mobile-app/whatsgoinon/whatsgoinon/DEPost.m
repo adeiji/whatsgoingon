@@ -15,7 +15,7 @@
 {
     if ([super init] == self)
     {
-        _images = [NSArray arrayWithObjects:[NSData new], [NSData new], [NSData new], [NSData new], nil];
+        _images = [NSMutableArray new];
         _cost = [NSNumber new];
         _numberGoing = [NSNumber numberWithInt:0];
         _comments = [NSArray new];
