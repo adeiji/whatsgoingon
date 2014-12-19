@@ -63,7 +63,9 @@
 }
 
 - (IBAction)shareText:(id)sender {
-    [[DEScreenManager sharedManager] showTextWithMessage:_btnShareText.titleLabel.text];
+    NSString *url = @"https://www.google.com/";
+    NSString *message = [NSString stringWithFormat:@"%@%@", url, _post.objectId ];
+    [[DEScreenManager sharedManager] showTextWithMessage:message];
 }
 
 
