@@ -13,6 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) PFFile *image;
-@property NSUInteger *index;
+@property NSUInteger index;
 
 @end

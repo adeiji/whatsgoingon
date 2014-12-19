@@ -75,9 +75,6 @@ struct TopMargin {
     [screenManager setMainMenu:viewMainMenu];
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.navigationController setNavigationBarHidden:YES];
-    [self.scrollView setDelegate:self];
-    
-    [_scrollView setDelegate:self];
     [self setUpSearchBar];
 
 }
@@ -216,6 +213,12 @@ struct TopMargin {
     
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.scrollView setDelegate:self];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -234,7 +237,6 @@ struct TopMargin {
     {
         [_containerView addSubview:_scrollView];
         [_scrollView setTranslatesAutoresizingMaskIntoConstraints:YES];
-        [_scrollView setDelegate:self];
     }
 }
 

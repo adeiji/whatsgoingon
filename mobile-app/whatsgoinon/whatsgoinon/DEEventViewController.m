@@ -401,14 +401,16 @@
     DEViewImagesViewController *pageViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewImages"];
     NSMutableArray *viewControllers = [NSMutableArray new];
     
-    for (int i = 0; i < [_post.images count]; i ++) {
+    for (NSUInteger i = 0; i < [_post.images count]; i ++) {
         DEViewImageViewController *viewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewImage"];
         [viewController setImage:_post.images[i]];
         [viewController setIndex:i];
+        
         [viewControllers addObject:viewController];
     }
     
     [pageViewController setMyViewControllers:viewControllers];
+    [pageViewController setViewControllers:@[viewControllers[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
     [self.navigationController pushViewController:pageViewController animated:YES];
     
     

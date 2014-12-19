@@ -17,6 +17,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.delegate = self;
+    self.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,7 +42,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSUInteger index = *(((DEViewImageViewController *) viewController).index);
+    NSUInteger index = (((DEViewImageViewController *) viewController).index);
     
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
@@ -51,7 +54,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = *(((DEViewImageViewController *) viewController).index);
+    NSUInteger index = (((DEViewImageViewController *) viewController).index);
     
     if (index == NSNotFound) {
         return nil;

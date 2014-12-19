@@ -15,7 +15,7 @@ View all the images that are affiliated with a specific post
  
 */
 
-@interface DEViewImagesViewController : UIPageViewController
+@interface DEViewImagesViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) NSArray *myViewControllers;
 @property (strong, nonatomic) NSArray *images;

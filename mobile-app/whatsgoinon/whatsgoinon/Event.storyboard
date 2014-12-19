@@ -269,7 +269,7 @@
         <!--View Images View Controller-->
         <scene sceneID="HKW-BA-NHZ">
             <objects>
-                <pageViewController storyboardIdentifier="viewImages" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="OXt-cD-y5N" customClass="DEViewImagesViewController" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="viewImages" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="none" id="OXt-cD-y5N" customClass="DEViewImagesViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="vq1-oN-rvX"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s1c-cQ-YlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
