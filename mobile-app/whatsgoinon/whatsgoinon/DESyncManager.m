@@ -72,7 +72,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
-            if ([objects count] < 10)
+            if ([objects count] < 10 && now)
             {
                 query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
                 [self getValuesForLater:query Objects:objects];

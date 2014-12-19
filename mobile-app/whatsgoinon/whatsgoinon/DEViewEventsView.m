@@ -116,17 +116,17 @@
     [self addSubview:_overlayView];
     [[_overlayView layer] setOpacity:0];
     
-    // THREADING
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
-
-    dispatch_async(queue, ^{
-        self.lblTitle.text = post.title;
-        self.lblAddress.text = post.address;
-        self.lblSubtitle.text = post.quickDescription;
-        [self.imgMainImageView setAlpha:0.0];
-        self.lblNumGoing.text = [NSString stringWithFormat:@"%@", post.numberGoing];
-    });
-    
+//    // THREADING
+//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+//
+//    dispatch_async(queue, ^{
+//
+//    });
+    [self.imgMainImageView setAlpha:0.0];
+    self.lblNumGoing.text = [NSString stringWithFormat:@"%@", post.numberGoing];
+    self.lblTitle.text = post.title;
+    self.lblAddress.text = post.address;
+    self.lblSubtitle.text = post.quickDescription;
     [self displayDistanceToLocationWithPost : post];
     
     _post = myPost;

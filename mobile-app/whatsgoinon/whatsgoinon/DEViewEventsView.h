@@ -14,6 +14,7 @@
 #import "DEEventViewController.h"
 #import "DEViewComment.h"
 
+
 @interface DEViewEventsView : UIView <UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgMainImageView;

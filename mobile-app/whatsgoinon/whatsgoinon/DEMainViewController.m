@@ -112,7 +112,7 @@
     else {
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
         DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
-        
+        viewEventsViewController.now = YES;
         [self setNextScreenWithViewController:viewEventsViewController];
     }
     
