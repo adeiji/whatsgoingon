@@ -23,6 +23,13 @@
                        Password : (NSString *) password
                  ViewController : (UIViewController *) viewController
                      ErrorLabel : (UILabel *) label;
+/*
+ 
+ Change the password of the current user
+ password: The new password
+ 
+ */
+- (void) changePassword : (NSString *) password;
 
 - (BOOL) isLoggedIn;
 
@@ -37,7 +44,7 @@
          ParseColumnName : (NSString *) columnName;
 
 + (void) addProfileImage : (NSData *) profileImageData;
-+ (void) getUserRank;
++ (void) getUserRank : (NSString *) username;
 + (void) getUserFromUsername : (NSString *) username;
 
 @property (strong, nonatomic) PFUser *user;

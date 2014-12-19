@@ -21,10 +21,10 @@
         isPublic = myIsPublic;
         [self setUpButtons];
         [self addObservers];
-        
+        [self registerForKeyboardNotifications];
         if ([PFUser currentUser])
         {
-            [DEUserManager getUserRank];
+            [DEUserManager getUserRank : [myUser username]];
             [DESyncManager getNumberOfPostByUser : myUser.username];
         }
         else {
@@ -83,6 +83,34 @@
     }
 }
 
+# pragma mark - Keyboard Notifications
+
+- (void) registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void) keyboardWillShow : (NSNotification *) aNotification {
+    [self scrollViewToTopOfKeyboard:(UIScrollView *) [self superview] Notification:aNotification View:self TextFieldOrView:activeField];
+}
+
+- (void) keyboardWillBeHidden : (NSNotification *) aNotification {
+    [self scrollViewToBottom:(UIScrollView *) [self superview] Notification:aNotification];
+}
+
+# pragma mark - Text Field Delegate
+- (void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeField = textField;
+}
+
 - (void) setUpButtons {
     [[_btnTakePicture layer] setCornerRadius:_btnTakePicture.frame.size.height / 2.0f];
     [[_btnTakePicture layer] setBorderWidth:2.0f];
@@ -90,6 +118,8 @@
     [_btnTakePicture setClipsToBounds:YES];
     [[_btnSendFeedback layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     [[_btnSignOut layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    
+    [[_btnChangePassword layer] setCornerRadius:BUTTON_CORNER_RADIUS];
 }
 
 - (void) addObservers {
@@ -163,11 +193,12 @@
 
 - (void) setUpTextFields
 {
-    NSArray *array = [NSArray arrayWithObjects:_txtPassword, _txtUsername, nil];
+    NSArray *array = [NSArray arrayWithObjects:_txtPassword, _txtUsername, _txtConfirmPassword, nil];
     [DEScreenManager setUpTextFields:array];
     
     _txtUsername.text = user[PARSE_CLASS_USER_USERNAME];
-    _txtPassword.text = user[PARSE_CLASS_USER_PASSWORD];
+    // Get the password that can actually be viewed on within the app
+    _txtPassword.text = user[PARSE_CLASS_USER_VISIBLE_PASSWORD];
 }
 
 
@@ -251,6 +282,8 @@
     
 }
 
+#pragma mark - Button Presses
+
 - (IBAction)goBack:(id)sender {
     [DEAnimationManager fadeOutRemoveView:[self superview] FromView:[[self superview] superview]];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -268,6 +301,99 @@
 
 - (IBAction)goBackToAccountScreen:(id)sender {
     [DEAnimationManager fadeOutRemoveView:promptView FromView:self];
+}
+
+- (IBAction)changePasswordPressed:(id)sender {
+    // Move the view that contains the buttons and the social media prompts down
+    [self changePasswordButtonFunction];
+}
+
+- (void) changePasswordButtonFunction {
+    static BOOL changePasswordPressed;
+    
+    if (!changePasswordPressed)
+    {
+        CGFloat heightChange = 80.0f;
+        [self moveBottomHalfView : heightChange];
+        
+        [_btnChangePassword setTitle:@"Save New Password" forState:UIControlStateNormal];
+        // Remove the target first then add the new target otherwise this will not work
+        [_btnChangePassword removeTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [_btnChangePassword addTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
+            changePasswordPressed = YES;
+    }
+    else {
+        CGFloat heightChange = 80.0f;
+        [self moveBottomHalfView:-heightChange];
+        
+        [_btnChangePassword setTitle:@"Change Password" forState:UIControlStateNormal];
+        // Remove the target first then add the new target otherwise this will not work
+        [_btnChangePassword removeTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
+        [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
+        changePasswordPressed = NO;
+    }
+
+}
+
+- (void) savePassword {
+
+    
+    if ([_txtPassword.text isEqualToString:_txtConfirmPassword.text])
+    {
+        // Save the new password to the parse database
+        [[DEUserManager sharedManager] changePassword:_txtPassword.text];
+        
+        _txtConfirmPassword.hidden = YES;
+        _txtPassword.hidden = YES;
+        [self changePasswordButtonFunction];
+        _lblPasswordError.text = @"Password Saved";
+        _txtConfirmPassword.text = @"";
+        [_lblPasswordError setTextAlignment:NSTextAlignmentCenter];
+        
+        [UIView animateWithDuration:1.5 animations:^{
+            [[_lblPasswordError layer] setOpacity:0.0f];
+        }];
+        
+    }
+    else {
+        [_lblPasswordError setTextAlignment:NSTextAlignmentLeft];
+        _lblPasswordError.text = @"Passwords do not match";
+    }
+    
+}
+
+#pragma mark - Animations
+
+
+/*
+ 
+ Moves the bottom half of the account view screen down
+ 
+ */
+- (void) moveBottomHalfView : (CGFloat) heightChange {
+     
+     [UIView animateWithDuration:.3 animations:^{
+         CGRect frame = _bottomHalfView.frame;
+         frame.origin.y = frame.origin.y + heightChange;
+         [_bottomHalfView setFrame:frame];
+         
+     } completion:^(BOOL finished) {
+         if (heightChange > 0)
+         {
+             _txtPassword.hidden = NO;
+             _txtConfirmPassword.hidden = NO;
+         }
+     }];
+     
+     [UIView animateWithDuration:.3 animations:^{
+         CGRect frame;
+         frame = self.frame;
+         frame.size.height = frame.size.height + heightChange;
+         [self setFrame:frame];
+         
+         UIScrollView *scrollView = (UIScrollView *) [self superview];
+         [scrollView setContentSize:CGSizeMake(frame.size.width, frame.size.height)];
+     }];
 }
 
 @end

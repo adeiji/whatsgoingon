@@ -61,6 +61,7 @@ NSString *const PARSE_CLASS_NAME_USER = @"User";
 NSString *const PARSE_CLASS_USER_USERNAME = @"username";
 NSString *const PARSE_CLASS_USER_EMAIL = @"email";
 NSString *const PARSE_CLASS_USER_PASSWORD = @"password";
+NSString *const PARSE_CLASS_USER_VISIBLE_PASSWORD = @"visiblePassword";
 NSString *const PARSE_CLASS_USER_EMAIL_VERIFIED = @"emailVerified";
 NSString *const PARSE_CLASS_USER_PROFILE_PICTURE = @"profilePicture";
 NSString *const PARSE_CLASS_USER_EVENTS_GOING = @"eventsGoing";

@@ -54,11 +54,11 @@
     }
 }
 // Each user has its own rank.  This gets the rank of the current user from Parse.
-+ (void) getUserRank
++ (void) getUserRank : (NSString *) username
 {
     PFQuery *query = [PFUser query];
     
-    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:[[PFUser currentUser] username]];
+    [query whereKey:PARSE_CLASS_USER_USERNAME equalTo:username];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (object != nil)
         {
@@ -91,6 +91,7 @@
             [[DEScreenManager getMainNavigationController] pushViewController:viewController animated:YES];
             _userObject = _user;
             _userObject[PARSE_CLASS_USER_RANK] = USER_RANK_STANDARD;
+            _userObject[PARSE_CLASS_USER_VISIBLE_PASSWORD] = password;
             [_userObject saveEventually];
         }
         else
@@ -103,6 +104,26 @@
     }];
 
     return error;
+}
+
+/*
+ 
+ Change the password of the current user
+ password: The new password
+ 
+ */
+- (void) changePassword:(NSString *)password
+{
+    [[PFUser currentUser] setPassword:password];
+    [PFUser currentUser][PARSE_CLASS_USER_VISIBLE_PASSWORD] = password;
+    
+    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded)
+        {
+            NSLog(@"Password Changed Succesfully and Saved to Server");
+        }
+    }];
+
 }
 
 + (void) getUserFromUsername:(NSString *)username
@@ -205,6 +226,7 @@
     [userDefaults setObject:nil forKey:@"profile-picture"];
     [userDefaults synchronize];
 }
+
 
 
 - (BOOL) usernameExist : (NSString *) username

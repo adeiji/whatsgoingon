@@ -283,7 +283,7 @@ Display the second screen for the post details
     [postManager setCurrentPost:_post];
     
     // Check to see what the rank of the user is and if the user is simply standard, then we want to disable the ability to add a website to the information
-    [DEUserManager getUserRank];
+    [DEUserManager getUserRank : [[PFUser currentUser] username]];
 }
 
 
