@@ -19,7 +19,6 @@
 
 @interface DEViewEventsViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate, UISearchBarDelegate>
 {
-    int postCounter;
     DEViewMainMenu *viewMainMenu;
     BOOL menuDisplayed;
 }

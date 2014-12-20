@@ -61,7 +61,6 @@ struct TopMargin {
     [selectCategoryView loadView];
     [window addSubview:selectCategoryView];
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
-    [self resetPostCounter];
     
     /* Check to see if this is their first time going to this part of the application
      If it is their first time then show the welcome screen.
@@ -76,6 +75,7 @@ struct TopMargin {
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.navigationController setNavigationBarHidden:YES];
     [self setUpSearchBar];
+    [self removeAllPostFromScreen];
 
 }
 
@@ -277,7 +277,7 @@ struct TopMargin {
     [_scrollView addSubview:view];
     [self loadPosts];
     [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
-    [self addEventsToScreen : view.frame.size.height + 15];
+    [self addEventsToScreen : view.frame.size.height + 15 ProcessStatus:nil];
     [self loadVisiblePost:_scrollView];
     
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
@@ -356,11 +356,9 @@ struct TopMargin {
     }
     
     [self loadPosts];
-    [self removeAllPostFromScreen];
     [self setUpScrollViewForPostsWithTopMargin:0];
-    [self addEventsToScreen : 0];
+    [self addEventsToScreen : 0 ProcessStatus:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS]];
     [self loadVisiblePost:_scrollView];
-    
     [self showOrbView];
 }
 
@@ -371,53 +369,57 @@ struct TopMargin {
 }
 
 - (void) addEventsToScreen : (NSInteger) topMargin
+             ProcessStatus : (NSString *) process
 {
-    __block int column = 0;
-    postCounter = 0;
-    __block CGFloat columnOneMargin = 0;
-    __block CGFloat columnTwoMargin = 0;
-    __block CGFloat margin = 0;
+    static int column = 0;
+    static int postCounter = 0;
+    static CGFloat columnOneMargin = 0;
+    static CGFloat columnTwoMargin = 0;
+    static CGFloat margin = 0;
     
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
-        DEPost *post = [DEPost getPostFromPFObject:obj];
-        
-        [viewEventsView renderViewWithPost:post];
-        [[viewEventsView layer] setCornerRadius:5.0f];
-    
-        // Set the height of the UITextView for the description to the necessary height to fit all the information
-        CGSize sizeThatFitsTextView = [[viewEventsView lblSubtitle] sizeThatFits:CGSizeMake([viewEventsView lblSubtitle].frame.size.width, 1000)];
-        CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - [viewEventsView lblSubtitle].frame.size.height;
-
-        if (column == 0)
+        if (!obj[@"loaded"])
         {
-            margin = columnOneMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter);
-        }
-        else {
-            margin = columnTwoMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter);
-        }
+            DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
+            DEPost *post = [DEPost getPostFromPFObject:obj];
+            obj[@"loaded"] = [NSNumber numberWithBool:YES];
+            [viewEventsView renderViewWithPost:post];
+            [[viewEventsView layer] setCornerRadius:5.0f];
         
-        CGRect frame = CGRectMake((column * POST_WIDTH) + (13 * (column + 1)), topMargin + margin, POST_WIDTH, POST_HEIGHT + heightDifference);
-        viewEventsView.frame = frame;
-        
-        frame = viewEventsView.lblSubtitle.frame;
-        frame.size.height += heightDifference;
-        [[viewEventsView lblSubtitle] setFrame:frame];
+            // Set the height of the UITextView for the description to the necessary height to fit all the information
+            CGSize sizeThatFitsTextView = [[viewEventsView lblSubtitle] sizeThatFits:CGSizeMake([viewEventsView lblSubtitle].frame.size.width, 1000)];
+            CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - [viewEventsView lblSubtitle].frame.size.height;
 
-        [_scrollView addSubview:viewEventsView];
-    
-        if (column == 0)
-        {
-            column = 1;
-            columnOneMargin += heightDifference;
-        }
-        else {
-            column = 0;
-            columnTwoMargin += heightDifference;
-            postCounter ++;
-        }
+            if (column == 0)
+            {
+                margin = columnOneMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter);
+            }
+            else {
+                margin = columnTwoMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter);
+            }
+            
+            CGRect frame = CGRectMake((column * POST_WIDTH) + (13 * (column + 1)), topMargin + margin, POST_WIDTH, POST_HEIGHT + heightDifference);
+            viewEventsView.frame = frame;
+            
+            frame = viewEventsView.lblSubtitle.frame;
+            frame.size.height += heightDifference;
+            [[viewEventsView lblSubtitle] setFrame:frame];
+
+            [_scrollView addSubview:viewEventsView];
         
-        [self getDistanceFromCurrentLocationOfEvent:obj];
+            if (column == 0)
+            {
+                column = 1;
+                columnOneMargin += heightDifference;
+            }
+            else {
+                column = 0;
+                columnTwoMargin += heightDifference;
+                postCounter ++;
+            }
+            
+            [self getDistanceFromCurrentLocationOfEvent:obj];
+        }
     }];
     
     CGSize size = _scrollView.contentSize;
@@ -431,6 +433,15 @@ struct TopMargin {
     
     [_scrollView setContentSize:size];
     
+    // If we've finished loading all the events then we reset everything back to zero so that next time we load events it will show them correctly
+    if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING])
+    {
+        column = 0;
+        postCounter = 0;
+        columnOneMargin = 0;
+        columnTwoMargin = 0;
+        margin = 0;
+    }
 }
 
 
@@ -438,9 +449,6 @@ struct TopMargin {
 
 }
 
-- (void) resetPostCounter {
-    postCounter = 0;
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -542,7 +550,7 @@ struct TopMargin {
         _posts = _searchPosts;
         _searchPosts = [NSMutableArray new];
         [self removeAllPostFromScreen];
-        [self addEventsToScreen:0];
+        [self addEventsToScreen:0 ProcessStatus:nil ];
     }
 }
 

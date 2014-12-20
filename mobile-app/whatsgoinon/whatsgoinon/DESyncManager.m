@@ -42,15 +42,73 @@
             NSLog(@"Error: %@", [error description]);
         }
     }];
-
 }
 
-+ (void) getAllValuesForNow : (BOOL) now {
+/*
+ 
+ Get all the values that are posted at a specific miles distance from the user
+ 
+ */
++ (void) getAllValuesWithinMilesForNow : (BOOL) now
+                            PostsArray : (NSMutableArray *) postsArray
+{
+    static double miles = 0;
+    PFQuery *query = [DESyncManager getBasePFQueryForNow:now];
+    // If the miles is set to 0 that means the range is all, which means basically 30 miles and in, so we want to grab all events basically that are set to all
+    if (miles > 0)
+    {
+        [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] currentLocation] withinMiles:miles];
+        [query whereKey:PARSE_CLASS_EVENT_POST_RANGE equalTo:[NSNumber numberWithDouble:miles]];
+    }
+    else {
+        [query whereKey:PARSE_CLASS_EVENT_POST_RANGE equalTo:[NSNumber numberWithDouble:miles]];
+    }
     
-    [self checkForInternet];
+    __block PFQuery *blockQuery = query;
+    // Update the amount of miles so that we get the next set of posts
+    miles += 5;
     
-    __block DEPostManager *sharedManager = [DEPostManager sharedManager];
-    __block PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            //The find succeeded, now do something with it
+            [DESyncManager storeEvents : objects
+                             PostsArray:postsArray
+                          ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING];
+            
+            if (miles < 30)
+            {
+                [DESyncManager getAllValuesWithinMilesForNow:now PostsArray:postsArray];
+            }
+            else {
+                if ([[[DEPostManager sharedManager] posts] count] < 10 && now)
+                {
+                    // Get any values that are later
+                    blockQuery = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+                    [self getValuesForLater:query
+                                    Objects:objects
+                     ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
+
+                }
+                else
+                {
+                    // Just let the app know that we've finished loading
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING }];
+                }
+                // Set the miles to zero so that the next time the events are loaded we load them from all to 25 miles distance
+                miles = 0;
+            }
+
+        }
+        else {
+            // The find failed, let the customer know
+            NSLog(@"Error: %@", [error description]);
+        }
+    }];
+}
+
++ (PFQuery *) getBasePFQueryForNow : (BOOL) now {
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     
     //Get all the events that are currently active and less than three hours away to start
     NSDate *date = [NSDate date];
@@ -59,44 +117,50 @@
     
     [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
-    [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] currentLocation] withinMiles:30.0];
     
     if (now)
     {
-//        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+        //[query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
         [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
-        #warning Remove before sending to test
+        #warning Uncomment before sending to test
     }
     else
     {
         [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
     }
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error)
-        {
-            if ([objects count] < 10 && now)
-            {
-                query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
-                [self getValuesForLater:query Objects:objects];
-            }
-            else {
-                //The find succeeded, now do something with it
-                [sharedManager setPosts:objects];
-                [sharedManager setAllEvents:objects];
-                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-                NSLog(@"Notification sent, events loaded");
-                [[DEScreenManager sharedManager] stopActivitySpinner];
-            }
-        }
-        else {
-            // The find failed, let the customer know
-            NSLog(@"Error: %@", [error description]);
-        }
-    }];
+    
+    return query;
 }
+
++ (void) getAllValuesForNow : (BOOL) now {
+    
+    [self checkForInternet];
+    NSMutableArray *postsArray = [NSMutableArray new];
+
+    [DESyncManager getAllValuesWithinMilesForNow:now
+                                         PostsArray:postsArray ];
+
+
+}
+// Store the events that we just recieved from Parse and notify the app
++ (void) storeEvents : (NSArray *) objects
+          PostsArray : (NSMutableArray *) postsArray
+       ProcessStatus : (NSString *) process
+{
+    DEPostManager *sharedManager = [DEPostManager sharedManager];
+    [postsArray addObjectsFromArray:objects];
+    [sharedManager setPosts:postsArray];
+    [sharedManager setAllEvents:postsArray];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : process }];
+    NSLog(@"Notification sent, events loaded");
+    [[DEScreenManager sharedManager] stopActivitySpinner];
+}
+
+
 // Get the values for later if there are not more than 50 in the now events
 + (void) getValuesForLater : (PFQuery *) query
                    Objects : (NSArray *) objects
+             ProcessStatus : (NSString *) processStatus
 {
     NSDate *date = [NSDate date];
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
@@ -116,12 +180,7 @@
         {
             //The find succeeded, now do something with it
             NSMutableArray *array = (NSMutableArray *) [[DEPostManager sharedManager] posts];
-            [array addObjectsFromArray:objects];
-            [[DEPostManager sharedManager] setPosts:array];
-            [[DEPostManager sharedManager] setAllEvents:array];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-            NSLog(@"Notification sent, events loaded");
-            [[DEScreenManager sharedManager] stopActivitySpinner];
+            [DESyncManager storeEvents:objects PostsArray:array ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
         }
     }];
     
@@ -208,7 +267,9 @@
             {
                 query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
                 [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:geoPoint withinMiles:miles];
-                [self getValuesForLater:query Objects:objects];
+                [self getValuesForLater:query
+                                Objects:objects
+                          ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
             }
             [[DEPostManager sharedManager] setPosts:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];

@@ -34,4 +34,12 @@
 + (void) getNumberOfPostByUser : (NSString *) username;
 // Pull all the comments for this specific event
 + (NSArray *) getAllCommentsForEventId : (NSString *) objectId;
+
+/*
+ 
+ Get all the values that are posted at a specific miles distance from the user
+ 
+ */
++ (void) getAllValuesWithinMiles : (double) miles;
+
 @end
