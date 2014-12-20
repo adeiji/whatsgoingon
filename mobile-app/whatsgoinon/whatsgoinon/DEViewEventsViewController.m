@@ -35,6 +35,7 @@ struct TopMargin {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory:) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllPostFromScreen) name:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
 }
 
 - (void)viewDidLoad
@@ -350,11 +351,6 @@ struct TopMargin {
 
 - (void) displayPost : (NSNotification *) notification {
     
-    if ([notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS] isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW])
-    {
-        [self removeAllPostFromScreen];
-    }
-    
     if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY] && notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS])
     {
         [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
@@ -388,17 +384,6 @@ struct TopMargin {
     static double widthMargin = 13;
     static double viewEventsViewFrameHeight = 278;
     __block BOOL validated;
-    
-    // If we've finished loading all the events then we reset everything back to zero so that next time we load events it will show them correctly
-    if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW])
-    {
-        column = 0;
-        postCounter = 0;
-        columnOneMargin = 0;
-        columnTwoMargin = 0;
-        margin = 0;
-        scrollViewContentSizeHeight = 0;
-    }
     
     validated = NO;
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -477,6 +462,17 @@ struct TopMargin {
     size.height = scrollViewContentSizeHeight;
     [_scrollView setContentSize:size];
 
+    // If we've finished loading all the events then we reset everything back to zero so that next time we load events it will show them correctly
+    if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING])
+    {
+        column = 0;
+        postCounter = 0;
+        columnOneMargin = 0;
+        columnTwoMargin = 0;
+        margin = 0;
+        scrollViewContentSizeHeight = 0;
+    }
+    
 }
 
 

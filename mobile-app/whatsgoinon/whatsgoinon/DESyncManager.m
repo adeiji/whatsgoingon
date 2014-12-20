@@ -88,7 +88,6 @@
                     [self getValuesForLater:query
                                     Objects:objects
                      ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
-
                 }
                 else
                 {
@@ -137,6 +136,7 @@
     [self checkForInternet];
     NSMutableArray *postsArray = [NSMutableArray new];
 
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
     [DESyncManager getAllValuesWithinMilesForNow:now
                                          PostsArray:postsArray ];
 
