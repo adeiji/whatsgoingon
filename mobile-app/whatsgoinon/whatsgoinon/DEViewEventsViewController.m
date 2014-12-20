@@ -375,77 +375,33 @@ struct TopMargin {
              ProcessStatus : (NSString *) process
                   Category : (NSString *) myCategory
 {
-    static int column = 0;
+    static CGFloat column = 0;
     static int postCounter = 0;
     static CGFloat columnOneMargin = 0;
     static CGFloat columnTwoMargin = 0;
     static CGFloat margin = 0;
     CGFloat scrollViewContentSizeHeight = 0;
-    static double widthMargin = 13;
     static double viewEventsViewFrameHeight = 278;
     __block BOOL validated;
     
     validated = NO;
+
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        if ([myCategory isEqualToString:@"Featured"])
+        validated = [self isValidToShowEvent:obj Category:myCategory];
+        // Show the event on the screen
+        if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
         {
-            if ([obj[PARSE_CLASS_EVENT_POST_RANGE] isEqual:@0])
-            {
-                validated = YES;
-            }
-            else {
-                validated = NO;
-            }
-        }
-        else {
-            validated = YES;
-        }
-        
-        if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"]) && validated)
-        {
-            DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
-            DEPost *post = [DEPost getPostFromPFObject:obj];
-            obj[@"loaded"] = @YES;
-            [viewEventsView renderViewWithPost:post];
-            [[viewEventsView layer] setCornerRadius:5.0f];
-        
-            // Set the height of the UITextView for the description to the necessary height to fit all the information
-            CGSize sizeThatFitsTextView = [[viewEventsView lblSubtitle] sizeThatFits:CGSizeMake([viewEventsView lblSubtitle].frame.size.width, 1000)];
-            // Get the heightDifference from what it's original size is and what it's size will be
-            CGFloat heightDifference = ceilf(sizeThatFitsTextView.height) - [viewEventsView lblSubtitle].frame.size.height;
 
-            if (column == 0)
-            {
-                margin = columnOneMargin;
-            }
-            else {
-                margin = columnTwoMargin;
-            }
-            
-            CGFloat viewEventsViewHeight = POST_HEIGHT + heightDifference;
-            CGRect frame = CGRectMake((column * POST_WIDTH) + (widthMargin * (column + 1)), topMargin + margin, POST_WIDTH, viewEventsViewHeight);
-            viewEventsView.frame = frame;
-            
-            frame = viewEventsView.lblSubtitle.frame;
-            frame.size.height += heightDifference;
-            [[viewEventsView lblSubtitle] setFrame:frame];
+                [self loadEvent:obj
+                        Margin1:&columnOneMargin
+                        Margin2:&columnTwoMargin
+                         Column:&column
+                      TopMargin:topMargin
+              EventsFrameHeight:&viewEventsViewFrameHeight
+                    PostCounter:&postCounter];
 
-            [_scrollView addSubview:viewEventsView];
-        
-            if (column == 0)
-            {
-                column = 1;
-                columnOneMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
-            }
-            else {
-                column = 0;
-                columnTwoMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
-                postCounter ++;
-            }
-            
-            [self getDistanceFromCurrentLocationOfEvent:obj];
-            
+
         }
     }];
     
@@ -472,9 +428,133 @@ struct TopMargin {
         margin = 0;
         scrollViewContentSizeHeight = 0;
     }
+}
+
+/*
+ 
+ Load the event
+ 
+ */
+
+- (void) loadEvent : (PFObject *) obj
+           Margin1 : (CGFloat *) columnOneMargin
+           Margin2 : (CGFloat *) columnTwoMargin
+            Column : (CGFloat *) column
+         TopMargin : (NSInteger) topMargin
+ EventsFrameHeight : (CGFloat *) viewEventsViewFrameHeight
+       PostCounter : (int *) postCounter
+{
+    DEPost *post = [DEPost getPostFromPFObject:obj];
+    obj[@"loaded"] = @YES;
+    
+    DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
+    [viewEventsView renderViewWithPost:post];
+
+    
+    CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
+    
+    [self setUpViewEventsFrame:*columnOneMargin
+                        Margin:*columnTwoMargin
+                          Post:post
+                        Column:*column
+                ViewEventsView:viewEventsView
+              HeightDifference:heightDifference
+                     TopMargin:topMargin];
+    
+
+
+    [_scrollView addSubview:viewEventsView];
+
+
+    if (*column == 0)
+    {
+        *column = 1;
+        *columnOneMargin += *viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
+    }
+    else {
+        *column = 0;
+        *columnTwoMargin += *viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
+        *postCounter = *postCounter + 1;
+    }
+    
+    [self getDistanceFromCurrentLocationOfEvent:obj];
     
 }
 
+/*
+ 
+ Check to see if it is valid to show this event on the screen
+ 
+ */
+
+- (BOOL) isValidToShowEvent : (PFObject *) obj
+                   Category : (NSString *) myCategory
+{
+    BOOL validated;
+    if ([myCategory isEqualToString:@"Featured"])
+    {
+        if ([obj[PARSE_CLASS_EVENT_POST_RANGE] isEqual:@0])
+        {
+            validated = YES;
+        }
+        else {
+            validated = NO;
+        }
+    }
+    else {
+        validated = YES;
+    }
+    
+    return validated;
+}
+
+/*
+ 
+ Set up the view events view.  Add the event, and display it properly with its image
+ 
+ */
+- (void) setUpViewEventsFrame : (CGFloat) columnOneMargin
+                       Margin : (CGFloat) columnTwoMargin
+                         Post : (DEPost *) post
+                       Column : (int) column
+               ViewEventsView : (DEViewEventsView *) view
+             HeightDifference : (CGFloat) heightDifference
+                    TopMargin : (CGFloat) topMargin
+
+{
+    CGFloat margin;
+    [[view layer] setCornerRadius:5.0f];
+    static double widthMargin = 13;
+    
+    if (column == 0)
+    {
+        margin = columnOneMargin;
+    }
+    else {
+        margin = columnTwoMargin;
+    }
+    
+    CGFloat viewEventsViewHeight = POST_HEIGHT + heightDifference;
+    CGRect frame = CGRectMake((column * POST_WIDTH) + (widthMargin * (column + 1)), topMargin + margin, POST_WIDTH, viewEventsViewHeight);
+    view.frame = frame;
+    // Set up the Subtitle frame
+    frame = [[view lblSubtitle ] frame];
+    frame.size.height += heightDifference;
+    [[view lblSubtitle] setFrame:frame];
+}
+/*
+ 
+ Get the difference of height between the label with no description, and the label with the size necessary to fit to the description
+ 
+ */
+- (CGFloat) getLabelHeightDifference : (DEViewEventsView *) view {
+    // Set the height of the UITextView for the description to the necessary height to fit all the information
+    CGSize sizeThatFitsTextView = [[view lblSubtitle] sizeThatFits:CGSizeMake([view lblSubtitle].frame.size.width, 1000)];
+    // Get the heightDifference from what it's original size is and what it's size will be
+    CGFloat heightDifference = ceilf(sizeThatFitsTextView.height) - [view lblSubtitle].frame.size.height;
+    
+    return heightDifference;
+}
 
 - (void) getDistanceFromCurrentLocationOfEvent : (PFObject *) event {
 
