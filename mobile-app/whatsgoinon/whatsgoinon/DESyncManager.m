@@ -59,6 +59,7 @@
     
     [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
+    [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] currentLocation] withinMiles:30.0];
     
     if (now)
     {
@@ -179,7 +180,7 @@
     [[DEScreenManager sharedManager] startActivitySpinner];
     // Let the necessary objects know that the city has just been changed
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
-    CGFloat miles = 25;
+    CGFloat miles = 30;
     
     __block PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     

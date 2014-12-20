@@ -12,7 +12,7 @@
 
 @class DEPost;
 
-@interface DESharingView : UIView <MFMessageComposeViewControllerDelegate>
+@interface DESharingView : UIView <MFMessageComposeViewControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) UIImage *image;
 @property (strong, nonatomic) DEPost *post;

@@ -54,6 +54,7 @@
         _switchTwitter.hidden = YES;
         _btnTakePicture.enabled = NO;
         _txtUsername.enabled = NO;
+        _btnChangePassword.hidden = YES;
     }
     
     isPublic = myIsPublic;

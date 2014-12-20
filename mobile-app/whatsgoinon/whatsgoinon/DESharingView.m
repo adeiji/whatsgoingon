@@ -34,25 +34,23 @@
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
         UINavigationController *vc = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        
-        [controller setInitialText:[_post toString]];
+        [controller addURL:[self getEventUrl]];
+        [controller setInitialText:[self messageCaption]];
         [controller addImage:_image];
         [vc presentViewController:controller animated:NO completion:^{
             NSLog(@"Completed the transition");
         }];
-        
     }
 }
 
-- (IBAction)shareInstagram:(id)sender {
-}
 
 - (IBAction)shareTwitter:(id)sender {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
     {
         SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
-        [tweetSheet setInitialText:[_post toString]];
+        [tweetSheet addURL:[self getEventUrl]];
+        [tweetSheet setInitialText:[self messageCaption]];
         [tweetSheet addImage:_image];
         UINavigationController *vc = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
         
@@ -60,14 +58,50 @@
             NSLog(@"Completed the transition");
         }];
     }
+    else {
+        if (&UIApplicationOpenSettingsURLString != NULL)  // If we're in iOS 8 and the user can open the settings app from within this app
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Tweet" message:@"It seems that you can't tweet using this app right now.  Go to Settings --> Twitter, and ensure that all is set up accurately" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", @"Settings", nil];
+            
+            [alert show];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Tweet" message:@"It seems that you can't tweet using this app right now.  Go to Settings --> Twitter, and ensure that all is set up accurately" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+            
+            [alert show];
+        }
+    }
+}
+
+- (NSString *) messageCaption {
+    return @"Check out this event that's posted on HappSnap!";
+}
+
+- (NSURL *) getEventUrl {
+    NSString *stringUrl = @"https://www.google.com/";
+    NSString *message = [NSString stringWithFormat:@"%@%@", stringUrl, _post.objectId ];
+    NSURL *url = [[NSURL alloc] initWithString:message];
+
+    return url;
 }
 
 - (IBAction)shareText:(id)sender {
-    NSString *url = @"https://www.google.com/";
-    NSString *message = [NSString stringWithFormat:@"%@%@", url, _post.objectId ];
-    [[DEScreenManager sharedManager] showTextWithMessage:message];
+    [[DEScreenManager sharedManager] showTextWithMessage:[[self getEventUrl] absoluteString ]];
+
 }
 
+# pragma mark - Alert View Delegate Methods
 
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // If he clicks on settings
+    if (buttonIndex == 0)
+    {
+        if (&UIApplicationOpenSettingsURLString != NULL) {
+            NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:appSettings];
+        }
+    }
+}
 
 @end
