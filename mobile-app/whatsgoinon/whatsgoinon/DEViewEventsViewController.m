@@ -277,7 +277,7 @@ struct TopMargin {
     [_scrollView addSubview:view];
     [self loadPosts];
     [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
-    [self addEventsToScreen : view.frame.size.height + 15 ProcessStatus:nil];
+    [self addEventsToScreen : view.frame.size.height + 15 ProcessStatus:nil Category:nil];
     [self loadVisiblePost:_scrollView];
     
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
@@ -350,15 +350,21 @@ struct TopMargin {
 
 - (void) displayPost : (NSNotification *) notification {
     
-    if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY])
+    if ([notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS] isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW])
+    {
+        [self removeAllPostFromScreen];
+    }
+    
+    if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY] && notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS])
     {
         [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
+        category = notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY];
     }
     
     [self loadPosts];
-    // Set the initial scroll view content size, we adjust from this
-//    [self setUpScrollViewForPostsWithTopMargin:0];
-    [self addEventsToScreen : 0 ProcessStatus:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS]];
+    [self addEventsToScreen : 0
+               ProcessStatus:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS]
+                    Category:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
     [self loadVisiblePost:_scrollView];
     [self showOrbView];
 }
@@ -371,6 +377,7 @@ struct TopMargin {
 
 - (void) addEventsToScreen : (NSInteger) topMargin
              ProcessStatus : (NSString *) process
+                  Category : (NSString *) myCategory
 {
     static int column = 0;
     static int postCounter = 0;
@@ -380,14 +387,41 @@ struct TopMargin {
     CGFloat scrollViewContentSizeHeight = 0;
     static double widthMargin = 13;
     static double viewEventsViewFrameHeight = 278;
+    __block BOOL validated;
     
+    // If we've finished loading all the events then we reset everything back to zero so that next time we load events it will show them correctly
+    if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW])
+    {
+        column = 0;
+        postCounter = 0;
+        columnOneMargin = 0;
+        columnTwoMargin = 0;
+        margin = 0;
+        scrollViewContentSizeHeight = 0;
+    }
+    
+    validated = NO;
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        if (!obj[@"loaded"])
+        if ([myCategory isEqualToString:@"Featured"])
+        {
+            if ([obj[PARSE_CLASS_EVENT_POST_RANGE] isEqual:@0])
+            {
+                validated = YES;
+            }
+            else {
+                validated = NO;
+            }
+        }
+        else {
+            validated = YES;
+        }
+        
+        if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"]) && validated)
         {
             DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
             DEPost *post = [DEPost getPostFromPFObject:obj];
-            obj[@"loaded"] = [NSNumber numberWithBool:YES];
+            obj[@"loaded"] = @YES;
             [viewEventsView renderViewWithPost:post];
             [[viewEventsView layer] setCornerRadius:5.0f];
         
@@ -443,16 +477,6 @@ struct TopMargin {
     size.height = scrollViewContentSizeHeight;
     [_scrollView setContentSize:size];
 
-    // If we've finished loading all the events then we reset everything back to zero so that next time we load events it will show them correctly
-    if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING])
-    {
-        column = 0;
-        postCounter = 0;
-        columnOneMargin = 0;
-        columnTwoMargin = 0;
-        margin = 0;
-        scrollViewContentSizeHeight = 0;
-    }
 }
 
 
@@ -561,7 +585,7 @@ struct TopMargin {
         _posts = _searchPosts;
         _searchPosts = [NSMutableArray new];
         [self removeAllPostFromScreen];
-        [self addEventsToScreen:0 ProcessStatus:nil ];
+        [self addEventsToScreen:0 ProcessStatus:nil Category:category ];
     }
 }
 

@@ -215,38 +215,8 @@
 
 - (void) reloadEvents
 {
-    NSArray *events = [[DEPostManager sharedManager] allEvents];
-    NSMutableArray *eventsInCategory = [NSMutableArray new];
-    NSDictionary *categoryDictionary = @{ kNOTIFICATION_CENTER_USER_INFO_CATEGORY : category };
-    
-    if (![category isEqualToString:@"Anything"])
-    {
-        [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            DEPost *event = [DEPost getPostFromPFObject:obj];
-            
-            if ([event.category isEqualToString:category] || [event.category isEqualToString:@"Anything"])
-            {
-                [eventsInCategory addObject:obj];
-            }
-        }];
-        
-        if ([eventsInCategory count] > 0)
-        {
-            [[DEPostManager sharedManager] setPosts:eventsInCategory];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:categoryDictionary];
-        }
-        else
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil userInfo:categoryDictionary];
-        }
-    }
-    else {  // If the user selects everything then pull back every posts
-        [[DEPostManager sharedManager] setPosts:[[DEPostManager sharedManager] allEvents]];
-        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:categoryDictionary];
-    }
-    
-    
-    
+    // Sort through all the posts and get the ones in this specific category
+    [DEPostManager getPostInCategory : category];
 }
 
 - (void) wheelDidChangeValue: (int) index {

@@ -93,7 +93,7 @@
                 else
                 {
                     // Just let the app know that we've finished loading
-                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING }];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING,     kNOTIFICATION_CENTER_USER_INFO_CATEGORY : @"Featured"}];
                 }
                 // Set the miles to zero so that the next time the events are loaded we load them from all to 25 miles distance
                 miles = 0;
@@ -151,7 +151,10 @@
     [postsArray addObjectsFromArray:objects];
     [sharedManager setPosts:postsArray];
     [sharedManager setAllEvents:postsArray];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : process }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : process,
+            kNOTIFICATION_CENTER_USER_INFO_CATEGORY : @"Featured"
+    }];
     NSLog(@"Notification sent, events loaded");
     [[DEScreenManager sharedManager] stopActivitySpinner];
 }

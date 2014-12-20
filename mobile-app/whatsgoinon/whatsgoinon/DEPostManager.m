@@ -131,6 +131,50 @@
     return [NSString stringWithFormat:@"%02ldmins", (long)minutes];
 }
 
++ (void) getPostInCategory : (NSString *) category
+{
+    NSArray *events = [[DEPostManager sharedManager] allEvents];
+    NSMutableArray *eventsInCategory = [NSMutableArray new];
+    NSDictionary *categoryDictionary = @{ kNOTIFICATION_CENTER_USER_INFO_CATEGORY : category,
+                                          kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW };
+    if (![category isEqualToString:@"Featured"])
+    {
+        [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            DEPost *event = [DEPost getPostFromPFObject:obj];
+            
+            if ([event.category isEqualToString:category] )
+            {
+                [eventsInCategory addObject:obj];
+            }
+            obj[@"loaded"] = @NO;
+        }];
+        
+        if ([eventsInCategory count] > 0)
+        {
+            [[DEPostManager sharedManager] setPosts:eventsInCategory];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:categoryDictionary];
+        }
+        else
+        {
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil userInfo:categoryDictionary];
+        }
+    }
+    else {  // If the user selects everything then pull back every posts
+        [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            DEPost *event = [DEPost getPostFromPFObject:obj];
+            if ([event.postRange isEqual:@0])
+            {
+                [eventsInCategory addObject:obj];
+            }
+            obj[@"loaded"] = @NO;
+        }];
+        
+        [[DEPostManager sharedManager] setPosts:eventsInCategory];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:categoryDictionary];
+    }
+
+}
+
 - (DEPost *) getCurrentPost {
     if (_currentPost == nil)
     {

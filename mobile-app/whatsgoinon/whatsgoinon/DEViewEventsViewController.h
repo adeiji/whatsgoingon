@@ -21,6 +21,7 @@
 {
     DEViewMainMenu *viewMainMenu;
     BOOL menuDisplayed;
+    NSString *category;
 }
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;

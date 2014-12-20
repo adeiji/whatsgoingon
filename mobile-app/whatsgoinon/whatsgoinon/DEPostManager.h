@@ -30,7 +30,12 @@
 + (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post;
 + (BOOL) isBeforeEvent : (DEPost *) post;
 + (NSNumber *) getDurationOfEvent : (DEPost *) event;
-
+/*
+ 
+ Sort through the post and get the events that fit for a specific category
+ 
+ */
++ (void) getPostInCategory : (NSString *) category;
 // Stores the current post when one post is being viewed, edited or created
 @property (strong, nonatomic) DEPost *currentPost;
 
