@@ -356,7 +356,8 @@ struct TopMargin {
     }
     
     [self loadPosts];
-    [self setUpScrollViewForPostsWithTopMargin:0];
+    // Set the initial scroll view content size, we adjust from this
+//    [self setUpScrollViewForPostsWithTopMargin:0];
     [self addEventsToScreen : 0 ProcessStatus:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS]];
     [self loadVisiblePost:_scrollView];
     [self showOrbView];
@@ -376,8 +377,12 @@ struct TopMargin {
     static CGFloat columnOneMargin = 0;
     static CGFloat columnTwoMargin = 0;
     static CGFloat margin = 0;
+    CGFloat scrollViewContentSizeHeight = 0;
+    static double widthMargin = 13;
+    static double viewEventsViewFrameHeight = 278;
     
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
         if (!obj[@"loaded"])
         {
             DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
@@ -388,17 +393,19 @@ struct TopMargin {
         
             // Set the height of the UITextView for the description to the necessary height to fit all the information
             CGSize sizeThatFitsTextView = [[viewEventsView lblSubtitle] sizeThatFits:CGSizeMake([viewEventsView lblSubtitle].frame.size.width, 1000)];
-            CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - [viewEventsView lblSubtitle].frame.size.height;
+            // Get the heightDifference from what it's original size is and what it's size will be
+            CGFloat heightDifference = ceilf(sizeThatFitsTextView.height) - [viewEventsView lblSubtitle].frame.size.height;
 
             if (column == 0)
             {
-                margin = columnOneMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter);
+                margin = columnOneMargin;
             }
             else {
-                margin = columnTwoMargin + (TOP_MARGIN * postCounter) + (POST_HEIGHT * postCounter);
+                margin = columnTwoMargin;
             }
             
-            CGRect frame = CGRectMake((column * POST_WIDTH) + (13 * (column + 1)), topMargin + margin, POST_WIDTH, POST_HEIGHT + heightDifference);
+            CGFloat viewEventsViewHeight = POST_HEIGHT + heightDifference;
+            CGRect frame = CGRectMake((column * POST_WIDTH) + (widthMargin * (column + 1)), topMargin + margin, POST_WIDTH, viewEventsViewHeight);
             viewEventsView.frame = frame;
             
             frame = viewEventsView.lblSubtitle.frame;
@@ -410,29 +417,32 @@ struct TopMargin {
             if (column == 0)
             {
                 column = 1;
-                columnOneMargin += heightDifference;
+                columnOneMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
             }
             else {
                 column = 0;
-                columnTwoMargin += heightDifference;
+                columnTwoMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
                 postCounter ++;
             }
             
             [self getDistanceFromCurrentLocationOfEvent:obj];
+            
         }
     }];
     
-    CGSize size = _scrollView.contentSize;
+    // Add the column one or column two margin, depending on which is greater to the height of the scroll view's content size
     if (columnOneMargin > columnTwoMargin)
     {
-        size.height += columnOneMargin;
+        scrollViewContentSizeHeight += columnOneMargin;
     }
     else {
-        size.height += columnTwoMargin;
+        scrollViewContentSizeHeight += columnTwoMargin;
     }
     
+    CGSize size = _scrollView.contentSize;
+    size.height = scrollViewContentSizeHeight;
     [_scrollView setContentSize:size];
-    
+
     // If we've finished loading all the events then we reset everything back to zero so that next time we load events it will show them correctly
     if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING])
     {
@@ -441,6 +451,7 @@ struct TopMargin {
         columnOneMargin = 0;
         columnTwoMargin = 0;
         margin = 0;
+        scrollViewContentSizeHeight = 0;
     }
 }
 
