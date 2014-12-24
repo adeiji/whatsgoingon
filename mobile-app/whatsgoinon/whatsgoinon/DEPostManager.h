@@ -44,6 +44,12 @@
 // Stores all the post that you are going to for sure
 @property (strong, nonatomic) NSMutableArray *goingPost;
 @property (strong, nonatomic) NSMutableArray *maybeGoingPost;
+/*
+ 
+ Events that the user has said he may go to or will go to that he is currently at
+ 
+ */
+@property (strong, nonatomic) NSMutableArray *eventsUserAt;
 @property (strong, nonatomic) NSArray *allEvents;
 @property (strong, nonatomic) NSString *distanceFromEvent;
 @property (strong, nonatomic) NSArray *comments;

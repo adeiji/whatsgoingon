@@ -42,26 +42,29 @@
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
-    [DEScreenManager promptForComment:[DEPost new]];
+    [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
+    
 }
 
 - (void) checkIfLocalNotification : (NSDictionary *) launchOptions {
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
-        // Check to see if the user is at the event
-        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:localNotif.applicationIconBadgeNumber];
+        [DEScreenManager promptForComment:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
     }
 }
 
 // Register the application to allow for local notifications
-- (void) registerForNotifications
+- (void) registerForNotifications : (UIApplication *) application
 {
-    UIUserNotificationType types = UIUserNotificationTypeBadge;
+    
+    // iOS 8
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
     UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

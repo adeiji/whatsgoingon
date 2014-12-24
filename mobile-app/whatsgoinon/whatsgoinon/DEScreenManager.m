@@ -105,8 +105,12 @@
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
     localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : post.objectId };
-    localNotification.applicationIconBadgeNumber = 1;
+    localNotification.alertBody = [NSString stringWithFormat:@"Wanna to comment for event - %@", post.title];
+    localNotification.alertAction = [NSString stringWithFormat:@"Since you went to this event, you can comment on it if you want"];
+    localNotification.applicationIconBadgeNumber = 5;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+    NSLog(@"Local Notification Object Set and Scheduled");
 }
 
 /*
@@ -116,29 +120,14 @@
  */
 + (void) promptForComment : (NSString *) eventId
 {
-
-    BOOL objectFound;
-    
-    // Get all the actual posts that are set as is going by this user and convert them to DEPost objects and then store them in a local array
-    for (PFObject *post in [[DEPostManager sharedManager] posts]) {
-        for (NSString *postId in [[DEPostManager sharedManager] goingPost]) {
-            if ([postId isEqualToString:post.objectId])
-            {
-                DEPost *myPost = [DEPost getPostFromPFObject:post];
-                DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
-                [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
-                [view showView];
-                objectFound = YES;
-                break;
-            }
-        }
-        if (objectFound)
-        {
-            break;
-        }
-    }
-    
-    
+    // Get the corresponding Event to this eventId
+    NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", eventId];
+    PFObject *postObj = [[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:objectIdPredicate][0];
+    DEPost *post = [DEPost getPostFromPFObject:postObj];
+    DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+    [view showView];
+    [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
 
 };
 

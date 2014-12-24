@@ -20,7 +20,7 @@
         
         [self setFrame:frame];
         post = myPost;
-        [_lblEventTitle setText:myPost.title];
+        [_lblEventTitle setText:post.title];
     }
     
     return self;
@@ -30,7 +30,7 @@
     
     [[_btnCancel layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     [[_btnComment layer] setCornerRadius:BUTTON_CORNER_RADIUS];
-    [_lblEventTitle setText:post.title];
+    [_lblEventTitle setText:[NSString stringWithFormat:@"%@ @ %@", post.title, post.address]];
     
     [UIView animateWithDuration:.5 animations:^{
         CGRect frame = self.frame;

@@ -25,8 +25,29 @@
     _currentLocation.latitude = [[locations objectAtIndex:0] coordinate].latitude;
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
 
-    NSMutableArray *goingPosts = [NSMutableArray new];
+    NSArray *goingPosts = [self getGoingPostEventObjects];
+    
+    for (DEPost *post in goingPosts) {
 
+        if ([self checkIfCanCommentForEvent:post Locations:locations])
+        {
+            break;
+        }
+        
+    }
+    
+    //Stop updating the location because now it is uneccesary, and we want to conserver battery life
+    [_locationManager stopUpdatingLocation];
+}
+
+/*
+ 
+ Get the actual events that correspond to the saved Post Ids stored in the Post Manager
+ 
+ */
+- (NSArray *) getGoingPostEventObjects {
+    NSMutableArray *goingPosts = [NSMutableArray new];
+    
     // Get all the actual posts that are set as is going by this user and convert them to DEPost objects and then store them in a local array
     for (PFObject *post in [[DEPostManager sharedManager] posts]) {
         for (NSString *postId in [[DEPostManager sharedManager] goingPost]) {
@@ -37,34 +58,55 @@
         }
     }
     
-    for (DEPost *post in goingPosts) {
+    return goingPosts;
+}
 
-        CLLocationDegrees latitude = [[locations objectAtIndex:0] coordinate].latitude;
-        CLLocationDegrees longitude = [[locations objectAtIndex:0] coordinate].longitude;
-        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-        
-        latitude = post.location.latitude;
-        longitude = post.location.longitude;
-        CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-        
-        CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
-        NSLog(@"Distance to event: %f", distance);
-        
+/*
+ 
+ Check to see if the user is eligible to comment for this event
+ 
+ */
+
+- (BOOL) checkIfCanCommentForEvent : (DEPost *) post
+                         Locations : (NSArray *) locations
+{
+    CLLocationDegrees latitude = [[locations objectAtIndex:0] coordinate].latitude;
+    CLLocationDegrees longitude = [[locations objectAtIndex:0] coordinate].longitude;
+    CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    
+    latitude = post.location.latitude;
+    longitude = post.location.longitude;
+    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    
+    CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
+    NSLog(@"Distance to event: %f", distance);
+    
+    // Check to see if the event is currently going on, or finished within the hour
+    NSDate *later = [post.endTime dateByAddingTimeInterval:(60 * 60)];
+    
+    #warning - make sure you test for later
+    if (([post.startTime compare:[NSDate new]] == NSOrderedAscending))
+    {
         if (distance < 500)
         {
-//            [timer invalidate];
-//            [timer setFireDate:[NSDate distantFuture]];
-//            _eventPersonAt = post;
-//            [self startTimerForFeedback];
             [DEScreenManager createPromptUserCommentNotification:post];
+            
+            for (NSString *postId in [[DEPostManager sharedManager] goingPost]) {
+                if ([postId isEqualToString:post.objectId])
+                {
+                    [[[DEPostManager sharedManager] goingPost] removeObject:postId];
+                    [[[DEPostManager sharedManager] eventsUserAt] addObject:postId];
+                }
+            }
+            
+            return YES;
         }
     }
     
-    //Stop updating the location because now it is uneccesary, and we want to conserver battery life
-    [_locationManager stopUpdatingLocation];
+    return NO;
 }
 
-/* 
+/*
  
  Handle any errors that happen from the location manager
  
@@ -93,14 +135,20 @@
 }
 // The user entered the location of an event that he said he was going to or maybe going to
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    NSArray *goingPosts = [self getGoingPostEventObjects];
+    
     // Check to see if this event that the user is at has already started
-    for (DEPost *post in [[DEPostManager sharedManager] goingPost]) {
+    
+    for (DEPost *post in goingPosts) {
         if ([post.objectId isEqualToString:region.identifier])
         {
             // Check to see if this event has started.  If the start time of the event is less than the current time
-            if ([post.startTime compare:[NSDate new]] == NSOrderedAscending)
+            if (([post.startTime compare:[NSDate new]] == NSOrderedAscending) &&  ([post.endTime compare:[NSDate new]] == NSOrderedDescending) )
             {
                 [DEScreenManager createPromptUserCommentNotification:post];
+                [[[DEPostManager sharedManager] goingPost] removeObject:post.objectId];
+                [[[DEPostManager sharedManager] eventsUserAt] addObject:post.objectId];
+                break;
             }
         }
     }
@@ -263,9 +311,6 @@
     NSOperationQueue *queue = [NSOperationQueue new];
     queue.name = @"Google Matrix Queue";
     queue.maxConcurrentOperationCount = 3;
-    
-//    NSLog(@"Active and pending operations: %@", queue.operations);
-//    NSLog(@"Count of operations: %lu", (unsigned long) queue.operationCount);
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSError *error;
