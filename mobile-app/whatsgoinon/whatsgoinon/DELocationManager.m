@@ -27,7 +27,7 @@
 
     NSMutableArray *goingPosts = [NSMutableArray new];
 
-    // Get all the actual posts that are set as is going by this user.
+    // Get all the actual posts that are set as is going by this user and convert them to DEPost objects and then store them in a local array
     for (PFObject *post in [[DEPostManager sharedManager] posts]) {
         for (NSString *postId in [[DEPostManager sharedManager] goingPost]) {
             if ([postId isEqualToString:post.objectId])
@@ -52,17 +52,82 @@
         
         if (distance < 500)
         {
-            [timer invalidate];
-            [timer setFireDate:[NSDate distantFuture]];
-            _eventPersonAt = post;
-            [self startTimerForFeedback];
+//            [timer invalidate];
+//            [timer setFireDate:[NSDate distantFuture]];
+//            _eventPersonAt = post;
+//            [self startTimerForFeedback];
+            [DEScreenManager createPromptUserCommentNotification:post];
         }
     }
     
-    
-    //Stop updating the location because now it is uneccesary
+    //Stop updating the location because now it is uneccesary, and we want to conserver battery life
     [_locationManager stopUpdatingLocation];
 }
+
+/* 
+ 
+ Handle any errors that happen from the location manager
+ 
+ */
+
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+}
+
+/*
+ 
+ Start monitoring for the current post location
+ post : The event that we're creating the location region for
+ 
+ */
+- (void) startMonitoringRegionForPost : (DEPost *) post {
+    
+    CLLocationCoordinate2D locCoordinate = CLLocationCoordinate2DMake(post.location.latitude, post.location.longitude);
+    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:500 identifier:post.objectId];
+    
+    // Ensure that when the user enters this specific region the app is notified, and woken up if necessary
+    [region setNotifyOnEntry:YES];
+    [_locationManager startMonitoringForRegion:region];
+    [_locationManager startMonitoringSignificantLocationChanges];
+}
+// The user entered the location of an event that he said he was going to or maybe going to
+- (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    // Check to see if this event that the user is at has already started
+    for (DEPost *post in [[DEPostManager sharedManager] goingPost]) {
+        if ([post.objectId isEqualToString:region.identifier])
+        {
+            // Check to see if this event has started.  If the start time of the event is less than the current time
+            if ([post.startTime compare:[NSDate new]] == NSOrderedAscending)
+            {
+                [DEScreenManager createPromptUserCommentNotification:post];
+            }
+        }
+    }
+}
+
+/*
+ 
+ Check to see if the user is currently at this event
+ 
+ */
+- (void) seeIfLocationMatchesEvent : (DEPost *) event
+{
+    [self startSignificantChangeUpdates];
+    CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_currentLocation.latitude longitude:_currentLocation.longitude];
+    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:event.location.latitude longitude:event.location.longitude];
+    CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
+    
+    // If the user is with 500 meters of the event
+    if (distance < 500) {
+        // Prompt the user to make a comment
+        [DEScreenManager showCommentView:event];
+    }
+    
+    [self stopSignificantChangeUpdates];
+}
+
+
 
 - (void) startTimer
 {

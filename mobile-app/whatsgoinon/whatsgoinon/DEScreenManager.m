@@ -91,6 +91,57 @@
     }
 }
 
+/*
+ 
+ Display a banner in 7 minutes asking the user to comment
+ 
+ */
+
++ (void) createPromptUserCommentNotification : (DEPost *) post {
+    // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
+    UILocalNotification *localNotification = [UILocalNotification new];
+    double minutes = .1;
+    NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
+    [localNotification setFireDate:nowPlusSevenMinutes];
+    // Set the user info to contain the event id of the post that the user is at
+    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : post.objectId };
+    localNotification.applicationIconBadgeNumber = 1;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
+
+/*
+ 
+ Display a screen similar to an iOS banner that asks the user if he wants to comment on the event that he just visited
+ 
+ */
++ (void) promptForComment : (NSString *) eventId
+{
+
+    BOOL objectFound;
+    
+    // Get all the actual posts that are set as is going by this user and convert them to DEPost objects and then store them in a local array
+    for (PFObject *post in [[DEPostManager sharedManager] posts]) {
+        for (NSString *postId in [[DEPostManager sharedManager] goingPost]) {
+            if ([postId isEqualToString:post.objectId])
+            {
+                DEPost *myPost = [DEPost getPostFromPFObject:post];
+                DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
+                [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+                [view showView];
+                objectFound = YES;
+                break;
+            }
+        }
+        if (objectFound)
+        {
+            break;
+        }
+    }
+    
+    
+
+};
+
 - (void) startActivitySpinner
 {
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];

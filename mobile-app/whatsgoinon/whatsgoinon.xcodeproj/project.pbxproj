@@ -96,6 +96,7 @@
 		F437C0131991CE0C00CF61E9 /* DEEventsTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0121991CE0C00CF61E9 /* DEEventsTimeline.m */; };
 		F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437C0161991CE7E00CF61E9 /* DEViewEventsViewController.m */; };
 		F439AEEB1A44BDDC00D24356 /* HappSnap-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F439AEEA1A44BDDC00D24356 /* HappSnap-bg.png */; };
+		F439AEEF1A4B3AFB00D24356 /* DEPromptCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = F439AEEE1A4B3AFB00D24356 /* DEPromptCommentView.m */; };
 		F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */ = {isa = PBXBuildFile; fileRef = F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */; };
 		F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7019A435A500645667 /* DESettingsAccount.m */; };
 		F448FE7C19A442D000645667 /* DEViewComment.m in Sources */ = {isa = PBXBuildFile; fileRef = F448FE7B19A442D000645667 /* DEViewComment.m */; };
@@ -306,6 +307,8 @@
 		F437C0151991CE7E00CF61E9 /* DEViewEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewEventsViewController.h; sourceTree = "<group>"; };
 		F437C0161991CE7E00CF61E9 /* DEViewEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewEventsViewController.m; sourceTree = "<group>"; };
 		F439AEEA1A44BDDC00D24356 /* HappSnap-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HappSnap-bg.png"; sourceTree = "<group>"; };
+		F439AEED1A4B3AFB00D24356 /* DEPromptCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPromptCommentView.h; sourceTree = "<group>"; };
+		F439AEEE1A4B3AFB00D24356 /* DEPromptCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPromptCommentView.m; sourceTree = "<group>"; };
 		F448FE6C19A4335A00645667 /* ViewSettingsAccount.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewSettingsAccount.xib; sourceTree = "<group>"; };
 		F448FE6F19A435A500645667 /* DESettingsAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESettingsAccount.h; sourceTree = "<group>"; };
 		F448FE7019A435A500645667 /* DESettingsAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESettingsAccount.m; sourceTree = "<group>"; };
@@ -786,6 +789,8 @@
 			children = (
 				F448FE7A19A442D000645667 /* DEViewComment.h */,
 				F448FE7B19A442D000645667 /* DEViewComment.m */,
+				F439AEED1A4B3AFB00D24356 /* DEPromptCommentView.h */,
+				F439AEEE1A4B3AFB00D24356 /* DEPromptCommentView.m */,
 			);
 			name = Comment;
 			sourceTree = "<group>";
@@ -1404,6 +1409,7 @@
 				F46B946619C2659C00B41D8C /* DELargeCameraButton.m in Sources */,
 				F46B944F19C116DA00B41D8C /* DEViewImGoing.m in Sources */,
 				F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */,
+				F439AEEF1A4B3AFB00D24356 /* DEPromptCommentView.m in Sources */,
 				F4EEB05519D269480072B683 /* DEViewComments.m in Sources */,
 				F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */,
 				F437BFFF19919F3200CF61E9 /* DECreatePostView.m in Sources */,

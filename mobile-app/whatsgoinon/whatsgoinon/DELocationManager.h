@@ -41,6 +41,19 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
                           DataResultType : (NSString *) type
                          CompletionBlock : (autocompleteCompletionBlock) callback;
 
+/*
+ 
+ Start monitoring to see when the user reaches this event
+ post : The post/event that the user has said they're going to
+ 
+ */
+- (void) startMonitoringRegionForPost : (DEPost *) post;
+/*
+ 
+ Check to see if the user is currently at this event
+ 
+ */
+- (void) seeIfLocationMatchesEvent : (DEPost *) event;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;

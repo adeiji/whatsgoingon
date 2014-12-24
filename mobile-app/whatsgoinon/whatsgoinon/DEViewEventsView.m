@@ -87,9 +87,9 @@
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
 #warning - Enable these commented lines before sending
-//    [DELocationManager getDistanceInMilesBetweenLocation:post.location LocationTwo:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
-//        self.lblDistance.text = value;
-//    }];
+    [DELocationManager getDistanceInMilesBetweenLocation:post.location LocationTwo:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
+        self.lblDistance.text = value;
+    }];
 }
 
 

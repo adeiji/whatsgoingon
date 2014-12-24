@@ -373,6 +373,10 @@
             DEEventDetailsView *eventView = (DEEventDetailsView *) _eventView.detailsView.subviews[0];
             [[eventView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
         }
+        
+        // Start monitoring to see if the user is near this event location
+        [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
+        [[DELocationManager sharedManager] startSignificantChangeUpdates];
     }
     
     if (!_mapView)

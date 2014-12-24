@@ -11,6 +11,7 @@
 #import "DEAnimationManager.h"
 #import <MessageUI/MessageUI.h>
 #import "DEMainViewController.h"
+#import "DEPromptCommentView.h"
 
 @class DEViewMainMenu;
 
@@ -35,6 +36,19 @@
 + (UINavigationController *) getMainNavigationController;
 + (void) setBackgroundWithImageURL : (NSString *) imageUrl;
 
+/*
+ 
+ Display a banner in 7 minutes asking the user to comment
+ 
+ */
++ (void) createPromptUserCommentNotification : (DEPost *) post;
+
+/*
+ 
+ Display a screen similar to an iOS banner that asks the user if he wants to comment on the event that he just visited
+ 
+ */
++ (void) promptForComment : (DEPost *) post;
 #pragma mark - Private Methods
 
 - (void) gotoNextScreen;

@@ -33,11 +33,33 @@
     [locManager startTimer];
     [DEScreenManager sharedManager];
     
-
-    
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
 
+    [self checkIfLocalNotification:launchOptions];
+    
     return YES;
+}
+
+- (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    
+    [DEScreenManager promptForComment:[DEPost new]];
+}
+
+- (void) checkIfLocalNotification : (NSDictionary *) launchOptions {
+    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+        // Check to see if the user is at the event
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:localNotif.applicationIconBadgeNumber];
+    }
+}
+
+// Register the application to allow for local notifications
+- (void) registerForNotifications
+{
+    UIUserNotificationType types = UIUserNotificationTypeBadge;
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
