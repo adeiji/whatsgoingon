@@ -48,7 +48,8 @@
  Display a screen similar to an iOS banner that asks the user if he wants to comment on the event that he just visited
  
  */
-+ (void) promptForComment : (DEPost *) post;
++ (void) promptForComment : (NSString *) eventId
+                     Post : (DEPost *) myPost;
 #pragma mark - Private Methods
 
 - (void) gotoNextScreen;

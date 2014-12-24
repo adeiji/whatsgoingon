@@ -42,14 +42,27 @@
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
-    [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
-    
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+    {
+
+        [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
+    }
+    else {
+        // Get the corresponding Event to this eventId
+        NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", [notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
+        PFObject *postObj = [[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:objectIdPredicate][0];
+        DEPost *post = [DEPost getPostFromPFObject:postObj];
+        
+        // Show the comment view for this particular event
+        [DEScreenManager showCommentView:post];
+    }
 }
 
 - (void) checkIfLocalNotification : (NSDictionary *) launchOptions {
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
-        [DEScreenManager promptForComment:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
+        // Reload the Event that the user had been to
+        [DESyncManager getPostById:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Comment:YES];
     }
 }
 

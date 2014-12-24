@@ -46,6 +46,29 @@
 
 /*
  
+ Get one post by its Id and then display the comment view
+ 
+ */
++ (void) getPostById:(NSString *)eventId
+             Comment:(BOOL) comment
+{
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    [query whereKey:PARSE_CLASS_EVENT_OBJECT_ID equalTo:eventId];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+       if (!error)
+       {
+           DEPost *post = [DEPost getPostFromPFObject:object];
+           if (comment)
+           {
+               [DEScreenManager showCommentView:post];
+           }
+       }
+    }];
+}
+
+/*
+ 
  Get all the values that are posted at a specific miles distance from the user
  
  */
@@ -105,6 +128,7 @@
         }
     }];
 }
+
 
 + (PFQuery *) getBasePFQueryForNow : (BOOL) now {
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];

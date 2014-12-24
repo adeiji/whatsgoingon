@@ -42,4 +42,12 @@
  */
 + (void) getAllValuesWithinMiles : (double) miles;
 
+/*
+ 
+ Get one post by its Id
+ 
+ */
++ (void) getPostById : (NSString *) eventId
+             Comment : (BOOL) comment;
+
 @end

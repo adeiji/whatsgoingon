@@ -107,7 +107,7 @@
     localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : post.objectId };
     localNotification.alertBody = [NSString stringWithFormat:@"Wanna to comment for event - %@", post.title];
     localNotification.alertAction = [NSString stringWithFormat:@"Since you went to this event, you can comment on it if you want"];
-    localNotification.applicationIconBadgeNumber = 5;
+    localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     NSLog(@"Local Notification Object Set and Scheduled");
@@ -119,15 +119,26 @@
  
  */
 + (void) promptForComment : (NSString *) eventId
+                     Post : (DEPost *) myPost
 {
-    // Get the corresponding Event to this eventId
-    NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", eventId];
-    PFObject *postObj = [[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:objectIdPredicate][0];
-    DEPost *post = [DEPost getPostFromPFObject:postObj];
-    DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
-    [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
-    [view showView];
-    [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
+
+    if (!myPost)
+    {
+        // Get the corresponding Event to this eventId
+        NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", eventId];
+        PFObject *postObj = [[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:objectIdPredicate][0];
+        DEPost *post = [DEPost getPostFromPFObject:postObj];
+        DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
+        [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+        [view showView];
+        [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
+    }
+    else {
+        DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
+        [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+        [view showView];
+        [[[DEPostManager sharedManager] eventsUserAt] removeObject:myPost.objectId];
+    }
 
 };
 
