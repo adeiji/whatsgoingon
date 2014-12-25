@@ -27,6 +27,8 @@
         #warning - This needs to be stored to memory before closing
         _goingPost = [NSMutableArray new];
         _eventsUserAt = [NSMutableArray new];
+        _loadedSavedEventIds = [NSMutableArray new];
+        _loadedSavedEvents = [NSArray new];
         _currentPost = [DEPost new];
     }
     return self;

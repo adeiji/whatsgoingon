@@ -101,6 +101,8 @@ NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING = @"co
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING = @"com.happsnap.finishedLoading";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW = @"com.happsnap.new";
 NSString *const kNOTIFICATION_CENTER_EVENT_USER_AT = @"com.happsnap.event.user.at";
+NSString *const NOTIFICATION_CENTER_SAVED_EVENTS_LOADED = @"com.happsnap.saved.events.loaded";
+NSString *const NOTIFICATION_CENTER_LOAD_USER_EVENTS = @"com.happsnap.load.user.events";
 
 // View Controllers
 

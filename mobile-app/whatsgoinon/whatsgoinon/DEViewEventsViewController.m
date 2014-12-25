@@ -35,7 +35,9 @@ struct TopMargin {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory:) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUserSavedEvents:) name:NOTIFICATION_CENTER_SAVED_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllPostFromScreen) name:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
+    
 }
 
 - (void)viewDidLoad
@@ -363,6 +365,23 @@ struct TopMargin {
                     Category:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
     [self loadVisiblePost:_scrollView];
     [self showOrbView];
+}
+
+/*
+    1. Remove all the post from the screen
+    2. Get all the actual events from the Event Ids that are stored within the application
+    3. Add those views to the screen
+*/
+- (void) displayUserSavedEvents : (NSNotification *) notification {
+
+    [self removeAllPostFromScreen];
+    _posts = [[DEScreenManager sharedManager] loadedSavedEvents];
+    [self addEventsToScreen:0 ProcessStatus:nil Category:nil];
+    [self loadVisiblePost:_scrollView];
+}
+
+- (void) getEventsFromEventIdsInGoingAndMaybe {
+    
 }
 
 - (void) setUpScrollViewForPostsWithTopMargin : (NSInteger) topMargin

@@ -13,6 +13,7 @@
 
 @implementation DESyncManager
 
+
 // Get all the future values from the server and store this information, then when the user wants to get Now or Later events, they will come from this list rather then be pulled down from the server
 + (void) getAllValues {
     [self checkForInternet];
@@ -187,6 +188,30 @@
     [[DEScreenManager sharedManager] stopActivitySpinner];
 }
 
+
++ (void) getAllSavedEvents {
+    
+    NSMutableArray *eventsToGetFromServer = [NSMutableArray new];
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    
+    for (NSString *eventId in [[DEPostManager sharedManager] goingPost]) {
+        if (![[[DEPostManager sharedManager] loadedSavedEventIds] containsObject:eventId])
+        {
+            [eventsToGetFromServer addObject:eventId];
+            [[[DEPostManager sharedManager] loadedSavedEventIds] addObject:eventId];
+            [query whereKey:PARSE_CLASS_EVENT_OBJECT_ID equalTo:eventId];
+        }
+    }
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+       if (!error)
+       {
+           [[DEPostManager sharedManager] setLoadedSavedEvents:objects];
+           // Post notification showing that all the user events have been loaded
+           [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_SAVED_EVENTS_LOADED object:nil userInfo:@{  }];
+       }
+    }];
+}
 
 // Get the values for later if there are not more than 50 in the now events
 + (void) getValuesForLater : (PFQuery *) query

@@ -138,6 +138,11 @@
     [self removeFromSuperview];
 }
 
+- (IBAction)showMyEvents:(id)sender {
+    // Send a notification that my events was pressed
+    [DESyncManager getAllSavedEvents];
+}
+
 - (void) drawRect:(CGRect)rect
 {
     

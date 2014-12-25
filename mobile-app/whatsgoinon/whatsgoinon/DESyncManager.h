@@ -31,6 +31,13 @@
                         Comment : (NSString *) comment
                          Rating : (NSInteger) rating;
 + (void) getNumberOfPostByUser : (NSString *) username;
+/*
+ 
+ Get all the saved events that the user has selected has maybe or going
+ 
+ */
++ (void) getAllSavedEvents;
+
 // Pull all the comments for this specific event
 + (NSArray *) getAllCommentsForEventId : (NSString *) objectId;
 

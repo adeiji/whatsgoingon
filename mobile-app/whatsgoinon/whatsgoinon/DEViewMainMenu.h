@@ -27,6 +27,7 @@
 - (IBAction)showFeedbackPage:(id)sender;
 - (IBAction)gotoAccountSettingsPage:(id)sender;
 - (IBAction)hideMenu:(id)sender;
+- (IBAction)showMyEvents:(id)sender;
 
 - (void) setupView;
 @end

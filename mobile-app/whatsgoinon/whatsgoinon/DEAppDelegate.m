@@ -32,7 +32,7 @@
     DELocationManager *locManager = [DELocationManager sharedManager];
     [locManager startSignificantChangeUpdates];
     [DEScreenManager sharedManager];
-    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
 
     [self checkIfLocalNotification:launchOptions];
