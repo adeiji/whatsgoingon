@@ -203,14 +203,17 @@
         }
     }
     
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-       if (!error)
-       {
-           [[DEPostManager sharedManager] setLoadedSavedEvents:objects];
-           // Post notification showing that all the user events have been loaded
-           [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_SAVED_EVENTS_LOADED object:nil userInfo:@{  }];
-       }
-    }];
+    if ([[[DEPostManager sharedManager] loadedSavedEvents] count] != 0)
+    {
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+           if (!error)
+           {
+               [[DEPostManager sharedManager] setLoadedSavedEvents:objects];
+               // Post notification showing that all the user events have been loaded
+               [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_SAVED_EVENTS_LOADED object:nil userInfo:@{  }];
+           }
+        }];
+    }
 }
 
 // Get the values for later if there are not more than 50 in the now events

@@ -366,7 +366,7 @@
         
         going = YES;
         // Save this item as going for the user to the server
-//        [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_GOING];
+        [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_GOING];
         
         if ([_eventView.detailsView.subviews[0] isKindOfClass:[DEEventDetailsView class]])
         {

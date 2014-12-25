@@ -53,6 +53,7 @@
         _createPostViewTwo.txtWebsite.hidden = YES;
     }
     
+    website = @"";
 }
 
 
