@@ -388,11 +388,10 @@ struct TopMargin {
 
     [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        validated = [self isValidToShowEvent:obj Category:myCategory];
+        validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
         // Show the event on the screen
         if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
         {
-
                 [self loadEvent:obj
                         Margin1:&columnOneMargin
                         Margin2:&columnTwoMargin
@@ -400,8 +399,6 @@ struct TopMargin {
                       TopMargin:topMargin
               EventsFrameHeight:&viewEventsViewFrameHeight
                     PostCounter:&postCounter];
-
-
         }
     }];
     
@@ -489,16 +486,21 @@ struct TopMargin {
 
 - (BOOL) isValidToShowEvent : (PFObject *) obj
                    Category : (NSString *) myCategory
+                 PostNumber : (int) postCounter
 {
-    BOOL validated;
+    BOOL validated = NO;
+    
     if ([myCategory isEqualToString:@"Featured"])
     {
-        if ([obj[PARSE_CLASS_EVENT_POST_RANGE] isEqual:@0])
+        if (postCounter < 50)
         {
-            validated = YES;
-        }
-        else {
-            validated = NO;
+            if ([obj[PARSE_CLASS_EVENT_POST_RANGE] isEqual:@0])
+            {
+                validated = YES;
+            }
+            else {
+                validated = NO;
+            }
         }
     }
     else {
