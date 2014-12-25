@@ -33,7 +33,7 @@
                     <rect key="frame" x="48" y="148" width="225" height="162"/>
                 </pickerView>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fw-7t-5QO">
-                    <rect key="frame" x="91" y="257" width="67" height="73"/>
+                    <rect key="frame" x="122" y="261" width="36" height="39"/>
                     <state key="normal" backgroundImage="thumbs-up.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -42,7 +42,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7k-e9-vcq">
-                    <rect key="frame" x="166" y="257" width="67" height="73"/>
+                    <rect key="frame" x="166" y="261" width="36" height="39"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" backgroundImage="thumbs-down.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

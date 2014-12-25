@@ -77,6 +77,7 @@
 {
     static double miles = 0;
     PFQuery *query = [DESyncManager getBasePFQueryForNow:now];
+
     // If the miles is set to 0 that means the range is all, which means basically 30 miles and in, so we want to grab all events basically that are set to all
     if (miles > 0)
     {
@@ -140,6 +141,7 @@
     
     [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
+    [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     
     if (now)
     {
