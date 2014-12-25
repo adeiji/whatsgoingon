@@ -33,7 +33,7 @@
                                             <action selector="displayMainMenu:" destination="IJq-25-4RC" eventType="touchUpInside" id="8cS-FB-KPi"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Featured" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o38-TD-LuS">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o38-TD-LuS">
                                         <rect key="frame" x="60" y="27" width="205" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="205" id="1Pv-DD-k2z"/>

@@ -114,3 +114,6 @@ NSString *const NSUSER_DEFAULTS_PROFILE_PICTURE = @"profile-picture";
 NSString *const USER_RANK_AMBASSADOR = @"ambassador";
 NSString *const USER_RANK_ADMIN = @"admin";
 NSString *const USER_RANK_STANDARD = @"standard";
+
+// Categories
+NSString *const CATEGORY_TRENDING = @"Trending";

@@ -148,7 +148,7 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calendar-icon 44x44.png" translatesAutoresizingMaskIntoConstraints="NO" id="cwj-fD-cOD">
                                                 <rect key="frame" x="15" y="148" width="25" height="25"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="49E8FC2E-AF17-4D8E-96FA-68D6ED6FAEBE" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="3DA17BAA-B1CC-4372-927B-871206F9EE58" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                             </imageView>
                                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKe-wM-5P2">
@@ -161,7 +161,7 @@
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If you change the range from &quot;All&quot;, this event will never show up on the featured page" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="159" translatesAutoresizingMaskIntoConstraints="NO" id="McR-it-gMB">
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If you change the range from &quot;All&quot;, this event will never show up on the trending page" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="159" translatesAutoresizingMaskIntoConstraints="NO" id="McR-it-gMB">
                                                         <rect key="frame" x="12" y="46" width="159" height="66"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
@@ -486,7 +486,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="49E8FC2E-AF17-4D8E-96FA-68D6ED6FAEBE" width="140" height="211">
+        <image name="3DA17BAA-B1CC-4372-927B-871206F9EE58" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

@@ -139,7 +139,7 @@
     NSMutableArray *eventsInCategory = [NSMutableArray new];
     NSDictionary *categoryDictionary = @{ kNOTIFICATION_CENTER_USER_INFO_CATEGORY : category,
                                           kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING };
-    if (![category isEqualToString:@"Featured"])
+    if (![category isEqualToString:CATEGORY_TRENDING])
     {
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *event = [DEPost getPostFromPFObject:obj];

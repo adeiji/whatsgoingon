@@ -101,9 +101,9 @@
     
     NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
     
-    // Remove the featured option from the picker
+    // Remove the trending option from the picker
     NSMutableArray *array = [[plistData allKeys] mutableCopy];
-    [array removeObject:@"Featured"];
+    [array removeObject:CATEGORY_TRENDING];
     _categories = array;
     array = nil;
     

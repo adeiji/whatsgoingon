@@ -74,6 +74,7 @@
  */
 + (void) getAllValuesWithinMilesForNow : (BOOL) now
                             PostsArray : (NSMutableArray *) postsArray
+                              Location : (PFGeoPoint *) location
 {
     static double miles = 0;
     PFQuery *query = [DESyncManager getBasePFQueryForNow:now];
@@ -81,10 +82,11 @@
     // If the miles is set to 0 that means the range is all, which means basically 30 miles and in, so we want to grab all events basically that are set to all
     if (miles > 0)
     {
-        [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] currentLocation] withinMiles:miles];
+        [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:location withinMiles:30];
         [query whereKey:PARSE_CLASS_EVENT_POST_RANGE equalTo:[NSNumber numberWithDouble:miles]];
     }
     else {
+        [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:location withinMiles:miles];
         [query whereKey:PARSE_CLASS_EVENT_POST_RANGE equalTo:[NSNumber numberWithDouble:miles]];
     }
     
@@ -102,7 +104,7 @@
             
             if (miles < 30)
             {
-                [DESyncManager getAllValuesWithinMilesForNow:now PostsArray:postsArray];
+                [DESyncManager getAllValuesWithinMilesForNow:now PostsArray:postsArray Location:location];
             }
             else {
                 if ([[[DEPostManager sharedManager] posts] count] < 10 && now)
@@ -116,7 +118,7 @@
                 else
                 {
                     // Just let the app know that we've finished loading
-                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING,     kNOTIFICATION_CENTER_USER_INFO_CATEGORY : @"Featured"}];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING,     kNOTIFICATION_CENTER_USER_INFO_CATEGORY : CATEGORY_TRENDING}];
                 }
                 // Set the miles to zero so that the next time the events are loaded we load them from all to 25 miles distance
                 miles = 0;
@@ -139,9 +141,8 @@
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
     
-    [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
-    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
+    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     
     if (now)
     {
@@ -164,8 +165,8 @@
 
     [[NSNotificationCenter defaultCenter] postNotificationName:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
     [DESyncManager getAllValuesWithinMilesForNow:now
-                                         PostsArray:postsArray ];
-
+                                      PostsArray:postsArray
+                                        Location:[[DELocationManager sharedManager] currentLocation]];
 
 }
 // Store the events that we just recieved from Parse and notify the app
@@ -179,7 +180,7 @@
     [sharedManager setAllEvents:postsArray];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : process,
-            kNOTIFICATION_CENTER_USER_INFO_CATEGORY : @"Featured"
+            kNOTIFICATION_CENTER_USER_INFO_CATEGORY : CATEGORY_TRENDING
     }];
     NSLog(@"Notification sent, events loaded");
     [[DEScreenManager sharedManager] stopActivitySpinner];
@@ -261,50 +262,6 @@
         }
     }];
 
-}
-
-+ (void) getAllValuesNearGeoPoint : (PFGeoPoint *) geoPoint
-{
-    [[DEScreenManager sharedManager] startActivitySpinner];
-    // Let the necessary objects know that the city has just been changed
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
-    CGFloat miles = 30;
-    
-    __block PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
-    
-    NSDate *date = [NSDate date];
-    NSTimeInterval threeHours = (3 * 60 * 60) - 1;
-    NSDate *later = [date dateByAddingTimeInterval:threeHours];
-    
-    if ([[DEScreenManager sharedManager] isLater])
-    {
-        [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
-    }
-    else
-    {
-        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
-        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
-    }
-  
-    [query setLimit:30];
-    [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:geoPoint withinMiles:miles];
-    // Get all the objects that are either now or later
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error)
-        {
-            if ([objects count] < 10)
-            {
-                query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
-                [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:geoPoint withinMiles:miles];
-                [self getValuesForLater:query
-                                Objects:objects
-                          ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
-            }
-            [[DEPostManager sharedManager] setPosts:objects];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-            [[DEScreenManager sharedManager] stopActivitySpinner];
-        }
-    }];
 }
 
 + (void) checkForInternet

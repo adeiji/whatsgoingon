@@ -27,7 +27,6 @@
 + (void) updateObjectWithId : (NSString *) objectId
                UpdateValues : (NSDictionary *) values
              ParseClassName : (NSString *) className;
-+ (void) getAllValuesNearGeoPoint : (PFGeoPoint *) geoPoint;
 + (void) saveCommentWithEventId : (NSString *) objectId
                         Comment : (NSString *) comment
                          Rating : (NSInteger) rating;
@@ -40,7 +39,9 @@
  Get all the values that are posted at a specific miles distance from the user
  
  */
-+ (void) getAllValuesWithinMiles : (double) miles;
++ (void) getAllValuesWithinMilesForNow : (BOOL) now
+                            PostsArray : (NSMutableArray *) postsArray
+                              Location : (PFGeoPoint *) location;
 
 /*
  

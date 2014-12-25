@@ -23,7 +23,6 @@
 #define BUTTON_OUTER_CIRCLE_WIDTH 40
 #define OUTER_VIEW_X_POS 320 - 60
 #define OUTER_VIEW_Y_POS 568 - 60
-#define CATEGORY_FEATURED @"Featured"
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -148,7 +147,7 @@
         myCarousel.type = iCarouselTypeWheel;
         myCarousel.delegate = self;
         myCarousel.dataSource = self;
-        [myCarousel scrollToItemAtIndex:(NSInteger)[categories indexOfObject:CATEGORY_FEATURED] animated:NO];
+        [myCarousel scrollToItemAtIndex:(NSInteger)[categories indexOfObject:CATEGORY_TRENDING] animated:NO];
     }
     myCarousel.type = iCarouselTypeWheel;
     myCarousel.delegate = self;

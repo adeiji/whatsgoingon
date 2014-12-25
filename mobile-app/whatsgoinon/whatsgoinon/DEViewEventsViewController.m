@@ -490,7 +490,7 @@ struct TopMargin {
 {
     BOOL validated = NO;
     
-    if ([myCategory isEqualToString:@"Featured"])
+    if ([myCategory isEqualToString:CATEGORY_TRENDING])
     {
         if (postCounter < 50)
         {
