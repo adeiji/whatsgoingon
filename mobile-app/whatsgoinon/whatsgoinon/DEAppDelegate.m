@@ -30,7 +30,7 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     DELocationManager *locManager = [DELocationManager sharedManager];
-    [locManager startTimer];
+    [locManager startSignificantChangeUpdates];
     [DEScreenManager sharedManager];
     
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];

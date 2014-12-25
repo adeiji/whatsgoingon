@@ -208,7 +208,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
         NSMutableArray *postsArray = [NSMutableArray new];
         
-        [DESyncManager getAllValuesWithinMilesForNow:[[DEScreenManager sharedManager] isLater]
+        DEScreenManager *manager = [DEScreenManager sharedManager];
+        [DESyncManager getAllValuesWithinMilesForNow:!manager.isLater
                                           PostsArray:postsArray
                                             Location:value];
     }];
@@ -287,7 +288,7 @@
         if (![jsonData[@"status"] isEqualToString:PLACES_API_NO_RESULTS])
         {
             PFGeoPoint *location = [PFGeoPoint new];
-            location.latitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lat"] doubleValue];
+            location.latitude =  [jsonData[@"results"][0][@"geometry"][@"location"][@"lat"] doubleValue];
             location.longitude = [jsonData[@"results"][0][@"geometry"][@"location"][@"lng"] doubleValue];
             
             dispatch_async(dispatch_get_main_queue(), ^{

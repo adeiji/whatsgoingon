@@ -82,11 +82,11 @@
     // If the miles is set to 0 that means the range is all, which means basically 30 miles and in, so we want to grab all events basically that are set to all
     if (miles > 0)
     {
-        [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:location withinMiles:30];
+        [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:location withinMiles:miles];
         [query whereKey:PARSE_CLASS_EVENT_POST_RANGE equalTo:[NSNumber numberWithDouble:miles]];
     }
-    else {
-        [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:location withinMiles:miles];
+    else {  // Get post within thirty miles
+        [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:location withinMiles:30];
         [query whereKey:PARSE_CLASS_EVENT_POST_RANGE equalTo:[NSNumber numberWithDouble:miles]];
     }
     
@@ -112,7 +112,7 @@
                     // Get any values that are later
                     blockQuery = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
                     [self getValuesForLater:query
-                                    Objects:objects
+                                    Objects:[[DEPostManager sharedManager] posts]
                      ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
                 }
                 else
@@ -146,7 +146,7 @@
     
     if (now)
     {
-        //[query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
         [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
         #warning Uncomment before sending to test
     }
@@ -164,6 +164,7 @@
     NSMutableArray *postsArray = [NSMutableArray new];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
+    
     [DESyncManager getAllValuesWithinMilesForNow:now
                                       PostsArray:postsArray
                                         Location:[[DELocationManager sharedManager] currentLocation]];
@@ -189,7 +190,7 @@
 
 // Get the values for later if there are not more than 50 in the now events
 + (void) getValuesForLater : (PFQuery *) query
-                   Objects : (NSArray *) objects
+                   Objects : (NSArray *) myObjects
              ProcessStatus : (NSString *) processStatus
 {
     NSDate *date = [NSDate date];
@@ -198,11 +199,10 @@
     
     [query setLimit:10];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
-    [[DEPostManager sharedManager] setPosts:objects];
     [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        if ([objects count] == 0)
+        if ([objects count] == 0  && [myObjects count] == 0)
         {
             [self loadBestEventsInPastWeekWithQuery : query];
         }

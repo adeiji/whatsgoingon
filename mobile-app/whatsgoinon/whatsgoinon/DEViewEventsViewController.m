@@ -277,8 +277,8 @@ struct TopMargin {
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] lastObject];
     [_scrollView addSubview:view];
     [self loadPosts];
-    [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
     [self addEventsToScreen : view.frame.size.height + 15 ProcessStatus:nil Category:nil];
+    [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
     [self loadVisiblePost:_scrollView];
     
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
@@ -368,7 +368,9 @@ struct TopMargin {
 - (void) setUpScrollViewForPostsWithTopMargin : (NSInteger) topMargin
 {
     //The calculation for the height gets the number of posts divided by two and then adds whatever the remainder is.  This makes sure that if there are for example 9 posts, we make sure that we do POST_HEIGHT * 5, and not 4, because the last post needs to show.
-    _scrollView.contentSize = CGSizeMake(IPHONE_DEVICE_WIDTH, topMargin + ((POST_HEIGHT + TOP_MARGIN) * (([_posts count] / 2) + ([_posts count] % 2))) + SCROLL_VIEW_DISTANCE_FROM_TOP);
+    CGSize size = _scrollView.contentSize;
+    size.height = size.height + topMargin;
+    _scrollView.contentSize = size;
 }
 
 - (void) addEventsToScreen : (NSInteger) topMargin

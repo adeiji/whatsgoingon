@@ -95,7 +95,8 @@
         [self setNextScreenWithViewController:viewEventsViewController];
     }
 
-    [[DEScreenManager sharedManager] setIsLater:YES];
+    DEScreenManager *manager = [DEScreenManager sharedManager];
+    manager.isLater = YES;
 
 }
 
@@ -116,7 +117,8 @@
         [self setNextScreenWithViewController:viewEventsViewController];
     }
     
-    [[DEScreenManager sharedManager] setIsLater:NO];
+    DEScreenManager *manager = [DEScreenManager sharedManager];
+    manager.isLater = NO;
 }
 
 - (void) setNextScreenWithViewController : (UIViewController *) viewController {
