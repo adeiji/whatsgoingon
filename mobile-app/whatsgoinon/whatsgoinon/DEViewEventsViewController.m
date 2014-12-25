@@ -279,7 +279,10 @@ struct TopMargin {
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] lastObject];
     [_scrollView addSubview:view];
     [self loadPosts];
-    [self addEventsToScreen : view.frame.size.height + 15 ProcessStatus:nil Category:nil];
+    [self addEventsToScreen : view.frame.size.height + 15
+               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
+                    Category:nil
+                   PostArray:_posts];
     [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
     [self loadVisiblePost:_scrollView];
     
@@ -362,7 +365,8 @@ struct TopMargin {
     [self loadPosts];
     [self addEventsToScreen : 0
                ProcessStatus:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS]
-                    Category:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
+                    Category:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]
+                   PostArray:_posts];
     [self loadVisiblePost:_scrollView];
     [self showOrbView];
 }
@@ -375,8 +379,10 @@ struct TopMargin {
 - (void) displayUserSavedEvents : (NSNotification *) notification {
 
     [self removeAllPostFromScreen];
-    _posts = [[DEScreenManager sharedManager] loadedSavedEvents];
-    [self addEventsToScreen:0 ProcessStatus:nil Category:nil];
+    NSArray *postArray = [[DEPostManager sharedManager] loadedSavedEvents];
+    [self addEventsToScreen:0
+              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING Category:nil
+                  PostArray:postArray];
     [self loadVisiblePost:_scrollView];
 }
 
@@ -395,6 +401,7 @@ struct TopMargin {
 - (void) addEventsToScreen : (NSInteger) topMargin
              ProcessStatus : (NSString *) process
                   Category : (NSString *) myCategory
+                 PostArray : (NSArray *) postArray
 {
     static CGFloat column = 0;
     static int postCounter = 0;
@@ -407,7 +414,7 @@ struct TopMargin {
     
     validated = NO;
 
-    [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [postArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
         // Show the event on the screen
@@ -684,7 +691,7 @@ struct TopMargin {
         _posts = _searchPosts;
         _searchPosts = [NSMutableArray new];
         [self removeAllPostFromScreen];
-        [self addEventsToScreen:0 ProcessStatus:nil Category:category ];
+        [self addEventsToScreen:0 ProcessStatus:nil Category:category PostArray:_posts];
     }
 }
 
