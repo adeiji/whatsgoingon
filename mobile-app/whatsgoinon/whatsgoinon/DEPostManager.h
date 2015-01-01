@@ -45,7 +45,7 @@
 @property (strong, nonatomic) NSMutableArray *goingPost;
 @property (strong, nonatomic) NSMutableArray *maybeGoingPost;
 @property (strong, nonatomic) NSMutableArray *loadedSavedEventIds;
-@property (strong, nonatomic) NSArray *loadedSavedEvents;
+@property (strong, nonatomic) NSMutableArray *loadedSavedEvents;
 /*
  
  Events that the user has said he may go to or will go to that he is currently at

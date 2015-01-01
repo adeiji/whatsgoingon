@@ -27,7 +27,8 @@
 @property (weak, nonatomic) DEEventsTimeline *overlayView;
 @property (strong, nonatomic) DEPost *post;
 
-- (void) renderViewWithPost : (DEPost *) post;
+- (void) renderViewWithPost : (DEPost *) post
+                  ShowBlank : (BOOL) showBlank;
 - (void) refreshView;
 - (void) loadImage;
 - (void) removeImage;

@@ -106,7 +106,8 @@
     [self addGestureRecognizer:tapGestureRecognizer];
 }
 
-- (void) renderViewWithPost : (DEPost *) myPost {
+- (void) renderViewWithPost : (DEPost *) myPost
+                  ShowBlank : (BOOL) showBlank {
 
     __block DEPost *post = myPost;
     
@@ -117,7 +118,14 @@
     [self addSubview:_overlayView];
     [[_overlayView layer] setOpacity:0];
     
-    [self.imgMainImageView setAlpha:0.0];
+    if (showBlank)
+    {
+        [self.imgMainImageView setAlpha:0.0];
+    }
+    else {
+        [self.imgMainImageView setAlpha:1.0];
+    }
+    
     self.lblNumGoing.text = [NSString stringWithFormat:@"%@", post.numberGoing];
     self.lblTitle.text = post.title;
     self.lblAddress.text = post.address;

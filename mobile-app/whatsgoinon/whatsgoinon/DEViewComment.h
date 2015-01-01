@@ -28,6 +28,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *txtComment;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *commentButtons;
 @property (weak, nonatomic) IBOutlet UILabel *lblHeader;
+@property (weak, nonatomic) IBOutlet UIButton *btnThumbsUp;
+@property (weak, nonatomic) IBOutlet UIButton *btnThumbsDown;
 
 - (IBAction)submitComment:(id)sender;
 - (IBAction)cancel:(id)sender;

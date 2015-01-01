@@ -109,6 +109,7 @@
     [[_eventView btnGoing] setEnabled:NO];
     [[_eventView btnMaybe] setEnabled:NO];
     [[_eventView lblNumberOfPeopleGoing] setText:0];
+//    [[_eventView btnMainImage] setUserInteractionEnabled:NO];
     UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
     [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
     _btnPost.hidden = NO;
@@ -234,7 +235,10 @@
         }];
     }
     
-    [[((DEEventDetailsView *) topView).profileImageView layer] setCornerRadius:((DEEventDetailsView *) topView).profileImageView.frame.size.height / 2.0];
+    if ([topView isKindOfClass:[DEEventDetailsView class]])
+    {
+        [[((DEEventDetailsView *) topView).profileImageView layer] setCornerRadius:((DEEventDetailsView *) topView).profileImageView.frame.size.height / 2.0];
+    }
 }
 
 
@@ -344,6 +348,7 @@
         DEEventViewController *mapViewController = [segue destinationViewController];
         mapViewController.isGoing = _isGoing;
         mapViewController.post = _post;
+        mapViewController.isPreview = _isPreview;
     }
 }
 
@@ -394,6 +399,7 @@
     [self updateViewToGoing];
     [[_eventView btnMainImage] setHidden:YES];
 }
+
 
 #pragma mark - Buttons
 

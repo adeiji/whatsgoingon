@@ -28,7 +28,7 @@
     
     // Track statistics around application opens
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
+    [self registerForNotifications:application];
     DELocationManager *locManager = [DELocationManager sharedManager];
     [locManager startSignificantChangeUpdates];
     [DEScreenManager sharedManager];
@@ -36,8 +36,20 @@
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
 
     [self checkIfLocalNotification:launchOptions];
+    [self startCommentTimer];
     
     return YES;
+}
+
+- (void) startCommentTimer {
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:(60 * .1)
+                                                      target:[DELocationManager sharedManager]
+                                                    selector:@selector(checkForCommenting)
+                                                    userInfo:nil
+                                                     repeats:YES];
+
+    
+    [timer fire];
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
@@ -70,11 +82,14 @@
 - (void) registerForNotifications : (UIApplication *) application
 {
     
-    // iOS 8
-    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
-    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    NSString *version = [UIDevice currentDevice].systemVersion;
     
-    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    if (version.intValue >= 8) {
+        UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+        UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
+    }
 
 }
 

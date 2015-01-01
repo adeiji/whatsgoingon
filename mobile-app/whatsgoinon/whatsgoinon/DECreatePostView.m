@@ -18,6 +18,8 @@
     [self registerForKeyboardNotifications];
     [self addFreeButtonToCostTextField];
     [self setUpValidators];
+    _txtStartTime.enabled = NO;
+    _txtEndTime.enabled = NO;
     costText = [NSString new];
 }
 
@@ -111,6 +113,8 @@
     
     UIDatePicker *datePicker = [UIDatePicker new];
     datePicker.datePickerMode = UIDatePickerModeDate;
+    datePicker.minimumDate = [NSDate date];
+    datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 24 * 3)];
     [datePicker addTarget:self action:@selector(updateDateTextField:)
          forControlEvents:UIControlEventValueChanged];
     
@@ -191,14 +195,58 @@
        
         NSTimeInterval threeHours = (3 * 60 * 60) - 1;
         NSDate *endTime = [sender.date dateByAddingTimeInterval:threeHours];
+        NSDate *startTime = sender.date;
+        
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *endTimeComponents = [calendar components:NSUIntegerMax fromDate:endTime];
+        NSDateComponents *startTimeComponents = [calendar components:NSUIntegerMax fromDate:startTime];
+        
+        if ([startTimeComponents day] < [endTimeComponents day])
+        {
+            NSDateFormatter *df = [NSDateFormatter new];
+            [df setDateFormat:@"mm/dd/yy"];
+            NSDate *endDate = [df dateFromString:_txtEndDate.text];
+            NSDateComponents *endDateComponents = [calendar components:NSUIntegerMax fromDate:endDate];
+            [endDateComponents setDay:[endDateComponents day] + 1];
+            endDate = [endDateComponents date];
+            _txtEndDate.text = [df stringFromDate:endDate];
+        }
         _txtEndTime.text = [dateFormat stringFromDate:endTime];
         
     }
-    
+    // If the user is changing the start time than now enable the user to change the end time
+    if ([activeField isEqual:_txtStartTime])
+    {
+        _txtEndTime.enabled = YES;
+    }
     NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
+}
+/*
+ 
+ Check to see if the given date is today's date
+ 
+ */
+- (BOOL) dateIsToday : (NSDate *) date {
+    
+    NSDate *today = [NSDate date];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *todayComponents = [calendar components:NSUIntegerMax fromDate:today];
+    NSDateComponents *dateComponents = [calendar components:NSUIntegerMax fromDate:date];
+    
+    // Check to see if the dates are the same, if they are, that means that the date given is today's date
+    if ([todayComponents month] == [dateComponents month] &&
+        [todayComponents day] == [dateComponents day] &&
+        [todayComponents year] == [dateComponents year])
+    {
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void) updateDateTextField : (UIDatePicker *) sender {
+    
+    // Check to see if the current selected date is today's date
     
     UITextField *textField;
     
@@ -220,6 +268,59 @@
     }
     
     NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
+    
+    // Check to see if the date selected is today's date, and if so don't allow the user to select a date a time that is earlier than right now
+    if ([self dateIsToday:sender.date])
+    {
+        [self setMinimumDateForTimePicker];
+    }
+    else {
+        UIDatePicker *datePicker = (UIDatePicker *) _txtStartTime.inputView;
+        [datePicker setMinimumDate:nil];
+        [_txtStartTime setInputView:datePicker];
+    }
+    if ([activeField isEqual:_txtStartDate])
+    {
+        [self setMinimumDateForDatePicker:sender.date];
+    }
+    _txtStartTime.enabled = YES;
+}
+
+/*
+ 
+ Set the maximum date for the end date date selector
+ 
+ */
+- (void) setMinimumDateForDatePicker : (NSDate *) date {
+    // Get the current date, and set the earliest date to the date selected
+    UIDatePicker *datePicker = (UIDatePicker *) _txtEndDate.inputView;
+    [datePicker setMinimumDate:date];
+}
+
+/*
+ 
+ Set the minimum date that the user can select from the picker picker
+ 
+ */
+
+- (void) setMinimumDateForTimePicker {
+    UIDatePicker *datePicker = (UIDatePicker *) _txtStartTime.inputView;
+    NSDate *now = [NSDate new];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+    NSDateComponents *components = [gregorian components: NSUIntegerMax fromDate: now];
+    
+    if ([components minute] > 30)
+    {
+        [components setMinute:0];
+        [components setHour:[components hour] + 1];
+    }
+    else {
+        [components setMinute:30];
+    }
+    
+    NSDate *nowTime = [gregorian dateFromComponents:components];
+    datePicker.minimumDate = nowTime;
+    _txtStartTime.inputView = datePicker;
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -342,6 +443,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void) displayCurrentLocation
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
+    [locationManager startSignificantChangeUpdates];
     [DELocationManager getAddressFromLatLongValue:[locationManager geoPoint] CompletionBlock:^(NSString *value) {
         _txtAddress.text = value;
     }];

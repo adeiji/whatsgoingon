@@ -17,16 +17,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [_image getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        
-        @autoreleasepool {
-            NSData *imageData = data;
-            UIImage *image = [UIImage imageWithData:imageData];
+    
+    if (![_image isKindOfClass:[NSData class]])
+    {
+        [_image getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             
-            [_imageView setImage:image];
-            
-        }
-    }];
+            @autoreleasepool {
+                NSData *imageData = data;
+                UIImage *image = [UIImage imageWithData:imageData];
+                
+                [_imageView setImage:image];
+                
+            }
+        }];
+    }
+    else {
+        UIImage *image = [UIImage imageWithData:(NSData *)_image];
+        [_imageView setImage:image];
+    }
     
     [[_imageView layer] setCornerRadius:BUTTON_CORNER_RADIUS * 2];
     [[_imageView layer] setBorderColor:[UIColor whiteColor].CGColor];

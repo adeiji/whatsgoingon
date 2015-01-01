@@ -96,7 +96,7 @@
     // Need to check and make sure that the user has picked thumbs up or down.  If not then prompt the user to do so.
     if (ratingChange != 0)
     {
-        [DESyncManager saveCommentWithEventId:[[[DEPostManager sharedManager] currentPost] objectId] Comment:_txtComment.text Rating:ratingChange];
+        [DESyncManager saveCommentWithEventId:[post objectId] Comment:_txtComment.text Rating:ratingChange];
         [DEScreenManager hideCommentView];
     }
     else {
@@ -138,15 +138,24 @@
     ratingChange = 5;
     [_lblPromptEntry setHidden:YES];
     
+    // Create a border around the button showing that its been clicked
     [[sender layer] setBorderColor:[UIColor colorWithRed:0.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0].CGColor];
     [[sender layer] setBorderWidth:1.5f];
     [[sender layer] setCornerRadius:5.0f];
-    
+    // Set the other buttons border to nothing
+    [[_btnThumbsDown layer] setBorderWidth:0.0f];
 }
 
 - (IBAction)thumbsDown:(UIButton *)sender {
     ratingChange = -5;
     [_lblPromptEntry setHidden:YES];
+    
+    // Create a border around the button showing that its been clicked
+    [[sender layer] setBorderColor:[UIColor colorWithRed:151.0f/255.0f green:154.0f/255.0f blue:155.0f/255.0f alpha:1.0].CGColor];
+    [[sender layer] setBorderWidth:1.5f];
+    [[sender layer] setCornerRadius:5.0f];
+    // Set the other buttons border to nothing
+    [[_btnThumbsUp layer] setBorderWidth:0.0f];
 }
 
 #pragma mark - Keyboard Methods

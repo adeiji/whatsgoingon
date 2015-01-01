@@ -36,6 +36,7 @@ struct TopMargin {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory:) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUserSavedEvents:) name:NOTIFICATION_CENTER_SAVED_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoSavedEvents) name:NOTIFICATION_CENTER_NO_SAVED_EVENTS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllPostFromScreen) name:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
     
 }
@@ -213,6 +214,7 @@ struct TopMargin {
 
     [super viewWillDisappear:animated];
     [self.scrollView removeFromSuperview];
+    [self hideOrbView];
     
 }
 
@@ -259,10 +261,6 @@ struct TopMargin {
     orbView.hidden = NO;
 }
 
-
-
-
-
 - (void) loadPosts {
     _posts = [[DEPostManager sharedManager] posts];
 }
@@ -276,13 +274,14 @@ struct TopMargin {
 
 - (void) displayNoData
 {
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] lastObject];
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:1];
     [_scrollView addSubview:view];
     [self loadPosts];
     [self addEventsToScreen : view.frame.size.height + 15
                ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
                     Category:nil
-                   PostArray:_posts];
+                   PostArray:_posts
+                   ShowBlank:YES];
     [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
     [self loadVisiblePost:_scrollView];
     
@@ -305,7 +304,6 @@ struct TopMargin {
     
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
     [_scrollView addSubview:view];
-    [self showOrbView];
 }
 
 - (void) showNoInternetConnectionScreen : (NSNotification *) object {
@@ -366,9 +364,9 @@ struct TopMargin {
     [self addEventsToScreen : 0
                ProcessStatus:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS]
                     Category:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]
-                   PostArray:_posts];
+                   PostArray:_posts
+                   ShowBlank:YES];
     [self loadVisiblePost:_scrollView];
-    [self showOrbView];
 }
 
 /*
@@ -380,9 +378,11 @@ struct TopMargin {
 
     [self removeAllPostFromScreen];
     NSArray *postArray = [[DEPostManager sharedManager] loadedSavedEvents];
+    postArray = [self setAllPostsToNotLoaded:postArray];
     [self addEventsToScreen:0
               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING Category:nil
-                  PostArray:postArray];
+                  PostArray:postArray
+                  ShowBlank:YES];
     [self loadVisiblePost:_scrollView];
 }
 
@@ -402,6 +402,7 @@ struct TopMargin {
              ProcessStatus : (NSString *) process
                   Category : (NSString *) myCategory
                  PostArray : (NSArray *) postArray
+                 ShowBlank : (BOOL) showBlank
 {
     static CGFloat column = 0;
     static int postCounter = 0;
@@ -426,7 +427,8 @@ struct TopMargin {
                          Column:&column
                       TopMargin:topMargin
               EventsFrameHeight:&viewEventsViewFrameHeight
-                    PostCounter:&postCounter];
+                    PostCounter:&postCounter
+                      ShowBlank:showBlank];
         }
     }];
     
@@ -455,6 +457,40 @@ struct TopMargin {
     }
 }
 
+- (NSArray *) setAllPostsToNotLoaded : (NSArray *) posts {
+    for (PFObject *obj in posts) {
+        obj[@"loaded"] = @NO;
+    }
+    
+    return posts;
+}
+
+/*
+ 
+ Display to the user that there were no events that the user has saved
+ 
+ */
+
+- (void) displayNoSavedEvents {
+    [self removeAllPostFromScreen];
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] lastObject];
+    [_scrollView addSubview:view];
+    [self loadPosts];
+    [self setAllPostsToNotLoaded : _posts];
+    [self addEventsToScreen : view.frame.size.height + 15
+               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
+                    Category:nil
+                   PostArray:_posts
+                   ShowBlank:YES];
+    [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
+    [self loadVisiblePost:_scrollView];
+    
+    DEScreenManager *screenManager = [DEScreenManager sharedManager];
+    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+    
+    orbView.hidden = YES;
+}
+
 /*
  
  Load the event
@@ -468,12 +504,14 @@ struct TopMargin {
          TopMargin : (NSInteger) topMargin
  EventsFrameHeight : (CGFloat *) viewEventsViewFrameHeight
        PostCounter : (int *) postCounter
+         ShowBlank : (BOOL) showBlank
 {
     DEPost *post = [DEPost getPostFromPFObject:obj];
     obj[@"loaded"] = @YES;
     
     DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
-    [viewEventsView renderViewWithPost:post];
+    [viewEventsView renderViewWithPost:post
+                             ShowBlank:showBlank];
 
     
     CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
@@ -658,20 +696,17 @@ struct TopMargin {
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     _searchPosts = [NSMutableArray new];
-    _postsCopy = [_posts copy];
 }
 
 - (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    _posts = _postsCopy;
-    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+
 }
 
 #pragma mark - Search Bar Delegate Methods
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    
-    _posts = _postsCopy;
+    [self removeAllPostFromScreen];
     
     if (![[searchText stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""])
     {
@@ -684,14 +719,31 @@ struct TopMargin {
                 [[post.quickDescription lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound
                 )
             {
-                [_searchPosts addObject:obj];
+                PFObject *unloadedObject = obj;
+                unloadedObject[@"loaded"] = @NO;
+                [_searchPosts addObject:unloadedObject];
             }
         }];
 
-        _posts = _searchPosts;
+        [self addEventsToScreen:0
+                  ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
+                       Category:nil
+                      PostArray:_searchPosts
+                      ShowBlank:NO];
+        [self loadVisiblePost:_scrollView];
         _searchPosts = [NSMutableArray new];
-        [self removeAllPostFromScreen];
-        [self addEventsToScreen:0 ProcessStatus:nil Category:category PostArray:_posts];
+    }
+    else {
+        for (PFObject *obj in _posts) {
+            obj[@"loaded"] = @NO;
+        }
+        
+        [self addEventsToScreen:0
+                  ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
+                       Category:nil
+                      PostArray:_posts
+                      ShowBlank:NO];
+        [self loadVisiblePost:_scrollView];
     }
 }
 

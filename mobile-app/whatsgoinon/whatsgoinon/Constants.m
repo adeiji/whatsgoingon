@@ -92,6 +92,7 @@ NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"allCommentsLoaded";
 NSString *const NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED = @"postFromUserRetrieved";
 NSString *const NOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
 NSString *const NOTIFICATION_CENTER_USER_RETRIEVED = @"retrievedUsername";
+NSString *const NOTIFICATION_CENTER_NO_SAVED_EVENTS = @"com.happsnap.no.saved.events";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_CATEGORY = @"category";
 NSString *const kNOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
 NSString *const kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO = @"userRankObjectInfo";

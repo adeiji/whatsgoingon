@@ -25,6 +25,8 @@
     [DELocationManager getAddressFromLatLongValue:_post.location CompletionBlock:^(NSString *value) {
         [_post setAddress:value];
     }];
+    
+    [_btnShareText setTitle:[[self getEventUrl] absoluteString] forState:UIControlStateNormal];
 }
 
 - (IBAction)shareFacebook:(id)sender {

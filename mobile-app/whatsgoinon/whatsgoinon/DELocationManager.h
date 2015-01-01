@@ -27,6 +27,12 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 - (void) startSignificantChangeUpdates;
 - (void) stopSignificantChangeUpdates;
 - (void) startTimer;
+/*
+ 
+ Check to see if the user can comment on the event that the user has selected Going/Maybe on
+ 
+ */
+- (void) checkForCommenting;
 + (void) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
                                LocationTwo : (PFGeoPoint *) location2
                            CompletionBlock : (completionBlock) callback;

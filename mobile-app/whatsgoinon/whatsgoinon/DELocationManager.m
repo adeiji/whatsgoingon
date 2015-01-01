@@ -25,19 +25,20 @@
     _currentLocation.latitude = [[locations objectAtIndex:0] coordinate].latitude;
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
 
-    NSArray *goingPosts = [self getGoingPostEventObjects];
-    
-    for (DEPost *post in goingPosts) {
+    //Stop updating the location because now it is uneccesary, and we want to conserver battery life
+    [_locationManager stopUpdatingLocation];
+}
 
-        if ([self checkIfCanCommentForEvent:post Locations:locations])
+- (void) checkForCommenting {
+    
+    NSArray *goingPosts = [self getGoingPostEventObjects];
+    for (DEPost *post in goingPosts) {
+        
+        if ([self checkIfCanCommentForEvent:post])
         {
             break;
         }
-        
     }
-    
-    //Stop updating the location because now it is uneccesary, and we want to conserver battery life
-    [_locationManager stopUpdatingLocation];
 }
 
 /*
@@ -68,19 +69,14 @@
  */
 
 - (BOOL) checkIfCanCommentForEvent : (DEPost *) post
-                         Locations : (NSArray *) locations
 {
-    CLLocationDegrees latitude = [[locations objectAtIndex:0] coordinate].latitude;
-    CLLocationDegrees longitude = [[locations objectAtIndex:0] coordinate].longitude;
-    CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-    
-    latitude = post.location.latitude;
-    longitude = post.location.longitude;
+    CLLocationDegrees latitude = post.location.latitude;
+    CLLocationDegrees longitude = post.location.longitude;
+    CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_currentLocation.latitude longitude:_currentLocation.longitude];
     CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
-    
     CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
     NSLog(@"Distance to event: %f", distance);
-    
+    NSMutableArray *goingPostArrayCopy = [[[DEPostManager sharedManager] goingPost] mutableCopy];
     // Check to see if the event is currently going on, or finished within the hour
     NSDate *later = [post.endTime dateByAddingTimeInterval:(60 * 60)];
     
@@ -91,11 +87,11 @@
         {
             [DEScreenManager createPromptUserCommentNotification:post];
             
-            for (NSString *postId in [[DEPostManager sharedManager] goingPost]) {
+            for (NSString *postId in goingPostArrayCopy) {
                 if ([postId isEqualToString:post.objectId])
                 {
-                    [[[DEPostManager sharedManager] goingPost] removeObject:postId];
                     [[[DEPostManager sharedManager] eventsUserAt] addObject:postId];
+                    [[[DEPostManager sharedManager] goingPost] removeObject:postId];
                 }
             }
             

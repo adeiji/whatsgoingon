@@ -28,7 +28,7 @@
         _goingPost = [NSMutableArray new];
         _eventsUserAt = [NSMutableArray new];
         _loadedSavedEventIds = [NSMutableArray new];
-        _loadedSavedEvents = [NSArray new];
+        _loadedSavedEvents = [NSMutableArray new];
         _currentPost = [DEPost new];
     }
     return self;

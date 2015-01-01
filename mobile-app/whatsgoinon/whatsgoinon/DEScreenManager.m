@@ -109,7 +109,7 @@
     localNotification.alertAction = [NSString stringWithFormat:@"Since you went to this event, you can comment on it if you want"];
     localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    
+
     NSLog(@"Local Notification Object Set and Scheduled");
 }
 
