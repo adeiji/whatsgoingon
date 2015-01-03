@@ -339,7 +339,7 @@ Display the second screen for the post details
     {
         // Let the user take a picture and store it
         picker.delegate = self;
-        picker.allowsEditing = NO;
+        picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self savePostDetails];
         [self presentViewController:picker animated:YES completion:NULL];

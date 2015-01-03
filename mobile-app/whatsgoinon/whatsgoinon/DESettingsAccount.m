@@ -245,7 +245,11 @@
     
     // Set the image at the correct location so that it can be restored later to this same exact location
     [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
-    
+    NSData *imageData = UIImageJPEGRepresentation (
+                                        image,
+                                        .01
+                                        );
+    [DEUserManager addProfileImage:imageData];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
