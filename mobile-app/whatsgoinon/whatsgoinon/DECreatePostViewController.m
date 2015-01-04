@@ -294,11 +294,7 @@ Display the second screen for the post details
         DELocationManager *sharedManager = [DELocationManager sharedManager];
         if (value)
         {
-            sharedManager.storedLocation = value;
-            _btnNext.userInteractionEnabled = YES;
-        }
-        else {
-            _btnNext.userInteractionEnabled = NO;
+            sharedManager.storedLocation = value;         
         }
     }];
 }

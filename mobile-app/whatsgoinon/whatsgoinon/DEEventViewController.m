@@ -146,6 +146,7 @@
         DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
         [createPostViewController.navigationItem setHidesBackButton:YES];
         [self.navigationController pushViewController:createPostViewController animated:YES];
+        [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
     }
 }
 
@@ -334,6 +335,7 @@
         [[eventDetailsMoreView btnReportEvent] setEnabled:YES];
         [eventDetailsMoreView setEventId:[_post objectId]];
         [eventDetailsMoreView setCategory:[_post category]];
+        [_post setUsername:[[PFUser currentUser] username]];
         [[DEPostManager sharedManager] setCurrentPost:_post];
     }
 }

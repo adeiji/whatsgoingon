@@ -195,7 +195,11 @@
     
     [timer fire];
 }
-
+/*
+ 
+ 
+ 
+ */
 - (void) setCity:(NSString *)city
 {
     _city = city;
@@ -245,6 +249,8 @@
         }
         
         _currentLocation = [PFGeoPoint new];
+        [self startSignificantChangeUpdates];
+        
     }
     return self;
 }

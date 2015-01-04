@@ -35,6 +35,8 @@
 
 - (IBAction)gotoPostPage:(id)sender {
     
+    [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
+    
     if ([self isLoggedIn:YES])
     {
     
@@ -44,7 +46,6 @@
         {
             [[[DEScreenManager sharedManager] mainMenu] removeFromSuperview];
         }
-        
         DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateInitialViewController];
         [nc pushViewController:createPostViewController animated:YES];
     }
