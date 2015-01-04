@@ -20,34 +20,46 @@
     
     if (self)
     {
+        // Load the predetermined comments
         self = [[[NSBundle mainBundle] loadNibNamed:@"ViewComment" owner:self options:nil] firstObject];
         options = @[@"Awesome", @"Meh...", @"Suuuucks!!"];
         
         _pickerView.delegate = self;
         _pickerView.dataSource = self;
-        
+        // Set the comment to Awesome initially
         comment = [options objectAtIndex:[_pickerView selectedRowInComponent:0]];
         ratingChange = 0;
         
-        for (UIView *view in _buttons) {
-            [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
-        }
-        
-        for (UIView *view in _commentButtons) {
-            [[view layer] setCornerRadius:view.frame.size.height / 2];
-            [[view layer] setBorderColor:[UIColor whiteColor].CGColor];
-            [[view layer] setBorderWidth:1.5f];
-        }
-        [_txtComment setInputAccessoryView:[DEScreenManager createInputAccessoryView]];
-        [[_txtComment layer] setCornerRadius:BUTTON_CORNER_RADIUS];
-        [_txtComment setDelegate:self];
-        [[_txtComment layer] setBorderColor:[UIColor whiteColor].CGColor];
-        [[_txtComment layer] setBorderWidth:1.5f];
+        [self setUpViews];
         [self registerForKeyboardNotifications];
-        ratingChange = 0;
     }
     
     return self;
+}
+
+/*
+ 
+ Set up the look and feel of the subviews, and set the necessary delegates and Input Accessory Views
+ 
+ */
+- (void) setUpViews {
+    
+    for (UIView *view in _buttons) {
+        [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    }
+    
+    for (UIView *view in _commentButtons) {
+        [[view layer] setCornerRadius:view.frame.size.height / 2];
+        [[view layer] setBorderColor:[UIColor whiteColor].CGColor];
+        [[view layer] setBorderWidth:1.5f];
+    }
+    
+    [_txtComment setInputAccessoryView:[DEScreenManager createInputAccessoryView]];
+    [[_txtComment layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    [_txtComment setDelegate:self];
+    [[_txtComment layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[_txtComment layer] setBorderWidth:1.5f];
+
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -112,7 +124,11 @@
     _lblHeader.text = header;
 }
 
-
+/*
+ 
+ When the user clicks one of the predermined comment buttons, then the comment is displayed accordingly
+ 
+ */
 - (IBAction)setComment:(UIButton *)sender {
     
     switch (sender.tag) {

@@ -26,6 +26,11 @@
     return self;
 }
 
+/*
+ 
+ Show a view that is similar to the iOS banner at the top of the screen prompting the user to comment
+ 
+ */
 - (void) showView {
     
     [[_btnCancel layer] setCornerRadius:BUTTON_CORNER_RADIUS];
@@ -40,6 +45,11 @@
     }];
 }
 
+/*
+ 
+ If the user decides that he is going to comment on this post then remove the banner and show the comment screen
+ 
+ */
 - (IBAction)showCommentScreen:(id)sender {
     
     [DEScreenManager showCommentView:post];

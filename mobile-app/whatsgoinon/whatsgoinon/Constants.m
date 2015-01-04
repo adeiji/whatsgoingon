@@ -84,14 +84,14 @@ NSString *const ORB_BUTTON_VIEW = @"orbButtonView";
 
 CGFloat const BUTTON_CORNER_RADIUS = 6.0f;
 
-NSString *const NOTIFICATION_CENTER_ALL_EVENTS_LOADED = @"allEventsLoaded";
-NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"cityChanged";
-NSString *const NOTIFICATION_CENTER_NO_DATA = @"noData";
-NSString *const NOTIFICATION_CENTER_NONE_IN_CATEGORY = @"noneInCategory";
-NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"allCommentsLoaded";
-NSString *const NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED = @"postFromUserRetrieved";
-NSString *const NOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
-NSString *const NOTIFICATION_CENTER_USER_RETRIEVED = @"retrievedUsername";
+NSString *const NOTIFICATION_CENTER_ALL_EVENTS_LOADED = @"com.happsnap.allEventsLoaded";
+NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"com.happsnap.cityChanged";
+NSString *const NOTIFICATION_CENTER_NO_DATA = @"com.happsnap.noData";
+NSString *const NOTIFICATION_CENTER_NONE_IN_CATEGORY = @"com.happsnap.noneInCategory";
+NSString *const NOTIFICATION_CENTER_ALL_COMMENTS_LOADED = @"com.happsnap.allCommentsLoaded";
+NSString *const NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED = @"com.happsnap.postFromUserRetrieved";
+NSString *const NOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"com.happsnap.retrievedUserRank";
+NSString *const NOTIFICATION_CENTER_USER_RETRIEVED = @"com.happsnap.retrievedUsername";
 NSString *const NOTIFICATION_CENTER_NO_SAVED_EVENTS = @"com.happsnap.no.saved.events";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_CATEGORY = @"category";
 NSString *const kNOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";

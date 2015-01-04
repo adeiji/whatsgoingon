@@ -250,13 +250,11 @@
     
     NSLog(@"Captured Date %@", [startDate description]);
     
-    // Check address availability
-    
+    // Check to see if the address that has been selected is an actual existing address
     [self checkAddressAvailability];
     
     _post.startTime = startDate;
     _post.endTime = endDate;
-
     _post.postRange = [NSNumber numberWithInt:[_createPostViewOne.txtPostRange.text intValue]];
     _post.address = _createPostViewOne.txtAddress.text;
     _post.category = _createPostViewOne.txtCategory.text;

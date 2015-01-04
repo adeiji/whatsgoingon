@@ -197,7 +197,7 @@
 }
 /*
  
- 
+ Set the city to the newly selected city
  
  */
 - (void) setCity:(NSString *)city

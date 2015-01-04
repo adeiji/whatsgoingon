@@ -159,6 +159,7 @@
     
     [self addSubview:myCarousel];
     
+    // This carosaul starts basically from a simple point and then expands into where it will be when the user starts scrolling
     {
         [UIView animateWithDuration:.2f animations:^{
         

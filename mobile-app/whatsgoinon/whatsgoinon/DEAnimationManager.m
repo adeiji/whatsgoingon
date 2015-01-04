@@ -45,7 +45,11 @@
     }];
 
 }
-
+/*
+ 
+ Display in the main window that the user has just saved an event
+ 
+ */
 + (void) savedAnimationWithImage : (NSString *) imageName {
     
     UIView *view = [[[UIApplication sharedApplication] delegate] window];

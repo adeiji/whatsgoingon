@@ -170,6 +170,7 @@
         
     }
     else {
+        // Load the profile image from the server
         PFFile *imageFile = user[PARSE_CLASS_USER_PROFILE_PICTURE];
         
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
@@ -295,6 +296,11 @@
 }
 
 
+/*
+ 
+ Signs the user out of the app
+ 
+ */
 - (IBAction)signOutUser:(id)sender {
     
     [PFUser logOut];
@@ -313,6 +319,13 @@
     [self changePasswordButtonFunction];
 }
 
+/*
+ 
+ Checks to see if the user has clicked on Change Password or on Save New Password
+ If the user has clicked on change password then we display the password text fields
+ Otherwise we slide the bottom half of the screen back up
+ 
+ */
 - (void) changePasswordButtonFunction {
     static BOOL changePasswordPressed;
     

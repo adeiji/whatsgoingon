@@ -410,7 +410,6 @@ struct TopMargin {
     static CGFloat columnTwoMargin = 0;
     static CGFloat margin = 0;
     CGFloat scrollViewContentSizeHeight = 0;
-    static double viewEventsViewFrameHeight = 278;
     __block BOOL validated;
     
     validated = NO;
@@ -426,9 +425,13 @@ struct TopMargin {
                         Margin2:&columnTwoMargin
                          Column:&column
                       TopMargin:topMargin
-              EventsFrameHeight:&viewEventsViewFrameHeight
                     PostCounter:&postCounter
                       ShowBlank:showBlank];
+            
+            NSLog(@"Column One Margin: %f", columnOneMargin);
+            NSLog(@"Column Two Margin: %f", columnTwoMargin);
+            NSLog(@"Margin: %f", margin);
+            NSLog(@"Post Counter: %i", postCounter);
         }
     }];
     
@@ -502,10 +505,10 @@ struct TopMargin {
            Margin2 : (CGFloat *) columnTwoMargin
             Column : (CGFloat *) column
          TopMargin : (NSInteger) topMargin
- EventsFrameHeight : (CGFloat *) viewEventsViewFrameHeight
        PostCounter : (int *) postCounter
          ShowBlank : (BOOL) showBlank
 {
+    CGFloat viewEventsViewFrameHeight = 278;
     DEPost *post = [DEPost getPostFromPFObject:obj];
     obj[@"loaded"] = @YES;
     
@@ -532,11 +535,11 @@ struct TopMargin {
     if (*column == 0)
     {
         *column = 1;
-        *columnOneMargin += *viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
+        *columnOneMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
     }
     else {
         *column = 0;
-        *columnTwoMargin += *viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
+        *columnTwoMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
         *postCounter = *postCounter + 1;
     }
     
@@ -695,6 +698,7 @@ struct TopMargin {
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+    
     _searchPosts = [NSMutableArray new];
 }
 
