@@ -62,6 +62,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 - (void) seeIfLocationMatchesEvent : (DEPost *) event;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;
+@property (strong, nonatomic) PFGeoPoint *userLocation;
 @property (strong, nonatomic) PFGeoPoint *geoPoint;
 @property (strong, nonatomic) NSMutableData *responseData;
 @property (strong, nonatomic) PFGeoPoint *storedLocation;

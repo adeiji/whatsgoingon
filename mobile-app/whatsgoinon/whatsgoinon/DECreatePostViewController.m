@@ -256,9 +256,7 @@
     
     _post.startTime = startDate;
     _post.endTime = endDate;
-    [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
-        _post.location = value;
-    }];
+
     _post.postRange = [NSNumber numberWithInt:[_createPostViewOne.txtPostRange.text intValue]];
     _post.address = _createPostViewOne.txtAddress.text;
     _post.category = _createPostViewOne.txtCategory.text;

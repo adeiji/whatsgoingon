@@ -39,6 +39,9 @@
     }
     
     [self transitionFromSplashScreen];
+    // Instantiate the Location Manager and set the user location to the current location
+    DELocationManager *sharedManager = [DELocationManager sharedManager];
+    [sharedManager setUserLocation:[sharedManager currentLocation]];
 }
 
 // Display the splash image and then fade into the first screen of the application

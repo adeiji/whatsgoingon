@@ -502,7 +502,13 @@ numberOfRowsInComponent:(NSInteger)component
     if ([subview isKindOfClass:[DEViewChangeCity class]])
     {
         NSString *fullAddress = ((DEViewChangeCity *) subview).selection;
+        // Get from the full address name the exact location of the event
+        [DELocationManager getLatLongValueFromAddress:fullAddress CompletionBlock:^(PFGeoPoint *value) {
+            [[DEPostManager sharedManager] currentPost].location = value;
+        }];
+        
         NSString *shortAddress = [fullAddress substringToIndex:[fullAddress rangeOfString:@","].location];
+        
         _txtAddress.text = shortAddress;
         [_txtAddress validate];
     }

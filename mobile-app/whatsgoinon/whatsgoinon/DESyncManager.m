@@ -106,8 +106,7 @@
                                  PostsArray:postsArray
                               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
             }
-            else {
-                //The find succeeded, now do something with it
+            else {  // The find succeeded, now store the events
                 [DESyncManager storeEvents : objects
                                  PostsArray:postsArray
                               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING];
@@ -122,6 +121,8 @@
                 {
                     // Get any values that are later
                     blockQuery = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+                    // Make sure that the values for later are only those within thirty miles of the location the user is checking for
+                    [blockQuery whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] userLocation] withinMiles:30];
                     [self getValuesForLater:blockQuery
                                     Objects:[[DEPostManager sharedManager] posts]
                      ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
@@ -173,7 +174,7 @@
     
     [DESyncManager getAllValuesWithinMilesForNow:now
                                       PostsArray:postsArray
-                                        Location:[[DELocationManager sharedManager] currentLocation]];
+                                        Location:[[DELocationManager sharedManager] userLocation]];
 
 }
 // Store the events that we just recieved from Parse and notify the app
