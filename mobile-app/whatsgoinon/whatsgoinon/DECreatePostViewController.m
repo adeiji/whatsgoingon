@@ -486,9 +486,12 @@ Display the second screen for the post details
     }
     _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
     _createPostViewTwo.txtDescription.text = post.myDescription;
+    
+    [_createPostViewTwo.txtQuickDescription validate];
+    [_createPostViewTwo.txtDescription validate];
+    
     _createPostViewTwo.txtWebsite.text = website;
 }
-
 
 
 #pragma mark - Text View Delegate Methods
@@ -509,10 +512,13 @@ Display the second screen for the post details
     
     [self.navigationController pushViewController:addValueViewController animated:YES];
 #warning Do not leave with this String, this is hard coded, instead we want to put a placeholder here instead of actual text
-    if (![textField.text isEqualToString:@"Enter a description"])
+
+    DEAddValueView *view = (DEAddValueView *) addValueViewController.view;
+    view.txtValue.text = textField.text;
+    
+    if ([textField.text isEqualToString:@""])
     {
-        DEAddValueView *view = (DEAddValueView *) addValueViewController.view;
-        view.txtValue.text = textField.text;
+        [addValueViewController showTutorial];
     }
     
     return YES;

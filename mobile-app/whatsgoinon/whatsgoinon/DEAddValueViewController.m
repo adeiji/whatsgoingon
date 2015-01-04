@@ -35,8 +35,7 @@
     
     [view.btnCancel setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [view.btnOk setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-    
-    [self showTutorial];
+
 }
 
 /*
@@ -53,6 +52,8 @@ Show the tutorial showing the user what should be entered for the different desc
     else {
         [_lblTutorial setText:@"The full description will be visible inside your event post info. This should contain all the detail that you want everyone to know about your event. Include everything that pertains to your event including additional costs if any. Be careful with profanity as it may get your post removed."];
     }
+
+    [_overlayView setAlpha:1.0];
 }
 
 - (void)didReceiveMemoryWarning

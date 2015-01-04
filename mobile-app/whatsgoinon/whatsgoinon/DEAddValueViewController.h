@@ -12,7 +12,13 @@
 
 @interface DEAddValueViewController : UIViewController <UITextViewDelegate>
 
+/*
+ 
+ The field which will contain the information that comes from this view controller
+ 
+ */
 @property (strong, nonatomic) id inputView;
+
 @property (strong, nonatomic) UITextView *textView;
 @property (weak, nonatomic) IBOutlet UILabel *lblMinCharacters;
 @property (weak, nonatomic) IBOutlet UILabel *lblTutorial;
@@ -23,4 +29,10 @@
 - (IBAction)okPressed:(id)sender;
 - (IBAction)cancelPressed:(id)sender;
 
+/*
+ 
+ Display a tutorial letting the user know how to enter in data
+ 
+*/
+- (void) showTutorial;
 @end
