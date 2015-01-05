@@ -75,6 +75,11 @@
     }
 }
 
+- (void) messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+
+}
+
+
 - (NSString *) messageCaption {
     return @"Check out this event that's posted on HappSnap!";
 }

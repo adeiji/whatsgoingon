@@ -26,7 +26,6 @@
 #pragma mark - Button Action Methods
 
 - (IBAction)shareFacebook:(id)sender;
-- (IBAction)shareInstagram:(id)sender;
 - (IBAction)shareTwitter:(id)sender;
 - (IBAction)shareText:(id)sender;
 

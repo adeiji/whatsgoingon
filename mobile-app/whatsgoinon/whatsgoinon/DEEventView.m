@@ -38,6 +38,7 @@
     marker.infoWindowAnchor = CGPointMake(.5, 1.2);
     marker.map = _viewMapView;
     
+    
     [_viewMapView setSelectedMarker:marker];
 }
 

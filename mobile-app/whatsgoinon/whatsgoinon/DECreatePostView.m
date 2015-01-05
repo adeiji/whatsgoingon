@@ -111,6 +111,7 @@
     
     _txtCategory.inputView = _categoriesPicker;
     [self setTextFieldInputViewForTextField:_txtStartDate DatePickerMode:UIDatePickerModeDate Selector:@selector(updateDateTextField:) MinuteInterval:0];
+    [((UIDatePicker *) _txtStartDate.inputView) setMinimumDate:[NSDate new]];
     [self setTextFieldInputViewForTextField:_txtEndDate DatePickerMode:UIDatePickerModeDate Selector:@selector(updateDateTextField:) MinuteInterval:0];
     [self setTextFieldInputViewForTextField:_txtStartTime DatePickerMode:UIDatePickerModeTime Selector:@selector(updateTimeTextField:) MinuteInterval:30];
     [self setTextFieldInputViewForTextField:_txtEndTime DatePickerMode:UIDatePickerModeTime Selector:@selector(updateTimeTextField:) MinuteInterval:0];
@@ -199,15 +200,23 @@
     // If the current field is the start time, then automatically set the end time to three hours from now
     if ([activeField isEqual:_txtStartTime])
     {
-        NSTimeInterval threeHours = (3 * 60 * 60) - 1;
-        NSDate *endTime = [sender.date dateByAddingTimeInterval:threeHours];
-        NSDate *startTime = sender.date;
-        [self checkForLaterEndDate:sender.date EndTime:endTime StartTime:startTime];
-        _txtEndTime.text = [dateFormat stringFromDate:endTime];
-        UIDatePicker *datePicker = (UIDatePicker *) _txtEndTime.inputView;
-        [datePicker setMinimumDate:sender.date];
-        [_txtEndTime setInputView:datePicker];
-        _txtEndTime.enabled = YES;
+        
+        
+        if ([_txtStartDate.text isEqualToString:_txtEndDate.text])
+        {
+            /* Set the earliest end date to the start time */
+            NSTimeInterval threeHours = (3 * 60 * 60) - 1;
+            NSDate *endTime = [sender.date dateByAddingTimeInterval:threeHours];
+            NSDate *startTime = sender.date;
+            // Check to make sure that three hours from now does not go into the next day, and if it does, then we display that on the end date
+            [self checkForLaterEndDate:sender.date EndTime:endTime StartTime:startTime];
+            _txtEndTime.text = [dateFormat stringFromDate:endTime];
+            UIDatePicker *datePicker = (UIDatePicker *) _txtEndTime.inputView;
+            [datePicker setMinimumDate:sender.date];
+            [_txtEndTime setInputView:datePicker];
+            _txtEndTime.enabled = YES;
+        }
+        
     }
     // If the user is changing the start time than now enable the user to change the end time
     else if ([activeField isEqual:_txtEndTime])
