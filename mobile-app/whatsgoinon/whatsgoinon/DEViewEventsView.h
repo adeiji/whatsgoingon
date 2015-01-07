@@ -32,4 +32,6 @@
 - (void) refreshView;
 - (void) loadImage;
 - (void) removeImage;
+- (void) showImage;
+- (void) hideImage;
 @end

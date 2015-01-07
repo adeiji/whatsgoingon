@@ -19,8 +19,6 @@
 @property (strong, nonatomic) UIViewController *nextScreen;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
-- (void) showNextScreen;
-
 #pragma mark - Button Methods
 
 - (IBAction)signIn:(id)sender;

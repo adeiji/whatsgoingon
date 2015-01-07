@@ -148,7 +148,7 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="calendar-icon 44x44.png" translatesAutoresizingMaskIntoConstraints="NO" id="cwj-fD-cOD">
                                                 <rect key="frame" x="15" y="148" width="25" height="25"/>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="33AEB75D-3E82-42C5-B93D-1E412D86C552" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="46D44398-45CF-4080-968F-76DE0F5C4EE7" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                             </imageView>
                                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKe-wM-5P2">
@@ -423,7 +423,7 @@
                         <viewControllerLayoutGuide type="top" id="6zN-RC-mUg"/>
                         <viewControllerLayoutGuide type="bottom" id="D4P-G7-7Hr"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uYU-S3-Sj2">
+                    <view key="view" contentMode="scaleToFill" id="uYU-S3-Sj2" customClass="DEFinishedPostingView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <userGuides>
@@ -443,13 +443,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Make sure to check out our web portal.  You can manage all your posts, edit, delete, and post more from there too!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="rye-nt-FrD">
-                                <rect key="frame" x="20" y="284" width="280" height="63"/>
-                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                                <rect key="frame" x="20" y="284" width="280" height="96"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="www.happsnap.com/post" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PM9-nS-War">
-                                <rect key="frame" x="57" y="373" width="206" height="25"/>
+                                <rect key="frame" x="57" y="393" width="206" height="25"/>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -473,6 +473,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <connections>
+                            <outlet property="lblParagraphOne" destination="yxH-kS-sRs" id="xyI-PA-F6v"/>
+                            <outlet property="lblParagraphTwo" destination="rye-nt-FrD" id="NhM-z8-Rwg"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="PHb-ep-bHo"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -486,7 +490,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="33AEB75D-3E82-42C5-B93D-1E412D86C552" width="140" height="211">
+        <image name="46D44398-45CF-4080-968F-76DE0F5C4EE7" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

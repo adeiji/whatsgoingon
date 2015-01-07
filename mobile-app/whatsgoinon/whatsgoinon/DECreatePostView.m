@@ -200,8 +200,6 @@
     // If the current field is the start time, then automatically set the end time to three hours from now
     if ([activeField isEqual:_txtStartTime])
     {
-        
-        
         if ([_txtStartDate.text isEqualToString:_txtEndDate.text])
         {
             /* Set the earliest end date to the start time */
@@ -222,9 +220,6 @@
     else if ([activeField isEqual:_txtEndTime])
     {
         [dateFormat setDateFormat:@"mm/dd/yy"];
-        NSDate *endDate = [dateFormat dateFromString:_txtEndDate.text];
-    
-        // If the end date is the same as the start date then we don't want the user to be able to select an earlier time then the selected start time
     
     }
     NSLog(@"%@", [dateFormat stringFromDate:sender.date]);

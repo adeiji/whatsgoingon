@@ -333,9 +333,9 @@ struct TopMargin {
     }
 }
 
-- (void) displayCategory : (NSString *) category
+- (void) displayCategory : (NSString *) myCategory
 {
-    self.lblCategoryHeader.text = category;
+    self.lblCategoryHeader.text = myCategory;
 }
 
 // Remove all the events/posts currently on the screen and free the images from memory
@@ -478,16 +478,7 @@ struct TopMargin {
     [self removeAllPostFromScreen];
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] lastObject];
     [_scrollView addSubview:view];
-    [self loadPosts];
-    [self setAllPostsToNotLoaded : _posts];
-    [self addEventsToScreen : view.frame.size.height + 15
-               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
-                    Category:nil
-                   PostArray:_posts
-                   ShowBlank:YES];
-    [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
-    [self loadVisiblePost:_scrollView];
-    
+    [_scrollView setContentSize:view.frame.size];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
@@ -686,10 +677,7 @@ struct TopMargin {
         {
             if (CGRectIntersectsRect(scrollView.bounds, view.frame))
             {
-                [((DEViewEventsView *) view) loadImage];
-            }
-            else if (!CGRectIntersectsRect(scrollView.bounds, view.frame)) {
-                [((DEViewEventsView *) view) removeImage];
+                [((DEViewEventsView *) view) showImage];
             }
         }
     }

@@ -204,7 +204,7 @@
                 <userLayoutGuide location="121" affinity="minY"/>
             </userGuides>
             <subviews>
-                <textView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uKd-Wd-teO">
+                <textView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKd-Wd-teO">
                     <rect key="frame" x="20" y="159" width="280" height="62"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="62" id="LFQ-Th-zJD"/>

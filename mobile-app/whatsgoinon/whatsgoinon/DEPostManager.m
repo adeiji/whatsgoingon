@@ -30,6 +30,7 @@
         _loadedSavedEventIds = [NSMutableArray new];
         _loadedSavedEvents = [NSMutableArray new];
         _currentPost = [DEPost new];
+        _promptedForCommentEvents = [NSMutableArray new];
     }
     return self;
 }
@@ -77,7 +78,6 @@
     {
         return YES;
     }
-    return nil;
 }
 
 + (NSNumber *) getDurationOfEvent : (DEPost *) event

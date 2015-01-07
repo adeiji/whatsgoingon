@@ -14,6 +14,8 @@
 
 @implementation DEAppDelegate
 
+static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForComment";
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -37,8 +39,23 @@
 
     [self checkIfLocalNotification:launchOptions];
     [self startCommentTimer];
+    [self loadPromptedForCommentEvents];
+    
+    // Load the events that the user already commented on
     
     return YES;
+}
+
+- (void) loadPromptedForCommentEvents {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DEPostManager *postManager = [DEPostManager sharedManager];
+
+    // Make sure that there actually is some data stored that we're pulling
+    NSMutableArray *savedPromptedForCommentEvents = (NSMutableArray *) [defaults objectForKey:eventsUserPromptedForComment];
+    if (savedPromptedForCommentEvents != nil)
+    {
+        [postManager setPromptedForCommentEvents: savedPromptedForCommentEvents ];
+    }
 }
 
 - (void) startCommentTimer {
@@ -119,7 +136,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    // Save the events that the user was already prompted to comment on
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:eventsUserPromptedForComment];
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

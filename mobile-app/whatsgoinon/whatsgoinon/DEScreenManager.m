@@ -132,13 +132,18 @@
         [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
         [view showView];
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
+        
     }
     else {
         DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
         [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
         [view showView];
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:myPost.objectId];
+        
+
     }
+    
+
 
 };
 

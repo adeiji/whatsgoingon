@@ -45,7 +45,6 @@
     [[self.navigationController navigationBar] setHidden:YES];
     [self addObservers];
     
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
     
     if ([[[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_RANK] isEqualToString:USER_RANK_STANDARD])
@@ -290,7 +289,8 @@ Display the second screen for the post details
         DELocationManager *sharedManager = [DELocationManager sharedManager];
         if (value)
         {
-            sharedManager.storedLocation = value;         
+            sharedManager.storedLocation = value;
+            _post.location = value;
         }
     }];
 }
@@ -478,7 +478,7 @@ Display the second screen for the post details
     }
     _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
     _createPostViewTwo.txtDescription.text = post.myDescription;
-    
+
     [_createPostViewTwo.txtQuickDescription validate];
     [_createPostViewTwo.txtDescription validate];
     
@@ -503,7 +503,6 @@ Display the second screen for the post details
     }
     
     [self.navigationController pushViewController:addValueViewController animated:YES];
-#warning Do not leave with this String, this is hard coded, instead we want to put a placeholder here instead of actual text
 
     DEAddValueView *view = (DEAddValueView *) addValueViewController.view;
     view.txtValue.text = textField.text;

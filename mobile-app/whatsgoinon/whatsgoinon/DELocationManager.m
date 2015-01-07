@@ -33,10 +33,13 @@
     
     NSArray *goingPosts = [self getGoingPostEventObjects];
     for (DEPost *post in goingPosts) {
-        
-        if ([self checkIfCanCommentForEvent:post])
+        // Check to make sure that the user has already been prompted to comment for this
+        if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
         {
-            break;
+            if ([self checkIfCanCommentForEvent:post])
+            {
+                break;
+            }
         }
     }
 }
@@ -76,24 +79,16 @@
     CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
     CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
     NSLog(@"Distance to event: %f", distance);
-    NSMutableArray *goingPostArrayCopy = [[[DEPostManager sharedManager] goingPost] mutableCopy];
     // Check to see if the event is currently going on, or finished within the hour
     NSDate *later = [post.endTime dateByAddingTimeInterval:(60 * 60)];
     
-    #warning - make sure you test for later
-    if (([post.startTime compare:[NSDate new]] == NSOrderedAscending))
+    // Check to make sure that the event has already started and that it ended within the past hour
+    if (([post.startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
     {
         if (distance < 500)
         {
             [DEScreenManager createPromptUserCommentNotification:post];
-            
-            for (NSString *postId in goingPostArrayCopy) {
-                if ([postId isEqualToString:post.objectId])
-                {
-                    [[[DEPostManager sharedManager] eventsUserAt] addObject:postId];
-                    [[[DEPostManager sharedManager] goingPost] removeObject:postId];
-                }
-            }
+            [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
             
             return YES;
         }
@@ -142,8 +137,8 @@
             if (([post.startTime compare:[NSDate new]] == NSOrderedAscending) &&  ([post.endTime compare:[NSDate new]] == NSOrderedDescending) )
             {
                 [DEScreenManager createPromptUserCommentNotification:post];
-                [[[DEPostManager sharedManager] goingPost] removeObject:post.objectId];
-                [[[DEPostManager sharedManager] eventsUserAt] addObject:post.objectId];
+                [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+                
                 break;
             }
         }
@@ -184,7 +179,6 @@
 {
     [DEScreenManager showCommentView : _eventPersonAt];
     #warning - Must make sure that we set the post as prompted for comment and save this.
-//    [[[DEPostManager sharedManager] goingPost] removeObject:_eventPersonAt.objectId];
     
     [self startTimer];
 }
@@ -356,7 +350,7 @@
                 NSString *street = jsonData[@"results"][0][@"address_components"][1][@"short_name"];
                 NSString *address = [NSString stringWithFormat:@"%@ %@", addressNumber, street];
                 
-    //            NSLog(@"%@", address);
+                NSLog(@"The address to get the lat long values is verified: %@", address);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Make sure that we call this method on the main thread so that it updates properly as supposed to
                     callback(address);
@@ -384,15 +378,8 @@
         NSMutableArray *values = [NSMutableArray new];
         
         for (NSDictionary *dictionary in predictions) {
-            NSArray *terms = [dictionary objectForKey:@"terms"];
             // Get everything from the address except the unnecessary end pieces
             NSString *location = [dictionary objectForKey:@"description"];
-
-//            for (int i = 1; i < [terms count] -1; i ++)
-//            {
-//               // location = [NSString stringWithFormat:@"%@ %@", location, terms[i][@"value"]];
-//            }
-            
             [values addObject:location];
         };
         

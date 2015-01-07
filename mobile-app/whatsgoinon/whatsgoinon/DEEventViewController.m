@@ -142,12 +142,25 @@
     
     if (postSaved)
     {
-        _post = nil;
         DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
+        DEFinishedPostingView *finishedPostView = (DEFinishedPostingView *) createPostViewController.view;
+        NSDate *laterDate = [NSDate dateWithTimeIntervalSinceNow:(60 * 59 * 24 * 3)];
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:laterDate];
+        laterDate = [[NSCalendar currentCalendar] dateFromComponents:components];
+        
+        // If the start time of the post is beyond three days, then we want to display to the user that this event will not show up until it's within three days of the start time of the event
+        if ([[_post startTime] compare:laterDate] == NSOrderedDescending)
+        {
+            finishedPostView.lblParagraphOne.text = @"Because your event is a little ways away, you won't be able to see it in the app yet.  When your event is a few days from happening, it will then appear for all to see!";
+            finishedPostView.lblParagraphTwo.text = @"If you would like to make changes to your post, you can do that and more from our website";
+        }
+        
         [createPostViewController.navigationItem setHidesBackButton:YES];
         [self.navigationController pushViewController:createPostViewController animated:YES];
         [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
     }
+    
+    _post = nil;
 }
 
 

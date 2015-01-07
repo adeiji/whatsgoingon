@@ -86,7 +86,7 @@
 - (void) displayDistanceToLocationWithPost : (DEPost *) post
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
-#warning - Enable these commented lines before sending
+
     [DELocationManager getDistanceInMilesBetweenLocation:post.location LocationTwo:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
         self.lblDistance.text = value;
     }];
@@ -117,7 +117,7 @@
     [_overlayView setFrame:CGRectMake(0, 0, 140, 140)];
     [self addSubview:_overlayView];
     [[_overlayView layer] setOpacity:0];
-    
+    [self loadImage];
     if (showBlank)
     {
         [self.imgMainImageView setAlpha:0.0];
@@ -135,10 +135,15 @@
     _post = myPost;
 }
 
-- (void) removeImage {
-    [self.imgMainImageView setImage:nil];
+- (void) hideImage {
     // Set the alpha to zero so that we still have the cool fade in affect when the user comes back to this post
     [self.imgMainImageView setAlpha:0.0f];
+}
+
+- (void) showImage {
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.imgMainImageView setAlpha:1.0f];
+    }];
 }
 
 - (void) loadImage
@@ -149,17 +154,13 @@
         if ([_post.images count] != 0)
         {
             PFFile *imageFile = _post.images[0];
-
+            
             [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                 
                 @autoreleasepool {
                     NSData *imageData = data;
                     UIImage *image = [UIImage imageWithData:imageData];
                     self.imgMainImageView.image = image;
-                    [UIView animateWithDuration:0.5f animations:^{
-                        [self.imgMainImageView setAlpha:1.0f];
-                    }];
-                    
                     image = nil;
                 }
             }];
@@ -167,13 +168,11 @@
         else { // If there is no image related to this event then use our placeholder image
             UIImage *image = ImageWithPath(ResourcePath(@"happ-snap-logo-in-app.png"));
             self.imgMainImageView.image = image;
-            [UIView animateWithDuration:0.5f animations:^{
-                [self.imgMainImageView setAlpha:1.0f];
-            }];
             
             image = nil;
         }
     });
+
 }
 
 // When the user taps this event it will take them to a screen to view all the details of the event.

@@ -68,7 +68,7 @@ Show the tutorial showing the user what should be entered for the different desc
     [self.inputView performSelector:@selector(setText:) withObject:view.txtValue.text];
     
     DEPost *post = [[DEPostManager sharedManager] currentPost];
-    
+
     if (_isQuickDescription)
     {
         post.quickDescription = view.txtValue.text;
@@ -87,6 +87,7 @@ Show the tutorial showing the user what should be entered for the different desc
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 
 - (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {

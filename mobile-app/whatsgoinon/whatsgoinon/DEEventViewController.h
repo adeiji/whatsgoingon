@@ -20,6 +20,8 @@
 #import "DEMaybeCheckmarkView.h"
 #import "DEViewImagesViewController.h"
 #import "DEViewImageViewController.h"
+#import "DEFinishedPostingView.h"
+
 
 @class DEPost, DEViewEventsView, DEEventView;
 
