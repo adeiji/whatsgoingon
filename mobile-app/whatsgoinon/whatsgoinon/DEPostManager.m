@@ -152,18 +152,8 @@
             }
             obj[@"loaded"] = @NO;
         }];
-        
-        if ([eventsInCategory count] > 0)
-        {
-            [[DEPostManager sharedManager] setPosts:eventsInCategory];
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:categoryDictionary];
-        }
-        else
-        {
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil userInfo:categoryDictionary];
-        }
     }
-    else {  // If the user selects everything then pull back every posts
+    else {  // If this is trending then we want to display all the best events
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *event = [DEPost getPostFromPFObject:obj];
             if ([event.postRange isEqual:@0])
@@ -173,10 +163,25 @@
             obj[@"loaded"] = @NO;
         }];
         
+    }
+    
+    [self sendNotificationThatTheEventsWereLoaded : eventsInCategory
+                               CategoryDictionary : categoryDictionary];
+
+}
+
++ (void) sendNotificationThatTheEventsWereLoaded : (NSMutableArray *) eventsInCategory
+                              CategoryDictionary : (NSDictionary *) categoryDictionary
+{
+    if ([eventsInCategory count] > 0)
+    {
         [[DEPostManager sharedManager] setPosts:eventsInCategory];
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil userInfo:categoryDictionary];
     }
-
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil userInfo:categoryDictionary];
+    }
 }
 
 - (DEPost *) getCurrentPost {

@@ -314,7 +314,7 @@
         if (!error)
         {
             [[DEPostManager sharedManager] setPosts:objects];
-            if (savedEvents)
+            if (!savedEvents)
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NO_DATA object:nil];
             }

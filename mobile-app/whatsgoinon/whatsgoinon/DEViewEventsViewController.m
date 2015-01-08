@@ -274,7 +274,7 @@ struct TopMargin {
 
 - (void) displayNoData
 {
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:1];
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:2];
     [_scrollView addSubview:view];
     [self loadPosts];
     [self addEventsToScreen : view.frame.size.height + 15

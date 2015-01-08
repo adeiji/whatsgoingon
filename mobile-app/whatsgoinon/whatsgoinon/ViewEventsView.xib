@@ -124,6 +124,7 @@
                 <outlet property="lblSubtitle" destination="kW7-t4-DET" id="XHW-lK-SBe"/>
                 <outlet property="lblTitle" destination="Rdq-Pp-4T2" id="lYf-Hm-poA"/>
             </connections>
+            <point key="canvasLocation" x="-158" y="99"/>
         </view>
         <view contentMode="scaleToFill" id="jXJ-tE-48P" customClass="DEEventsTimeline">
             <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
