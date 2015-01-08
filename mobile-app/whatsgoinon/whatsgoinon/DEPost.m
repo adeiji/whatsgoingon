@@ -20,6 +20,7 @@
         _numberGoing = [NSNumber numberWithInt:0];
         _comments = [NSArray new];
         _viewCount = [NSNumber numberWithInt:0];
+        _thumbsUpCount = [NSNumber numberWithInt:0];
     }
     
     return self;

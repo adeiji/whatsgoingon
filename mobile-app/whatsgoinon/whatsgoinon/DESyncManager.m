@@ -147,7 +147,7 @@
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
     
-    [query orderByAscending:PARSE_CLASS_EVENT_THUMBS_UP_COUNT];
+    [query orderByDescending:PARSE_CLASS_EVENT_THUMBS_UP_COUNT];
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query orderByDescending:PARSE_CLASS_EVENT_VIEW_COUNT];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
@@ -387,6 +387,7 @@
     postObject[PARSE_CLASS_EVENT_COMMENTS] = post.comments;
     postObject[PARSE_CLASS_EVENT_USERNAME] = [[PFUser currentUser] username];
     postObject[PARSE_CLASS_EVENT_VIEW_COUNT] = post.viewCount;
+    postObject[PARSE_CLASS_EVENT_THUMBS_UP_COUNT] = post.thumbsUpCount;
     
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

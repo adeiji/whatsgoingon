@@ -48,6 +48,7 @@
                    QuickDescription:(NSString *)quickDescription
                            Username:(NSString *) username
                           ViewCount:(NSNumber *) viewCount
+                      ThumbsUpCount:(NSNumber *) thumbsUpCount
 {
     DEPost *post = [DEPost new];
     post.address = address;
@@ -65,6 +66,7 @@
     post.comments = [NSArray new];
     post.username = [[PFUser currentUser] username];
     post.viewCount = viewCount;
+    post.thumbsUpCount = thumbsUpCount;
     
     return post;
 }
