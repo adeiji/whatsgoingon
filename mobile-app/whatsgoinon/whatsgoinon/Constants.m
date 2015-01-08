@@ -85,6 +85,7 @@ NSString *const ORB_BUTTON_VIEW = @"orbButtonView";
 CGFloat const BUTTON_CORNER_RADIUS = 6.0f;
 
 NSString *const NOTIFICATION_CENTER_ALL_EVENTS_LOADED = @"com.happsnap.allEventsLoaded";
+NSString *const NOTIFICATION_CENTER_PAST_EPIC_EVENTS_LOADED = @"com.happsnap.pastEpicEventsLoaded";
 NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"com.happsnap.cityChanged";
 NSString *const NOTIFICATION_CENTER_NO_DATA = @"com.happsnap.noData";
 NSString *const NOTIFICATION_CENTER_NONE_IN_CATEGORY = @"com.happsnap.noneInCategory";
@@ -93,6 +94,11 @@ NSString *const NOTIFICATION_CENTER_POST_FROM_USER_RETRIEVED = @"com.happsnap.po
 NSString *const NOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"com.happsnap.retrievedUserRank";
 NSString *const NOTIFICATION_CENTER_USER_RETRIEVED = @"com.happsnap.retrievedUsername";
 NSString *const NOTIFICATION_CENTER_NO_SAVED_EVENTS = @"com.happsnap.no.saved.events";
+NSString *const NOTIFICATION_CENTER_SAVED_EVENTS_LOADED = @"com.happsnap.saved.events.loaded";
+NSString *const NOTIFICATION_CENTER_LOAD_USER_EVENTS = @"com.happsnap.load.user.events";
+
+
+// Notification Constants
 NSString *const kNOTIFICATION_CENTER_USER_INFO_CATEGORY = @"category";
 NSString *const kNOTIFICATION_CENTER_USER_RANK_RETRIEVED = @"retrievedUserRank";
 NSString *const kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO = @"userRankObjectInfo";
@@ -101,9 +107,8 @@ NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS = @"com.happsnap.pro
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING = @"com.happsnap.stillloading";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING = @"com.happsnap.finishedLoading";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW = @"com.happsnap.new";
+NSString *const kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS = @"com.happsnap.isEpicEvents";
 NSString *const kNOTIFICATION_CENTER_EVENT_USER_AT = @"com.happsnap.event.user.at";
-NSString *const NOTIFICATION_CENTER_SAVED_EVENTS_LOADED = @"com.happsnap.saved.events.loaded";
-NSString *const NOTIFICATION_CENTER_LOAD_USER_EVENTS = @"com.happsnap.load.user.events";
 
 // View Controllers
 

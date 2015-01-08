@@ -153,6 +153,8 @@
 		F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F485811719A2B00F00BD1CE7 /* DEViewMainMenu.m */; };
 		F485811A19A2B74900BD1CE7 /* ViewChangeCity.xib in Resources */ = {isa = PBXBuildFile; fileRef = F485811919A2B74900BD1CE7 /* ViewChangeCity.xib */; };
 		F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */ = {isa = PBXBuildFile; fileRef = F485812019A2B85E00BD1CE7 /* DEViewChangeCity.m */; };
+		F49BB8E81A5E23F100C68E42 /* PromptForViewEpicEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BB8E71A5E23F100C68E42 /* PromptForViewEpicEventsView.xib */; };
+		F49BB8EC1A5E24D400C68E42 /* DEPromptForEpicEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8EB1A5E24D400C68E42 /* DEPromptForEpicEvents.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -400,6 +402,9 @@
 		F485811919A2B74900BD1CE7 /* ViewChangeCity.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewChangeCity.xib; sourceTree = "<group>"; };
 		F485811F19A2B85E00BD1CE7 /* DEViewChangeCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewChangeCity.h; sourceTree = "<group>"; };
 		F485812019A2B85E00BD1CE7 /* DEViewChangeCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewChangeCity.m; sourceTree = "<group>"; };
+		F49BB8E71A5E23F100C68E42 /* PromptForViewEpicEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptForViewEpicEventsView.xib; sourceTree = "<group>"; };
+		F49BB8EA1A5E24D400C68E42 /* DEPromptForEpicEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPromptForEpicEvents.h; sourceTree = "<group>"; };
+		F49BB8EB1A5E24D400C68E42 /* DEPromptForEpicEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPromptForEpicEvents.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
@@ -693,6 +698,7 @@
 				F412BC9D19CBB6650088F265 /* ViewAlert.xib */,
 				F4EEB04E19D241670072B683 /* ViewNoInternet.xib */,
 				F4EEB05E19D26D7B0072B683 /* ViewMadeComments.xib */,
+				F49BB8E71A5E23F100C68E42 /* PromptForViewEpicEventsView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -735,6 +741,7 @@
 		F437BFF219919B7200CF61E9 /* Posting */ = {
 			isa = PBXGroup;
 			children = (
+				F49BB8E91A5E24C300C68E42 /* Prompt For Epic Events */,
 				F43BBF171A5DC85E005DE199 /* Finished Posting */,
 				F448FE7F19A539D800645667 /* Address Autocomplete */,
 				F4AA5ADD199D90FB0035FEAF /* Sharing View */,
@@ -1011,6 +1018,15 @@
 				F485812019A2B85E00BD1CE7 /* DEViewChangeCity.m */,
 			);
 			name = "Change City";
+			sourceTree = "<group>";
+		};
+		F49BB8E91A5E24C300C68E42 /* Prompt For Epic Events */ = {
+			isa = PBXGroup;
+			children = (
+				F49BB8EA1A5E24D400C68E42 /* DEPromptForEpicEvents.h */,
+				F49BB8EB1A5E24D400C68E42 /* DEPromptForEpicEvents.m */,
+			);
+			name = "Prompt For Epic Events";
 			sourceTree = "<group>";
 		};
 		F4AA5ADD199D90FB0035FEAF /* Sharing View */ = {
@@ -1294,6 +1310,7 @@
 				F41277C619E611570092CD67 /* iTunesArtwork in Resources */,
 				F47EA7EC1A37D0F1005B7B79 /* Images.xcassets in Resources */,
 				F448FE6D19A4335A00645667 /* ViewSettingsAccount.xib in Resources */,
+				F49BB8E81A5E23F100C68E42 /* PromptForViewEpicEventsView.xib in Resources */,
 				F41277AF19E611570092CD67 /* appicon-72.png in Resources */,
 				F40A4F911A1687450041FDD2 /* maybe-indicator-icon.png in Resources */,
 				F41277C219E611570092CD67 /* Default-Portrait.png in Resources */,
@@ -1431,6 +1448,7 @@
 				F4CCBD81199BF30200532E9B /* DESector.m in Sources */,
 				F46B945519C1196B00B41D8C /* DEViewLocation.m in Sources */,
 				F4774F9F1995629500FCDE66 /* DELoginViewController.m in Sources */,
+				F49BB8EC1A5E24D400C68E42 /* DEPromptForEpicEvents.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

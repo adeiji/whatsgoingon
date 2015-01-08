@@ -33,11 +33,12 @@ struct TopMargin {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoData) name:NOTIFICATION_CENTER_NO_DATA object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_NO_DATA object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoDataInCategory:) name:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUserSavedEvents:) name:NOTIFICATION_CENTER_SAVED_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoSavedEvents) name:NOTIFICATION_CENTER_NO_SAVED_EVENTS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllPostFromScreen) name:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_PAST_EPIC_EVENTS_LOADED object:nil];
     
 }
 
@@ -48,12 +49,15 @@ struct TopMargin {
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [self addObservers];
     
-    if (_now)
+    if (!_shouldNotDisplayPosts)
     {
-        [DESyncManager getAllValuesForNow:YES];
-    }
-    else {
-        [DESyncManager getAllValuesForNow:NO];
+        if (_now)
+        {
+            [DESyncManager getAllValuesForNow:YES];
+        }
+        else {
+            [DESyncManager getAllValuesForNow:NO];
+        }
     }
     
     
@@ -272,9 +276,20 @@ struct TopMargin {
     }
 }
 
-- (void) displayNoData
+- (void) displayPastEpicEvents : (NSNotification *) notification
 {
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:2];
+    BOOL isPastEpicEvent = notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS];
+    UIView *view;
+
+    if (!isPastEpicEvent)
+    {
+        // If this method is being called because there are no events loaded
+        view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:2];
+    }
+    else {
+        view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:4];
+    }
+    
     [_scrollView addSubview:view];
     [self loadPosts];
     [self addEventsToScreen : view.frame.size.height + 15

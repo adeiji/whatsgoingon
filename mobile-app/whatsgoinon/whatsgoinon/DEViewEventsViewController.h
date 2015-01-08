@@ -32,6 +32,7 @@
 @property (strong, nonatomic) NSArray *posts;
 @property (strong, nonatomic) NSMutableArray *postsCopy;
 @property (strong, nonatomic) NSMutableArray *searchPosts;
+@property BOOL shouldNotDisplayPosts;
 @property BOOL overlayDisplayed;
 @property BOOL now;
 

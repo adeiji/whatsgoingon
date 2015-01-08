@@ -144,6 +144,12 @@
     [DESyncManager getAllSavedEvents];
 }
 
+- (IBAction)showPastEpicEvents:(id)sender {
+    
+    [DESyncManager loadEpicEvents:YES];
+    
+}
+
 - (void) drawRect:(CGRect)rect
 {
     

@@ -79,7 +79,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="showCreatePostView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="E6Q-Xt-Lvp"/>
+                                    <action selector="showPromptForEpicEventsView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qNf-1l-Z1A"/>
                                 </connections>
                             </button>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-WC-yP6" customClass="DEHappSnapTitleView">

@@ -11,10 +11,13 @@
 #import "DEUserManager.h"
 #import "DELoginViewController.h"
 
+@class DEPromptForEpicEvents;
+
 @interface DEMainViewController : UIViewController
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
+@property (strong, nonatomic) DEPromptForEpicEvents *promptEpicEventsView;
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender;
 

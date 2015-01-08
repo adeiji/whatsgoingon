@@ -58,4 +58,7 @@
 + (void) getPostById : (NSString *) eventId
              Comment : (BOOL) comment;
 
+
++ (void) loadEpicEvents : (BOOL) epicEvents;
+
 @end

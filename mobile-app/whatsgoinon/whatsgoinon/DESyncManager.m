@@ -261,7 +261,7 @@
         
         if ([objects count] == 0  && [myObjects count] == 0)
         {
-            [self loadBestEventsInPastWeekWithQuery : query SavedEvents:NO];
+            [self loadEpicEvents:NO];
         }
         else
         {
@@ -296,15 +296,14 @@
     return nil;
 }
 
-+ (void) loadBestEventsInPastWeekWithQuery : (PFQuery *) query
-                               SavedEvents : (BOOL) savedEvents
++ (void) loadEpicEvents : (BOOL) epicEvents
 {
     NSDate *startDate = [NSDate date];
     // Seconds in one week
     NSTimeInterval timeInterval = -60 * 60 * 24 * 7;
     startDate = [startDate dateByAddingTimeInterval:timeInterval];
     
-    query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThanOrEqualTo:startDate];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThanOrEqualTo:[NSDate date]];
@@ -314,12 +313,12 @@
         if (!error)
         {
             [[DEPostManager sharedManager] setPosts:objects];
-            if (!savedEvents)
+            if (!epicEvents)
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NO_DATA object:nil];
             }
             else {
-               [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NO_SAVED_EVENTS object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_PAST_EPIC_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS : [NSNumber numberWithBool:YES] }];
             }
             
             [[DEScreenManager sharedManager] stopActivitySpinner];

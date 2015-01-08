@@ -28,6 +28,7 @@
 - (IBAction)gotoAccountSettingsPage:(id)sender;
 - (IBAction)hideMenu:(id)sender;
 - (IBAction)showMyEvents:(id)sender;
+- (IBAction)showPastEpicEvents:(id)sender;
 
 - (void) setupView;
 @end
