@@ -405,7 +405,7 @@ struct TopMargin {
                  ShowBlank : (BOOL) showBlank
 {
     static CGFloat column = 0;
-    static int postCounter = 0;
+    static int postCounter = 1;
     static CGFloat columnOneMargin = 0;
     static CGFloat columnTwoMargin = 0;
     static CGFloat margin = 0;
@@ -452,7 +452,7 @@ struct TopMargin {
     if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING])
     {
         column = 0;
-        postCounter = 0;
+        postCounter = 1;
         columnOneMargin = 0;
         columnTwoMargin = 0;
         margin = 0;
@@ -521,8 +521,7 @@ struct TopMargin {
 
 
     [_scrollView addSubview:viewEventsView];
-
-
+    
     if (*column == 0)
     {
         *column = 1;

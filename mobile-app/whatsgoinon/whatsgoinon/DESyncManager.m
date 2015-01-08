@@ -98,20 +98,8 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {
-            // If this is the last run for later, then go ahead and show that we're finished loading
-            if (miles == 25 && !now)
-            {
-                //The find succeeded, now do something with it
-                [DESyncManager storeEvents : objects
-                                 PostsArray:postsArray
-                              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
-            }
-            else {  // The find succeeded, now store the events
-                [DESyncManager storeEvents : objects
-                                 PostsArray:postsArray
-                              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING];
-            }
-            
+            // Check to see if we need to store this data and finish loading
+            [DESyncManager addEventsToAlreadyRetrievedEvents : objects PostsArray:postsArray ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING];
             if (miles < 30)
             {
                 [DESyncManager getAllValuesWithinMilesForNow:now PostsArray:postsArray Location:location];
@@ -119,13 +107,12 @@
             else {
                 if (([[[DEPostManager sharedManager] posts] count] < 10 && now) || ([[[DEPostManager sharedManager] posts] count] == 0 && !now))
                 {
-                    // Get any values that are later
-                    blockQuery = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
-                    // Make sure that the values for later are only those within thirty miles of the location the user is checking for
-                    [blockQuery whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] userLocation] withinMiles:30];
-                    [self getValuesForLater:blockQuery
-                                    Objects:[[DEPostManager sharedManager] posts]
-                     ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
+                    [self getAllValuesForLaterNearbyWithQuery : blockQuery];
+                }
+                else {
+                    [DESyncManager addEventsToAlreadyRetrievedEvents : objects
+                                                           PostsArray:postsArray
+                                                        ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
                 }
                 // Set the miles to zero so that the next time the events are loaded we load them from all to 25 miles distance
                 miles = 0;
@@ -137,6 +124,18 @@
             NSLog(@"Error: %@", [error description]);
         }
     }];
+}
+
+
++ (void) getAllValuesForLaterNearbyWithQuery : (PFQuery *) query {
+    
+    // Get any values that are later
+    query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    // Make sure that the values for later are only those within thirty miles of the location the user is checking for
+    [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] userLocation] withinMiles:30];
+    [self getValuesForLater:query
+                    Objects:[[DEPostManager sharedManager] posts]
+              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
 }
 
 
@@ -177,9 +176,9 @@
 
 }
 // Store the events that we just recieved from Parse and notify the app
-+ (void) storeEvents : (NSArray *) objects
-          PostsArray : (NSMutableArray *) postsArray
-       ProcessStatus : (NSString *) process
++ (void) addEventsToAlreadyRetrievedEvents : (NSArray *) objects
+                                PostsArray : (NSMutableArray *) postsArray
+                             ProcessStatus : (NSString *) process
 {
     DEPostManager *sharedManager = [DEPostManager sharedManager];
     [postsArray addObjectsFromArray:objects];
@@ -268,7 +267,7 @@
         {
             //The find succeeded, now do something with it
             NSMutableArray *array = (NSMutableArray *) [[DEPostManager sharedManager] posts];
-            [DESyncManager storeEvents:objects PostsArray:array ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
+            [DESyncManager addEventsToAlreadyRetrievedEvents:objects PostsArray:array ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
         }
     }];
     
