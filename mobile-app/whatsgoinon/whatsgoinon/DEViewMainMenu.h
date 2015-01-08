@@ -13,13 +13,16 @@
 #import "DEAnimationManager.h"
 #import "DEScreenManager.h"
 #import "DEMainViewController.h"
+#import "DEPromptForEpicEventsViewController.h"
+
+@class DEPromptForEpicEvents;
 
 @interface DEViewMainMenu : UIView <UIActionSheetDelegate>
 
 @property (strong, nonatomic) UIView *viewToCutThrough;
 @property (weak, nonatomic) IBOutlet UITextField *txtSearch;
 @property (strong, nonatomic) IBOutletCollection(id) NSArray *viewCollection;
-
+@property (strong, nonatomic) UIView *superView;
 
 - (IBAction)goHome:(id)sender;
 - (IBAction)gotoPostPage:(id)sender;

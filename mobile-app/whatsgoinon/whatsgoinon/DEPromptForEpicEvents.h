@@ -13,5 +13,9 @@
 
 @interface DEPromptForEpicEvents : UIView
 
+@property (weak, nonatomic) IBOutlet UIButton *btnSure;
+@property (weak, nonatomic) IBOutlet UIButton *btnNoThanks;
+
+- (void) editButtons;
 
 @end

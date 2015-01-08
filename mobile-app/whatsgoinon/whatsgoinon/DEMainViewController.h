@@ -18,8 +18,10 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (strong, nonatomic) DEPromptForEpicEvents *promptEpicEventsView;
+@property (strong, nonatomic) UIView *viewToBeRemoved;
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender;
 
 - (IBAction)showCreatePostView:(id)sender;
+- (IBAction)showPromptForEpicEventsView:(id)sender;
 @end

@@ -130,22 +130,12 @@
 }
 
 
-- (void) showCreatePostView:(id)sender {
-    if ([self isLoggedIn : YES])
-    {
-        UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
-        DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+- (IBAction)showCreatePostView:(id)sender {
 
-        [self.navigationController pushViewController:createPostViewController animated:YES];
-    }
-    else {
-        UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
-        DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
-        
-        [self setNextScreenWithViewController:createPostViewController];
-    }
+    DEPromptForEpicEventsViewController *viewController = [[DEPromptForEpicEventsViewController alloc] initWithNibName:@"PromptForViewEpicEventsView" bundle:nil];
+    [self.navigationController pushViewController:viewController animated:YES];
     
-    [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
+    [self.navigationController setNavigationBarHidden:YES];
     
 }
 
@@ -167,44 +157,6 @@
     }
     
     return YES;
-}
-
-// Take the user straight to the Create Post View Controller
-- (IBAction)noThanksPressed:(id)sender {
-    
-    [self showCreatePostView:nil];
-    [DEAnimationManager fadeOutRemoveView:(UIView *) _promptEpicEventsView FromView:self.view];
-}
-
-- (IBAction)postingButtonPressed:(id)sender {
-    
-    UINavigationController *navController = self.navigationController;
-    BOOL viewEventsViewControllerInNavigationStack = NO;
-    for (UIViewController *viewController in [navController viewControllers]) {
-        
-        // Check to see if the View Events View Controller is in the navigation view controller stack, if not then push it to the screen, otherwise just show the past epic events
-        if ([viewController isKindOfClass:[DEViewEventsViewController class]])
-        {
-            viewEventsViewControllerInNavigationStack = YES;
-        }
-    }
-    
-    if (viewEventsViewControllerInNavigationStack)
-    {
-        [DESyncManager loadEpicEvents:YES];
-    }
-    else {
-        DEViewEventsViewController *veViewController = [[UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil] instantiateInitialViewController];
-        veViewController.shouldNotDisplayPosts = YES;
-        [navController pushViewController:veViewController animated:YES];
-        [DESyncManager loadEpicEvents:YES];
-    }
-    
-    [DEAnimationManager fadeOutRemoveView:(UIView *) _promptEpicEventsView FromView:self.view];
-}
-- (IBAction)showPromptForEpicEventsView:(id)sender {
-    _promptEpicEventsView = [[[NSBundle mainBundle] loadNibNamed:@"PromptForViewEpicEventsView" owner:self options:nil] firstObject];
-    [DEAnimationManager fadeOutWithView:self.view ViewToAdd:(UIView *) _promptEpicEventsView];
 }
 
 @end

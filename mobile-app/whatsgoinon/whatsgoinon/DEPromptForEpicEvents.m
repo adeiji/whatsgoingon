@@ -10,7 +10,10 @@
 
 @implementation DEPromptForEpicEvents
 
-
+- (void) editButtons {
+    [[_btnNoThanks layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    [[_btnSure layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+}
 
 
 @end

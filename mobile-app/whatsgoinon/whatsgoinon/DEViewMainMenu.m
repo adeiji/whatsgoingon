@@ -33,13 +33,12 @@
     [nc popToRootViewControllerAnimated:YES];
 }
 
-- (IBAction)gotoPostPage:(id)sender {
-    
+- (void) showPostPage {
     [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
     
     if ([self isLoggedIn:YES])
     {
-    
+        
         UINavigationController *nc = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
         
         if ([[DEScreenManager sharedManager] mainMenu])
@@ -55,6 +54,12 @@
         
         [self setNextScreenWithViewController:createPostViewController];
     }
+}
+
+- (IBAction)gotoPostPage:(id)sender {
+    DEPromptForEpicEventsViewController *viewController = [[DEPromptForEpicEventsViewController alloc] initWithNibName:@"PromptForViewEpicEventsView" bundle:nil] ;
+    [[DEScreenManager getMainNavigationController] pushViewController:viewController animated:YES];
+    [self hideMenu:nil];
 }
 
 - (BOOL) isLoggedIn : (BOOL) posting {

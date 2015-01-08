@@ -77,6 +77,7 @@ struct TopMargin {
     [self addGestureRecognizers];
     
     viewMainMenu = [[[NSBundle mainBundle] loadNibNamed:@"MainMenuView" owner:self options:nil] firstObject];
+    [viewMainMenu setSuperView:self.view];
     [viewMainMenu setupView];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     [screenManager setMainMenu:viewMainMenu];
@@ -217,6 +218,7 @@ struct TopMargin {
 - (void) viewWillDisappear:(BOOL)animated {
 
     [super viewWillDisappear:animated];
+    [self.view setHidden:YES];
     [self.scrollView removeFromSuperview];
     [self hideOrbView];
     
@@ -280,6 +282,8 @@ struct TopMargin {
 {
     BOOL isPastEpicEvent = notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS];
     UIView *view;
+    
+    [self removeAllPostFromScreen];
 
     if (!isPastEpicEvent)
     {

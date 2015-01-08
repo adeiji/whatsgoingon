@@ -25,7 +25,7 @@
         <!--Main View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="DEMainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vXZ-lx-hvc" customClass="DEMainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JBh-5V-QCE"/>
                         <viewControllerLayoutGuide type="bottom" id="bZu-wL-LDZ"/>
@@ -79,7 +79,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="showPromptForEpicEventsView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qNf-1l-Z1A"/>
+                                    <action selector="showCreatePostView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wAp-Lp-zaf"/>
                                 </connections>
                             </button>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-WC-yP6" customClass="DEHappSnapTitleView">

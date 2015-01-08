@@ -155,6 +155,7 @@
 		F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */ = {isa = PBXBuildFile; fileRef = F485812019A2B85E00BD1CE7 /* DEViewChangeCity.m */; };
 		F49BB8E81A5E23F100C68E42 /* PromptForViewEpicEventsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49BB8E71A5E23F100C68E42 /* PromptForViewEpicEventsView.xib */; };
 		F49BB8EC1A5E24D400C68E42 /* DEPromptForEpicEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8EB1A5E24D400C68E42 /* DEPromptForEpicEvents.m */; };
+		F49BB8EF1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8EE1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -405,6 +406,8 @@
 		F49BB8E71A5E23F100C68E42 /* PromptForViewEpicEventsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PromptForViewEpicEventsView.xib; sourceTree = "<group>"; };
 		F49BB8EA1A5E24D400C68E42 /* DEPromptForEpicEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPromptForEpicEvents.h; sourceTree = "<group>"; };
 		F49BB8EB1A5E24D400C68E42 /* DEPromptForEpicEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPromptForEpicEvents.m; sourceTree = "<group>"; };
+		F49BB8ED1A5E409400C68E42 /* DEPromptForEpicEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEPromptForEpicEventsViewController.h; sourceTree = "<group>"; };
+		F49BB8EE1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPromptForEpicEventsViewController.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
@@ -1025,6 +1028,8 @@
 			children = (
 				F49BB8EA1A5E24D400C68E42 /* DEPromptForEpicEvents.h */,
 				F49BB8EB1A5E24D400C68E42 /* DEPromptForEpicEvents.m */,
+				F49BB8ED1A5E409400C68E42 /* DEPromptForEpicEventsViewController.h */,
+				F49BB8EE1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m */,
 			);
 			name = "Prompt For Epic Events";
 			sourceTree = "<group>";
@@ -1385,6 +1390,7 @@
 				F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */,
 				F4CB0B9819AFF33600AABD12 /* DETwitterButton.m in Sources */,
 				F46B947219C355E500B41D8C /* DEActionButton.m in Sources */,
+				F49BB8EF1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m in Sources */,
 				F46B946A19C26E7900B41D8C /* DEAnimationManager.m in Sources */,
 				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
