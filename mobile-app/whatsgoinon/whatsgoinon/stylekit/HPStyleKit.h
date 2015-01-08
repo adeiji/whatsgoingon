@@ -20,5 +20,6 @@
 + (void) drawHappSnapIcon : (CGRect) frame;
 + (void) drawLargeCameraButton : (CGRect) frame;
 + (void) drawBinocularsWithFrame: (CGRect)frame;
++ (void)drawHappsnaplogoWithRectangle: (CGRect)rectangle;
 
 @end
