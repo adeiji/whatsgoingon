@@ -51,7 +51,7 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
     DEPostManager *postManager = [DEPostManager sharedManager];
 
     // Make sure that there actually is some data stored that we're pulling
-    NSMutableArray *savedPromptedForCommentEvents = (NSMutableArray *) [defaults objectForKey:eventsUserPromptedForComment];
+    NSMutableArray *savedPromptedForCommentEvents = [[defaults objectForKey:eventsUserPromptedForComment] mutableCopy];
     if (savedPromptedForCommentEvents != nil)
     {
         [postManager setPromptedForCommentEvents: savedPromptedForCommentEvents ];

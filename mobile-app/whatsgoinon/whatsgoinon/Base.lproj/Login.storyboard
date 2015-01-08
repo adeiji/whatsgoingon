@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -107,29 +108,25 @@
                                     <action selector="showCreatePostView:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="wAp-Lp-zaf"/>
                                 </connections>
                             </button>
-                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-WC-yP6" customClass="DEHappSnapTitleView">
-                                <rect key="frame" x="56" y="94" width="209" height="220"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happ-snap-title-menu.png" translatesAutoresizingMaskIntoConstraints="NO" id="Xsz-3y-bu1">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="222" id="Tzb-AE-Hq0">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="246"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="233" id="dqN-Bs-oIr">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="298"/>
-                                    </constraint>
+                                    <constraint firstAttribute="width" constant="195" id="MYL-gi-c0v"/>
+                                    <constraint firstAttribute="width" secondItem="Xsz-3y-bu1" secondAttribute="height" multiplier="80:69" id="b8H-R4-9MN"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Tzb-AE-Hq0"/>
-                                        <exclude reference="dqN-Bs-oIr"/>
+                                        <exclude reference="MYL-gi-c0v"/>
+                                        <exclude reference="b8H-R4-9MN"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="Tzb-AE-Hq0"/>
-                                        <include reference="dqN-Bs-oIr"/>
+                                        <include reference="MYL-gi-c0v"/>
+                                        <include reference="b8H-R4-9MN"/>
                                     </mask>
                                 </variation>
-                            </view>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.57000000000000006" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -144,23 +141,22 @@
                             <constraint firstItem="M8F-ic-t46" firstAttribute="height" secondItem="8fT-UB-jEz" secondAttribute="height" id="O5G-jj-M6R"/>
                             <constraint firstItem="8fT-UB-jEz" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="48" id="WVQ-Fc-sml"/>
                             <constraint firstItem="j5M-pl-9Ue" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="32" id="Wnf-ch-t5o"/>
+                            <constraint firstAttribute="centerY" secondItem="Xsz-3y-bu1" secondAttribute="centerY" constant="123" id="ZLg-D0-syT"/>
                             <constraint firstItem="M8F-ic-t46" firstAttribute="top" secondItem="j5M-pl-9Ue" secondAttribute="bottom" constant="10" id="agc-1r-AU6"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hwZ-WC-yP6" secondAttribute="trailing" constant="40" id="fsW-0T-9fh">
-                                <variation key="heightClass=regular-widthClass=compact" constant="61"/>
-                            </constraint>
                             <constraint firstItem="M8F-ic-t46" firstAttribute="height" secondItem="j5M-pl-9Ue" secondAttribute="height" id="gO9-3w-42b"/>
                             <constraint firstItem="M8F-ic-t46" firstAttribute="trailing" secondItem="8fT-UB-jEz" secondAttribute="trailing" id="ivv-q1-0v9"/>
-                            <constraint firstItem="hwZ-WC-yP6" firstAttribute="top" secondItem="JBh-5V-QCE" secondAttribute="bottom" constant="100" id="jz1-F6-xQ4">
-                                <variation key="heightClass=regular-widthClass=compact" constant="68"/>
-                            </constraint>
+                            <constraint firstAttribute="centerX" secondItem="Xsz-3y-bu1" secondAttribute="centerX" id="res-qv-7ed"/>
                             <constraint firstItem="bZu-wL-LDZ" firstAttribute="top" secondItem="8fT-UB-jEz" secondAttribute="bottom" constant="38" id="t4O-Fw-l0v"/>
                             <constraint firstItem="8fT-UB-jEz" firstAttribute="top" secondItem="M8F-ic-t46" secondAttribute="bottom" constant="11" id="tep-j9-yMF"/>
                             <constraint firstItem="8fT-UB-jEz" firstAttribute="top" secondItem="M8F-ic-t46" secondAttribute="bottom" constant="11" id="zSz-VY-NVh"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Xsz-3y-bu1"/>
+                            </mask>
                             <mask key="constraints">
-                                <exclude reference="fsW-0T-9fh"/>
-                                <exclude reference="jz1-F6-xQ4"/>
+                                <exclude reference="ZLg-D0-syT"/>
+                                <exclude reference="res-qv-7ed"/>
                                 <exclude reference="9KW-J2-jiv"/>
                                 <exclude reference="Wnf-ch-t5o"/>
                                 <exclude reference="4Q5-an-FFh"/>
@@ -175,9 +171,12 @@
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="Xsz-3y-bu1"/>
+                            </mask>
                             <mask key="constraints">
-                                <include reference="fsW-0T-9fh"/>
-                                <include reference="jz1-F6-xQ4"/>
+                                <include reference="ZLg-D0-syT"/>
+                                <include reference="res-qv-7ed"/>
                                 <exclude reference="2EF-d5-eaH"/>
                                 <include reference="9KW-J2-jiv"/>
                                 <include reference="Wnf-ch-t5o"/>
@@ -201,7 +200,6 @@
                     <navigationItem key="navigationItem" id="OMo-1V-X28"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="titleView" destination="hwZ-WC-yP6" id="lJ1-Vx-xKo"/>
                         <outletCollection property="buttons" destination="j5M-pl-9Ue" id="2cv-NN-ZKm"/>
                         <outletCollection property="buttons" destination="M8F-ic-t46" id="Cn5-dq-bGV"/>
                         <outletCollection property="buttons" destination="8fT-UB-jEz" id="7PR-mk-rYn"/>
@@ -1432,6 +1430,7 @@
     </scenes>
     <resources>
         <image name="email-icon.png" width="110" height="69"/>
+        <image name="happ-snap-title-menu.png" width="3248" height="2957"/>
         <image name="password-icon.png" width="77" height="108"/>
     </resources>
 </document>

@@ -157,6 +157,7 @@
 		F49BB8EC1A5E24D400C68E42 /* DEPromptForEpicEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8EB1A5E24D400C68E42 /* DEPromptForEpicEvents.m */; };
 		F49BB8EF1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8EE1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m */; };
 		F49BB8F21A5ED12300C68E42 /* DEBinoculars.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8F11A5ED12300C68E42 /* DEBinoculars.m */; };
+		F49BB8F41A5F118900C68E42 /* happ-snap-title-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = F49BB8F31A5F118900C68E42 /* happ-snap-title-menu.png */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -411,6 +412,7 @@
 		F49BB8EE1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPromptForEpicEventsViewController.m; sourceTree = "<group>"; };
 		F49BB8F01A5ED12300C68E42 /* DEBinoculars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEBinoculars.h; sourceTree = "<group>"; };
 		F49BB8F11A5ED12300C68E42 /* DEBinoculars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEBinoculars.m; sourceTree = "<group>"; };
+		F49BB8F31A5F118900C68E42 /* happ-snap-title-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "happ-snap-title-menu.png"; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
@@ -1119,6 +1121,7 @@
 				F47C8A7A1A58C70400757918 /* error-01.png */,
 				F439AEEC1A44BE0D00D24356 /* backgrounds */,
 				F47EA8001A439C7D005B7B79 /* happ-snap-logo-in-app.png */,
+				F49BB8F31A5F118900C68E42 /* happ-snap-title-menu.png */,
 				F47EA7ED1A37E016005B7B79 /* splashimage.png */,
 				F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */,
 				F412770919E4F8390092CD67 /* HappSnap-image-only-logo.png */,
@@ -1300,6 +1303,7 @@
 				F437BFBE199048AF00CF61E9 /* WelcomeEventsView.xib in Resources */,
 				F41277B719E611570092CD67 /* appicon-Small.png in Resources */,
 				F412BC9E19CBB6650088F265 /* ViewAlert.xib in Resources */,
+				F49BB8F41A5F118900C68E42 /* happ-snap-title-menu.png in Resources */,
 				F4EEB05F19D26D7B0072B683 /* ViewMadeComments.xib in Resources */,
 				F437BFC81990500500CF61E9 /* Event.storyboard in Resources */,
 				F439AEEB1A44BDDC00D24356 /* HappSnap-bg.png in Resources */,
