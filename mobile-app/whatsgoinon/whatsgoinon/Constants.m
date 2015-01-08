@@ -31,6 +31,7 @@ NSString *const PARSE_CLASS_NAME_REPORT = @"Report";
 NSString *const PARSE_CLASS_EVENT_NUMBER_GOING = @"numberGoing";
 NSString *const PARSE_CLASS_EVENT_USERNAME = @"username";
 NSString *const PARSE_CLASS_EVENT_VIEW_COUNT = @"viewCount";
+NSString *const PARSE_CLASS_EVENT_THUMBS_UP_COUNT = @"thumbsUpCount";
 
 // Parse - Report
 

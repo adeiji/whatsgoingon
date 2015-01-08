@@ -31,7 +31,7 @@
                         Comment : (NSString *) comment
                          Rating : (NSInteger) rating;
 + (void) getNumberOfPostByUser : (NSString *) username;
-+ (void) updateViewCountForPost : (PFObject *) post;
++ (void) saveUpdatedPFObjectToServer : (PFObject *) post;
 /*
  
  Get all the saved events that the user has selected has maybe or going

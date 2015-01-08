@@ -48,6 +48,7 @@
     post.comments = object[PARSE_CLASS_EVENT_COMMENTS];
     post.username = object[PARSE_CLASS_EVENT_USERNAME];
     post.viewCount = object[PARSE_CLASS_EVENT_VIEW_COUNT];
+    post.thumbsUpCount = object[PARSE_CLASS_EVENT_THUMBS_UP_COUNT];
     
     return post;
 }

@@ -147,6 +147,7 @@
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
     
+    [query orderByAscending:PARSE_CLASS_EVENT_THUMBS_UP_COUNT];
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query orderByDescending:PARSE_CLASS_EVENT_VIEW_COUNT];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
@@ -414,6 +415,7 @@
     }];
 }
 
+
 + (void) saveEventAsMiscategorizedWithEventId : (NSString *) objectId
                                      Category : (NSString *) category
 {
@@ -510,18 +512,17 @@
     return images;
 }
 
-+ (void) updateViewCountForPost : (PFObject *) post {
++ (void) saveUpdatedPFObjectToServer : (PFObject *) post {
     
     [post saveEventually:^(BOOL succeeded, NSError *error) {
         if (succeeded)
         {
-            NSLog(@"Saved the View Count for object: %@", post);
+            NSLog(@"The post object was saved successfuly: %@", post.objectId);
         }
         else {
-            NSLog(@"Error saving the view count: %@", [error description]);
+            NSLog(@"Error saving the post object: %@", [error description]);
         }
     }];
-    
 }
 
 #warning This should not be here, it needs to be moved to the Screen Manager

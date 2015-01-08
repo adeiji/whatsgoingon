@@ -103,6 +103,21 @@
      //[comment appendString:[options objectAtIndex:row]];
 }
 
+- (void) incrementThumbsUpCount
+{
+
+    PFObject *myObject = [[[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"objectId = %@", post.objectId]] firstObject];
+    NSInteger thumbsUpCount = [post.thumbsUpCount integerValue];
+    thumbsUpCount ++;
+    post.thumbsUpCount = [NSNumber numberWithInteger:thumbsUpCount];
+    myObject[PARSE_CLASS_EVENT_THUMBS_UP_COUNT] = post.thumbsUpCount;
+    
+    NSNumber *loaded = myObject[@"loaded"];
+    myObject[@"loaded"] = @NO;
+    [DESyncManager saveUpdatedPFObjectToServer:myObject];
+    myObject[@"loaded"] = loaded;
+}
+
 - (IBAction)submitComment:(id)sender {
     
     // Need to check and make sure that the user has picked thumbs up or down.  If not then prompt the user to do so.
@@ -110,6 +125,11 @@
     {
         [DESyncManager saveCommentWithEventId:[post objectId] Comment:_txtComment.text Rating:ratingChange];
         [DEScreenManager hideCommentView];
+        //Thumbs up
+        if (ratingChange == 5)
+        {
+            [self incrementThumbsUpCount];
+        }
     }
     else {
         [_lblPromptEntry setHidden:NO];

@@ -184,7 +184,7 @@
     _postObject[PARSE_CLASS_EVENT_VIEW_COUNT] = _post.viewCount;
     // We can't save this as loaded to the server, otherwise it won't load again
     _postObject[@"loaded"] = @NO;
-    [DESyncManager updateViewCountForPost:_postObject];
+    [DESyncManager saveUpdatedPFObjectToServer:_postObject];
     _postObject[@"loaded"] = @YES;
     self.lblViewCount.text = [_post.viewCount stringValue];
 }
