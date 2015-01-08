@@ -358,6 +358,7 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     if ([[segue identifier] isEqualToString:@"viewMap"])
     {
         DEEventViewController *mapViewController = [segue destinationViewController];
@@ -365,6 +366,7 @@
         mapViewController.post = _post;
         mapViewController.isPreview = _isPreview;
     }
+
 }
 
 - (IBAction)setEventAsGoing:(id)sender {
