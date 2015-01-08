@@ -136,31 +136,10 @@
         eventViewController.isPreview = YES;
         eventViewController.post = _post;
         [self savePostDetails];
-        _post.website = website;
         [[DEPostManager sharedManager] setCurrentPost:_post];
         [self.navigationController pushViewController:eventViewController animated:YES];
     }
 }
-
-- (void) saveNewInfoToPost {
-    DECreatePostView *view = self.createPostViewTwo;
-    
-    // Development
-    _post.title = view.txtTitle.text;
-    _post.cost = [NSNumber numberWithDouble:[view.txtCost.text doubleValue]];
-    _post.images = [[[DEPostManager sharedManager] currentPost] images];
-    
-    NSString *description = [NSString stringWithFormat:@"%@ /n%@", _createPostViewTwo.txtDescription.text, _createPostViewTwo.txtWebsite.text];
-    _post.myDescription = description;
-    
-    _post.active = YES;
-    _post.quickDescription = view.txtQuickDescription.text;
-    _post.images = [[[DEPostManager sharedManager] currentPost] images];
-    
-    [[DEPostManager sharedManager] setCurrentPost:_post];
-
-}
-
 
 - (IBAction)displayInfo:(id)sender {
     
@@ -427,22 +406,13 @@ Display the second screen for the post details
     post.images = _post.images;
     NSNumber * cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
     post.cost = cost;
-    post.quickDescription = _createPostViewTwo.txtQuickDescription.text;
-    website = _createPostViewTwo.txtWebsite.text;
-    NSString *description = [NSString stringWithFormat:@"%@", _createPostViewTwo.txtDescription.text];
-
-    post.myDescription = description;
-    
+    post.website = _createPostViewTwo.txtWebsite.text;
     [postManager setCurrentPost:post];
 }
 
-- (void) loadPostDetails
-{
-    DEPost *post = [[DEPostManager sharedManager] currentPost];
-    _createPostViewTwo.txtTitle.text = post.title;
-    
+- (void) loadImages {
     // Reload the images if there are any images to load
-    NSArray *images = (NSMutableArray *) post.images;
+    NSArray *images = (NSMutableArray *) [[[DEPostManager sharedManager] currentPost] images];
     
     if ([images count] != 0)
     {
@@ -459,7 +429,7 @@ Display the second screen for the post details
                 UIButton *button = (UIButton *) [_createPostViewTwo viewWithTag:i];
                 NSData *imageData = images[i];
                 UIImage *image = [UIImage imageWithData:imageData];
-
+                
                 if (image != nil)
                 {
                     [button setBackgroundImage:image forState:UIControlStateNormal];
@@ -467,6 +437,14 @@ Display the second screen for the post details
             }
         }
     }
+}
+
+- (void) loadPostDetails
+{
+    DEPost *post = [[DEPostManager sharedManager] currentPost];
+    _createPostViewTwo.txtTitle.text = post.title;
+    // Reload any images that were taken
+    [self loadImages];
     
     if (![post.cost isEqual:@0] && post.cost != nil)    // If the cost is not free or has not been entered yet
     {
@@ -478,11 +456,10 @@ Display the second screen for the post details
     }
     _createPostViewTwo.txtQuickDescription.text = post.quickDescription;
     _createPostViewTwo.txtDescription.text = post.myDescription;
-
+    _createPostViewTwo.txtTitle.text = post.title;
     [_createPostViewTwo.txtQuickDescription validate];
     [_createPostViewTwo.txtDescription validate];
-    
-    _createPostViewTwo.txtWebsite.text = website;
+    _createPostViewTwo.txtWebsite.text = post.website;
 }
 
 
@@ -492,20 +469,22 @@ Display the second screen for the post details
 {
     DEAddValueViewController *addValueViewController = [DEAddValueViewController new];
     [self savePostDetails];
+
+    DEAddValueView *view = (DEAddValueView *) addValueViewController.view;
+    
     // Let the Add Value View Controller knowh which text field was pressed so that the text displayed will be different
     if ([textField isEqual:_createPostViewTwo.txtQuickDescription])
     {
         [addValueViewController setIsQuickDescription:YES];
+        view.txtValue.text = [[DEPostManager sharedManager] currentPost].quickDescription;
     }
     else
     {
         [addValueViewController setIsQuickDescription:NO];
+        view.txtValue.text = [[DEPostManager sharedManager] currentPost].myDescription;
     }
     
     [self.navigationController pushViewController:addValueViewController animated:YES];
-
-    DEAddValueView *view = (DEAddValueView *) addValueViewController.view;
-    view.txtValue.text = textField.text;
     
     if ([textField.text isEqualToString:@""])
     {
