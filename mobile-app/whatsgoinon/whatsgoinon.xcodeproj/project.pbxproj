@@ -6,6 +6,19 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		F49BB8F51A5F1F3000C68E42 /* multiple_devices */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F49BB8F61A5F1F3000C68E42 /* Build configuration list for PBXAggregateTarget "multiple_devices" */;
+			buildPhases = (
+			);
+			dependencies = (
+			);
+			name = multiple_devices;
+			productName = multiple_devices;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1ADD77F251EC4AB29E379A83 /* libPods-whatsgoinon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36964091027C46C399137B26 /* libPods-whatsgoinon.a */; };
 		F401BBFD1A35473400AE5BB7 /* DEMaybeCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = F401BBFC1A35473400AE5BB7 /* DEMaybeCheckmarkView.m */; };
@@ -1229,6 +1242,9 @@
 					F437BFA11990452000CF61E9 = {
 						TestTargetID = F437BF801990452000CF61E9;
 					};
+					F49BB8F51A5F1F3000C68E42 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 				};
 			};
 			buildConfigurationList = F437BF7C1990452000CF61E9 /* Build configuration list for PBXProject "whatsgoinon" */;
@@ -1246,6 +1262,7 @@
 			targets = (
 				F437BF801990452000CF61E9 /* whatsgoinon */,
 				F437BFA11990452000CF61E9 /* whatsgoinonTests */,
+				F49BB8F51A5F1F3000C68E42 /* multiple_devices */,
 			);
 		};
 /* End PBXProject section */
@@ -1674,6 +1691,20 @@
 			};
 			name = Release;
 		};
+		F49BB8F71A5F1F3000C68E42 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F49BB8F81A5F1F3000C68E42 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1703,6 +1734,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		F49BB8F61A5F1F3000C68E42 /* Build configuration list for PBXAggregateTarget "multiple_devices" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F49BB8F71A5F1F3000C68E42 /* Debug */,
+				F49BB8F81A5F1F3000C68E42 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

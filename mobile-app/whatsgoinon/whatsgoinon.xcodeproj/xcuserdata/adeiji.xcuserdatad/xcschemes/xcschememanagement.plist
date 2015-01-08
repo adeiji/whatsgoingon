@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>multiple_devices.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>whatsgoinon.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>F437BFA11990452000CF61E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F49BB8F51A5F1F3000C68E42</key>
 		<dict>
 			<key>primary</key>
 			<true/>
