@@ -15,7 +15,7 @@
 
 @end
 
-#define POST_HEIGHT 278
+#define POST_HEIGHT 305
 #define POST_WIDTH 140
 #define IPHONE_DEVICE_WIDTH 320
 #define TOP_MARGIN 20
@@ -518,13 +518,14 @@ struct TopMargin {
        PostCounter : (int *) postCounter
          ShowBlank : (BOOL) showBlank
 {
-    CGFloat viewEventsViewFrameHeight = 278;
+    CGFloat viewEventsViewFrameHeight = POST_HEIGHT;
     DEPost *post = [DEPost getPostFromPFObject:obj];
     obj[@"loaded"] = @YES;
     
     DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
     [viewEventsView renderViewWithPost:post
                              ShowBlank:showBlank];
+    [viewEventsView setPostObject:obj];
 
     
     CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
@@ -633,6 +634,7 @@ struct TopMargin {
     // Get the heightDifference from what it's original size is and what it's size will be
     CGFloat heightDifference = ceilf(sizeThatFitsTextView.height) - [view lblSubtitle].frame.size.height;
     
+    NSLog(@"The height difference for the label is: %f", heightDifference);
     return heightDifference;
 }
 

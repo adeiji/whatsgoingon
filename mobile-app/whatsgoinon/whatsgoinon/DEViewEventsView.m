@@ -130,6 +130,7 @@
     self.lblTitle.text = post.title;
     self.lblAddress.text = post.address;
     self.lblSubtitle.text = post.quickDescription;
+    self.lblViewCount.text = [post.viewCount stringValue];
     [self displayDistanceToLocationWithPost : post];
     
     _post = myPost;
@@ -174,9 +175,24 @@
     });
 
 }
+// Increment the number of views by one for this post
+- (void) updateViewCount {
+    //Every time the user clicks on the event, we update its view count
+    NSInteger viewCount = [_post.viewCount integerValue];
+    viewCount ++;
+    _post.viewCount = [NSNumber numberWithInteger:viewCount];
+    _postObject[PARSE_CLASS_EVENT_VIEW_COUNT] = _post.viewCount;
+    // We can't save this as loaded to the server, otherwise it won't load again
+    _postObject[@"loaded"] = @NO;
+    [DESyncManager updateViewCountForPost:_postObject];
+    _postObject[@"loaded"] = @YES;
+    self.lblViewCount.text = [_post.viewCount stringValue];
+}
 
 // When the user taps this event it will take them to a screen to view all the details of the event.
 - (void) displayEventDetails : (id) sender {
+    [self updateViewCount];
+    
     UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
     
     DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateInitialViewController];
@@ -198,7 +214,8 @@
     {
         eventViewController.isMaybeGoing = YES;
     }
-}
+    
 
+}
 
 @end

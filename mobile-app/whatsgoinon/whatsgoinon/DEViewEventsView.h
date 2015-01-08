@@ -23,9 +23,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblDistance;
 @property (weak, nonatomic) IBOutlet UILabel *lblSubtitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblNumGoing;
+@property (weak, nonatomic) IBOutlet UILabel *lblViewCount;
 @property BOOL isImageLoaded;
 @property (weak, nonatomic) DEEventsTimeline *overlayView;
 @property (strong, nonatomic) DEPost *post;
+@property (strong, nonatomic) PFObject *postObject;
 
 - (void) renderViewWithPost : (DEPost *) post
                   ShowBlank : (BOOL) showBlank;

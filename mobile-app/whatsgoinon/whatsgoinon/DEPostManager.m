@@ -47,6 +47,7 @@
                             Address:(NSString *)address
                    QuickDescription:(NSString *)quickDescription
                            Username:(NSString *) username
+                          ViewCount:(NSNumber *) viewCount
 {
     DEPost *post = [DEPost new];
     post.address = address;
@@ -63,6 +64,7 @@
     post.numberGoing = [NSNumber numberWithInt:0];
     post.comments = [NSArray new];
     post.username = [[PFUser currentUser] username];
+    post.viewCount = viewCount;
     
     return post;
 }

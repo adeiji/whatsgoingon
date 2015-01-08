@@ -19,6 +19,7 @@
         _cost = [NSNumber new];
         _numberGoing = [NSNumber numberWithInt:0];
         _comments = [NSArray new];
+        _viewCount = [NSNumber numberWithInt:0];
     }
     
     return self;
@@ -46,6 +47,7 @@
     post.numberGoing = object[PARSE_CLASS_EVENT_NUMBER_GOING];
     post.comments = object[PARSE_CLASS_EVENT_COMMENTS];
     post.username = object[PARSE_CLASS_EVENT_USERNAME];
+    post.viewCount = object[PARSE_CLASS_EVENT_VIEW_COUNT];
     
     return post;
 }

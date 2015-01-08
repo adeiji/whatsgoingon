@@ -19,5 +19,6 @@
 + (void) drawMaybeCheckmark;
 + (void) drawHappSnapIcon : (CGRect) frame;
 + (void) drawLargeCameraButton : (CGRect) frame;
++ (void) drawBinocularsWithFrame: (CGRect)frame;
 
 @end

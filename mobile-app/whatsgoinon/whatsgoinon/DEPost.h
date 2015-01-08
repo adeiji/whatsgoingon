@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSNumber *numberGoing;
 @property (strong, nonatomic) NSString *username;
 @property (strong, nonatomic) NSString *website;
+@property (strong, nonatomic) NSNumber *viewCount;
 @property BOOL active;
 
 + (DEPost *) getPostFromPFObject : (PFObject *) object;
