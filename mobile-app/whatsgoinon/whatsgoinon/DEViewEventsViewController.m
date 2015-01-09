@@ -294,11 +294,8 @@ struct TopMargin {
     else {
         view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:4];
     }
-    
-    CGRect frame = view.frame;
-    frame.size.width = _scrollView.frame.size.width;
-    [view setFrame:frame];
-    
+
+    [self moveViewToCenterOfScrollViewView:view];
     [_scrollView addSubview:view];
     [self loadPosts];
     [self addEventsToScreen : view.frame.size.height + 15
@@ -313,6 +310,12 @@ struct TopMargin {
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
     orbView.hidden = YES;
+}
+
+- (void) moveViewToCenterOfScrollViewView : (UIView *) view {
+    CGPoint center = view.center;
+    center.x = _scrollView.center.x;
+    [view setCenter:center];
 }
 
 - (void) displayNoDataInCategory : (NSNotification *) notification
