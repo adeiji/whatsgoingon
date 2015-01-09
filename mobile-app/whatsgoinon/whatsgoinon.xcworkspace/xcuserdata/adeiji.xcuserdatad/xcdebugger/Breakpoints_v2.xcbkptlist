@@ -37,51 +37,5 @@
             endingLineNumber = "1">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "whatsgoinon/DEEventViewController.m"
-            timestampString = "442461893.271681"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "-showView:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[DEEventViewController showView:]"
-                  moduleName = "whatsgoinon"
-                  urlString = "file:///Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/whatsgoinon/DEEventViewController.m"
-                  timestampString = "442461895.437327"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "798">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__34-[DEEventViewController showView:]_block_invoke"
-                  moduleName = "whatsgoinon"
-                  urlString = "file:///Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/whatsgoinon/DEEventViewController.m"
-                  timestampString = "442461895.437489"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

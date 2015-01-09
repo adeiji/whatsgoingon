@@ -18,6 +18,8 @@
 #define GOOGLE_MAPS_APP_URL @"comgooglemaps://?saddr=&daddr=%@&center=%f,%f&zoom=10"
 #define APPLE_MAPS_APP_URL @"http://maps.apple.com/?daddr=%@&saddr=%@"
 
+const int heightConstraintConstant = 62;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -187,14 +189,10 @@
     UIView *view = [_eventView detailsView];
     [view addSubview:newView];
 
-//    CGRect frame = newView.frame;
-//    frame.size.width = view.superview.frame.size.width;
-//    [newView setFrame:frame];
-
-    
-    [newView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(view);
-    }];
+    CGRect frame = newView.frame;
+    frame.size.width = view.frame.size.width;
+    frame.size.height = view.frame.size.height;
+    [newView setFrame:frame];
     
     ((UIScrollView *) view).contentSize = newView.frame.size;
     if ([newView isKindOfClass:[DEViewComments class]])
@@ -274,6 +272,15 @@
 }
 
 
+- (void) showFlagIfAmbassadorDetailsView : (DEEventDetailsView *) detailsView {
+    if (userIsAmbassador)
+    {
+        detailsView.ambassadorFlagView.hidden = NO;
+    }
+    else {
+        detailsView.ambassadorFlagView.hidden = YES;
+    }
+}
 
 #pragma mark - Button Action Methods
 
@@ -284,14 +291,8 @@
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
     
     [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
-    
-    if (userIsAmbassador)
-    {
-        detailsView.ambassadorFlagView.hidden = NO;
-    }
-    else {
-        detailsView.ambassadorFlagView.hidden = YES;
-    }
+    [self showFlagIfAmbassadorDetailsView:detailsView];
+
     if (_isPreview && ![_post.website isEqualToString:@""])
     {
         NSString *temporaryDescription = [NSString stringWithFormat:@"%@\n %@", _post.myDescription, _post.website];
@@ -300,15 +301,7 @@
     else {
         [[detailsView txtDescription] setText:_post.myDescription];
     }
-    // Set the height of the UITextView for the description to the necessary height to fit all the information
-    CGSize sizeThatFitsTextView = [[detailsView txtDescription] sizeThatFits:CGSizeMake([detailsView txtDescription].frame.size.width, 1000)];
-    CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - [detailsView heightConstraint].constant;
-    [detailsView heightConstraint].constant = ceilf(sizeThatFitsTextView.height);
-    
-    CGRect frame = detailsView.frame;
-    frame.size.height += heightDifference;
-    [detailsView setFrame:frame];
-    [[_eventView detailsView] setContentSize:detailsView.frame.size];
+    [self adjustDetailsViewHeightDetailsView:detailsView];
     
     [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
     [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
@@ -324,6 +317,19 @@
     }
     
     [[detailsView lblTimeUntilStartsOrEnds] setText:[DEPostManager getTimeUntilStartOrFinishFromPost:_post]];
+}
+
+- (void) adjustDetailsViewHeightDetailsView : (DEEventDetailsView *) detailsView {
+    
+    // Set the height of the UITextView for the description to the necessary height to fit all the information
+    CGSize sizeThatFitsTextView = [[detailsView txtDescription] sizeThatFits:CGSizeMake([detailsView txtDescription].frame.size.width, 1000)];
+    CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - heightConstraintConstant;
+    [detailsView heightConstraint].constant = ceilf(sizeThatFitsTextView.height);
+    
+    CGRect frame = detailsView.frame;
+    frame.size.height += heightDifference / 1.5;
+    [detailsView setFrame:frame];
+    [[_eventView detailsView] setContentSize:detailsView.frame.size];
 }
 
 

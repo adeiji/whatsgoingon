@@ -21,4 +21,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnUsername;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 
+
 @end
