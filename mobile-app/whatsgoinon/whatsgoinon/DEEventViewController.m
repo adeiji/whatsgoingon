@@ -31,7 +31,9 @@
     [[[_eventView btnMainImage] layer] setBorderWidth:2.0f];
     [[_eventView lblTitle] setText:_post.title];
     [_lblEventTitle setText:_post.title];
-    
+    CGRect frame = [[_eventView detailsView] frame];
+    frame.size.width = _eventView.frame.size.width;
+    [[_eventView detailsView] setFrame:frame];
     if (_isPreview)
     {
         [self loadPreview];
@@ -178,6 +180,11 @@
     
     UIView *view = [_eventView detailsView];
     [view addSubview:newView];
+
+    CGRect frame = newView.frame;
+    frame.size.width = view.superview.frame.size.width;
+    [newView setFrame:frame];
+    
     ((UIScrollView *) view).contentSize = newView.frame.size;
     if ([newView isKindOfClass:[DEViewComments class]])
     {

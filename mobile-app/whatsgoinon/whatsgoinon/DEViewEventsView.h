@@ -31,9 +31,7 @@
 
 - (void) renderViewWithPost : (DEPost *) post
                   ShowBlank : (BOOL) showBlank;
-- (void) refreshView;
 - (void) loadImage;
-- (void) removeImage;
 - (void) showImage;
 - (void) hideImage;
 @end
