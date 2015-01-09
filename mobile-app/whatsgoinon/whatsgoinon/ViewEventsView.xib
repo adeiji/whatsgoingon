@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DEViewEventsViewController"/>
@@ -20,7 +21,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie at the park" lineBreakMode="tailTruncation" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="129" translatesAutoresizingMaskIntoConstraints="NO" id="kW7-t4-DET">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie at the park" lineBreakMode="tailTruncation" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="129" translatesAutoresizingMaskIntoConstraints="NO" id="kW7-t4-DET">
                     <rect key="frame" x="6" y="161" width="129" height="37"/>
                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -48,7 +49,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJ0-LB-RQz">
                     <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="140" id="B2A-dW-RKa"/>
+                        <constraint firstAttribute="width" secondItem="MJ0-LB-RQz" secondAttribute="height" multiplier="1:1" id="Rn1-4e-N9M"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1c-VQ-fcl" customClass="DEViewDistance">
@@ -186,26 +187,47 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Oh man...I hate to break it to you, but we can't find anything near you :(" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="TaV-DE-mMd">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Oh man...I hate to break it to you, but we can't find anything near you :(" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="TaV-DE-mMd">
                     <rect key="frame" x="20" y="15" width="280" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="1uS-5c-OSK"/>
+                        <constraint firstAttribute="height" constant="55" id="NL7-ks-qas"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Maybe you can be the first to post something cool around here!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="cN9-Yo-zwV">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maybe you can be the first to post something cool around here!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="cN9-Yo-zwV">
                     <rect key="frame" x="20" y="78" width="280" height="55"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="55" id="EAF-g2-E5a"/>
+                        <constraint firstAttribute="width" constant="280" id="num-wL-vsL"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Check out the posts that did the best in the last week for some inspiration maybe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="UZG-b0-xJD">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check out the posts that did the best in the last week for some inspiration maybe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="UZG-b0-xJD">
                     <rect key="frame" x="20" y="141" width="280" height="66"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="66" id="7If-I7-KR1"/>
+                        <constraint firstAttribute="width" constant="280" id="ZSx-K9-nAC"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="UZG-b0-xJD" firstAttribute="top" secondItem="cN9-Yo-zwV" secondAttribute="bottom" constant="8" id="1ql-fl-Y1x"/>
+                <constraint firstAttribute="centerY" secondItem="cN9-Yo-zwV" secondAttribute="centerY" constant="1" id="3kb-DE-ATU"/>
+                <constraint firstItem="cN9-Yo-zwV" firstAttribute="top" secondItem="TaV-DE-mMd" secondAttribute="bottom" constant="8" id="GvR-48-9hf"/>
+                <constraint firstAttribute="centerX" secondItem="cN9-Yo-zwV" secondAttribute="centerX" id="Hz6-vf-mEp"/>
+                <constraint firstAttribute="trailing" secondItem="UZG-b0-xJD" secondAttribute="trailing" constant="20" id="Whn-Lm-GVT"/>
+                <constraint firstAttribute="centerX" secondItem="UZG-b0-xJD" secondAttribute="centerX" id="bkt-Wv-Fk2"/>
+                <constraint firstAttribute="centerX" secondItem="TaV-DE-mMd" secondAttribute="centerX" id="fIr-bb-XIZ"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
@@ -213,26 +235,47 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="358"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pick a category from the Orb to start your magical journey" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="FNC-bU-V6j">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick a category from the Orb to start your magical journey" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="FNC-bU-V6j">
                     <rect key="frame" x="20" y="116" width="280" height="96"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="96" id="6XC-lu-qLe"/>
+                        <constraint firstAttribute="width" constant="280" id="v9q-qk-ING"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Find some cool events that you are interested in and mark them as either Going or Maybe!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GUS-x7-aOT">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find some cool events that you are interested in and mark them as either Going or Maybe!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GUS-x7-aOT">
                     <rect key="frame" x="20" y="207" width="280" height="133"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="133" id="0FP-lt-aVJ"/>
+                        <constraint firstAttribute="width" constant="280" id="V2b-4S-44t"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sorry, it seems you have no events that you're going to" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="dOe-Aa-lRc">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, it seems you have no events that you're going to" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="dOe-Aa-lRc">
                     <rect key="frame" x="20" y="12" width="280" height="96"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="4vA-Ec-due"/>
+                        <constraint firstAttribute="height" constant="96" id="k0Q-8h-q2v"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="FNC-bU-V6j" firstAttribute="top" secondItem="dOe-Aa-lRc" secondAttribute="bottom" constant="8" id="KuL-O4-eke"/>
+                <constraint firstAttribute="centerX" secondItem="dOe-Aa-lRc" secondAttribute="centerX" id="No7-38-ypv"/>
+                <constraint firstAttribute="centerX" secondItem="FNC-bU-V6j" secondAttribute="centerX" id="eUE-65-J6g"/>
+                <constraint firstAttribute="centerY" secondItem="FNC-bU-V6j" secondAttribute="centerY" constant="15" id="guj-6c-CQE"/>
+                <constraint firstAttribute="centerX" secondItem="GUS-x7-aOT" secondAttribute="centerX" id="pZM-0i-mVc"/>
+                <constraint firstAttribute="trailing" secondItem="FNC-bU-V6j" secondAttribute="trailing" constant="20" id="twV-Vb-Ew6"/>
+                <constraint firstItem="GUS-x7-aOT" firstAttribute="top" secondItem="FNC-bU-V6j" secondAttribute="bottom" constant="-5" id="vsM-jI-doO"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="139" y="515"/>
@@ -241,14 +284,22 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Looking for inspiration huh? Check out the events that did the best from the last week." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="5X4-Wo-25h">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looking for inspiration huh? Check out the events that did the best from the last week." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="5X4-Wo-25h">
                     <rect key="frame" x="20" y="11" width="280" height="140"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="e5k-4d-kNI"/>
+                        <constraint firstAttribute="height" constant="140" id="kMf-1p-8QE"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="22"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="centerX" secondItem="5X4-Wo-25h" secondAttribute="centerX" id="0fm-p9-REZ"/>
+                <constraint firstAttribute="centerY" secondItem="5X4-Wo-25h" secondAttribute="centerY" id="3j9-tj-Ex3"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="534" y="417"/>

@@ -136,6 +136,7 @@ struct TopMargin {
     CGRect frame = [screenManager mainMenu].frame;
     frame.origin.y = MAIN_MENU_Y_POS;
     frame.origin.x = -frame.size.width;
+    frame.size.height = [[UIScreen mainScreen] bounds].size.height;
     viewMainMenu.frame = frame;
     
     self.mainViewRightConstraint.constant = self.mainViewRightConstraint.constant - frame.size.width;
@@ -294,6 +295,10 @@ struct TopMargin {
         view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:4];
     }
     
+    CGRect frame = view.frame;
+    frame.size.width = _scrollView.frame.size.width;
+    [view setFrame:frame];
+    
     [_scrollView addSubview:view];
     [self loadPosts];
     [self addEventsToScreen : view.frame.size.height + 15
@@ -429,6 +434,7 @@ struct TopMargin {
     static CGFloat columnTwoMargin = 0;
     static CGFloat margin = 0;
     CGFloat scrollViewContentSizeHeight = 0;
+    CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
     __block BOOL validated;
     
     validated = NO;
@@ -457,10 +463,10 @@ struct TopMargin {
     // Add the column one or column two margin, depending on which is greater to the height of the scroll view's content size
     if (columnOneMargin > columnTwoMargin)
     {
-        scrollViewContentSizeHeight += columnOneMargin;
+        scrollViewContentSizeHeight += (columnOneMargin * screenSizeRelativeToiPhone5Width);
     }
     else {
-        scrollViewContentSizeHeight += columnTwoMargin;
+        scrollViewContentSizeHeight += (columnTwoMargin * screenSizeRelativeToiPhone5Width);
     }
     
     CGSize size = _scrollView.contentSize;
@@ -523,6 +529,7 @@ struct TopMargin {
     obj[@"loaded"] = @YES;
     
     DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
+    
     [viewEventsView renderViewWithPost:post
                              ShowBlank:showBlank];
     [viewEventsView setPostObject:obj];
@@ -615,8 +622,11 @@ struct TopMargin {
         margin = columnTwoMargin;
     }
     
-    CGFloat viewEventsViewHeight = POST_HEIGHT + heightDifference;
-    CGRect frame = CGRectMake((column * POST_WIDTH) + (widthMargin * (column + 1)), topMargin + margin, POST_WIDTH, viewEventsViewHeight);
+    CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
+    
+    CGFloat viewEventsViewHeight = (POST_HEIGHT * screenSizeRelativeToiPhone5Width) + heightDifference;
+    CGRect frame = CGRectMake((column * (POST_WIDTH * screenSizeRelativeToiPhone5Width)) + ((widthMargin * screenSizeRelativeToiPhone5Width) * (column + 1)), topMargin + (margin * screenSizeRelativeToiPhone5Width), (POST_WIDTH * screenSizeRelativeToiPhone5Width), viewEventsViewHeight);
+    
     view.frame = frame;
     // Set up the Subtitle frame
     frame = [[view lblSubtitle ] frame];
