@@ -208,7 +208,6 @@
     if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
     {
         eventViewController.isGoing = YES;
-        [eventViewController updateViewToGoing];
     }
     else if ([[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post.objectId])
     {

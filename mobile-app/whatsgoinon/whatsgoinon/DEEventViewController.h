@@ -39,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet DEMaybeCheckmarkView *maybeCheckmarkView;
 @property (weak, nonatomic) IBOutlet UILabel *lblEventTitle;
 @property (strong, nonatomic) DEEventDetailsViewController *eventDetailsViewController;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *goingButtonTopSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *goingButtonBottomSpaceConstraint;
 @property BOOL isGoing;
 @property BOOL isMaybeGoing;
 

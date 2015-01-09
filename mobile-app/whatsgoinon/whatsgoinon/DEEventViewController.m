@@ -51,6 +51,16 @@
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
     
+    
+    userIsAmbassador = NO;
+    [DEUserManager getUserFromUsername:_post.username];
+
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [super viewDidAppear:animated];
+    
     if (_isGoing)
     {
         [self updateViewToGoing];
@@ -59,10 +69,6 @@
     {
         self.maybeCheckmarkView.hidden = NO;
     }
-    
-    userIsAmbassador = NO;
-    [DEUserManager getUserFromUsername:_post.username];
-
 }
 
 
@@ -181,9 +187,14 @@
     UIView *view = [_eventView detailsView];
     [view addSubview:newView];
 
-    CGRect frame = newView.frame;
-    frame.size.width = view.superview.frame.size.width;
-    [newView setFrame:frame];
+//    CGRect frame = newView.frame;
+//    frame.size.width = view.superview.frame.size.width;
+//    [newView setFrame:frame];
+
+    
+    [newView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(view);
+    }];
     
     ((UIScrollView *) view).contentSize = newView.frame.size;
     if ([newView isKindOfClass:[DEViewComments class]])
@@ -468,13 +479,12 @@
     [button removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
 
-    CGRect frame = button.frame;
-    frame.origin.y += 40;
-    [button setFrame:frame];
+    _goingButtonBottomSpaceConstraint.constant -= 40;
+    [self.view layoutIfNeeded];
    // [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
     [[_eventView btnMaybe] setHidden:YES];
     
-    frame = _mapView.frame;
+    CGRect frame = _mapView.frame;
     frame.size.height += 40;
     [_mapView setFrame:frame];
     
