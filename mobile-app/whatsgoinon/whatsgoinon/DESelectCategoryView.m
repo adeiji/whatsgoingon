@@ -13,28 +13,31 @@
 
 @implementation DESelectCategoryView
 
-#define BUTTON_HOME_LOC_X 270
-#define BUTTON_HOME_LOC_Y 518
 #define NUMBER_OF_SECTIONS 13
 #define VIEW_WIDTH 250
 #define BUTTON_HEIGHT 30
 #define BUTTON_WIDTH 30
 #define BUTTON_OUTER_CIRCLE_HEIGHT 40
 #define BUTTON_OUTER_CIRCLE_WIDTH 40
-#define OUTER_VIEW_X_POS 320 - 60
-#define OUTER_VIEW_Y_POS 568 - 60
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+
     }
     return self;
 }
 
+- (void) setButtonConstants {
+    BUTTON_HOME_LOC_X = [[UIScreen mainScreen] bounds].size.width - 50;
+    BUTTON_HOME_LOC_Y = [[UIScreen mainScreen] bounds].size.height - 50;
+    OUTER_VIEW_X_POS = [[UIScreen mainScreen] bounds].size.width - 60;
+    OUTER_VIEW_Y_POS = [[UIScreen mainScreen] bounds].size.height - 60;
+}
+
 - (void) loadView {
-    
+    [self setButtonConstants];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     UIView *outerView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     

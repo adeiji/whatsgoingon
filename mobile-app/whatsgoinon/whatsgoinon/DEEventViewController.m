@@ -91,6 +91,8 @@ const int heightConstraintConstant = 62;
         [scrollView setContentSize:settingsAccount.frame.size];
         [scrollView addSubview:settingsAccount];
         [DEAnimationManager fadeOutWithView:self.view ViewToAdd:scrollView];
+        [scrollView setFrame:[[UIScreen mainScreen] bounds]];
+        [settingsAccount setFrame:[scrollView frame]];
         [settingsAccount setIsPublic:YES];
         [settingsAccount.lblTitle setText:[user username]];
     }

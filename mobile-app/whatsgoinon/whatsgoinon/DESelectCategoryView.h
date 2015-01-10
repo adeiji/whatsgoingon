@@ -23,6 +23,17 @@
     UIColor *orbColor;
     NSString *category;
     NSInteger previousIndex;
+    
+    double BUTTON_HOME_LOC_X;
+    double BUTTON_HOME_LOC_Y;
+    double NUMBER_OF_SECTIONS;
+    double VIEW_WIDTH;
+    double BUTTON_HEIGHT;
+    double BUTTON_WIDTH;
+    double BUTTON_OUTER_CIRCLE_HEIGHT;
+    double BUTTON_OUTER_CIRCLE_WIDTH;
+    double OUTER_VIEW_X_POS;
+    double OUTER_VIEW_Y_POS;
 }
 
 #pragma mark - Outlets

@@ -71,6 +71,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblConnected;
 @property (strong, nonatomic) UIView *viewToHide;
 @property (weak, nonatomic) IBOutlet UILabel *lblTwitter;
+@property (weak, nonatomic) IBOutlet UILabel *lblProgressToNextLevel;
 
 /*
  

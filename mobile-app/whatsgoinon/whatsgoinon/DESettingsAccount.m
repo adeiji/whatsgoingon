@@ -133,6 +133,8 @@
     if ([userRank isEqualToString:USER_RANK_AMBASSADOR])
     {
         self.ambassadorFlag.hidden = NO;
+        _progressBarForLevel.hidden = NO;
+        _lblProgressToNextLevel.hidden = NO;
     }
     self.lblRank.text = [notification.userInfo[kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO] capitalizedString];
 }
