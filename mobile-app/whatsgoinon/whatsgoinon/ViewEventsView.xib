@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DEViewEventsViewController"/>
@@ -155,26 +156,46 @@
             <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="50" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="25" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-xL-dTH">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="25" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-xL-dTH">
                     <rect key="frame" x="9" y="34" width="123" height="71"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="71" id="Qw8-tL-wkj"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="82"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Starts in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9C-kj-Lr7">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starts in" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9C-kj-Lr7">
                     <rect key="frame" x="38" y="5" width="64" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="8Vy-JJ-vqr"/>
+                        <constraint firstAttribute="width" constant="64" id="McJ-Xr-Khv"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FRa-I1-bKg">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FRa-I1-bKg">
                     <rect key="frame" x="5" y="113" width="131" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="9nk-bz-mZI"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="R9C-kj-Lr7" firstAttribute="top" secondItem="jXJ-tE-48P" secondAttribute="top" constant="5" id="BbK-dY-zpm"/>
+                <constraint firstItem="Xk5-xL-dTH" firstAttribute="trailing" secondItem="jXJ-tE-48P" secondAttribute="trailingMargin" id="INv-ze-HVY"/>
+                <constraint firstItem="Xk5-xL-dTH" firstAttribute="centerX" secondItem="FRa-I1-bKg" secondAttribute="centerX" id="JFd-bz-2fc"/>
+                <constraint firstAttribute="centerY" secondItem="Xk5-xL-dTH" secondAttribute="centerY" constant="0.5" id="oJo-zn-bEc"/>
+                <constraint firstAttribute="bottom" secondItem="FRa-I1-bKg" secondAttribute="bottom" constant="2" id="oWP-mI-V2f"/>
+                <constraint firstItem="R9C-kj-Lr7" firstAttribute="centerX" secondItem="jXJ-tE-48P" secondAttribute="centerX" id="tcz-Zx-A5i"/>
+                <constraint firstItem="R9C-kj-Lr7" firstAttribute="centerX" secondItem="Xk5-xL-dTH" secondAttribute="centerX" id="ulO-dU-Xl4"/>
+                <constraint firstItem="FRa-I1-bKg" firstAttribute="leading" secondItem="jXJ-tE-48P" secondAttribute="leading" constant="5" id="vs1-XZ-Bvk"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

@@ -331,6 +331,7 @@ struct TopMargin {
     }
     
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
+    [self moveViewToCenterOfScrollViewView:view];
     [_scrollView addSubview:view];
 }
 
@@ -505,8 +506,9 @@ struct TopMargin {
 
 - (void) displayNoSavedEvents {
     [self removeAllPostFromScreen];
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] lastObject];
+    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:3];
     [_scrollView addSubview:view];
+    [self moveViewToCenterOfScrollViewView:view];
     [_scrollView setContentSize:view.frame.size];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];

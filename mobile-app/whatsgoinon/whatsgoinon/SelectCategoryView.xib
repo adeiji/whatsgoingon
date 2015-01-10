@@ -56,13 +56,17 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="350"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sorry, looks like there's no events for this category." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-e5-3NO">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, looks like there's no events for this category." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dD4-e5-3NO">
                     <rect key="frame" x="20" y="84" width="280" height="89"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="89" id="nvm-at-cce"/>
+                        <constraint firstAttribute="width" constant="280" id="uOI-sE-H4S"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="But feel free to have a look at the other categories.  You may find what you're looking for!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgI-bJ-whK">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="But feel free to have a look at the other categories.  You may find what you're looking for!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgI-bJ-whK">
                     <rect key="frame" x="20" y="193" width="280" height="89"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,6 +74,14 @@
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="mgI-bJ-whK" firstAttribute="trailing" secondItem="dD4-e5-3NO" secondAttribute="trailing" id="0Ec-Wp-aR4"/>
+                <constraint firstItem="mgI-bJ-whK" firstAttribute="top" secondItem="dD4-e5-3NO" secondAttribute="bottom" constant="20" id="8JP-t4-XZu"/>
+                <constraint firstItem="mgI-bJ-whK" firstAttribute="leading" secondItem="dD4-e5-3NO" secondAttribute="leading" id="DtT-im-nSf"/>
+                <constraint firstAttribute="bottom" secondItem="mgI-bJ-whK" secondAttribute="bottom" constant="68" id="dau-dA-pF7"/>
+                <constraint firstItem="dD4-e5-3NO" firstAttribute="top" secondItem="4gh-6H-HUT" secondAttribute="top" constant="84" id="eF6-sk-L2o"/>
+                <constraint firstItem="dD4-e5-3NO" firstAttribute="centerX" secondItem="4gh-6H-HUT" secondAttribute="centerX" id="hY2-E1-oTn"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

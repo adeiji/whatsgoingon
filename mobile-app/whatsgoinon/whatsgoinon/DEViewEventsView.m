@@ -25,6 +25,8 @@
 
 - (void) setUpOverlayViewWithSuperview : (DEViewEventsView *) eventView
 {
+    [eventView.overlayView setFrame:eventView.imgMainImageView.frame];
+    
     if ([DEPostManager isBeforeEvent:eventView.post])
     {
         [[eventView.overlayView lblEndsInStartsIn] setText:@"Starts In"];
