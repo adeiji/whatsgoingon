@@ -146,6 +146,8 @@
                 <outletCollection property="viewCollection" destination="oDK-e8-07f" id="5Kd-Wi-FgP"/>
                 <outletCollection property="viewCollection" destination="4og-16-nF6" id="EsM-Qy-jBQ"/>
                 <outletCollection property="viewCollection" destination="iid-vy-eBb" id="eze-Wy-g0y"/>
+                <outletCollection property="viewCollection" destination="nRw-HW-kp1" id="9wA-Ul-14S"/>
+                <outletCollection property="viewCollection" destination="qPF-Vg-KP0" id="Wai-9C-qdD"/>
             </connections>
         </view>
     </objects>

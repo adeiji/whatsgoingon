@@ -216,12 +216,12 @@
            if (!error)
            {
                
-               NSMutableArray *array = [objects mutableCopy];
+               NSMutableArray *array = [NSMutableArray new];
                
                for (PFObject *obj in array) {
-                   if ([(NSDate *) obj[PARSE_CLASS_EVENT_END_TIME] compare:[NSDate dateWithTimeInterval:(60 * 60) sinceDate:[NSDate new]]] == NSOrderedAscending)
+                   if ([(NSDate *) obj[PARSE_CLASS_EVENT_END_TIME] compare:[NSDate dateWithTimeInterval:(60 * 60) sinceDate:[NSDate new]]] != NSOrderedAscending)
                     {
-                        [array removeObject:obj];
+                        [array addObject:obj];
                     }
                }
                // If there are no saved events that are earlier than now
