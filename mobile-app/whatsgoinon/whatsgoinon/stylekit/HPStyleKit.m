@@ -24,7 +24,7 @@
 + (void)drawTrophyWithFrame: (CGRect)frame
 {
     //// Color Declarations
-    UIColor* color = [UIColor colorWithRed: 0 green: 0.675 blue: 0.933 alpha: 1];
+    UIColor* color = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
     
     
     //// Subframes
@@ -103,6 +103,7 @@
         [bezier2Path fill];
     }
 }
+
 
 
 

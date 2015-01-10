@@ -389,12 +389,12 @@
                         <constraint firstAttribute="height" constant="30" id="Ow9-Vl-wTn"/>
                     </constraints>
                 </imageView>
-                <view hidden="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gP-xa-EW9" customClass="DEAmbassadorFlag">
-                    <rect key="frame" x="275" y="125" width="17" height="30"/>
+                <view hidden="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gP-xa-EW9" customClass="DETrophy">
+                    <rect key="frame" x="275" y="123" width="36" height="35"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="17" id="70G-7x-59P"/>
-                        <constraint firstAttribute="height" constant="30" id="fkb-6m-50j"/>
+                        <constraint firstAttribute="width" constant="36" id="70G-7x-59P"/>
+                        <constraint firstAttribute="height" constant="35" id="fkb-6m-50j"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Posted by" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USf-xV-qQT">
@@ -441,7 +441,7 @@
                 <constraint firstItem="q76-JZ-fvq" firstAttribute="centerX" secondItem="TEt-CM-cQA" secondAttribute="centerX" constant="-0.5" id="hMg-7r-DxB"/>
                 <constraint firstItem="ppq-6L-me9" firstAttribute="leading" secondItem="USf-xV-qQT" secondAttribute="trailing" constant="5" id="jZW-fK-xm1"/>
                 <constraint firstAttribute="trailing" secondItem="GDf-U2-yES" secondAttribute="trailing" constant="26" id="lXY-Im-avk"/>
-                <constraint firstAttribute="trailing" secondItem="4gP-xa-EW9" secondAttribute="trailing" constant="28" id="lt3-FZ-qPw"/>
+                <constraint firstAttribute="trailing" secondItem="4gP-xa-EW9" secondAttribute="trailing" constant="9" id="lt3-FZ-qPw"/>
                 <constraint firstItem="GDf-U2-yES" firstAttribute="top" secondItem="NE1-hg-p8v" secondAttribute="bottom" constant="5" id="m75-4o-RCQ"/>
                 <constraint firstItem="bna-nf-HLa" firstAttribute="centerX" secondItem="dVA-BD-vyc" secondAttribute="centerX" id="mBR-dJ-VT3"/>
                 <constraint firstItem="dVA-BD-vyc" firstAttribute="leading" secondItem="z1Y-XB-JcB" secondAttribute="leading" constant="45" id="mEe-wD-jnz"/>
