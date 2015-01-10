@@ -67,6 +67,7 @@ struct TopMargin {
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
     [selectCategoryView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
     [selectCategoryView loadView];
+    [selectCategoryView setFrame:window.frame];
     [window addSubview:selectCategoryView];
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
     

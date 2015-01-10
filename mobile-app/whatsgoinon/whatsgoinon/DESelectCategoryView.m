@@ -165,14 +165,16 @@
     // This carosaul starts basically from a simple point and then expands into where it will be when the user starts scrolling
     {
         [UIView animateWithDuration:.2f animations:^{
-        
             myCarousel.transform = CGAffineTransformMakeScale(2.54, 2.52);
             //myCarousel.contentOffset = CGSizeMake(0, -80);
             myCarousel.contentOffset = CGSizeMake(5, -myCarousel.frame.size.height + 15);
             NSLog(@"Carousel Center %@", NSStringFromCGPoint(myCarousel.center));
             [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.9]];
         } completion:^(BOOL finished) {
-            [myCarousel setFrame:CGRectMake(0, 150, 320, 418)];
+//            [myCarousel setFrame:CGRectMake(0, 150, 320, 418)];
+            double xPos = [[UIScreen mainScreen] bounds].size.width - 320;
+            double yPos = [[UIScreen mainScreen] bounds].size.height - 418;
+            [myCarousel setFrame:CGRectMake(xPos, yPos, 320, 418)];
             myCarousel.type = iCarouselTypeWheel;
             myCarousel.delegate = self;
             myCarousel.dataSource = self;
