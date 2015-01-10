@@ -265,6 +265,8 @@
     {
         promptView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] lastObject];
         [DEAnimationManager fadeOutWithView:self ViewToAdd:promptView];
+        [promptView setFrame:self.frame];
+        
         // Set up the view of the prompt screen
         [self setUpPromptViewButtons];
     }
@@ -389,11 +391,14 @@
  
  */
 - (void) moveBottomHalfView : (CGFloat) heightChange {
-     
+    
+    _bottomViewTopConstraint.constant += heightChange;
+    
      [UIView animateWithDuration:.3 animations:^{
-         CGRect frame = _bottomHalfView.frame;
-         frame.origin.y = frame.origin.y + heightChange;
-         [_bottomHalfView setFrame:frame];
+//         CGRect frame = _bottomHalfView.frame;
+//         frame.origin.y = frame.origin.y + heightChange;
+//         [_bottomHalfView setFrame:frame];
+         [self layoutIfNeeded];
          
      } completion:^(BOOL finished) {
          if (heightChange > 0)

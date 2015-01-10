@@ -11,21 +11,27 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Are You Sure?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFS-k0-yzt">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are You Sure?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFS-k0-yzt">
                     <rect key="frame" x="97" y="59" width="126" height="28"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="If you continue, you'll lose all the information that you've entered for this post?  Are you sure you want to do that?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="G4i-Te-wIH">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you continue, you'll lose all the information that you've entered for this post?  Are you sure you want to do that?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="G4i-Te-wIH">
                     <rect key="frame" x="48" y="90" width="225" height="211"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="211" id="wDw-RQ-AQq"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxA-7d-YPo">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nxA-7d-YPo">
                     <rect key="frame" x="48" y="460" width="225" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="fgj-wg-QnQ"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
                     <state key="normal" title="Exit and lose post info">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -35,9 +41,12 @@
                         <action selector="continueGoingBack:" destination="-1" eventType="touchUpInside" id="pnU-Bi-Xmt"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRj-7I-5wX">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRj-7I-5wX">
                     <rect key="frame" x="48" y="508" width="225" height="40"/>
                     <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="zY3-iR-jHp"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
                     <state key="normal" title="Return to post screen">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -48,6 +57,18 @@
                     </connections>
                 </button>
             </subviews>
+            <constraints>
+                <constraint firstItem="BFS-k0-yzt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="59" id="Czu-H4-CHL"/>
+                <constraint firstItem="nxA-7d-YPo" firstAttribute="trailing" secondItem="rRj-7I-5wX" secondAttribute="trailing" id="FSo-S3-g2H"/>
+                <constraint firstItem="rRj-7I-5wX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="I7m-Zk-zbf"/>
+                <constraint firstItem="G4i-Te-wIH" firstAttribute="leading" secondItem="nxA-7d-YPo" secondAttribute="leading" id="UpX-cB-AhU"/>
+                <constraint firstItem="G4i-Te-wIH" firstAttribute="centerX" secondItem="BFS-k0-yzt" secondAttribute="centerX" id="VX0-t9-Jjb"/>
+                <constraint firstItem="G4i-Te-wIH" firstAttribute="top" secondItem="BFS-k0-yzt" secondAttribute="bottom" constant="3" id="dSo-xT-VtR"/>
+                <constraint firstAttribute="bottom" secondItem="rRj-7I-5wX" secondAttribute="bottom" constant="20" id="fY9-GN-4yW"/>
+                <constraint firstItem="rRj-7I-5wX" firstAttribute="top" secondItem="nxA-7d-YPo" secondAttribute="bottom" constant="8" symbolic="YES" id="p6B-6z-dfR"/>
+                <constraint firstItem="nxA-7d-YPo" firstAttribute="leading" secondItem="rRj-7I-5wX" secondAttribute="leading" id="to9-8e-ABe"/>
+                <constraint firstItem="G4i-Te-wIH" firstAttribute="trailing" secondItem="nxA-7d-YPo" secondAttribute="trailing" id="ywy-HS-To2"/>
+            </constraints>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

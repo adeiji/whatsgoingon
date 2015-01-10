@@ -504,7 +504,6 @@ Display the second screen for the post details
     if ([viewControllers count] == 2)
     {
         UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewAlert" owner:self options:nil] firstObject];
-        
         for (UIView *subview in [view subviews]) {
             if([subview isKindOfClass:[UIButton class]])
             {
@@ -513,6 +512,7 @@ Display the second screen for the post details
         }
         
         [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
+        [view setFrame:self.view.frame];
     }
     else {
         [self savePostDetails];

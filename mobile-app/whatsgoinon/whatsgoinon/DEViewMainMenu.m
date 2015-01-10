@@ -132,7 +132,11 @@
         UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] objectAtIndex:1];
         [scrollView setContentSize:settingsAccount.frame.size];
         [scrollView addSubview:settingsAccount];
+        [scrollView setFrame:[[UIScreen mainScreen] bounds]];
+        [settingsAccount setFrame:[scrollView frame]];
+        
         [DEAnimationManager fadeOutWithView:[self superview] ViewToAdd:scrollView];
+        
     }
     else {
         DEMainViewController *mainViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateInitialViewController];

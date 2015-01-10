@@ -130,6 +130,13 @@
         DEPost *post = [DEPost getPostFromPFObject:postObj];
         DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
         [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+        
+        {
+            CGRect frame = view.frame;
+            frame.size.width = [[UIScreen mainScreen] bounds].size.width;
+            [view setFrame:frame];
+        }
+        
         [view showView];
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
         
