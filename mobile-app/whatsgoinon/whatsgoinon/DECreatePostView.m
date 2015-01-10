@@ -463,7 +463,7 @@
     }
     else if ([textField isEqual:_txtAddress])
     {
-        DEViewChangeCity *viewPostAddress = [[DEViewChangeCity alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+        DEViewChangeCity *viewPostAddress = [[DEViewChangeCity alloc] initWithFrame:self.frame];
         [DEAnimationManager fadeOutWithView:self ViewToAdd:viewPostAddress];
         [viewPostAddress setUpViewWithType:PLACES_API_DATA_RESULT_TYPE_GEOCODE];
 

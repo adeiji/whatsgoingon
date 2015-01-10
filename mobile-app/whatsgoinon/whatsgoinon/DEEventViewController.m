@@ -465,10 +465,11 @@ const int heightConstraintConstant = 62;
     }
     
     [pageViewController setMyViewControllers:viewControllers];
-    [pageViewController setViewControllers:@[viewControllers[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-    [self.navigationController pushViewController:pageViewController animated:YES];
-    
-    
+    if ([viewControllers count] != 0)
+    {
+        [pageViewController setViewControllers:@[viewControllers[0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+        [self.navigationController pushViewController:pageViewController animated:YES];
+    }
 }
 
 - (IBAction)setEventAsMaybeGoing:(id)sender {

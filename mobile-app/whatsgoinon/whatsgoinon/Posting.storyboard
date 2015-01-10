@@ -369,7 +369,7 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="79AC7D41-F81C-4AD4-9A0C-EE6E732A0FB3" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BD6431F7-5826-4CF5-9EBF-FA15268A1D63" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="iZM-I6-gde"/>
@@ -839,6 +839,7 @@
                                 </variation>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="0eU-cd-Bav" firstAttribute="leading" secondItem="Ts4-l1-T70" secondAttribute="leadingMargin" constant="-4" id="17M-xa-02a"/>
                             <constraint firstItem="rzu-H9-exW" firstAttribute="leading" secondItem="Ts4-l1-T70" secondAttribute="leading" id="3Zn-Xx-TVy"/>
@@ -1395,6 +1396,7 @@
                                 </variation>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JVg-ae-v1d" firstAttribute="top" secondItem="Rke-5R-L2x" secondAttribute="bottom" constant="38" id="9Ub-TJ-qs1"/>
                             <constraint firstItem="JVg-ae-v1d" firstAttribute="bottom" secondItem="URT-CR-9yK" secondAttribute="top" id="Frt-H9-3Yb"/>
@@ -1569,6 +1571,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="rye-nt-FrD" firstAttribute="centerX" secondItem="PM9-nS-War" secondAttribute="centerX" constant="0.5" id="4U5-xy-K04"/>
                             <constraint firstItem="PM9-nS-War" firstAttribute="top" secondItem="rye-nt-FrD" secondAttribute="bottom" constant="20" id="6bl-gp-8Fp"/>
@@ -1632,7 +1635,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="79AC7D41-F81C-4AD4-9A0C-EE6E732A0FB3" width="140" height="211">
+        <image name="BD6431F7-5826-4CF5-9EBF-FA15268A1D63" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

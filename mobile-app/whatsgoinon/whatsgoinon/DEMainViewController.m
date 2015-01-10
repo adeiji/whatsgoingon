@@ -50,7 +50,7 @@
     UIImageView *imageView = [UIImageView new];
     UIImage *launchImage = [UIImage imageNamed:@"splashimage.png"];
     
-    [imageView setFrame:CGRectMake(0, 0, 320, 568)];
+    [imageView setFrame:self.view.frame];
     [imageView setImage:launchImage];
     
     [UIView animateWithDuration:1.2f animations:^{
