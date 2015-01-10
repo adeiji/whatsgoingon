@@ -149,6 +149,33 @@
 {
     NSNumber *numberOfPost = [notification.userInfo objectForKey:kNOTIFICATION_CENTER_USER_INFO_USER_EVENTS_COUNT];
     self.lblNumberOfPosts.text = [numberOfPost stringValue];
+    
+    DELevelHandler *levelHandler = [[DELevelHandler alloc] init];
+    
+    __block NSInteger level = 0;
+
+    __block NSNumber *postSinceLastLevel = [NSNumber new];
+    // This post variable is called postNecessaryToReachAde, because this is the amount of post it will take to reach the next level, where Ade resides
+    __block NSNumber *postNecessaryToReachAde = [NSNumber new];
+    // This is the necessary post required to reach the previous level
+    __block NSNumber *postNecessaryForAyosLevel = [NSNumber new];
+    
+    [[levelHandler levels] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (numberOfPost > (NSNumber *) obj)
+        {
+            level ++;
+            postSinceLastLevel = [NSNumber numberWithLong:(numberOfPost.integerValue - ((NSNumber *) obj).integerValue)];
+            postNecessaryForAyosLevel = obj;
+        }
+        else {
+            *stop = YES;
+            postNecessaryToReachAde = [NSNumber numberWithLong: ((NSNumber *) obj).integerValue - postNecessaryForAyosLevel.integerValue];
+        }
+    }];
+    
+    _lblLevel.text = [NSString stringWithFormat:@"%li", (long)level];
+    [_progressBarForLevel setProgress:(postSinceLastLevel.doubleValue / postNecessaryToReachAde.doubleValue) animated:YES];
+    _progressBarForLevel.transform = CGAffineTransformMakeScale(1.0f, 2.0f);
 }
 
 - (void) displayProfilePicture
@@ -307,9 +334,9 @@
     
     [PFUser logOut];
     [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [promptView removeFromSuperview];
     [[DEScreenManager getMainNavigationController] popToRootViewControllerAnimated:YES];
-    
 }
 
 - (IBAction)goBackToAccountScreen:(id)sender {

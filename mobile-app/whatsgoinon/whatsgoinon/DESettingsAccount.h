@@ -14,6 +14,7 @@
 #import "DEAmbassadorFlag.h"
 #import "DELargeCameraButton.h"
 #import "UIView+DEScrollOnShowKeyboard.h"
+#import "DELevelHandler.h"
 
 @interface DESettingsAccount : UIView <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 {
@@ -63,12 +64,20 @@
  Displays the rank of the user. For ex: Ambassador, standard, Admin etc
  
  */
+@property (weak, nonatomic) IBOutlet UILabel *lblLevel;
 @property (weak, nonatomic) IBOutlet UILabel *lblRank;
 @property (weak, nonatomic) IBOutlet DEAmbassadorFlag *ambassadorFlag;
 @property (weak, nonatomic) IBOutlet UILabel *lblFacebook;
 @property (weak, nonatomic) IBOutlet UILabel *lblConnected;
 @property (strong, nonatomic) UIView *viewToHide;
 @property (weak, nonatomic) IBOutlet UILabel *lblTwitter;
+
+/*
+ 
+ This progress bar shows how far the user is until the next level
+ 
+ */
+@property (weak, nonatomic) IBOutlet UIProgressView *progressBarForLevel;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 /*
  

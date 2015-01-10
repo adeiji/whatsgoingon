@@ -171,6 +171,8 @@
 		F49BB8EF1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8EE1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m */; };
 		F49BB8F21A5ED12300C68E42 /* DEBinoculars.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8F11A5ED12300C68E42 /* DEBinoculars.m */; };
 		F49BB8F41A5F118900C68E42 /* happ-snap-title-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = F49BB8F31A5F118900C68E42 /* happ-snap-title-menu.png */; };
+		F49BB8FE1A60CC1D00C68E42 /* DELevelHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8FD1A60CC1D00C68E42 /* DELevelHandler.m */; };
+		F49BB9011A60D07B00C68E42 /* DETrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9001A60D07B00C68E42 /* DETrophy.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -426,6 +428,10 @@
 		F49BB8F01A5ED12300C68E42 /* DEBinoculars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEBinoculars.h; sourceTree = "<group>"; };
 		F49BB8F11A5ED12300C68E42 /* DEBinoculars.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEBinoculars.m; sourceTree = "<group>"; };
 		F49BB8F31A5F118900C68E42 /* happ-snap-title-menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "happ-snap-title-menu.png"; sourceTree = "<group>"; };
+		F49BB8FC1A60CC1D00C68E42 /* DELevelHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELevelHandler.h; sourceTree = "<group>"; };
+		F49BB8FD1A60CC1D00C68E42 /* DELevelHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELevelHandler.m; sourceTree = "<group>"; };
+		F49BB8FF1A60D07B00C68E42 /* DETrophy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DETrophy.h; sourceTree = "<group>"; };
+		F49BB9001A60D07B00C68E42 /* DETrophy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETrophy.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
@@ -821,6 +827,8 @@
 			children = (
 				F448FE6F19A435A500645667 /* DESettingsAccount.h */,
 				F448FE7019A435A500645667 /* DESettingsAccount.m */,
+				F49BB8FC1A60CC1D00C68E42 /* DELevelHandler.h */,
+				F49BB8FD1A60CC1D00C68E42 /* DELevelHandler.m */,
 			);
 			name = Settings/Account;
 			sourceTree = "<group>";
@@ -882,6 +890,8 @@
 				F46B946519C2659C00B41D8C /* DELargeCameraButton.m */,
 				F49BB8F01A5ED12300C68E42 /* DEBinoculars.h */,
 				F49BB8F11A5ED12300C68E42 /* DEBinoculars.m */,
+				F49BB8FF1A60D07B00C68E42 /* DETrophy.h */,
+				F49BB9001A60D07B00C68E42 /* DETrophy.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
@@ -1427,6 +1437,7 @@
 				F45E60B819AD8CAF007705F9 /* DEPostView.m in Sources */,
 				F4EEB06219D2717D0072B683 /* DECommentTableViewCell.m in Sources */,
 				F4CCBD7A199B0A9900532E9B /* Constants.m in Sources */,
+				F49BB8FE1A60CC1D00C68E42 /* DELevelHandler.m in Sources */,
 				F45E60AC19AD7222007705F9 /* DEMenuButton.m in Sources */,
 				F437BF911990452000CF61E9 /* main.m in Sources */,
 				F4774FB019996A9B00FCDE66 /* DEEventView.m in Sources */,
@@ -1465,6 +1476,7 @@
 				F46B945219C1181800B41D8C /* DEViewDistance.m in Sources */,
 				F448FE7119A435A500645667 /* DESettingsAccount.m in Sources */,
 				F4774FB319996E7B00FCDE66 /* DEEventViewController.m in Sources */,
+				F49BB9011A60D07B00C68E42 /* DETrophy.m in Sources */,
 				F47EA7F21A40E44E005B7B79 /* TextFieldValidator.m in Sources */,
 				F437BFD519918DF800CF61E9 /* DESyncManager.m in Sources */,
 				F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */,
