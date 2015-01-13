@@ -34,7 +34,7 @@
     DEPostManager *postManager = [DEPostManager sharedManager];
     _post = [postManager currentPost];
     [self setUpViews];
-    postRanges = @[@"1 mile radius", @"2 mile radius", @"3 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius", @"ALL"];
+    postRanges = @[@"ALL", @"1 mile radius", @"2 mile radius", @"3 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius"];
     
     if (_createPostViewOne.switchUseCurrentLocation.on)
     {

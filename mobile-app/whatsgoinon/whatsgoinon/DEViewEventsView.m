@@ -82,7 +82,7 @@
 
 - (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    return TRUE;
+    return YES;
 }
 
 - (void) displayDistanceToLocationWithPost : (DEPost *) post
