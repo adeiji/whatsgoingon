@@ -17,7 +17,6 @@
 // Get all the values from the Parse database
 + (void) getAllValuesForNow : (BOOL) now;
 + (BOOL) savePost : (DEPost *) post;
-+ (void) popToRootAndShowViewController : (UIViewController *) viewController;
 + (void) saveReportWithEventId : (NSString * )objectId
                     WhatsWrong : (NSDictionary *) whatsWrong
                          Other : (NSString *) other;

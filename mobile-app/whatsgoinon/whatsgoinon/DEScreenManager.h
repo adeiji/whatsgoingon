@@ -35,7 +35,7 @@
 + (UIView *) createInputAccessoryView;
 + (UINavigationController *) getMainNavigationController;
 + (void) setBackgroundWithImageURL : (NSString *) imageUrl;
-
++ (void) popToRootAndShowViewController : (UIViewController *) viewController;
 /*
  
  Display a banner in 7 minutes asking the user to comment

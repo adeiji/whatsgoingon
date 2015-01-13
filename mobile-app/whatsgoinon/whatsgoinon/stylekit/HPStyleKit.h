@@ -21,5 +21,6 @@
 + (void) drawLargeCameraButton : (CGRect) frame;
 + (void) drawBinocularsWithFrame: (CGRect)frame;
 + (void)drawTrophyWithFrame: (CGRect)frame;
++ (void)drawHappSnapTitleIconWithFrame: (CGRect)frame;
 
 @end

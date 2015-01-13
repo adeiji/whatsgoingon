@@ -5,7 +5,7 @@
 //  Created by adeiji on 8/4/14.
 //  Copyright (c) 2014 adeiji. All rights reserved.
 //
-
+// HappSnap SKU - com.happsnap.dephyned
 #import "DEAppDelegate.h"
 #import <Parse/Parse.h>
 #import "TestFlight.h"
@@ -33,6 +33,9 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
     [self registerForNotifications:application];
     DELocationManager *locManager = [DELocationManager sharedManager];
     [locManager startSignificantChangeUpdates];
+    // Instantiate the Location Manager and set the user location to the current location
+    [locManager setUserLocation:[locManager currentLocation]];
+    [DESyncManager getAllValuesForNow:YES];
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];

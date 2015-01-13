@@ -23,5 +23,4 @@
 - (IBAction)viewWhatsGoingOnNow:(id)sender;
 
 - (IBAction)showCreatePostView:(id)sender;
-- (IBAction)showPromptForEpicEventsView:(id)sender;
 @end

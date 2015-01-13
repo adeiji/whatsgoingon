@@ -170,15 +170,17 @@
 
 - (void) startTimer
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval:900 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:NO];
-    
-    [timer fire];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        timer = [NSTimer scheduledTimerWithTimeInterval:900 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:NO];
+        [timer fire];
+        
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    });
 }
 
 - (void) promptUserForFeedback
 {
     [DEScreenManager showCommentView : _eventPersonAt];
-    #warning - Must make sure that we set the post as prompted for comment and save this.
     
     [self startTimer];
 }
@@ -189,6 +191,7 @@
     
     [timer fire];
 }
+
 /*
  
  Set the city to the newly selected city
@@ -259,8 +262,7 @@
     }
     
     _locationManager.delegate = self;
-#warning Make sure to uncomment this in production
-//    [_locationManager startMonitoringSignificantLocationChanges];
+    [_locationManager startMonitoringSignificantLocationChanges];
     [_locationManager startUpdatingLocation];
 }
 

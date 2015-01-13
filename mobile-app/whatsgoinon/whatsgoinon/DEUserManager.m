@@ -53,6 +53,7 @@
         return NO;
     }
 }
+
 // Each user has its own rank.  This gets the rank of the current user from Parse.
 + (void) getUserRank : (NSString *) username
 {
@@ -209,7 +210,7 @@
     [PFUser logInWithUsernameInBackground:[username lowercaseString] password:password block:^(PFUser *user, NSError *error) {
         if (user)
         {
-            [DESyncManager popToRootAndShowViewController:viewController];
+            [DEScreenManager popToRootAndShowViewController:viewController];
             // Clear user image defaults
             [self clearUserImageDefaults];
         }

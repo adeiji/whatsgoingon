@@ -298,7 +298,6 @@ Display the second screen for the post details
         }
     }
     else {
-        #warning - Let the user know that they need a camera to take a photo
     }
 }
 

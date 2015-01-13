@@ -149,7 +149,6 @@ const int heightConstraintConstant = 62;
         _post.myDescription = [NSString stringWithFormat:@"%@\n %@", _post.myDescription, _post.website];
     }
     
-    #warning - For now we call SyncManager but we may let PostManager handle this, we'll have to decide later
     BOOL postSaved = [DESyncManager savePost:[[DEPostManager sharedManager] currentPost]];
     
     if (postSaved)

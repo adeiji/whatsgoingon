@@ -83,7 +83,6 @@
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
 
     for (UIView *view in [[[window rootViewController] view] subviews]) {
-    #warning Right now we're hardcoding in the UIScrollView detection, but that should probably be done differently
         if ([view isKindOfClass:[UIScrollView class]])
         {
             [DEAnimationManager fadeOutRemoveView:view FromView:[[window rootViewController] view]];
@@ -258,6 +257,19 @@
     picker.body = message;
     [[DEScreenManager sharedManager] setNextScreen:[DEScreenManager getMainNavigationController].topViewController];
     [[[DEScreenManager sharedManager] nextScreen] presentViewController:picker animated:YES completion:NULL];
+}
+
+// Display the new view controller, but remove all other views from the View Controller stack first.
++ (void) popToRootAndShowViewController : (UIViewController *) viewController
+{
+    // Successful login
+    UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    
+    [navigationController popToRootViewControllerAnimated:NO];
+    [navigationController pushViewController:viewController animated:YES];
+    
+    [[viewController navigationController] setNavigationBarHidden:NO];
+    
 }
 
 - (void) messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
