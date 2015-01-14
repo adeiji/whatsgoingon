@@ -52,7 +52,7 @@
         _lblFacebook.hidden = YES;
         _switchFacebook.hidden = YES;
         _switchTwitter.hidden = YES;
-        _btnTakePicture.enabled = NO;
+        _btnTakePicture.userInteractionEnabled = NO;
         _txtUsername.enabled = NO;
         _btnChangePassword.hidden = YES;
     }
