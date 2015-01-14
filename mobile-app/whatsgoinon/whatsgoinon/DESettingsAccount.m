@@ -11,6 +11,9 @@
 
 @implementation DESettingsAccount
 
+const int FEEDBACK_ACTION_SHEET = 1;
+const int PICTURE_ACTION_SHEET = 2;
+
 - (id)initWithUser : (PFUser *) myUser
           IsPublic : (BOOL) myIsPublic
 {
@@ -110,6 +113,22 @@
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
     activeField = textField;
+}
+
+- (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([_txtPassword.text isEqualToString:_txtConfirmPassword.text])
+    {
+        [_btnChangePassword setTitle:@"Save New Password" forState:UIControlStateNormal];
+        [_btnChangePassword addTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
+        [_btnChangePassword removeTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else {
+        [_btnChangePassword setTitle:@"Cancel" forState:UIControlStateNormal];
+        [_btnChangePassword removeTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
+        [_btnChangePassword addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return YES;
 }
 
 - (void) setUpButtons {
@@ -230,12 +249,14 @@
     _txtUsername.text = user[PARSE_CLASS_USER_USERNAME];
     // Get the password that can actually be viewed on within the app
     _txtPassword.text = user[PARSE_CLASS_USER_VISIBLE_PASSWORD];
+    _txtPassword.delegate = self;
+    _txtConfirmPassword.delegate = self;
 }
 
 
 - (IBAction)sendFeedback:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Email Feedback", @"Write a Review",nil];
-    
+    actionSheet.tag = FEEDBACK_ACTION_SHEET;
     [[DEScreenManager sharedManager] setNextScreen:[[DEScreenManager getMainNavigationController] topViewController]];
 
     [actionSheet showInView:self];
@@ -243,24 +264,41 @@
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
+    if (actionSheet.tag == FEEDBACK_ACTION_SHEET)
     {
-        [[DEScreenManager sharedManager] showEmail];
+        if (buttonIndex == 0)
+        {
+            [[DEScreenManager sharedManager] showEmail];
+        }
     }
-    else
+    else if (actionSheet.tag == PICTURE_ACTION_SHEET)
     {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         
+        // Display the camera
+        if (buttonIndex == 1)
+        {
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            picker.allowsEditing = YES;
+        }
+        else if (buttonIndex == 0) {
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        
+        // Let the user take a picture and store it
+        picker.delegate = self;
+        UINavigationController *navController = [DEScreenManager getMainNavigationController];
+        [navController.topViewController presentViewController:picker animated:YES completion:NULL];
     }
+    
+
 }
 - (IBAction)takePicture:(id)sender {
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     
-    // Let the user take a picture and store it
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    UINavigationController *navController = [DEScreenManager getMainNavigationController];
-    [navController.topViewController presentViewController:picker animated:YES completion:NULL];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose From Photo Library", @"Take a Picture",nil];
+    
+    [actionSheet showInView:self];
+    actionSheet.tag = PICTURE_ACTION_SHEET;
 
 }
 
@@ -362,26 +400,40 @@
     
     if (!changePasswordPressed)
     {
-        CGFloat heightChange = 80.0f;
-        [self moveBottomHalfView : heightChange];
-        
-        [_btnChangePassword setTitle:@"Save New Password" forState:UIControlStateNormal];
+        [_btnChangePassword setTitle:@"Cancel" forState:UIControlStateNormal];
         // Remove the target first then add the new target otherwise this will not work
         [_btnChangePassword removeTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [_btnChangePassword addTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
-            changePasswordPressed = YES;
+        [_btnChangePassword addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+        changePasswordPressed = YES;
+        _txtPassword.hidden = NO;
+        _txtConfirmPassword.hidden = NO;
     }
     else {
-        CGFloat heightChange = 80.0f;
-        [self moveBottomHalfView:-heightChange];
-        
         [_btnChangePassword setTitle:@"Change Password" forState:UIControlStateNormal];
         // Remove the target first then add the new target otherwise this will not work
         [_btnChangePassword removeTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
         [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
         changePasswordPressed = NO;
+        _txtPassword.hidden = YES;
+        _txtConfirmPassword.hidden = YES;
     }
 
+}
+
+#pragma mark - Change Password Button Functionality
+
+
+/*
+ 
+User presses the cancel button and we just want to hide the password text fields
+ 
+ */
+- (void) cancel {
+    _txtPassword.hidden = YES;
+    _txtConfirmPassword.hidden = YES;
+    [_btnChangePassword setTitle:@"Change Password" forState:UIControlStateNormal];
+    [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnChangePassword removeTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) savePassword {
@@ -410,42 +462,4 @@
     }
     
 }
-
-#pragma mark - Animations
-
-
-/*
- 
- Moves the bottom half of the account view screen down
- 
- */
-- (void) moveBottomHalfView : (CGFloat) heightChange {
-    
-    _bottomViewTopConstraint.constant += heightChange;
-    
-     [UIView animateWithDuration:.3 animations:^{
-//         CGRect frame = _bottomHalfView.frame;
-//         frame.origin.y = frame.origin.y + heightChange;
-//         [_bottomHalfView setFrame:frame];
-         [self layoutIfNeeded];
-         
-     } completion:^(BOOL finished) {
-         if (heightChange > 0)
-         {
-             _txtPassword.hidden = NO;
-             _txtConfirmPassword.hidden = NO;
-         }
-     }];
-     
-     [UIView animateWithDuration:.3 animations:^{
-         CGRect frame;
-         frame = self.frame;
-         frame.size.height = frame.size.height + heightChange;
-         [self setFrame:frame];
-         
-         UIScrollView *scrollView = (UIScrollView *) [self superview];
-         [scrollView setContentSize:CGSizeMake(frame.size.width, frame.size.height)];
-     }];
-}
-
 @end

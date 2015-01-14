@@ -226,7 +226,7 @@
 
 + (UINavigationController *) getMainNavigationController
 {
-    return (UINavigationController *) [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    return (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
 }
 
 
