@@ -39,6 +39,7 @@ const int PICTURE_ACTION_SHEET = 2;
         [self setUpTextFields];
         [self setUpSocialNetworkingIcons];
         [self displayProfilePicture];
+        [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;    
 }
@@ -297,15 +298,20 @@ const int PICTURE_ACTION_SHEET = 2;
         {
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
             picker.allowsEditing = YES;
+            
+            // Let the user take a picture and store it
+            picker.delegate = self;
+            UINavigationController *navController = [DEScreenManager getMainNavigationController];
+            [navController.topViewController presentViewController:picker animated:YES completion:NULL];
         }
         else if (buttonIndex == 0) {
             picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            
+            // Let the user take a picture and store it
+            picker.delegate = self;
+            UINavigationController *navController = [DEScreenManager getMainNavigationController];
+            [navController.topViewController presentViewController:picker animated:YES completion:NULL];
         }
-        
-        // Let the user take a picture and store it
-        picker.delegate = self;
-        UINavigationController *navController = [DEScreenManager getMainNavigationController];
-        [navController.topViewController presentViewController:picker animated:YES completion:NULL];
     }
     
 
@@ -442,10 +448,12 @@ User presses the cancel button and we just want to hide the password text fields
     
     _txtConfirmPassword.hidden = YES;
     _txtPassword.hidden = YES;
-    [self changePasswordButtonFunction];
     _lblPasswordError.text = @"Password Saved";
     _txtConfirmPassword.text = @"";
     [_lblPasswordError setTextAlignment:NSTextAlignmentCenter];
+    
+    [_txtConfirmPassword resignFirstResponder];
+    [_txtPassword resignFirstResponder];
     
     [UIView animateWithDuration:1.5 animations:^{
         [[_lblPasswordError layer] setOpacity:0.0f];
