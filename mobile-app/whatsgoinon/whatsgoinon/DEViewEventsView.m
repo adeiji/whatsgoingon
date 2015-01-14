@@ -90,7 +90,17 @@
     DELocationManager *locationManager = [DELocationManager sharedManager];
 
     [DELocationManager getDistanceInMilesBetweenLocation:post.location LocationTwo:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
-        self.lblDistance.text = value;
+        if ([value doubleValue] > 1000)
+        {
+            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+            [formatter setPositiveFormat:@"0.#"];
+            double miles = [value doubleValue] / 1000;
+            NSString *distanceInShortFormat = [NSString stringWithFormat:@"%@k mi", [formatter stringFromNumber:[NSNumber numberWithDouble:miles]]];
+            self.lblDistance.text = distanceInShortFormat;
+        }
+        else {
+            self.lblDistance.text = value;
+        }
     }];
 }
 

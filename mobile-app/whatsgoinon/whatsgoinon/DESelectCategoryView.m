@@ -226,19 +226,19 @@
 
 - (void) wheelDidChangeValue: (int) index {
     [self.btnCategory setTitle:[categories objectAtIndex:index] forState:UIControlStateNormal];
-    [[myCarousel itemViewAtIndex:index] setBackgroundColor:orbColor];
+    [[myCarousel itemViewAtIndex:index] setBackgroundColor:[HPStyleKit blueColor]];
 }
 
 - (void) carouselDidEndDecelerating:(iCarousel *)carousel
 {
-    [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0]];
+    [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:[HPStyleKit blueColor]];
 }
 
 
 - (void) carouselDidScroll:(iCarousel *)carousel
 {
     [[carousel itemViewAtIndex:previousIndex] setBackgroundColor:orbColor];
-    [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0]];
+    [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:[HPStyleKit blueColor]];
     previousIndex = [carousel currentItemIndex];
 }
 
@@ -253,6 +253,12 @@
         view.contentMode = UIViewContentModeCenter;
         [[view layer] setCornerRadius:view.frame.size.height / 2.0f];
         [view setBackgroundColor:orbColor];
+        
+        // If this is the first item on the view
+        if (index == [carousel currentItemIndex])
+        {
+            [view setBackgroundColor:[HPStyleKit blueColor]];
+        }
 
     }
     else
@@ -279,8 +285,12 @@
 
 - (void) carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index
 {
-    [[carousel itemViewAtIndex:[carousel currentItemIndex]] setBackgroundColor:orbColor];
-    [[carousel itemViewAtIndex:index] setBackgroundColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0]];
+    [[carousel itemViewAtIndex:index] setBackgroundColor:[HPStyleKit blueColor]];
+    
+    if (index == [carousel currentItemIndex])
+    {
+        [self categoryButtonClicked:nil];
+    }
 }
 
 

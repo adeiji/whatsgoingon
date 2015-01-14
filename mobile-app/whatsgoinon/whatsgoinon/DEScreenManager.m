@@ -99,13 +99,13 @@
 + (void) createPromptUserCommentNotification : (DEPost *) post {
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
     UILocalNotification *localNotification = [UILocalNotification new];
-    double minutes = .01;
+    double minutes = .1;
     NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
     localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : post.objectId };
-    localNotification.alertBody = [NSString stringWithFormat:@"Wanna comment for event:\n %@", post.title];
-    localNotification.alertAction = [NSString stringWithFormat:@"Since you went to this event, you can comment on it if you want"];
+    localNotification.alertBody = [NSString stringWithFormat:@"Wanna comment for event:\n%@", post.title];
+    localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
     localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 

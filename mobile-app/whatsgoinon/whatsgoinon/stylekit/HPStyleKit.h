@@ -14,6 +14,8 @@
 
 @interface HPStyleKit : NSObject
 
+
++ (UIColor *) blueColor;
 // Drawing Methods
 + (void) drawAmbassadorFlagInRect: (CGRect)frame;
 + (void) drawMaybeCheckmark;
