@@ -289,14 +289,15 @@
             </userGuides>
             <subviews>
                 <textView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKd-Wd-teO">
-                    <rect key="frame" x="20" y="159" width="280" height="62"/>
+                    <rect key="frame" x="20" y="163" width="280" height="58"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="62" id="LFQ-Th-zJD"/>
+                        <constraint firstAttribute="height" constant="58" id="LFQ-Th-zJD"/>
                     </constraints>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
                 </textView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NE1-hg-p8v">
                     <rect key="frame" x="233" y="51" width="56" height="21"/>
@@ -432,7 +433,7 @@
                 <constraint firstItem="Xsb-zB-uUe" firstAttribute="top" secondItem="q76-JZ-fvq" secondAttribute="bottom" constant="3" id="PYU-JB-RqT"/>
                 <constraint firstItem="dVA-BD-vyc" firstAttribute="top" secondItem="z1Y-XB-JcB" secondAttribute="top" constant="20" id="Q3F-Xc-VmQ"/>
                 <constraint firstAttribute="trailing" secondItem="uKd-Wd-teO" secondAttribute="trailing" constant="20" id="Vca-x2-c5m"/>
-                <constraint firstItem="uKd-Wd-teO" firstAttribute="top" secondItem="USf-xV-qQT" secondAttribute="bottom" constant="9" id="Xdt-ce-KRz"/>
+                <constraint firstItem="uKd-Wd-teO" firstAttribute="top" secondItem="USf-xV-qQT" secondAttribute="bottom" constant="13" id="Xdt-ce-KRz"/>
                 <constraint firstAttribute="centerX" secondItem="TEt-CM-cQA" secondAttribute="centerX" constant="-0.5" id="ZFk-Vi-3Jg"/>
                 <constraint firstItem="uKd-Wd-teO" firstAttribute="leading" secondItem="USf-xV-qQT" secondAttribute="leading" id="ZtV-PU-bTW"/>
                 <constraint firstItem="TLD-cq-zX1" firstAttribute="top" secondItem="z1Y-XB-JcB" secondAttribute="top" constant="18" id="bgI-Io-dIW"/>
@@ -445,7 +446,7 @@
                 <constraint firstItem="bna-nf-HLa" firstAttribute="centerX" secondItem="dVA-BD-vyc" secondAttribute="centerX" id="mBR-dJ-VT3"/>
                 <constraint firstItem="dVA-BD-vyc" firstAttribute="leading" secondItem="z1Y-XB-JcB" secondAttribute="leading" constant="45" id="mEe-wD-jnz"/>
                 <constraint firstItem="uKd-Wd-teO" firstAttribute="leading" secondItem="z1Y-XB-JcB" secondAttribute="leading" constant="20" id="qpu-jd-AG7"/>
-                <constraint firstItem="uKd-Wd-teO" firstAttribute="top" secondItem="z1Y-XB-JcB" secondAttribute="top" constant="159" id="udI-5C-cSM"/>
+                <constraint firstItem="uKd-Wd-teO" firstAttribute="top" secondItem="z1Y-XB-JcB" secondAttribute="top" constant="163" id="udI-5C-cSM"/>
                 <constraint firstItem="geA-nd-QYP" firstAttribute="centerX" secondItem="bna-nf-HLa" secondAttribute="centerX" id="wuQ-Ie-FzZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -460,7 +461,7 @@
                 <outlet property="profileImageView" destination="ppq-6L-me9" id="8dV-9s-n4O"/>
                 <outlet property="txtDescription" destination="uKd-Wd-teO" id="YUq-Ub-fMg"/>
             </connections>
-            <point key="canvasLocation" x="498" y="-377.5"/>
+            <point key="canvasLocation" x="511" y="-144.5"/>
         </view>
     </objects>
     <resources>

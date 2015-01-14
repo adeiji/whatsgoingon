@@ -118,13 +118,15 @@ const int heightConstraintConstant = 62;
 - (void) loadPreview
 {
     [_eventView setPost:_post];
-    [[_eventView btnGoing] setEnabled:NO];
-    [[_eventView btnMaybe] setEnabled:NO];
+    [[_eventView btnGoing] setEnabled:YES];
+    [[_eventView btnGoing] setTitle:@"Post Away!" forState:UIControlStateNormal];
+    [[_eventView btnGoing] removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
+    [[_eventView btnGoing] addTarget:self action:@selector(savePost:) forControlEvents:UIControlEventTouchUpInside];
+    _goingButtonBottomSpaceConstraint.constant -= 40;
+    [[_eventView btnMaybe] setHidden:YES];
     [[_eventView lblNumberOfPeopleGoing] setText:0];
-//    [[_eventView btnMainImage] setUserInteractionEnabled:NO];
     UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
     [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
-    _btnPost.hidden = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated

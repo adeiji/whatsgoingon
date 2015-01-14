@@ -173,6 +173,7 @@
 		F49BB8F41A5F118900C68E42 /* happ-snap-title-menu.png in Resources */ = {isa = PBXBuildFile; fileRef = F49BB8F31A5F118900C68E42 /* happ-snap-title-menu.png */; };
 		F49BB8FE1A60CC1D00C68E42 /* DELevelHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8FD1A60CC1D00C68E42 /* DELevelHandler.m */; };
 		F49BB9011A60D07B00C68E42 /* DETrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9001A60D07B00C68E42 /* DETrophy.m */; };
+		F49BB9041A65F27200C68E42 /* DEWrench.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9031A65F27200C68E42 /* DEWrench.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -191,6 +192,9 @@
 		F4CCBD7A199B0A9900532E9B /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD79199B0A9900532E9B /* Constants.m */; };
 		F4CCBD7E199BD6F500532E9B /* DESelectCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD7D199BD6F500532E9B /* DESelectCategoryView.m */; };
 		F4CCBD81199BF30200532E9B /* DESector.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCBD80199BF30200532E9B /* DESector.m */; };
+		F4CCCE051A65F9900073DEE5 /* DEHeart.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCCE041A65F9900073DEE5 /* DEHeart.m */; };
+		F4CCCE081A65FBFB0073DEE5 /* DETime.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCCE071A65FBFB0073DEE5 /* DETime.m */; };
+		F4CCCE0B1A65FDD00073DEE5 /* DELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCCE0A1A65FDD00073DEE5 /* DELocation.m */; };
 		F4EEB03519D20E400072B683 /* categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03419D20E400072B683 /* categories.plist */; };
 		F4EEB03719D21F720072B683 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EEB03619D21F720072B683 /* MessageUI.framework */; };
 		F4EEB03919D22A300072B683 /* going-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03819D22A300072B683 /* going-indicator-icon.png */; };
@@ -432,6 +436,8 @@
 		F49BB8FD1A60CC1D00C68E42 /* DELevelHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELevelHandler.m; sourceTree = "<group>"; };
 		F49BB8FF1A60D07B00C68E42 /* DETrophy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DETrophy.h; sourceTree = "<group>"; };
 		F49BB9001A60D07B00C68E42 /* DETrophy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETrophy.m; sourceTree = "<group>"; };
+		F49BB9021A65F27200C68E42 /* DEWrench.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEWrench.h; sourceTree = "<group>"; };
+		F49BB9031A65F27200C68E42 /* DEWrench.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEWrench.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
@@ -467,6 +473,12 @@
 		F4CCBD7F199BF30200532E9B /* DESector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESector.h; sourceTree = "<group>"; };
 		F4CCBD80199BF30200532E9B /* DESector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESector.m; sourceTree = "<group>"; };
 		F4CCBD82199BF6C300532E9B /* DERotaryProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DERotaryProtocol.h; sourceTree = "<group>"; };
+		F4CCCE031A65F9900073DEE5 /* DEHeart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEHeart.h; sourceTree = "<group>"; };
+		F4CCCE041A65F9900073DEE5 /* DEHeart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEHeart.m; sourceTree = "<group>"; };
+		F4CCCE061A65FBFB0073DEE5 /* DETime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DETime.h; sourceTree = "<group>"; };
+		F4CCCE071A65FBFB0073DEE5 /* DETime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETime.m; sourceTree = "<group>"; };
+		F4CCCE091A65FDD00073DEE5 /* DELocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocation.h; sourceTree = "<group>"; };
+		F4CCCE0A1A65FDD00073DEE5 /* DELocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocation.m; sourceTree = "<group>"; };
 		F4EEB03419D20E400072B683 /* categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = categories.plist; path = "supporting files/categories.plist"; sourceTree = "<group>"; };
 		F4EEB03619D21F720072B683 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F4EEB03819D22A300072B683 /* going-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "going-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/going-indicator-icon.png"; sourceTree = "<group>"; };
@@ -892,6 +904,14 @@
 				F49BB8F11A5ED12300C68E42 /* DEBinoculars.m */,
 				F49BB8FF1A60D07B00C68E42 /* DETrophy.h */,
 				F49BB9001A60D07B00C68E42 /* DETrophy.m */,
+				F49BB9021A65F27200C68E42 /* DEWrench.h */,
+				F49BB9031A65F27200C68E42 /* DEWrench.m */,
+				F4CCCE031A65F9900073DEE5 /* DEHeart.h */,
+				F4CCCE041A65F9900073DEE5 /* DEHeart.m */,
+				F4CCCE061A65FBFB0073DEE5 /* DETime.h */,
+				F4CCCE071A65FBFB0073DEE5 /* DETime.m */,
+				F4CCCE091A65FDD00073DEE5 /* DELocation.h */,
+				F4CCCE0A1A65FDD00073DEE5 /* DELocation.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
@@ -1420,11 +1440,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F40DF97719A5621F002B4419 /* DEPost.m in Sources */,
+				F49BB9041A65F27200C68E42 /* DEWrench.m in Sources */,
 				F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */,
 				F47EA7FC1A411EA1005B7B79 /* DEViewImagesViewController.m in Sources */,
 				F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */,
 				F485812119A2B85E00BD1CE7 /* DEViewChangeCity.m in Sources */,
 				F4CB0B9819AFF33600AABD12 /* DETwitterButton.m in Sources */,
+				F4CCCE081A65FBFB0073DEE5 /* DETime.m in Sources */,
 				F46B947219C355E500B41D8C /* DEActionButton.m in Sources */,
 				F49BB8EF1A5E409400C68E42 /* DEPromptForEpicEventsViewController.m in Sources */,
 				F46B946A19C26E7900B41D8C /* DEAnimationManager.m in Sources */,
@@ -1433,6 +1455,7 @@
 				F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */,
 				F45E60BB19AD8F22007705F9 /* DELocationView.m in Sources */,
 				F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */,
+				F4CCCE0B1A65FDD00073DEE5 /* DELocation.m in Sources */,
 				F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */,
 				F45E60B819AD8CAF007705F9 /* DEPostView.m in Sources */,
 				F4EEB06219D2717D0072B683 /* DECommentTableViewCell.m in Sources */,
@@ -1452,6 +1475,7 @@
 				F45E60B219AD7C71007705F9 /* DEClearRectView.m in Sources */,
 				F485811819A2B00F00BD1CE7 /* DEViewMainMenu.m in Sources */,
 				F41277CA19E614770092CD67 /* DEAddProfileImageViewController.m in Sources */,
+				F4CCCE051A65F9900073DEE5 /* DEHeart.m in Sources */,
 				F40E0E1719C0093000D2C3A0 /* DECameraButton.m in Sources */,
 				F437BFF11991968200CF61E9 /* DEEvents.m in Sources */,
 				F4774FAB199575CE00FCDE66 /* DELoginView.m in Sources */,
@@ -1754,6 +1778,7 @@
 				F49BB8F81A5F1F3000C68E42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

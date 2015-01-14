@@ -22,5 +22,9 @@
 + (void) drawBinocularsWithFrame: (CGRect)frame;
 + (void)drawTrophyWithFrame: (CGRect)frame;
 + (void)drawHappSnapTitleIconWithFrame: (CGRect)frame;
++ (void)drawWrenchWithRect: (CGRect)rect;
++ (void)drawHeartWithRect: (CGRect)rect;
++ (void)drawTimeWithFrame: (CGRect)frame;
++ (void)drawLocationWithFrame: (CGRect)frame;
 
 @end

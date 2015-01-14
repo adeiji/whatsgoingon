@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -217,16 +218,13 @@
                                 <exclude reference="PDE-bj-g4U"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="USX-Nh-pG4"/>
-                                <exclude reference="UXk-cF-KL2"/>
-                                <exclude reference="iam-bs-hff"/>
-                                <exclude reference="0t5-Lp-gPd"/>
-                                <exclude reference="geu-w3-r5c"/>
-                                <exclude reference="qfH-Fb-JuV"/>
                                 <exclude reference="G8o-pX-LBi"/>
                                 <exclude reference="ZpT-eH-DvZ"/>
                                 <exclude reference="hTU-ui-RaC"/>
                                 <exclude reference="nck-UH-8My"/>
+                                <exclude reference="0t5-Lp-gPd"/>
+                                <exclude reference="geu-w3-r5c"/>
+                                <exclude reference="qfH-Fb-JuV"/>
                                 <exclude reference="9KW-J2-jiv"/>
                                 <exclude reference="Wnf-ch-t5o"/>
                                 <exclude reference="4Q5-an-FFh"/>
@@ -238,6 +236,9 @@
                                 <exclude reference="ivv-q1-0v9"/>
                                 <exclude reference="zSz-VY-NVh"/>
                                 <exclude reference="CJA-GV-c3u"/>
+                                <exclude reference="USX-Nh-pG4"/>
+                                <exclude reference="UXk-cF-KL2"/>
+                                <exclude reference="iam-bs-hff"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -247,16 +248,13 @@
                                 <include reference="PDE-bj-g4U"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="USX-Nh-pG4"/>
-                                <include reference="UXk-cF-KL2"/>
-                                <include reference="iam-bs-hff"/>
-                                <include reference="0t5-Lp-gPd"/>
-                                <include reference="geu-w3-r5c"/>
-                                <include reference="qfH-Fb-JuV"/>
                                 <exclude reference="G8o-pX-LBi"/>
                                 <include reference="ZpT-eH-DvZ"/>
                                 <include reference="hTU-ui-RaC"/>
                                 <include reference="nck-UH-8My"/>
+                                <include reference="0t5-Lp-gPd"/>
+                                <include reference="geu-w3-r5c"/>
+                                <include reference="qfH-Fb-JuV"/>
                                 <exclude reference="2EF-d5-eaH"/>
                                 <include reference="9KW-J2-jiv"/>
                                 <include reference="Wnf-ch-t5o"/>
@@ -274,6 +272,9 @@
                                 <include reference="zSz-VY-NVh"/>
                                 <include reference="CJA-GV-c3u"/>
                                 <exclude reference="t4O-Fw-l0v"/>
+                                <include reference="USX-Nh-pG4"/>
+                                <include reference="UXk-cF-KL2"/>
+                                <include reference="iam-bs-hff"/>
                             </mask>
                         </variation>
                     </view>
