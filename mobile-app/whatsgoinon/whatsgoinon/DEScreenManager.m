@@ -104,7 +104,7 @@
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
     localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : post.objectId };
-    localNotification.alertBody = [NSString stringWithFormat:@"Wanna to comment for event - %@", post.title];
+    localNotification.alertBody = [NSString stringWithFormat:@"Wanna comment for event - %@", post.title];
     localNotification.alertAction = [NSString stringWithFormat:@"Since you went to this event, you can comment on it if you want"];
     localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];

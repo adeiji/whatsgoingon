@@ -130,6 +130,11 @@
         {
             [self incrementThumbsUpCount];
         }
+        // If this post has not already been marked as prompted for comment, do so now
+        if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
+        {
+            [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+        }
     }
     else {
         [_lblPromptEntry setHidden:NO];
