@@ -209,25 +209,17 @@
     
     if ([eventsToGetFromServerIds count] != 0)
     {
-        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate new]];
+        // Get all the events where the end time ended at the least an hour before the current time
+        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate dateWithTimeIntervalSinceNow:-60 * 60]];
         [query whereKey:PARSE_CLASS_EVENT_OBJECT_ID containedIn:eventsToGetFromServerIds];
         
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
            if (!error)
            {
-               
-               NSMutableArray *array = [NSMutableArray new];
-               
-               for (PFObject *obj in array) {
-                   if ([(NSDate *) obj[PARSE_CLASS_EVENT_END_TIME] compare:[NSDate dateWithTimeInterval:(60 * 60) sinceDate:[NSDate new]]] != NSOrderedAscending)
-                    {
-                        [array addObject:obj];
-                    }
-               }
                // If there are no saved events that are earlier than now
-               if ([array count] != 0)
+               if ([objects count] != 0)
                {
-                   [[[DEPostManager sharedManager] loadedSavedEvents] addObjectsFromArray:array];
+                   [[[DEPostManager sharedManager] loadedSavedEvents] addObjectsFromArray:objects];
                    // Post notification showing that all the user events have been loaded
                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_SAVED_EVENTS_LOADED object:nil userInfo:@{  }];
                }
