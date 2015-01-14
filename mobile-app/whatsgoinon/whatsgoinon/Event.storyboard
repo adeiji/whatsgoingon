@@ -355,7 +355,7 @@
                             <constraint firstItem="9qi-fd-hCu" firstAttribute="trailing" secondItem="iD5-yh-YDX" secondAttribute="trailing" id="bGB-Ef-I47"/>
                             <constraint firstAttribute="trailing" secondItem="Hka-7K-0uG" secondAttribute="trailing" id="d2x-TM-Xba"/>
                             <constraint firstItem="177-jK-Otc" firstAttribute="centerY" secondItem="Tpk-QC-Gf9" secondAttribute="centerY" constant="-3.5" id="e5D-0b-zuI"/>
-                            <constraint firstItem="iD5-yh-YDX" firstAttribute="top" secondItem="Hka-7K-0uG" secondAttribute="bottom" constant="-2" id="jaI-bK-dCa">
+                            <constraint firstItem="iD5-yh-YDX" firstAttribute="top" secondItem="Hka-7K-0uG" secondAttribute="bottom" id="jaI-bK-dCa">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="Svq-Tm-YuF" firstAttribute="bottom" secondItem="5Lu-Dv-3Od" secondAttribute="bottom" id="n2c-qb-xwk"/>

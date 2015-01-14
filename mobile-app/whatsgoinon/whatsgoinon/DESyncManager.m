@@ -132,7 +132,7 @@
     // Get any values that are later
     query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     // Make sure that the values for later are only those within thirty miles of the location the user is checking for
-    [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] userLocation] withinMiles:30];
+    [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] currentLocation] withinMiles:30];
     [self getValuesForLater:query
                     Objects:[[DEPostManager sharedManager] posts]
               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
@@ -174,7 +174,7 @@
     
     [DESyncManager getAllValuesWithinMilesForNow:now
                                       PostsArray:postsArray
-                                        Location:[[DELocationManager sharedManager] userLocation]];
+                                        Location:[[DELocationManager sharedManager] currentLocation]];
 
 }
 // Store the events that we just recieved from Parse and notify the app

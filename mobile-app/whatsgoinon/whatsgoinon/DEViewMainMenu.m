@@ -151,6 +151,7 @@
 - (IBAction)showMyEvents:(id)sender {
     // Send a notification that my events was pressed
     [DESyncManager getAllSavedEvents];
+
 }
 
 - (IBAction)showPastEpicEvents:(id)sender {

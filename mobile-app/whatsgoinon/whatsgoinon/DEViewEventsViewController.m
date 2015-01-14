@@ -369,7 +369,8 @@ struct TopMargin {
 
 // Remove all the events/posts currently on the screen and free the images from memory
 - (void) removeAllPostFromScreen {
-    
+    // Always hide the main menu when we show anything new on the screen
+    [self hideMainMenu];
     for (UIView *subview in [_scrollView subviews]) {
         if ([subview isKindOfClass:[DEViewEventsView class]])
         {

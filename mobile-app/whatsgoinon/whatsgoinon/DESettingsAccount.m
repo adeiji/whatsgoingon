@@ -117,16 +117,33 @@ const int PICTURE_ACTION_SHEET = 2;
 
 - (BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if ([_txtPassword.text isEqualToString:_txtConfirmPassword.text])
+    if ([textField isEqual:_txtPassword])
     {
-        [_btnChangePassword setTitle:@"Save New Password" forState:UIControlStateNormal];
-        [_btnChangePassword addTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
-        [_btnChangePassword removeTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
+        if ([[_txtPassword.text stringByReplacingCharactersInRange:range withString:string] isEqualToString:_txtConfirmPassword.text])
+        {
+            [_btnChangePassword setTitle:@"Save New Password" forState:UIControlStateNormal];
+            [_btnChangePassword removeTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+            [_btnChangePassword addTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else {
+            [_btnChangePassword setTitle:@"Cancel" forState:UIControlStateNormal];
+            [_btnChangePassword removeTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
+            [_btnChangePassword addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
-    else {
-        [_btnChangePassword setTitle:@"Cancel" forState:UIControlStateNormal];
-        [_btnChangePassword removeTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
-        [_btnChangePassword addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+    else if ([textField isEqual:_txtConfirmPassword])
+    {
+        if ([[_txtConfirmPassword.text stringByReplacingCharactersInRange:range withString:string] isEqualToString:_txtPassword.text])
+        {
+            [_btnChangePassword setTitle:@"Save New Password" forState:UIControlStateNormal];
+            [_btnChangePassword removeTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+            [_btnChangePassword addTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else {
+            [_btnChangePassword setTitle:@"Cancel" forState:UIControlStateNormal];
+            [_btnChangePassword removeTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
+            [_btnChangePassword addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     return YES;
 }
@@ -390,34 +407,16 @@ const int PICTURE_ACTION_SHEET = 2;
 
 /*
  
- Checks to see if the user has clicked on Change Password or on Save New Password
  If the user has clicked on change password then we display the password text fields
- Otherwise we slide the bottom half of the screen back up
  
  */
 - (void) changePasswordButtonFunction {
-    static BOOL changePasswordPressed;
-    
-    if (!changePasswordPressed)
-    {
-        [_btnChangePassword setTitle:@"Cancel" forState:UIControlStateNormal];
-        // Remove the target first then add the new target otherwise this will not work
-        [_btnChangePassword removeTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [_btnChangePassword addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
-        changePasswordPressed = YES;
-        _txtPassword.hidden = NO;
-        _txtConfirmPassword.hidden = NO;
-    }
-    else {
-        [_btnChangePassword setTitle:@"Change Password" forState:UIControlStateNormal];
-        // Remove the target first then add the new target otherwise this will not work
-        [_btnChangePassword removeTarget:self action:@selector(savePassword) forControlEvents:UIControlEventTouchUpInside];
-        [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
-        changePasswordPressed = NO;
-        _txtPassword.hidden = YES;
-        _txtConfirmPassword.hidden = YES;
-    }
-
+    [_btnChangePassword setTitle:@"Cancel" forState:UIControlStateNormal];
+    // Remove the target first then add the new target otherwise this will not work
+    [_btnChangePassword removeTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnChangePassword addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+    _txtPassword.hidden = NO;
+    _txtConfirmPassword.hidden = NO;
 }
 
 #pragma mark - Change Password Button Functionality
@@ -432,34 +431,25 @@ User presses the cancel button and we just want to hide the password text fields
     _txtPassword.hidden = YES;
     _txtConfirmPassword.hidden = YES;
     [_btnChangePassword setTitle:@"Change Password" forState:UIControlStateNormal];
-    [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
     [_btnChangePassword removeTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+    [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) savePassword {
 
+    // Save the new password to the parse database
+    [[DEUserManager sharedManager] changePassword:_txtPassword.text];
     
-    if ([_txtPassword.text isEqualToString:_txtConfirmPassword.text])
-    {
-        // Save the new password to the parse database
-        [[DEUserManager sharedManager] changePassword:_txtPassword.text];
-        
-        _txtConfirmPassword.hidden = YES;
-        _txtPassword.hidden = YES;
-        [self changePasswordButtonFunction];
-        _lblPasswordError.text = @"Password Saved";
-        _txtConfirmPassword.text = @"";
-        [_lblPasswordError setTextAlignment:NSTextAlignmentCenter];
-        
-        [UIView animateWithDuration:1.5 animations:^{
-            [[_lblPasswordError layer] setOpacity:0.0f];
-        }];
-        
-    }
-    else {
-        [_lblPasswordError setTextAlignment:NSTextAlignmentLeft];
-        _lblPasswordError.text = @"Passwords do not match";
-    }
+    _txtConfirmPassword.hidden = YES;
+    _txtPassword.hidden = YES;
+    [self changePasswordButtonFunction];
+    _lblPasswordError.text = @"Password Saved";
+    _txtConfirmPassword.text = @"";
+    [_lblPasswordError setTextAlignment:NSTextAlignmentCenter];
+    
+    [UIView animateWithDuration:1.5 animations:^{
+        [[_lblPasswordError layer] setOpacity:0.0f];
+    }];
     
 }
 @end

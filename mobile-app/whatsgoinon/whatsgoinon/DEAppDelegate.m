@@ -33,9 +33,6 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
     [self registerForNotifications:application];
     DELocationManager *locManager = [DELocationManager sharedManager];
     [locManager startSignificantChangeUpdates];
-    // Instantiate the Location Manager and set the user location to the current location
-    [locManager setUserLocation:[locManager currentLocation]];
-    [DESyncManager getAllValuesForNow:YES];
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
