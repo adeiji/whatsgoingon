@@ -43,7 +43,7 @@
     
     if (![[screenManager values] objectForKey:ORB_BUTTON_VIEW])
     {
-        orbColor = [UIColor colorWithRed: 0.161 green: 0.502 blue: 0.725 alpha: 1];
+        orbColor = [UIColor colorWithRed: 66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha: 1];
         UIButton *viewCategories = [UIButton new];
         UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
         UIView *outerView = [[UIView alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_OUTER_CIRCLE_WIDTH, BUTTON_OUTER_CIRCLE_HEIGHT)];
