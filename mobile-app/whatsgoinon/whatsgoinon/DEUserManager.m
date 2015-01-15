@@ -207,16 +207,30 @@
                  ViewController : (UIViewController *)viewController
                      ErrorLabel : (UILabel *)label
 {
-    [PFUser logInWithUsernameInBackground:[username lowercaseString] password:password block:^(PFUser *user, NSError *error) {
-        if (user)
-        {
-            [DEScreenManager popToRootAndShowViewController:viewController];
-            // Clear user image defaults
-            [self clearUserImageDefaults];
+    
+    __block NSString *blockUsername = username;
+    // Get the user corresponding to an email and then use that username to login
+    PFQuery *query = [PFUser query];
+    [query whereKey:PARSE_CLASS_USER_EMAIL equalTo:username];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *obj, NSError *error) {
+        // If there's no returned objects we know then that this email does not exist, if we get a returned object though, we want to get that username and login now
+        if (obj) {
+            blockUsername = obj[PARSE_CLASS_USER_USERNAME];
         }
-        else {
-            [self usernameExist:[username lowercaseString] ErrorLabel:label];
-        }
+        
+        [PFUser logInWithUsernameInBackground:[blockUsername lowercaseString] password:password block:^(PFUser *user, NSError *error) {
+            if (user)
+            {
+                [DEScreenManager popToRootAndShowViewController:viewController];
+                // Clear user image defaults
+                [self clearUserImageDefaults];
+            }
+            else {
+                [self usernameExist:[blockUsername lowercaseString] ErrorLabel:label];
+            }
+        }];
+        
     }];
     
     return nil;

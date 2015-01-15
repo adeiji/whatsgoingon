@@ -238,6 +238,7 @@
                 <constraint firstItem="wu7-mS-D2d" firstAttribute="leading" secondItem="z6h-3d-K53" secondAttribute="trailing" constant="8" symbolic="YES" id="WZn-SS-zSB"/>
                 <constraint firstItem="GYx-Re-4r6" firstAttribute="top" secondItem="hGM-sH-5Bv" secondAttribute="bottom" constant="14" id="Wgb-PN-kaf"/>
                 <constraint firstItem="eOs-av-RBc" firstAttribute="leading" secondItem="FcG-da-MAS" secondAttribute="leading" id="YGo-34-RSa"/>
+                <constraint firstAttribute="bottom" secondItem="DeT-Mw-KyC" secondAttribute="bottom" constant="13" id="ZQ0-xS-6Ng"/>
                 <constraint firstItem="tcN-WP-kyB" firstAttribute="leading" secondItem="z6h-3d-K53" secondAttribute="trailing" constant="15" id="aFY-5R-HxK"/>
                 <constraint firstItem="0SS-Zk-NaO" firstAttribute="top" secondItem="z6h-3d-K53" secondAttribute="bottom" constant="3" id="aPd-k4-FdG"/>
                 <constraint firstItem="z6h-3d-K53" firstAttribute="centerY" secondItem="tcN-WP-kyB" secondAttribute="centerY" constant="-5" id="azM-ls-c3j"/>
@@ -255,7 +256,6 @@
                 <constraint firstItem="bCA-sK-xBJ" firstAttribute="centerY" secondItem="pdA-hr-Yv3" secondAttribute="centerY" id="jOF-hJ-UGL"/>
                 <constraint firstItem="6tH-JM-PZg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jkD-Br-SkW"/>
                 <constraint firstItem="duH-8J-71V" firstAttribute="top" secondItem="tcN-WP-kyB" secondAttribute="bottom" constant="75" id="l5z-JV-xhA"/>
-                <constraint firstItem="DeT-Mw-KyC" firstAttribute="top" secondItem="6tH-JM-PZg" secondAttribute="bottom" constant="117" id="lG2-vO-u8f"/>
                 <constraint firstItem="bCA-sK-xBJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="23" id="nvD-KP-q2c"/>
                 <constraint firstItem="FcG-da-MAS" firstAttribute="trailing" secondItem="eOs-av-RBc" secondAttribute="trailing" id="pQz-bC-OSD"/>
                 <constraint firstItem="DeT-Mw-KyC" firstAttribute="leading" secondItem="eOs-av-RBc" secondAttribute="leading" id="sYt-uy-xpg"/>
@@ -267,7 +267,6 @@
             <connections>
                 <outlet property="ambassadorFlag" destination="Yfv-1H-Vsm" id="hrf-23-eso"/>
                 <outlet property="bottomHalfView" destination="DeT-Mw-KyC" id="k0l-8l-yt6"/>
-                <outlet property="bottomViewTopConstraint" destination="lG2-vO-u8f" id="hr0-Za-xba"/>
                 <outlet property="btnChangePassword" destination="ECL-f1-3Mb" id="agn-vY-UFV"/>
                 <outlet property="btnSendFeedback" destination="XBN-Q4-bFe" id="OQq-pD-jsQ"/>
                 <outlet property="btnSignOut" destination="Ony-rI-kOe" id="CXS-Ns-iyB"/>
