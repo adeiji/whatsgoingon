@@ -29,6 +29,7 @@
 {
     BOOL userIsAmbassador;
     PFUser *user;
+    int goingButtonBottomSpaceConstraintConstant;
 }
 @property BOOL isPreview;
 @property (weak, nonatomic) DEPost *post;

@@ -56,6 +56,7 @@ const int heightConstraintConstant = 62;
     
     userIsAmbassador = NO;
     [DEUserManager getUserFromUsername:_post.username];
+    goingButtonBottomSpaceConstraintConstant = _goingButtonBottomSpaceConstraint.constant;
 
 }
 
@@ -117,12 +118,11 @@ const int heightConstraintConstant = 62;
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    static BOOL loaded = NO;
     
     self.view.hidden = NO;
     
     // Only do this when this screen is first loaded
-    if (!loaded)
+
     {
         if (_isGoing)
         {
@@ -134,7 +134,6 @@ const int heightConstraintConstant = 62;
         }
     }
     
-    loaded = YES;
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -149,7 +148,7 @@ const int heightConstraintConstant = 62;
     
     if (_isPreview && ![_post.website isEqualToString:@""])
     {
-        _post.myDescription = [NSString stringWithFormat:@"%@\n %@", _post.myDescription, _post.website];
+        _post.myDescription = [NSString stringWithFormat:@"%@\n%@", _post.myDescription, _post.website];
     }
     
     BOOL postSaved = [DESyncManager savePost:[[DEPostManager sharedManager] currentPost]];
@@ -299,12 +298,20 @@ const int heightConstraintConstant = 62;
     
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
     [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
-    [self showFlagIfAmbassadorDetailsView:detailsView];
-    [[detailsView txtDescription] setText:_post.myDescription];
-    [self adjustDetailsViewHeightDetailsView:detailsView];
+    [[detailsView txtDescription] setText:nil];
+    
+    if (_isPreview)
+    {
+        [[detailsView txtDescription] setText:[NSString stringWithFormat:@"%@\n%@", _post.myDescription, _post.website]];
+    }
+    else {
+        [[detailsView txtDescription] setText:_post.myDescription];
+    }
     [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
     [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
-    [detailsView layoutIfNeeded];
+    
+    [self showFlagIfAmbassadorDetailsView:detailsView];
+    [self adjustDetailsViewHeightDetailsView:detailsView];
     
     if ([DEPostManager isBeforeEvent:_post])
     {
@@ -325,8 +332,9 @@ const int heightConstraintConstant = 62;
     CGFloat heightDifference =  ceilf(sizeThatFitsTextView.height) - heightConstraintConstant;
     [detailsView heightConstraint].constant = ceilf(sizeThatFitsTextView.height);
     
-    CGRect frame = detailsView.frame;
-    frame.size.height += heightDifference;
+    CGRect frame = [_eventView detailsView].frame;
+    frame.size.height += heightDifference + 40;
+    frame.origin.y = 0;
     [detailsView setFrame:frame];
     [[_eventView detailsView] setContentSize:detailsView.frame.size];
 }
@@ -485,7 +493,7 @@ const int heightConstraintConstant = 62;
     [button removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
 
-    _goingButtonBottomSpaceConstraint.constant -= 40;
+    _goingButtonBottomSpaceConstraint.constant = goingButtonBottomSpaceConstraintConstant - 40;
     [self.view layoutIfNeeded];
    // [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
     [[_eventView btnMaybe] setHidden:YES];

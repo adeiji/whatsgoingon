@@ -321,19 +321,15 @@ struct TopMargin {
 
 - (void) displayNoDataInCategory : (NSNotification *) notification
 {
+    [_scrollView setContentSize:_scrollView.frame.size];
+    [self removeAllPostFromScreen];
     if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY])
     {
         [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
     }
-    
-    for (UIView *subview in [_scrollView subviews]) {
-        [subview removeFromSuperview];
-    }
-    
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
     [self moveViewToCenterOfScrollViewView:view];
     [_scrollView addSubview:view];
-    [self scrollToTopOfScrollView];
 }
 
 - (void) scrollToTopOfScrollView

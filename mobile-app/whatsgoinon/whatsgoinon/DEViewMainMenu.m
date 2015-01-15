@@ -72,7 +72,6 @@
         [nc pushViewController:loginViewController animated:YES];
         [[[DEScreenManager sharedManager] mainMenu] removeFromSuperview];
         [[loginViewController navigationController] setNavigationBarHidden:YES animated:YES];
-        
         // If the user pressed post it then we don't want them to be able to skip this section
         loginViewController.posting = posting;
         
@@ -125,7 +124,7 @@
 
 - (IBAction)gotoAccountSettingsPage:(id)sender {
     
-    if ([self isLoggedIn:NO])
+    if ([self isLoggedIn:YES])
     {
         DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:[PFUser currentUser] IsPublic:NO];
 
