@@ -68,10 +68,13 @@
     DEViewReportEvent *viewReportEvent = [[[NSBundle mainBundle] loadNibNamed:@"ViewReportEvent" owner:self options:nil] firstObject];
     [viewReportEvent setEventId:_eventId];
     [viewReportEvent registerForKeyboardNotifications];
-    
-    CGRect frame = viewReportEvent.frame;
-    
+    CGRect frame = [[UIScreen mainScreen] bounds];
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
+    
+    frame = viewReportEvent.frame;
+    frame.size.height = scrollView.frame.size.height;
+    frame.size.width = scrollView.frame.size.width;
+    [viewReportEvent setFrame:frame];
     [scrollView setAlwaysBounceVertical:YES];
     [scrollView setContentSize:CGSizeMake(frame.size.width, frame.size.height)];
     [scrollView addSubview:viewReportEvent];

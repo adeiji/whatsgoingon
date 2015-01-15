@@ -264,7 +264,15 @@ Display the second screen for the post details
 
 - (void) checkAddressAvailability
 {
-    [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
+    
+    if (_createPostViewOne.longAddress)
+    {
+        
+    }
+    
+    NSString *addressToSearch = _createPostViewOne.longAddress ? _createPostViewOne.longAddress : _createPostViewOne.txtAddress.text;
+    
+    [DELocationManager getLatLongValueFromAddress:addressToSearch CompletionBlock:^(PFGeoPoint *value) {
         DELocationManager *sharedManager = [DELocationManager sharedManager];
         if (value)
         {
@@ -372,27 +380,14 @@ Display the second screen for the post details
     UIGraphicsBeginImageContext( CGSizeMake(70, 56) );
     [image drawInRect:CGRectMake(0,0,70,56)];
     UIGraphicsEndImageContext();
-
-    //Increment the imageCounter so that we display on the next image
-    imageCounter ++;
-    [_currentButton setHighlighted:NO];
-    UIButton *button = (UIButton *) [self.view viewWithTag:imageCounter];
-    [button setHighlighted:YES];
-    
     NSArray *storedImages = [[[DEPostManager sharedManager] currentPost] images];
     NSMutableArray *images = [NSMutableArray arrayWithArray:storedImages];
     // Set the image at the correct location so that it can be restored later to this same exact location
-    images[_currentButton.tag] = UIImageJPEGRepresentation(image, .02);
+    [images addObject:UIImageJPEGRepresentation(image, .02)];
     [_post setImages:images];
-    [_currentButton setHighlighted:NO];
-
-    [_currentButton setBackgroundImage:image forState:UIControlStateNormal];
+    [[_currentButton layer] setBorderColor:[UIColor whiteColor].CGColor];
+    [[_currentButton layer] setBorderWidth:1.0f];
     
-    if (![_currentButton isEqual:_createPostViewTwo.btnTakePicture])
-    {
-        [[_currentButton layer] setBorderColor:[UIColor whiteColor].CGColor];
-        [[_currentButton layer] setBorderWidth:1.0f];
-    }
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 

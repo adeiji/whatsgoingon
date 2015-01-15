@@ -512,6 +512,7 @@ numberOfRowsInComponent:(NSInteger)component
         }];
         
         NSString *shortAddress = [fullAddress substringToIndex:[fullAddress rangeOfString:@","].location];
+        _longAddress = fullAddress;
         
         _txtAddress.text = shortAddress;
         [_txtAddress validate];

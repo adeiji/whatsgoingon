@@ -201,7 +201,6 @@
 {
     _city = city;
     [DELocationManager getLatLongValueFromAddress:city CompletionBlock:^(PFGeoPoint *value) {
-        _userLocation = value;
         [[NSNotificationCenter defaultCenter] postNotificationName:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
         NSMutableArray *postsArray = [NSMutableArray new];
         

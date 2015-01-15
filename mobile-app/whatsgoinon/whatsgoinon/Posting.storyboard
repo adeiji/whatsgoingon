@@ -369,7 +369,7 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="875279B1-CFE4-41ED-B64E-EAD33A680FB1" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="37062F71-B947-4D62-9590-A18E875E2CDB" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="iZM-I6-gde"/>
@@ -549,7 +549,9 @@
                                             <constraint firstItem="Dvk-jc-T4d" firstAttribute="top" secondItem="AI2-qX-GSR" secondAttribute="bottom" constant="38" id="XbG-gL-P0A"/>
                                             <constraint firstItem="XHQ-CN-dTk" firstAttribute="leading" secondItem="1Rp-JB-xPG" secondAttribute="leading" id="Xug-J7-K5d"/>
                                             <constraint firstItem="ER6-N2-dtb" firstAttribute="leading" secondItem="4oe-3B-fWE" secondAttribute="leading" constant="48" id="Yo1-9N-ty2"/>
-                                            <constraint firstItem="ntw-IL-If7" firstAttribute="leading" secondItem="Dvk-jc-T4d" secondAttribute="trailing" constant="97" id="Yv4-2f-vxN"/>
+                                            <constraint firstItem="ntw-IL-If7" firstAttribute="leading" secondItem="Dvk-jc-T4d" secondAttribute="trailing" constant="97" id="Yv4-2f-vxN">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="7"/>
+                                            </constraint>
                                             <constraint firstItem="aiE-Tl-xcY" firstAttribute="leading" secondItem="ER6-N2-dtb" secondAttribute="leading" id="aLy-cM-uHh"/>
                                             <constraint firstItem="1cm-CC-sS7" firstAttribute="top" secondItem="Cfp-hI-51d" secondAttribute="bottom" constant="6" id="agj-Bw-1SW"/>
                                             <constraint firstItem="aiE-Tl-xcY" firstAttribute="leading" secondItem="JT0-Z2-p8Y" secondAttribute="leading" id="bAc-TO-G2a"/>
@@ -1668,7 +1670,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="875279B1-CFE4-41ED-B64E-EAD33A680FB1" width="140" height="211">
+        <image name="37062F71-B947-4D62-9590-A18E875E2CDB" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

@@ -1165,6 +1165,9 @@
                                         <include reference="22B-CV-N9W"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="goBack:" destination="UXA-aR-Gf2" eventType="touchUpInside" id="o8M-eX-mc5"/>
+                                </connections>
                             </button>
                             <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Sorry, username already exists" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Let-sw-RAp">
                                 <rect key="frame" x="64" y="124" width="171" height="21"/>

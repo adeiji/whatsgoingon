@@ -59,21 +59,6 @@ const int heightConstraintConstant = 62;
 
 }
 
-- (void) viewDidAppear:(BOOL)animated {
-    
-    [super viewDidAppear:animated];
-    
-    if (_isGoing)
-    {
-        [self updateViewToGoing];
-    }
-    if (_isMaybeGoing)
-    {
-        self.maybeCheckmarkView.hidden = NO;
-    }
-}
-
-
 - (void) setUsernameButtonClickAction {
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
 
@@ -132,8 +117,24 @@ const int heightConstraintConstant = 62;
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    static BOOL loaded = NO;
     
     self.view.hidden = NO;
+    
+    // Only do this when this screen is first loaded
+    if (!loaded)
+    {
+        if (_isGoing)
+        {
+            [self updateViewToGoing];
+        }
+        if (_isMaybeGoing)
+        {
+            self.maybeCheckmarkView.hidden = NO;
+        }
+    }
+    
+    loaded = YES;
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -264,6 +265,11 @@ const int heightConstraintConstant = 62;
                 ((DEEventDetailsView *) topView).profileImageView.image = image;
                 
                 image = nil;
+                
+                if (userIsAmbassador)
+                {
+                    ((DEEventDetailsView *) topView).ambassadorFlagView.hidden = NO;
+                }
             }
         }];
     }
@@ -292,20 +298,10 @@ const int heightConstraintConstant = 62;
     [self showView:[_eventDetailsViewController viewInfo]];
     
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
-    
     [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
     [self showFlagIfAmbassadorDetailsView:detailsView];
-
-    if (_isPreview && ![_post.website isEqualToString:@""])
-    {
-        NSString *temporaryDescription = [NSString stringWithFormat:@"%@\n %@", _post.myDescription, _post.website];
-        [[detailsView txtDescription] setText:temporaryDescription];
-    }
-    else {
-        [[detailsView txtDescription] setText:_post.myDescription];
-    }
+    [[detailsView txtDescription] setText:_post.myDescription];
     [self adjustDetailsViewHeightDetailsView:detailsView];
-    
     [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
     [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
     [detailsView layoutIfNeeded];
@@ -330,7 +326,7 @@ const int heightConstraintConstant = 62;
     [detailsView heightConstraint].constant = ceilf(sizeThatFitsTextView.height);
     
     CGRect frame = detailsView.frame;
-    frame.size.height += heightDifference / 1.5;
+    frame.size.height += heightDifference;
     [detailsView setFrame:frame];
     [[_eventView detailsView] setContentSize:detailsView.frame.size];
 }

@@ -55,9 +55,9 @@
     UIView *view = [[[UIApplication sharedApplication] delegate] window];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];
-    CGRect frame = CGRectMake(60, 180, 200, 200);
-    
+    CGRect frame = CGRectMake(0, 0, 200, 200);
     imageView.frame = frame;
+    [imageView setCenter:[view center]];
     [view addSubview:imageView];
     
     if ([view subviews])

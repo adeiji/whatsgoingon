@@ -333,6 +333,13 @@ struct TopMargin {
     UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
     [self moveViewToCenterOfScrollViewView:view];
     [_scrollView addSubview:view];
+    [self scrollToTopOfScrollView];
+}
+
+- (void) scrollToTopOfScrollView
+{
+    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [_scrollView setContentSize:_scrollView.frame.size];
 }
 
 - (void) showNoInternetConnectionScreen : (NSNotification *) object {
@@ -515,6 +522,7 @@ struct TopMargin {
     UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
     orbView.hidden = YES;
+    [self scrollToTopOfScrollView];
 }
 
 /*

@@ -42,7 +42,7 @@
 @property (strong, nonatomic) IBOutletCollection(DECameraButton) NSArray *btnSmallPictureButtons;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;
-
+@property (strong, nonatomic) NSString *longAddress;
 #pragma mark - UIPickerView Properties
 
 @property (strong, nonatomic) NSArray *categories;

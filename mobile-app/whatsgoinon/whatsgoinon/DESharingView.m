@@ -30,8 +30,7 @@
 }
 
 - (IBAction)shareFacebook:(id)sender {
-    DEUserManager *userManager = [DEUserManager sharedManager];
-    if ([PFFacebookUtils isLinkedWithUser:userManager.user])
+    if ([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
     {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
@@ -42,6 +41,9 @@
         [vc presentViewController:controller animated:NO completion:^{
             NSLog(@"Completed the transition");
         }];
+    }
+    else {
+        [PFFacebookUtils linkUser:[PFUser currentUser] permissions:nil];
     }
 }
 
@@ -54,6 +56,7 @@
         [tweetSheet addURL:[self getEventUrl]];
         [tweetSheet setInitialText:[self messageCaption]];
         [tweetSheet addImage:_image];
+        [tweetSheet setTitle:_post.title];
         UINavigationController *vc = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
         
         [vc presentViewController:tweetSheet animated:YES completion:^{
@@ -81,7 +84,7 @@
 
 
 - (NSString *) messageCaption {
-    return @"Check out this event that's posted on HappSnap!";
+    return [NSString stringWithFormat:@"%@\nCheck out this event that's posted on HappSnap!", _post.title];
 }
 
 - (NSURL *) getEventUrl {
