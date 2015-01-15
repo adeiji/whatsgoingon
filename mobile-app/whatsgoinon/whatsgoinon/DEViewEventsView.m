@@ -85,6 +85,15 @@
     return YES;
 }
 
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]])
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void) displayDistanceToLocationWithPost : (DEPost *) post
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
