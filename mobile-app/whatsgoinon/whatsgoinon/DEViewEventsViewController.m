@@ -297,6 +297,8 @@ struct TopMargin {
     [self loadVisiblePost:_scrollView];
     
     [self hideOrbView];
+    
+    _lblCategoryHeader.text = @"Past Epic Events";
 }
 
 - (void) moveViewToCenterOfScrollViewView : (UIView *) view {
@@ -403,6 +405,7 @@ struct TopMargin {
                   PostArray:postArray
                   ShowBlank:YES];
     [self loadVisiblePost:_scrollView];
+    _lblCategoryHeader.text = @"Saved Events";
 }
 
 - (void) getEventsFromEventIdsInGoingAndMaybe {

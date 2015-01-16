@@ -255,6 +255,13 @@ const int heightConstraintConstant = 62;
     if ([topView isKindOfClass:[DEEventDetailsView class]])
     {        
         PFFile *imageFile = object[PARSE_CLASS_USER_PROFILE_PICTURE];
+        if (userIsAmbassador)
+        {
+            ((DEEventDetailsView *) topView).txtDescription.dataDetectorTypes = UIDataDetectorTypeLink;
+        }
+        else {
+            ((DEEventDetailsView *) topView).txtDescription.dataDetectorTypes = UIDataDetectorTypeNone;
+        }
         
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             
@@ -290,6 +297,7 @@ const int heightConstraintConstant = 62;
     }
     else {
         detailsView.ambassadorFlagView.hidden = YES;
+
     }
 }
 
