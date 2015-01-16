@@ -17,6 +17,8 @@
 @property (weak, nonatomic) NSString *postTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property NSUInteger index;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewWidthConstraint;
 
 - (IBAction)goBack:(id)sender;
 
