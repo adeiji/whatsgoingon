@@ -17,6 +17,8 @@
 
 @implementation DECreatePostViewController
 
+const int DISPLAY_INFO_VIEW_HEIGHT = 118;
+const int DISPLAY_INFO_VIEW_WIDTH = 183;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -141,63 +143,70 @@
     }
 }
 
-- (IBAction)displayInfo:(id)sender {
+- (IBAction)displayInfo:(UIButton *) button {
     
     if (!_infoView.hidden)
     {
-        [self animateHideInfoView];
+        [self animateHideInfoView : button];
     }
     else
     {
-        [self animateDisplayInfoView];
+        [self animateDisplayInfoView : button];
     }
 }
 
-- (void) animateDisplayInfoView
+/*
+ 
+ Display to the user what the purpose of post range field is when the question mark button is pressed.
+ 
+ The animation starts as a point above the question mark, then expands outwards, and then expands downwards
+ 
+ */
+- (void) animateDisplayInfoView : (UIButton *) button
 {
-    CGRect frame = _infoView.frame;
-
-    int height = 118;
-    int width = 183;
-    int xPos = 47;
-    int yPos = 321;
-    
-    frame.origin.x  = frame.origin.x + frame.size.width;
-    frame.origin.y = _btnPostRangeHelperView.center.y;
-    frame.size.height = 2;
-    frame.size.width = 2;
-    [_infoView setFrame:frame];
+    [_infoView setFrame:CGRectMake(0, 0, 2, 2)];
+    CGPoint center = button.center;
+    center.y -= DISPLAY_INFO_VIEW_HEIGHT + 50;
+    [_infoView setCenter:center];
     _infoView.hidden = NO;
     
     [UIView animateWithDuration:.2 animations:^{
         CGRect frame = _infoView.frame;
-        frame.size.width = width;
-        frame.origin.x = xPos;
+        CGPoint center = button.center;
+        center.y -= DISPLAY_INFO_VIEW_HEIGHT + 50;
+        frame.size.width = DISPLAY_INFO_VIEW_WIDTH;
         [_infoView setFrame:frame];
+        [_infoView setCenter:center];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:.2 animations:^{
             CGRect frame = _infoView.frame;
-            frame.size.height = height;
-            frame.origin.y = yPos;
+            frame.size.height = DISPLAY_INFO_VIEW_HEIGHT;
             [_infoView setFrame:frame];
         }];
     }];
 }
 
-- (void) animateHideInfoView
+/*
+ 
+ Hide the screen that displays to the user the purpose of the post range field when they press the question mark button
+ The animation starts as a full box, then retracts upwards, and then inwards.
+ 
+ */
+- (void) animateHideInfoView : (UIButton *) button
 {
     
     [UIView animateWithDuration:.2 animations:^{
         CGRect frame = _infoView.frame;
-        frame.origin.y = _btnPostRangeHelperView.center.y;
         frame.size.height = 2;
         [_infoView setFrame:frame];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:.2 animations:^{
             CGRect frame = _infoView.frame;
-            frame.origin.x = frame.origin.x + (frame.size.width);
             frame.size.width = 2;
+            CGPoint point = _infoView.center;
+            point.x = button.center.x;
             [_infoView setFrame:frame];
+            [_infoView setCenter:point];
         } completion:^(BOOL finished) {
             [_infoView setHidden:YES];
         }];

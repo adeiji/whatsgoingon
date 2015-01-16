@@ -68,4 +68,29 @@
     return self;
 }
 
+- (NSNumber *) getLevelInformation : (NSNumber *) numberOfPost {
+    __block int level = 0;
+    _postSinceLastLevel = [NSNumber new];
+    // This post variable is called postNecessaryToReachAde, because this is the amount of post it will take to reach the next level, where Ade resides
+    _postNecessaryToReachAde = [NSNumber new];
+    // This is the necessary post required to reach the previous level
+    _postNecessaryForAyosLevel = [NSNumber new];
+    
+    [_levels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (numberOfPost > (NSNumber *) obj)
+        {
+            level ++;
+            _postSinceLastLevel = [NSNumber numberWithLong:(numberOfPost.integerValue - ((NSNumber *) obj).integerValue)];
+            _postNecessaryForAyosLevel = obj;
+        }
+        else {
+            *stop = YES;
+            _postNecessaryToReachAde = [NSNumber numberWithLong: ((NSNumber *) obj).integerValue - _postNecessaryForAyosLevel.integerValue];
+        }
+    }];
+    
+    return [NSNumber numberWithInt:level];;
+}
+
+
 @end

@@ -268,6 +268,9 @@ const int heightConstraintConstant = 62;
                 if (userIsAmbassador)
                 {
                     ((DEEventDetailsView *) topView).ambassadorFlagView.hidden = NO;
+                    DELevelHandler *levelHandler = [DELevelHandler new];
+                    // Display the ambassador's current level
+                    ((DEEventDetailsView *) topView).lblLevel.text = [[levelHandler getLevelInformation:object[PARSE_CLASS_USER_POST_COUNT]] stringValue];
                 }
             }
         }];
@@ -307,7 +310,14 @@ const int heightConstraintConstant = 62;
     else {
         [[detailsView txtDescription] setText:_post.myDescription];
     }
-    [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
+    // If the post is free
+    if (_post.cost == nil)
+    {
+        [[detailsView lblCost] setText:@"free"];
+    }
+    else {
+        [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
+    }
     [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
     
     [self showFlagIfAmbassadorDetailsView:detailsView];

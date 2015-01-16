@@ -137,15 +137,18 @@
         
         [view showView];
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
+        // Make sure its saved that the user has already been prompted to comment for the event
+        [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
     }
     else {
         DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
         [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
         [view showView];
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:myPost.objectId];
+        // Make sure its saved that the user has already been prompted to comment for the event
+        [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:myPost.objectId];
     }
-    // Make sure its saved that the user has already been prompted to comment for the event
-    [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:myPost.objectId];
+
 };
 
 - (void) startActivitySpinner

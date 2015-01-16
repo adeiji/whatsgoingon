@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet DEAmbassadorFlag *ambassadorFlagView;
 @property (weak, nonatomic) IBOutlet UIButton *btnUsername;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *lblLevel;
 
 
 @end
