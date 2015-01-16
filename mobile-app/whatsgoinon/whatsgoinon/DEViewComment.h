@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblHeader;
 @property (weak, nonatomic) IBOutlet UIButton *btnThumbsUp;
 @property (weak, nonatomic) IBOutlet UIButton *btnThumbsDown;
+@property (weak, nonatomic) IBOutlet UILabel *lblMinCharacters;
 
 - (IBAction)submitComment:(id)sender;
 - (IBAction)cancel:(id)sender;

@@ -22,6 +22,7 @@
     {
         // Load the predetermined comments
         self = [[[NSBundle mainBundle] loadNibNamed:@"ViewComment" owner:self options:nil] firstObject];
+        [self setFrame:[[UIScreen mainScreen] bounds]];
         options = @[@"Awesome", @"Meh...", @"Suuuucks!!"];
         
         _pickerView.delegate = self;
@@ -59,6 +60,7 @@
     [_txtComment setDelegate:self];
     [[_txtComment layer] setBorderColor:[UIColor whiteColor].CGColor];
     [[_txtComment layer] setBorderWidth:1.5f];
+    [_txtComment setDelegate:self];
 
 }
 
@@ -227,5 +229,28 @@
 - (void) keyboardWillBeHidden : (NSNotification *) aNotification {
     [self scrollViewToBottom:(UIScrollView *)[self superview] Notification:aNotification];
 }
+
+#pragma mark - Text View Delegate
+
+- (BOOL) textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    NSUInteger newLength = [textView.text length] + [text length] - range.length;
+    
+    // Get how many characters are available to be entered after the data is pasted
+    int targetLength = 75 - (int) newLength;
+    
+    if (targetLength > -1)
+    {
+        self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 75 - newLength];
+    }
+    else
+    {
+        self.lblMinCharacters.text = @"0";
+        return NO;
+    }
+    
+    return  YES;
+}
+
 
 @end

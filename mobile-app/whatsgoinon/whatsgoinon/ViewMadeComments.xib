@@ -150,7 +150,7 @@
             <connections>
                 <outlet property="imgProfileView" destination="o4S-dz-3Uk" id="yz5-aS-IGv"/>
                 <outlet property="imgThumbView" destination="2Lo-DO-ASC" id="y6r-Nu-9ho"/>
-                <outlet property="lblComment" destination="G1L-MN-PCN" id="52O-ap-8Wj"/>
+                <outlet property="lblComment" destination="G1L-MN-PCN" id="NEa-9A-idv"/>
             </connections>
             <point key="canvasLocation" x="463" y="230.5"/>
         </tableViewCell>

@@ -80,7 +80,7 @@
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kFu-HK-aPj">
-                    <rect key="frame" x="48" y="340" width="225" height="110"/>
+                    <rect key="frame" x="48" y="320" width="225" height="110"/>
                     <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
@@ -139,6 +139,16 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ret-rb-ICt">
+                    <rect key="frame" x="48" y="434" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="mkk-Gm-8mI"/>
+                        <constraint firstAttribute="width" constant="42" id="v10-km-XiR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="ybD-Rp-ZvU" firstAttribute="baseline" secondItem="uoX-LV-Pgi" secondAttribute="baseline" id="2NE-SV-l8z"/>
@@ -150,7 +160,9 @@
                 <constraint firstItem="uoX-LV-Pgi" firstAttribute="leading" secondItem="FPZ-Ai-itC" secondAttribute="trailing" constant="7" id="NaG-Qw-jAM"/>
                 <constraint firstItem="V1e-vH-Mzw" firstAttribute="top" secondItem="1" secondAttribute="top" constant="31" id="QLP-rq-FMD"/>
                 <constraint firstItem="D7k-e9-vcq" firstAttribute="bottom" secondItem="8fw-7t-5QO" secondAttribute="bottom" id="RHS-Xd-SJP"/>
-                <constraint firstItem="kFu-HK-aPj" firstAttribute="top" secondItem="FPZ-Ai-itC" secondAttribute="bottom" constant="33" id="Rle-0j-8wg"/>
+                <constraint firstItem="kFu-HK-aPj" firstAttribute="top" secondItem="FPZ-Ai-itC" secondAttribute="bottom" constant="13" id="Rle-0j-8wg"/>
+                <constraint firstItem="ret-rb-ICt" firstAttribute="top" secondItem="kFu-HK-aPj" secondAttribute="bottom" constant="4" id="T1F-FZ-Pxo"/>
+                <constraint firstItem="kFu-HK-aPj" firstAttribute="leading" secondItem="ret-rb-ICt" secondAttribute="leading" id="TYf-eK-SJF"/>
                 <constraint firstItem="ybD-Rp-ZvU" firstAttribute="top" secondItem="uoX-LV-Pgi" secondAttribute="top" id="Ugt-mE-itv"/>
                 <constraint firstItem="FPZ-Ai-itC" firstAttribute="top" secondItem="uoX-LV-Pgi" secondAttribute="top" id="Vju-yG-sI3"/>
                 <constraint firstItem="kFu-HK-aPj" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="YmF-wJ-whQ"/>
@@ -164,7 +176,7 @@
                 <constraint firstItem="SwF-sI-gcU" firstAttribute="centerX" secondItem="V1e-vH-Mzw" secondAttribute="centerX" id="ia7-zc-lVD"/>
                 <constraint firstItem="kFu-HK-aPj" firstAttribute="trailing" secondItem="ybD-Rp-ZvU" secondAttribute="trailing" id="jG8-9H-oRK"/>
                 <constraint firstItem="SwF-sI-gcU" firstAttribute="top" secondItem="V1e-vH-Mzw" secondAttribute="bottom" constant="33" id="k47-bE-I9S"/>
-                <constraint firstItem="l6Q-py-I1i" firstAttribute="top" secondItem="kFu-HK-aPj" secondAttribute="bottom" constant="10" id="mBm-yf-4rn"/>
+                <constraint firstItem="l6Q-py-I1i" firstAttribute="top" secondItem="kFu-HK-aPj" secondAttribute="bottom" constant="30" id="mBm-yf-4rn"/>
                 <constraint firstItem="uoX-LV-Pgi" firstAttribute="baseline" secondItem="ybD-Rp-ZvU" secondAttribute="firstBaseline" id="sJR-jY-RGf"/>
                 <constraint firstItem="uoX-LV-Pgi" firstAttribute="top" secondItem="8fw-7t-5QO" secondAttribute="bottom" constant="17" id="u9T-7g-MnL"/>
                 <constraint firstItem="uoX-LV-Pgi" firstAttribute="baseline" secondItem="FPZ-Ai-itC" secondAttribute="firstBaseline" id="vDW-kF-Tvw"/>
@@ -176,6 +188,7 @@
                 <outlet property="btnThumbsDown" destination="D7k-e9-vcq" id="5IZ-BJ-Itq"/>
                 <outlet property="btnThumbsUp" destination="8fw-7t-5QO" id="qpX-Mr-ILC"/>
                 <outlet property="lblHeader" destination="SwF-sI-gcU" id="dT1-Zc-5Fs"/>
+                <outlet property="lblMinCharacters" destination="ret-rb-ICt" id="Ibd-Lk-ayB"/>
                 <outlet property="txtComment" destination="kFu-HK-aPj" id="C2T-pj-WJV"/>
                 <outletCollection property="buttons" destination="l6Q-py-I1i" id="tSY-7d-ncy"/>
                 <outletCollection property="buttons" destination="s7M-V2-2P2" id="6Wy-IG-LRb"/>

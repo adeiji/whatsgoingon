@@ -36,8 +36,11 @@
     [[cell.imgProfileView layer] setCornerRadius:cell.imgProfileView.frame.size.width / 2.0];
     if (_comments[indexPath.row][PARSE_CLASS_COMMENT_THUMBS_UP] == [NSNumber numberWithBool:NO])
     {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"ViewMadeComments" owner:self options:nil] objectAtIndex:0];
         [cell.imgThumbView setImage:[UIImage imageNamed:@"thumbs-down.png"]];
+        cell.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        cell.imgThumbView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        cell.lblComment.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+        cell.imgProfileView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
     }
     
     [cell layoutSubviews];
