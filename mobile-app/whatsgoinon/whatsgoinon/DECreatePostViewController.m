@@ -135,13 +135,20 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     
     if ([_createPostViewTwo page2ValidateTextFields])
     {
-        //  Display the event preview
-        DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
-        eventViewController.isPreview = YES;
-        eventViewController.post = _post;
-        [self savePostDetails];
-        [[DEPostManager sharedManager] setCurrentPost:_post];
-        [self.navigationController pushViewController:eventViewController animated:YES];
+        if ([[_post images] count] != 0)
+        {
+            //  Display the event preview
+            DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
+            eventViewController.isPreview = YES;
+            eventViewController.post = _post;
+            [self savePostDetails];
+            [[DEPostManager sharedManager] setCurrentPost:_post];
+            [self.navigationController pushViewController:eventViewController animated:YES];
+        }
+        else {
+            [[_createPostViewTwo.btnTakePicture layer] setBorderColor:[UIColor redColor].CGColor];
+            [[_createPostViewTwo.btnTakePicture layer] setBorderWidth:5.0f];
+        }
     }
 }
 

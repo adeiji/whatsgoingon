@@ -247,9 +247,11 @@
     NSDate *date = [NSDate date];
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
+    NSDate *latestDate = [date dateByAddingTimeInterval:(60 * 60 * 24 * 3)];
     
     [query setLimit:10];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
+    [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:latestDate];
     [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
