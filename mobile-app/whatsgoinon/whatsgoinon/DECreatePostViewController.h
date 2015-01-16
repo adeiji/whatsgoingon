@@ -12,6 +12,7 @@
 #import "DELocationManager.h"
 #import "DEEventViewController.h"
 #import "DEAddValueViewController.h"
+#import "DECameraButton.h"
 
 @class DECreatePostView;
 
@@ -22,6 +23,7 @@
     NSString *postRange;
     NSDictionary *dictionary;
     NSString *website;
+    NSMutableArray *imagesCopy;
 }
 #pragma mark - Action Methods
 
@@ -37,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet DECreatePostView *createPostViewTwo;
 @property (weak, nonatomic) IBOutlet UIView *btnPostRangeHelperView;
 @property (strong, nonatomic) UIButton *currentButton;
+@property (strong, nonatomic) IBOutletCollection(DECameraButton) NSArray *cameraButtons;
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
@@ -47,6 +50,10 @@
 @property (strong, nonatomic) DEPost *post;
 @property (strong, nonatomic) PFGeoPoint *location;
 
+@end
 
+@interface UIImage (UIImageWithTag)
+
+@property id tag;
 
 @end

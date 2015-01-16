@@ -10,6 +10,7 @@
 #import "DEPostManager.h"
 #import "DESyncManager.h"
 #import "Constants.h"
+#import <objc/runtime.h>
 
 @interface DECreatePostViewController ()
 
@@ -55,6 +56,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     }
     
     _createPostViewTwo.txtWebsite.text = @"";
+    imagesCopy = [NSMutableArray new];
 }
 
 
@@ -391,12 +393,39 @@ Display the second screen for the post details
     UIGraphicsEndImageContext();
     NSArray *storedImages = [[[DEPostManager sharedManager] currentPost] images];
     NSMutableArray *images = [NSMutableArray arrayWithArray:storedImages];
-    // Set the image at the correct location so that it can be restored later to this same exact location
-    [images addObject:UIImageJPEGRepresentation(image, .02)];
+    image.tag = [NSNumber numberWithInteger:_currentButton.tag];
+
+    if ([images count] == 0)
+    {
+        // Set the image at the correct location so that it can be restored later to this same exact location
+        [imagesCopy addObject:image];
+    }
+    else {
+        __block BOOL foundImage = NO;
+        // check to see if this a new image or the user clicked a button with an image already inside
+        [images enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            UIImage *myImage = (UIImage *) obj;
+            if (((NSNumber *)myImage.tag).integerValue == ((NSNumber *) image.tag).integerValue)
+            {
+                obj = image;
+                foundImage = YES;
+                // Get the object with this tag as an array, and then simply get the first and only object
+                UIImage *imageToRemove = [imagesCopy filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"tag == %@", myImage.tag]][0];
+                [imagesCopy removeObject:imageToRemove];
+                [imagesCopy addObject:image];
+            }
+        }];
+        
+        if (!foundImage)
+        {
+            // Set the image at the correct location so that it can be restored later to this same exact location
+            [imagesCopy addObject:image];
+        }
+    }
+    images = imagesCopy;
     [_post setImages:images];
     [[_currentButton layer] setBorderColor:[UIColor whiteColor].CGColor];
     [[_currentButton layer] setBorderWidth:1.0f];
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -413,31 +442,29 @@ Display the second screen for the post details
     [postManager setCurrentPost:post];
 }
 
+
 - (void) loadImages {
-    // Reload the images if there are any images to load
-    NSArray *images = (NSMutableArray *) [[[DEPostManager sharedManager] currentPost] images];
     
-    if ([images count] != 0)
+    if ([imagesCopy count] != 0)
     {
         // Make sure that this is not a PFFile class which would mean that the current post is from an already existing one
-        if (![images[0] isKindOfClass:[PFFile class]])
+        if (![imagesCopy[0] isKindOfClass:[PFFile class]])
         {
-            NSData *imageData = images[0];
-            UIImage *image = [UIImage imageWithData:imageData];
-            UIButton *button = _createPostViewTwo.btnTakePicture;
-            [button setHighlighted:NO];
-            [button setBackgroundImage:image forState:UIControlStateNormal];
-            
-            for (int i = 1; i < [images count]; i++) {
-                UIButton *button = (UIButton *) [_createPostViewTwo viewWithTag:i];
-                NSData *imageData = images[i];
-                UIImage *image = [UIImage imageWithData:imageData];
+            [imagesCopy enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                UIImage *image = (UIImage *) obj;
+                __block UIButton *button;
                 
-                if (image != nil)
-                {
-                    [button setBackgroundImage:image forState:UIControlStateNormal];
-                }
-            }
+                [_cameraButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    if (((UIButton *) obj).tag == ((NSNumber *) image.tag).integerValue)
+                    {
+                        button = (UIButton *) obj;
+                        *stop = YES;
+                    }
+                }];
+
+                [button setBackgroundImage:image forState:UIControlStateNormal];
+
+            }];
         }
     }
 }
@@ -533,4 +560,18 @@ Display the second screen for the post details
     UIView *view = [[self.view subviews] lastObject];
     [DEAnimationManager fadeOutRemoveView:view FromView:self.view];
 }
+@end
+
+@implementation UIImage (UIImageWithTag)
+
+@dynamic tag;
+
+- (void) setTag:(id) tag {
+    objc_setAssociatedObject(self, @selector(tag), tag, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (id) tag {
+    return objc_getAssociatedObject(self, @selector(tag));
+}
+
 @end

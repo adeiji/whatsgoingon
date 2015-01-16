@@ -103,6 +103,7 @@ const int heightConstraintConstant = 62;
 
 - (void) loadPreview
 {
+    NSArray *postImages = [self imagesToNSDataArray:_post.images Compression:.02];
     [_eventView setPost:_post];
     [[_eventView btnGoing] setEnabled:YES];
     [[_eventView btnGoing] setTitle:@"Post Away!" forState:UIControlStateNormal];
@@ -111,7 +112,7 @@ const int heightConstraintConstant = 62;
     _goingButtonBottomSpaceConstraint.constant -= 40;
     [[_eventView btnMaybe] setHidden:YES];
     [[_eventView lblNumberOfPeopleGoing] setText:0];
-    UIImage *mainImage =  [UIImage imageWithData:[[_post images] firstObject]];
+    UIImage *mainImage =  [UIImage imageWithData:[postImages firstObject]];
     [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
 }
 
@@ -150,7 +151,8 @@ const int heightConstraintConstant = 62;
     {
         _post.myDescription = [NSString stringWithFormat:@"%@\n%@", _post.myDescription, _post.website];
     }
-    
+    NSArray *postImages = [self imagesToNSDataArray:_post.images Compression:.02];
+    [[[DEPostManager sharedManager] currentPost] setImages:postImages];
     BOOL postSaved = [DESyncManager savePost:[[DEPostManager sharedManager] currentPost]];
     
     if (postSaved)
@@ -467,6 +469,44 @@ const int heightConstraintConstant = 62;
 }
 
 
+/*
+ 
+ Takes an array of images and returns an array of their data representations
+ 
+ */
+- (NSArray *) imagesToNSDataArray : (NSArray *) array
+                      Compression : (CGFloat) compression {
+    __block NSMutableArray *dataArray = [NSMutableArray new];
+    
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        // If this array still contains images then we do no conversion and return the array that was given
+        if ([obj isKindOfClass:[UIImage class]])
+        {
+            UIImage *image = (UIImage *) obj;
+            NSData *dataOfImage = UIImageJPEGRepresentation(image, compression);
+            [dataArray addObject:dataOfImage];
+        }
+        else {
+            dataArray = [array mutableCopy];
+            *stop = YES;
+        }
+    }];
+    
+    return dataArray;
+}
+
+- (NSArray *) dataToUIIMageArray : (NSArray *) array {
+    NSMutableArray *imageArray = [NSMutableArray new];
+    
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSData *data = (NSData *) obj;
+        UIImage *image = [UIImage imageWithData:data];
+        [imageArray addObject:image];
+    }];
+    
+    return imageArray;
+}
+
 #pragma mark - Buttons
 
 /*
@@ -478,10 +518,10 @@ const int heightConstraintConstant = 62;
     
     DEViewImagesViewController *pageViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewImages"];
     NSMutableArray *viewControllers = [NSMutableArray new];
-    
+    NSArray *postImages = [self imagesToNSDataArray:_post.images Compression:.02];
     for (NSUInteger i = 0; i < [_post.images count]; i ++) {
         DEViewImageViewController *viewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewImage"];
-        [viewController setImage:_post.images[i]];
+        [viewController setImage:postImages[i]];
         [viewController setIndex:i];
         [viewController setPostTitle:_post.title];
         [viewControllers addObject:viewController];
