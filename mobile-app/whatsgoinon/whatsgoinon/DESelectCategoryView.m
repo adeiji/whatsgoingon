@@ -1,5 +1,5 @@
 //
-//  DEViewCategoriesView.m
+//  DE_orbViewView.m
 //  whatsgoinon
 //
 //  Created by adeiji on 8/13/14.
@@ -38,51 +38,39 @@
 
 - (void) loadView {
     [self setButtonConstants];
-    DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIView *outerView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
     
-    if (![[screenManager values] objectForKey:ORB_BUTTON_VIEW])
+    orbColor = [UIColor colorWithRed: 66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha: 1];
+    _orbView = [UIButton new];
+    _outerView = [[UIView alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_OUTER_CIRCLE_WIDTH, BUTTON_OUTER_CIRCLE_HEIGHT)];
+    
+    _orbView = [[UIButton alloc] initWithFrame:CGRectMake((BUTTON_OUTER_CIRCLE_HEIGHT / 2.0) - (BUTTON_WIDTH / 2), (BUTTON_OUTER_CIRCLE_WIDTH / 2.0) - (BUTTON_HEIGHT / 2), BUTTON_WIDTH, BUTTON_HEIGHT)];
+    
+    // Outer View Group
     {
-        orbColor = [UIColor colorWithRed: 66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha: 1];
-        UIButton *viewCategories = [UIButton new];
-        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        UIView *outerView = [[UIView alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_OUTER_CIRCLE_WIDTH, BUTTON_OUTER_CIRCLE_HEIGHT)];
-        
-        viewCategories = [[UIButton alloc] initWithFrame:CGRectMake((BUTTON_OUTER_CIRCLE_HEIGHT / 2.0) - (BUTTON_WIDTH / 2), (BUTTON_OUTER_CIRCLE_WIDTH / 2.0) - (BUTTON_HEIGHT / 2), BUTTON_WIDTH, BUTTON_HEIGHT)];
-        
-        // Outer View Group
-        {
-            [[outerView layer] setBackgroundColor:[UIColor clearColor].CGColor];
-            [[outerView layer] setCornerRadius:BUTTON_OUTER_CIRCLE_HEIGHT / 2.0f];
-            [[outerView layer] setBorderColor:orbColor.CGColor];
-            [[outerView layer] setBorderWidth:2.0f];
-        }
-        
-        // View Categories Button Group
-        {
-            [[viewCategories layer] setCornerRadius:BUTTON_HEIGHT / 2.0f];
-            [viewCategories setBackgroundColor:orbColor];
-            [viewCategories addTarget:self action:@selector(displayCategoryWheel:) forControlEvents:UIControlEventTouchUpInside];
-            [viewCategories setOpaque:NO];
-        }
-        [outerView addSubview:viewCategories];
-        [window addSubview:outerView];
-        
-        // Animation for when orb is simply sitting there
-        {
-            [UIView animateWithDuration:0.8f delay:0.0f options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
-                
-                outerView.transform = CGAffineTransformMakeScale(1.2, 1.2);
-                viewCategories.transform = CGAffineTransformMakeScale(.9, .9);
-                
-            } completion:NULL];
-        }
-        
-        [[screenManager values] setObject:outerView forKey:ORB_BUTTON_VIEW];
+        [[_outerView layer] setBackgroundColor:[UIColor clearColor].CGColor];
+        [[_outerView layer] setCornerRadius:BUTTON_OUTER_CIRCLE_HEIGHT / 2.0f];
+        [[_outerView layer] setBorderColor:orbColor.CGColor];
+        [[_outerView layer] setBorderWidth:2.0f];
     }
-    else
+    
+    // View Categories Button Group
     {
-        outerView.hidden = NO;
+        [[_orbView layer] setCornerRadius:BUTTON_HEIGHT / 2.0f];
+        [_orbView setBackgroundColor:orbColor];
+        [_orbView addTarget:self action:@selector(displayCategoryWheel:) forControlEvents:UIControlEventTouchUpInside];
+        [_orbView setOpaque:NO];
+    }
+    [_outerView addSubview:_orbView];
+    [[self superview] addSubview:_outerView];
+    
+    // Animation for when orb is simply sitting there
+    {
+        [UIView animateWithDuration:0.8f delay:0.0f options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
+            
+            _outerView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            _orbView.transform = CGAffineTransformMakeScale(.9, .9);
+            
+        } completion:NULL];
     }
     
     isActive = false;
@@ -113,9 +101,7 @@
     
     if (isActive)
     {
-        DEScreenManager *screenManager = [DEScreenManager sharedManager];
-        UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
-        if (CGRectContainsPoint(orbView.frame, point))
+        if (CGRectContainsPoint(_orbView.frame, point))
         {
             return NO;
         }

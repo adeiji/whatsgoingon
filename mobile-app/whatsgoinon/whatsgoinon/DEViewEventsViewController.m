@@ -62,13 +62,13 @@ struct TopMargin {
     
     
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
-    
-    // Add the select category view to the window so that we completely cover the screen including the navigation bar.
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    [self.view addSubview:selectCategoryView];
     [selectCategoryView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
     [selectCategoryView loadView];
-    [selectCategoryView setFrame:window.frame];
-    [window addSubview:selectCategoryView];
+    orbView = selectCategoryView.orbView;
+    outerView = selectCategoryView.outerView;
+    [selectCategoryView setFrame:[[UIScreen mainScreen] bounds]];
+    [self.view addSubview:selectCategoryView];
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
     
     /* Check to see if this is their first time going to this part of the application
@@ -209,7 +209,6 @@ struct TopMargin {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
     }
     
-    [self hideOrbView];
     self.view.hidden = YES;
     [_scrollView setDelegate:nil];
 }
@@ -219,7 +218,6 @@ struct TopMargin {
     [super viewWillDisappear:animated];
     [self.view setHidden:YES];
     [self.scrollView removeFromSuperview];
-    [self hideOrbView];
     
 }
 
@@ -232,7 +230,6 @@ struct TopMargin {
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self showOrbView];
     self.view.hidden = NO;
     
     if (menuDisplayed && ![[[DEScreenManager sharedManager] mainMenu] superview])
@@ -240,7 +237,6 @@ struct TopMargin {
         DEScreenManager *screenManager = [DEScreenManager sharedManager];
         [[self view] addSubview:[screenManager mainMenu]];
         [[[DEScreenManager sharedManager] mainMenu] setHidden:NO];
-        [self hideOrbView];
     }
     
     if (![_scrollView superview])
@@ -252,18 +248,14 @@ struct TopMargin {
 
 - (void) hideOrbView
 {
-    DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
-    
     orbView.hidden = YES;
+    outerView.hidden = YES;
 }
 
 - (void) showOrbView
 {
-    DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
-    
     orbView.hidden = NO;
+    outerView.hidden = NO;
 }
 
 - (void) loadPosts {
@@ -304,10 +296,7 @@ struct TopMargin {
     [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
     [self loadVisiblePost:_scrollView];
     
-    DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
-    
-    orbView.hidden = YES;
+    [self hideOrbView];
 }
 
 - (void) moveViewToCenterOfScrollViewView : (UIView *) view {
@@ -511,10 +500,8 @@ struct TopMargin {
     [_scrollView addSubview:view];
     [self moveViewToCenterOfScrollViewView:view];
     [_scrollView setContentSize:view.frame.size];
-    DEScreenManager *screenManager = [DEScreenManager sharedManager];
-    UIView *orbView = [[screenManager values] objectForKey:ORB_BUTTON_VIEW];
+    [self hideOrbView];
     
-    orbView.hidden = YES;
     [self scrollToTopOfScrollView];
 }
 

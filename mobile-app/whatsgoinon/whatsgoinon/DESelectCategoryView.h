@@ -39,6 +39,8 @@
 #pragma mark - Outlets
 
 @property (weak, nonatomic) IBOutlet UIButton *btnCategory;
+@property (strong, nonatomic) UIButton *orbView;
+@property (strong, nonatomic) UIView *outerView;
 
 #pragma mark - Category Functions
 - (IBAction)displayCategoryWheel:(id)sender;
