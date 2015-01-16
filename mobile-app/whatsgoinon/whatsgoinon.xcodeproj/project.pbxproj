@@ -142,7 +142,6 @@
 		F46B947219C355E500B41D8C /* DEActionButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B947119C355E500B41D8C /* DEActionButton.m */; };
 		F46B947619C3657900B41D8C /* email-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947519C3657900B41D8C /* email-icon.png */; };
 		F46B947819C3674E00B41D8C /* password-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947719C3674E00B41D8C /* password-icon.png */; };
-		F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947A19C39D0600B41D8C /* thumbs-up.png */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
 		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
@@ -197,6 +196,8 @@
 		F4CCCE0B1A65FDD00073DEE5 /* DELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CCCE0A1A65FDD00073DEE5 /* DELocation.m */; };
 		F4CCCE0D1A68D3090073DEE5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CCCE0C1A68D3090073DEE5 /* LaunchScreen.xib */; };
 		F4CCCE131A68D5300073DEE5 /* happ-snap-logo-no-text.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CCCE121A68D5300073DEE5 /* happ-snap-logo-no-text.png */; };
+		F4CCCE161A696AD60073DEE5 /* thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CCCE141A696AD60073DEE5 /* thumbs-down.png */; };
+		F4CCCE171A696AD60073DEE5 /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CCCE151A696AD60073DEE5 /* thumbs-up.png */; };
 		F4EEB03519D20E400072B683 /* categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03419D20E400072B683 /* categories.plist */; };
 		F4EEB03719D21F720072B683 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EEB03619D21F720072B683 /* MessageUI.framework */; };
 		F4EEB03919D22A300072B683 /* going-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03819D22A300072B683 /* going-indicator-icon.png */; };
@@ -206,7 +207,6 @@
 		F4EEB04F19D241670072B683 /* ViewNoInternet.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB04E19D241670072B683 /* ViewNoInternet.xib */; };
 		F4EEB05119D241CE0072B683 /* no-internet.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB05019D241CE0072B683 /* no-internet.png */; };
 		F4EEB05519D269480072B683 /* DEViewComments.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EEB05419D269480072B683 /* DEViewComments.m */; };
-		F4EEB05D19D26D1C0072B683 /* thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB05C19D26D1C0072B683 /* thumbs-down.png */; };
 		F4EEB05F19D26D7B0072B683 /* ViewMadeComments.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB05E19D26D7B0072B683 /* ViewMadeComments.xib */; };
 		F4EEB06219D2717D0072B683 /* DECommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EEB06119D2717D0072B683 /* DECommentTableViewCell.m */; };
 		F4EEB06419D276F00072B683 /* profile-pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB06319D276F00072B683 /* profile-pic.jpg */; };
@@ -384,7 +384,6 @@
 		F46B947119C355E500B41D8C /* DEActionButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEActionButton.m; sourceTree = "<group>"; };
 		F46B947519C3657900B41D8C /* email-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email-icon.png"; sourceTree = "<group>"; };
 		F46B947719C3674E00B41D8C /* password-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password-icon.png"; sourceTree = "<group>"; };
-		F46B947A19C39D0600B41D8C /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
 		F4774F871992E40C00FCDE66 /* DELocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationManager.h; sourceTree = "<group>"; };
 		F4774F881992E40C00FCDE66 /* DELocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationManager.m; sourceTree = "<group>"; };
 		F4774F8F1994398F00FCDE66 /* UDIDGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UDIDGenerator.h; path = ../../../../12WeekFitness/Resources/UDIDGenerator.h; sourceTree = "<group>"; };
@@ -483,6 +482,8 @@
 		F4CCCE0A1A65FDD00073DEE5 /* DELocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocation.m; sourceTree = "<group>"; };
 		F4CCCE0C1A68D3090073DEE5 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		F4CCCE121A68D5300073DEE5 /* happ-snap-logo-no-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "happ-snap-logo-no-text.png"; sourceTree = "<group>"; };
+		F4CCCE141A696AD60073DEE5 /* thumbs-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down.png"; sourceTree = "<group>"; };
+		F4CCCE151A696AD60073DEE5 /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
 		F4EEB03419D20E400072B683 /* categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = categories.plist; path = "supporting files/categories.plist"; sourceTree = "<group>"; };
 		F4EEB03619D21F720072B683 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F4EEB03819D22A300072B683 /* going-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "going-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/going-indicator-icon.png"; sourceTree = "<group>"; };
@@ -494,7 +495,6 @@
 		F4EEB05019D241CE0072B683 /* no-internet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no-internet.png"; sourceTree = "<group>"; };
 		F4EEB05319D269480072B683 /* DEViewComments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewComments.h; sourceTree = "<group>"; };
 		F4EEB05419D269480072B683 /* DEViewComments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewComments.m; sourceTree = "<group>"; };
-		F4EEB05C19D26D1C0072B683 /* thumbs-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down.png"; sourceTree = "<group>"; };
 		F4EEB05E19D26D7B0072B683 /* ViewMadeComments.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewMadeComments.xib; sourceTree = "<group>"; };
 		F4EEB06019D2717D0072B683 /* DECommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECommentTableViewCell.h; sourceTree = "<group>"; };
 		F4EEB06119D2717D0072B683 /* DECommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECommentTableViewCell.m; sourceTree = "<group>"; };
@@ -1166,6 +1166,8 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F4CCCE141A696AD60073DEE5 /* thumbs-down.png */,
+				F4CCCE151A696AD60073DEE5 /* thumbs-up.png */,
 				F4CCCE121A68D5300073DEE5 /* happ-snap-logo-no-text.png */,
 				F47C8A7A1A58C70400757918 /* error-01.png */,
 				F439AEEC1A44BE0D00D24356 /* backgrounds */,
@@ -1175,12 +1177,10 @@
 				F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */,
 				F412770919E4F8390092CD67 /* HappSnap-image-only-logo.png */,
 				F4EEB06319D276F00072B683 /* profile-pic.jpg */,
-				F4EEB05C19D26D1C0072B683 /* thumbs-down.png */,
 				F4EEB05019D241CE0072B683 /* no-internet.png */,
 				F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */,
 				F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */,
 				F4EEB03819D22A300072B683 /* going-indicator-icon.png */,
-				F46B947A19C39D0600B41D8C /* thumbs-up.png */,
 				F46B947719C3674E00B41D8C /* password-icon.png */,
 				F46B947519C3657900B41D8C /* email-icon.png */,
 				F46B946B19C27E2C00B41D8C /* ok.png */,
@@ -1321,6 +1321,7 @@
 				F41277B319E611570092CD67 /* appicon-Small-40.png in Resources */,
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
 				F41277B519E611570092CD67 /* appicon-Small-50.png in Resources */,
+				F4CCCE161A696AD60073DEE5 /* thumbs-down.png in Resources */,
 				F41277B219E611570092CD67 /* appicon-76@2x.png in Resources */,
 				F46B946319C2551000B41D8C /* Magnifying Glass Icon.png in Resources */,
 				F41277C319E611570092CD67 /* Default-Portrait@2x.png in Resources */,
@@ -1366,14 +1367,13 @@
 				F47EA8011A439C7D005B7B79 /* happ-snap-logo-in-app.png in Resources */,
 				F437BF981990452000CF61E9 /* Login.storyboard in Resources */,
 				F46B946D19C27E2C00B41D8C /* ok.png in Resources */,
+				F4CCCE171A696AD60073DEE5 /* thumbs-up.png in Resources */,
 				F448FE7E19A538C700645667 /* ViewAutocomplete.xib in Resources */,
 				F41277B019E611570092CD67 /* appicon-72@2x.png in Resources */,
 				F41277B919E611570092CD67 /* appicon-Small@3x.png in Resources */,
 				F41277C719E611570092CD67 /* iTunesArtwork@2x in Resources */,
 				F41277BD19E611570092CD67 /* Default-667h@2x.png in Resources */,
-				F46B947C19C39D0600B41D8C /* thumbs-up.png in Resources */,
 				F4EEB05119D241CE0072B683 /* no-internet.png in Resources */,
-				F4EEB05D19D26D1C0072B683 /* thumbs-down.png in Resources */,
 				F412770C19E5037A0092CD67 /* main-vc-background.png in Resources */,
 				F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */,
 				F41277C619E611570092CD67 /* iTunesArtwork in Resources */,

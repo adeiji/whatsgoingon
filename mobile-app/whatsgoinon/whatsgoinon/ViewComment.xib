@@ -155,7 +155,7 @@
                 <constraint firstItem="l6Q-py-I1i" firstAttribute="leading" secondItem="kFu-HK-aPj" secondAttribute="leading" id="9wC-M5-S3E"/>
                 <constraint firstItem="s7M-V2-2P2" firstAttribute="leading" secondItem="l6Q-py-I1i" secondAttribute="leading" id="CAW-J6-KBp"/>
                 <constraint firstItem="l6Q-py-I1i" firstAttribute="trailing" secondItem="kFu-HK-aPj" secondAttribute="trailing" id="CLl-1S-NDH"/>
-                <constraint firstItem="D7k-e9-vcq" firstAttribute="leading" secondItem="8fw-7t-5QO" secondAttribute="trailing" constant="28" id="GM1-QT-QYi"/>
+                <constraint firstAttribute="centerX" secondItem="D7k-e9-vcq" secondAttribute="centerX" constant="-34" id="H7r-X5-tba"/>
                 <constraint firstItem="kFu-HK-aPj" firstAttribute="centerX" secondItem="uoX-LV-Pgi" secondAttribute="centerX" id="Ktv-np-P1P"/>
                 <constraint firstItem="uoX-LV-Pgi" firstAttribute="leading" secondItem="FPZ-Ai-itC" secondAttribute="trailing" constant="7" id="NaG-Qw-jAM"/>
                 <constraint firstItem="V1e-vH-Mzw" firstAttribute="top" secondItem="1" secondAttribute="top" constant="31" id="QLP-rq-FMD"/>
@@ -172,11 +172,11 @@
                 <constraint firstItem="s7M-V2-2P2" firstAttribute="top" secondItem="l6Q-py-I1i" secondAttribute="bottom" constant="8" symbolic="YES" id="bHq-l9-kXu"/>
                 <constraint firstItem="8fw-7t-5QO" firstAttribute="top" secondItem="D7k-e9-vcq" secondAttribute="top" id="c5M-O7-dwg"/>
                 <constraint firstItem="SwF-sI-gcU" firstAttribute="centerX" secondItem="uoX-LV-Pgi" secondAttribute="centerX" id="cI1-mR-nnI"/>
-                <constraint firstItem="8fw-7t-5QO" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="112" id="ehK-rU-ZAi"/>
                 <constraint firstItem="SwF-sI-gcU" firstAttribute="centerX" secondItem="V1e-vH-Mzw" secondAttribute="centerX" id="ia7-zc-lVD"/>
                 <constraint firstItem="kFu-HK-aPj" firstAttribute="trailing" secondItem="ybD-Rp-ZvU" secondAttribute="trailing" id="jG8-9H-oRK"/>
                 <constraint firstItem="SwF-sI-gcU" firstAttribute="top" secondItem="V1e-vH-Mzw" secondAttribute="bottom" constant="33" id="k47-bE-I9S"/>
                 <constraint firstItem="l6Q-py-I1i" firstAttribute="top" secondItem="kFu-HK-aPj" secondAttribute="bottom" constant="30" id="mBm-yf-4rn"/>
+                <constraint firstAttribute="centerX" secondItem="8fw-7t-5QO" secondAttribute="centerX" constant="30" id="mIJ-Jl-dcc"/>
                 <constraint firstItem="uoX-LV-Pgi" firstAttribute="baseline" secondItem="ybD-Rp-ZvU" secondAttribute="firstBaseline" id="sJR-jY-RGf"/>
                 <constraint firstItem="uoX-LV-Pgi" firstAttribute="top" secondItem="8fw-7t-5QO" secondAttribute="bottom" constant="17" id="u9T-7g-MnL"/>
                 <constraint firstItem="uoX-LV-Pgi" firstAttribute="baseline" secondItem="FPZ-Ai-itC" secondAttribute="firstBaseline" id="vDW-kF-Tvw"/>
@@ -249,8 +249,8 @@
         </view>
     </objects>
     <resources>
-        <image name="thumbs-down.png" width="154" height="167"/>
-        <image name="thumbs-up.png" width="154" height="167"/>
+        <image name="thumbs-down.png" width="155" height="168"/>
+        <image name="thumbs-up.png" width="155" height="168"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
