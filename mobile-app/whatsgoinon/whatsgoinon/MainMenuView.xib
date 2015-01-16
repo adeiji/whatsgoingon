@@ -69,7 +69,7 @@
                                     <rect key="frame" x="50" y="237" width="190" height="58"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <state key="normal" title="Account / Settings">
+                                    <state key="normal" title="Account Settings">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>

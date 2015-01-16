@@ -59,6 +59,8 @@ const int PICTURE_ACTION_SHEET = 2;
         _btnTakePicture.userInteractionEnabled = NO;
         _txtUsername.enabled = NO;
         _btnChangePassword.hidden = YES;
+        _progressBarForLevel.hidden = YES;
+        _lblProgressToNextLevel.hidden = YES;
     }
     
     isPublic = myIsPublic;
@@ -170,8 +172,11 @@ const int PICTURE_ACTION_SHEET = 2;
     if ([userRank isEqualToString:USER_RANK_AMBASSADOR])
     {
         self.ambassadorFlag.hidden = NO;
-        _progressBarForLevel.hidden = NO;
-        _lblProgressToNextLevel.hidden = NO;
+        if (!isPublic)
+        {
+            _progressBarForLevel.hidden = NO;
+            _lblProgressToNextLevel.hidden = NO;
+        }
     }
     self.lblRank.text = [notification.userInfo[kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO] capitalizedString];
 }

@@ -106,6 +106,7 @@
                 <outlet property="lblThumbsUp" destination="5cb-pL-nVB" id="V8N-c0-2yh"/>
                 <outlet property="tableView" destination="9xZ-Nj-NWc" id="PyN-oA-1fY"/>
             </connections>
+            <point key="canvasLocation" x="463" y="602.5"/>
         </view>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="85" id="VG2-Fz-1ZB" customClass="DECommentTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
@@ -114,7 +115,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o4S-dz-3Uk">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o4S-dz-3Uk">
                         <rect key="frame" x="55" y="6" width="71" height="71"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="71" id="fkG-cJ-qak"/>
@@ -151,6 +152,7 @@
                 <outlet property="imgThumbView" destination="2Lo-DO-ASC" id="y6r-Nu-9ho"/>
                 <outlet property="lblComment" destination="G1L-MN-PCN" id="52O-ap-8Wj"/>
             </connections>
+            <point key="canvasLocation" x="463" y="230.5"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="85" id="4AS-fU-5Du">
             <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
@@ -171,7 +173,7 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kcx-dM-Otg">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kcx-dM-Otg">
                         <rect key="frame" x="195" y="7" width="71" height="71"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="71" id="e1X-GO-OXA"/>
@@ -191,7 +193,7 @@
                     <constraint firstItem="0HG-lP-Uf4" firstAttribute="leading" secondItem="Kcx-dM-Otg" secondAttribute="trailing" constant="12" id="xvG-5H-oRa"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="276" y="381.5"/>
+            <point key="canvasLocation" x="463" y="394.5"/>
         </tableViewCell>
     </objects>
     <resources>

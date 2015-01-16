@@ -33,14 +33,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DECommentTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"ViewMadeComments" owner:self options:nil] objectAtIndex:1];
-    
+    [[cell.imgProfileView layer] setCornerRadius:cell.imgProfileView.frame.size.width / 2.0];
     if (_comments[indexPath.row][PARSE_CLASS_COMMENT_THUMBS_UP] == [NSNumber numberWithBool:NO])
     {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ViewMadeComments" owner:self options:nil] objectAtIndex:0];
         [cell.imgThumbView setImage:[UIImage imageNamed:@"thumbs-down.png"]];
     }
     
     [cell layoutSubviews];
-    
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.lblComment.text = _comments[indexPath.row][PARSE_CLASS_COMMENT_COMMENT];
     
