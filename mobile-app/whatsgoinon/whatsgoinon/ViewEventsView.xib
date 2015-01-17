@@ -47,7 +47,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJ0-LB-RQz">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJ0-LB-RQz">
                     <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="MJ0-LB-RQz" secondAttribute="height" multiplier="1:1" id="Rn1-4e-N9M"/>

@@ -511,10 +511,7 @@ numberOfRowsInComponent:(NSInteger)component
             [[DEPostManager sharedManager] currentPost].location = value;
         }];
         
-        NSString *shortAddress = [fullAddress substringToIndex:[fullAddress rangeOfString:@","].location];
-        _longAddress = fullAddress;
-        
-        _txtAddress.text = shortAddress;
+        _txtAddress.text = fullAddress;
         [_txtAddress validate];
     }
 }

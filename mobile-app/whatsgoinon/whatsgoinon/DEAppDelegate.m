@@ -41,8 +41,6 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
     [self startCommentTimer];
     [self loadPromptedForCommentEvents];
     
-    // Load the events that the user already commented on
-    
     return YES;
 }
 

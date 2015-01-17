@@ -282,15 +282,7 @@ Display the second screen for the post details
 
 - (void) checkAddressAvailability
 {
-    
-    if (_createPostViewOne.longAddress)
-    {
-        
-    }
-    
-    NSString *addressToSearch = _createPostViewOne.longAddress ? _createPostViewOne.longAddress : _createPostViewOne.txtAddress.text;
-    
-    [DELocationManager getLatLongValueFromAddress:addressToSearch CompletionBlock:^(PFGeoPoint *value) {
+    [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
         DELocationManager *sharedManager = [DELocationManager sharedManager];
         if (value)
         {
