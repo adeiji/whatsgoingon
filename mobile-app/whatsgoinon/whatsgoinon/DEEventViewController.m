@@ -551,7 +551,8 @@ const int heightConstraintConstant = 62;
     [button removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
     [button addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
 
-    _goingButtonBottomSpaceConstraint.constant = goingButtonBottomSpaceConstraintConstant - 40;
+    _goingButtonBottomSpaceConstraint.constant = -40;
+    _goingButtonBottomSpaceConstraintMapView.constant = -40;
     [self.view layoutIfNeeded];
    // [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
     [[_eventView btnMaybe] setHidden:YES];

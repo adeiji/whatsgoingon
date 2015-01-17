@@ -546,6 +546,7 @@
                             <constraint firstItem="hJ9-XQ-7vX" firstAttribute="top" secondItem="NfX-4o-j1K" secondAttribute="bottom" constant="1" id="Hb4-6W-TY2"/>
                             <constraint firstItem="LYK-Gz-UJr" firstAttribute="leading" secondItem="4uj-JY-5KX" secondAttribute="leading" id="Kki-QH-Icc"/>
                             <constraint firstItem="7MU-eT-AlI" firstAttribute="leading" secondItem="NfX-4o-j1K" secondAttribute="trailing" constant="8" symbolic="YES" id="LuL-S1-RdJ"/>
+                            <constraint firstItem="v8V-4e-r6T" firstAttribute="top" secondItem="hJ9-XQ-7vX" secondAttribute="bottom" constant="-2" id="Mdh-Vd-OAk"/>
                             <constraint firstItem="NfX-4o-j1K" firstAttribute="top" secondItem="4uj-JY-5KX" secondAttribute="topMargin" constant="14" id="Ru0-E7-MdJ"/>
                             <constraint firstItem="hJ9-XQ-7vX" firstAttribute="trailing" secondItem="LYK-Gz-UJr" secondAttribute="trailing" id="XGh-Vx-271"/>
                             <constraint firstItem="WTm-Gk-3XI" firstAttribute="top" secondItem="v8V-4e-r6T" secondAttribute="bottom" id="XT8-Kl-4Gb"/>
@@ -555,10 +556,19 @@
                             <constraint firstItem="NfX-4o-j1K" firstAttribute="leading" secondItem="4uj-JY-5KX" secondAttribute="leadingMargin" constant="-4" id="kEf-TE-DjY"/>
                             <constraint firstItem="WTm-Gk-3XI" firstAttribute="leading" secondItem="v8V-4e-r6T" secondAttribute="leading" id="kSX-hw-KIQ"/>
                             <constraint firstItem="hJ9-XQ-7vX" firstAttribute="top" secondItem="7MU-eT-AlI" secondAttribute="bottom" constant="10" id="oFw-CN-0nu"/>
-                            <constraint firstItem="WTm-Gk-3XI" firstAttribute="top" secondItem="hJ9-XQ-7vX" secondAttribute="bottom" constant="38" id="sMW-dI-wAE"/>
                             <constraint firstItem="LYK-Gz-UJr" firstAttribute="top" secondItem="4uj-JY-5KX" secondAttribute="top" id="v90-a6-ADu"/>
                             <constraint firstItem="WTm-Gk-3XI" firstAttribute="bottom" secondItem="KTx-nk-oJM" secondAttribute="top" id="xsB-Fp-kwT"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Mdh-Vd-OAk"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="Mdh-Vd-OAk"/>
+                            </mask>
+                        </variation>
                         <connections>
                             <outlet property="btnGoing" destination="v8V-4e-r6T" id="Byk-UZ-QIg"/>
                             <outlet property="btnMaybe" destination="WTm-Gk-3XI" id="nI8-DG-vLc"/>
@@ -568,6 +578,7 @@
                     <navigationItem key="navigationItem" id="hP6-Bh-cBi"/>
                     <connections>
                         <outlet property="eventView" destination="4uj-JY-5KX" id="ZTk-7R-a7a"/>
+                        <outlet property="goingButtonBottomSpaceConstraintMapView" destination="XT8-Kl-4Gb" id="BR6-mi-6uF"/>
                         <outlet property="lblEventTitle" destination="7MU-eT-AlI" id="bTI-I4-aog"/>
                         <outlet property="mapView" destination="hJ9-XQ-7vX" id="nYO-uZ-1MR"/>
                     </connections>
