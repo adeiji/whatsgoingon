@@ -47,10 +47,10 @@ Show the tutorial showing the user what should be entered for the different desc
 - (void) showTutorial {
     if (_isQuickDescription)
     {
-        [_lblTutorial setText:@"The quick description will be visible underneath your main image while scrolling events. Use the quick description to attract your attendees at a glance with keywords that make your event stand out. This field is limited to 150 characters or less so use them wisely."];
+        [_lblTutorial setText:@"(Start typing to begin)\n\nThe quick description will be visible underneath your main image while scrolling events. Use the quick description to attract your attendees at a glance with keywords that make your event stand out. This field is limited to 150 characters or less so use them wisely."];
     }
     else {
-        [_lblTutorial setText:@"The full description will be visible inside your event post info. This should contain all the detail that you want everyone to know about your event. Include everything that pertains to your event including additional costs if any. Be careful with profanity as it may get your post removed."];
+        [_lblTutorial setText:@"(Start typing to begin)\n\nThe full description will be visible inside your event post info. This should contain all the detail that you want everyone to know about your event. Include everything that pertains to your event including additional costs if any. Be careful with profanity as it may get your post removed."];
     }
 
     [_overlayView setAlpha:1.0];

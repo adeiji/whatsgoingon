@@ -315,6 +315,8 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
         
         NSString *imageURLString = result[@"profile_image_url_https"];
+        // May need to be careful with this because these images can be very large, but it shouldn't be a problem since we're only getting these once!
+        imageURLString = [imageURLString stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
         NSURL *url = [NSURL URLWithString:imageURLString];
         NSData *data = [NSData dataWithContentsOfURL:url];
         

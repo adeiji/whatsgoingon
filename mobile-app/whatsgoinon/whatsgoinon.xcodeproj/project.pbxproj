@@ -1274,6 +1274,11 @@
 				TargetAttributes = {
 					F437BF801990452000CF61E9 = {
 						DevelopmentTeam = HJPTQ3N75W;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					F437BFA11990452000CF61E9 = {
 						TestTargetID = F437BF801990452000CF61E9;

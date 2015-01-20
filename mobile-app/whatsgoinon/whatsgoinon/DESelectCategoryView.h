@@ -40,6 +40,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnCategory;
 @property (strong, nonatomic) UIButton *orbView;
+@property (weak, nonatomic) IBOutlet UILabel *lblMood;
 @property (strong, nonatomic) UIView *outerView;
 
 #pragma mark - Category Functions

@@ -41,6 +41,8 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
     [self startCommentTimer];
     [self loadPromptedForCommentEvents];
     
+    [DEScreenManager showCommentView:nil];
+    
     return YES;
 }
 
@@ -57,14 +59,15 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
 }
 
 - (void) startCommentTimer {
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:(60 * .1)
-                                                      target:[DELocationManager sharedManager]
-                                                    selector:@selector(checkForCommenting)
-                                                    userInfo:nil
-                                                     repeats:YES];
-
-    
-    [timer fire];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        timer = [NSTimer timerWithTimeInterval:(60 * .1)
+                                        target:[DELocationManager sharedManager]
+                                      selector:@selector(checkForCommenting)
+                                      userInfo:nil
+                                       repeats:YES];
+        [timer fire];
+        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    });
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {

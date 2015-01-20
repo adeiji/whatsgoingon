@@ -107,7 +107,7 @@
             else {
                 if (([[[DEPostManager sharedManager] posts] count] < 10 && now) || ([[[DEPostManager sharedManager] posts] count] == 0 && !now))
                 {
-                    [self getAllValuesForLaterNearbyWithQuery : blockQuery];
+                    [self getAllValuesForLaterNearbyWithQuery : blockQuery Location:location];
                 }
                 else {
                     [DESyncManager addEventsToAlreadyRetrievedEvents : objects
@@ -127,7 +127,8 @@
 }
 
 
-+ (void) getAllValuesForLaterNearbyWithQuery : (PFQuery *) query {
++ (void) getAllValuesForLaterNearbyWithQuery : (PFQuery *) query
+                                    Location : (PFGeoPoint *) location {
     
     // Get any values that are later
     query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
@@ -135,7 +136,8 @@
     [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] currentLocation] withinMiles:30];
     [self getValuesForLater:query
                     Objects:[[DEPostManager sharedManager] posts]
-              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING];
+              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
+                   Location:location];
 }
 
 
@@ -243,6 +245,7 @@
 + (void) getValuesForLater : (PFQuery *) query
                    Objects : (NSArray *) myObjects
              ProcessStatus : (NSString *) processStatus
+                  Location : (PFGeoPoint *) location
 {
     NSDate *date = [NSDate date];
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
@@ -253,6 +256,7 @@
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:latestDate];
     [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
+    [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:location withinMiles:30];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         if ([objects count] == 0  && [myObjects count] == 0)

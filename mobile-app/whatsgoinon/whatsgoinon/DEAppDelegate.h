@@ -13,9 +13,9 @@
 #import "DEUserManager.h"
 
 @interface DEAppDelegate : UIResponder <UIApplicationDelegate>
-
+{
+    NSTimer *timer;
+}
 @property (strong, nonatomic) UIWindow *window;
-
-
 
 @end

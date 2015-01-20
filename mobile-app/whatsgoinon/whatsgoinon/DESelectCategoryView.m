@@ -74,7 +74,17 @@
     }
     
     isActive = false;
+    [self hideText];
+}
+
+- (void) hideText {
     self.btnCategory.hidden = YES;
+    self.lblMood.hidden = YES;
+}
+
+- (void) showText {
+    self.btnCategory.hidden = NO;
+    self.lblMood.hidden = NO;
 }
 
 - (void) renderView {
@@ -181,7 +191,7 @@
         
         [[_btnCategory layer] setZPosition:1.0f];
 
-        self.btnCategory.hidden = NO;
+        [self showText];
     }
     else {
         [self hideCategoryScreen];
@@ -191,7 +201,7 @@
 - (void) hideCategoryScreen {
     [myCarousel removeFromSuperview];
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
-    self.btnCategory.hidden = YES;
+    [self hideText];
     
     [self reloadEvents];
     

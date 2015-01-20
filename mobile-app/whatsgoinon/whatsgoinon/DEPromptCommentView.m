@@ -54,7 +54,7 @@
     
     [DEScreenManager showCommentView:post];
     [self removeViewFromScreen];
-    
+
 }
 
 /*

@@ -97,6 +97,12 @@
  */
 
 + (void) createPromptUserCommentNotification : (DEPost *) post {
+    
+    UIBackgroundTaskIdentifier taskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(void) {
+        // Uh-oh - we took too long. Stop task.
+    }];
+    
+    // Perform task here
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
     UILocalNotification *localNotification = [UILocalNotification new];
     double minutes = .1;
@@ -108,8 +114,14 @@
     localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
     localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-
+    
     NSLog(@"Local Notification Object Set and Scheduled");
+    
+    if (taskId != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:taskId];
+    }
+    
+
 }
 
 /*

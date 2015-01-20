@@ -27,10 +27,10 @@
 
     //Stop updating the location because now it is uneccesary, and we want to conserver battery life
     [_locationManager stopUpdatingLocation];
+    NSLog(@"Location Updated");
 }
 
 - (void) checkForCommenting {
-    
     NSArray *goingPosts = [self getGoingPostEventObjects];
     for (DEPost *post in goingPosts) {
         // Check to make sure that the user has already been prompted to comment for this
@@ -85,17 +85,21 @@
     // Check to make sure that the event has already started and that it ended within the past hour
     if (([post.startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
     {
-        if (distance < 500)
+        if (distance < 1500)
         {
             [DEScreenManager createPromptUserCommentNotification:post];
             [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
-            
             return YES;
         }
     }
     
     return NO;
 }
+
+- (void) updateLocation {
+    [_locationManager startUpdatingLocation];
+}
+
 
 /*
  
@@ -163,26 +167,13 @@
         [DEScreenManager showCommentView:event];
     }
     
-    [self stopSignificantChangeUpdates];
-}
-
-
-
-- (void) startTimer
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        timer = [NSTimer scheduledTimerWithTimeInterval:900 target:self selector:@selector(startSignificantChangeUpdates) userInfo:nil repeats:NO];
-        [timer fire];
-        
-        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-    });
+//    [self stopSignificantChangeUpdates];
 }
 
 - (void) promptUserForFeedback
 {
     [DEScreenManager showCommentView : _eventPersonAt];
-    
-    [self startTimer];
+
 }
 
 - (void) startTimerForFeedback
@@ -235,9 +226,7 @@
         }
         
         _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = 500; //Meters
-        
-        [_locationManager startUpdatingLocation];
+        _locationManager.desiredAccuracy = 100; //Meters
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app
         if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
@@ -245,8 +234,7 @@
         }
         
         _currentLocation = [PFGeoPoint new];
-        [self startSignificantChangeUpdates];
-        
+        [_locationManager startUpdatingLocation];
     }
     return self;
 }
@@ -262,7 +250,6 @@
     
     _locationManager.delegate = self;
     [_locationManager startMonitoringSignificantLocationChanges];
-    [_locationManager startUpdatingLocation];
 }
 
 - (void) stopSignificantChangeUpdates {

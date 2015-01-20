@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
@@ -11,8 +11,18 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What mood are you in?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxb-a2-EL3">
+                    <rect key="frame" x="48" y="118" width="225" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="225" id="r1m-d4-vBw"/>
+                        <constraint firstAttribute="height" constant="21" id="u8o-vM-fLM"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="21"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9q-b2-CI6">
-                    <rect key="frame" x="25" y="103" width="271" height="63"/>
+                    <rect key="frame" x="25" y="139" width="271" height="63"/>
                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="37"/>
                     <state key="normal" title="Trending">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -25,12 +35,15 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="O9q-b2-CI6" firstAttribute="centerX" secondItem="rxb-a2-EL3" secondAttribute="centerX" id="GIw-4u-owo"/>
+                <constraint firstItem="O9q-b2-CI6" firstAttribute="top" secondItem="rxb-a2-EL3" secondAttribute="bottom" id="Hg3-AA-SwA"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="25" id="IHj-EN-bKr"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="SMy-6g-LmF"/>
-                <constraint firstAttribute="centerY" secondItem="O9q-b2-CI6" secondAttribute="centerY" constant="149.5" id="rg4-Z7-Bfv"/>
+                <constraint firstAttribute="centerY" secondItem="O9q-b2-CI6" secondAttribute="centerY" constant="113.5" id="rg4-Z7-Bfv"/>
             </constraints>
             <connections>
                 <outlet property="btnCategory" destination="O9q-b2-CI6" id="A4t-bT-qrc"/>
+                <outlet property="lblMood" destination="rxb-a2-EL3" id="pp9-T7-cWi"/>
             </connections>
         </view>
         <view tag="1" contentMode="scaleToFill" id="UJk-cv-1wP">

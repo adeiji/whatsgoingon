@@ -405,7 +405,7 @@ struct TopMargin {
                   PostArray:postArray
                   ShowBlank:YES];
     [self loadVisiblePost:_scrollView];
-    _lblCategoryHeader.text = @"Saved Events";
+    _lblCategoryHeader.text = @"My Events";
 }
 
 - (void) getEventsFromEventIdsInGoingAndMaybe {

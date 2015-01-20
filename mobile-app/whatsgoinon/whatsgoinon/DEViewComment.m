@@ -138,7 +138,15 @@
             [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
         }
     }
-    else {
+    else { // If the user has not selected thumbs up or down then display to them that they need to do this by adding a red border to thumbs buttons
+        [[_btnThumbsDown layer] setBorderColor:[UIColor redColor].CGColor];
+        [[_btnThumbsDown layer] setBorderWidth:2.0f];
+        [[_btnThumbsDown layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        
+        [[_btnThumbsUp layer] setBorderColor:[UIColor redColor].CGColor];
+        [[_btnThumbsUp layer] setBorderWidth:2.0f];
+        [[_btnThumbsUp layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        
         [_lblPromptEntry setHidden:NO];
     }
 }

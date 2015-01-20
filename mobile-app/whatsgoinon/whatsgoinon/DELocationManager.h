@@ -26,7 +26,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 + (id)sharedManager;
 - (void) startSignificantChangeUpdates;
 - (void) stopSignificantChangeUpdates;
-- (void) startTimer;
+- (void) updateLocation;
 /*
  
  Check to see if the user can comment on the event that the user has selected Going/Maybe on
