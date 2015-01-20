@@ -40,6 +40,8 @@
 @property (weak, nonatomic) IBOutlet TextFieldValidator *txtDescription;
 @property (weak, nonatomic) IBOutlet TextFieldValidator *txtWebsite;
 @property (strong, nonatomic) IBOutletCollection(DECameraButton) NSArray *btnSmallPictureButtons;
+@property (weak, nonatomic) IBOutlet UIView *mainView;
+@property (weak, nonatomic) IBOutlet UIView *infoView;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;
 @property (strong, nonatomic) NSString *longAddress;
