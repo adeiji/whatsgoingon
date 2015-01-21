@@ -8,6 +8,7 @@
 
 #import "DEUserManager.h"
 #import "Constants.h"
+#import "DEAppDelegate.h"
 
 @implementation DEUserManager
 
@@ -396,6 +397,14 @@
             [[PFUser currentUser] saveInBackground];
         }
     }];
+}
+
++ (void) logoutUser {
+
+    DEAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate loadGoingPosts];
+    [delegate loadMaybeGoingPosts];
+    [delegate loadPromptedForCommentEvents];
 }
 
 @end

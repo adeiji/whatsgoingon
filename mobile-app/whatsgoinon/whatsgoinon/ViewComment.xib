@@ -216,15 +216,23 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Free Rock Show" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOd-ok-Wws">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Free Rock Show" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xOd-ok-Wws">
                     <rect key="frame" x="154" y="8" width="151" height="53"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="53" id="Tqs-8N-Ygx"/>
+                        <constraint firstAttribute="width" constant="151" id="W3o-J8-wS9"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NH-aQ-ppc">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5NH-aQ-ppc">
                     <rect key="frame" x="45" y="66" width="94" height="34"/>
                     <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="aMZ-Po-4E4"/>
+                        <constraint firstAttribute="width" constant="94" id="vPY-k4-klW"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <state key="normal" title="Comment">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -234,9 +242,13 @@
                         <action selector="showCommentScreen:" destination="IU5-pD-01A" eventType="touchUpInside" id="VBB-P4-wvG"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhR-tP-0dR">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhR-tP-0dR">
                     <rect key="frame" x="182" y="66" width="94" height="34"/>
                     <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="94" id="TUC-nT-sYw"/>
+                        <constraint firstAttribute="height" constant="34" id="cHX-7e-qAe"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <state key="normal" title="Cancel">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -246,21 +258,35 @@
                         <action selector="hideView:" destination="IU5-pD-01A" eventType="touchUpInside" id="tKz-IU-KRr"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Awesome! You  made it to:  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo3-ia-Odz">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Awesome! You  made it to:  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo3-ia-Odz">
                     <rect key="frame" x="38" y="8" width="108" height="53"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="108" id="oVN-vn-Lza"/>
+                        <constraint firstAttribute="height" constant="53" id="tuM-sq-lGn"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="xOd-ok-Wws" secondAttribute="trailing" constant="15" id="7NI-Sb-Zwr"/>
+                <constraint firstItem="rhR-tP-0dR" firstAttribute="top" secondItem="xOd-ok-Wws" secondAttribute="bottom" constant="5" id="BTa-Yg-pWB"/>
+                <constraint firstItem="5NH-aQ-ppc" firstAttribute="top" secondItem="jo3-ia-Odz" secondAttribute="bottom" constant="5" id="H5f-G5-HMl"/>
+                <constraint firstItem="jo3-ia-Odz" firstAttribute="top" secondItem="IU5-pD-01A" secondAttribute="top" constant="8" id="KIH-8b-dyu"/>
+                <constraint firstItem="xOd-ok-Wws" firstAttribute="centerX" secondItem="rhR-tP-0dR" secondAttribute="centerX" constant="0.5" id="MGS-4G-oXQ"/>
+                <constraint firstItem="xOd-ok-Wws" firstAttribute="top" secondItem="IU5-pD-01A" secondAttribute="top" constant="8" id="gKH-cR-3J6"/>
+                <constraint firstItem="5NH-aQ-ppc" firstAttribute="centerX" secondItem="jo3-ia-Odz" secondAttribute="centerX" id="mP6-iN-7mI"/>
+                <constraint firstItem="jo3-ia-Odz" firstAttribute="leading" secondItem="IU5-pD-01A" secondAttribute="leading" constant="38" id="sbm-2a-sWv"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="btnCancel" destination="rhR-tP-0dR" id="iCu-6I-n0T"/>
                 <outlet property="btnComment" destination="5NH-aQ-ppc" id="eou-dM-pPR"/>
                 <outlet property="lblEventTitle" destination="xOd-ok-Wws" id="ZCl-O2-ULZ"/>
             </connections>
-            <point key="canvasLocation" x="514" y="142.5"/>
+            <point key="canvasLocation" x="497" y="106.5"/>
         </view>
     </objects>
     <resources>

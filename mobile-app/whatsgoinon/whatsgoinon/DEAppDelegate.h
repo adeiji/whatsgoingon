@@ -16,6 +16,11 @@
 {
     NSTimer *timer;
 }
+
+- (void) loadPromptedForCommentEvents;
+- (void) loadGoingPosts;
+- (void) loadMaybeGoingPosts;
+
 @property (strong, nonatomic) UIWindow *window;
 
 @end

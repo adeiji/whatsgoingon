@@ -201,7 +201,11 @@
     
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     NSMutableArray *eventsToGetFromServerIds = [NSMutableArray new];
-    for (NSString *eventId in [[DEPostManager sharedManager] goingPost]) {
+    
+    NSMutableArray *allSavedEvents = [[[DEPostManager sharedManager] goingPost] mutableCopy];
+    [allSavedEvents addObjectsFromArray:[[DEPostManager sharedManager] maybeGoingPost]];
+    
+    for (NSString *eventId in allSavedEvents) {
         if (![[[DEPostManager sharedManager] loadedSavedEventIds] containsObject:eventId])
         {
             [[[DEPostManager sharedManager] loadedSavedEventIds] addObject:eventId];

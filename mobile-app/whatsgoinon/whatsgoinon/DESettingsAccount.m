@@ -395,6 +395,7 @@ const int PICTURE_ACTION_SHEET = 2;
 - (IBAction)signOutUser:(id)sender {
     
     [PFUser logOut];
+    [DEUserManager logoutUser];
     [_btnSignOut setTitle:@"Sign Up" forState:UIControlStateNormal];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [promptView removeFromSuperview];

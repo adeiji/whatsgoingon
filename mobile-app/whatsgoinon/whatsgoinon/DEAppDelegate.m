@@ -14,7 +14,9 @@
 
 @implementation DEAppDelegate
 
-static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForComment";
+static NSString *const eventsUserPromptedForComment = @"com.happsnap.eventsUserPromptedForComment";
+static NSString *const eventsUserGoingTo = @"com.happsnap.eventsUserGoingTo";
+static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingTo";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -40,6 +42,8 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
     [self checkIfLocalNotification:launchOptions];
     [self startCommentTimer];
     [self loadPromptedForCommentEvents];
+    [self loadGoingPosts];
+    [self loadMaybeGoingPosts];
     
     [DEScreenManager showCommentView:nil];
     
@@ -55,6 +59,30 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
     if (savedPromptedForCommentEvents != nil)
     {
         [postManager setPromptedForCommentEvents: savedPromptedForCommentEvents ];
+    }
+}
+
+- (void) loadGoingPosts {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DEPostManager *postManager = [DEPostManager sharedManager];
+    
+    // Make sure that there actually is some data stored that we're pulling
+    NSMutableArray *eventsUserGoingToArray = [[defaults objectForKey:eventsUserGoingTo] mutableCopy];
+    if (eventsUserGoingToArray != nil)
+    {
+        [postManager setGoingPost: eventsUserGoingToArray ];
+    }
+}
+
+- (void) loadMaybeGoingPosts {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    DEPostManager *postManager = [DEPostManager sharedManager];
+    
+    // Make sure that there actually is some data stored that we're pulling
+    NSMutableArray *eventsUserMaybeGoingToArray = [[defaults objectForKey:eventsUserMaybeGoingTo] mutableCopy];
+    if (eventsUserMaybeGoingToArray != nil)
+    {
+        [postManager setGoingPost: eventsUserMaybeGoingToArray ];
     }
 }
 
@@ -140,6 +168,8 @@ static NSString *const eventsUserPromptedForComment = @"eventsUserPromptedForCom
     // Save the events that the user was already prompted to comment on
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:eventsUserPromptedForComment];
+    [userDefaults setObject:[[DEPostManager sharedManager] goingPost] forKey:eventsUserGoingTo];
+    [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:eventsUserMaybeGoingTo];
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
