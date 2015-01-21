@@ -591,6 +591,7 @@ const int heightConstraintConstant = 62;
     else if (buttonIndex == 1)
     {
         [DELocationManager getAddressFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSString *value) {
+            
             NSString *urlString = [NSString stringWithFormat:APPLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], [value stringByReplacingOccurrencesOfString:@" " withString:@"+"] ];
 
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
