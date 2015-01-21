@@ -209,7 +209,6 @@
 		F4EEB05519D269480072B683 /* DEViewComments.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EEB05419D269480072B683 /* DEViewComments.m */; };
 		F4EEB05F19D26D7B0072B683 /* ViewMadeComments.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB05E19D26D7B0072B683 /* ViewMadeComments.xib */; };
 		F4EEB06219D2717D0072B683 /* DECommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4EEB06119D2717D0072B683 /* DECommentTableViewCell.m */; };
-		F4EEB06419D276F00072B683 /* profile-pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB06319D276F00072B683 /* profile-pic.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -498,7 +497,6 @@
 		F4EEB05E19D26D7B0072B683 /* ViewMadeComments.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewMadeComments.xib; sourceTree = "<group>"; };
 		F4EEB06019D2717D0072B683 /* DECommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DECommentTableViewCell.h; sourceTree = "<group>"; };
 		F4EEB06119D2717D0072B683 /* DECommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DECommentTableViewCell.m; sourceTree = "<group>"; };
-		F4EEB06319D276F00072B683 /* profile-pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "profile-pic.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1176,7 +1174,6 @@
 				F47EA7ED1A37E016005B7B79 /* splashimage.png */,
 				F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */,
 				F412770919E4F8390092CD67 /* HappSnap-image-only-logo.png */,
-				F4EEB06319D276F00072B683 /* profile-pic.jpg */,
 				F4EEB05019D241CE0072B683 /* no-internet.png */,
 				F4EEB04019D22BEF0072B683 /* miscategorized-indicator-icon.png */,
 				F4EEB03C19D22AF80072B683 /* event-reported-indicator-icon.png */,
@@ -1355,7 +1352,6 @@
 				F437BF8F1990452000CF61E9 /* InfoPlist.strings in Resources */,
 				F41277B419E611570092CD67 /* appicon-Small-40@2x.png in Resources */,
 				F47C8A7B1A58C70400757918 /* error-01.png in Resources */,
-				F4EEB06419D276F00072B683 /* profile-pic.jpg in Resources */,
 				F4EEB03D19D22AF80072B683 /* event-reported-indicator-icon.png in Resources */,
 				F437BFCA199053B000CF61E9 /* EventDetailsView.xib in Resources */,
 				F4CCBD76199AADBD00532E9B /* release_notes.md in Resources */,

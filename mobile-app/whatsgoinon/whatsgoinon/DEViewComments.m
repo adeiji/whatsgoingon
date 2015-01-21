@@ -51,7 +51,7 @@
     [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!user[PARSE_CLASS_USER_PROFILE_PICTURE])
         {
-            [cell.imgProfileView setImage:[UIImage imageNamed:@"profile-pic.jpg"]];
+            [cell.imgProfileView setImage:[UIImage imageNamed:@"HappSnap-image-only-logo.png"]];
         }
         else
         {

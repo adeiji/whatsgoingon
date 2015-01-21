@@ -336,10 +336,9 @@
             {
                 NSString *addressNumber = jsonData[@"results"][0][@"address_components"][0][@"short_name"];
                 NSString *street = jsonData[@"results"][0][@"address_components"][1][@"short_name"];
-                NSString *city = jsonData[@"results"][0][@"address_components"][2][@"short_name"];
-                NSString *state = jsonData[@"results"][0][@"address_components"][4][@"short_name"];
-                NSString *zipCode = jsonData[@"results"][0][@"address_components"][6][@"short_name"];
-                NSString *address = [NSString stringWithFormat:@"%@ %@, %@ %@, %@", addressNumber, street, city, state, zipCode];
+                NSString *city = jsonData[@"results"][0][@"address_components"][3][@"short_name"];
+                NSString *state = jsonData[@"results"][0][@"address_components"][5][@"short_name"];
+                NSString *address = [NSString stringWithFormat:@"%@ %@, %@ %@", addressNumber, street, city, state];
                 
                 NSLog(@"The address to get the lat long values is verified: %@", address);
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -367,22 +366,12 @@
         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         NSArray *predictions = jsonData[@"predictions"];
         NSMutableArray *values = [NSMutableArray new];
-
         for (NSDictionary *dictionary in predictions) {
-            NSArray *terms = [dictionary objectForKey:@"terms"];
             // At times when entering the values are returned together for example. Val 1 will equal 8785 when the street number has not begun being entered, but it will also be 8785 Hawk St, if the user has begun entering the address
-            NSString *val1 = terms[0][@"value"];
-            NSString *val2 = terms[1][@"value"];
-            NSString *val3 = terms[2][@"value"];
-            NSString *val4 = @"";
-            
-            if ([terms count] > 4)
-            {
-                val4 = terms[3][@"value"];
-            }
-            NSString *location = [NSString stringWithFormat:@"%@ %@, %@ %@", val1, val2, val3, val4];
-            
-            [values addObject:location];
+            NSString *fullAddress = [dictionary objectForKey:@"description"];
+            NSRange range = [fullAddress rangeOfString:@"," options:NSBackwardsSearch];
+            NSString *address = [fullAddress substringToIndex:range.location];
+            [values addObject:address];
         };
         
         dispatch_async(dispatch_get_main_queue(), ^{
