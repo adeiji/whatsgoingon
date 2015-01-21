@@ -47,8 +47,17 @@
 - (IBAction)gotoNextScreen:(id)sender {
     [[DEScreenManager sharedManager] gotoNextScreen];
     self.view.hidden = YES;
+    UIImage *image = [UIImage imageNamed:@"happ-snap-logo-no-text.png"];
     
-    [DEUserManager addProfileImage:profileImageData];
+    if (profileImageData) // Only if a profile image was created do we store one
+    {
+        [DEUserManager addProfileImage:profileImageData];
+    }
+    else {
+        NSData *imageData = UIImageJPEGRepresentation (image, .02);
+        [DEUserManager addProfileImage:imageData];
+    }
+    
 }
 - (IBAction)takeProfileImagePicture:(id)sender {
     

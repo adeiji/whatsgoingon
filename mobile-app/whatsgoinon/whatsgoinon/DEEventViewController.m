@@ -310,36 +310,41 @@ const int heightConstraintConstant = 62;
     [self showView:[_eventDetailsViewController viewInfo]];
     
     DEEventDetailsView *detailsView = [[[_eventView detailsView] subviews] lastObject];
-    [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
-    [[detailsView txtDescription] setText:nil];
     
-    if (_isPreview)
+    if (![detailsView isLoaded])
     {
-        [[detailsView txtDescription] setText:[NSString stringWithFormat:@"%@\n%@", _post.myDescription, _post.website]];
-    }
-    else {
-        [[detailsView txtDescription] setText:_post.myDescription];
-    }
-    // If the post is free
-    if (_post.cost == nil)
-    {
-        [[detailsView lblCost] setText:@"free"];
-    }
-    else {
-        [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
-    }
-    [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
-    
-    [self showFlagIfAmbassadorDetailsView:detailsView];
-    [self adjustDetailsViewHeightDetailsView:detailsView];
-    
-    if ([DEPostManager isBeforeEvent:_post])
-    {
-        [[detailsView lblEndsInStartsIn] setText:@"Starts In"];
-    }
-    else
-    {
-        [[detailsView lblEndsInStartsIn] setText:@"Ends In"];
+        [detailsView setIsLoaded:YES];
+        [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
+        [[detailsView txtDescription] setText:nil];
+        
+        if (_isPreview)
+        {
+            [[detailsView txtDescription] setText:[NSString stringWithFormat:@"%@\n%@", _post.myDescription, _post.website]];
+        }
+        else {
+            [[detailsView txtDescription] setText:_post.myDescription];
+        }
+        // If the post is free
+        if (_post.cost == nil)
+        {
+            [[detailsView lblCost] setText:@"free"];
+        }
+        else {
+            [[detailsView lblCost] setText:[NSString stringWithFormat:@"$%@", [_post.cost stringValue]]];
+        }
+        [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
+        
+        [self showFlagIfAmbassadorDetailsView:detailsView];
+        [self adjustDetailsViewHeightDetailsView:detailsView];
+        
+        if ([DEPostManager isBeforeEvent:_post])
+        {
+            [[detailsView lblEndsInStartsIn] setText:@"Starts In"];
+        }
+        else
+        {
+            [[detailsView lblEndsInStartsIn] setText:@"Ends In"];
+        }
     }
     
     [[detailsView lblTimeUntilStartsOrEnds] setText:[DEPostManager getTimeUntilStartOrFinishFromPost:_post]];

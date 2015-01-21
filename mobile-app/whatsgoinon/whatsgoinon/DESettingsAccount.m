@@ -25,14 +25,8 @@ const int PICTURE_ACTION_SHEET = 2;
         [self setUpButtons];
         [self addObservers];
         [self registerForKeyboardNotifications];
-        if ([PFUser currentUser])
-        {
-            [DEUserManager getUserRank : [myUser username]];
-            [DESyncManager getNumberOfPostByUser : myUser.username];
-        }
-        else {
-
-        }
+        [DEUserManager getUserRank : [myUser username]];
+        [DESyncManager getNumberOfPostByUser : myUser.username];
         self.lblRank.text = @"";
         self.ambassadorFlag.hidden = YES;
         [self displayMemberSince];

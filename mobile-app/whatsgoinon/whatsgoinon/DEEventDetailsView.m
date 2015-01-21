@@ -21,15 +21,6 @@
 
 - (void) loadView : (DEPost *) post
 {
-    // Event has already started
-    if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending)
-    {
-
-        
-    }
-    else    // Event has not started
-    {
-        
-    }
+    _isLoaded = NO;
 }
 @end
