@@ -22,6 +22,7 @@
 #define SCROLL_VIEW_DISTANCE_FROM_TOP 30
 #define MAIN_MENU_Y_POS 0
 
+
 @implementation DEViewEventsViewController
 
 struct TopMargin {
@@ -537,6 +538,7 @@ struct TopMargin {
 
     
     CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
+    [self getEventImageHeightDifference:viewEventsView];
     
     [self setUpViewEventsFrame:*columnOneMargin
                         Margin:*columnTwoMargin
@@ -647,6 +649,44 @@ struct TopMargin {
     
     NSLog(@"The height difference for the label is: %f", heightDifference);
     return heightDifference;
+}
+
+- (CGFloat) getEventImageHeightDifference : (DEViewEventsView *) view {
+    
+    PFFile *file = [view post].images[0];
+    if ([file.name containsString:IMAGE_DIMENSION_HEIGHT]) {
+        NSRange widthRange = [file.name rangeOfString:IMAGE_DIMENSION_WIDTH];
+        NSString *dimensions = [file.name substringFromIndex:widthRange.location];
+        NSRange heightRange = [dimensions rangeOfString:IMAGE_DIMENSION_HEIGHT];
+        NSString *width = [dimensions substringToIndex:heightRange.location];
+        width = [width stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_WIDTH withString:@""];
+        NSString *height = [dimensions substringFromIndex:heightRange.location];
+        height = [height stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_HEIGHT withString:@""];
+        
+        double imageWidth = [width doubleValue];
+        double imageHeight = [height doubleValue];
+        
+        [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
+    }
+    return 0;
+}
+
+- (CGFloat) resizeViewEventsImageView : (DEViewEventsView *) view
+                        ImageWidth : (double) width
+                       ImageHeight : (double) height
+{
+    [view setContentMode:UIViewContentModeScaleAspectFit];
+    CGFloat correctImageViewHeight = (view.imgMainImageView.frame.size.width / width) * height;
+    
+    if (correctImageViewHeight < view.imageViewHeightConstraint.constant) {
+        view.rotateImage = YES;
+        correctImageViewHeight = (view.imgMainImageView.frame.size.width / height) * width;
+    }
+    
+    view.imageViewHeightConstraint.constant = correctImageViewHeight;
+    [view.imgMainImageView layoutIfNeeded];
+    
+    return view.imageViewHeightConstraint.constant;
 }
 
 - (void) getDistanceFromCurrentLocationOfEvent : (PFObject *) event {

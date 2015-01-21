@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -50,7 +49,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJ0-LB-RQz">
                     <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                     <constraints>
-                        <constraint firstAttribute="width" secondItem="MJ0-LB-RQz" secondAttribute="height" multiplier="1:1" id="Rn1-4e-N9M"/>
+                        <constraint firstAttribute="height" constant="140" id="SPl-mj-GoB"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1c-VQ-fcl" customClass="DEViewDistance">
@@ -142,6 +141,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="imageViewHeightConstraint" destination="SPl-mj-GoB" id="D25-5W-sNc"/>
                 <outlet property="imgMainImageView" destination="MJ0-LB-RQz" id="eGy-qr-vHd"/>
                 <outlet property="lblAddress" destination="dfb-u1-i4Q" id="jan-Bk-Q5Y"/>
                 <outlet property="lblDistance" destination="Ali-rf-U8v" id="Ohv-nv-uSm"/>

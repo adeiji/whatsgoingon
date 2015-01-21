@@ -128,4 +128,9 @@ NSString *const USER_RANK_STANDARD = @"standard";
 // Categories
 NSString *const CATEGORY_TRENDING = @"Trending";
 
+// Parse Image Dimensions Constants
+NSString *const IMAGE_DIMENSION_WIDTH = @"width";
+NSString *const IMAGE_DIMENSION_HEIGHT = @"height";
+
+
 

@@ -187,6 +187,12 @@ const int POST_WIDTH = 140;
                 @autoreleasepool {
                     NSData *imageData = data;
                     UIImage *image = [UIImage imageWithData:imageData];
+                    if (_rotateImage) {
+                        image = [[UIImage alloc] initWithCGImage: image.CGImage
+                                                           scale: 1.0
+                                                     orientation: UIImageOrientationLeft];
+                    }
+                    
                     self.imgMainImageView.image = image;
                     image = nil;
                 }
@@ -201,30 +207,6 @@ const int POST_WIDTH = 140;
     });
 }
 
-- (void) resizeImageViewToDisplayImage : (UIImage *) image {
-//    CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
-//    CGFloat postWidth = POST_WIDTH * screenSizeRelativeToiPhone5Width;
-//    double maximumHeight = [[UIScreen mainScreen] bounds].size.height - 200.0f;
-//
-//    CGSize imageSize        = image.size;
-//
-//    
-//    _imageViewWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width - 32;
-//    CGSize imageViewSize    = CGSizeMake(_imageViewWidthConstraint.constant, _imageViewHeightConstraint.constant);
-//    CGFloat correctImageViewHeight = (imageViewSize.width / imageSize.width) * imageSize.height;
-//    
-//    if (correctImageViewHeight > maximumHeight)
-//    {
-//        double scaleMultiplier = maximumHeight / correctImageViewHeight;
-//        _imageViewHeightConstraint.constant = correctImageViewHeight * scaleMultiplier;
-//        _imageViewWidthConstraint.constant = _imageViewWidthConstraint.constant * scaleMultiplier;
-//    }
-//    else {
-//        _imageViewHeightConstraint.constant = correctImageViewHeight;
-//    }
-//    [_imageView layoutIfNeeded];
-    
-}
 // Increment the number of views by one for this post
 - (void) updateViewCount {
     //Every time the user clicks on the event, we update its view count

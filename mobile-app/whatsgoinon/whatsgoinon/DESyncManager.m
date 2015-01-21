@@ -502,8 +502,11 @@
     NSMutableArray *images = [NSMutableArray new];
     
     for (NSData *imageData in imageArray) {
+        UIImage *image = [UIImage imageWithData:imageData];
+        CGFloat width = [image size].width;
+        CGFloat height = [image size].height;
         
-        PFFile *imageFile = [PFFile fileWithName:@"post-image" data:imageData];
+        PFFile *imageFile = [PFFile fileWithName:[NSString stringWithFormat:@"post-image%@%f%@%f", IMAGE_DIMENSION_WIDTH, width, IMAGE_DIMENSION_HEIGHT, height] data:imageData];
         
         [images addObject:imageFile];
     }
