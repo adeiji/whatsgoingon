@@ -42,6 +42,7 @@
 @property (strong, nonatomic) IBOutletCollection(DECameraButton) NSArray *btnSmallPictureButtons;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIView *infoView;
+@property (weak, nonatomic) IBOutlet UIView *secondPageMainView;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;
 @property (strong, nonatomic) NSString *longAddress;

@@ -25,7 +25,14 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     _txtEndTime.enabled = NO;
     costText = [NSString new];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFirstResponder)];
-    [_mainView addGestureRecognizer:tapGestureRecognizer];
+    if (_mainView)
+    {
+        [_mainView addGestureRecognizer:tapGestureRecognizer];
+    }
+    else
+    {
+        [_secondPageMainView addGestureRecognizer:tapGestureRecognizer];
+    }
 }
 
 - (void) removeFirstResponder {
@@ -162,6 +169,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     _txtCategory.delegate = self;
     _txtTitle.delegate = self;
     _txtCost.delegate = self;
+    _txtWebsite.delegate = self;
 }
 
 - (void) setCostToFree

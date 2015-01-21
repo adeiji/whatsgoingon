@@ -368,7 +368,7 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="CE07865D-0DD3-4922-BD1F-765493C172F4" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="8C6DF09B-FD77-4062-A8B7-9733FD0EB41F" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="iZM-I6-gde"/>
@@ -1456,6 +1456,7 @@
                             <outlet property="btnPreview" destination="LY0-xd-I6Z" id="FUL-lc-UFd"/>
                             <outlet property="btnTakePicture" destination="IVB-OI-kmN" id="fJR-L2-cyh"/>
                             <outlet property="scrollView" destination="JVg-ae-v1d" id="0HR-ZZ-kiK"/>
+                            <outlet property="secondPageMainView" destination="wW1-NQ-Gpz" id="lKF-8c-I8q"/>
                             <outlet property="txtCost" destination="g64-bY-Vd5" id="pgL-Sj-mRI"/>
                             <outlet property="txtDescription" destination="nXM-q4-M7m" id="yPn-HB-Qbs"/>
                             <outlet property="txtQuickDescription" destination="82v-ss-xtE" id="J6J-x7-2IF"/>
@@ -1676,7 +1677,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CE07865D-0DD3-4922-BD1F-765493C172F4" width="140" height="211">
+        <image name="8C6DF09B-FD77-4062-A8B7-9733FD0EB41F" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

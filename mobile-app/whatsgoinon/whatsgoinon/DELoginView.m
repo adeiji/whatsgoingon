@@ -27,4 +27,14 @@
     [userManager loginWithUsername:_txtUsernameOrEmail.text Password:_txtPassword.text ViewController:[screenManager nextScreen] ErrorLabel:_errorLabel];
 }
 
+- (void) removeFirstResponder {
+    // When the user taps the image, resign the first responder
+    [_txtPassword resignFirstResponder];
+    [_txtUsernameOrEmail resignFirstResponder];
+}
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self removeFirstResponder];
+}
+
 @end
