@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblNumGoing;
 @property (weak, nonatomic) IBOutlet UILabel *lblViewCount;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionHeightConstraint;
+@property (strong, nonatomic) UISearchBar *searchBar;
 @property BOOL isImageLoaded;
 @property (weak, nonatomic) DEEventsTimeline *overlayView;
 @property (strong, nonatomic) DEPost *post;

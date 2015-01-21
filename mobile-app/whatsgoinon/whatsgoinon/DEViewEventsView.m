@@ -242,28 +242,32 @@ const int POST_WIDTH = 140;
 // When the user taps this event it will take them to a screen to view all the details of the event.
 - (void) displayEventDetails : (id) sender {
     [self updateViewCount];
-    
-    UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    
-    DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
-    eventViewController.post = _post;
-    eventViewController.isPreview = NO;
-    eventViewController.viewEventView = self;
-    [[DEPostManager sharedManager] setCurrentPost:_post];
-    [[DEPostManager sharedManager] setDistanceFromEvent:self.lblDistance.text];
-    
-    [navigationController pushViewController:eventViewController animated:YES];
-    
-    // If this event is already saved as going, then we need to display that in the view.
-    if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
+    if ([_searchBar isFirstResponder])
     {
-        eventViewController.isGoing = YES;
+        [_searchBar resignFirstResponder];
     }
-    else if ([[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post.objectId])
-    {
-        eventViewController.isMaybeGoing = YES;
+    else {
+        UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        
+        DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
+        eventViewController.post = _post;
+        eventViewController.isPreview = NO;
+        eventViewController.viewEventView = self;
+        [[DEPostManager sharedManager] setCurrentPost:_post];
+        [[DEPostManager sharedManager] setDistanceFromEvent:self.lblDistance.text];
+        
+        [navigationController pushViewController:eventViewController animated:YES];
+        
+        // If this event is already saved as going, then we need to display that in the view.
+        if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
+        {
+            eventViewController.isGoing = YES;
+        }
+        else if ([[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post.objectId])
+        {
+            eventViewController.isMaybeGoing = YES;
+        }
     }
-    
 
 }
 

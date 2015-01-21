@@ -17,7 +17,7 @@
 
 @class DEViewMainMenu;
 
-@interface DEViewEventsViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate, UISearchBarDelegate>
+@interface DEViewEventsViewController : UIViewController <UIScrollViewDelegate, MFMailComposeViewControllerDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate>
 {
     DEViewMainMenu *viewMainMenu;
     BOOL menuDisplayed;

@@ -86,7 +86,10 @@ struct TopMargin {
     [self.navigationController setNavigationBarHidden:YES];
     [self setUpSearchBar];
     [self removeAllPostFromScreen];
+}
 
+- (void) removeFirstResponder {
+    [_searchBar resignFirstResponder];
 }
 
 - (void) setUpSearchBar
@@ -284,7 +287,7 @@ struct TopMargin {
     else {
         view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:4];
     }
-
+    
     [self moveViewToCenterOfScrollViewView:view];
     [_scrollView addSubview:view];
     [self loadPosts];
@@ -527,7 +530,7 @@ struct TopMargin {
     obj[@"loaded"] = @YES;
     
     DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
-    
+    [viewEventsView setSearchBar:_searchBar];
     [viewEventsView renderViewWithPost:post
                              ShowBlank:showBlank];
     [viewEventsView setPostObject:obj];

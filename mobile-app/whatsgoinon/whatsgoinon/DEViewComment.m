@@ -33,9 +33,15 @@
         
         [self setUpViews];
         [self registerForKeyboardNotifications];
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFirstResponder)];
+        [self addGestureRecognizer:tapGestureRecognizer];
     }
     
     return self;
+}
+
+- (void) removeFirstResponder {
+    [_txtComment resignFirstResponder]; 
 }
 
 /*
