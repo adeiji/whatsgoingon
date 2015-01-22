@@ -40,7 +40,6 @@ struct TopMargin {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoSavedEvents) name:NOTIFICATION_CENTER_NO_SAVED_EVENTS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllPostFromScreen) name:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_PAST_EPIC_EVENTS_LOADED object:nil];
-    
 }
 
 - (void)viewDidLoad

@@ -19,18 +19,33 @@
 
 //it’s recommended that you always call the locationServicesEnabled class method of CLLocationManager before attempting to start either the standard or significant-change location services. If it returns NO and you attempt to start location services anyway, the system prompts the user to confirm whether location services should be re-enabled. Because the user probably disabled location services on purpose, the prompt is likely to be unwelcome.
 
+#pragma mark - Location Services Delegate Methods
+
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     //Get the latitude and longitude values of the current user
     _currentLocation.latitude = [[locations objectAtIndex:0] coordinate].latitude;
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
 
-    //Stop updating the location because now it is uneccesary, and we want to conserver battery life
-    [_locationManager stopUpdatingLocation];
+    // If the application is open then we know we'll be getting regular updates everytime the user presses What's Going On Now or Later
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+    {
+        [_locationManager stopUpdatingLocation];
+    }
+    
     NSLog(@"Location Updated");
+    [self checkForCommenting];
+}
+
+- (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (status == kCLAuthorizationStatusAuthorized || status == kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
+        [_locationManager startMonitoringSignificantLocationChanges];
+    }
 }
 
 - (void) checkForCommenting {
+    // Perform task here
     
     NSArray *goingPosts = [self getGoingPostEventObjects];
     for (DEPost *post in goingPosts) {
@@ -55,8 +70,7 @@
         NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
         [localNotification setFireDate:nowPlusSevenMinutes];
         // Set the user info to contain the event id of the post that the user is at
-        localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", object];
-        localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
+        localNotification.alertBody = [NSString stringWithFormat:@"Cloud code function called"];
         localNotification.applicationIconBadgeNumber = 0;
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     }];
@@ -91,6 +105,16 @@
 
 - (BOOL) checkIfCanCommentForEvent : (DEPost *) post
 {
+    // Perform task here
+    // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
+    UILocalNotification *localNotification = [UILocalNotification new];
+    double minutes = .01;
+    NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
+    [localNotification setFireDate:nowPlusSevenMinutes];
+    localNotification.alertBody = [NSString stringWithFormat:@"Check if can comment for event called"];
+    localNotification.applicationIconBadgeNumber = 0;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
     CLLocationDegrees latitude = post.location.latitude;
     CLLocationDegrees longitude = post.location.longitude;
     CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_currentLocation.latitude longitude:_currentLocation.longitude];
@@ -100,24 +124,35 @@
     // Check to see if the event is currently going on, or finished within the hour
     NSDate *later = [post.endTime dateByAddingTimeInterval:(60 * 60)];
     
+    
     // Check to make sure that the event has already started and that it ended within the past hour
     if (([post.startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
     {
-        if (distance < 1500)
+        if (distance < 600)
         {
-            [DEScreenManager createPromptUserCommentNotification:post];
-            [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+            [self promptUserForCommentPost:post TimeToShow:[NSDate new]];
             return YES;
         }
+    }
+    else if (distance < 600 && ([post.endTime compare:[NSDate date]] == NSOrderedDescending))  // If the user is simply early
+    {
+        [self promptUserForCommentPost:post TimeToShow:[post.startTime dateByAddingTimeInterval:(60 * 15)]];
     }
     
     return NO;
 }
 
+- (void) promptUserForCommentPost : (DEPost *) post
+                       TimeToShow : (NSDate *) date
+{
+    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date];
+    [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+    [_locationManager stopUpdatingLocation];
+}
+
 - (void) updateLocation {
     [_locationManager startUpdatingLocation];
 }
-
 
 /*
  
@@ -158,34 +193,13 @@
             // Check to see if this event has started.  If the start time of the event is less than the current time
             if (([post.startTime compare:[NSDate new]] == NSOrderedAscending) &&  ([post.endTime compare:[NSDate new]] == NSOrderedDescending) )
             {
-                [DEScreenManager createPromptUserCommentNotification:post];
+                [DEScreenManager createPromptUserCommentNotification:post TimeToShow:[NSDate new]];
                 [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
                 
                 break;
             }
         }
     }
-}
-
-/*
- 
- Check to see if the user is currently at this event
- 
- */
-- (void) seeIfLocationMatchesEvent : (DEPost *) event
-{
-    [self startSignificantChangeUpdates];
-    CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_currentLocation.latitude longitude:_currentLocation.longitude];
-    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:event.location.latitude longitude:event.location.longitude];
-    CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
-    
-    // If the user is with 500 meters of the event
-    if (distance < 500) {
-        // Prompt the user to make a comment
-        [DEScreenManager showCommentView:event];
-    }
-    
-//    [self stopSignificantChangeUpdates];
 }
 
 - (void) promptUserForFeedback
@@ -252,6 +266,7 @@
         }
         
         _currentLocation = [PFGeoPoint new];
+        [_locationManager startMonitoringSignificantLocationChanges];
         [_locationManager startUpdatingLocation];
     }
     return self;
@@ -267,12 +282,11 @@
     }
     
     _locationManager.delegate = self;
+    [_locationManager stopMonitoringSignificantLocationChanges];
     [_locationManager startMonitoringSignificantLocationChanges];
 }
 
-- (void) stopSignificantChangeUpdates {
-    [_locationManager stopMonitoringSignificantLocationChanges];
-}
+#pragma mark - API Calls - Google / Apple
 
 + (void) getLatLongValueFromAddress:(NSString *)address CompletionBlock:(completionHandler)callback {
 //    NSLog(@"The address to get the lat/long value is: %@", address);
@@ -397,7 +411,6 @@
             callback(values);
         });
     }];
-    
 }
 
 

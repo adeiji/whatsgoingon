@@ -42,7 +42,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location services must enabled to allow the app to know where you're at, and where other events are relative to you.</string>
+	<string>Location services must enabled to allow the app to know where you&apos;re at, and where other events are relative to you.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>You need location services running in the background in order to see if you&apos;re at an event you&apos;re going to in order to comment.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

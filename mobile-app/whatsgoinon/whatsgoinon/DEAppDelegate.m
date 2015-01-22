@@ -36,23 +36,23 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     [TestFlight takeOff:@"7dff8d72-f33d-4eb7-aa3f-632fff9c3f03"];
     [GMSServices provideAPIKey:@"AIzaSyAChpei4sacCZDpzE4boq1lhftbBteTYak"];
     
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        // Make sure this keeps running in the background
+        [[[DELocationManager sharedManager] locationManager] requestWhenInUseAuthorization];
+    }
+    
     // Track statistics around application opens
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [self registerForNotifications:application];
-    DELocationManager *locManager = [DELocationManager sharedManager];
-    [locManager startSignificantChangeUpdates];
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
-
+    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     [self checkIfLocalNotification:launchOptions];
     [self checkIfSignificantLocationChange:launchOptions];
-    [self startCommentTimer];
     [self loadPromptedForCommentEvents];
     [self loadGoingPosts];
     [self loadMaybeGoingPosts];
-    
-    [DEScreenManager showCommentView:nil];
     
     return YES;
 }
@@ -62,6 +62,10 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
 
+        [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"getGoingEvents" expirationHandler:^{
+            
+        }];
+        
         [[DEUserManager sharedManager] isLoggedIn];
         [[DELocationManager sharedManager] checkForCommenting];
         [[DELocationManager sharedManager] callCloudCode];
@@ -104,24 +108,13 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     }
 }
 
-- (void) startCommentTimer {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        timer = [NSTimer timerWithTimeInterval:10
-                                        target:[DELocationManager sharedManager]
-                                      selector:@selector(checkForCommenting)
-                                      userInfo:nil
-                                       repeats:YES];
-        [timer fire];
-        [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-    });
-}
-
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
     {
 
-        [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
+#warning Commented out for testing purposes
+//        [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
     }
     else {
         // Get the corresponding Event to this eventId

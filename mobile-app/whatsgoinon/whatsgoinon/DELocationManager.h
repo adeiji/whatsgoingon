@@ -55,12 +55,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
  
  */
 - (void) startMonitoringRegionForPost : (DEPost *) post;
-/*
- 
- Check to see if the user is currently at this event
- 
- */
-- (void) seeIfLocationMatchesEvent : (DEPost *) event;
+
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;
 @property (strong, nonatomic) PFGeoPoint *userLocation;

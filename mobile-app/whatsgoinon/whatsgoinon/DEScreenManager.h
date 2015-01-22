@@ -41,7 +41,8 @@
  Display a banner in 7 minutes asking the user to comment
  
  */
-+ (void) createPromptUserCommentNotification : (DEPost *) post;
++ (void) createPromptUserCommentNotification : (DEPost *) post
+                                  TimeToShow : (NSDate *) dateToShow;
 
 /*
  

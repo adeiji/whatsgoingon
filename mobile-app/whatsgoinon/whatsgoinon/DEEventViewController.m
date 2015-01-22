@@ -455,6 +455,8 @@ const int heightConstraintConstant = 62;
         // Start monitoring to see if the user is near this event location
         [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
         [[DELocationManager sharedManager] startSignificantChangeUpdates];
+        // Update the location so we can see if they are at this event and can comment
+        [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     }
     
     if (!_mapView)

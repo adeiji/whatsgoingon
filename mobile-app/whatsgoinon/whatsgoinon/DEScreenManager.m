@@ -96,7 +96,8 @@
  
  */
 
-+ (void) createPromptUserCommentNotification : (DEPost *) post {
++ (void) createPromptUserCommentNotification : (DEPost *) post
+                                  TimeToShow : (NSDate *) dateToShow {
     
     UIBackgroundTaskIdentifier taskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(void) {
         // Uh-oh - we took too long. Stop task.
@@ -105,8 +106,8 @@
     // Perform task here
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
     UILocalNotification *localNotification = [UILocalNotification new];
-    double minutes = .1;
-    NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
+    double minutes = .01;
+    NSDate *nowPlusSevenMinutes = [dateToShow dateByAddingTimeInterval:(minutes * 60)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
     localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : post.objectId };
@@ -150,7 +151,9 @@
         [view showView];
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
         // Make sure its saved that the user has already been prompted to comment for the event
-        [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
+#warning Removed for testing purposes
+//        [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
+        
     }
     else {
         DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
