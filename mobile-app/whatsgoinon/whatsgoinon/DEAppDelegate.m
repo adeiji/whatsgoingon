@@ -18,6 +18,12 @@ static NSString *const eventsUserPromptedForComment = @"com.happsnap.eventsUserP
 static NSString *const eventsUserGoingTo = @"com.happsnap.eventsUserGoingTo";
 static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingTo";
 
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -40,6 +46,7 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
 
     [self checkIfLocalNotification:launchOptions];
+    [self checkIfSignificantLocationChange:launchOptions];
     [self startCommentTimer];
     [self loadPromptedForCommentEvents];
     [self loadGoingPosts];
@@ -48,6 +55,17 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     [DEScreenManager showCommentView:nil];
     
     return YES;
+}
+
+- (void) checkIfSignificantLocationChange : (NSDictionary *) launchOptions {
+    // Application is launched because of a significant location change
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
+    {
+
+        [[DEUserManager sharedManager] isLoggedIn];
+        [[DELocationManager sharedManager] checkForCommenting];
+        [[DELocationManager sharedManager] callCloudCode];
+    }
 }
 
 - (void) loadPromptedForCommentEvents {
@@ -88,7 +106,7 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
 
 - (void) startCommentTimer {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        timer = [NSTimer timerWithTimeInterval:(60 * .1)
+        timer = [NSTimer timerWithTimeInterval:10
                                         target:[DELocationManager sharedManager]
                                       selector:@selector(checkForCommenting)
                                       userInfo:nil
@@ -149,6 +167,12 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[[DELocationManager sharedManager] locationManager] startMonitoringSignificantLocationChanges];
+    
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        // Make sure this keeps running in the background
+        [[[DELocationManager sharedManager] locationManager] requestAlwaysAuthorization];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

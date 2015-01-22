@@ -47,6 +47,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
                           DataResultType : (NSString *) type
                          CompletionBlock : (autocompleteCompletionBlock) callback;
 
+- (void) callCloudCode;
 /*
  
  Start monitoring to see when the user reaches this event

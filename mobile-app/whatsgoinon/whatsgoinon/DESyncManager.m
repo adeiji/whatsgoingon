@@ -390,6 +390,7 @@
     postObject[PARSE_CLASS_EVENT_USERNAME] = [[PFUser currentUser] username];
     postObject[PARSE_CLASS_EVENT_VIEW_COUNT] = post.viewCount;
     postObject[PARSE_CLASS_EVENT_THUMBS_UP_COUNT] = post.thumbsUpCount;
+    postObject[PARSE_CLASS_EVENT_STATUS] = PARSE_CLASS_EVENT_STATUS_POSTED;
     
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
