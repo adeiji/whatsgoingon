@@ -152,7 +152,7 @@
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
         // Make sure its saved that the user has already been prompted to comment for the event
 #warning Removed for testing purposes
-//        [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
+        [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
         
     }
     else {

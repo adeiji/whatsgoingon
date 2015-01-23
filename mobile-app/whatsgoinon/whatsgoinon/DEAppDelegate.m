@@ -11,6 +11,7 @@
 #import "TestFlight.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @implementation DEAppDelegate
 
@@ -28,6 +29,8 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
 {
     // Override point for customization after application launch.
     // Connect our app to Parse
+    // Allow the parse local data store
+//    [Parse enableLocalDatastore];
     [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
                   clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
     [PFTwitterUtils initializeWithConsumerKey:@"TFcHVbGMjgBiXuSUpE16untPd" consumerSecret:@"alxo7PP08tyyG2mR3QFm8n8XHdJBcTzGw1u7BKW7A13AaeCWe8"];
@@ -58,17 +61,35 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
 }
 
 - (void) checkIfSignificantLocationChange : (NSDictionary *) launchOptions {
+
     // Application is launched because of a significant location change
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
-
-        [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"getGoingEvents" expirationHandler:^{
-            
-        }];
+        __block UIBackgroundTaskIdentifier background_task;
         
-        [[DEUserManager sharedManager] isLoggedIn];
-        [[DELocationManager sharedManager] checkForCommenting];
-        [[DELocationManager sharedManager] callCloudCode];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            //### background task starts
+            NSLog(@"Running in the background\n");
+            
+//            for (PFObject *postObject in objects) {
+//                DEPost *post = [DEPost getPostFromPFObject:postObject];
+//                // Check to make sure that the user has already been prompted to comment for this
+//                if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
+//                {
+//                    if ([[DELocationManager sharedManager] checkIfCanCommentForEvent:post])
+//                    {
+//                        break;
+//                    }
+//                }
+//            }
+//            
+            //#### background task ends
+            
+            //Clean up code. Tell the system that we are done.
+            [[UIApplication sharedApplication] endBackgroundTask: background_task];
+            background_task = UIBackgroundTaskInvalid; 
+        });
     }
 }
 

@@ -9,6 +9,7 @@
 #import "DEUserManager.h"
 #import "Constants.h"
 #import "DEAppDelegate.h"
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @implementation DEUserManager
 

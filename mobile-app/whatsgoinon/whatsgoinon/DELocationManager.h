@@ -33,6 +33,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
  
  */
 - (void) checkForCommenting;
+- (BOOL) checkIfCanCommentForEvent : (DEPost *) post;
 + (void) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
                                LocationTwo : (PFGeoPoint *) location2
                            CompletionBlock : (completionBlock) callback;

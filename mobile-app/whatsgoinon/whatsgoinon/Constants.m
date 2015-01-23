@@ -134,5 +134,6 @@ NSString *const CATEGORY_TRENDING = @"Trending";
 NSString *const IMAGE_DIMENSION_WIDTH = @"width";
 NSString *const IMAGE_DIMENSION_HEIGHT = @"height";
 
-
+// Parse Local Datastore
+NSString *const kGOING_POST_LOCAL_DATASTORE = @"com.happsnap.goingPostsInLocalDatastore";
 

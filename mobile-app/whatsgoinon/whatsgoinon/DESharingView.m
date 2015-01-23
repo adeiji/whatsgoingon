@@ -9,6 +9,7 @@
 
 #import "DESharingView.h"
 #import <Social/Social.h>
+#import <ParseFacebookUtils/PFFacebookUtils.h>
 
 @implementation DESharingView
 
@@ -43,7 +44,7 @@
         }];
     }
     else {
-        [PFFacebookUtils linkUser:[PFUser currentUser] permissions:nil];
+        [PFFacebookUtils linkUserInBackground:[PFUser currentUser] permissions:nil];
     }
 }
 

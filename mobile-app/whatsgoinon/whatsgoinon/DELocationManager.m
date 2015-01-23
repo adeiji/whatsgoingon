@@ -34,7 +34,9 @@
     }
     
     NSLog(@"Location Updated");
-    [self checkForCommenting];
+    
+    NSArray *goingPosts = [self getGoingPostEventObjects];
+    [self checkForCommenting : goingPosts];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
@@ -44,10 +46,9 @@
     }
 }
 
-- (void) checkForCommenting {
+- (void) checkForCommenting : (NSArray *) goingPosts {
     // Perform task here
     
-    NSArray *goingPosts = [self getGoingPostEventObjects];
     for (DEPost *post in goingPosts) {
         // Check to make sure that the user has already been prompted to comment for this
         if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
@@ -60,22 +61,6 @@
     }
 }
 
-- (void) callCloudCode {
-    
-    [PFCloud callFunctionInBackground:@"hello" withParameters:@{ @"hello" : @"world" } block:^(id object, NSError *error) {
-        // Perform task here
-        // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
-        UILocalNotification *localNotification = [UILocalNotification new];
-        double minutes = .1;
-        NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
-        [localNotification setFireDate:nowPlusSevenMinutes];
-        // Set the user info to contain the event id of the post that the user is at
-        localNotification.alertBody = [NSString stringWithFormat:@"Cloud code function called"];
-        localNotification.applicationIconBadgeNumber = 0;
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    }];
-}
-
 /*
  
  Get the actual events that correspond to the saved Post Ids stored in the Post Manager
@@ -83,6 +68,7 @@
  */
 - (NSArray *) getGoingPostEventObjects {
     NSMutableArray *goingPosts = [NSMutableArray new];
+    NSMutableArray *goingPFObjectPosts = [NSMutableArray new];
     
     // Get all the actual posts that are set as is going by this user and convert them to DEPost objects and then store them in a local array
     for (PFObject *post in [[DEPostManager sharedManager] posts]) {
@@ -90,10 +76,13 @@
             if ([postId isEqualToString:post.objectId])
             {
                 [goingPosts addObject:[DEPost getPostFromPFObject:post]];
+                [goingPFObjectPosts addObject:post];
             }
         }
     }
     
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:eventsUserPromptedForComment];
     return goingPosts;
 }
 
@@ -111,7 +100,7 @@
     double minutes = .01;
     NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
     [localNotification setFireDate:nowPlusSevenMinutes];
-    localNotification.alertBody = [NSString stringWithFormat:@"Check if can comment for event called"];
+    localNotification.alertBody = [NSString stringWithFormat:@"Check if can comment for event called from the app delegate"];
     localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
@@ -267,7 +256,6 @@
         
         _currentLocation = [PFGeoPoint new];
         [_locationManager startMonitoringSignificantLocationChanges];
-        [_locationManager startUpdatingLocation];
     }
     return self;
 }

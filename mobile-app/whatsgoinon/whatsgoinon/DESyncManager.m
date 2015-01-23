@@ -132,6 +132,9 @@
     
     // Get any values that are later
     query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    
+    NSLog(@"Latitude - %f - Longitude %f retrieving events for", [[DELocationManager sharedManager] currentLocation].latitude, [[DELocationManager sharedManager] currentLocation].longitude );
+    
     // Make sure that the values for later are only those within thirty miles of the location the user is checking for
     [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] currentLocation] withinMiles:30];
     [self getValuesForLater:query
@@ -168,7 +171,7 @@
 }
 
 + (void) getAllValuesForNow : (BOOL) now {
-    
+
     [self checkForInternet];
     NSMutableArray *postsArray = [NSMutableArray new];
 
@@ -176,7 +179,7 @@
     
     [DESyncManager getAllValuesWithinMilesForNow:now
                                       PostsArray:postsArray
-                                        Location:[[DELocationManager sharedManager] currentLocation]];
+                                        Location:[[DELocationManager sharedManager]  currentLocation]];
 
 }
 // Store the events that we just recieved from Parse and notify the app
