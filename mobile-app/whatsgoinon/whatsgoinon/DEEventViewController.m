@@ -23,7 +23,6 @@ const int heightConstraintConstant = 62;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[DELocationManager sharedManager] updateLocation];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadComments:) name:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAmbassador:) name:NOTIFICATION_CENTER_USER_RETRIEVED object:nil];
 	// Do any additional setup after loading the view.
@@ -425,6 +424,19 @@ const int heightConstraintConstant = 62;
 
 }
 
+- (void) addPostInformationToGoingPostWithCommentInformationManager : (DEPostManager *) postManager {
+    NSDictionary *values = @{
+                             PARSE_CLASS_EVENT_START_TIME : _post.startTime,
+                             PARSE_CLASS_EVENT_END_TIME : _post.endTime,
+                             LOCATION_LATITUDE : [NSNumber numberWithDouble:_post.location.latitude],
+                             LOCATION_LONGITUDE : [NSNumber numberWithDouble:_post.location.longitude],
+                             PARSE_CLASS_EVENT_OBJECT_ID : _post.objectId,
+                             PARSE_CLASS_EVENT_TITLE : _post.title
+    };
+    
+    [[postManager goingPostWithCommentInformation] addObject:values];
+}
+
 - (IBAction)setEventAsGoing:(id)sender {
     
     static BOOL going = NO;
@@ -438,6 +450,7 @@ const int heightConstraintConstant = 62;
         _post.numberGoing = [NSNumber numberWithInt:numGoing];
         NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
         [[postManager goingPost] addObject:_post.objectId];
+        [self addPostInformationToGoingPostWithCommentInformationManager:postManager];
         [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
         [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
         [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];

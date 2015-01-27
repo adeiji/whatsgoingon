@@ -30,6 +30,8 @@
         _loadedSavedEvents = [NSMutableArray new];
         _currentPost = [DEPost new];
         _promptedForCommentEvents = [NSMutableArray new];
+        _goingPostWithCommentInformation = [NSMutableArray new];
+        
     }
     return self;
 }

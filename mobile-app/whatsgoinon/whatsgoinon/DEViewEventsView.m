@@ -97,25 +97,31 @@ const int POST_WIDTH = 140;
 
 - (void) displayDistanceToLocationWithPost : (DEPost *) post
 {
-    DELocationManager *locationManager = [DELocationManager sharedManager];
-
-    [DELocationManager getDistanceInMilesBetweenLocation:post.location LocationTwo:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
-        
-        NSString *valueWithoutCharacters = [value stringByReplacingOccurrencesOfString:@"," withString:@""];
-        valueWithoutCharacters = [valueWithoutCharacters stringByReplacingOccurrencesOfString:@" mi" withString:@""];
-        
-        if ([valueWithoutCharacters doubleValue] > 1000)
-        {
-            NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-            [formatter setPositiveFormat:@"0.#"];
-            double miles = [valueWithoutCharacters doubleValue] / 1000;
-            NSString *distanceInShortFormat = [NSString stringWithFormat:@"%@k mi", [formatter stringFromNumber:[NSNumber numberWithDouble:miles]]];
-            self.lblDistance.text = distanceInShortFormat;
-        }
-        else {
-            self.lblDistance.text = value;
-        }
-    }];
+    // Perform task here
+    CLLocationDegrees latitude = post.location.latitude;
+    CLLocationDegrees longitude = post.location.longitude;
+    PFGeoPoint *location = [[DELocationManager sharedManager] currentLocation];
+    CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:location.latitude longitude:location.longitude];
+    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
+    NSLog(@"Distance to event: %f", distance);
+    // Check to see if the event is currently going on, or finished within the hour
+    double miles = distance / 1609.34;
+    if (miles > 1000)
+    {
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+        [formatter setPositiveFormat:@"0.#"];
+        miles = miles / 1000;
+        NSString *distanceInShortFormat = [NSString stringWithFormat:@"%@k mi", [formatter stringFromNumber:[NSNumber numberWithDouble:miles]]];
+        self.lblDistance.text = distanceInShortFormat;
+    }
+    else if (miles > .1) {
+        self.lblDistance.text = [NSString stringWithFormat:@"%.1f mi", miles];
+    }
+    else if (miles < .1) {
+        double feet = miles * 5280;
+        self.lblDistance.text = [NSString stringWithFormat:@"%.0f ft", feet];
+    }
 }
 
 

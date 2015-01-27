@@ -10,7 +10,7 @@ var express     = require('express'),
 var router = express.Router();
 
 // Environment Settings
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3000 );
 
 // Middleware
 app.use(express.favicon());

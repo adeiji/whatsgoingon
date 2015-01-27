@@ -81,8 +81,6 @@
         }
     }
     
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:eventsUserPromptedForComment];
     return goingPosts;
 }
 
@@ -95,15 +93,6 @@
 - (BOOL) checkIfCanCommentForEvent : (DEPost *) post
 {
     // Perform task here
-    // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
-    UILocalNotification *localNotification = [UILocalNotification new];
-    double minutes = .01;
-    NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
-    [localNotification setFireDate:nowPlusSevenMinutes];
-    localNotification.alertBody = [NSString stringWithFormat:@"Check if can comment for event called from the app delegate"];
-    localNotification.applicationIconBadgeNumber = 0;
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    
     CLLocationDegrees latitude = post.location.latitude;
     CLLocationDegrees longitude = post.location.longitude;
     CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:_currentLocation.latitude longitude:_currentLocation.longitude];
@@ -113,19 +102,18 @@
     // Check to see if the event is currently going on, or finished within the hour
     NSDate *later = [post.endTime dateByAddingTimeInterval:(60 * 60)];
     
-    
     // Check to make sure that the event has already started and that it ended within the past hour
     if (([post.startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
     {
-        if (distance < 600)
+        if (distance < 200)
         {
-            [self promptUserForCommentPost:post TimeToShow:[NSDate new]];
+            [self promptUserForCommentPost:post TimeToShow:[NSDate new] isFuture:NO];
             return YES;
         }
     }
-    else if (distance < 600 && ([post.endTime compare:[NSDate date]] == NSOrderedDescending))  // If the user is simply early
+    else if (distance < 200 && ([post.endTime compare:[NSDate date]] == NSOrderedDescending))  // If the user is simply early
     {
-        [self promptUserForCommentPost:post TimeToShow:[post.startTime dateByAddingTimeInterval:(60 * 15)]];
+        [self promptUserForCommentPost:post TimeToShow:[post.startTime dateByAddingTimeInterval:(60 * 15)] isFuture:YES];
     }
     
     return NO;
@@ -133,8 +121,9 @@
 
 - (void) promptUserForCommentPost : (DEPost *) post
                        TimeToShow : (NSDate *) date
+                         isFuture : (BOOL) future
 {
-    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date];
+    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date isFuture:future];
     [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
     [_locationManager stopUpdatingLocation];
 }
@@ -182,7 +171,7 @@
             // Check to see if this event has started.  If the start time of the event is less than the current time
             if (([post.startTime compare:[NSDate new]] == NSOrderedAscending) &&  ([post.endTime compare:[NSDate new]] == NSOrderedDescending) )
             {
-                [DEScreenManager createPromptUserCommentNotification:post TimeToShow:[NSDate new]];
+                [DEScreenManager createPromptUserCommentNotification:post TimeToShow:[NSDate new] isFuture:NO];
                 [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
                 
                 break;
@@ -247,7 +236,7 @@
         }
         
         _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = 100; //Meters
+        _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app
         if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {

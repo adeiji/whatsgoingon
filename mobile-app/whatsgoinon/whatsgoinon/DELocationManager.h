@@ -25,14 +25,12 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 - (PFGeoPoint *) geoPoint;
 + (id)sharedManager;
 - (void) startSignificantChangeUpdates;
-- (void) stopSignificantChangeUpdates;
 - (void) updateLocation;
 /*
  
  Check to see if the user can comment on the event that the user has selected Going/Maybe on
  
  */
-- (void) checkForCommenting;
 - (BOOL) checkIfCanCommentForEvent : (DEPost *) post;
 + (void) getDistanceInMilesBetweenLocation : (PFGeoPoint *) location1
                                LocationTwo : (PFGeoPoint *) location2
@@ -48,7 +46,6 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
                           DataResultType : (NSString *) type
                          CompletionBlock : (autocompleteCompletionBlock) callback;
 
-- (void) callCloudCode;
 /*
  
  Start monitoring to see when the user reaches this event

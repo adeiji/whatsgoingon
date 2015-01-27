@@ -42,7 +42,8 @@
  
  */
 + (void) createPromptUserCommentNotification : (DEPost *) post
-                                  TimeToShow : (NSDate *) dateToShow;
+                                  TimeToShow : (NSDate *) dateToShow
+                                    isFuture : (BOOL) future;
 
 /*
  

@@ -12,12 +12,14 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseCrashReporting/ParseCrashReporting.h>
 
 @implementation DEAppDelegate
 
-static NSString *const eventsUserPromptedForComment = @"com.happsnap.eventsUserPromptedForComment";
-static NSString *const eventsUserGoingTo = @"com.happsnap.eventsUserGoingTo";
-static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingTo";
+static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUserPromptedForComment";
+static NSString *const kEventsUserGoingTo = @"com.happsnap.eventsUserGoingTo";
+static NSString *const kEventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingTo";
+static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWithCommentInformation";
 
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
@@ -28,14 +30,8 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    // Connect our app to Parse
-    // Allow the parse local data store
-//    [Parse enableLocalDatastore];
-    [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
-                  clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
-    [PFTwitterUtils initializeWithConsumerKey:@"TFcHVbGMjgBiXuSUpE16untPd" consumerSecret:@"alxo7PP08tyyG2mR3QFm8n8XHdJBcTzGw1u7BKW7A13AaeCWe8"];
-    [PFFacebookUtils initializeFacebook];
     // start of your application:didFinishLaunchingWithOptions // ...
+    [self setUpParseWithLaunchOptions:launchOptions];
     [TestFlight takeOff:@"7dff8d72-f33d-4eb7-aa3f-632fff9c3f03"];
     [GMSServices provideAPIKey:@"AIzaSyAChpei4sacCZDpzE4boq1lhftbBteTYak"];
     
@@ -43,9 +39,7 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
         // Make sure this keeps running in the background
         [[[DELocationManager sharedManager] locationManager] requestWhenInUseAuthorization];
     }
-    
-    // Track statistics around application opens
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+
     [self registerForNotifications:application];
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -56,34 +50,121 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     [self loadPromptedForCommentEvents];
     [self loadGoingPosts];
     [self loadMaybeGoingPosts];
-    
+
     return YES;
 }
 
-- (void) checkIfSignificantLocationChange : (NSDictionary *) launchOptions {
+- (void) setUpParseWithLaunchOptions : (NSDictionary *) launchOptions {
+    // Connect our app to Parse
+    // Allow the parse local data store
+    [ParseCrashReporting enable];
+    [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
+                  clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
+    [PFTwitterUtils initializeWithConsumerKey:@"TFcHVbGMjgBiXuSUpE16untPd" consumerSecret:@"alxo7PP08tyyG2mR3QFm8n8XHdJBcTzGw1u7BKW7A13AaeCWe8"];
+    [PFFacebookUtils initializeFacebook];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+}
 
+- (void) sendNotification {
+    // Perform task here
+    // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
+    UILocalNotification *localNotification = [UILocalNotification new];
+    double minutes = .01;
+    NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
+    [localNotification setFireDate:nowPlusSevenMinutes];
+    // Set the user info to contain the event id of the post that the user is at
+    localNotification.alertBody = [NSString stringWithFormat:@"Recieved significant location change update"];
+    localNotification.applicationIconBadgeNumber = 0;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+}
+
+- (void) cancelAllFutureNotifications
+{
+    NSArray *scheduledLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    [scheduledLocalNotifications enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UILocalNotification *notification = (UILocalNotification *) obj;
+        if ([notification.userInfo[kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE] isEqual:[NSNumber numberWithBool:YES]])
+        {
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        }
+    }];
+}
+
+- (void) checkIfSignificantLocationChange : (NSDictionary *) launchOptions {
+    
     // Application is launched because of a significant location change
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
+        NSDictionary *dimensions = @{
+                                     @"type": @"HappSnap Application opened from terminated state.  Location update",
+                                     };
+        // Send the dimensions to Parse along with the 'read' event
+        [PFAnalytics trackEvent:@"read" dimensions:dimensions];
         __block UIBackgroundTaskIdentifier background_task;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
             //### background task starts
             NSLog(@"Running in the background\n");
+            [self cancelAllFutureNotifications];
+            // 1.  Get the current Location
+            // 2.  See if any of the events the user is going to are nearby
+            CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+            NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
             
-//            for (PFObject *postObject in objects) {
-//                DEPost *post = [DEPost getPostFromPFObject:postObject];
-//                // Check to make sure that the user has already been prompted to comment for this
-//                if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
-//                {
-//                    if ([[DELocationManager sharedManager] checkIfCanCommentForEvent:post])
-//                    {
-//                        break;
-//                    }
-//                }
-//            }
-//            
+            NSDictionary *dimensions = @{
+                                         @"type": @"HappSnap Application retrieved the going posts",
+                                         };
+            // Send the dimensions to Parse along with the 'read' event
+            [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+            
+            if (postsWithCommentInformation != nil)
+            {
+                [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    NSDictionary *values = (NSDictionary *) obj;
+                    NSDictionary *dimensions = @{
+                                                 @"type": @"HappSnap Application - Application is searching through events",
+                                                 @"eventId": values[PARSE_CLASS_EVENT_OBJECT_ID]
+                                                 };
+                    // Send the dimensions to Parse along with the 'read' event
+                    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+                    CLLocationDegrees latitude = ((NSNumber *) values[LOCATION_LATITUDE]).doubleValue;
+                    CLLocationDegrees longitude = ((NSNumber *) values[LOCATION_LONGITUDE]).doubleValue;
+                    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+                    
+                    if ([self checkIfNearEventLocation:location Event:eventLocation])
+                    {
+                        NSDictionary *dimensions = @{
+                                                     @"type": @"HappSnap Application - user is near location of going to event",
+                                                     };
+                        NSDate *later = values[PARSE_CLASS_EVENT_END_TIME];
+                        NSDate *startTime = values[PARSE_CLASS_EVENT_START_TIME];
+                        NSString *postTitle = values[PARSE_CLASS_EVENT_TITLE];
+                        NSString *postId = values[PARSE_CLASS_EVENT_OBJECT_ID];
+                        // Send the dimensions to Parse along with the 'read' event
+                        [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+                        later = [later dateByAddingTimeInterval:(60 * 60)];
+                        
+                        if (([startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
+                        {
+                            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
+                            NSDictionary *dimensions = @{
+                                                         @"type": @"HappSnap Application - Sending Local Notification For Now",
+                                                         };
+                            // Send the dimensions to Parse along with the 'read' event
+                            [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+                        }
+                        else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
+                        {
+                            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
+                            NSDictionary *dimensions = @{
+                                                         @"type": @"HappSnap Application - Sending Local Notification for Later",
+                                                         };
+                            // Send the dimensions to Parse along with the 'read' event
+                            [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+                        }
+                    }
+                }];
+            }
             //#### background task ends
             
             //Clean up code. Tell the system that we are done.
@@ -93,12 +174,63 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     }
 }
 
+- (void) createPromptUserCommentNotification : (NSString *) postId
+                                       Title : (NSString *) postTitle
+                                  TimeToShow : (NSDate *) dateToShow
+                                    isFuture : (BOOL) future {
+    
+    
+    // Perform task here
+    // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
+    UILocalNotification *localNotification = [UILocalNotification new];
+    double minutes = .001;
+    NSDate *nowPlusSevenMinutes = [dateToShow dateByAddingTimeInterval:(minutes * 60)];
+    [localNotification setFireDate:nowPlusSevenMinutes];
+    // Set the user info to contain the event id of the post that the user is at
+    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : postId,
+                                    kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE : [NSNumber numberWithBool:future] };
+    localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", postTitle];
+    localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
+    localNotification.applicationIconBadgeNumber = 0;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+    NSLog(@"Local Notification Object Set and Scheduled");
+}
+
+
+- (BOOL) checkIfNearEventLocation : (CLLocation *) location
+                            Event : (CLLocation *) eventLocation {
+    
+    CLLocationDistance distance = [location distanceFromLocation:eventLocation];
+    
+    if (distance < 600)
+    {
+        return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
+- (NSArray *) getPostWithCommentInformation {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // Make sure that there actually is some data stored that we're pulling
+    NSMutableArray *postsWithCommentInformation = [[defaults objectForKey:kEventsWithCommentInformation] copy];
+    if (postsWithCommentInformation != nil)
+    {
+        return postsWithCommentInformation;
+    }
+    
+    return nil;
+}
+
 - (void) loadPromptedForCommentEvents {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     DEPostManager *postManager = [DEPostManager sharedManager];
 
     // Make sure that there actually is some data stored that we're pulling
-    NSMutableArray *savedPromptedForCommentEvents = [[defaults objectForKey:eventsUserPromptedForComment] mutableCopy];
+    NSMutableArray *savedPromptedForCommentEvents = [[defaults objectForKey:kEventsUserPromptedForComment] mutableCopy];
     if (savedPromptedForCommentEvents != nil)
     {
         [postManager setPromptedForCommentEvents: savedPromptedForCommentEvents ];
@@ -110,7 +242,7 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     DEPostManager *postManager = [DEPostManager sharedManager];
     
     // Make sure that there actually is some data stored that we're pulling
-    NSMutableArray *eventsUserGoingToArray = [[defaults objectForKey:eventsUserGoingTo] mutableCopy];
+    NSMutableArray *eventsUserGoingToArray = [[defaults objectForKey:kEventsUserGoingTo] mutableCopy];
     if (eventsUserGoingToArray != nil)
     {
         [postManager setGoingPost: eventsUserGoingToArray ];
@@ -122,7 +254,7 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     DEPostManager *postManager = [DEPostManager sharedManager];
     
     // Make sure that there actually is some data stored that we're pulling
-    NSMutableArray *eventsUserMaybeGoingToArray = [[defaults objectForKey:eventsUserMaybeGoingTo] mutableCopy];
+    NSMutableArray *eventsUserMaybeGoingToArray = [[defaults objectForKey:kEventsUserMaybeGoingTo] mutableCopy];
     if (eventsUserMaybeGoingToArray != nil)
     {
         [postManager setGoingPost: eventsUserMaybeGoingToArray ];
@@ -134,17 +266,20 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
     {
 
-#warning Commented out for testing purposes
-//        [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
+        [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
     }
     else {
         // Get the corresponding Event to this eventId
         NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", [notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
-        PFObject *postObj = [[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:objectIdPredicate][0];
-        DEPost *post = [DEPost getPostFromPFObject:postObj];
-        
-        // Show the comment view for this particular event
-        [DEScreenManager showCommentView:post];
+        NSArray *object = [[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:objectIdPredicate];
+        if ([object count] != 0)
+        {
+            PFObject *postObj = object[0];
+            DEPost *post = [DEPost getPostFromPFObject:postObj];
+            
+            // Show the comment view for this particular event
+            [DEScreenManager showCommentView:post];
+        }
     }
 }
 
@@ -205,9 +340,12 @@ static NSString *const eventsUserMaybeGoingTo = @"com.happsnap.eventsMaybeGoingT
 {
     // Save the events that the user was already prompted to comment on
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:eventsUserPromptedForComment];
-    [userDefaults setObject:[[DEPostManager sharedManager] goingPost] forKey:eventsUserGoingTo];
-    [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:eventsUserMaybeGoingTo];
+#warning Make sure we uncomment before sending to Fabian
+    
+//    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
+    [userDefaults setObject:[[DEPostManager sharedManager] goingPost] forKey:kEventsUserGoingTo];
+    [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:kEventsUserMaybeGoingTo];
+    [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

@@ -294,6 +294,10 @@ THE SOFTWARE.
 
 See https://www.parse.com/about/terms
 
+## ParseCrashReporting
+
+See https://www.parse.com/about/terms
+
 ## ParseFacebookUtils
 
 See https://www.parse.com/about/terms

@@ -35,6 +35,9 @@ NSString *const PARSE_CLASS_EVENT_THUMBS_UP_COUNT = @"thumbsUpCount";
 NSString *const PARSE_CLASS_EVENT_STATUS = @"Status";
 NSString *const PARSE_CLASS_EVENT_STATUS_POSTED = @"posted";
 
+NSString *const LOCATION_LATITUDE = @"latitude";
+NSString *const LOCATION_LONGITUDE = @"longitude";
+
 // Parse - Report
 
 NSString *const REPORT_VULGAR_OR_ABUSIVE_LANGUAGE = @"Vulgar or Abusive Language";
@@ -113,6 +116,7 @@ NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING = @
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW = @"com.happsnap.new";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS = @"com.happsnap.isEpicEvents";
 NSString *const kNOTIFICATION_CENTER_EVENT_USER_AT = @"com.happsnap.event.user.at";
+NSString *const kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE = @"com.happsnap.local.notification.future";
 
 // View Controllers
 

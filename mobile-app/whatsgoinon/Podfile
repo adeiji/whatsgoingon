@@ -10,6 +10,7 @@ pod 'Google-Maps-iOS-SDK', '~> 1.8'
 pod 'Facebook-iOS-SDK', '~> 3.17'
 pod 'Masonry', '~> 0.5'
 pod 'ParseFacebookUtils', '~> 1.2'
+pod 'ParseCrashReporting', '~> 1.6'
 
 end
 

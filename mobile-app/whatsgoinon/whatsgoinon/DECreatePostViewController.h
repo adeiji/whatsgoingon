@@ -28,7 +28,6 @@
 #pragma mark - Action Methods
 
 - (IBAction)displayPreview:(id)sender;
-- (IBAction)displayInfo:(id)sender;
 - (IBAction)gotoNextScreen:(id)sender;
 - (IBAction)takePicture:(id)sender;
 - (IBAction)goHome:(id)sender;

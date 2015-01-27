@@ -92,16 +92,13 @@
 
 /*
  
- Display a banner in 7 minutes asking the user to comment
+ Display a banner in 15 minutes asking the user to comment.  Set whether or not this event is something that will show in the future after the event started, or if we're showing this event immediately
  
  */
 
 + (void) createPromptUserCommentNotification : (DEPost *) post
-                                  TimeToShow : (NSDate *) dateToShow {
-    
-    UIBackgroundTaskIdentifier taskId = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(void) {
-        // Uh-oh - we took too long. Stop task.
-    }];
+                                  TimeToShow : (NSDate *) dateToShow
+                                    isFuture : (BOOL) future {
     
     // Perform task here
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
@@ -110,18 +107,14 @@
     NSDate *nowPlusSevenMinutes = [dateToShow dateByAddingTimeInterval:(minutes * 60)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
-    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : post.objectId };
+    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : post.objectId,
+                                    kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE : [NSNumber numberWithBool:future] };
     localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", post.title];
     localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
     localNotification.applicationIconBadgeNumber = 0;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     NSLog(@"Local Notification Object Set and Scheduled");
-    
-    if (taskId != UIBackgroundTaskInvalid) {
-        [[UIApplication sharedApplication] endBackgroundTask:taskId];
-    }
-    
 
 }
 
@@ -151,7 +144,6 @@
         [view showView];
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
         // Make sure its saved that the user has already been prompted to comment for the event
-#warning Removed for testing purposes
         [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
         
     }
