@@ -1241,7 +1241,6 @@
 				F437BF7E1990452000CF61E9 /* Frameworks */,
 				F437BF7F1990452000CF61E9 /* Resources */,
 				73B5527B8DD541019EF126CB /* Copy Pods Resources */,
-				F49578E81A780848008931BC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1451,19 +1450,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-whatsgoinon/Pods-whatsgoinon-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		F49578E81A780848008931BC /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export PATH=/usr/local/bin:$PATH\ncd /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/cloud_code/crash-reporting\n\nparse symbols \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

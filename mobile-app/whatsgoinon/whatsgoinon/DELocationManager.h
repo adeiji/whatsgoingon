@@ -18,6 +18,8 @@
     NSTimer *timer;
 }
 
+@property (strong, nonatomic) NSString *countryCode;
+
 typedef void (^completionBlock) (NSString *value);
 typedef void (^completionHandler) (PFGeoPoint *value);
 typedef void (^autocompleteCompletionBlock) (NSArray *values);
@@ -26,6 +28,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 + (id)sharedManager;
 - (void) startSignificantChangeUpdates;
 - (void) updateLocation;
+
 /*
  
  Check to see if the user can comment on the event that the user has selected Going/Maybe on
@@ -37,8 +40,8 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
                            CompletionBlock : (completionBlock) callback;
 
 + (void) getLatLongValueFromAddress : (NSString *) address
-
                     CompletionBlock : (completionHandler) callback;
+
 + (void) getAddressFromLatLongValue : (PFGeoPoint *) location
                     CompletionBlock : (completionBlock) callback;
 

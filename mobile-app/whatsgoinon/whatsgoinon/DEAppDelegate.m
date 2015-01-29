@@ -37,19 +37,21 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
         // Make sure this keeps running in the background
-        [[[DELocationManager sharedManager] locationManager] requestWhenInUseAuthorization];
+        [[[DELocationManager sharedManager] locationManager] requestAlwaysAuthorization];
     }
 
     [self registerForNotifications:application];
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
-    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+#warning Make sure to uncomment when going to Fabian
+//    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     [self checkIfLocalNotification:launchOptions];
     [self checkIfSignificantLocationChange:launchOptions];
     [self loadPromptedForCommentEvents];
     [self loadGoingPosts];
     [self loadMaybeGoingPosts];
+    [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
 
     return YES;
 }
@@ -212,11 +214,11 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     }
 }
 
-- (NSArray *) getPostWithCommentInformation {
+- (NSMutableArray *) getPostWithCommentInformation {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     // Make sure that there actually is some data stored that we're pulling
-    NSMutableArray *postsWithCommentInformation = [[defaults objectForKey:kEventsWithCommentInformation] copy];
+    NSMutableArray *postsWithCommentInformation = [[defaults objectForKey:kEventsWithCommentInformation] mutableCopy];
     if (postsWithCommentInformation != nil)
     {
         return postsWithCommentInformation;
@@ -265,7 +267,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     
     if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
     {
-
         [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
     }
     else {
@@ -316,7 +317,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    [[[DELocationManager sharedManager] locationManager] startMonitoringSignificantLocationChanges];
     
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
         // Make sure this keeps running in the background

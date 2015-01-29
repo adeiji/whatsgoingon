@@ -557,8 +557,9 @@ numberOfRowsInComponent:(NSInteger)component
 - (void) displayCurrentLocation
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
-    [locationManager startSignificantChangeUpdates];
-    [DELocationManager getAddressFromLatLongValue:[locationManager geoPoint] CompletionBlock:^(NSString *value) {
+    [locationManager updateLocation];
+    
+    [DELocationManager getAddressFromLatLongValue:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
         _txtAddress.text = value;
     }];
 }

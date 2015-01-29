@@ -11,7 +11,8 @@
 @implementation DELocationManager
 
 #define GOOGLE_MATRIX_DISTANCE_API @"https://maps.googleapis.com/maps/api/distancematrix/json?origins=%@&destinations=%@&sensor=false&units=imperial&key=AIzaSyDuVa4zdofqE5f7z4wkmi6dw--0HQYm5Ho"
-#define GOOGLE_GEOLOCATION_API_GET_COORDINATES @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
+#define GOOGLE_GEOLOCATION_API_GET_COORDINATES @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&components=country:%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
+#define GOOGLE_GEOLOCATION_API_GET_COORDINATES_TEMP @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 #define GOOGLE_GEOLOCATION_API_GET_ADDRESS @"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 #define GOOGLE_PLACES_AUTOCOMPLETE @"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&types=%@&components=country:us&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 
@@ -129,7 +130,8 @@
 }
 
 - (void) updateLocation {
-    [_locationManager startUpdatingLocation];
+#warning Make sure to uncomment when going to Fabian
+//    [_locationManager startUpdatingLocation];
 }
 
 /*
@@ -237,38 +239,25 @@
         
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+        _currentLocation = [PFGeoPoint new];
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app
         if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-            [self.locationManager requestWhenInUseAuthorization];
+            [self.locationManager requestAlwaysAuthorization];
         }
         
-        _currentLocation = [PFGeoPoint new];
-        [_locationManager startMonitoringSignificantLocationChanges];
     }
     return self;
 }
 
-- (void)startSignificantChangeUpdates
-{
-    // Create the location manager if this object does not
-    // already have one.
-    if (nil == _locationManager)
-    {
-        _locationManager = [[CLLocationManager alloc] init];
-    }
-    
-    _locationManager.delegate = self;
-    [_locationManager stopMonitoringSignificantLocationChanges];
-    [_locationManager startMonitoringSignificantLocationChanges];
-}
 
 #pragma mark - API Calls - Google / Apple
 
 + (void) getLatLongValueFromAddress:(NSString *)address CompletionBlock:(completionHandler)callback {
 //    NSLog(@"The address to get the lat/long value is: %@", address);
     address = [address stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API_GET_COORDINATES, address]]];
+    NSString *urlRequestAsString = [NSString stringWithFormat:GOOGLE_GEOLOCATION_API_GET_COORDINATES_TEMP, address];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urlRequestAsString]];
     
     NSOperationQueue *queue = [NSOperationQueue new];
     queue.name = @"Google Geolocation Queue";
@@ -348,7 +337,8 @@
                 NSString *city = jsonData[@"results"][0][@"address_components"][3][@"short_name"];
                 NSString *state = jsonData[@"results"][0][@"address_components"][5][@"short_name"];
                 NSString *address = [NSString stringWithFormat:@"%@ %@, %@ %@", addressNumber, street, city, state];
-                
+                NSString *countryCode = jsonData[@"results"][0][@"address_components"][6][@"short_name"];
+                [[DELocationManager sharedManager] setCountryCode:countryCode];
                 NSLog(@"The address to get the lat long values is verified: %@", address);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Make sure that we call this method on the main thread so that it updates properly as supposed to
