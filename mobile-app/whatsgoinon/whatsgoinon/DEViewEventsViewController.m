@@ -32,6 +32,7 @@ struct TopMargin {
 
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUsersEvents:) name:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_NO_DATA object:nil];
@@ -377,6 +378,11 @@ struct TopMargin {
     }
 }
 
+- (void) displayUsersEvents : (NSNotification *) notification {
+    [self removeAllPostFromScreen];
+    [self displayPost:notification];
+}
+
 - (void) displayPost : (NSNotification *) notification {
     
     if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY] && notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS])
@@ -652,21 +658,23 @@ struct TopMargin {
 }
 
 - (CGFloat) getEventImageHeightDifference : (DEViewEventsView *) view {
-    
-    PFFile *file = [view post].images[0];
-    if ([file.name containsString:IMAGE_DIMENSION_HEIGHT]) {
-        NSRange widthRange = [file.name rangeOfString:IMAGE_DIMENSION_WIDTH];
-        NSString *dimensions = [file.name substringFromIndex:widthRange.location];
-        NSRange heightRange = [dimensions rangeOfString:IMAGE_DIMENSION_HEIGHT];
-        NSString *width = [dimensions substringToIndex:heightRange.location];
-        width = [width stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_WIDTH withString:@""];
-        NSString *height = [dimensions substringFromIndex:heightRange.location];
-        height = [height stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_HEIGHT withString:@""];
-        
-        double imageWidth = [width doubleValue];
-        double imageHeight = [height doubleValue];
-        
-        [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
+    if ([[view post].images count] != 0)
+    {
+        PFFile *file = [view post].images[0];
+        if ([file.name containsString:IMAGE_DIMENSION_HEIGHT]) {
+            NSRange widthRange = [file.name rangeOfString:IMAGE_DIMENSION_WIDTH];
+            NSString *dimensions = [file.name substringFromIndex:widthRange.location];
+            NSRange heightRange = [dimensions rangeOfString:IMAGE_DIMENSION_HEIGHT];
+            NSString *width = [dimensions substringToIndex:heightRange.location];
+            width = [width stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_WIDTH withString:@""];
+            NSString *height = [dimensions substringFromIndex:heightRange.location];
+            height = [height stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_HEIGHT withString:@""];
+            
+            double imageWidth = [width doubleValue];
+            double imageHeight = [height doubleValue];
+            
+            [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
+        }
     }
     return 0;
 }

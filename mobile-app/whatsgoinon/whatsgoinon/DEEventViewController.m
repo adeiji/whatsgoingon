@@ -20,12 +20,12 @@
 
 const int heightConstraintConstant = 62;
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadComments:) name:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAmbassador:) name:NOTIFICATION_CENTER_USER_RETRIEVED object:nil];
-	// Do any additional setup after loading the view.
+}
+
+- (void) setUpView {
     _eventDetailsViewController = [[DEEventDetailsViewController alloc] initWithNibName:@"EventDetailsView" bundle:[NSBundle mainBundle]];
     [[[_eventView btnMainImage] layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     [[[_eventView btnMainImage] layer] setBorderColor:[UIColor whiteColor].CGColor];
@@ -35,6 +35,7 @@ const int heightConstraintConstant = 62;
     CGRect frame = [[_eventView detailsView] frame];
     frame.size.width = _eventView.frame.size.width;
     [[_eventView detailsView] setFrame:frame];
+    
     if (_isPreview)
     {
         [self loadPreview];
@@ -47,34 +48,41 @@ const int heightConstraintConstant = 62;
         [self loadNonPreview];
     }
     
-    
     [[_eventView lblCost] setText:[[_post cost] stringValue]];
-    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self addObservers];
+	// Do any additional setup after loading the view.
+    [self setUpView];
     // Display the Event Details View and then set up the Username Button click action
     [self showEventDetails:nil];
     [self setUsernameButtonClickAction];
-    
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
-    
-    
     userIsAmbassador = NO;
     [DEUserManager getUserFromUsername:_post.username];
     goingButtonBottomSpaceConstraintConstant = _goingButtonBottomSpaceConstraint.constant;
-
 }
 
 - (void) loadEditDeleteModeView {
     [[_eventView btnGoing] setTitle:@"Edit" forState:UIControlStateNormal];
     [[_eventView btnGoing] removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
     [[_eventView btnGoing] addTarget:self action:@selector(editPostPressed) forControlEvents:UIControlEventTouchUpInside];
-    [[_eventView btnMaybe] setTitle:@"Maybe" forState:UIControlStateNormal];
+    [[_eventView btnMaybe] setTitle:@"Delete" forState:UIControlStateNormal];
     [[_eventView btnMaybe] removeTarget:self action:@selector(setEventAsMaybeGoing:) forControlEvents:UIControlEventTouchUpInside];
     [[_eventView btnMaybe] addTarget:self action:@selector(deletePostPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self loadMainImage];
 }
 
 - (void) editPostPressed {
-    
+    UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+    DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+    createPostViewController.isEditMode = YES;
+    [self.navigationController pushViewController:createPostViewController animated:YES];
+    [[DEPostManager sharedManager] setCurrentPost:_post];
 }
 
 - (void) deletePostPressed {
@@ -105,8 +113,7 @@ const int heightConstraintConstant = 62;
     }
 }
 
-- (void) loadNonPreview
-{
+- (void) loadMainImage {
     PFFile *file = [[_post images] firstObject];
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error)
@@ -117,7 +124,11 @@ const int heightConstraintConstant = 62;
     } progressBlock:^(int percentDone) {
         //Display to the user how much has been loaded
     }];
-    
+}
+
+- (void) loadNonPreview
+{
+    [self loadMainImage];
     // Load all the comments so that by the time the user clicks to view the comments they are already loaded.
     [DESyncManager getAllCommentsForEventId:[[DEPostManager sharedManager] currentPost].objectId];
 }
@@ -144,13 +155,12 @@ const int heightConstraintConstant = 62;
     self.view.hidden = NO;
     
     // Only do this when this screen is first loaded
-
     {
-        if (_isGoing)
+        if (_isGoing && !_isEditDeleteMode)
         {
             [self updateViewToGoing];
         }
-        if (_isMaybeGoing)
+        if (_isMaybeGoing && !_isEditDeleteMode)
         {
             self.maybeCheckmarkView.hidden = NO;
         }

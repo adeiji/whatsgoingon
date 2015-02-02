@@ -32,6 +32,7 @@
 - (IBAction)hideMenu:(id)sender;
 - (IBAction)showMyEvents:(id)sender;
 - (IBAction)showPastEpicEvents:(id)sender;
+- (IBAction)showPostedByUserEvents:(id)sender;
 
 - (void) setupView;
 @end

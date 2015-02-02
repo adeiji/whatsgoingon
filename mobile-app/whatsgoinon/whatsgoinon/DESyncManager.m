@@ -535,6 +535,23 @@
     }];
 }
 
++ (void) getEventsPostedByUser:(NSString *)username {
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    [query whereKey:PARSE_CLASS_EVENT_USERNAME equalTo:username];
+    [query setLimit:15];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!objects)
+        {
+            // Notify that the user has not posted anything
+        }
+        else {
+            [[DEPostManager sharedManager] setPosts:objects];
+            // Notify that events have just been loaded from the server
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
+        }
+    }];
+}
+
 
 
 @end

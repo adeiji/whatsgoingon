@@ -31,6 +31,7 @@
                          Rating : (NSInteger) rating;
 + (void) getNumberOfPostByUser : (NSString *) username;
 + (void) saveUpdatedPFObjectToServer : (PFObject *) post;
++ (void) getEventsPostedByUser : (NSString *) username;
 /*
  
  Get all the saved events that the user has selected has maybe or going

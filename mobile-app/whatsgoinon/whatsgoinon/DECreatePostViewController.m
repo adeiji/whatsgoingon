@@ -31,10 +31,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    imagesCopy = [NSMutableArray new];
 	// Do any additional setup after loading the view.
     DEPostManager *postManager = [DEPostManager sharedManager];
     _post = [postManager currentPost];
     [self setUpViews];
+    [self checkForEditMode];
     postRanges = @[@"ALL", @"1 mile radius", @"2 mile radius", @"3 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius"];
     
     if (_createPostViewOne.switchUseCurrentLocation.on)
@@ -54,7 +56,43 @@
     }
     
     _createPostViewTwo.txtWebsite.text = @"";
-    imagesCopy = [NSMutableArray new];
+}
+
+/*
+ 
+ Get the start and end date and time for the event and store those values in the respective text boxes.  Also displays the address
+ 
+ */
+- (void) setTimesAndAddressForEditMode {
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateStyle:NSDateFormatterShortStyle];
+    _createPostViewOne.txtStartDate.text = [df stringFromDate:_post.startTime];
+    _createPostViewOne.txtEndDate.text = [df stringFromDate:_post.endTime];
+    [df setDateFormat:@"hh:mm a"];
+    _createPostViewOne.txtStartTime.text = [df stringFromDate:_post.startTime];
+    _createPostViewOne.txtEndTime.text = [df stringFromDate:_post.endTime];
+    _createPostViewOne.txtAddress.text = _post.address;
+}
+/*
+ 
+ Display from the post the descriptions the price and the saved images.
+ 
+ */
+- (void) setDescriptionsPriceAndImages {
+    NSString *cost = _post.cost  == 0 ? @"Free" : [_post.cost stringValue];
+    _createPostViewTwo.txtCost.text = cost;
+    _createPostViewTwo.txtDescription.text = _post.myDescription;
+    _createPostViewTwo.txtQuickDescription.text = _post.quickDescription;
+    imagesCopy = [_post.images mutableCopy];
+}
+
+- (void) checkForEditMode {
+    if (_isEditMode)
+    {
+        [self setTimesAndAddressForEditMode];
+        _createPostViewOne.txtAddress.text = _post.address;
+        [self setDescriptionsPriceAndImages];
+    }
 }
 
 

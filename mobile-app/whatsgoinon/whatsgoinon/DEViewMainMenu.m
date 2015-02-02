@@ -156,6 +156,10 @@
     [DESyncManager loadEpicEvents:YES];
 }
 
+- (IBAction)showPostedByUserEvents:(id)sender {
+    [DESyncManager getEventsPostedByUser:[[PFUser currentUser] username]];
+}
+
 - (void) drawRect:(CGRect)rect
 {
     
