@@ -34,6 +34,7 @@
 }
 @property BOOL isPreview;
 @property (weak, nonatomic) DEPost *post;
+@property (strong, nonatomic) PFObject *postObject;
 @property (weak, nonatomic) DEViewEventsView *viewEventView;
 @property (weak, nonatomic) IBOutlet DEEventView *eventView;
 @property (weak, nonatomic) IBOutlet UIButton *btnPost;
@@ -47,6 +48,7 @@
 @property BOOL isEditDeleteMode;
 @property BOOL isGoing;
 @property BOOL isMaybeGoing;
+@property BOOL isUpdateMode;
 
 #pragma mark - Button Action Methods
 

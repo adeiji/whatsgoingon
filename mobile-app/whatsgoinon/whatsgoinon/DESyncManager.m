@@ -372,10 +372,22 @@
     }];
 }
 
-+ (BOOL) savePost : (DEPost *) post {
-    DEPostManager *sharedManager = [DEPostManager sharedManager];
-    PFObject *postObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_EVENT];
-    
++ (void) updatePFObject : (PFObject *) postObject
+     WithValuesFromPost : (DEPost *) post {
+    postObject = [self getPFObjectWithValuesFromPost:post PFObject:postObject];
+    [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"happsnap.objectupdated");
+        }
+        else {
+            NSLog(@"happsnap.updatefailedforobject");
+        }
+    }];
+}
+
++ (PFObject *) getPFObjectWithValuesFromPost : (DEPost *) post
+                              PFObject : (PFObject *) postObject
+{
     postObject[PARSE_CLASS_EVENT_TITLE] = post.title;
     postObject[PARSE_CLASS_EVENT_ADDRESS] = post.address;
     postObject[PARSE_CLASS_EVENT_DESCRIPTION] = post.myDescription;
@@ -395,6 +407,14 @@
     postObject[PARSE_CLASS_EVENT_THUMBS_UP_COUNT] = post.thumbsUpCount;
     postObject[PARSE_CLASS_EVENT_STATUS] = PARSE_CLASS_EVENT_STATUS_POSTED;
     
+    return postObject;
+}
+
++ (BOOL) savePost : (DEPost *) post {
+    DEPostManager *sharedManager = [DEPostManager sharedManager];
+    PFObject *postObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_EVENT];
+    postObject = [self getPFObjectWithValuesFromPost:post PFObject:postObject];
+
     // If it saved successful return that it was successful and vice versa.
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded)
@@ -552,6 +572,8 @@
     }];
 }
 
-
++ (void) updatePost : (DEPost *) post {
+    
+}
 
 @end

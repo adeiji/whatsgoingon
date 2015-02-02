@@ -16,6 +16,10 @@
 
 // Get all the values from the Parse database
 + (void) getAllValuesForNow : (BOOL) now;
++ (PFObject *) getPFObjectWithValuesFromPost : (DEPost *) post
+                                    PFObject : (PFObject *) postObject;
++ (void) updatePFObject : (PFObject *) postObject
+     WithValuesFromPost : (DEPost *) post;
 + (BOOL) savePost : (DEPost *) post;
 + (void) saveReportWithEventId : (NSString * )objectId
                     WhatsWrong : (NSDictionary *) whatsWrong
@@ -32,6 +36,7 @@
 + (void) getNumberOfPostByUser : (NSString *) username;
 + (void) saveUpdatedPFObjectToServer : (PFObject *) post;
 + (void) getEventsPostedByUser : (NSString *) username;
++ (void) updatePost : (DEPost *) post;
 /*
  
  Get all the saved events that the user has selected has maybe or going

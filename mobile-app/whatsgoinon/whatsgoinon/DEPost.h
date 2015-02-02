@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import "DELocationManager.h"
 
-@interface DEPost : NSObject
+@interface DEPost : NSObject <NSCopying>
 
 @property (strong, nonatomic) NSString *category;
 @property (strong, nonatomic) NSDate *startTime;

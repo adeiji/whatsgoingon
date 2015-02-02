@@ -70,4 +70,33 @@
             _cost];
 }
 
+- (id) copyWithZone:(NSZone *)zone {
+    id copy = [[[self class] alloc] init];
+    
+    if (copy)
+    {
+        [copy setCategory:[_category copyWithZone:zone]];
+        [copy setStartTime:[_startTime copyWithZone:zone]];
+        [copy setEndTime:[_category copyWithZone:zone]];
+        [copy setLocation:[_location copyWithZone:zone]];
+        [copy setAddress:[_address copyWithZone:zone]];
+        [copy setPostRange:[_postRange copyWithZone:zone]];
+        [copy setTitle:[_title copyWithZone:zone]];
+        [copy setCost:[_cost copyWithZone:zone]];
+        [copy setImages:[_images copyWithZone:zone]];
+        [copy setMyDescription:[_myDescription copyWithZone:zone]];
+        [copy setObjectId:[_objectId copyWithZone:zone]];
+        [copy setComments:[_comments copyWithZone:zone]];
+        [copy setRating:[_rating copyWithZone:zone]];
+        [copy setQuickDescription:[_quickDescription copyWithZone:zone]];
+        [copy setNumberGoing:[_numberGoing copyWithZone:zone]];
+        [copy setUsername:[_username copyWithZone:zone]];
+        [copy setWebsite:[_website copyWithZone:zone]];
+        [copy setViewCount:[_viewCount copyWithZone:zone]];
+        [copy setThumbsUpCount:[_thumbsUpCount copyWithZone:zone]];
+    }
+    
+    return copy;
+}
+
 @end

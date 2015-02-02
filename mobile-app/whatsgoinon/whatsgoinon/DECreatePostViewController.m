@@ -36,7 +36,6 @@
     DEPostManager *postManager = [DEPostManager sharedManager];
     _post = [postManager currentPost];
     [self setUpViews];
-    [self checkForEditMode];
     postRanges = @[@"ALL", @"1 mile radius", @"2 mile radius", @"3 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius"];
     
     if (_createPostViewOne.switchUseCurrentLocation.on)
@@ -79,20 +78,76 @@
  
  */
 - (void) setDescriptionsPriceAndImages {
-    NSString *cost = _post.cost  == 0 ? @"Free" : [_post.cost stringValue];
+    NSString *cost = _post.cost  == nil ? @"Free" : [_post.cost stringValue];
     _createPostViewTwo.txtCost.text = cost;
     _createPostViewTwo.txtDescription.text = _post.myDescription;
     _createPostViewTwo.txtQuickDescription.text = _post.quickDescription;
-    imagesCopy = [_post.images mutableCopy];
+    _createPostViewTwo.txtTitle.text = _post.title;
+    _createPostViewTwo.txtWebsite.text = _post.website;
+    
+    static BOOL imagesConverted = NO;
+    
+    [self convertPFFileArrayToImageArrayConverted:imagesConverted Images:_post.images];
+    imagesConverted = YES;
+    
 }
 
-- (void) checkForEditMode {
+/*
+ 
+ Get all the actual images from the PFFiles and store them in an array for later usage
+ 
+ */
+- (void) convertPFFileArrayToImageArrayConverted : (BOOL) isConverted
+                                          Images : (NSArray *) array {
+    __block int counter = 0;
+    imagesCopy = [NSMutableArray new];
+    // If we haven't already converted these images
+    if (!isConverted)
+    {
+        [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PFFile *file = (PFFile *) obj;
+            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+
+                UIImage *image = [UIImage imageWithData:data];
+                image.tag = [NSNumber numberWithInt:counter];
+                counter ++;
+                [imagesCopy addObject:image];
+                _post.images = imagesCopy;
+            NSLog(@"happsnap.decreatepostviewcontroller.image.loaded");
+            }];
+        } ];
+    }
+    else {
+        imagesCopy = [_post.images mutableCopy];
+        [self loadImages];
+    }
+}
+
+- (void) setButtonBackgroundImageToSavedPostImageButton : (UIImage *) image
+{
+    __block UIButton *button;
+    [_cameraButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (((UIButton *) obj).tag == ((NSNumber *) image.tag).integerValue)
+        {
+            button = (UIButton *) obj;
+            *stop = YES;
+        }
+    }];
+    
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+}
+
+- (BOOL) checkForEditMode {
     if (_isEditMode)
     {
         [self setTimesAndAddressForEditMode];
         _createPostViewOne.txtAddress.text = _post.address;
         [self setDescriptionsPriceAndImages];
+        
+        return YES;
     }
+    
+    return NO;
 }
 
 
@@ -122,7 +177,10 @@
     
     [_createPostViewTwo setupView];
     [_createPostViewOne setupView];
-    [self loadPostDetails];
+    if (![self checkForEditMode])
+    {
+        [self loadPostDetails];
+    }
 }
 
 - (void) setUpViews {
@@ -167,14 +225,21 @@
 // ** Production
 // We display the post to allow the user to view the post before he actually makes it live
 - (IBAction)displayPreview:(id)sender {
-    
+
     if ([_createPostViewTwo page2ValidateTextFields])
     {
         if ([[_post images] count] != 0)
         {
             //  Display the event preview
             DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
-            eventViewController.isPreview = YES;
+            
+            if (!_isEditMode)
+            {
+                eventViewController.isPreview = YES;
+            }
+            else {
+                eventViewController.isUpdateMode = YES;
+            }
             eventViewController.post = _post;
             [self savePostDetails];
             [[DEPostManager sharedManager] setCurrentPost:_post];
@@ -186,7 +251,6 @@
         }
     }
 }
-
 
 - (IBAction)gotoNextScreen:(id)sender {
     
@@ -236,6 +300,7 @@ Display the second screen for the post details
     DEPostManager *postManager = [DEPostManager sharedManager];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
     DECreatePostViewController *createPostViewController = [sb instantiateViewControllerWithIdentifier:@"CreatePostDetailTwo"];
+    createPostViewController.isEditMode = _isEditMode;
     // Pass the new view controller the new post that was just created.
     [self.navigationController pushViewController:createPostViewController animated:YES];
     [postManager setCurrentPost:_post];

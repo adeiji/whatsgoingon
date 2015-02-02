@@ -44,6 +44,10 @@ const int heightConstraintConstant = 62;
     {
         [self loadEditDeleteModeView];
     }
+    else if (_isUpdateMode)
+    {
+        [self loadUpdateModeView];
+    }
     else {
         [self loadNonPreview];
     }
@@ -65,6 +69,41 @@ const int heightConstraintConstant = 62;
     userIsAmbassador = NO;
     [DEUserManager getUserFromUsername:_post.username];
     goingButtonBottomSpaceConstraintConstant = _goingButtonBottomSpaceConstraint.constant;
+}
+
+- (void) loadUpdateModeView {
+    _goingButtonBottomSpaceConstraint.constant = -40;
+    _goingButtonBottomSpaceConstraintMapView.constant = -40;
+    [[_eventView btnMaybe] setHidden:YES];
+    [[_eventView btnGoing] setTitle:@"Update Now!" forState:UIControlStateNormal];
+    [[_eventView btnGoing] removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
+    [[_eventView btnGoing] addTarget:self action:@selector(updatePost) forControlEvents:UIControlEventTouchUpInside];
+}
+/*
+ 
+ Update the current post that the user has just modified
+ 
+ */
+- (void) updatePost {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", _post.objectId];
+    // Get the PFObject that corresponds to this post
+    PFObject *object = (PFObject *) [[[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:predicate] firstObject];
+    // Convert the images to data in order to store the images as PFFiles
+    _post.images = [self imagesToNSDataArray:_post.images Compression:.2];
+    
+    if (!_post.thumbsUpCount)
+    {
+        _post.thumbsUpCount = [NSNumber numberWithInt:0];
+    }
+    
+    // Update the object with the new values
+    [DESyncManager updatePFObject:object WithValuesFromPost:_post];
+
+    DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
+    DEFinishedPostingView *finishedPostView = (DEFinishedPostingView *) createPostViewController.view;
+    [[finishedPostView lblParagraphOne] setText:@"The changes to your event have been submitted and  applied."];
+    [[finishedPostView lblParagraphTwo] setText:@"Hey! Don't forget about the HappSnap posting portal. You can do a lot more with your events from there. Check it out!"];
+    [self.navigationController pushViewController:createPostViewController animated:YES];
 }
 
 - (void) loadEditDeleteModeView {
@@ -135,6 +174,7 @@ const int heightConstraintConstant = 62;
 
 - (void) loadPreview
 {
+    // Compress the image to less data
     NSArray *postImages = [self imagesToNSDataArray:_post.images Compression:.02];
     [_eventView setPost:_post];
     [[_eventView btnGoing] setEnabled:YES];
@@ -144,6 +184,7 @@ const int heightConstraintConstant = 62;
     _goingButtonBottomSpaceConstraint.constant -= 40;
     [[_eventView btnMaybe] setHidden:YES];
     [[_eventView lblNumberOfPeopleGoing] setText:0];
+    
     UIImage *mainImage =  [UIImage imageWithData:[postImages firstObject]];
     [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
 }
