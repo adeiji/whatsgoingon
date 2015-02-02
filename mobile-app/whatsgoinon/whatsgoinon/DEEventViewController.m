@@ -65,7 +65,20 @@ const int heightConstraintConstant = 62;
 }
 
 - (void) loadEditDeleteModeView {
-//    [_eventView btnGoing] setTitle:@"" forState:<#(UIControlState)#>
+    [[_eventView btnGoing] setTitle:@"Edit" forState:UIControlStateNormal];
+    [[_eventView btnGoing] removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
+    [[_eventView btnGoing] addTarget:self action:@selector(editPostPressed) forControlEvents:UIControlEventTouchUpInside];
+    [[_eventView btnMaybe] setTitle:@"Maybe" forState:UIControlStateNormal];
+    [[_eventView btnMaybe] removeTarget:self action:@selector(setEventAsMaybeGoing:) forControlEvents:UIControlEventTouchUpInside];
+    [[_eventView btnMaybe] addTarget:self action:@selector(deletePostPressed) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void) editPostPressed {
+    
+}
+
+- (void) deletePostPressed {
+    
 }
 
 - (void) setUsernameButtonClickAction {
