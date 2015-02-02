@@ -39,9 +39,14 @@ const int heightConstraintConstant = 62;
     {
         [self loadPreview];
     }
+    else if (_isEditDeleteMode)
+    {
+        [self loadEditDeleteModeView];
+    }
     else {
         [self loadNonPreview];
     }
+    
     
     [[_eventView lblCost] setText:[[_post cost] stringValue]];
     
@@ -57,6 +62,10 @@ const int heightConstraintConstant = 62;
     [DEUserManager getUserFromUsername:_post.username];
     goingButtonBottomSpaceConstraintConstant = _goingButtonBottomSpaceConstraint.constant;
 
+}
+
+- (void) loadEditDeleteModeView {
+//    [_eventView btnGoing] setTitle:@"" forState:<#(UIControlState)#>
 }
 
 - (void) setUsernameButtonClickAction {

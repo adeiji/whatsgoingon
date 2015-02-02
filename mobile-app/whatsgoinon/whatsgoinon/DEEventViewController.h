@@ -43,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *goingButtonTopSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *goingButtonBottomSpaceConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *goingButtonBottomSpaceConstraintMapView;
+@property BOOL isEditDeleteMode;
 @property BOOL isGoing;
 @property BOOL isMaybeGoing;
 
