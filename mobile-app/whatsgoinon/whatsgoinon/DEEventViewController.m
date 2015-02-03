@@ -79,15 +79,22 @@ const int heightConstraintConstant = 62;
     [[_eventView btnGoing] removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
     [[_eventView btnGoing] addTarget:self action:@selector(updatePost) forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (PFObject *) getPFObjectForEvent {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", _post.objectId];
+    // Get the PFObject that corresponds to this post
+    PFObject *object = (PFObject *) [[[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:predicate] firstObject];
+    
+    return object;
+}
+
 /*
  
  Update the current post that the user has just modified
  
  */
 - (void) updatePost {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", _post.objectId];
-    // Get the PFObject that corresponds to this post
-    PFObject *object = (PFObject *) [[[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:predicate] firstObject];
+    PFObject *object = [self getPFObjectForEvent];
     // Convert the images to data in order to store the images as PFFiles
     _post.images = [self imagesToNSDataArray:_post.images Compression:.2];
     
@@ -125,7 +132,31 @@ const int heightConstraintConstant = 62;
 }
 
 - (void) deletePostPressed {
+    deletionPromptView = [[[NSBundle mainBundle] loadNibNamed:@"viewPromptForDeletionOfEvent" owner:self options:nil] firstObject];
     
+    [[deletionPromptView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[UIButton class]])
+        {
+            UIButton *button = (UIButton *) obj;
+            [[button layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        }
+    }];
+    
+    [self.view addSubview:deletionPromptView];
+
+    [DEAnimationManager animateView:deletionPromptView WithInsets:UIEdgeInsetsZero WithSelector:nil];
+}
+
+- (IBAction)cancelDeletion:(id)sender {
+    [DEAnimationManager animateViewOut:deletionPromptView WithInsets:UIEdgeInsetsZero];
+}
+
+- (IBAction)deletePost:(id)sender {
+    [DESyncManager deletePostWithId:_post.objectId];
+    DEPostManager *postManager = [DEPostManager sharedManager];
+    [postManager deletePFObjectWithObjectId:_post.objectId];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) setUsernameButtonClickAction {
@@ -135,7 +166,6 @@ const int heightConstraintConstant = 62;
 }
 
 // Take the user to a profile page where they can see limited information about this user
-
 - (void) usernameButtonClicked {
     if (user)
     {
@@ -154,6 +184,7 @@ const int heightConstraintConstant = 62;
 
 - (void) loadMainImage {
     PFFile *file = [[_post images] firstObject];
+#warning - When we run this through twice the app crashes
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error)
         {

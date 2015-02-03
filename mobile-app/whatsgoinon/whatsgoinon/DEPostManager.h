@@ -39,8 +39,11 @@
  */
 + (void) getPostInCategory : (NSString *) category;
 // Stores the current post when one post is being viewed, edited or created
+- (PFObject *) getPFObjectForEventWithObjectId : (NSString *) objectId
+                                     WithArray : (NSArray *) array;
+- (void) deletePFObjectWithObjectId : (NSString *) objectId;
+- (void) setAllPostToNotLoaded;
 @property (strong, nonatomic) DEPost *currentPost;
-
 // Stores all the posts that will be viewed currently
 @property (strong, nonatomic) NSArray *posts;
 // Stores all the post that you are going to for sure

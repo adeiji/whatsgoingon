@@ -31,6 +31,7 @@
     BOOL userIsAmbassador;
     PFUser *user;
     int goingButtonBottomSpaceConstraintConstant;
+    UIView *deletionPromptView;
 }
 @property BOOL isPreview;
 @property (weak, nonatomic) DEPost *post;

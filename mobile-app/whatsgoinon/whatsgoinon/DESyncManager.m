@@ -152,6 +152,7 @@
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
     
+    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     [query orderByDescending:PARSE_CLASS_EVENT_THUMBS_UP_COUNT];
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query orderByDescending:PARSE_CLASS_EVENT_VIEW_COUNT];
@@ -203,6 +204,7 @@
 + (void) getAllSavedEvents {
     
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     NSMutableArray *eventsToGetFromServerIds = [NSMutableArray new];
     
     NSMutableArray *allSavedEvents = [[[DEPostManager sharedManager] goingPost] mutableCopy];
@@ -314,6 +316,7 @@
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThanOrEqualTo:startDate];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThanOrEqualTo:[NSDate date]];
+    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     [query setLimit:10];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -375,12 +378,30 @@
 + (void) updatePFObject : (PFObject *) postObject
      WithValuesFromPost : (DEPost *) post {
     postObject = [self getPFObjectWithValuesFromPost:post PFObject:postObject];
+    [postObject setObject:@NO forKey:@"loaded"];
     [postObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"happsnap.objectupdated");
         }
         else {
             NSLog(@"happsnap.updatefailedforobject");
+        }
+    }];
+}
+
++ (void) deletePostWithId : (NSString *) objectId {
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", objectId];
+    PFObject *object = (PFObject *) [[[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:predicate] firstObject];
+    [object setObject:@NO forKey:@"loaded"];
+    [object setObject:[NSNumber numberWithBool:false] forKey:PARSE_CLASS_EVENT_ACTIVE];
+    [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error)
+        {
+            NSLog(@"happsnap.objectupdatedtonotactive - %@", objectId);
+        }
+        else {
+            NSLog(@"happsnap.objectupdatetonotactivefailedwithid - %@", objectId);
         }
     }];
 }
@@ -558,6 +579,7 @@
 + (void) getEventsPostedByUser:(NSString *)username {
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     [query whereKey:PARSE_CLASS_EVENT_USERNAME equalTo:username];
+    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     [query setLimit:15];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!objects)
@@ -572,8 +594,5 @@
     }];
 }
 
-+ (void) updatePost : (DEPost *) post {
-    
-}
 
 @end

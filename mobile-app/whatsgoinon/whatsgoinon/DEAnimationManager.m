@@ -7,6 +7,7 @@
 //
 
 #import "DEAnimationManager.h"
+#import <Masonry/Masonry.h>
 
 @implementation DEAnimationManager
 
@@ -68,6 +69,94 @@
             [imageView removeFromSuperview];
         }];
 }
+
+
++ (void) animateView:(UIView *)view
+          WithInsets:(UIEdgeInsets)insets
+        WithSelector:(SEL)selector
+{
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    insets = UIEdgeInsetsMake(screenSize.size.height / 5, 30, screenSize.size.height / 5, 30);
+    UIEdgeInsets startInsets = [self getCenter:insets WithView:view];
+    
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo([view superview]).with.insets(startInsets);
+    }];
+    
+    [view layoutIfNeeded];
+    UIEdgeInsets midWayInsets = UIEdgeInsetsMake(startInsets.top, insets.left, startInsets.bottom, insets.right);
+    [view mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo([view superview]).with.insets(midWayInsets);
+    }];
+    [UIView animateWithDuration:.1 animations:^{
+        [view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [view mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo([view superview]).with.insets(insets);
+        }];
+        [UIView animateWithDuration:.1 animations:^{
+            [view layoutIfNeeded];
+            [[view layer] setCornerRadius:view.frame.size.width / 15];
+        } completion:^(BOOL finished) {
+            if (selector != nil)
+            {
+                IMP imp = [view methodForSelector:selector];
+                void (*func)(id, SEL) = (void *) imp;
+                
+                func(view, selector);
+            }
+            [self setHiddenOfAllSubviews:view isHidden:NO];
+        }];
+    }];
+}
+
++ (void) setHiddenOfAllSubviews : (UIView *) view
+                       isHidden : (BOOL) hidden {
+    [[view subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UIView *view = (UIView *) obj;
+        view.hidden = hidden;
+    }];
+}
+
++ (void) animateViewOut:(UIView *)view
+             WithInsets:(UIEdgeInsets)insets
+{
+    [self setHiddenOfAllSubviews:view isHidden:YES];
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    insets = UIEdgeInsetsMake(screenSize.size.height / 5, 30, screenSize.size.height / 5, 30);
+    UIEdgeInsets startInsets = [self getCenter:insets WithView:view];
+    
+    UIEdgeInsets midWayInsets = UIEdgeInsetsMake(startInsets.top, insets.left, startInsets.bottom, insets.right);
+    [view mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo([view superview]).with.insets(midWayInsets);
+    }];
+    [UIView animateWithDuration:.1 animations:^{
+        [view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        [view mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo([view superview]).with.insets(startInsets);
+        }];
+        [UIView animateWithDuration:.2 animations:^{
+            [view layoutIfNeeded];
+            
+        } completion:^(BOOL finished) {
+            [view removeFromSuperview];
+        }];
+    }];
+}
+
+
++ (UIEdgeInsets) getCenter : (UIEdgeInsets) insets
+                  WithView : (UIView *) view
+{
+    CGFloat top = (insets.top + ([view superview].frame.size.height - insets.bottom)) / 2 - 15 ;
+    CGFloat bottom = [view superview].frame.size.height - top - 15;
+    CGFloat left = (insets.left + [view superview].frame.size.width - (insets.right)) / 2 - 15;
+    CGFloat right = [view superview].frame.size.width - left - 15;
+    
+    return UIEdgeInsetsMake(top, left, bottom, right);
+}
+
 
 
 

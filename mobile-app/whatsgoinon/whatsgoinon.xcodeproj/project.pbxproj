@@ -174,6 +174,7 @@
 		F49BB9011A60D07B00C68E42 /* DETrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9001A60D07B00C68E42 /* DETrophy.m */; };
 		F49BB9041A65F27200C68E42 /* DEWrench.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9031A65F27200C68E42 /* DEWrench.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
+		F4C603E41A808A60009BB549 /* viewPromptForDeletionOfEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C603E31A808A60009BB549 /* viewPromptForDeletionOfEvent.xib */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
 		F4C68D32199EB2E900AD0D36 /* DEViewReportEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D31199EB2E900AD0D36 /* DEViewReportEvent.m */; };
@@ -440,6 +441,7 @@
 		F49BB9031A65F27200C68E42 /* DEWrench.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEWrench.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
+		F4C603E31A808A60009BB549 /* viewPromptForDeletionOfEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewPromptForDeletionOfEvent.xib; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
 		F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsMoreView.m; sourceTree = "<group>"; };
 		F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewReportEvent.xib; sourceTree = "<group>"; };
@@ -736,6 +738,7 @@
 				F46B946F19C355CE00B41D8C /* Buttons */,
 				F45E60A219AD3263007705F9 /* Graphical Views - Paint Code */,
 				F437BFBD199048AF00CF61E9 /* WelcomeEventsView.xib */,
+				F4C603E31A808A60009BB549 /* viewPromptForDeletionOfEvent.xib */,
 				F437BFC1199049D300CF61E9 /* SelectCategoryView.xib */,
 				F437BFC319904A4200CF61E9 /* MainMenuView.xib */,
 				F437BFC519904E4E00CF61E9 /* ViewEventsView.xib */,
@@ -1328,6 +1331,7 @@
 				F485811A19A2B74900BD1CE7 /* ViewChangeCity.xib in Resources */,
 				F40E0E0F19BFFFA000D2C3A0 /* money-icon 28x28.png in Resources */,
 				F41277C419E611570092CD67 /* Default.png in Resources */,
+				F4C603E41A808A60009BB549 /* viewPromptForDeletionOfEvent.xib in Resources */,
 				F412770A19E4F8390092CD67 /* HappSnap-image-only-logo.png in Resources */,
 				F41277AC19E611570092CD67 /* appicon-60.png in Resources */,
 				F41277B319E611570092CD67 /* appicon-Small-40.png in Resources */,

@@ -30,13 +30,13 @@
 + (void) updateObjectWithId : (NSString *) objectId
                UpdateValues : (NSDictionary *) values
              ParseClassName : (NSString *) className;
++ (void) deletePostWithId : (NSString *) objectId;
 + (void) saveCommentWithEventId : (NSString *) objectId
                         Comment : (NSString *) comment
                          Rating : (NSInteger) rating;
 + (void) getNumberOfPostByUser : (NSString *) username;
 + (void) saveUpdatedPFObjectToServer : (PFObject *) post;
 + (void) getEventsPostedByUser : (NSString *) username;
-+ (void) updatePost : (DEPost *) post;
 /*
  
  Get all the saved events that the user has selected has maybe or going
