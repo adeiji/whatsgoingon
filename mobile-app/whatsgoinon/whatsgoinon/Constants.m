@@ -119,6 +119,7 @@ NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW = @"com.happsnap
 NSString *const kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS = @"com.happsnap.isEpicEvents";
 NSString *const kNOTIFICATION_CENTER_EVENT_USER_AT = @"com.happsnap.event.user.at";
 NSString *const kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE = @"com.happsnap.local.notification.future";
+NSString *const NOTIFICATION_CENTER_USER_INFO_POSOTED_BY_ME = @"Posted By Me";
 
 // View Controllers
 

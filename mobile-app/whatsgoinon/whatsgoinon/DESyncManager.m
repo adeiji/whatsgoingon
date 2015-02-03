@@ -589,7 +589,7 @@
         else {
             [[DEPostManager sharedManager] setPosts:objects];
             // Notify that events have just been loaded from the server
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING, kNOTIFICATION_CENTER_USER_INFO_CATEGORY : NOTIFICATION_CENTER_USER_INFO_POSOTED_BY_ME }];
         }
     }];
 }
