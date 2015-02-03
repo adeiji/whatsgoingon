@@ -31,10 +31,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    imagesCopy = [NSMutableArray new];
 	// Do any additional setup after loading the view.
     DEPostManager *postManager = [DEPostManager sharedManager];
     _post = [postManager currentPost];
+    if ([_post.images count] == 0)
+    {
+        imagesCopy = [NSMutableArray new];
+    }
+    else {
+        imagesCopy = [_post.images mutableCopy];
+    }
     [self setUpViews];
     postRanges = @[@"ALL", @"1 mile radius", @"2 mile radius", @"3 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius"];
     
