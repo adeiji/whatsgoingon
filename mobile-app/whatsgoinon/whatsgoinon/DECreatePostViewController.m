@@ -581,7 +581,7 @@ Display the second screen for the post details
 - (IBAction)goBack:(id)sender {
     NSArray *viewControllers = self.navigationController.viewControllers;
     
-//    if ([viewControllers count] == 2)
+    if ([viewControllers count] == 2)
     {
         UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewAlert" owner:self options:nil] firstObject];
         for (UIView *subview in [view subviews]) {
@@ -594,10 +594,10 @@ Display the second screen for the post details
         [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
         [view setFrame:self.view.frame];
     }
-//    else {
-//        [self savePostDetails];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
+    else {
+        [self savePostDetails];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)continueGoingBack:(id)sender {
