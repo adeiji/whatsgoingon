@@ -14,6 +14,7 @@
 
 @interface DESyncManager : NSObject
 
+
 // Get all the values from the Parse database
 + (void) getAllValuesForNow : (BOOL) now;
 + (PFObject *) getPFObjectWithValuesFromPost : (DEPost *) post

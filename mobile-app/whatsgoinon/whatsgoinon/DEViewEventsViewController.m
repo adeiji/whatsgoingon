@@ -22,6 +22,7 @@
 #define SCROLL_VIEW_DISTANCE_FROM_TOP 30
 #define MAIN_MENU_Y_POS 0
 
+const int NO_USER_EVENTS = 5;
 
 @implementation DEViewEventsViewController
 
@@ -379,8 +380,14 @@ struct TopMargin {
 }
 
 - (void) displayUsersEvents : (NSNotification *) notification {
-    [self removeAllPostFromScreen];
-    [self displayPost:notification];
+    if ([[[DEPostManager sharedManager] posts] count] != 0)
+    {
+        [self removeAllPostFromScreen];
+        [self displayPost:notification];
+    }
+    else {
+        [self showNoPostedEventsByUser];
+    }
 }
 
 - (void) displayPost : (NSNotification *) notification {
@@ -401,12 +408,31 @@ struct TopMargin {
 }
 
 /*
+ 
+ Display to the user that he has no events that he posted, and show a button which will allow the user to post an event.
+ 
+ */
+- (void) showNoPostedEventsByUser {
+    [self removeAllPostFromScreen];
+    UIView *noPostedEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:NO_USER_EVENTS];
+    
+    [_scrollView addSubview:noPostedEventsView];
+    CGRect frame = [noPostedEventsView frame];
+    frame.size.height = _scrollView.frame.size.height;
+    [noPostedEventsView setFrame:frame];
+    CGSize contentSize = [_scrollView contentSize];
+    contentSize.height = _scrollView.frame.size.height;
+    [_scrollView setContentSize:contentSize];
+    [self hideOrbView];
+}
+
+/*
     1. Remove all the post from the screen
     2. Get all the actual events from the Event Ids that are stored within the application
     3. Add those views to the screen
 */
 - (void) displayUserSavedEvents : (NSNotification *) notification {
-
+    
     [self removeAllPostFromScreen];
     NSArray *postArray = [[DEPostManager sharedManager] loadedSavedEvents];
     postArray = [self setAllPostsToNotLoaded:postArray];
@@ -708,7 +734,16 @@ struct TopMargin {
     // Dispose of any resources that can be recreated.
 }
 
-// Display the main menu on the current screen
+/*
+ 
+ Display the screen to allow the user to post an event
+ 
+ */
+- (IBAction)showCreatePostScreen:(id)sender {
+    DECreatePostViewController *viewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"createPostDetailsOne"];
+    
+    [self.navigationController pushViewController:viewController animated:YES];
+}
 
 - (IBAction)displayMainMenu:(id)sender {
 

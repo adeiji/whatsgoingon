@@ -21,12 +21,12 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5T-cH-1tT">
-                    <rect key="frame" x="37" y="226" width="220" height="36"/>
+                    <rect key="frame" x="37" y="181" width="220" height="36"/>
                     <color key="backgroundColor" red="1" green="0.03113876489" blue="0.074984954940000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="DxU-ZQ-rRi"/>
                     </constraints>
-                    <state key="normal" title="Delete">
+                    <state key="normal" title="Yes">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -35,12 +35,12 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyV-pp-KeU">
-                    <rect key="frame" x="37" y="182" width="220" height="36"/>
+                    <rect key="frame" x="37" y="227" width="220" height="36"/>
                     <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="bxR-Vu-aPn"/>
                     </constraints>
-                    <state key="normal" title="Cancel">
+                    <state key="normal" title="No">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -52,11 +52,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="DBa-eh-PCK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="61" id="4pA-WX-cK6"/>
+                <constraint firstItem="nyV-pp-KeU" firstAttribute="top" secondItem="r5T-cH-1tT" secondAttribute="bottom" constant="10" id="7Fy-BQ-Tg8"/>
                 <constraint firstItem="nyV-pp-KeU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="37" id="P4k-2b-ePD"/>
                 <constraint firstItem="r5T-cH-1tT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="37" id="Qj4-fo-RBX"/>
                 <constraint firstAttribute="trailing" secondItem="DBa-eh-PCK" secondAttribute="trailing" constant="61" id="TCP-LV-RUQ"/>
-                <constraint firstItem="r5T-cH-1tT" firstAttribute="top" secondItem="nyV-pp-KeU" secondAttribute="bottom" constant="8" id="W2f-YS-UDo"/>
-                <constraint firstAttribute="bottom" secondItem="r5T-cH-1tT" secondAttribute="bottom" constant="33" id="ZEV-vj-EjL"/>
+                <constraint firstAttribute="bottom" secondItem="nyV-pp-KeU" secondAttribute="bottom" constant="32" id="can-Wz-doh"/>
                 <constraint firstAttribute="trailing" secondItem="nyV-pp-KeU" secondAttribute="trailing" constant="38" id="d4V-LN-SUd"/>
                 <constraint firstAttribute="trailing" secondItem="r5T-cH-1tT" secondAttribute="trailing" constant="38" id="iaJ-f5-Nja"/>
                 <constraint firstItem="DBa-eh-PCK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="41" id="vgI-f7-OdX"/>

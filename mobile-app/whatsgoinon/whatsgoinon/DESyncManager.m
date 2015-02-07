@@ -11,6 +11,8 @@
 #import "Constants.h"
 #import "Reachability.h"
 
+static PFQuery *globalQuery;
+
 @implementation DESyncManager
 
 
@@ -79,7 +81,7 @@
 {
     static double miles = 0;
     PFQuery *query = [DESyncManager getBasePFQueryForNow:now];
-
+    globalQuery = query;
     // If the miles is set to 0 that means the range is all, which means basically 30 miles and in, so we want to grab all events basically that are set to all
     if (miles > 0)
     {
@@ -577,20 +579,20 @@
 }
 
 + (void) getEventsPostedByUser:(NSString *)username {
+    [globalQuery cancel];
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+
     [query whereKey:PARSE_CLASS_EVENT_USERNAME equalTo:username];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
+    [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
     [query setLimit:15];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!objects)
-        {
-            // Notify that the user has not posted anything
-        }
-        else {
-            [[DEPostManager sharedManager] setPosts:objects];
-            // Notify that events have just been loaded from the server
-            [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING, kNOTIFICATION_CENTER_USER_INFO_CATEGORY : NOTIFICATION_CENTER_USER_INFO_POSOTED_BY_ME }];
-        }
+            if (!error)
+            {
+                [[DEPostManager sharedManager] setPosts:objects];
+                // Notify that events have just been loaded from the server
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING, kNOTIFICATION_CENTER_USER_INFO_CATEGORY : NOTIFICATION_CENTER_USER_INFO_POSOTED_BY_ME }];
+            }
     }];
 }
 

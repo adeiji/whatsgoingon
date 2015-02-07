@@ -161,6 +161,8 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="btnPostedByMe" destination="BYy-kC-SWO" id="yDF-4O-hrL"/>
+                <outlet property="viewPostedByMe" destination="Pes-Z2-z2M" id="YFX-6G-QuE"/>
                 <outletCollection property="viewCollection" destination="LPc-Oo-U47" id="j4j-xX-DOu"/>
                 <outletCollection property="viewCollection" destination="1yf-n8-lqY" id="4Fb-ce-hmF"/>
                 <outletCollection property="viewCollection" destination="oDK-e8-07f" id="5Kd-Wi-FgP"/>

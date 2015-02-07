@@ -143,12 +143,31 @@
     [button setBackgroundImage:image forState:UIControlStateNormal];
 }
 
+- (void) setEditableTextFields {
+    // Check to see if this event is started or not
+    if (([_post.startTime compare:[NSDate new]] == NSOrderedAscending) && ([_post.endTime compare:[NSDate new]] == NSOrderedDescending))
+    {
+        _createPostViewOne.txtAddress.userInteractionEnabled = NO;
+        _createPostViewOne.txtCategory.userInteractionEnabled = NO;
+        _createPostViewOne.txtEndDate.userInteractionEnabled = NO;
+        _createPostViewOne.txtStartDate.userInteractionEnabled = NO;
+        _createPostViewOne.txtStartTime.userInteractionEnabled = NO;
+        _createPostViewOne.txtEndTime.userInteractionEnabled = NO;
+        _createPostViewOne.txtPostRange.userInteractionEnabled = NO;
+        _createPostViewTwo.txtTitle.userInteractionEnabled = NO;
+        _createPostViewTwo.txtWebsite.userInteractionEnabled = NO;
+        _createPostViewTwo.txtCost.userInteractionEnabled = NO;
+    }
+}
+
 - (BOOL) checkForEditMode {
     if (_isEditMode)
     {
+        [self setEditableTextFields];
         [self setTimesAndAddressForEditMode];
         _createPostViewOne.txtAddress.text = _post.address;
         [self setDescriptionsPriceAndImages];
+        [_createPostViewOne setUpTextFieldAvailability:_isEditMode];
         
         return YES;
     }
@@ -562,7 +581,7 @@ Display the second screen for the post details
 - (IBAction)goBack:(id)sender {
     NSArray *viewControllers = self.navigationController.viewControllers;
     
-    if ([viewControllers count] == 2)
+//    if ([viewControllers count] == 2)
     {
         UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewAlert" owner:self options:nil] firstObject];
         for (UIView *subview in [view subviews]) {
@@ -575,10 +594,10 @@ Display the second screen for the post details
         [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
         [view setFrame:self.view.frame];
     }
-    else {
-        [self savePostDetails];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+//    else {
+//        [self savePostDetails];
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
 }
 
 - (IBAction)continueGoingBack:(id)sender {

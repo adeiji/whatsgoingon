@@ -18,6 +18,12 @@
         [bottomBorder setBackgroundColor:[UIColor whiteColor]];
         [view addSubview:bottomBorder];
     }
+    // If the person has not logged in, then we don't show the posted by me menu item
+    if ([PFUser currentUser] == nil)
+    {
+        _btnPostedByMe.hidden = YES;
+        _viewPostedByMe.hidden = YES;
+    }
 }
 
 - (IBAction)goHome:(id)sender {

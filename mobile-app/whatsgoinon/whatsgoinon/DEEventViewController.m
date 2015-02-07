@@ -121,6 +121,7 @@ const int heightConstraintConstant = 62;
     [[_eventView btnMaybe] removeTarget:self action:@selector(setEventAsMaybeGoing:) forControlEvents:UIControlEventTouchUpInside];
     [[_eventView btnMaybe] addTarget:self action:@selector(deletePostPressed) forControlEvents:UIControlEventTouchUpInside];
     [self loadMainImage];
+    [self checkIfEventIsDone];
 }
 
 - (void) editPostPressed {
@@ -218,6 +219,17 @@ const int heightConstraintConstant = 62;
     
     UIImage *mainImage =  [UIImage imageWithData:[postImages firstObject]];
     [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
+    
+}
+
+- (void) checkIfEventIsDone {
+    if (([_post.endTime compare:[NSDate new]] == NSOrderedAscending))
+    {
+        [[_eventView btnGoing] setUserInteractionEnabled:NO];
+        [[_eventView btnMaybe] setUserInteractionEnabled:NO];
+        [[_eventView btnGoing] setAlpha:.6f];
+        [[_eventView btnMaybe] setAlpha:.6f];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated

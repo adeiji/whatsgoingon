@@ -35,6 +35,39 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     }
 }
 
+- (void) setUpTextFieldAvailability : (BOOL) isUpdateMode {
+    if (isUpdateMode)
+    {
+        _txtStartTime.enabled = YES;
+        _txtEndTime.enabled = YES;
+        [self updateTextFieldDatePickers];
+    }
+    
+    isEditMode = isUpdateMode;
+}
+
+- (void) updateTextFieldDatePickers {
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateFormat:@"MM/dd/yy"];
+    // Set the start date and end date date pickers to the correct values
+    NSDate *startDate = [df dateFromString:_txtStartDate.text];
+    NSDate *endDate = [df dateFromString:_txtEndDate.text];
+    UIDatePicker *datePicker = (UIDatePicker *) _txtStartDate.inputView;
+    [datePicker setDate:startDate];
+    datePicker = (UIDatePicker *) _txtEndDate.inputView;
+    [datePicker setDate:endDate];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"hh:mm a";
+    
+    NSDate *startTime = [formatter dateFromString:_txtStartTime.text];
+    NSDate *endTime = [formatter dateFromString:_txtEndTime.text];
+    datePicker = (UIDatePicker *) _txtStartTime.inputView;
+    [datePicker setDate:startTime];
+    datePicker = (UIDatePicker *) _txtEndTime.inputView;
+    [datePicker setDate:endTime];
+}
+
 - (void) removeFirstResponder {
     
     [activeField resignFirstResponder];
@@ -206,6 +239,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 }
 
 - (void) updateTimeTextField : (UIDatePicker *) sender {
+
     UITextField *textField;
     
     for (UIView *view in self.subviews) {
@@ -219,33 +253,36 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     [dateFormat setTimeStyle:NSDateFormatterShortStyle];
     
     activeField.text = [dateFormat stringFromDate:sender.date];
-    
-    // If the current field is the start time, then automatically set the end time to three hours from now
-    if ([activeField isEqual:_txtStartTime])
+
+    if (!isEditMode)
     {
-        if ([_txtStartDate.text isEqualToString:_txtEndDate.text])
+        // If the current field is the start time, then automatically set the end time to three hours from now
+        if ([activeField isEqual:_txtStartTime])
         {
-            /* Set the earliest end date to the start time */
-            NSTimeInterval threeHours = (3 * 60 * 60) - 1;
-            NSDate *endTime = [sender.date dateByAddingTimeInterval:threeHours];
-            NSDate *startTime = sender.date;
-            // Check to make sure that three hours from now does not go into the next day, and if it does, then we display that on the end date
-            [self checkForLaterEndDate:sender.date EndTime:endTime StartTime:startTime];
-            _txtEndTime.text = [dateFormat stringFromDate:endTime];
-            UIDatePicker *datePicker = (UIDatePicker *) _txtEndTime.inputView;
-            [datePicker setMinimumDate:sender.date];
-            [_txtEndTime setInputView:datePicker];
-            _txtEndTime.enabled = YES;
+            if ([_txtStartDate.text isEqualToString:_txtEndDate.text])
+            {
+                /* Set the earliest end date to the start time */
+                NSTimeInterval threeHours = (3 * 60 * 60) - 1;
+                NSDate *endTime = [sender.date dateByAddingTimeInterval:threeHours];
+                NSDate *startTime = sender.date;
+                // Check to make sure that three hours from now does not go into the next day, and if it does, then we display that on the end date
+                [self checkForLaterEndDate:sender.date EndTime:endTime StartTime:startTime];
+                _txtEndTime.text = [dateFormat stringFromDate:endTime];
+                UIDatePicker *datePicker = (UIDatePicker *) _txtEndTime.inputView;
+                [datePicker setMinimumDate:sender.date];
+                [_txtEndTime setInputView:datePicker];
+                _txtEndTime.enabled = YES;
+            }
+            
         }
+        // If the user is changing the start time than now enable the user to change the end time
+        else if ([activeField isEqual:_txtEndTime])
+        {
+            [dateFormat setDateFormat:@"mm/dd/yy"];
         
+        }
+        NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
     }
-    // If the user is changing the start time than now enable the user to change the end time
-    else if ([activeField isEqual:_txtEndTime])
-    {
-        [dateFormat setDateFormat:@"mm/dd/yy"];
-    
-    }
-    NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
 }
 
 
@@ -299,7 +336,6 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 }
 
 - (void) updateDateTextField : (UIDatePicker *) sender {
-    
     // Check to see if the current selected date is today's date
     
     UITextField *textField;
@@ -322,62 +358,65 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
         [self setMaximumDateForEndDate];
     }
     
-    NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
-    
-    /* Check to see if the date selected is today's date, and if so don't
-    allow the user to select a date a time that is earlier than right now */
-    
-    // Validation Group
+    if (!isEditMode)
     {
-        if ([self dateIsToday:sender.date])  // 1 Check to see if the date of whatever textfield is today's date
+        NSLog(@"%@", [dateFormat stringFromDate:sender.date]);
+        
+        /* Check to see if the date selected is today's date, and if so don't
+        allow the user to select a date a time that is earlier than right now */
+        
+        // Validation Group
         {
-            UIDatePicker *startTimeDatePicker = (UIDatePicker *) [_txtStartTime inputView];
-            if ([activeField isEqual:_txtStartDate]) // YES -   1A.  Check to see if the selected textfield is the start date
+            if ([self dateIsToday:sender.date])  // 1 Check to see if the date of whatever textfield is today's date
             {
-                [self setMinimumDateForTimePicker : _txtStartTime];  // YES -   a.  Set the minimum time that can be selected for the start time to the current time
+                UIDatePicker *startTimeDatePicker = (UIDatePicker *) [_txtStartTime inputView];
+                if ([activeField isEqual:_txtStartDate]) // YES -   1A.  Check to see if the selected textfield is the start date
+                {
+                    [self setMinimumDateForTimePicker : _txtStartTime];  // YES -   a.  Set the minimum time that can be selected for the start time to the current time
 
-                if ([self dateIsToday:((UIDatePicker *) [_txtEndTime inputView]).date] )// b.  Check to see if the end date is also set to today
+                    if ([self dateIsToday:((UIDatePicker *) [_txtEndTime inputView]).date] )// b.  Check to see if the end date is also set to today
+                    {
+                        [((UIDatePicker *) [_txtEndTime inputView]) setMinimumDate:startTimeDatePicker.date];  // YES -   aa. - Set the minimum date for the end time to whatever the start time is
+                    }
+                }
+                else if ([activeField isEqual:_txtEndDate])  // NO -    c.  The selected textfield is the end date, therefore we set the earliest time that can be selected to the start time
                 {
-                    [((UIDatePicker *) [_txtEndTime inputView]) setMinimumDate:startTimeDatePicker.date];  // YES -   aa. - Set the minimum date for the end time to whatever the start time is
+                    NSDate *startTime = ((UIDatePicker *) _txtStartTime.inputView).date;
+                    NSDate *endTime = ((UIDatePicker *) _txtEndTime.inputView).date;
+                    
+                    // If the start time is less than the end time
+                    if ([startTime compare:endTime] == NSOrderedDescending)  // Check to see if the start time is greater than the end time, and if so then we set the end time to the start time
+                    {
+                        _txtEndTime.text = _txtStartTime.text;
+                    }
+                    
+                    [((UIDatePicker *) [_txtEndTime inputView]) setMinimumDate:startTimeDatePicker.date];
                 }
             }
-            else if ([activeField isEqual:_txtEndDate])  // NO -    c.  The selected textfield is the end date, therefore we set the earliest time that can be selected to the start time
-            {
-                NSDate *startTime = ((UIDatePicker *) _txtStartTime.inputView).date;
-                NSDate *endTime = ((UIDatePicker *) _txtEndTime.inputView).date;
-                
-                // If the start time is less than the end time
-                if ([startTime compare:endTime] == NSOrderedDescending)  // Check to see if the start time is greater than the end time, and if so then we set the end time to the start time
+            else {
+                if ([activeField isEqual:_txtStartDate])  // aaa If the user has selected the start date
                 {
-                    _txtEndTime.text = _txtStartTime.text;
+                    [((UIDatePicker *) _txtStartTime.inputView) setMinimumDate:nil];
                 }
-                
-                [((UIDatePicker *) [_txtEndTime inputView]) setMinimumDate:startTimeDatePicker.date];
+                else if ([activeField isEqual:_txtEndDate])  // bbb If the user has selected the end date
+                {
+                    [((UIDatePicker *) _txtEndTime.inputView) setMinimumDate:nil];
+                }
             }
         }
-        else {
-            if ([activeField isEqual:_txtStartDate])  // aaa If the user has selected the start date
-            {
-                [((UIDatePicker *) _txtStartTime.inputView) setMinimumDate:nil];
-            }
-            else if ([activeField isEqual:_txtEndDate])  // bbb If the user has selected the end date
-            {
-                [((UIDatePicker *) _txtEndTime.inputView) setMinimumDate:nil];
-            }
+        /*If this is the end date that is being selected then we want to ensure that
+         the earliest date for the user to select as an end date is the day of the event*/
+        if ([activeField isEqual:_txtEndDate])
+        {
+            // If this is the end date then set the earliest date to start date
+            [self setMinimumDateForDatePicker:sender.date];
+            NSDateFormatter *df = [NSDateFormatter new];
+            [df setDateFormat:@"mm/dd/yy"];
+            NSDate *minDate = [df dateFromString:_txtStartDate.text];
+            [((UIDatePicker *) _txtEndDate.inputView) setMinimumDate:minDate];
         }
+        _txtStartTime.enabled = YES;
     }
-    /*If this is the end date that is being selected then we want to ensure that
-     the earliest date for the user to select as an end date is the day of the event*/
-    if ([activeField isEqual:_txtEndDate])
-    {
-        // If this is the end date then set the earliest date to start date
-        [self setMinimumDateForDatePicker:sender.date];
-        NSDateFormatter *df = [NSDateFormatter new];
-        [df setDateFormat:@"mm/dd/yy"];
-        NSDate *minDate = [df dateFromString:_txtStartDate.text];
-        [((UIDatePicker *) _txtEndDate.inputView) setMinimumDate:minDate];
-    }
-    _txtStartTime.enabled = YES;
 }
 
 /*
