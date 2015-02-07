@@ -16,7 +16,7 @@
 @implementation DEEventViewController
 
 #define GOOGLE_MAPS_APP_URL @"comgooglemaps://?saddr=&daddr=%@&center=%f,%f&zoom=10"
-#define APPLE_MAPS_APP_URL @"http://maps.apple.com/?daddr=%@&saddr=%@"
+#define APPLE_MAPS_APP_URL @"http://maps.apple.com/?daddr=%@&saddr=%f,%f"
 
 const int heightConstraintConstant = 62;
 
@@ -584,8 +584,7 @@ const int heightConstraintConstant = 62;
         // Start monitoring to see if the user is near this event location
         [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
         // Update the location so we can see if they are at this event and can comment
-#warning Make sure to uncomment when coing to Fabian
-//        [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+        [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     }
     
     if (!_mapView)
@@ -721,12 +720,11 @@ const int heightConstraintConstant = 62;
     }
     else if (buttonIndex == 1)
     {
-        [DELocationManager getAddressFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSString *value) {
-            
-            NSString *urlString = [NSString stringWithFormat:APPLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], [value stringByReplacingOccurrencesOfString:@" " withString:@"+"] ];
+        PFGeoPoint *currentLocation = [[DELocationManager sharedManager] currentLocation];
+        NSString *urlString = [NSString stringWithFormat:APPLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], currentLocation.latitude, currentLocation.longitude];
 
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-        }];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+
     }
 }
 
