@@ -205,12 +205,14 @@
     _city = city;
     [DELocationManager getLatLongValueFromAddress:city CompletionBlock:^(PFGeoPoint *value) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNOTIFICATION_CENTER_IS_CITY_CHANGE object:nil];
         NSMutableArray *postsArray = [NSMutableArray new];
         
         DEScreenManager *manager = [DEScreenManager sharedManager];
         [DESyncManager getAllValuesWithinMilesForNow:!manager.isLater
                                           PostsArray:postsArray
                                             Location:value];
+        
     }];
 }
 

@@ -33,6 +33,7 @@ struct TopMargin {
 
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectorToNewCity) name:kNOTIFICATION_CENTER_IS_CITY_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUsersEvents:) name:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
@@ -42,6 +43,10 @@ struct TopMargin {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayNoSavedEvents) name:NOTIFICATION_CENTER_NO_SAVED_EVENTS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllPostFromScreen) name:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_PAST_EPIC_EVENTS_LOADED object:nil];
+}
+
+- (void) changeSelectorToNewCity {
+    postSelector = @selector(getAllValuesWithinMilesForNow:PostsArray:Location:);
 }
 
 - (void)viewDidLoad
@@ -391,11 +396,15 @@ struct TopMargin {
 }
 
 - (void) displayPost : (NSNotification *) notification {
-    
+
     if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY] && notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS])
     {
         [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
         category = notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY];
+    }
+    if (notification.userInfo[kNOTIFICATION_CENTER_IS_CITY_CHANGE]) // Notification info shows that this is a city change
+    {
+        postSelector = @selector(getAllValuesWithinMilesForNow:PostsArray:Location:);
     }
     
     [self loadPosts];
@@ -470,15 +479,17 @@ struct TopMargin {
     CGFloat scrollViewContentSizeHeight = 0;
     CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
     __block BOOL validated;
-    
+    static int count = 0;
     validated = NO;
 
-    [postArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
-        // Show the event on the screen
-        if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
+    for (int i = 0; i < 10; i ++) {
+        if ([postArray count] != 0)
         {
+            id obj = postArray[count];
+            validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
+            // Show the event on the screen
+            if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
+            {
                 [self loadEvent:obj
                         Margin1:&columnOneMargin
                         Margin2:&columnTwoMargin
@@ -486,13 +497,16 @@ struct TopMargin {
                       TopMargin:topMargin
                     PostCounter:&postCounter
                       ShowBlank:showBlank];
+                
+                NSLog(@"Column One Margin: %f", columnOneMargin);
+                NSLog(@"Column Two Margin: %f", columnTwoMargin);
+                NSLog(@"Margin: %f", margin);
+                NSLog(@"Post Counter: %i", postCounter);
+            }
             
-            NSLog(@"Column One Margin: %f", columnOneMargin);
-            NSLog(@"Column Two Margin: %f", columnTwoMargin);
-            NSLog(@"Margin: %f", margin);
-            NSLog(@"Post Counter: %i", postCounter);
+            count ++;
         }
-    }];
+    }
     
     // Add the column one or column two margin, depending on which is greater to the height of the scroll view's content size
     if (columnOneMargin > columnTwoMargin)
@@ -772,6 +786,11 @@ struct TopMargin {
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self loadVisiblePost:scrollView];
+    
+    if (scrollView.contentOffset.y > scrollView.contentSize.height - 1000)
+    {
+        NSLog(@"Load events again");
+    }
 }
 
 - (void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView

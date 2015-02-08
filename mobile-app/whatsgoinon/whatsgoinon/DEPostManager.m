@@ -31,7 +31,7 @@
         _currentPost = [DEPost new];
         _promptedForCommentEvents = [NSMutableArray new];
         _goingPostWithCommentInformation = [NSMutableArray new];
-        
+        _loadedEvents = [NSMutableArray new];
     }
     return self;
 }

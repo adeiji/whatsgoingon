@@ -53,6 +53,7 @@
 @property (strong, nonatomic) NSMutableArray *loadedSavedEvents;
 @property (strong, nonatomic) NSMutableArray *promptedForCommentEvents;
 @property (strong, nonatomic) NSMutableArray *goingPostWithCommentInformation;
+@property (strong, nonatomic) NSMutableArray *loadedEvents;
 /*
  
  Events that the user has said he may go to or will go to that he is currently at

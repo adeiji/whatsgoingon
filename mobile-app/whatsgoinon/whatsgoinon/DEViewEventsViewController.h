@@ -24,6 +24,7 @@
     NSString *category;
     UIView *outerView;
     UIButton *orbView;
+    SEL postSelector;
 }
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;

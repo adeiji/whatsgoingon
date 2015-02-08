@@ -724,7 +724,6 @@ const int heightConstraintConstant = 62;
         NSString *urlString = [NSString stringWithFormat:APPLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], currentLocation.latitude, currentLocation.longitude];
 
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-
     }
 }
 
