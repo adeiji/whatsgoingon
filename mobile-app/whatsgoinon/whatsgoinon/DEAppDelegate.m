@@ -260,7 +260,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     NSMutableArray *eventsUserMaybeGoingToArray = [[defaults objectForKey:kEventsUserMaybeGoingTo] mutableCopy];
     if (eventsUserMaybeGoingToArray != nil)
     {
-        [postManager setGoingPost: eventsUserMaybeGoingToArray ];
+        [postManager setMaybeGoingPost: eventsUserMaybeGoingToArray ];
     }
 }
 
@@ -341,9 +341,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 {
     // Save the events that the user was already prompted to comment on
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-#warning Make sure we uncomment before sending to Fabian
-    
-//    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
+    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPost] forKey:kEventsUserGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:kEventsUserMaybeGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];

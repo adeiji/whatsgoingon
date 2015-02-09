@@ -482,10 +482,15 @@ struct TopMargin {
     static int count = 0;
     validated = NO;
 
+    if ([process isEqualToString: kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW])
+    {
+        count = 0;
+    }
+    
     if (count < [postArray count])
     {
         for (int i = 0; i < 10; i ++) {
-            if ([postArray count] != 0 && count < [_posts count])
+            if ([postArray count] != 0 && count < [postArray count])
             {
                 id obj = postArray[count];
                 validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
@@ -524,6 +529,16 @@ struct TopMargin {
         CGSize size = _scrollView.contentSize;
         size.height = scrollViewContentSizeHeight;
         [_scrollView setContentSize:size];
+        
+        if (count == [postArray count])
+        {
+            column = 0;
+            postCounter = 1;
+            columnOneMargin = 0;
+            columnTwoMargin = 0;
+            margin = 0;
+            scrollViewContentSizeHeight = 0;
+        }
     }
     else     /* If we've finished loading all the events then we reset
                 everything back to zero so that next time we load events
@@ -535,7 +550,6 @@ struct TopMargin {
         columnTwoMargin = 0;
         margin = 0;
         scrollViewContentSizeHeight = 0;
-        count = 0;
     }
     
 }
@@ -875,7 +889,7 @@ struct TopMargin {
         }];
 
         [self addEventsToScreen:0
-                  ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
+                  ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW
                        Category:nil
                       PostArray:_searchPosts
                       ShowBlank:NO];
