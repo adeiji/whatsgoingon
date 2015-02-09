@@ -483,7 +483,7 @@ struct TopMargin {
     validated = NO;
 
     for (int i = 0; i < 10; i ++) {
-        if ([postArray count] != 0)
+        if ([postArray count] != 0 && count < [_posts count])
         {
             id obj = postArray[count];
             validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
@@ -786,11 +786,6 @@ struct TopMargin {
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self loadVisiblePost:scrollView];
-    
-    if (scrollView.contentOffset.y > scrollView.contentSize.height - 1000)
-    {
-        NSLog(@"Load events again");
-    }
 }
 
 - (void) scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
@@ -801,6 +796,24 @@ struct TopMargin {
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self loadVisiblePost:scrollView];
+    BOOL scrollDown= NO;
+    
+    if (scrollView.contentOffset.y > lastContentOffset)
+    {
+        scrollDown = YES;
+    }
+    
+    if (scrollDown && scrollView.contentOffset.y > scrollView.contentSize.height - 1000)
+    {
+        [self addEventsToScreen : 0
+                   ProcessStatus:nil
+                        Category:nil
+                       PostArray:_posts
+                       ShowBlank:YES];
+        NSLog(@"Load events again");
+    }
+    
+    lastContentOffset = scrollView.contentOffset.y;
 }
 
 - (void) loadVisiblePost : (UIScrollView *) scrollView
@@ -811,6 +824,10 @@ struct TopMargin {
             if (CGRectIntersectsRect(scrollView.bounds, view.frame))
             {
                 [((DEViewEventsView *) view) showImage];
+
+            }
+            else {
+                [((DEViewEventsView *) view) hideImage];
             }
         }
     }
