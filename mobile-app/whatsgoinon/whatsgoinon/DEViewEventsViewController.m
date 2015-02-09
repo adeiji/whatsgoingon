@@ -482,47 +482,52 @@ struct TopMargin {
     static int count = 0;
     validated = NO;
 
-    for (int i = 0; i < 10; i ++) {
-        if ([postArray count] != 0 && count < [_posts count])
-        {
-            id obj = postArray[count];
-            validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
-            // Show the event on the screen
-            if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
-            {
-                [self loadEvent:obj
-                        Margin1:&columnOneMargin
-                        Margin2:&columnTwoMargin
-                         Column:&column
-                      TopMargin:topMargin
-                    PostCounter:&postCounter
-                      ShowBlank:showBlank];
-                
-                NSLog(@"Column One Margin: %f", columnOneMargin);
-                NSLog(@"Column Two Margin: %f", columnTwoMargin);
-                NSLog(@"Margin: %f", margin);
-                NSLog(@"Post Counter: %i", postCounter);
-            }
-            
-            count ++;
-        }
-    }
-    
-    // Add the column one or column two margin, depending on which is greater to the height of the scroll view's content size
-    if (columnOneMargin > columnTwoMargin)
+    if (count < [postArray count])
     {
-        scrollViewContentSizeHeight += (columnOneMargin * screenSizeRelativeToiPhone5Width);
-    }
-    else {
-        scrollViewContentSizeHeight += (columnTwoMargin * screenSizeRelativeToiPhone5Width);
-    }
-    
-    CGSize size = _scrollView.contentSize;
-    size.height = scrollViewContentSizeHeight;
-    [_scrollView setContentSize:size];
+        for (int i = 0; i < 10; i ++) {
+            if ([postArray count] != 0 && count < [_posts count])
+            {
+                id obj = postArray[count];
+                validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
+                // Show the event on the screen
+                if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
+                {
+                    [self loadEvent:obj
+                            Margin1:&columnOneMargin
+                            Margin2:&columnTwoMargin
+                             Column:&column
+                          TopMargin:topMargin
+                        PostCounter:&postCounter
+                          ShowBlank:showBlank];
+                    
+                    NSLog(@"Column One Margin: %f", columnOneMargin);
+                    NSLog(@"Column Two Margin: %f", columnTwoMargin);
+                    NSLog(@"Margin: %f", margin);
+                    NSLog(@"Post Counter: %i", postCounter);
+                }
+                
+                count ++;
+                
+            }
+        }
 
-    // If we've finished loading all the events then we reset everything back to zero so that next time we load events it will show them correctly
-    if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING])
+
+        // Add the column one or column two margin, depending on which is greater to the height of the scroll view's content size
+        if (columnOneMargin > columnTwoMargin)
+        {
+            scrollViewContentSizeHeight += (columnOneMargin * screenSizeRelativeToiPhone5Width);
+        }
+        else {
+            scrollViewContentSizeHeight += (columnTwoMargin * screenSizeRelativeToiPhone5Width);
+        }
+        
+        CGSize size = _scrollView.contentSize;
+        size.height = scrollViewContentSizeHeight;
+        [_scrollView setContentSize:size];
+    }
+    else     /* If we've finished loading all the events then we reset
+                everything back to zero so that next time we load events
+                it will show them correctly*/
     {
         column = 0;
         postCounter = 1;
@@ -530,7 +535,9 @@ struct TopMargin {
         columnTwoMargin = 0;
         margin = 0;
         scrollViewContentSizeHeight = 0;
+        count = 0;
     }
+    
 }
 
 - (NSArray *) setAllPostsToNotLoaded : (NSArray *) posts {
