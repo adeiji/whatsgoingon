@@ -26,6 +26,7 @@
     UIButton *orbView;
     SEL postSelector;
     CGFloat lastContentOffset;
+    UIActivityIndicatorView *spinner;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -40,11 +41,14 @@
 @property BOOL shouldNotDisplayPosts;
 @property BOOL overlayDisplayed;
 @property BOOL now;
+@property BOOL isNewProcess;
 
 - (IBAction)showCreatePostScreen:(id)sender;
 - (IBAction)displayMainMenu:(id)sender;
 - (IBAction)goHome:(id)sender;
-- (void) displayPost : (NSNotification *) notification;
+- (void) displayPost : (NSNotification *) notification
+           TopMargin : (CGFloat) topMargin
+           PostArray : (NSArray *) postArray;
 - (void) showMainMenu;
 - (void) hideMainMenu;
 

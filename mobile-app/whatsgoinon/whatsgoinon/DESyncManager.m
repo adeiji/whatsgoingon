@@ -37,7 +37,6 @@ static PFQuery *globalQuery;
             [sharedManager setAllEvents:objects];
             [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
             NSLog(@"Notification sent, events loaded");
-            [[DEScreenManager sharedManager] stopActivitySpinner];
 
         }
         else {
@@ -117,7 +116,9 @@ static PFQuery *globalQuery;
             else {
                 if (([[[DEPostManager sharedManager] posts] count] < 10 && now) || ([[[DEPostManager sharedManager] posts] count] == 0 && !now))
                 {
-                    [self getAllValuesForLaterNearbyWithQuery : blockQuery Location:location];
+                    [self getAllValuesForLaterNearbyWithQuery : blockQuery
+                                                      Location:location
+                                                  isNewProcess:NO];
                 }
                 else {
                     [DESyncManager addEventsToAlreadyRetrievedEvents : objects
@@ -138,7 +139,9 @@ static PFQuery *globalQuery;
 
 
 + (void) getAllValuesForLaterNearbyWithQuery : (PFQuery *) query
-                                    Location : (PFGeoPoint *) location {
+                                    Location : (PFGeoPoint *) location
+                                isNewProcess : (BOOL) isNewProcess
+{
     
     // Get any values that are later
     query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
@@ -147,10 +150,13 @@ static PFQuery *globalQuery;
     
     // Make sure that the values for later are only those within thirty miles of the location the user is checking for
     [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:[[DELocationManager sharedManager] currentLocation] withinMiles:30];
+
     [self getValuesForLater:query
                     Objects:[[DEPostManager sharedManager] posts]
               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
-                   Location:location];
+                   Location:location
+     isNewProcess:isNewProcess];
+
 }
 
 
@@ -167,17 +173,16 @@ static PFQuery *globalQuery;
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query orderByDescending:PARSE_CLASS_EVENT_VIEW_COUNT];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
-    [query whereKey:PARSE_CLASS_EVENT_OBJECT_ID notContainedIn:[[DEPostManager sharedManager] loadedEvents]];
     
-//    if (now)
-//    {
-//        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
-//        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
-//    }
-//    else
-//    {
-//        [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
-//    }
+    if (now)
+    {
+        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
+    }
+    else
+    {
+        [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
+    }
     
     return query;
 }
@@ -217,7 +222,6 @@ static PFQuery *globalQuery;
         }];
     }
     NSLog(@"Notification sent, events loaded");
-    [[DEScreenManager sharedManager] stopActivitySpinner];
 }
 
 
@@ -275,12 +279,13 @@ static PFQuery *globalQuery;
                    Objects : (NSArray *) myObjects
              ProcessStatus : (NSString *) processStatus
                   Location : (PFGeoPoint *) location
+              isNewProcess : (BOOL) isNewProcess
 {
     NSDate *date = [NSDate date];
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
     NSDate *latestDate = [date dateByAddingTimeInterval:(60 * 60 * 24 * 3)];
-    
+    __block BOOL blkIsNewProcess = isNewProcess;
     [query setLimit:10];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:latestDate];
@@ -296,7 +301,8 @@ static PFQuery *globalQuery;
         {
             //The find succeeded, now do something with it
             NSMutableArray *array = (NSMutableArray *) [[DEPostManager sharedManager] posts];
-            [DESyncManager addEventsToAlreadyRetrievedEvents:objects PostsArray:array ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING isNewProcess:YES];
+            [DESyncManager addEventsToAlreadyRetrievedEvents:objects PostsArray:array ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING isNewProcess:blkIsNewProcess];
+            
         }
     }];
     
@@ -350,8 +356,6 @@ static PFQuery *globalQuery;
             else {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_PAST_EPIC_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS : [NSNumber numberWithBool:YES] }];
             }
-            
-            [[DEScreenManager sharedManager] stopActivitySpinner];
         }
     }];
 
