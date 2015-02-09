@@ -14,8 +14,13 @@
 
 @interface DESyncManager : NSObject
 
+
 // Get all the values from the Parse database
 + (void) getAllValuesForNow : (BOOL) now;
++ (PFObject *) getPFObjectWithValuesFromPost : (DEPost *) post
+                                    PFObject : (PFObject *) postObject;
++ (void) updatePFObject : (PFObject *) postObject
+     WithValuesFromPost : (DEPost *) post;
 + (BOOL) savePost : (DEPost *) post;
 + (void) saveReportWithEventId : (NSString * )objectId
                     WhatsWrong : (NSDictionary *) whatsWrong
@@ -26,11 +31,13 @@
 + (void) updateObjectWithId : (NSString *) objectId
                UpdateValues : (NSDictionary *) values
              ParseClassName : (NSString *) className;
++ (void) deletePostWithId : (NSString *) objectId;
 + (void) saveCommentWithEventId : (NSString *) objectId
                         Comment : (NSString *) comment
                          Rating : (NSInteger) rating;
 + (void) getNumberOfPostByUser : (NSString *) username;
 + (void) saveUpdatedPFObjectToServer : (PFObject *) post;
++ (void) getEventsPostedByUser : (NSString *) username;
 /*
  
  Get all the saved events that the user has selected has maybe or going

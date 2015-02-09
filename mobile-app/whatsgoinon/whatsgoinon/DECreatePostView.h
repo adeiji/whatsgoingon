@@ -17,6 +17,7 @@
 {
     UITextField *activeField;
     NSString *costText;
+    BOOL isEditMode;
 }
 
 
@@ -54,6 +55,7 @@
 #pragma mark - Button Actions
 
 - (IBAction)enableOrDisableAddressBox:(id)sender;
+- (void) setUpTextFieldAvailability : (BOOL) isUpdateMode;
 
 - (void) displayCurrentLocation;
 - (void) setupView;

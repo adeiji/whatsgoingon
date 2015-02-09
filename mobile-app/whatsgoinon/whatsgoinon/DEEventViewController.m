@@ -16,16 +16,16 @@
 @implementation DEEventViewController
 
 #define GOOGLE_MAPS_APP_URL @"comgooglemaps://?saddr=&daddr=%@&center=%f,%f&zoom=10"
-#define APPLE_MAPS_APP_URL @"http://maps.apple.com/?daddr=%@&saddr=%@"
+#define APPLE_MAPS_APP_URL @"http://maps.apple.com/?daddr=%@&saddr=%f,%f"
 
 const int heightConstraintConstant = 62;
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+- (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadComments:) name:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAmbassador:) name:NOTIFICATION_CENTER_USER_RETRIEVED object:nil];
-	// Do any additional setup after loading the view.
+}
+
+- (void) setUpView {
     _eventDetailsViewController = [[DEEventDetailsViewController alloc] initWithNibName:@"EventDetailsView" bundle:[NSBundle mainBundle]];
     [[[_eventView btnMainImage] layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     [[[_eventView btnMainImage] layer] setBorderColor:[UIColor whiteColor].CGColor];
@@ -35,6 +35,7 @@ const int heightConstraintConstant = 62;
     CGRect frame = [[_eventView detailsView] frame];
     frame.size.width = _eventView.frame.size.width;
     [[_eventView detailsView] setFrame:frame];
+    
     if (_isPreview)
     {
         [self loadPreview];
@@ -43,42 +44,120 @@ const int heightConstraintConstant = 62;
     {
         [self loadEditDeleteModeView];
     }
+    else if (_isUpdateMode)
+    {
+        [self loadUpdateModeView];
+    }
     else {
         [self loadNonPreview];
     }
     
-    
     [[_eventView lblCost] setText:[[_post cost] stringValue]];
-    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self addObservers];
+	// Do any additional setup after loading the view.
+    [self setUpView];
     // Display the Event Details View and then set up the Username Button click action
     [self showEventDetails:nil];
     [self setUsernameButtonClickAction];
-    
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
-    
-    
     userIsAmbassador = NO;
     [DEUserManager getUserFromUsername:_post.username];
     goingButtonBottomSpaceConstraintConstant = _goingButtonBottomSpaceConstraint.constant;
+}
 
+- (void) loadUpdateModeView {
+    _goingButtonBottomSpaceConstraint.constant = -40;
+    _goingButtonBottomSpaceConstraintMapView.constant = -40;
+    [[_eventView btnMaybe] setHidden:YES];
+    [[_eventView btnGoing] setTitle:@"Update Now!" forState:UIControlStateNormal];
+    [[_eventView btnGoing] removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
+    [[_eventView btnGoing] addTarget:self action:@selector(updatePost) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (PFObject *) getPFObjectForEvent {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", _post.objectId];
+    // Get the PFObject that corresponds to this post
+    PFObject *object = (PFObject *) [[[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:predicate] firstObject];
+    
+    return object;
+}
+
+/*
+ 
+ Update the current post that the user has just modified
+ 
+ */
+- (void) updatePost {
+    PFObject *object = [self getPFObjectForEvent];
+    // Convert the images to data in order to store the images as PFFiles
+    _post.images = [self imagesToNSDataArray:_post.images Compression:.2];
+    
+    if (!_post.thumbsUpCount)
+    {
+        _post.thumbsUpCount = [NSNumber numberWithInt:0];
+    }
+    
+    // Update the object with the new values
+    [DESyncManager updatePFObject:object WithValuesFromPost:_post];
+
+    DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
+    DEFinishedPostingView *finishedPostView = (DEFinishedPostingView *) createPostViewController.view;
+    [[finishedPostView lblParagraphOne] setText:@"The changes to your event have been submitted and  applied."];
+    [[finishedPostView lblParagraphTwo] setText:@"Hey! Don't forget about the HappSnap posting portal. You can do a lot more with your events from there. Check it out!"];
+    [self.navigationController pushViewController:createPostViewController animated:YES];
 }
 
 - (void) loadEditDeleteModeView {
     [[_eventView btnGoing] setTitle:@"Edit" forState:UIControlStateNormal];
     [[_eventView btnGoing] removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
     [[_eventView btnGoing] addTarget:self action:@selector(editPostPressed) forControlEvents:UIControlEventTouchUpInside];
-    [[_eventView btnMaybe] setTitle:@"Maybe" forState:UIControlStateNormal];
+    [[_eventView btnMaybe] setTitle:@"Delete" forState:UIControlStateNormal];
     [[_eventView btnMaybe] removeTarget:self action:@selector(setEventAsMaybeGoing:) forControlEvents:UIControlEventTouchUpInside];
     [[_eventView btnMaybe] addTarget:self action:@selector(deletePostPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self loadMainImage];
+    [self checkIfEventIsDone];
 }
 
 - (void) editPostPressed {
-    
+    UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+    DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+    createPostViewController.isEditMode = YES;
+    [self.navigationController pushViewController:createPostViewController animated:YES];
+    [[DEPostManager sharedManager] setCurrentPost:_post];
 }
 
 - (void) deletePostPressed {
+    deletionPromptView = [[[NSBundle mainBundle] loadNibNamed:@"viewPromptForDeletionOfEvent" owner:self options:nil] firstObject];
     
+    [[deletionPromptView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[UIButton class]])
+        {
+            UIButton *button = (UIButton *) obj;
+            [[button layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        }
+    }];
+    
+    [self.view addSubview:deletionPromptView];
+
+    [DEAnimationManager animateView:deletionPromptView WithInsets:UIEdgeInsetsZero WithSelector:nil];
+}
+
+- (IBAction)cancelDeletion:(id)sender {
+    [DEAnimationManager animateViewOut:deletionPromptView WithInsets:UIEdgeInsetsZero];
+}
+
+- (IBAction)deletePost:(id)sender {
+    [DESyncManager deletePostWithId:_post.objectId];
+    DEPostManager *postManager = [DEPostManager sharedManager];
+    [postManager deletePFObjectWithObjectId:_post.objectId];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) setUsernameButtonClickAction {
@@ -88,7 +167,6 @@ const int heightConstraintConstant = 62;
 }
 
 // Take the user to a profile page where they can see limited information about this user
-
 - (void) usernameButtonClicked {
     if (user)
     {
@@ -105,9 +183,9 @@ const int heightConstraintConstant = 62;
     }
 }
 
-- (void) loadNonPreview
-{
+- (void) loadMainImage {
     PFFile *file = [[_post images] firstObject];
+#warning - When we run this through twice the app crashes
     [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
         if (!error)
         {
@@ -117,13 +195,18 @@ const int heightConstraintConstant = 62;
     } progressBlock:^(int percentDone) {
         //Display to the user how much has been loaded
     }];
-    
+}
+
+- (void) loadNonPreview
+{
+    [self loadMainImage];
     // Load all the comments so that by the time the user clicks to view the comments they are already loaded.
     [DESyncManager getAllCommentsForEventId:[[DEPostManager sharedManager] currentPost].objectId];
 }
 
 - (void) loadPreview
 {
+    // Compress the image to less data
     NSArray *postImages = [self imagesToNSDataArray:_post.images Compression:.02];
     [_eventView setPost:_post];
     [[_eventView btnGoing] setEnabled:YES];
@@ -133,8 +216,20 @@ const int heightConstraintConstant = 62;
     _goingButtonBottomSpaceConstraint.constant -= 40;
     [[_eventView btnMaybe] setHidden:YES];
     [[_eventView lblNumberOfPeopleGoing] setText:0];
+    
     UIImage *mainImage =  [UIImage imageWithData:[postImages firstObject]];
     [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
+    
+}
+
+- (void) checkIfEventIsDone {
+    if (([_post.endTime compare:[NSDate new]] == NSOrderedAscending))
+    {
+        [[_eventView btnGoing] setUserInteractionEnabled:NO];
+        [[_eventView btnMaybe] setUserInteractionEnabled:NO];
+        [[_eventView btnGoing] setAlpha:.6f];
+        [[_eventView btnMaybe] setAlpha:.6f];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -144,13 +239,12 @@ const int heightConstraintConstant = 62;
     self.view.hidden = NO;
     
     // Only do this when this screen is first loaded
-
     {
-        if (_isGoing)
+        if (_isGoing && !_isEditDeleteMode)
         {
             [self updateViewToGoing];
         }
-        if (_isMaybeGoing)
+        if (_isMaybeGoing && !_isEditDeleteMode)
         {
             self.maybeCheckmarkView.hidden = NO;
         }
@@ -490,8 +584,7 @@ const int heightConstraintConstant = 62;
         // Start monitoring to see if the user is near this event location
         [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
         // Update the location so we can see if they are at this event and can comment
-#warning Make sure to uncomment when coing to Fabian
-//        [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+        [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     }
     
     if (!_mapView)
@@ -627,12 +720,11 @@ const int heightConstraintConstant = 62;
     }
     else if (buttonIndex == 1)
     {
-        [DELocationManager getAddressFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSString *value) {
-            
-            NSString *urlString = [NSString stringWithFormat:APPLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], [value stringByReplacingOccurrencesOfString:@" " withString:@"+"] ];
+        PFGeoPoint *currentLocation = [[DELocationManager sharedManager] currentLocation];
+        NSString *urlString = [NSString stringWithFormat:APPLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], currentLocation.latitude, currentLocation.longitude];
 
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-        }];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+
     }
 }
 

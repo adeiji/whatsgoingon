@@ -92,6 +92,8 @@ NSString *const ORB_BUTTON_VIEW = @"orbButtonView";
 CGFloat const BUTTON_CORNER_RADIUS = 6.0f;
 
 NSString *const NOTIFICATION_CENTER_ALL_EVENTS_LOADED = @"com.happsnap.allEventsLoaded";
+NSString *const NOTIFICATION_CENTER_ALL_NO_EVENTS_POSTED_BY_USER = @"com.happsnap.noeventspostedbyuser";
+NSString *const NOTIFICATION_CENTER_USERS_EVENTS_LOADED = @"com.happsnap.userseventsloaded";
 NSString *const NOTIFICATION_CENTER_PAST_EPIC_EVENTS_LOADED = @"com.happsnap.pastEpicEventsLoaded";
 NSString *const NOTIFICATION_CENTER_CITY_CHANGED = @"com.happsnap.cityChanged";
 NSString *const NOTIFICATION_CENTER_NO_DATA = @"com.happsnap.noData";
@@ -117,6 +119,7 @@ NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW = @"com.happsnap
 NSString *const kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS = @"com.happsnap.isEpicEvents";
 NSString *const kNOTIFICATION_CENTER_EVENT_USER_AT = @"com.happsnap.event.user.at";
 NSString *const kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE = @"com.happsnap.local.notification.future";
+NSString *const NOTIFICATION_CENTER_USER_INFO_POSOTED_BY_ME = @"Posted By Me";
 
 // View Controllers
 

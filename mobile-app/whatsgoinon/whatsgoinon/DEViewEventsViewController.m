@@ -22,6 +22,7 @@
 #define SCROLL_VIEW_DISTANCE_FROM_TOP 30
 #define MAIN_MENU_Y_POS 0
 
+const int NO_USER_EVENTS = 5;
 
 @implementation DEViewEventsViewController
 
@@ -32,6 +33,7 @@ struct TopMargin {
 
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUsersEvents:) name:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_NO_DATA object:nil];
@@ -377,6 +379,17 @@ struct TopMargin {
     }
 }
 
+- (void) displayUsersEvents : (NSNotification *) notification {
+    if ([[[DEPostManager sharedManager] posts] count] != 0)
+    {
+        [self removeAllPostFromScreen];
+        [self displayPost:notification];
+    }
+    else {
+        [self showNoPostedEventsByUser];
+    }
+}
+
 - (void) displayPost : (NSNotification *) notification {
     
     if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY] && notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS])
@@ -395,12 +408,31 @@ struct TopMargin {
 }
 
 /*
+ 
+ Display to the user that he has no events that he posted, and show a button which will allow the user to post an event.
+ 
+ */
+- (void) showNoPostedEventsByUser {
+    [self removeAllPostFromScreen];
+    UIView *noPostedEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:NO_USER_EVENTS];
+    
+    [_scrollView addSubview:noPostedEventsView];
+    CGRect frame = [noPostedEventsView frame];
+    frame.size.height = _scrollView.frame.size.height;
+    [noPostedEventsView setFrame:frame];
+    CGSize contentSize = [_scrollView contentSize];
+    contentSize.height = _scrollView.frame.size.height;
+    [_scrollView setContentSize:contentSize];
+    [self hideOrbView];
+}
+
+/*
     1. Remove all the post from the screen
     2. Get all the actual events from the Event Ids that are stored within the application
     3. Add those views to the screen
 */
 - (void) displayUserSavedEvents : (NSNotification *) notification {
-
+    
     [self removeAllPostFromScreen];
     NSArray *postArray = [[DEPostManager sharedManager] loadedSavedEvents];
     postArray = [self setAllPostsToNotLoaded:postArray];
@@ -652,21 +684,23 @@ struct TopMargin {
 }
 
 - (CGFloat) getEventImageHeightDifference : (DEViewEventsView *) view {
-    
-    PFFile *file = [view post].images[0];
-    if ([file.name containsString:IMAGE_DIMENSION_HEIGHT]) {
-        NSRange widthRange = [file.name rangeOfString:IMAGE_DIMENSION_WIDTH];
-        NSString *dimensions = [file.name substringFromIndex:widthRange.location];
-        NSRange heightRange = [dimensions rangeOfString:IMAGE_DIMENSION_HEIGHT];
-        NSString *width = [dimensions substringToIndex:heightRange.location];
-        width = [width stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_WIDTH withString:@""];
-        NSString *height = [dimensions substringFromIndex:heightRange.location];
-        height = [height stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_HEIGHT withString:@""];
-        
-        double imageWidth = [width doubleValue];
-        double imageHeight = [height doubleValue];
-        
-        [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
+    if ([[view post].images count] != 0)
+    {
+        PFFile *file = [view post].images[0];
+        if ([file.name containsString:IMAGE_DIMENSION_HEIGHT]) {
+            NSRange widthRange = [file.name rangeOfString:IMAGE_DIMENSION_WIDTH];
+            NSString *dimensions = [file.name substringFromIndex:widthRange.location];
+            NSRange heightRange = [dimensions rangeOfString:IMAGE_DIMENSION_HEIGHT];
+            NSString *width = [dimensions substringToIndex:heightRange.location];
+            width = [width stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_WIDTH withString:@""];
+            NSString *height = [dimensions substringFromIndex:heightRange.location];
+            height = [height stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_HEIGHT withString:@""];
+            
+            double imageWidth = [width doubleValue];
+            double imageHeight = [height doubleValue];
+            
+            [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
+        }
     }
     return 0;
 }
@@ -700,7 +734,16 @@ struct TopMargin {
     // Dispose of any resources that can be recreated.
 }
 
-// Display the main menu on the current screen
+/*
+ 
+ Display the screen to allow the user to post an event
+ 
+ */
+- (IBAction)showCreatePostScreen:(id)sender {
+    DECreatePostViewController *viewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"createPostDetailsOne"];
+    
+    [self.navigationController pushViewController:viewController animated:YES];
+}
 
 - (IBAction)displayMainMenu:(id)sender {
 

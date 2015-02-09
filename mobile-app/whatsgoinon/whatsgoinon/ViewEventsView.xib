@@ -325,6 +325,71 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="534" y="417"/>
         </view>
+        <view contentMode="scaleToFill" id="VLz-SA-Cqq">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You haven't posted any events yet so we have nothing to show ya!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnx-gM-Iun">
+                    <rect key="frame" x="25" y="37" width="271" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="qvh-8n-72x"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We thought so! If you find a cool event, HappSnap it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKp-CB-lAL">
+                    <rect key="frame" x="25" y="219" width="271" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="pXx-k4-X5P"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1QT-Qj-MeB">
+                    <rect key="frame" x="0.0" y="523" width="320" height="45"/>
+                    <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="Gd4-Ef-9IH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                    <state key="normal" title="Post Somethin'">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="showCreatePostScreen:" destination="-1" eventType="touchUpInside" id="5AU-oI-At7"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You know what makes HappSnap so special? The people that share what they find with others. You like being awesome, right?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43U-0d-sAm">
+                    <rect key="frame" x="25" y="106" width="271" height="94"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="94" id="yYC-8a-6KG"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="43U-0d-sAm" firstAttribute="trailing" secondItem="nnx-gM-Iun" secondAttribute="trailing" id="5Ug-rY-2Tn"/>
+                <constraint firstItem="ZKp-CB-lAL" firstAttribute="trailing" secondItem="43U-0d-sAm" secondAttribute="trailing" id="60h-MV-BrS"/>
+                <constraint firstItem="nnx-gM-Iun" firstAttribute="top" secondItem="VLz-SA-Cqq" secondAttribute="top" constant="37" id="8WZ-MI-61Y"/>
+                <constraint firstItem="nnx-gM-Iun" firstAttribute="leading" secondItem="VLz-SA-Cqq" secondAttribute="leading" constant="25" id="CJx-Zv-A2f"/>
+                <constraint firstAttribute="bottom" secondItem="1QT-Qj-MeB" secondAttribute="bottom" id="Ivb-iT-PLs"/>
+                <constraint firstItem="43U-0d-sAm" firstAttribute="leading" secondItem="nnx-gM-Iun" secondAttribute="leading" id="TiR-5l-ULY"/>
+                <constraint firstAttribute="trailing" secondItem="1QT-Qj-MeB" secondAttribute="trailing" id="Tin-nB-iCj"/>
+                <constraint firstItem="1QT-Qj-MeB" firstAttribute="leading" secondItem="VLz-SA-Cqq" secondAttribute="leading" id="hy1-Ya-nC7"/>
+                <constraint firstItem="ZKp-CB-lAL" firstAttribute="leading" secondItem="43U-0d-sAm" secondAttribute="leading" id="tko-eV-unD"/>
+                <constraint firstAttribute="trailing" secondItem="nnx-gM-Iun" secondAttribute="trailing" constant="24" id="ueh-8N-2aP"/>
+                <constraint firstItem="ZKp-CB-lAL" firstAttribute="top" secondItem="43U-0d-sAm" secondAttribute="bottom" constant="19" id="vGg-sY-gGr"/>
+                <constraint firstItem="43U-0d-sAm" firstAttribute="top" secondItem="nnx-gM-Iun" secondAttribute="bottom" constant="19" id="zu1-mA-idM"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="534" y="-19"/>
+        </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

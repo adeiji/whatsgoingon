@@ -189,6 +189,30 @@
     }
 }
 
+- (PFObject *) getPFObjectForEventWithObjectId : (NSString *) objectId
+                                     WithArray : (NSArray *) array {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", objectId];
+    // Get the PFObject that corresponds to this post
+    PFObject *object = (PFObject *) [[array filteredArrayUsingPredicate:predicate] firstObject];
+    
+    return object;
+}
+
+- (void) deletePFObjectWithObjectId : (NSString *) objectId {
+    NSMutableArray *postsCopy = [_posts mutableCopy];
+    PFObject *object = [self getPFObjectForEventWithObjectId:objectId
+                                                   WithArray:postsCopy];
+    [postsCopy removeObject:object];
+    _posts = postsCopy;
+    [self setAllPostToNotLoaded];
+}
+
+- (void) setAllPostToNotLoaded {
+    [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        obj[@"loaded"] = @NO;
+    }];
+}
+
 - (DEPost *) getCurrentPost {
     if (_currentPost == nil)
     {

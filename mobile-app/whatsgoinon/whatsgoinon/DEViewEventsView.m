@@ -235,28 +235,37 @@ const int POST_WIDTH = 140;
         [_searchBar resignFirstResponder];
     }
     else {
-        UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        
-        DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
-        eventViewController.post = _post;
-        eventViewController.isPreview = NO;
-        eventViewController.viewEventView = self;
-        [[DEPostManager sharedManager] setCurrentPost:_post];
-        [[DEPostManager sharedManager] setDistanceFromEvent:self.lblDistance.text];
-        
-        [navigationController pushViewController:eventViewController animated:YES];
-        
-        // If this event is already saved as going, then we need to display that in the view.
-        if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
+        if ([_post.username isEqualToString:[[PFUser currentUser] username]])
         {
-            eventViewController.isGoing = YES;
+            [self showEventEditing : YES];
         }
-        else if ([[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post.objectId])
-        {
-            eventViewController.isMaybeGoing = YES;
+        else {
+            [self showEventEditing : NO];
         }
     }
-
 }
 
+- (void) showEventEditing : (BOOL) editing {
+    UINavigationController *navigationController = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
+    eventViewController.post = _post;
+    eventViewController.isPreview = NO;
+    eventViewController.isEditDeleteMode = editing;
+    eventViewController.viewEventView = self;
+    [[DEPostManager sharedManager] setCurrentPost:_post];
+    [[DEPostManager sharedManager] setDistanceFromEvent:self.lblDistance.text];
+    
+    [navigationController pushViewController:eventViewController animated:YES];
+    
+    // If this event is already saved as going, then we need to display that in the view.
+    if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
+    {
+        eventViewController.isGoing = YES;
+    }
+    else if ([[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post.objectId])
+    {
+        eventViewController.isMaybeGoing = YES;
+    }
+    
+}
 @end

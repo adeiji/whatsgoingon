@@ -38,6 +38,7 @@
 @property BOOL overlayDisplayed;
 @property BOOL now;
 
+- (IBAction)showCreatePostScreen:(id)sender;
 - (IBAction)displayMainMenu:(id)sender;
 - (IBAction)goHome:(id)sender;
 - (void) displayPost : (NSNotification *) notification;

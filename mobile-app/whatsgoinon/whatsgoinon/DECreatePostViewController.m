@@ -34,6 +34,13 @@
 	// Do any additional setup after loading the view.
     DEPostManager *postManager = [DEPostManager sharedManager];
     _post = [postManager currentPost];
+    if ([_post.images count] == 0)
+    {
+        imagesCopy = [NSMutableArray new];
+    }
+    else {
+        imagesCopy = [_post.images mutableCopy];
+    }
     [self setUpViews];
     postRanges = @[@"ALL", @"1 mile radius", @"2 mile radius", @"3 mile radius", @"5 mile radius", @"10 mile radius", @"15 mile radius", @"20 mile radius", @"30 mile radius"];
     
@@ -54,7 +61,118 @@
     }
     
     _createPostViewTwo.txtWebsite.text = @"";
+}
+
+/*
+ 
+ Get the start and end date and time for the event and store those values in the respective text boxes.  Also displays the address
+ 
+ */
+- (void) setTimesAndAddressForEditMode {
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateStyle:NSDateFormatterShortStyle];
+    _createPostViewOne.txtStartDate.text = [df stringFromDate:_post.startTime];
+    _createPostViewOne.txtEndDate.text = [df stringFromDate:_post.endTime];
+    [df setDateFormat:@"hh:mm a"];
+    _createPostViewOne.txtStartTime.text = [df stringFromDate:_post.startTime];
+    _createPostViewOne.txtEndTime.text = [df stringFromDate:_post.endTime];
+    _createPostViewOne.txtAddress.text = _post.address;
+}
+/*
+ 
+ Display from the post the descriptions the price and the saved images.
+ 
+ */
+- (void) setDescriptionsPriceAndImages {
+    NSString *cost = _post.cost  == nil ? @"Free" : [_post.cost stringValue];
+    _createPostViewTwo.txtCost.text = cost;
+    _createPostViewTwo.txtDescription.text = _post.myDescription;
+    _createPostViewTwo.txtQuickDescription.text = _post.quickDescription;
+    _createPostViewTwo.txtTitle.text = _post.title;
+    _createPostViewTwo.txtWebsite.text = _post.website;
+    
+    static BOOL imagesConverted = NO;
+    
+    [self convertPFFileArrayToImageArrayConverted:imagesConverted Images:_post.images];
+    imagesConverted = YES;
+    
+}
+
+/*
+ 
+ Get all the actual images from the PFFiles and store them in an array for later usage
+ 
+ */
+- (void) convertPFFileArrayToImageArrayConverted : (BOOL) isConverted
+                                          Images : (NSArray *) array {
+    __block int counter = 0;
     imagesCopy = [NSMutableArray new];
+    // If we haven't already converted these images
+    if (!isConverted)
+    {
+        [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            PFFile *file = (PFFile *) obj;
+            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+
+                UIImage *image = [UIImage imageWithData:data];
+                image.tag = [NSNumber numberWithInt:counter];
+                counter ++;
+                [imagesCopy addObject:image];
+                _post.images = imagesCopy;
+            NSLog(@"happsnap.decreatepostviewcontroller.image.loaded");
+            }];
+        } ];
+    }
+    else {
+        imagesCopy = [_post.images mutableCopy];
+        [self loadImages];
+    }
+}
+
+- (void) setButtonBackgroundImageToSavedPostImageButton : (UIImage *) image
+{
+    __block UIButton *button;
+    [_cameraButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if (((UIButton *) obj).tag == ((NSNumber *) image.tag).integerValue)
+        {
+            button = (UIButton *) obj;
+            *stop = YES;
+        }
+    }];
+    
+    [button setBackgroundImage:image forState:UIControlStateNormal];
+}
+
+- (void) setEditableTextFields {
+    // Check to see if this event is started or not
+    if (([_post.startTime compare:[NSDate new]] == NSOrderedAscending) && ([_post.endTime compare:[NSDate new]] == NSOrderedDescending))
+    {
+        _createPostViewOne.txtAddress.userInteractionEnabled = NO;
+        _createPostViewOne.txtCategory.userInteractionEnabled = NO;
+        _createPostViewOne.txtEndDate.userInteractionEnabled = NO;
+        _createPostViewOne.txtStartDate.userInteractionEnabled = NO;
+        _createPostViewOne.txtStartTime.userInteractionEnabled = NO;
+        _createPostViewOne.txtEndTime.userInteractionEnabled = NO;
+        _createPostViewOne.txtPostRange.userInteractionEnabled = NO;
+        _createPostViewTwo.txtTitle.userInteractionEnabled = NO;
+        _createPostViewTwo.txtWebsite.userInteractionEnabled = NO;
+        _createPostViewTwo.txtCost.userInteractionEnabled = NO;
+    }
+}
+
+- (BOOL) checkForEditMode {
+    if (_isEditMode)
+    {
+        [self setEditableTextFields];
+        [self setTimesAndAddressForEditMode];
+        _createPostViewOne.txtAddress.text = _post.address;
+        [self setDescriptionsPriceAndImages];
+        [_createPostViewOne setUpTextFieldAvailability:_isEditMode];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 
@@ -84,7 +202,10 @@
     
     [_createPostViewTwo setupView];
     [_createPostViewOne setupView];
-    [self loadPostDetails];
+    if (![self checkForEditMode])
+    {
+        [self loadPostDetails];
+    }
 }
 
 - (void) setUpViews {
@@ -129,14 +250,21 @@
 // ** Production
 // We display the post to allow the user to view the post before he actually makes it live
 - (IBAction)displayPreview:(id)sender {
-    
+
     if ([_createPostViewTwo page2ValidateTextFields])
     {
         if ([[_post images] count] != 0)
         {
             //  Display the event preview
             DEEventViewController *eventViewController = [[UIStoryboard storyboardWithName:@"Event" bundle:nil] instantiateViewControllerWithIdentifier:@"viewEvent"];
-            eventViewController.isPreview = YES;
+            
+            if (!_isEditMode)
+            {
+                eventViewController.isPreview = YES;
+            }
+            else {
+                eventViewController.isUpdateMode = YES;
+            }
             eventViewController.post = _post;
             [self savePostDetails];
             [[DEPostManager sharedManager] setCurrentPost:_post];
@@ -148,7 +276,6 @@
         }
     }
 }
-
 
 - (IBAction)gotoNextScreen:(id)sender {
     
@@ -198,6 +325,7 @@ Display the second screen for the post details
     DEPostManager *postManager = [DEPostManager sharedManager];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
     DECreatePostViewController *createPostViewController = [sb instantiateViewControllerWithIdentifier:@"CreatePostDetailTwo"];
+    createPostViewController.isEditMode = _isEditMode;
     // Pass the new view controller the new post that was just created.
     [self.navigationController pushViewController:createPostViewController animated:YES];
     [postManager setCurrentPost:_post];

@@ -42,9 +42,8 @@
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 @property (weak, nonatomic) IBOutlet UIButton *btnNext;
 @property (weak, nonatomic) IBOutlet UIButton *btnHome;
+@property BOOL isEditMode;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
-
-
 @property (strong, nonatomic) DEPost *post;
 @property (strong, nonatomic) PFGeoPoint *location;
 
