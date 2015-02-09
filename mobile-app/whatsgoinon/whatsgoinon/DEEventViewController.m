@@ -553,6 +553,22 @@ const int heightConstraintConstant = 62;
     [[postManager goingPostWithCommentInformation] addObject:values];
 }
 
+#pragma mark - Going and Not Going Methods
+
+- (void) addEventToGoingListAndUpdateGoingCount
+{
+    int numGoing = [_post.numberGoing intValue];
+    numGoing ++;
+    _post.numberGoing = [NSNumber numberWithInt:numGoing];
+    NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
+    [[[DEPostManager sharedManager] goingPost] addObject:_post.objectId];
+    [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
+    [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
+    [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
+    [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
+    
+}
+
 - (IBAction)setEventAsGoing:(id)sender {
     
     static BOOL going = NO;
@@ -561,16 +577,13 @@ const int heightConstraintConstant = 62;
     // If the user has not already selected this post as going then we set this post as going for the user and save that to the server.
     if ( ![[postManager goingPost] containsObject:_post] )
     {
-        int numGoing = [_post.numberGoing intValue];
-        numGoing ++;
-        _post.numberGoing = [NSNumber numberWithInt:numGoing];
-        NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
-        [[postManager goingPost] addObject:_post.objectId];
-        [self addPostInformationToGoingPostWithCommentInformationManager:postManager];
-        [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
-        [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
-        [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
-        
+        [self addEventToGoingListAndUpdateGoingCount];
+        if ([[postManager maybeGoingPost] containsObject:_post.objectId])
+        {
+            [[postManager maybeGoingPost] removeObject:_post.objectId];
+            
+        }
+        self.maybeCheckmarkView.hidden = YES;
         going = YES;
         // Save this item as going for the user to the server
         [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_GOING];
@@ -603,6 +616,19 @@ const int heightConstraintConstant = 62;
     [[_eventView btnMainImage] setHidden:YES];
 }
 
+
+- (IBAction)setEventAsMaybeGoing:(id)sender {
+    
+    DEPostManager *postManager = [DEPostManager sharedManager];
+    if (![[postManager maybeGoingPost] containsObject:_post.objectId])
+    {
+        [[postManager maybeGoingPost] addObject:_post.objectId];
+        // Save this item as maybe going for the user to the server
+        [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
+        self.maybeCheckmarkView.hidden = NO;
+        [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
+    }
+}
 
 /*
  
@@ -670,14 +696,6 @@ const int heightConstraintConstant = 62;
     }
 }
 
-- (IBAction)setEventAsMaybeGoing:(id)sender {
-    DEPostManager *postManager = [DEPostManager new];
-    [[postManager maybeGoingPost] addObject:_post.objectId];
-    // Save this item as maybe going for the user to the server
-    [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
-    self.maybeCheckmarkView.hidden = NO;
-    [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
-}
 
 - (void) updateViewToGoing
 {

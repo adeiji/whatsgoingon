@@ -591,7 +591,7 @@ struct TopMargin {
     [_scrollView addSubview:view];
     [self moveViewToCenterOfScrollViewView:view];
     [_scrollView setContentSize:view.frame.size];
-    [self hideOrbView];
+    [self showOrbView];
     
     [self scrollToTopOfScrollView];
 }
