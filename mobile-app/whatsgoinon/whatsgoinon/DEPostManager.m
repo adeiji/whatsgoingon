@@ -187,6 +187,8 @@
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil userInfo:categoryDictionary];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ORB_CLICKED object:nil userInfo:categoryDictionary];
 }
 
 - (PFObject *) getPFObjectForEventWithObjectId : (NSString *) objectId

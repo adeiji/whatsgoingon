@@ -14,6 +14,7 @@
 #import "DESelectCategoryView.h"
 #import "DEViewMainMenu.h"
 #import <Masonry/Masonry.h>
+#import "DEWelcomeEventView.h"
 
 @class DEViewMainMenu;
 
@@ -27,6 +28,8 @@
     SEL postSelector;
     CGFloat lastContentOffset;
     UIActivityIndicatorView *spinner;
+    BOOL welcomeScreen;
+    DEWelcomeEventView *welcomeView;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;

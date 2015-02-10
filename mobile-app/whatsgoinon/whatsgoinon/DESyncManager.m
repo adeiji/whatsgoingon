@@ -430,6 +430,21 @@ static PFQuery *globalQuery;
     }];
 }
 
++ (void) getPFObjectForEventObjectIdAndUpdate:(NSString *)objectId
+                                 WithPost : (DEPost *) post{
+    
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    [query whereKey:PARSE_CLASS_EVENT_OBJECT_ID equalTo:objectId];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+       if (!error)
+       {
+           PFObject *object = [objects firstObject];
+           // Update the object with the new values
+           [DESyncManager updatePFObject:object WithValuesFromPost:post];
+       }
+    }];
+}
+
 + (PFObject *) getPFObjectWithValuesFromPost : (DEPost *) post
                               PFObject : (PFObject *) postObject
 {

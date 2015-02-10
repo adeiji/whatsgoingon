@@ -46,6 +46,14 @@
                 [[DEPostManager sharedManager] setGoingPost:user[PARSE_CLASS_USER_EVENTS_GOING]];
                 [[DEPostManager sharedManager] setMaybeGoingPost:user[PARSE_CLASS_USER_EVENTS_MAYBE]];
                 NSLog(@"Retrieved the user from the server");
+                
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                PFFile *imageFile = (PFFile *) user[PARSE_CLASS_USER_PROFILE_PICTURE];
+                
+                [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    [userDefaults setObject:data forKey:@"profile-picture"];
+                }];
+
             }
         }];
 
@@ -403,6 +411,7 @@
 + (void) logoutUser {
 
     DEAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate setUserDefaultArraysToEmpty];
     [delegate loadGoingPosts];
     [delegate loadMaybeGoingPosts];
     [delegate loadPromptedForCommentEvents];

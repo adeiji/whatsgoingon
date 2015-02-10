@@ -116,6 +116,7 @@ NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS = @"com.happsnap.pro
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING = @"com.happsnap.stillloading";
 NSString *const kNOTIFICATION_CENTER_IS_CITY_CHANGE = @"com.happsnap.citychange";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING = @"com.happsnap.finishedLoading";
+NSString *const NOTIFICATION_CENTER_ORB_CLICKED = @"com.happsnap.orbclicked";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW = @"com.happsnap.new";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS = @"com.happsnap.isEpicEvents";
 NSString *const kNOTIFICATION_CENTER_EVENT_USER_AT = @"com.happsnap.event.user.at";

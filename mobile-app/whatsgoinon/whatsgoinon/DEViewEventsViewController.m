@@ -23,6 +23,7 @@
 #define MAIN_MENU_Y_POS 0
 
 const int NO_USER_EVENTS = 5;
+NSString *IS_FIRST_TIME_VIEWING_SCREEN = @"com.happsnap.isfirsttimeviewingscreen";
 
 @implementation DEViewEventsViewController
 
@@ -35,6 +36,7 @@ struct TopMargin {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectorToNewCity) name:kNOTIFICATION_CENTER_IS_CITY_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUsersEvents:) name:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orbClicked) name:NOTIFICATION_CENTER_ORB_CLICKED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_NO_DATA object:nil];
@@ -46,6 +48,7 @@ struct TopMargin {
 }
 
 #pragma mark - Activity Spinners
+
 
 - (void) startActivitySpinner
 {
@@ -66,10 +69,26 @@ struct TopMargin {
     postSelector = @selector(getAllValuesWithinMilesForNow:PostsArray:Location:);
 }
 
+- (void) loadFirstTimeView {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *isFirstTimeViewingScreen = (NSNumber *) [userDefaults objectForKey:IS_FIRST_TIME_VIEWING_SCREEN];
+    welcomeScreen = NO;
+    
+    if (!isFirstTimeViewingScreen)
+    {
+        welcomeView = (DEWelcomeEventView *)[[[NSBundle mainBundle] loadNibNamed:@"WelcomeEventsView" owner:self options:nil] firstObject];
+        [[welcomeView.btnStart layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        [self.view addSubview:welcomeView];
+        [userDefaults setObject:@YES forKey:IS_FIRST_TIME_VIEWING_SCREEN];
+        welcomeScreen = YES;
+    }
+}
+
 - (void)viewDidLoad
 {
     [[DELocationManager sharedManager] updateLocation];
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [self addObservers];
@@ -86,7 +105,7 @@ struct TopMargin {
         }
     }
     
-    
+    [self loadFirstTimeView];
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     [self.view addSubview:selectCategoryView];
     [selectCategoryView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
@@ -275,10 +294,44 @@ struct TopMargin {
     }
 }
 
+- (void) orbClicked {
+    if (welcomeScreen)
+    {
+        [self hideWelcomeScreen:nil];
+    }
+}
+
+- (IBAction)hideWelcomeScreen:(id)sender {
+    for (UIView *subview in [welcomeView subviews]) {
+        [subview removeFromSuperview];
+    }
+    [UIView animateWithDuration:.25f animations:^{
+        CGRect frame = welcomeView.frame;
+        frame.origin.y = welcomeView.center.y;
+        frame.size.height = 20;
+        [welcomeView setFrame:frame];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.25f animations:^{
+            CGRect frame = welcomeView.frame;
+            frame.origin.x = welcomeView.center.x;
+            frame.size.width = 20;
+            [welcomeView setFrame:frame];
+        } completion:^(BOOL finished) {
+            [welcomeView removeFromSuperview];
+        }];
+    }];
+    
+    welcomeScreen = NO;
+    
+}
+
 - (void) hideOrbView
 {
-    orbView.hidden = YES;
-    outerView.hidden = YES;
+    if (!welcomeScreen)
+    {
+        orbView.hidden = YES;
+        outerView.hidden = YES;
+    }
 }
 
 - (void) showOrbView
@@ -334,15 +387,21 @@ struct TopMargin {
 
 - (void) displayNoDataInCategory : (NSNotification *) notification
 {
-    [_scrollView setContentSize:_scrollView.frame.size];
-    [self removeAllPostFromScreen];
-    if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY])
+    if (!welcomeScreen)
     {
-        [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
+        [_scrollView setContentSize:_scrollView.frame.size];
+        [self removeAllPostFromScreen];
+        if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY])
+        {
+            [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
+        }
+        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
+        [self moveViewToCenterOfScrollViewView:view];
+        [_scrollView addSubview:view];
     }
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
-    [self moveViewToCenterOfScrollViewView:view];
-    [_scrollView addSubview:view];
+    else {
+        [DESyncManager loadEpicEvents:NO];
+    }
 }
 
 - (void) scrollToTopOfScrollView

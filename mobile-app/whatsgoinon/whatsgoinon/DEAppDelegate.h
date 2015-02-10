@@ -20,6 +20,7 @@
 - (void) loadPromptedForCommentEvents;
 - (void) loadGoingPosts;
 - (void) loadMaybeGoingPosts;
+- (void) setUserDefaultArraysToEmpty;
 
 @property (strong, nonatomic) UIWindow *window;
 

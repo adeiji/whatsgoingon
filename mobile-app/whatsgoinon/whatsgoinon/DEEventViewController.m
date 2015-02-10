@@ -80,31 +80,19 @@ const int heightConstraintConstant = 62;
     [[_eventView btnGoing] addTarget:self action:@selector(updatePost) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (PFObject *) getPFObjectForEvent {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", _post.objectId];
-    // Get the PFObject that corresponds to this post
-    PFObject *object = (PFObject *) [[[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:predicate] firstObject];
-    
-    return object;
-}
-
 /*
  
  Update the current post that the user has just modified
  
  */
 - (void) updatePost {
-    PFObject *object = [self getPFObjectForEvent];
-    // Convert the images to data in order to store the images as PFFiles
     _post.images = [self imagesToNSDataArray:_post.images Compression:.2];
-    
     if (!_post.thumbsUpCount)
     {
         _post.thumbsUpCount = [NSNumber numberWithInt:0];
     }
     
-    // Update the object with the new values
-    [DESyncManager updatePFObject:object WithValuesFromPost:_post];
+    [DESyncManager getPFObjectForEventObjectIdAndUpdate:_post.objectId WithPost:_post];
 
     DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
     DEFinishedPostingView *finishedPostView = (DEFinishedPostingView *) createPostViewController.view;

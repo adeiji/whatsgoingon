@@ -345,6 +345,20 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [userDefaults setObject:[[DEPostManager sharedManager] goingPost] forKey:kEventsUserGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:kEventsUserMaybeGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
+    [userDefaults synchronize];
+}
+
+- (void) setUserDefaultArraysToEmpty {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:nil forKey:kEventsUserPromptedForComment];
+    [userDefaults setObject:nil forKey:kEventsUserGoingTo];
+    [userDefaults setObject:nil forKey:kEventsUserMaybeGoingTo];
+    [userDefaults setObject:nil forKey:kEventsWithCommentInformation];
+    [[DEPostManager sharedManager] setPromptedForCommentEvents:[NSMutableArray new]];
+    [[DEPostManager sharedManager] setGoingPost:[NSMutableArray new]];
+    [[DEPostManager sharedManager] setMaybeGoingPost:[NSMutableArray new]];
+    [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[NSMutableArray new]];
+     
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

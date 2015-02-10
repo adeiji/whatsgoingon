@@ -37,6 +37,8 @@
 + (void) getNumberOfPostByUser : (NSString *) username;
 + (void) saveUpdatedPFObjectToServer : (PFObject *) post;
 + (void) getEventsPostedByUser : (NSString *) username;
++ (void) getPFObjectForEventObjectIdAndUpdate:(NSString *)objectId
+                                          WithPost : (DEPost *) post;
 /*
  
  Get all the saved events that the user has selected has maybe or going

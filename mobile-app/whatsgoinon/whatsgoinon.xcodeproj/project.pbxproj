@@ -174,6 +174,7 @@
 		F49BB9011A60D07B00C68E42 /* DETrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9001A60D07B00C68E42 /* DETrophy.m */; };
 		F49BB9041A65F27200C68E42 /* DEWrench.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9031A65F27200C68E42 /* DEWrench.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
+		F4B910641A895D9400E83EE5 /* DEWelcomeEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B910631A895D9400E83EE5 /* DEWelcomeEventView.m */; };
 		F4C603E41A808A60009BB549 /* viewPromptForDeletionOfEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C603E31A808A60009BB549 /* viewPromptForDeletionOfEvent.xib */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -441,6 +442,8 @@
 		F49BB9031A65F27200C68E42 /* DEWrench.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEWrench.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
+		F4B910621A895D9400E83EE5 /* DEWelcomeEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEWelcomeEventView.h; sourceTree = "<group>"; };
+		F4B910631A895D9400E83EE5 /* DEWelcomeEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEWelcomeEventView.m; sourceTree = "<group>"; };
 		F4C603E31A808A60009BB549 /* viewPromptForDeletionOfEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewPromptForDeletionOfEvent.xib; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
 		F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsMoreView.m; sourceTree = "<group>"; };
@@ -1115,6 +1118,8 @@
 				F4C68D2C199EB25B00AD0D36 /* Report View */,
 				F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */,
 				F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */,
+				F4B910621A895D9400E83EE5 /* DEWelcomeEventView.h */,
+				F4B910631A895D9400E83EE5 /* DEWelcomeEventView.m */,
 			);
 			name = "More View";
 			sourceTree = "<group>";
@@ -1463,6 +1468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F40DF97719A5621F002B4419 /* DEPost.m in Sources */,
+				F4B910641A895D9400E83EE5 /* DEWelcomeEventView.m in Sources */,
 				F49BB9041A65F27200C68E42 /* DEWrench.m in Sources */,
 				F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */,
 				F47EA7FC1A411EA1005B7B79 /* DEViewImagesViewController.m in Sources */,
