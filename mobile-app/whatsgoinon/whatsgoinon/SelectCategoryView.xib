@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What mood are you in?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxb-a2-EL3">
-                    <rect key="frame" x="48" y="118" width="225" height="21"/>
+                    <rect key="frame" x="48" y="102" width="225" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="225" id="r1m-d4-vBw"/>
                         <constraint firstAttribute="height" constant="21" id="u8o-vM-fLM"/>
@@ -22,7 +22,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9q-b2-CI6">
-                    <rect key="frame" x="25" y="139" width="271" height="63"/>
+                    <rect key="frame" x="25" y="123" width="271" height="95"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="95" id="Iax-yg-5DV"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="37"/>
                     <state key="normal" title="Trending">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -44,8 +44,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
-#warning Make sure to uncomment when going to Fabian
-//    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     [self checkIfLocalNotification:launchOptions];
     [self checkIfSignificantLocationChange:launchOptions];
     [self loadPromptedForCommentEvents];
