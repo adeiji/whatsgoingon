@@ -681,7 +681,7 @@ struct TopMargin {
 
     
     CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
-    [self getEventImageHeightDifference:viewEventsView];
+    heightDifference += [self getEventImageHeightDifference:viewEventsView];
     
     [self setUpViewEventsFrame:*columnOneMargin
                         Margin:*columnTwoMargin
@@ -771,14 +771,10 @@ struct TopMargin {
     
     CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
     
-    CGFloat viewEventsViewHeight = (POST_HEIGHT * screenSizeRelativeToiPhone5Width) + heightDifference;
+    CGFloat viewEventsViewHeight = (POST_HEIGHT) + heightDifference;
     CGRect frame = CGRectMake((column * (POST_WIDTH * screenSizeRelativeToiPhone5Width)) + ((widthMargin * screenSizeRelativeToiPhone5Width) * (column + 1)), topMargin + (margin * screenSizeRelativeToiPhone5Width), (POST_WIDTH * screenSizeRelativeToiPhone5Width), viewEventsViewHeight);
-    
+
     view.frame = frame;
-    // Set up the Subtitle frame
-    frame = [[view lblSubtitle ] frame];
-    frame.size.height += heightDifference;
-    [[view lblSubtitle] setFrame:frame];
 }
 /*
  
@@ -811,7 +807,7 @@ struct TopMargin {
             double imageWidth = [width doubleValue];
             double imageHeight = [height doubleValue];
             
-            [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
+            return [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
         }
     }
     return 0;
@@ -825,14 +821,14 @@ struct TopMargin {
     CGFloat correctImageViewHeight = (view.imgMainImageView.frame.size.width / width) * height;
     
     if (correctImageViewHeight < view.imageViewHeightConstraint.constant) {
-        view.rotateImage = YES;
+        view.rotateImage = NO;
         correctImageViewHeight = (view.imgMainImageView.frame.size.width / height) * width;
     }
     
     view.imageViewHeightConstraint.constant = correctImageViewHeight;
-    [view.imgMainImageView layoutIfNeeded];
+//    [view.imgMainImageView layoutIfNeeded];
     
-    return view.imageViewHeightConstraint.constant;
+    return view.imageViewHeightConstraint.constant - view.imgMainImageView.frame.size.height;
 }
 
 - (void) getDistanceFromCurrentLocationOfEvent : (PFObject *) event {

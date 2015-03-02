@@ -44,7 +44,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location services must enabled to allow the app to know where you&apos;re at, and where other events are relative to you.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>You need location services running in the background in order to see if you&apos;re at an event you&apos;re going to in order to comment.</string>
+	<string>HappSnap only requires location services running in the background to show you events nearby and to know when to ask you for feedback of events you attend.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

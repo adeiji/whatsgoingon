@@ -687,16 +687,21 @@ const int heightConstraintConstant = 62;
 
 - (void) updateViewToGoing
 {
-    UIButton *button = [_eventView btnGoing];
-    [button setTitle:@"Map It" forState:UIControlStateNormal];
-    [button removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
-    [button addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *goingButton;
+    UIButton *maybeButton;
+    
+    goingButton = [_eventView btnGoing];
+    maybeButton = [_eventView btnMaybe];
+    
+    [goingButton setTitle:@"Map It" forState:UIControlStateNormal];
+    [goingButton removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
+    [goingButton addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
 
     _goingButtonBottomSpaceConstraint.constant = -40;
     _goingButtonBottomSpaceConstraintMapView.constant = -40;
     [self.view layoutIfNeeded];
    // [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
-    [[_eventView btnMaybe] setHidden:YES];
+    [maybeButton setHidden:YES];
     
     CGRect frame = _mapView.frame;
     frame.size.height += 40;

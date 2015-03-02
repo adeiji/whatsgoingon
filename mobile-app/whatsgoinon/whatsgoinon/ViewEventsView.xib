@@ -22,13 +22,15 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie at the park" lineBreakMode="tailTruncation" numberOfLines="40" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="129" translatesAutoresizingMaskIntoConstraints="NO" id="kW7-t4-DET">
-                    <rect key="frame" x="6" y="161" width="129" height="37"/>
+                    <rect key="frame" x="6" y="167" width="129" height="23"/>
+                    <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="106" translatesAutoresizingMaskIntoConstraints="NO" id="dfb-u1-i4Q">
                     <rect key="frame" x="29" y="192" width="106" height="53"/>
+                    <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="53" id="7eb-Zm-fJq"/>
                     </constraints>
@@ -115,14 +117,13 @@
                 <constraint firstItem="wIg-bV-ff8" firstAttribute="leading" secondItem="6uh-TH-Z8h" secondAttribute="trailing" constant="3" id="2WD-iF-nwf"/>
                 <constraint firstItem="Ali-rf-U8v" firstAttribute="top" secondItem="dfb-u1-i4Q" secondAttribute="bottom" constant="6" id="2Wv-G7-kgG"/>
                 <constraint firstItem="B1c-VQ-fcl" firstAttribute="centerY" secondItem="Ali-rf-U8v" secondAttribute="centerY" constant="0.5" id="7gH-P0-bic"/>
-                <constraint firstItem="kW7-t4-DET" firstAttribute="top" secondItem="Rdq-Pp-4T2" secondAttribute="bottom" constant="-5" id="8Bu-6m-Vda"/>
+                <constraint firstItem="kW7-t4-DET" firstAttribute="top" secondItem="Rdq-Pp-4T2" secondAttribute="bottom" constant="1" id="8Bu-6m-Vda"/>
                 <constraint firstAttribute="trailing" secondItem="MJ0-LB-RQz" secondAttribute="trailing" id="9xA-Je-nJW"/>
                 <constraint firstItem="L5I-6n-mVu" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="4" id="BeU-FW-WFU"/>
                 <constraint firstItem="dfb-u1-i4Q" firstAttribute="leading" secondItem="L5I-6n-mVu" secondAttribute="trailing" id="EDr-7c-L9s"/>
                 <constraint firstItem="wIg-bV-ff8" firstAttribute="centerY" secondItem="B1c-VQ-fcl" secondAttribute="centerY" constant="-0.5" id="FFV-bn-bfl"/>
                 <constraint firstItem="Ali-rf-U8v" firstAttribute="leading" secondItem="B1c-VQ-fcl" secondAttribute="trailing" constant="4" id="Fw2-e5-cKJ"/>
                 <constraint firstItem="Rdq-Pp-4T2" firstAttribute="top" secondItem="MJ0-LB-RQz" secondAttribute="bottom" constant="3" id="G2D-rO-Xz2"/>
-                <constraint firstItem="dfb-u1-i4Q" firstAttribute="top" secondItem="kW7-t4-DET" secondAttribute="bottom" constant="-6" id="HCT-SC-l6C"/>
                 <constraint firstItem="6uh-TH-Z8h" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="4" id="KZ9-86-EJv"/>
                 <constraint firstItem="6uh-TH-Z8h" firstAttribute="centerY" secondItem="wIg-bV-ff8" secondAttribute="centerY" constant="-1.5" id="L5h-Py-HTV"/>
                 <constraint firstItem="kW7-t4-DET" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="6" id="LTL-LV-kMw"/>
@@ -135,6 +136,7 @@
                 <constraint firstItem="Rdq-Pp-4T2" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="6" id="olk-eP-Z9B"/>
                 <constraint firstItem="MJ0-LB-RQz" firstAttribute="top" secondItem="1" secondAttribute="top" id="qQT-IK-8eI"/>
                 <constraint firstAttribute="trailing" secondItem="kW7-t4-DET" secondAttribute="trailing" constant="5" id="rNO-jX-mbX"/>
+                <constraint firstItem="dfb-u1-i4Q" firstAttribute="top" secondItem="kW7-t4-DET" secondAttribute="bottom" constant="2" id="ten-oM-2iG"/>
                 <constraint firstItem="MJ0-LB-RQz" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="uBJ-qB-x4W"/>
                 <constraint firstAttribute="bottom" secondItem="xnQ-Xu-Rdb" secondAttribute="bottom" constant="4" id="wPs-PJ-rmY"/>
                 <constraint firstItem="xnQ-Xu-Rdb" firstAttribute="leading" secondItem="wIg-bV-ff8" secondAttribute="leading" id="zyw-9f-6dO"/>
