@@ -129,7 +129,7 @@
 - (IBAction)submitComment:(id)sender {
     
     // Need to check and make sure that the user has picked thumbs up or down.  If not then prompt the user to do so.
-    if (ratingChange != 0)
+    if (ratingChange != 0 && commentSelected == YES)
     {
         [DESyncManager saveCommentWithEventId:[post objectId] Comment:_txtComment.text Rating:ratingChange];
         [DEScreenManager hideCommentView];
@@ -144,7 +144,8 @@
             [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
         }
     }
-    else { // If the user has not selected thumbs up or down then display to them that they need to do this by adding a red border to thumbs buttons
+    
+    if (ratingChange == 0) { // If the user has not selected thumbs up or down then display to them that they need to do this by adding a red border to thumbs buttons
         [[_btnThumbsDown layer] setBorderColor:[UIColor redColor].CGColor];
         [[_btnThumbsDown layer] setBorderWidth:2.0f];
         [[_btnThumbsDown layer] setCornerRadius:BUTTON_CORNER_RADIUS];
@@ -154,6 +155,13 @@
         [[_btnThumbsUp layer] setCornerRadius:BUTTON_CORNER_RADIUS];
         
         [_lblPromptEntry setHidden:NO];
+    }
+    if (commentSelected == NO)
+    {
+        for (UIButton *button in _commentButtons) {
+            [[button layer] setBorderColor:[UIColor redColor].CGColor];
+            [[button layer] setBorderWidth:2.0f];
+        }
     }
 }
 
@@ -185,6 +193,15 @@
         default:
             break;
     }
+    
+    commentSelected = YES;
+    
+    
+    for (UIButton *button in _commentButtons) {
+        [[button layer] setBorderColor:[UIColor whiteColor].CGColor];
+        [[button layer] setBorderWidth:1.5f];
+    }
+    
 }
 
 - (IBAction)cancel:(id)sender {

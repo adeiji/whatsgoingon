@@ -17,6 +17,7 @@
 
 + (UIColor *) blueColor;
 // Drawing Methods
++ (void)drawAccountIconWithFrame: (CGRect)frame;
 + (void) drawAmbassadorFlagInRect: (CGRect)frame;
 + (void) drawMaybeCheckmark;
 + (void) drawHappSnapIcon : (CGRect) frame;

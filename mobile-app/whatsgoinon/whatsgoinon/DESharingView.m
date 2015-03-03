@@ -89,7 +89,7 @@
 }
 
 - (NSURL *) getEventUrl {
-    NSString *stringUrl = @"https://www.google.com/";
+    NSString *stringUrl = @"http://www.happsnap.com/event/?";
     NSString *message = [NSString stringWithFormat:@"%@%@", stringUrl, _post.objectId ];
     NSURL *url = [[NSURL alloc] initWithString:message];
 

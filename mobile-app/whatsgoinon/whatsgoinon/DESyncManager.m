@@ -387,13 +387,13 @@ static PFQuery *globalQuery;
         }
         
         [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded)
+            if (!error)
             {
                 NSLog(@"Saved successfully");
             }
             else
             {
-                NSLog(@"%@", error.description);
+                NSLog(@"Oh snap, something happened! - %@", error.description);
             }
         }];
     }];

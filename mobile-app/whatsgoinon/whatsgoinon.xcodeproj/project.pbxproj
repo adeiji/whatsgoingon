@@ -118,6 +118,7 @@
 		F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A219C013B40061F362 /* calendar-icon 44x44.png */; };
 		F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A619C014AB0061F362 /* clock-icon 44x44.png */; };
 		F45030A919C015E80061F362 /* location-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A819C015E80061F362 /* location-icon.png */; };
+		F45A90C01AA535350080EBB5 /* DEAccountIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = F45A90BF1AA535350080EBB5 /* DEAccountIcon.m */; };
 		F45BC4D61A33C0E4001197CD /* main-screen-background-small.png in Resources */ = {isa = PBXBuildFile; fileRef = F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */; };
 		F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A019AC6EFD007705F9 /* DEOrbButton.m */; };
 		F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */; };
@@ -348,6 +349,8 @@
 		F45030A219C013B40061F362 /* calendar-icon 44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-icon 44x44.png"; sourceTree = "<group>"; };
 		F45030A619C014AB0061F362 /* clock-icon 44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock-icon 44x44.png"; sourceTree = "<group>"; };
 		F45030A819C015E80061F362 /* location-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon.png"; sourceTree = "<group>"; };
+		F45A90BE1AA535350080EBB5 /* DEAccountIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAccountIcon.h; sourceTree = "<group>"; };
+		F45A90BF1AA535350080EBB5 /* DEAccountIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAccountIcon.m; sourceTree = "<group>"; };
 		F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-screen-background-small.png"; sourceTree = "<group>"; };
 		F45E609F19AC6EFD007705F9 /* DEOrbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEOrbButton.h; sourceTree = "<group>"; };
 		F45E60A019AC6EFD007705F9 /* DEOrbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEOrbButton.m; sourceTree = "<group>"; };
@@ -931,6 +934,8 @@
 				F4CCCE071A65FBFB0073DEE5 /* DETime.m */,
 				F4CCCE091A65FDD00073DEE5 /* DELocation.h */,
 				F4CCCE0A1A65FDD00073DEE5 /* DELocation.m */,
+				F45A90BE1AA535350080EBB5 /* DEAccountIcon.h */,
+				F45A90BF1AA535350080EBB5 /* DEAccountIcon.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
@@ -1482,6 +1487,7 @@
 				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
 				F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */,
+				F45A90C01AA535350080EBB5 /* DEAccountIcon.m in Sources */,
 				F45E60BB19AD8F22007705F9 /* DELocationView.m in Sources */,
 				F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */,
 				F4CCCE0B1A65FDD00073DEE5 /* DELocation.m in Sources */,

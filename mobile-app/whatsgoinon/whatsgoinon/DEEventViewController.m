@@ -237,7 +237,6 @@ const int heightConstraintConstant = 62;
             self.maybeCheckmarkView.hidden = NO;
         }
     }
-    
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -595,8 +594,10 @@ const int heightConstraintConstant = 62;
     else {
         NSInteger indexOfViewController = self.navigationController.viewControllers.count - 2;
         DEEventViewController *viewController = [self.navigationController.viewControllers objectAtIndex:indexOfViewController];
+        viewController.isGoing = YES;
+        [viewController updateViewToGoing];
         [viewController shareEvent:nil];
-        
+
         [self.navigationController popViewControllerAnimated:YES];
     }
     

@@ -20,6 +20,7 @@
     NSString *comment;
     NSInteger ratingChange;
     DEPost *post;
+    BOOL commentSelected;
 }
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;

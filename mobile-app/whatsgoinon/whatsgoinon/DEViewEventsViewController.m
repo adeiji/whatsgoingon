@@ -600,11 +600,6 @@ struct TopMargin {
                           TopMargin:topMargin
                         PostCounter:&postCounter
                           ShowBlank:showBlank];
-                    
-                    NSLog(@"Column One Margin: %f", columnOneMargin);
-                    NSLog(@"Column Two Margin: %f", columnTwoMargin);
-                    NSLog(@"Margin: %f", margin);
-                    NSLog(@"Post Counter: %i", postCounter);
                 }
                 
                 count ++;
@@ -615,10 +610,10 @@ struct TopMargin {
         // Add the column one or column two margin, depending on which is greater to the height of the scroll view's content size
         if (columnOneMargin > columnTwoMargin)
         {
-            scrollViewContentSizeHeight += (columnOneMargin * screenSizeRelativeToiPhone5Width) + topMargin;
+            scrollViewContentSizeHeight += (columnOneMargin) + topMargin;
         }
         else {
-            scrollViewContentSizeHeight += (columnTwoMargin * screenSizeRelativeToiPhone5Width) + topMargin;
+            scrollViewContentSizeHeight += (columnTwoMargin) + topMargin;
         }
         
         CGSize size = _scrollView.contentSize;
@@ -707,7 +702,6 @@ struct TopMargin {
     }
     
     [self getDistanceFromCurrentLocationOfEvent:obj];
-    NSLog(@"The top maergin is %f", topMargin);
     
 }
 
@@ -772,7 +766,7 @@ struct TopMargin {
     CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
     
     CGFloat viewEventsViewHeight = (POST_HEIGHT) + heightDifference;
-    CGRect frame = CGRectMake((column * (POST_WIDTH * screenSizeRelativeToiPhone5Width)) + ((widthMargin * screenSizeRelativeToiPhone5Width) * (column + 1)), topMargin + (margin * screenSizeRelativeToiPhone5Width), (POST_WIDTH * screenSizeRelativeToiPhone5Width), viewEventsViewHeight);
+    CGRect frame = CGRectMake((column * (POST_WIDTH * screenSizeRelativeToiPhone5Width)) + ((widthMargin * screenSizeRelativeToiPhone5Width) * (column + 1)), topMargin + (margin), (POST_WIDTH * screenSizeRelativeToiPhone5Width), viewEventsViewHeight);
 
     view.frame = frame;
 }
@@ -787,7 +781,6 @@ struct TopMargin {
     // Get the heightDifference from what it's original size is and what it's size will be
     CGFloat heightDifference = ceilf(sizeThatFitsTextView.height) - [view lblSubtitle].frame.size.height;
     
-    NSLog(@"The height difference for the label is: %f", heightDifference);
     return heightDifference;
 }
 
@@ -904,6 +897,7 @@ struct TopMargin {
                         Category:nil
                        PostArray:_posts
                        ShowBlank:YES];
+        
         NSLog(@"Load events again");
     }
     

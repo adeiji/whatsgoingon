@@ -11,6 +11,7 @@
 #import "DEAppDelegate.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
+
 @implementation DEUserManager
 
 + (id)sharedManager {
@@ -174,10 +175,18 @@
 - (void) saveItemToArray : (NSString *) item
          ParseColumnName : (NSString *) columnName
 {
-    PFObject *myUser = [PFUser currentUser];
-    [myUser addObject:item forKey:columnName];
     
-    [myUser saveEventually:^(BOOL succeeded, NSError *error) {
+    PFACL *acl = [PFACL ACL];
+    [acl setWriteAccess:YES forUser:[PFUser currentUser]];
+    [acl setReadAccess:YES forUser:[PFUser currentUser]];
+    [acl setPublicReadAccess:YES];
+    [acl setPublicWriteAccess:YES];
+    
+    [_userObject setACL:acl];
+    
+    [_userObject addObject:item forKey:columnName];
+    
+    [_userObject saveEventually:^(BOOL succeeded, NSError *error) {
        if (succeeded)
        {
            NSLog(@"Yeah!! You saved the item to an array on parse!");
