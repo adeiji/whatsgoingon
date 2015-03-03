@@ -924,21 +924,33 @@ struct TopMargin {
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    
     _searchPosts = [NSMutableArray new];
+    _postsCopy = [_posts copy];
 }
 
 - (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-
+    _posts = [_postsCopy copy];
+    _postsCopy = [NSMutableArray new];
+    
+    for (PFObject *obj in _posts)
+    {
+        obj[@"loaded"] = @NO;
+    }
+    
+    _isNewProcess = YES;
+    [self addEventsToScreen:0
+              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW
+                   Category:nil
+                  PostArray:_posts
+                  ShowBlank:NO];
+    [self loadVisiblePost:_scrollView];
 }
 
 #pragma mark - Search Bar Delegate Methods
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    static BOOL searchModeStarted = NO;
     [self removeAllPostFromScreen];
-    NSArray *postsCopy;
     
     if (![[searchText stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""])
     {
@@ -957,13 +969,8 @@ struct TopMargin {
             }
         }];
         
-        if (!searchModeStarted)
-        {
-            postsCopy = [_posts copy];
-
-        }
-        
         _posts = _searchPosts;
+        _isNewProcess = YES;
         [self addEventsToScreen:0
                   ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW
                        Category:nil
@@ -973,11 +980,12 @@ struct TopMargin {
         _searchPosts = [NSMutableArray new];
     }
     else {
-        _posts = postsCopy;
+        _posts = [_postsCopy copy];
+        
         for (PFObject *obj in _posts) {
             obj[@"loaded"] = @NO;
         }
-        
+        _isNewProcess = YES;
         [self addEventsToScreen:0
                   ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW
                        Category:nil
