@@ -810,16 +810,14 @@ struct TopMargin {
                         ImageWidth : (double) width
                        ImageHeight : (double) height
 {
-    [view setContentMode:UIViewContentModeScaleAspectFit];
     CGFloat correctImageViewHeight = (view.imgMainImageView.frame.size.width / width) * height;
     
     if (correctImageViewHeight < view.imageViewHeightConstraint.constant) {
-        view.rotateImage = NO;
-        correctImageViewHeight = (view.imgMainImageView.frame.size.width / height) * width;
+        [view.imgMainImageView setContentMode:UIViewContentModeScaleAspectFill];
     }
-    
-    view.imageViewHeightConstraint.constant = correctImageViewHeight;
-//    [view.imgMainImageView layoutIfNeeded];
+    else {
+         view.imageViewHeightConstraint.constant = correctImageViewHeight;
+    }
     
     return view.imageViewHeightConstraint.constant - view.imgMainImageView.frame.size.height;
 }

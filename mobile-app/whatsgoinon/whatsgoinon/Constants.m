@@ -64,7 +64,7 @@ NSString *const PARSE_CLASS_COMMENT_EVENT_ID = @"event_id";
 
 // Parse - User
 
-NSString *const PARSE_CLASS_NAME_USER = @"User";
+NSString *const PARSE_CLASS_NAME_USER = @"UserDetails";
 NSString *const PARSE_CLASS_USER_USERNAME = @"username";
 NSString *const PARSE_CLASS_USER_EMAIL = @"email";
 NSString *const PARSE_CLASS_USER_PASSWORD = @"password";

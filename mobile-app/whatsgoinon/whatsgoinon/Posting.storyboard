@@ -368,7 +368,7 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="872144B3-7F9A-4145-B0AE-AAD34926154E" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="D27CC9A1-C012-416C-B00C-454EB18FD200" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="iZM-I6-gde"/>
@@ -1010,7 +1010,7 @@
                                                     </mask>
                                                 </variation>
                                             </textField>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVB-OI-kmN" customClass="DECameraButton">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVB-OI-kmN" customClass="DECameraButton">
                                                 <rect key="frame" x="71" y="66" width="178" height="178"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="178" id="ccG-DE-mPN"/>
@@ -1032,7 +1032,7 @@
                                                     <action selector="takePicture:" destination="yte-Ni-6PL" eventType="touchUpInside" id="tcO-l3-f7i"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCj-sp-25g" customClass="DECameraButton">
+                                            <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCj-sp-25g" customClass="DECameraButton">
                                                 <rect key="frame" x="71" y="251" width="55" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="mSo-Iz-mAr"/>
@@ -1054,7 +1054,7 @@
                                                     <action selector="takePicture:" destination="yte-Ni-6PL" eventType="touchUpInside" id="UBG-ym-Tzf"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbp-Fo-QIT" customClass="DECameraButton">
+                                            <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbp-Fo-QIT" customClass="DECameraButton">
                                                 <rect key="frame" x="134" y="250" width="52" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="6Kc-1D-rG1"/>
@@ -1079,7 +1079,7 @@
                                                     <action selector="takePicture:" destination="yte-Ni-6PL" eventType="touchUpInside" id="F3c-Ud-T9N"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgD-7U-wCg" customClass="DECameraButton">
+                                            <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pgD-7U-wCg" customClass="DECameraButton">
                                                 <rect key="frame" x="197" y="250" width="52" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="52" id="K6c-xL-o8t"/>
@@ -1677,7 +1677,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="872144B3-7F9A-4145-B0AE-AAD34926154E" width="140" height="211">
+        <image name="D27CC9A1-C012-416C-B00C-454EB18FD200" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

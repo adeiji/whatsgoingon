@@ -33,17 +33,18 @@
 - (BOOL) isLoggedIn
 {
     PFUser *currentUser = [PFUser currentUser];
-    
+
     if (currentUser) {
         _user = currentUser;
-        _userObject = _user;
         // Set the going and maybegoing post for the current user to be able to detect how events should be displayed later on.
         PFQuery *userQuery = [PFUser query];
         [userQuery whereKey:PARSE_CLASS_USER_USERNAME equalTo:currentUser.username];
+        
         [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error)
             {
                 PFObject *user = [objects firstObject];
+                _userObject = user;
                 [[DEPostManager sharedManager] setGoingPost:user[PARSE_CLASS_USER_EVENTS_GOING]];
                 [[DEPostManager sharedManager] setMaybeGoingPost:user[PARSE_CLASS_USER_EVENTS_MAYBE]];
                 NSLog(@"Retrieved the user from the server");
