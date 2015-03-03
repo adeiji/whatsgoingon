@@ -32,7 +32,7 @@ NSString *const PARSE_CLASS_EVENT_NUMBER_GOING = @"numberGoing";
 NSString *const PARSE_CLASS_EVENT_USERNAME = @"username";
 NSString *const PARSE_CLASS_EVENT_VIEW_COUNT = @"viewCount";
 NSString *const PARSE_CLASS_EVENT_THUMBS_UP_COUNT = @"thumbsUpCount";
-NSString *const PARSE_CLASS_EVENT_STATUS = @"Status";
+NSString *const PARSE_CLASS_EVENT_STATUS = @"status";
 NSString *const PARSE_CLASS_EVENT_STATUS_POSTED = @"posted";
 
 NSString *const LOCATION_LATITUDE = @"latitude";
@@ -76,6 +76,8 @@ NSString *const PARSE_CLASS_USER_EVENTS_MAYBE = @"eventsMaybe";
 NSString *const PARSE_CLASS_USER_POST_COUNT = @"postCount";
 NSString *const PARSE_CLASS_USER_RANK = @"rank";
 NSString *const PARSE_CLASS_USER_CREATED_AT = @"createdAt";
+NSString *const PARSE_CLASS_USER_STATE = @"state";
+NSString *const PARSE_CLASS_USER_CITY = @"city";
 
 // Geocoding
 

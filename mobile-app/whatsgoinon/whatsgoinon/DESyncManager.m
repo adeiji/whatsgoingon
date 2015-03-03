@@ -590,6 +590,7 @@ static PFQuery *globalQuery;
     NSMutableArray *images = [NSMutableArray new];
     
     for (NSData *imageData in imageArray) {
+        
         UIImage *image = [UIImage imageWithData:imageData];
         CGFloat width = [image size].width;
         CGFloat height = [image size].height;

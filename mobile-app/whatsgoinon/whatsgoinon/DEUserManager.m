@@ -14,6 +14,11 @@
 
 @implementation DEUserManager
 
+const static NSString *FACEBOOK_USER_LOCATION = @"location";
+const static NSString *FACEBOOK_USER_LOCATION_NAME = @"name";
+
+const static NSString *TWITTER_USER_LOCATION = @"location";
+
 + (id)sharedManager {
     static DEUserManager *sharedMyManager = nil;
     static dispatch_once_t onceToken;
@@ -45,8 +50,14 @@
             {
                 PFObject *user = [objects firstObject];
                 _userObject = user;
-                [[DEPostManager sharedManager] setGoingPost:user[PARSE_CLASS_USER_EVENTS_GOING]];
-                [[DEPostManager sharedManager] setMaybeGoingPost:user[PARSE_CLASS_USER_EVENTS_MAYBE]];
+                if (user[PARSE_CLASS_USER_EVENTS_GOING])
+                {
+                    [[DEPostManager sharedManager] setGoingPost:user[PARSE_CLASS_USER_EVENTS_GOING]];
+                }
+                if (user[PARSE_CLASS_USER_EVENTS_MAYBE])
+                {
+                    [[DEPostManager sharedManager] setMaybeGoingPost:user[PARSE_CLASS_USER_EVENTS_MAYBE]];
+                }
                 NSLog(@"Retrieved the user from the server");
                 
                 NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -307,7 +318,7 @@
             [[DEScreenManager sharedManager] stopActivitySpinner];
             [[DEScreenManager sharedManager] stopActivitySpinner];
             
-            [self getTwitterProfilePicture : [PFTwitterUtils twitter].userId];
+            [self getTwitterInformation:[PFTwitterUtils twitter].userId];
             [[PFUser currentUser] setUsername:[PFTwitterUtils twitter].screenName];
             [[PFUser currentUser] saveInBackground];
             [self clearUserImageDefaults];
@@ -318,7 +329,7 @@
     return nil;
 }
 
-- (void) getTwitterProfilePicture : (NSString *) username
+- (void) getTwitterInformation : (NSString *) username
 {
     
     // Call the twitter API and get the profile image
@@ -335,15 +346,43 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
         
         NSString *imageURLString = result[@"profile_image_url_https"];
+        NSString *location = result[TWITTER_USER_LOCATION];
         // May need to be careful with this because these images can be very large, but it shouldn't be a problem since we're only getting these once!
         imageURLString = [imageURLString stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
         NSURL *url = [NSURL URLWithString:imageURLString];
         NSData *data = [NSData dataWithContentsOfURL:url];
         
+        if (location)
+        {
+            NSArray *items = [location componentsSeparatedByString:@","];
+            NSString *city = items[0];
+            NSString *state = [items[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            [self addLocationToUserCity:city State:state];
+        }
+        
         // Add the profile image from twitter
         [DEUserManager addProfileImage:data];
     }
 }
+
+- (void) addLocationToUserCity : (NSString *) city
+                         State : (NSString *) state
+{
+    
+    _userObject[PARSE_CLASS_USER_CITY] = city;
+    _userObject[PARSE_CLASS_USER_STATE] = state;
+    
+    [_userObject saveEventually:^(BOOL succeeded, NSError *error) {
+        if (!error)
+        {
+            NSLog(@"The location of the user was pulled from the social network and stored in the database");
+        }
+        else {
+            NSLog(@"Error storing the users location");
+        }
+    }];
+}
+
 
 - (NSError *) linkWithTwitter
 {
@@ -407,8 +446,18 @@
         {
             NSString *facebookId = [result objectForKey:@"id"];
             NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", facebookId]];
-            
+
             NSData *imageData = [NSData dataWithContentsOfURL:profilePictureURL];
+            NSString *location = result[FACEBOOK_USER_LOCATION][FACEBOOK_USER_LOCATION_NAME];
+            
+            if (location)
+            {
+                NSArray *items = [location componentsSeparatedByString:@","];
+                NSString *city = items[0];
+                NSString *state = [items[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+                [self addLocationToUserCity:city State:state];
+            }
+            
             [DEUserManager addProfileImage:imageData];
             
             // Set the current user's name to the name that is on their social network profile

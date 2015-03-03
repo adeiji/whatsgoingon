@@ -53,13 +53,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "whatsgoinon/DEEventViewController.m"
-            timestampString = "447097902.029807"
+            filePath = "whatsgoinon/DEAppDelegate.m"
+            timestampString = "447104299.954454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "616"
-            endingLineNumber = "616"
-            landmarkName = "-setEventAsMaybeGoing:"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "-loadGoingPosts"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
