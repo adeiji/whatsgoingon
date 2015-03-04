@@ -60,7 +60,7 @@
         _createPostViewTwo.txtWebsite.hidden = YES;
     }
     
-    _createPostViewTwo.txtWebsite.text = @"";
+//    _createPostViewTwo.txtWebsite.text = @"";
 }
 
 /*
@@ -84,7 +84,9 @@
  
  */
 - (void) setDescriptionsPriceAndImages {
-    NSString *cost = _post.cost  == nil ? @"Free" : [_post.cost stringValue];
+    
+    NSString *cost = [_post.cost stringValue];
+    cost = [cost isEqual: @"0"] ? @"Free" : [_post.cost stringValue];
     _createPostViewTwo.txtCost.text = cost;
     _createPostViewTwo.txtDescription.text = _post.myDescription;
     _createPostViewTwo.txtQuickDescription.text = _post.quickDescription;
@@ -95,7 +97,6 @@
     
     [self convertPFFileArrayToImageArrayConverted:imagesConverted Images:_post.images];
     imagesConverted = YES;
-    
 }
 
 /*
@@ -488,11 +489,16 @@ Display the second screen for the post details
     DEPostManager *postManager = [DEPostManager sharedManager];
 
     DEPost *post = [[DEPostManager sharedManager] currentPost];
-    post.title = _createPostViewTwo.txtTitle.text;
+    if (_createPostViewTwo)
+    {
+        post.title = _createPostViewTwo.txtTitle.text;
+        NSNumber * cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
+        post.website = _createPostViewTwo.txtWebsite.text;
+        post.cost = cost;
+    }
+    
     post.images = _post.images;
-    NSNumber * cost = [NSNumber numberWithDouble:[_createPostViewTwo.txtCost.text doubleValue]];
-    post.cost = cost;
-    post.website = _createPostViewTwo.txtWebsite.text;
+    
     [postManager setCurrentPost:post];
 }
 
@@ -501,10 +507,11 @@ Display the second screen for the post details
     
     if ([imagesCopy count] != 0)
     {
-        // Make sure that this is not a PFFile class which would mean that the current post is from an already existing one
-        if (![imagesCopy[0] isKindOfClass:[PFFile class]])
-        {
-            [imagesCopy enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        // If not a PFFile class this means that the current post is from an already existing one
+
+        [imagesCopy enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if ([obj isKindOfClass:[UIImage class]])
+            {
                 UIImage *image = (UIImage *) obj;
                 __block UIButton *button;
                 
@@ -517,9 +524,27 @@ Display the second screen for the post details
                 }];
 
                 [button setBackgroundImage:image forState:UIControlStateNormal];
-
-            }];
-        }
+            }
+            else if ([obj isKindOfClass:[PFFile class]]) {
+                PFFile *file = (PFFile *) obj;
+                __block UIButton *button;
+                
+                [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    UIImage *image = [UIImage imageWithData:data];
+                
+                    [_cameraButtons enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                        if (((UIButton *) obj).tag == ((NSNumber *) image.tag).integerValue)
+                        {
+                            button = (UIButton *) obj;
+                            *stop = YES;
+                        }
+                    }];
+                    
+                    [button setBackgroundImage:image forState:UIControlStateNormal];
+                }];
+            }
+        }];
+        
     }
 }
 

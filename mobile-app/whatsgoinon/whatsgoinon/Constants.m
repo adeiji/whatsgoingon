@@ -34,6 +34,7 @@ NSString *const PARSE_CLASS_EVENT_VIEW_COUNT = @"viewCount";
 NSString *const PARSE_CLASS_EVENT_THUMBS_UP_COUNT = @"thumbsUpCount";
 NSString *const PARSE_CLASS_EVENT_STATUS = @"status";
 NSString *const PARSE_CLASS_EVENT_STATUS_POSTED = @"posted";
+NSString *const PARSE_CLASS_EVENT_WEBSITE = @"website";
 
 NSString *const LOCATION_LATITUDE = @"latitude";
 NSString *const LOCATION_LONGITUDE = @"longitude";

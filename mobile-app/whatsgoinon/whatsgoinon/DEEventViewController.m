@@ -172,17 +172,27 @@ const int heightConstraintConstant = 62;
 }
 
 - (void) loadMainImage {
-    PFFile *file = [[_post images] firstObject];
-#warning - When we run this through twice the app crashes
-    [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-        if (!error)
-        {
-            UIImage *mainImage = [UIImage imageWithData:data];
-            [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
-        }
-    } progressBlock:^(int percentDone) {
-        //Display to the user how much has been loaded
-    }];
+    
+    id firstObject = [[_post images] firstObject];
+    
+    if ([firstObject isKindOfClass:[PFFile class]])
+    {
+        PFFile *file = [[_post images] firstObject];
+        #warning - When we run this through twice the app crashes
+        [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (!error)
+            {
+                UIImage *mainImage = [UIImage imageWithData:data];
+                [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
+            }
+        } progressBlock:^(int percentDone) {
+            //Display to the user how much has been loaded
+        }];
+    }
+    else if ([firstObject isKindOfClass:[UIImage class]]) {
+        UIImage *mainImage = (UIImage *) firstObject;
+        [[_eventView btnMainImage] setBackgroundImage:mainImage forState:UIControlStateNormal];
+    }
 }
 
 - (void) loadNonPreview
@@ -249,10 +259,6 @@ const int heightConstraintConstant = 62;
 
 - (IBAction) savePost : (id)sender {
     
-    if (_isPreview && ![_post.website isEqualToString:@""])
-    {
-        _post.myDescription = [NSString stringWithFormat:@"%@\n%@", _post.myDescription, _post.website];
-    }
     NSArray *postImages = [self imagesToNSDataArray:_post.images Compression:.02];
     [[[DEPostManager sharedManager] currentPost] setImages:postImages];
     BOOL postSaved = [DESyncManager savePost:[[DEPostManager sharedManager] currentPost]];
@@ -418,14 +424,14 @@ const int heightConstraintConstant = 62;
         [detailsView setIsLoaded:YES];
         [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
         [[detailsView txtDescription] setText:nil];
-        
-        if (_isPreview)
-        {
+//        
+//        if (_isPreview)
+//        {
             [[detailsView txtDescription] setText:[NSString stringWithFormat:@"%@\n%@", _post.myDescription, _post.website]];
-        }
-        else {
-            [[detailsView txtDescription] setText:_post.myDescription];
-        }
+//        }
+//        else {
+//            [[detailsView txtDescription] setText:_post.myDescription];
+//        }
         // If the post is free
         if (_post.cost == nil)
         {

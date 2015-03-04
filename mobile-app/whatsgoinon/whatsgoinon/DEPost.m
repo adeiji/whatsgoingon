@@ -50,6 +50,7 @@
     post.username = object[PARSE_CLASS_EVENT_USERNAME];
     post.viewCount = object[PARSE_CLASS_EVENT_VIEW_COUNT];
     post.thumbsUpCount = object[PARSE_CLASS_EVENT_THUMBS_UP_COUNT];
+    post.website = object[PARSE_CLASS_EVENT_WEBSITE];
     
     return post;
 }
