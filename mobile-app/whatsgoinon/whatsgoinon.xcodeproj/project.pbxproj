@@ -118,6 +118,7 @@
 		F45030A319C013B40061F362 /* calendar-icon 44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A219C013B40061F362 /* calendar-icon 44x44.png */; };
 		F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A619C014AB0061F362 /* clock-icon 44x44.png */; };
 		F45030A919C015E80061F362 /* location-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F45030A819C015E80061F362 /* location-icon.png */; };
+		F45A90C01AA535350080EBB5 /* DEAccountIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = F45A90BF1AA535350080EBB5 /* DEAccountIcon.m */; };
 		F45BC4D61A33C0E4001197CD /* main-screen-background-small.png in Resources */ = {isa = PBXBuildFile; fileRef = F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */; };
 		F45E60A119AC6EFD007705F9 /* DEOrbButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A019AC6EFD007705F9 /* DEOrbButton.m */; };
 		F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60A419AD3287007705F9 /* DEHappSnapTitleView.m */; };
@@ -174,6 +175,7 @@
 		F49BB9011A60D07B00C68E42 /* DETrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9001A60D07B00C68E42 /* DETrophy.m */; };
 		F49BB9041A65F27200C68E42 /* DEWrench.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9031A65F27200C68E42 /* DEWrench.m */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
+		F4B910641A895D9400E83EE5 /* DEWelcomeEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B910631A895D9400E83EE5 /* DEWelcomeEventView.m */; };
 		F4C603E41A808A60009BB549 /* viewPromptForDeletionOfEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C603E31A808A60009BB549 /* viewPromptForDeletionOfEvent.xib */; };
 		F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */; };
 		F4C68D2B199EB0BA00AD0D36 /* ViewReportEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C68D2A199EB0BA00AD0D36 /* ViewReportEvent.xib */; };
@@ -347,6 +349,8 @@
 		F45030A219C013B40061F362 /* calendar-icon 44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar-icon 44x44.png"; sourceTree = "<group>"; };
 		F45030A619C014AB0061F362 /* clock-icon 44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clock-icon 44x44.png"; sourceTree = "<group>"; };
 		F45030A819C015E80061F362 /* location-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon.png"; sourceTree = "<group>"; };
+		F45A90BE1AA535350080EBB5 /* DEAccountIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAccountIcon.h; sourceTree = "<group>"; };
+		F45A90BF1AA535350080EBB5 /* DEAccountIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAccountIcon.m; sourceTree = "<group>"; };
 		F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-screen-background-small.png"; sourceTree = "<group>"; };
 		F45E609F19AC6EFD007705F9 /* DEOrbButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEOrbButton.h; sourceTree = "<group>"; };
 		F45E60A019AC6EFD007705F9 /* DEOrbButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEOrbButton.m; sourceTree = "<group>"; };
@@ -441,6 +445,8 @@
 		F49BB9031A65F27200C68E42 /* DEWrench.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEWrench.m; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
+		F4B910621A895D9400E83EE5 /* DEWelcomeEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEWelcomeEventView.h; sourceTree = "<group>"; };
+		F4B910631A895D9400E83EE5 /* DEWelcomeEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEWelcomeEventView.m; sourceTree = "<group>"; };
 		F4C603E31A808A60009BB549 /* viewPromptForDeletionOfEvent.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewPromptForDeletionOfEvent.xib; sourceTree = "<group>"; };
 		F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEventDetailsMoreView.h; sourceTree = "<group>"; };
 		F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEventDetailsMoreView.m; sourceTree = "<group>"; };
@@ -928,6 +934,8 @@
 				F4CCCE071A65FBFB0073DEE5 /* DETime.m */,
 				F4CCCE091A65FDD00073DEE5 /* DELocation.h */,
 				F4CCCE0A1A65FDD00073DEE5 /* DELocation.m */,
+				F45A90BE1AA535350080EBB5 /* DEAccountIcon.h */,
+				F45A90BF1AA535350080EBB5 /* DEAccountIcon.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
@@ -1115,6 +1123,8 @@
 				F4C68D2C199EB25B00AD0D36 /* Report View */,
 				F4C68D27199EAD6700AD0D36 /* DEEventDetailsMoreView.h */,
 				F4C68D28199EAD6700AD0D36 /* DEEventDetailsMoreView.m */,
+				F4B910621A895D9400E83EE5 /* DEWelcomeEventView.h */,
+				F4B910631A895D9400E83EE5 /* DEWelcomeEventView.m */,
 			);
 			name = "More View";
 			sourceTree = "<group>";
@@ -1463,6 +1473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F40DF97719A5621F002B4419 /* DEPost.m in Sources */,
+				F4B910641A895D9400E83EE5 /* DEWelcomeEventView.m in Sources */,
 				F49BB9041A65F27200C68E42 /* DEWrench.m in Sources */,
 				F4C68D29199EAD6700AD0D36 /* DEEventDetailsMoreView.m in Sources */,
 				F47EA7FC1A411EA1005B7B79 /* DEViewImagesViewController.m in Sources */,
@@ -1476,6 +1487,7 @@
 				F4774FA51995655500FCDE66 /* DECreateAccountView.m in Sources */,
 				F437C0091991A72E00CF61E9 /* DEPostManager.m in Sources */,
 				F437C0101991CDEB00CF61E9 /* DEViewEventsView.m in Sources */,
+				F45A90C01AA535350080EBB5 /* DEAccountIcon.m in Sources */,
 				F45E60BB19AD8F22007705F9 /* DELocationView.m in Sources */,
 				F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */,
 				F4CCCE0B1A65FDD00073DEE5 /* DELocation.m in Sources */,

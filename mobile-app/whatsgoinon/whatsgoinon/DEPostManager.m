@@ -31,7 +31,7 @@
         _currentPost = [DEPost new];
         _promptedForCommentEvents = [NSMutableArray new];
         _goingPostWithCommentInformation = [NSMutableArray new];
-        
+        _loadedEvents = [NSMutableArray new];
     }
     return self;
 }
@@ -105,7 +105,7 @@
     }
     else
     {
-        // Get the amount of seconds until the end of the event
+        // Get the amount of seconds until the start of the event
         NSTimeInterval distanceBetweenDates = [[post startTime] timeIntervalSinceDate:[NSDate date]];
         return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
     }
@@ -187,6 +187,8 @@
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NONE_IN_CATEGORY object:nil userInfo:categoryDictionary];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_ORB_CLICKED object:nil userInfo:categoryDictionary];
 }
 
 - (PFObject *) getPFObjectForEventWithObjectId : (NSString *) objectId

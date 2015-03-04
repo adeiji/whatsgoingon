@@ -108,7 +108,6 @@
         DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
         [self.navigationController pushViewController:viewEventsViewController animated:YES];
         viewEventsViewController.now = YES;
-        [[DEScreenManager sharedManager] startActivitySpinner];
     }
     else {
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];

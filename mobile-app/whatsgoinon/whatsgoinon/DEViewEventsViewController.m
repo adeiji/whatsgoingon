@@ -23,6 +23,7 @@
 #define MAIN_MENU_Y_POS 0
 
 const int NO_USER_EVENTS = 5;
+NSString *IS_FIRST_TIME_VIEWING_SCREEN = @"com.happsnap.isfirsttimeviewingscreen";
 
 @implementation DEViewEventsViewController
 
@@ -32,8 +33,10 @@ struct TopMargin {
 };
 
 - (void) addObservers {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectorToNewCity) name:kNOTIFICATION_CENTER_IS_CITY_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUsersEvents:) name:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orbClicked) name:NOTIFICATION_CENTER_ORB_CLICKED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNoInternetConnectionScreen:) name:kReachabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPostFromNewCity) name:NOTIFICATION_CENTER_CITY_CHANGED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_NO_DATA object:nil];
@@ -44,16 +47,56 @@ struct TopMargin {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPastEpicEvents:) name:NOTIFICATION_CENTER_PAST_EPIC_EVENTS_LOADED object:nil];
 }
 
+#pragma mark - Activity Spinners
+
+
+- (void) startActivitySpinner
+{
+    spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.center = self.view.center;
+    spinner.hidesWhenStopped = YES;
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
+}
+
+- (void) stopActivitySpinner {
+    [spinner hidesWhenStopped];
+    [spinner stopAnimating];
+}
+
+
+- (void) changeSelectorToNewCity {
+    postSelector = @selector(getAllValuesWithinMilesForNow:PostsArray:Location:);
+}
+
+- (void) loadFirstTimeView {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *isFirstTimeViewingScreen = (NSNumber *) [userDefaults objectForKey:IS_FIRST_TIME_VIEWING_SCREEN];
+    welcomeScreen = NO;
+    
+    if (!isFirstTimeViewingScreen)
+    {
+        welcomeView = (DEWelcomeEventView *)[[[NSBundle mainBundle] loadNibNamed:@"WelcomeEventsView" owner:self options:nil] firstObject];
+        [welcomeView setFrame:[[UIScreen mainScreen] bounds]];
+        [[welcomeView.btnStart layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        [self.view addSubview:welcomeView];
+        [userDefaults setObject:@YES forKey:IS_FIRST_TIME_VIEWING_SCREEN];
+        welcomeScreen = YES;
+    }
+}
+
 - (void)viewDidLoad
 {
     [[DELocationManager sharedManager] updateLocation];
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [self addObservers];
     
     if (!_shouldNotDisplayPosts)
     {
+        [self startActivitySpinner];
         if (_now)
         {
             [DESyncManager getAllValuesForNow:YES];
@@ -63,13 +106,20 @@ struct TopMargin {
         }
     }
     
-    
+    [self loadFirstTimeView];
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     [self.view addSubview:selectCategoryView];
     [selectCategoryView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
     [selectCategoryView loadView];
     orbView = selectCategoryView.orbView;
     outerView = selectCategoryView.outerView;
+    /*
+     If the welcome screen is displayed then don't allow the orb view to be selected
+     */
+    if (welcomeScreen)
+    {
+        [orbView setEnabled:NO];
+    }
     [selectCategoryView setFrame:[[UIScreen mainScreen] bounds]];
     [self.view addSubview:selectCategoryView];
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
@@ -252,10 +302,45 @@ struct TopMargin {
     }
 }
 
+- (void) orbClicked {
+    if (welcomeScreen)
+    {
+        [self hideWelcomeScreen:nil];
+    }
+}
+
+- (IBAction)hideWelcomeScreen:(id)sender {
+    for (UIView *subview in [welcomeView subviews]) {
+        [subview removeFromSuperview];
+    }
+    [UIView animateWithDuration:.25f animations:^{
+        CGRect frame = welcomeView.frame;
+        frame.origin.y = welcomeView.center.y;
+        frame.size.height = 20;
+        [welcomeView setFrame:frame];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.25f animations:^{
+            CGRect frame = welcomeView.frame;
+            frame.origin.x = welcomeView.center.x;
+            frame.size.width = 20;
+            [welcomeView setFrame:frame];
+        } completion:^(BOOL finished) {
+            [welcomeView removeFromSuperview];
+        }];
+    }];
+    
+    welcomeScreen = NO;
+    [orbView setEnabled:YES];
+    
+}
+
 - (void) hideOrbView
 {
-    orbView.hidden = YES;
-    outerView.hidden = YES;
+    if (!welcomeScreen)
+    {
+        orbView.hidden = YES;
+        outerView.hidden = YES;
+    }
 }
 
 - (void) showOrbView
@@ -293,14 +378,10 @@ struct TopMargin {
     
     [self moveViewToCenterOfScrollViewView:view];
     [_scrollView addSubview:view];
-    [self loadPosts];
-    [self addEventsToScreen : view.frame.size.height + 15
-               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
-                    Category:nil
-                   PostArray:_posts
-                   ShowBlank:YES];
+
     [self setUpScrollViewForPostsWithTopMargin:view.frame.size.height + 15];
-    [self loadVisiblePost:_scrollView];
+    [self stopActivitySpinner];
+    [self displayPost:nil TopMargin:view.frame.size.height + 15 PostArray:nil];
     
     [self hideOrbView];
     
@@ -315,15 +396,21 @@ struct TopMargin {
 
 - (void) displayNoDataInCategory : (NSNotification *) notification
 {
-    [_scrollView setContentSize:_scrollView.frame.size];
-    [self removeAllPostFromScreen];
-    if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY])
+    if (!welcomeScreen)
     {
-        [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
+        [_scrollView setContentSize:_scrollView.frame.size];
+        [self removeAllPostFromScreen];
+        if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY])
+        {
+            [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
+        }
+        UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
+        [self moveViewToCenterOfScrollViewView:view];
+        [_scrollView addSubview:view];
     }
-    UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] lastObject];
-    [self moveViewToCenterOfScrollViewView:view];
-    [_scrollView addSubview:view];
+    else {
+        [DESyncManager loadEpicEvents:NO];
+    }
 }
 
 - (void) scrollToTopOfScrollView
@@ -383,24 +470,39 @@ struct TopMargin {
     if ([[[DEPostManager sharedManager] posts] count] != 0)
     {
         [self removeAllPostFromScreen];
-        [self displayPost:notification];
+        [self displayPost:notification TopMargin:0 PostArray:nil];
     }
     else {
         [self showNoPostedEventsByUser];
     }
 }
 
-- (void) displayPost : (NSNotification *) notification {
-    
+- (void) displayPost {
+    [self stopActivitySpinner];
+    [self displayPost:nil TopMargin:0 PostArray:nil];
+}
+
+- (void) displayPost : (NSNotification *) notification
+           TopMargin : (CGFloat) topMargin
+           PostArray : (NSArray *) postArray
+{
+    _isNewProcess = YES;
     if (notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY] && notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS])
     {
         [self displayCategory:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]];
         category = notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY];
     }
     
-    [self loadPosts];
-    [self addEventsToScreen : 0
-               ProcessStatus:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS]
+    if (!postArray)
+    {
+        [self loadPosts];
+    }
+    else {
+        _posts = postArray;
+    }
+    
+    [self addEventsToScreen : topMargin
+               ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW
                     Category:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]
                    PostArray:_posts
                    ShowBlank:YES];
@@ -415,7 +517,7 @@ struct TopMargin {
 - (void) showNoPostedEventsByUser {
     [self removeAllPostFromScreen];
     UIView *noPostedEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:NO_USER_EVENTS];
-    
+    [noPostedEventsView setFrame:[[UIScreen mainScreen] bounds]];
     [_scrollView addSubview:noPostedEventsView];
     CGRect frame = [noPostedEventsView frame];
     frame.size.height = _scrollView.frame.size.height;
@@ -434,12 +536,10 @@ struct TopMargin {
 - (void) displayUserSavedEvents : (NSNotification *) notification {
     
     [self removeAllPostFromScreen];
+
     NSArray *postArray = [[DEPostManager sharedManager] loadedSavedEvents];
     postArray = [self setAllPostsToNotLoaded:postArray];
-    [self addEventsToScreen:0
-              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING Category:nil
-                  PostArray:postArray
-                  ShowBlank:YES];
+    [self displayPost:nil TopMargin:0 PostArray:postArray];
     [self loadVisiblePost:_scrollView];
     _lblCategoryHeader.text = @"My Events";
 }
@@ -456,7 +556,7 @@ struct TopMargin {
     _scrollView.contentSize = size;
 }
 
-- (void) addEventsToScreen : (NSInteger) topMargin
+- (void) addEventsToScreen : (CGFloat) topMargin
              ProcessStatus : (NSString *) process
                   Category : (NSString *) myCategory
                  PostArray : (NSArray *) postArray
@@ -470,45 +570,18 @@ struct TopMargin {
     CGFloat scrollViewContentSizeHeight = 0;
     CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
     __block BOOL validated;
-    
+    static int count = 0;
     validated = NO;
 
-    [postArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
-        // Show the event on the screen
-        if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
-        {
-                [self loadEvent:obj
-                        Margin1:&columnOneMargin
-                        Margin2:&columnTwoMargin
-                         Column:&column
-                      TopMargin:topMargin
-                    PostCounter:&postCounter
-                      ShowBlank:showBlank];
-            
-            NSLog(@"Column One Margin: %f", columnOneMargin);
-            NSLog(@"Column Two Margin: %f", columnTwoMargin);
-            NSLog(@"Margin: %f", margin);
-            NSLog(@"Post Counter: %i", postCounter);
-        }
-    }];
-    
-    // Add the column one or column two margin, depending on which is greater to the height of the scroll view's content size
-    if (columnOneMargin > columnTwoMargin)
+    if ([process isEqualToString: kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW])
     {
-        scrollViewContentSizeHeight += (columnOneMargin * screenSizeRelativeToiPhone5Width);
-    }
-    else {
-        scrollViewContentSizeHeight += (columnTwoMargin * screenSizeRelativeToiPhone5Width);
+        count = 0;
     }
     
-    CGSize size = _scrollView.contentSize;
-    size.height = scrollViewContentSizeHeight;
-    [_scrollView setContentSize:size];
-
-    // If we've finished loading all the events then we reset everything back to zero so that next time we load events it will show them correctly
-    if ([process isEqualToString:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING])
+    if (_isNewProcess)     /* If we've finished loading all the
+                                 events then we reset everything back
+                                 to zero so that next time we load
+                                 events it will show them correctly*/
     {
         column = 0;
         postCounter = 1;
@@ -516,7 +589,49 @@ struct TopMargin {
         columnTwoMargin = 0;
         margin = 0;
         scrollViewContentSizeHeight = 0;
+        _isNewProcess = NO;
     }
+    
+    if (count < [postArray count])
+    {
+        for (int i = 0; i < 10; i ++) {
+            if ([postArray count] != 0 && count < [postArray count])
+            {
+                id obj = postArray[count];
+                validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
+                // Show the event on the screen
+                if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
+                {
+                    [self loadEvent:obj
+                            Margin1:&columnOneMargin
+                            Margin2:&columnTwoMargin
+                             Column:&column
+                          TopMargin:topMargin
+                        PostCounter:&postCounter
+                          ShowBlank:showBlank];
+                }
+                
+                count ++;
+            }
+        }
+
+
+        // Add the column one or column two margin, depending on which is greater to the height of the scroll view's content size
+        if (columnOneMargin > columnTwoMargin)
+        {
+            scrollViewContentSizeHeight += (columnOneMargin) + topMargin;
+        }
+        else {
+            scrollViewContentSizeHeight += (columnTwoMargin) + topMargin;
+        }
+        
+        CGSize size = _scrollView.contentSize;
+        size.height = scrollViewContentSizeHeight;
+        [_scrollView setContentSize:size];
+        
+    }
+
+    
 }
 
 - (NSArray *) setAllPostsToNotLoaded : (NSArray *) posts {
@@ -539,7 +654,7 @@ struct TopMargin {
     [_scrollView addSubview:view];
     [self moveViewToCenterOfScrollViewView:view];
     [_scrollView setContentSize:view.frame.size];
-    [self hideOrbView];
+    [self showOrbView];
     
     [self scrollToTopOfScrollView];
 }
@@ -554,7 +669,7 @@ struct TopMargin {
            Margin1 : (CGFloat *) columnOneMargin
            Margin2 : (CGFloat *) columnTwoMargin
             Column : (CGFloat *) column
-         TopMargin : (NSInteger) topMargin
+         TopMargin : (CGFloat) topMargin
        PostCounter : (int *) postCounter
          ShowBlank : (BOOL) showBlank
 {
@@ -570,7 +685,7 @@ struct TopMargin {
 
     
     CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
-    [self getEventImageHeightDifference:viewEventsView];
+    heightDifference += [self getEventImageHeightDifference:viewEventsView];
     
     [self setUpViewEventsFrame:*columnOneMargin
                         Margin:*columnTwoMargin
@@ -659,14 +774,10 @@ struct TopMargin {
     
     CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
     
-    CGFloat viewEventsViewHeight = (POST_HEIGHT * screenSizeRelativeToiPhone5Width) + heightDifference;
-    CGRect frame = CGRectMake((column * (POST_WIDTH * screenSizeRelativeToiPhone5Width)) + ((widthMargin * screenSizeRelativeToiPhone5Width) * (column + 1)), topMargin + (margin * screenSizeRelativeToiPhone5Width), (POST_WIDTH * screenSizeRelativeToiPhone5Width), viewEventsViewHeight);
-    
+    CGFloat viewEventsViewHeight = (POST_HEIGHT) + heightDifference;
+    CGRect frame = CGRectMake((column * (POST_WIDTH * screenSizeRelativeToiPhone5Width)) + ((widthMargin * screenSizeRelativeToiPhone5Width) * (column + 1)), topMargin + (margin), (POST_WIDTH * screenSizeRelativeToiPhone5Width), viewEventsViewHeight);
+
     view.frame = frame;
-    // Set up the Subtitle frame
-    frame = [[view lblSubtitle ] frame];
-    frame.size.height += heightDifference;
-    [[view lblSubtitle] setFrame:frame];
 }
 /*
  
@@ -679,7 +790,6 @@ struct TopMargin {
     // Get the heightDifference from what it's original size is and what it's size will be
     CGFloat heightDifference = ceilf(sizeThatFitsTextView.height) - [view lblSubtitle].frame.size.height;
     
-    NSLog(@"The height difference for the label is: %f", heightDifference);
     return heightDifference;
 }
 
@@ -699,7 +809,7 @@ struct TopMargin {
             double imageWidth = [width doubleValue];
             double imageHeight = [height doubleValue];
             
-            [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
+            return [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
         }
     }
     return 0;
@@ -709,18 +819,16 @@ struct TopMargin {
                         ImageWidth : (double) width
                        ImageHeight : (double) height
 {
-    [view setContentMode:UIViewContentModeScaleAspectFit];
     CGFloat correctImageViewHeight = (view.imgMainImageView.frame.size.width / width) * height;
     
     if (correctImageViewHeight < view.imageViewHeightConstraint.constant) {
-        view.rotateImage = YES;
-        correctImageViewHeight = (view.imgMainImageView.frame.size.width / height) * width;
+        [view.imgMainImageView setContentMode:UIViewContentModeScaleAspectFill];
+    }
+    else {
+         view.imageViewHeightConstraint.constant = correctImageViewHeight;
     }
     
-    view.imageViewHeightConstraint.constant = correctImageViewHeight;
-    [view.imgMainImageView layoutIfNeeded];
-    
-    return view.imageViewHeightConstraint.constant;
+    return view.imageViewHeightConstraint.constant - view.imgMainImageView.frame.size.height;
 }
 
 - (void) getDistanceFromCurrentLocationOfEvent : (PFObject *) event {
@@ -782,6 +890,25 @@ struct TopMargin {
 - (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self loadVisiblePost:scrollView];
+    BOOL scrollDown= NO;
+    
+    if (scrollView.contentOffset.y > lastContentOffset)
+    {
+        scrollDown = YES;
+    }
+    
+    if (scrollDown && scrollView.contentOffset.y > scrollView.contentSize.height - 1000)
+    {
+        [self addEventsToScreen : 0
+                   ProcessStatus:nil
+                        Category:nil
+                       PostArray:_posts
+                       ShowBlank:YES];
+        
+        NSLog(@"Load events again");
+    }
+    
+    lastContentOffset = scrollView.contentOffset.y;
 }
 
 - (void) loadVisiblePost : (UIScrollView *) scrollView
@@ -792,6 +919,10 @@ struct TopMargin {
             if (CGRectIntersectsRect(scrollView.bounds, view.frame))
             {
                 [((DEViewEventsView *) view) showImage];
+
+            }
+            else {
+                [((DEViewEventsView *) view) hideImage];
             }
         }
     }
@@ -800,13 +931,28 @@ struct TopMargin {
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    
     _searchPosts = [NSMutableArray new];
+    _postsCopy = [_posts copy];
 }
 
 - (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-
+    [self removeAllPostFromScreen];
+    _posts = [_postsCopy copy];
+    _postsCopy = [NSMutableArray new];
+    
+    for (PFObject *obj in _posts)
+    {
+        obj[@"loaded"] = @NO;
+    }
+    
+    _isNewProcess = YES;
+    [self addEventsToScreen:0
+              ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW
+                   Category:nil
+                  PostArray:_posts
+                  ShowBlank:NO];
+    [self loadVisiblePost:_scrollView];
 }
 
 #pragma mark - Search Bar Delegate Methods
@@ -830,22 +976,26 @@ struct TopMargin {
                 [_searchPosts addObject:unloadedObject];
             }
         }];
-
+        
+        _posts = _searchPosts;
+        _isNewProcess = YES;
         [self addEventsToScreen:0
-                  ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
+                  ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW
                        Category:nil
-                      PostArray:_searchPosts
+                      PostArray:_posts
                       ShowBlank:NO];
         [self loadVisiblePost:_scrollView];
         _searchPosts = [NSMutableArray new];
     }
     else {
+        _posts = [_postsCopy copy];
+        
         for (PFObject *obj in _posts) {
             obj[@"loaded"] = @NO;
         }
-        
+        _isNewProcess = YES;
         [self addEventsToScreen:0
-                  ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING
+                  ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW
                        Category:nil
                       PostArray:_posts
                       ShowBlank:NO];

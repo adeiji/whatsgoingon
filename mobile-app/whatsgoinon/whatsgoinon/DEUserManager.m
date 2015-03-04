@@ -11,7 +11,13 @@
 #import "DEAppDelegate.h"
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 
+
 @implementation DEUserManager
+
+const static NSString *FACEBOOK_USER_LOCATION = @"location";
+const static NSString *FACEBOOK_USER_LOCATION_NAME = @"name";
+
+const static NSString *TWITTER_USER_LOCATION = @"location";
 
 + (id)sharedManager {
     static DEUserManager *sharedMyManager = nil;
@@ -32,20 +38,35 @@
 - (BOOL) isLoggedIn
 {
     PFUser *currentUser = [PFUser currentUser];
-    
+
     if (currentUser) {
         _user = currentUser;
-        _userObject = _user;
         // Set the going and maybegoing post for the current user to be able to detect how events should be displayed later on.
         PFQuery *userQuery = [PFUser query];
         [userQuery whereKey:PARSE_CLASS_USER_USERNAME equalTo:currentUser.username];
+        
         [userQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error)
             {
                 PFObject *user = [objects firstObject];
-                [[DEPostManager sharedManager] setGoingPost:user[PARSE_CLASS_USER_EVENTS_GOING]];
-                [[DEPostManager sharedManager] setMaybeGoingPost:user[PARSE_CLASS_USER_EVENTS_MAYBE]];
+                _userObject = user;
+                if (user[PARSE_CLASS_USER_EVENTS_GOING])
+                {
+                    [[DEPostManager sharedManager] setGoingPost:user[PARSE_CLASS_USER_EVENTS_GOING]];
+                }
+                if (user[PARSE_CLASS_USER_EVENTS_MAYBE])
+                {
+                    [[DEPostManager sharedManager] setMaybeGoingPost:user[PARSE_CLASS_USER_EVENTS_MAYBE]];
+                }
                 NSLog(@"Retrieved the user from the server");
+                
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                PFFile *imageFile = (PFFile *) user[PARSE_CLASS_USER_PROFILE_PICTURE];
+                
+                [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    [userDefaults setObject:data forKey:@"profile-picture"];
+                }];
+
             }
         }];
 
@@ -96,6 +117,14 @@
             _userObject[PARSE_CLASS_USER_RANK] = USER_RANK_STANDARD;
             _userObject[PARSE_CLASS_USER_VISIBLE_PASSWORD] = password;
             [_userObject saveEventually];
+            
+            [DELocationManager getAddressFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSString *value) {
+                NSArray *items = [value componentsSeparatedByString:@","];
+                NSString *state = [items lastObject];
+                NSString *city = [items objectAtIndex:[items count] - 2];
+                
+                [self addLocationToUserCity:city State:state];
+            }];
         }
         else
         {
@@ -166,10 +195,8 @@
 - (void) saveItemToArray : (NSString *) item
          ParseColumnName : (NSString *) columnName
 {
-    PFObject *myUser = [PFUser currentUser];
-    [myUser addObject:item forKey:columnName];
-    
-    [myUser saveEventually:^(BOOL succeeded, NSError *error) {
+    [[PFUser currentUser] addObject:item forKey:columnName];
+    [[PFUser currentUser] saveEventually:^(BOOL succeeded, NSError *error) {
        if (succeeded)
        {
            NSLog(@"Yeah!! You saved the item to an array on parse!");
@@ -209,7 +236,7 @@
                  ViewController : (UIViewController *)viewController
                      ErrorLabel : (UILabel *)label
 {
-    
+    username = [username lowercaseString];
     __block NSString *blockUsername = username;
     // Get the user corresponding to an email and then use that username to login
     PFQuery *query = [PFUser query];
@@ -232,7 +259,6 @@
                 [self usernameExist:[blockUsername lowercaseString] ErrorLabel:label];
             }
         }];
-        
     }];
     
     return nil;
@@ -289,7 +315,7 @@
             [[DEScreenManager sharedManager] stopActivitySpinner];
             [[DEScreenManager sharedManager] stopActivitySpinner];
             
-            [self getTwitterProfilePicture : [PFTwitterUtils twitter].userId];
+            [self getTwitterInformation:[PFTwitterUtils twitter].userId];
             [[PFUser currentUser] setUsername:[PFTwitterUtils twitter].screenName];
             [[PFUser currentUser] saveInBackground];
             [self clearUserImageDefaults];
@@ -300,7 +326,7 @@
     return nil;
 }
 
-- (void) getTwitterProfilePicture : (NSString *) username
+- (void) getTwitterInformation : (NSString *) username
 {
     
     // Call the twitter API and get the profile image
@@ -317,15 +343,43 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
         
         NSString *imageURLString = result[@"profile_image_url_https"];
+        NSString *location = result[TWITTER_USER_LOCATION];
         // May need to be careful with this because these images can be very large, but it shouldn't be a problem since we're only getting these once!
         imageURLString = [imageURLString stringByReplacingOccurrencesOfString:@"_normal" withString:@""];
         NSURL *url = [NSURL URLWithString:imageURLString];
         NSData *data = [NSData dataWithContentsOfURL:url];
         
+        if (location)
+        {
+            NSArray *items = [location componentsSeparatedByString:@","];
+            NSString *city = items[0];
+            NSString *state = [items[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+            [self addLocationToUserCity:city State:state];
+        }
+        
         // Add the profile image from twitter
         [DEUserManager addProfileImage:data];
     }
 }
+
+- (void) addLocationToUserCity : (NSString *) city
+                         State : (NSString *) state
+{
+
+    [PFUser currentUser][PARSE_CLASS_USER_CITY] = city;
+    [PFUser currentUser][PARSE_CLASS_USER_STATE] = state;
+    
+    [[PFUser currentUser] saveEventually:^(BOOL succeeded, NSError *error) {
+        if (!error)
+        {
+            NSLog(@"The location of the user was pulled from the social network and stored in the database");
+        }
+        else {
+            NSLog(@"Error storing the users location");
+        }
+    }];
+}
+
 
 - (NSError *) linkWithTwitter
 {
@@ -389,8 +443,18 @@
         {
             NSString *facebookId = [result objectForKey:@"id"];
             NSURL *profilePictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", facebookId]];
-            
+
             NSData *imageData = [NSData dataWithContentsOfURL:profilePictureURL];
+            NSString *location = result[FACEBOOK_USER_LOCATION][FACEBOOK_USER_LOCATION_NAME];
+            
+            if (location)
+            {
+                NSArray *items = [location componentsSeparatedByString:@","];
+                NSString *city = items[0];
+                NSString *state = [items[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
+                [self addLocationToUserCity:city State:state];
+            }
+            
             [DEUserManager addProfileImage:imageData];
             
             // Set the current user's name to the name that is on their social network profile
@@ -403,6 +467,7 @@
 + (void) logoutUser {
 
     DEAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate setUserDefaultArraysToEmpty];
     [delegate loadGoingPosts];
     [delegate loadMaybeGoingPosts];
     [delegate loadPromptedForCommentEvents];

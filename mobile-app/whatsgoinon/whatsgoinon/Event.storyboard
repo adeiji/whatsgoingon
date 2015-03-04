@@ -123,7 +123,7 @@
                                     <action selector="goBack:" destination="6zc-FM-Gmr" eventType="touchUpInside" id="2wH-SC-wfF"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Movie at the Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpk-QC-Gf9">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Movie at the Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tpk-QC-Gf9">
                                 <rect key="frame" x="62" y="28" width="477" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="3ac-WX-7ZY"/>
@@ -175,13 +175,23 @@
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
                                 </variation>
                             </scrollView>
-                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tsa-CC-E1Z" customClass="DEMaybeCheckmarkView">
+                            <view hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tsa-CC-E1Z" customClass="DEMaybeCheckmarkView">
                                 <rect key="frame" x="541" y="562" width="46" height="35"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="341" y="762" width="46" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="gwS-SU-HVU"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="gwS-SU-HVU"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="gwS-SU-HVU"/>
+                                    </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ba-ho-i5t">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ba-ho-i5t">
                                 <rect key="frame" x="10" y="136" width="81" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="FoX-br-2i4"/>
@@ -354,10 +364,13 @@
                             <constraint firstItem="Svq-Tm-YuF" firstAttribute="leading" secondItem="5Lu-Dv-3Od" secondAttribute="leading" id="ZaR-b2-gKj"/>
                             <constraint firstItem="9qi-fd-hCu" firstAttribute="trailing" secondItem="iD5-yh-YDX" secondAttribute="trailing" id="bGB-Ef-I47"/>
                             <constraint firstAttribute="trailing" secondItem="Hka-7K-0uG" secondAttribute="trailing" id="d2x-TM-Xba"/>
+                            <constraint firstItem="Tsa-CC-E1Z" firstAttribute="leading" secondItem="9qi-fd-hCu" secondAttribute="trailing" constant="-59" id="dAf-hB-ze6"/>
                             <constraint firstItem="177-jK-Otc" firstAttribute="centerY" secondItem="Tpk-QC-Gf9" secondAttribute="centerY" constant="-3.5" id="e5D-0b-zuI"/>
+                            <constraint firstItem="Tsa-CC-E1Z" firstAttribute="bottom" secondItem="9qi-fd-hCu" secondAttribute="bottom" constant="-3" id="hkl-9K-kgS"/>
                             <constraint firstItem="iD5-yh-YDX" firstAttribute="top" secondItem="Hka-7K-0uG" secondAttribute="bottom" id="jaI-bK-dCa">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="Tsa-CC-E1Z" firstAttribute="top" secondItem="9qi-fd-hCu" secondAttribute="top" constant="2" id="lYL-Jk-28n"/>
                             <constraint firstItem="Svq-Tm-YuF" firstAttribute="bottom" secondItem="5Lu-Dv-3Od" secondAttribute="bottom" id="n2c-qb-xwk"/>
                             <constraint firstItem="omt-AH-yG2" firstAttribute="leading" secondItem="OQg-c0-tjK" secondAttribute="leading" id="nec-rX-jHs"/>
                             <constraint firstItem="9qi-fd-hCu" firstAttribute="leading" secondItem="OQg-c0-tjK" secondAttribute="leading" id="o2O-Tw-HbY"/>
@@ -404,6 +417,9 @@
                                 <exclude reference="xhH-8p-JTg"/>
                                 <exclude reference="K9N-eB-mJE"/>
                                 <exclude reference="sRL-gp-ROp"/>
+                                <exclude reference="dAf-hB-ze6"/>
+                                <exclude reference="hkl-9K-kgS"/>
+                                <exclude reference="lYL-Jk-28n"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -439,6 +455,9 @@
                                 <include reference="xhH-8p-JTg"/>
                                 <include reference="K9N-eB-mJE"/>
                                 <include reference="sRL-gp-ROp"/>
+                                <include reference="dAf-hB-ze6"/>
+                                <include reference="hkl-9K-kgS"/>
+                                <include reference="lYL-Jk-28n"/>
                             </mask>
                         </variation>
                         <connections>
@@ -493,7 +512,7 @@
                                     <action selector="goBack:" destination="Pp2-S5-zRI" eventType="touchUpInside" id="y8C-wJ-uXQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie at the Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MU-eT-AlI">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie at the Park" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7MU-eT-AlI">
                                 <rect key="frame" x="62" y="28" width="477" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="v0R-1f-lhR"/>

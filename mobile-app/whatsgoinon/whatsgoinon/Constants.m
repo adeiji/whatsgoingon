@@ -32,7 +32,7 @@ NSString *const PARSE_CLASS_EVENT_NUMBER_GOING = @"numberGoing";
 NSString *const PARSE_CLASS_EVENT_USERNAME = @"username";
 NSString *const PARSE_CLASS_EVENT_VIEW_COUNT = @"viewCount";
 NSString *const PARSE_CLASS_EVENT_THUMBS_UP_COUNT = @"thumbsUpCount";
-NSString *const PARSE_CLASS_EVENT_STATUS = @"Status";
+NSString *const PARSE_CLASS_EVENT_STATUS = @"status";
 NSString *const PARSE_CLASS_EVENT_STATUS_POSTED = @"posted";
 
 NSString *const LOCATION_LATITUDE = @"latitude";
@@ -64,7 +64,7 @@ NSString *const PARSE_CLASS_COMMENT_EVENT_ID = @"event_id";
 
 // Parse - User
 
-NSString *const PARSE_CLASS_NAME_USER = @"User";
+NSString *const PARSE_CLASS_NAME_USER = @"UserDetails";
 NSString *const PARSE_CLASS_USER_USERNAME = @"username";
 NSString *const PARSE_CLASS_USER_EMAIL = @"email";
 NSString *const PARSE_CLASS_USER_PASSWORD = @"password";
@@ -76,6 +76,8 @@ NSString *const PARSE_CLASS_USER_EVENTS_MAYBE = @"eventsMaybe";
 NSString *const PARSE_CLASS_USER_POST_COUNT = @"postCount";
 NSString *const PARSE_CLASS_USER_RANK = @"rank";
 NSString *const PARSE_CLASS_USER_CREATED_AT = @"createdAt";
+NSString *const PARSE_CLASS_USER_STATE = @"state";
+NSString *const PARSE_CLASS_USER_CITY = @"city";
 
 // Geocoding
 
@@ -114,7 +116,9 @@ NSString *const kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO = @"userRankObjectInf
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_EVENTS_COUNT = @"eventCount";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS = @"com.happsnap.process";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING = @"com.happsnap.stillloading";
+NSString *const kNOTIFICATION_CENTER_IS_CITY_CHANGE = @"com.happsnap.citychange";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING = @"com.happsnap.finishedLoading";
+NSString *const NOTIFICATION_CENTER_ORB_CLICKED = @"com.happsnap.orbclicked";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW = @"com.happsnap.new";
 NSString *const kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS = @"com.happsnap.isEpicEvents";
 NSString *const kNOTIFICATION_CENTER_EVENT_USER_AT = @"com.happsnap.event.user.at";

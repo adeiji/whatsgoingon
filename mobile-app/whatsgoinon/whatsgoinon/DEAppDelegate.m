@@ -44,8 +44,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
-#warning Make sure to uncomment when going to Fabian
-//    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     [self checkIfLocalNotification:launchOptions];
     [self checkIfSignificantLocationChange:launchOptions];
     [self loadPromptedForCommentEvents];
@@ -260,7 +259,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     NSMutableArray *eventsUserMaybeGoingToArray = [[defaults objectForKey:kEventsUserMaybeGoingTo] mutableCopy];
     if (eventsUserMaybeGoingToArray != nil)
     {
-        [postManager setGoingPost: eventsUserMaybeGoingToArray ];
+        [postManager setMaybeGoingPost: eventsUserMaybeGoingToArray ];
     }
 }
 
@@ -341,12 +340,24 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 {
     // Save the events that the user was already prompted to comment on
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-#warning Make sure we uncomment before sending to Fabian
-    
-//    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
+    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPost] forKey:kEventsUserGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:kEventsUserMaybeGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
+    [userDefaults synchronize];
+}
+
+- (void) setUserDefaultArraysToEmpty {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:nil forKey:kEventsUserPromptedForComment];
+    [userDefaults setObject:nil forKey:kEventsUserGoingTo];
+    [userDefaults setObject:nil forKey:kEventsUserMaybeGoingTo];
+    [userDefaults setObject:nil forKey:kEventsWithCommentInformation];
+    [[DEPostManager sharedManager] setPromptedForCommentEvents:[NSMutableArray new]];
+    [[DEPostManager sharedManager] setGoingPost:[NSMutableArray new]];
+    [[DEPostManager sharedManager] setMaybeGoingPost:[NSMutableArray new]];
+    [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[NSMutableArray new]];
+     
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

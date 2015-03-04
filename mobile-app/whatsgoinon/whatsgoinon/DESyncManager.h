@@ -14,7 +14,6 @@
 
 @interface DESyncManager : NSObject
 
-
 // Get all the values from the Parse database
 + (void) getAllValuesForNow : (BOOL) now;
 + (PFObject *) getPFObjectWithValuesFromPost : (DEPost *) post
@@ -38,6 +37,8 @@
 + (void) getNumberOfPostByUser : (NSString *) username;
 + (void) saveUpdatedPFObjectToServer : (PFObject *) post;
 + (void) getEventsPostedByUser : (NSString *) username;
++ (void) getPFObjectForEventObjectIdAndUpdate:(NSString *)objectId
+                                          WithPost : (DEPost *) post;
 /*
  
  Get all the saved events that the user has selected has maybe or going

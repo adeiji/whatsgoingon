@@ -21,7 +21,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3.6</string>
+	<string>1.3.7</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -34,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.3.6</string>
+	<string>1.3.7</string>
 	<key>FacebookAppID</key>
 	<string>484984924975378</string>
 	<key>FacebookDisplayName</key>
@@ -44,7 +44,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Location services must enabled to allow the app to know where you&apos;re at, and where other events are relative to you.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>You need location services running in the background in order to see if you&apos;re at an event you&apos;re going to in order to comment.</string>
+	<string>HappSnap only requires location services running in the background to show you events nearby and to know when to ask you for feedback of events you attend.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

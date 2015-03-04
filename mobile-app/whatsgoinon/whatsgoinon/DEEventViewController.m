@@ -80,31 +80,19 @@ const int heightConstraintConstant = 62;
     [[_eventView btnGoing] addTarget:self action:@selector(updatePost) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (PFObject *) getPFObjectForEvent {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", _post.objectId];
-    // Get the PFObject that corresponds to this post
-    PFObject *object = (PFObject *) [[[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:predicate] firstObject];
-    
-    return object;
-}
-
 /*
  
  Update the current post that the user has just modified
  
  */
 - (void) updatePost {
-    PFObject *object = [self getPFObjectForEvent];
-    // Convert the images to data in order to store the images as PFFiles
     _post.images = [self imagesToNSDataArray:_post.images Compression:.2];
-    
     if (!_post.thumbsUpCount)
     {
         _post.thumbsUpCount = [NSNumber numberWithInt:0];
     }
     
-    // Update the object with the new values
-    [DESyncManager updatePFObject:object WithValuesFromPost:_post];
+    [DESyncManager getPFObjectForEventObjectIdAndUpdate:_post.objectId WithPost:_post];
 
     DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
     DEFinishedPostingView *finishedPostView = (DEFinishedPostingView *) createPostViewController.view;
@@ -249,7 +237,6 @@ const int heightConstraintConstant = 62;
             self.maybeCheckmarkView.hidden = NO;
         }
     }
-    
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -553,6 +540,22 @@ const int heightConstraintConstant = 62;
     [[postManager goingPostWithCommentInformation] addObject:values];
 }
 
+#pragma mark - Going and Not Going Methods
+
+- (void) addEventToGoingListAndUpdateGoingCount
+{
+    int numGoing = [_post.numberGoing intValue];
+    numGoing ++;
+    _post.numberGoing = [NSNumber numberWithInt:numGoing];
+    NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
+    [[[DEPostManager sharedManager] goingPost] addObject:_post.objectId];
+    [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
+    [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
+    [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
+    [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
+    
+}
+
 - (IBAction)setEventAsGoing:(id)sender {
     
     static BOOL going = NO;
@@ -561,16 +564,13 @@ const int heightConstraintConstant = 62;
     // If the user has not already selected this post as going then we set this post as going for the user and save that to the server.
     if ( ![[postManager goingPost] containsObject:_post] )
     {
-        int numGoing = [_post.numberGoing intValue];
-        numGoing ++;
-        _post.numberGoing = [NSNumber numberWithInt:numGoing];
-        NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
-        [[postManager goingPost] addObject:_post.objectId];
-        [self addPostInformationToGoingPostWithCommentInformationManager:postManager];
-        [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
-        [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
-        [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
-        
+        [self addEventToGoingListAndUpdateGoingCount];
+        if ([[postManager maybeGoingPost] containsObject:_post.objectId])
+        {
+            [[postManager maybeGoingPost] removeObject:_post.objectId];
+            
+        }
+        self.maybeCheckmarkView.hidden = YES;
         going = YES;
         // Save this item as going for the user to the server
         [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_GOING];
@@ -594,8 +594,10 @@ const int heightConstraintConstant = 62;
     else {
         NSInteger indexOfViewController = self.navigationController.viewControllers.count - 2;
         DEEventViewController *viewController = [self.navigationController.viewControllers objectAtIndex:indexOfViewController];
+        viewController.isGoing = YES;
+        [viewController updateViewToGoing];
         [viewController shareEvent:nil];
-        
+
         [self.navigationController popViewControllerAnimated:YES];
     }
     
@@ -603,6 +605,19 @@ const int heightConstraintConstant = 62;
     [[_eventView btnMainImage] setHidden:YES];
 }
 
+
+- (IBAction)setEventAsMaybeGoing:(id)sender {
+    
+    DEPostManager *postManager = [DEPostManager sharedManager];
+    if (![[postManager maybeGoingPost] containsObject:_post.objectId])
+    {
+        [[postManager maybeGoingPost] addObject:_post.objectId];
+        // Save this item as maybe going for the user to the server
+        [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
+        self.maybeCheckmarkView.hidden = NO;
+        [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
+    }
+}
 
 /*
  
@@ -670,27 +685,24 @@ const int heightConstraintConstant = 62;
     }
 }
 
-- (IBAction)setEventAsMaybeGoing:(id)sender {
-    DEPostManager *postManager = [DEPostManager new];
-    [[postManager maybeGoingPost] addObject:_post.objectId];
-    // Save this item as maybe going for the user to the server
-    [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
-    self.maybeCheckmarkView.hidden = NO;
-    [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
-}
 
 - (void) updateViewToGoing
 {
-    UIButton *button = [_eventView btnGoing];
-    [button setTitle:@"Map It" forState:UIControlStateNormal];
-    [button removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
-    [button addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
+    UIButton *goingButton;
+    UIButton *maybeButton;
+    
+    goingButton = [_eventView btnGoing];
+    maybeButton = [_eventView btnMaybe];
+    
+    [goingButton setTitle:@"Map It" forState:UIControlStateNormal];
+    [goingButton removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
+    [goingButton addTarget:self action:@selector(mapIt) forControlEvents:UIControlEventTouchUpInside];
 
     _goingButtonBottomSpaceConstraint.constant = -40;
     _goingButtonBottomSpaceConstraintMapView.constant = -40;
     [self.view layoutIfNeeded];
    // [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
-    [[_eventView btnMaybe] setHidden:YES];
+    [maybeButton setHidden:YES];
     
     CGRect frame = _mapView.frame;
     frame.size.height += 40;
@@ -724,7 +736,6 @@ const int heightConstraintConstant = 62;
         NSString *urlString = [NSString stringWithFormat:APPLE_MAPS_APP_URL, [_post.address stringByReplacingOccurrencesOfString:@" " withString:@"+"], currentLocation.latitude, currentLocation.longitude];
 
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
-
     }
 }
 

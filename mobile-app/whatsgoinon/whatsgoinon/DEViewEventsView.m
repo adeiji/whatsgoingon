@@ -149,7 +149,7 @@ const int POST_WIDTH = 140;
     [_overlayView setFrame:CGRectMake(0, 0, 140, 140)];
     [self addSubview:_overlayView];
     [[_overlayView layer] setOpacity:0];
-    [self loadImage];
+//    [self loadImage];
     if (showBlank)
     {
         [self.imgMainImageView setAlpha:0.0];
@@ -170,13 +170,18 @@ const int POST_WIDTH = 140;
 
 - (void) hideImage {
     // Set the alpha to zero so that we still have the cool fade in affect when the user comes back to this post
+    self.imgMainImageView.image = nil;
     [self.imgMainImageView setAlpha:0.0f];
 }
 
 - (void) showImage {
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.imgMainImageView setAlpha:1.0f];
-    }];
+    if (self.imgMainImageView.image == nil)
+    {
+        [self loadImage];
+        [UIView animateWithDuration:0.5f animations:^{
+            [self.imgMainImageView setAlpha:1.0f];
+        }];
+    }
 }
 
 - (void) loadImage

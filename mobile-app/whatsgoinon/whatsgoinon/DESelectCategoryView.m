@@ -74,6 +74,7 @@
     }
     
     isActive = false;
+    [[_btnCategory layer] setZPosition:5.0f];
     [self hideText];
 }
 
@@ -169,13 +170,14 @@
         } completion:^(BOOL finished) {
 //            [myCarousel setFrame:CGRectMake(0, 150, 320, 418)];
             double xPos = [[UIScreen mainScreen] bounds].size.width - 320;
-            double yPos = [[UIScreen mainScreen] bounds].size.height - 418;
-            [myCarousel setFrame:CGRectMake(xPos, yPos, 320, 418)];
+            double yPos = [[UIScreen mainScreen] bounds].size.height - 350;
+            [myCarousel setFrame:CGRectMake(xPos, yPos, 320, 350)];
             myCarousel.type = iCarouselTypeWheel;
             myCarousel.delegate = self;
             myCarousel.dataSource = self;
             [myCarousel reloadData];
-            myCarousel.contentOffset = CGSizeMake(50, 4.5);
+//            myCarousel.contentOffset = CGSizeMake(50, 4.5);
+            myCarousel.contentOffset = CGSizeMake(50, -8.5);
             NSLog(@"Carousel Center %@", NSStringFromCGPoint(myCarousel.center));
         }];
     }
@@ -186,11 +188,9 @@
     if (!isActive)
     {
         isActive = true;
+        [[myCarousel layer] setZPosition:-5.0f];
         
         [self showOrbsAnimation];
-        
-        [[_btnCategory layer] setZPosition:1.0f];
-
         [self showText];
     }
     else {
