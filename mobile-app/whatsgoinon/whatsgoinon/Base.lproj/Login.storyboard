@@ -945,25 +945,55 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="If you want, go ahead and take a picture other people will know who you are" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="dHq-Y5-bgk">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tap &quot;Continue&quot; to skip for now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="D4d-zZ-i4B">
                                 <rect key="frame" x="61" y="86" width="200" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="VRb-LN-vzx"/>
-                                    <constraint firstAttribute="width" constant="200" id="oD8-Dr-bM1"/>
+                                    <constraint firstAttribute="height" constant="100" id="6r4-EF-tFW">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="36"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="200" id="RVC-vN-7dN">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="298"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="VRb-LN-vzx"/>
-                                        <exclude reference="oD8-Dr-bM1"/>
+                                        <exclude reference="6r4-EF-tFW"/>
+                                        <exclude reference="RVC-vN-7dN"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="VRb-LN-vzx"/>
-                                        <include reference="oD8-Dr-bM1"/>
+                                        <include reference="6r4-EF-tFW"/>
+                                        <include reference="RVC-vN-7dN"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="You can do this later by tapping the image under &quot;My Account&quot; in the side menu." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="UA9-wq-cFR">
+                                <rect key="frame" x="61" y="86" width="200" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="o4w-TB-W3X">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="81"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="200" id="tBG-DG-YEV">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="298"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="o4w-TB-W3X"/>
+                                        <exclude reference="tBG-DG-YEV"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="o4w-TB-W3X"/>
+                                        <include reference="tBG-DG-YEV"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -1017,28 +1047,80 @@
                                     <action selector="takeProfileImagePicture:" destination="BIc-Ga-SSU" eventType="touchUpInside" id="eZU-UI-0gZ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Upload or take a picture of your beautiful self!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="dHq-Y5-bgk">
+                                <rect key="frame" x="61" y="86" width="200" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="VRb-LN-vzx">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="47"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="200" id="oD8-Dr-bM1">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="298"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="VRb-LN-vzx"/>
+                                        <exclude reference="oD8-Dr-bM1"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="VRb-LN-vzx"/>
+                                        <include reference="oD8-Dr-bM1"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dHq-Y5-bgk" firstAttribute="top" secondItem="kRH-dj-Y4a" secondAttribute="bottom" constant="53" id="8oZ-38-iWd"/>
+                            <constraint firstItem="UA9-wq-cFR" firstAttribute="centerX" secondItem="D4d-zZ-i4B" secondAttribute="centerX" id="1v3-j1-GZZ"/>
+                            <constraint firstItem="dHq-Y5-bgk" firstAttribute="top" secondItem="kRH-dj-Y4a" secondAttribute="bottom" constant="53" id="8oZ-38-iWd">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                            </constraint>
                             <constraint firstItem="tlv-D1-85C" firstAttribute="top" secondItem="9cm-xc-UqK" secondAttribute="bottom" constant="40" id="G5t-0z-c98">
                                 <variation key="heightClass=regular-widthClass=compact" constant="38"/>
                             </constraint>
-                            <constraint firstItem="hIa-G3-z6B" firstAttribute="top" secondItem="dHq-Y5-bgk" secondAttribute="bottom" constant="36" id="MW6-cC-dRD"/>
+                            <constraint firstItem="hIa-G3-z6B" firstAttribute="top" secondItem="dHq-Y5-bgk" secondAttribute="bottom" constant="36" id="MW6-cC-dRD">
+                                <variation key="heightClass=regular-widthClass=compact" constant="134"/>
+                            </constraint>
                             <constraint firstItem="kRH-dj-Y4a" firstAttribute="top" secondItem="vk2-uC-buP" secondAttribute="bottom" constant="20" id="PFE-fq-QVO"/>
-                            <constraint firstItem="kRH-dj-Y4a" firstAttribute="centerX" secondItem="dHq-Y5-bgk" secondAttribute="centerX" constant="0.5" id="Vxn-mh-lI1"/>
+                            <constraint firstItem="dHq-Y5-bgk" firstAttribute="centerX" secondItem="UA9-wq-cFR" secondAttribute="centerX" id="V2L-Fv-YdF">
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="kRH-dj-Y4a" firstAttribute="centerX" secondItem="dHq-Y5-bgk" secondAttribute="centerX" constant="0.5" id="Vxn-mh-lI1">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-5.5"/>
+                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="kRH-dj-Y4a" secondAttribute="centerX" constant="-0.5" id="aSO-2R-L5W"/>
-                            <constraint firstItem="dHq-Y5-bgk" firstAttribute="centerX" secondItem="hIa-G3-z6B" secondAttribute="centerX" id="fY8-Tu-NWM"/>
+                            <constraint firstItem="UA9-wq-cFR" firstAttribute="top" secondItem="dHq-Y5-bgk" secondAttribute="bottom" constant="5" id="e4W-gU-K7Y">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-1"/>
+                            </constraint>
+                            <constraint firstItem="dHq-Y5-bgk" firstAttribute="centerX" secondItem="hIa-G3-z6B" secondAttribute="centerX" id="fY8-Tu-NWM">
+                                <variation key="heightClass=regular-widthClass=compact" constant="6"/>
+                            </constraint>
+                            <constraint firstItem="D4d-zZ-i4B" firstAttribute="top" secondItem="UA9-wq-cFR" secondAttribute="bottom" constant="14" id="kOw-EU-kUS">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-6"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="9cm-xc-UqK" secondAttribute="trailing" constant="31" id="lCM-6g-3zx"/>
                             <constraint firstItem="9cm-xc-UqK" firstAttribute="leading" secondItem="uCd-uQ-O6Y" secondAttribute="leadingMargin" constant="32" id="nqS-bb-ypS"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="D4d-zZ-i4B"/>
+                                <exclude reference="UA9-wq-cFR"/>
+                            </mask>
                             <mask key="constraints">
+                                <exclude reference="8oZ-38-iWd"/>
+                                <exclude reference="V2L-Fv-YdF"/>
+                                <exclude reference="fY8-Tu-NWM"/>
                                 <exclude reference="PFE-fq-QVO"/>
                                 <exclude reference="Vxn-mh-lI1"/>
                                 <exclude reference="aSO-2R-L5W"/>
-                                <exclude reference="8oZ-38-iWd"/>
-                                <exclude reference="fY8-Tu-NWM"/>
+                                <exclude reference="1v3-j1-GZZ"/>
+                                <exclude reference="e4W-gU-K7Y"/>
+                                <exclude reference="kOw-EU-kUS"/>
                                 <exclude reference="MW6-cC-dRD"/>
                                 <exclude reference="lCM-6g-3zx"/>
                                 <exclude reference="nqS-bb-ypS"/>
@@ -1046,12 +1128,20 @@
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="D4d-zZ-i4B"/>
+                                <include reference="UA9-wq-cFR"/>
+                            </mask>
                             <mask key="constraints">
+                                <include reference="8oZ-38-iWd"/>
+                                <include reference="V2L-Fv-YdF"/>
+                                <include reference="fY8-Tu-NWM"/>
                                 <include reference="PFE-fq-QVO"/>
                                 <include reference="Vxn-mh-lI1"/>
                                 <include reference="aSO-2R-L5W"/>
-                                <include reference="8oZ-38-iWd"/>
-                                <include reference="fY8-Tu-NWM"/>
+                                <include reference="1v3-j1-GZZ"/>
+                                <include reference="e4W-gU-K7Y"/>
+                                <include reference="kOw-EU-kUS"/>
                                 <include reference="MW6-cC-dRD"/>
                                 <include reference="lCM-6g-3zx"/>
                                 <include reference="nqS-bb-ypS"/>
@@ -1066,7 +1156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0qa-Dz-5ko" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2388.75" y="-8.4507042253521121"/>
+            <point key="canvasLocation" x="2388" y="-9"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ycX-Z8-80T">

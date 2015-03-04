@@ -938,8 +938,6 @@ struct TopMargin {
 - (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     [self removeAllPostFromScreen];
-    _posts = [_postsCopy copy];
-    _postsCopy = [NSMutableArray new];
     
     for (PFObject *obj in _posts)
     {

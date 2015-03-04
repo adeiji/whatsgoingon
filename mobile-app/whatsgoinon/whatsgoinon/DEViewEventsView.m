@@ -191,23 +191,22 @@ const int POST_WIDTH = 140;
         // Make sure that this post actually has an image
         if ([_post.images count] != 0)
         {
-            PFFile *imageFile = _post.images[0];
-            
-            [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                
-                @autoreleasepool {
+            if ([_post.images[0] isKindOfClass:[PFFile class]])
+            {
+                PFFile *imageFile = _post.images[0];
+                [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                     NSData *imageData = data;
                     UIImage *image = [UIImage imageWithData:imageData];
-                    if (_rotateImage) {
-                        image = [[UIImage alloc] initWithCGImage: image.CGImage
-                                                           scale: 1.0
-                                                     orientation: UIImageOrientationLeft];
-                    }
-                    
                     self.imgMainImageView.image = image;
                     image = nil;
-                }
-            }];
+
+                }];
+            }
+            else if ([_post.images[0] isKindOfClass:[UIImage class]]) {
+                UIImage *image = (UIImage *) _post.images[0];
+                self.imgMainImageView.image = image;
+                image = nil;
+            }
         }
         else { // If there is no image related to this event then use our placeholder image
             UIImage *image = ImageWithPath(ResourcePath(@"happ-snap-logo-in-app.png"));

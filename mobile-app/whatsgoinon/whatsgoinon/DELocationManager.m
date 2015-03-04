@@ -240,7 +240,7 @@
         }
         
         _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         _currentLocation = [PFGeoPoint new];
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app
