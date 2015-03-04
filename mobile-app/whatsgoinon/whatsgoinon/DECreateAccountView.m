@@ -47,17 +47,48 @@
     return YES;
 }
 
+- (void) setUpValidators {
+    [_txtEmail addRegx:@"[A-Z0-9a-z._%+-]{3,}+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}" withMsg:@"Must enter a valid email"];
+    [_txtPassword addRegx:@"^(?!\\s*$).+" withMsg:@"Must enter a password"];
+    [_txtUsername addRegx:@"[A-Za-z0-9]{3,10}" withMsg:@"Only alpha numeric characters are allowed."];
+    [_txtConfirmPassword addConfirmValidationTo:_txtPassword withMsg:@"Passwords do not match"];
+    
+    [_txtEmail setPresentInView:self];
+    [_txtPassword setPresentInView:self];
+    [_txtUsername setPresentInView:self];
+    [_txtConfirmPassword setPresentInView:self];
+}
+
+- (BOOL) validateTextFields
+{
+    if ([_txtEmail validate] &
+        [_txtPassword validate] &
+        [_txtUsername validate] &
+        [_txtConfirmPassword validate])
+    {
+        // Success
+        return YES;
+    }
+    
+    return NO;
+}
+
 #pragma mark - Button Methods
 
 - (IBAction)signUp:(id)sender {
+    [self setUpValidators];
     
-    DEAddProfileImageViewController *profileImageViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER];
-    
-    [[DEUserManager sharedManager] createUserWithUserName:_txtUsername.text
-                                                                   Password:_txtPassword.text
-                                                                      Email:_txtEmail.text
-                                                             ViewController:profileImageViewController
-                                                                 ErrorLabel:_lblUsernameError];
+    if ([self validateTextFields])
+    {
+        DEAddProfileImageViewController *profileImageViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER];
+        
+        [[DEUserManager sharedManager] createUserWithUserName:_txtUsername.text
+                                                     Password:_txtPassword.text
+                                                        Email:_txtEmail.text
+                                               ViewController:profileImageViewController
+                                                   ErrorLabel:_lblUsernameError];
+    }
 }
+
 
 @end

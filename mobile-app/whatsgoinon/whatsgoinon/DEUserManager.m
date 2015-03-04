@@ -236,7 +236,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
                  ViewController : (UIViewController *)viewController
                      ErrorLabel : (UILabel *)label
 {
-    
+    username = [username lowercaseString];
     __block NSString *blockUsername = username;
     // Get the user corresponding to an email and then use that username to login
     PFQuery *query = [PFUser query];
