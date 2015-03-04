@@ -388,7 +388,7 @@
                 <constraint firstItem="43U-0d-sAm" firstAttribute="top" secondItem="nnx-gM-Iun" secondAttribute="bottom" constant="19" id="zu1-mA-idM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="534" y="-19"/>
+            <point key="canvasLocation" x="850" y="-103"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

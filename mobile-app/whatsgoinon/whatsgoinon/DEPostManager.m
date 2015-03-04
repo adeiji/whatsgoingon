@@ -105,7 +105,7 @@
     }
     else
     {
-        // Get the amount of seconds until the end of the event
+        // Get the amount of seconds until the start of the event
         NSTimeInterval distanceBetweenDates = [[post startTime] timeIntervalSinceDate:[NSDate date]];
         return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
     }

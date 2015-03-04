@@ -517,7 +517,7 @@ struct TopMargin {
 - (void) showNoPostedEventsByUser {
     [self removeAllPostFromScreen];
     UIView *noPostedEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:NO_USER_EVENTS];
-    
+    [noPostedEventsView setFrame:[[UIScreen mainScreen] bounds]];
     [_scrollView addSubview:noPostedEventsView];
     CGRect frame = [noPostedEventsView frame];
     frame.size.height = _scrollView.frame.size.height;
