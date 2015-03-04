@@ -53,13 +53,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "whatsgoinon/DEAppDelegate.m"
-            timestampString = "447104299.954454"
+            filePath = "whatsgoinon/DESyncManager.m"
+            timestampString = "447181746.371852"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
-            landmarkName = "-loadGoingPosts"
+            startingLineNumber = "630"
+            endingLineNumber = "630"
+            landmarkName = "+getEventsPostedByUser:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

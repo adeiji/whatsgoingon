@@ -77,6 +77,7 @@ struct TopMargin {
     if (!isFirstTimeViewingScreen)
     {
         welcomeView = (DEWelcomeEventView *)[[[NSBundle mainBundle] loadNibNamed:@"WelcomeEventsView" owner:self options:nil] firstObject];
+        [welcomeView setFrame:[[UIScreen mainScreen] bounds]];
         [[welcomeView.btnStart layer] setCornerRadius:BUTTON_CORNER_RADIUS];
         [self.view addSubview:welcomeView];
         [userDefaults setObject:@YES forKey:IS_FIRST_TIME_VIEWING_SCREEN];
@@ -112,6 +113,13 @@ struct TopMargin {
     [selectCategoryView loadView];
     orbView = selectCategoryView.orbView;
     outerView = selectCategoryView.outerView;
+    /*
+     If the welcome screen is displayed then don't allow the orb view to be selected
+     */
+    if (welcomeScreen)
+    {
+        [orbView setEnabled:NO];
+    }
     [selectCategoryView setFrame:[[UIScreen mainScreen] bounds]];
     [self.view addSubview:selectCategoryView];
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
@@ -322,6 +330,7 @@ struct TopMargin {
     }];
     
     welcomeScreen = NO;
+    [orbView setEnabled:YES];
     
 }
 
@@ -928,6 +937,7 @@ struct TopMargin {
 
 - (void) searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+    [self removeAllPostFromScreen];
     _posts = [_postsCopy copy];
     _postsCopy = [NSMutableArray new];
     

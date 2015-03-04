@@ -117,6 +117,14 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             _userObject[PARSE_CLASS_USER_RANK] = USER_RANK_STANDARD;
             _userObject[PARSE_CLASS_USER_VISIBLE_PASSWORD] = password;
             [_userObject saveEventually];
+            
+            [DELocationManager getAddressFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSString *value) {
+                NSArray *items = [value componentsSeparatedByString:@","];
+                NSString *state = [items lastObject];
+                NSString *city = [items objectAtIndex:[items count] - 2];
+                
+                [self addLocationToUserCity:city State:state];
+            }];
         }
         else
         {
@@ -187,18 +195,8 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
 - (void) saveItemToArray : (NSString *) item
          ParseColumnName : (NSString *) columnName
 {
-    
-    PFACL *acl = [PFACL ACL];
-    [acl setWriteAccess:YES forUser:[PFUser currentUser]];
-    [acl setReadAccess:YES forUser:[PFUser currentUser]];
-    [acl setPublicReadAccess:YES];
-    [acl setPublicWriteAccess:YES];
-    
-    [_userObject setACL:acl];
-    
-    [_userObject addObject:item forKey:columnName];
-    
-    [_userObject saveEventually:^(BOOL succeeded, NSError *error) {
+    [[PFUser currentUser] addObject:item forKey:columnName];
+    [[PFUser currentUser] saveEventually:^(BOOL succeeded, NSError *error) {
        if (succeeded)
        {
            NSLog(@"Yeah!! You saved the item to an array on parse!");
@@ -261,7 +259,6 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
                 [self usernameExist:[blockUsername lowercaseString] ErrorLabel:label];
             }
         }];
-        
     }];
     
     return nil;
@@ -368,11 +365,11 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
 - (void) addLocationToUserCity : (NSString *) city
                          State : (NSString *) state
 {
+
+    [PFUser currentUser][PARSE_CLASS_USER_CITY] = city;
+    [PFUser currentUser][PARSE_CLASS_USER_STATE] = state;
     
-    _userObject[PARSE_CLASS_USER_CITY] = city;
-    _userObject[PARSE_CLASS_USER_STATE] = state;
-    
-    [_userObject saveEventually:^(BOOL succeeded, NSError *error) {
+    [[PFUser currentUser] saveEventually:^(BOOL succeeded, NSError *error) {
         if (!error)
         {
             NSLog(@"The location of the user was pulled from the social network and stored in the database");
