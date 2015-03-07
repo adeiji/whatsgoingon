@@ -170,7 +170,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
                         }
                         else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
                         {
-                            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
+                            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:YES];
                             NSDictionary *dimensions = @{
                                                          @"type": @"HappSnap Application - Sending Local Notification for Later",
                                                          @"Time" : nowString,

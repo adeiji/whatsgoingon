@@ -158,7 +158,7 @@
             obj[@"loaded"] = @NO;
         }];
     }
-    else {  // If this is trending then we want to display all the best events
+    else if ([category isEqualToString:CATEGORY_TRENDING]) {  // If this is trending then we want to display all the best events
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *event = [DEPost getPostFromPFObject:obj];
             if ([event.postRange isEqual:@0])
@@ -167,7 +167,6 @@
             }
             obj[@"loaded"] = @NO;
         }];
-        
     }
     
     [self sendNotificationThatTheEventsWereLoaded : eventsInCategory

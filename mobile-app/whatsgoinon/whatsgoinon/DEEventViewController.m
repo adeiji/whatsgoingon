@@ -425,14 +425,13 @@ const int heightConstraintConstant = 62;
         [detailsView setIsLoaded:YES];
         [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
         [[detailsView txtDescription] setText:nil];
-//        
-//        if (_isPreview)
-//        {
-            [[detailsView txtDescription] setText:[NSString stringWithFormat:@"%@\n%@", _post.myDescription, _post.website]];
-//        }
-//        else {
-//            [[detailsView txtDescription] setText:_post.myDescription];
-//        }
+        NSString *website = _post.website;
+        if (!_post.website)
+        {
+            website = @"";
+        }
+        [[detailsView txtDescription] setText:[NSString stringWithFormat:@"%@\n%@", _post.myDescription, website]];
+
         // If the post is free
         if (_post.cost == nil)
         {

@@ -95,6 +95,21 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 
 - (BOOL) validateTextFields
 {
+    
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateFormat:@"MM/dd/yy"];
+    // Set the start date and end date date pickers to the correct values
+    NSDate *startDate = [df dateFromString:_txtStartDate.text];
+    NSDate *endDate = [df dateFromString:_txtEndDate.text];
+    
+    if ([startDate compare:endDate] == NSOrderedDescending)
+    {
+        [[_txtEndDate layer] setBorderWidth:2.0f];
+        [[_txtEndDate layer] setBorderColor:[UIColor redColor].CGColor];
+        
+        return NO;
+    }
+    
     if ([_txtCategory validate] &
         [_txtStartDate validate] &
         [_txtStartTime validate] &
@@ -492,7 +507,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
         maxLength = 20;
     }
     else {
-        maxLength = 2;
+        maxLength = 40;
     }
     
     if (newLength > maxLength)
@@ -531,6 +546,11 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 
         [activeField resignFirstResponder];
         [viewPostAddress.searchBar becomeFirstResponder];
+    }
+    
+    if ([textField isEqual:_txtEndDate])
+    {
+        [[_txtEndDate layer] setBorderWidth:0.0f];
     }
 }
 
