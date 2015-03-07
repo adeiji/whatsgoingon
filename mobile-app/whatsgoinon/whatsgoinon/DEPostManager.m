@@ -13,6 +13,8 @@
 
 @synthesize posts = _posts;
 
+static NSString *CATEGORY_ANYTHING = @"Anything";
+
 + (id) sharedManager {
     static DEPostManager *sharedMyManager = nil;
     static dispatch_once_t onceToken;
@@ -146,7 +148,7 @@
     NSMutableArray *eventsInCategory = [NSMutableArray new];
     NSDictionary *categoryDictionary = @{ kNOTIFICATION_CENTER_USER_INFO_CATEGORY : category,
                                           kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS : kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING };
-    if (![category isEqualToString:CATEGORY_TRENDING])
+    if (![category isEqualToString:CATEGORY_TRENDING] && ![category isEqualToString:CATEGORY_ANYTHING])
     {
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *event = [DEPost getPostFromPFObject:obj];
@@ -159,6 +161,15 @@
         }];
     }
     else if ([category isEqualToString:CATEGORY_TRENDING]) {  // If this is trending then we want to display all the best events
+        
+        [events sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            PFObject *post1 = (PFObject *) obj1;
+            PFObject *post2 = (PFObject *) obj2;
+
+            return [post1[TRENDING_ORDER] compare:post2[TRENDING_ORDER]];
+        }];
+
+        
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *event = [DEPost getPostFromPFObject:obj];
             if ([event.postRange isEqual:@0])
@@ -167,6 +178,24 @@
             }
             obj[@"loaded"] = @NO;
         }];
+    }
+    else if ([category isEqualToString:CATEGORY_ANYTHING])
+    {
+        [events sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            PFObject *post1 = (PFObject *) obj1;
+            PFObject *post2 = (PFObject *) obj2;
+
+            NSDate *startTimePost1 = post1[PARSE_CLASS_EVENT_START_TIME];
+            NSDate *startTimePost2 = post2[PARSE_CLASS_EVENT_START_TIME];
+            
+            return [startTimePost1 compare:startTimePost2];
+        }];
+
+        [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            obj[@"loaded"] = @NO;
+            [eventsInCategory addObject:obj];
+        }];
+        
     }
     
     [self sendNotificationThatTheEventsWereLoaded : eventsInCategory

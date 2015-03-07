@@ -89,7 +89,7 @@ struct TopMargin {
 {
     [[DELocationManager sharedManager] updateLocation];
     [super viewDidLoad];
-    
+    numberOfPostOnScreen = 0;
     // Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [self addObservers];
@@ -572,6 +572,7 @@ struct TopMargin {
     __block BOOL validated;
     static int count = 0;
     validated = NO;
+    BOOL addPost = YES;
 
     if ([process isEqualToString: kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW])
     {
@@ -597,21 +598,30 @@ struct TopMargin {
         for (int i = 0; i < 10; i ++) {
             if ([postArray count] != 0 && count < [postArray count])
             {
-                id obj = postArray[count];
-                validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
-                // Show the event on the screen
-                if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
+                if (([myCategory isEqualToString:CATEGORY_TRENDING] || !myCategory) && (numberOfPostOnScreen >= 50))
                 {
-                    [self loadEvent:obj
-                            Margin1:&columnOneMargin
-                            Margin2:&columnTwoMargin
-                             Column:&column
-                          TopMargin:topMargin
-                        PostCounter:&postCounter
-                          ShowBlank:showBlank];
+                    addPost = NO;
                 }
                 
-                count ++;
+                if (addPost)
+                {
+                    id obj = postArray[count];
+                    validated = [self isValidToShowEvent:obj Category:myCategory PostNumber : postCounter];
+                    // Show the event on the screen
+                    if (([obj[@"loaded"] isEqual:@NO] || !obj[@"loaded"])  && validated)
+                    {
+                        [self loadEvent:obj
+                                Margin1:&columnOneMargin
+                                Margin2:&columnTwoMargin
+                                 Column:&column
+                              TopMargin:topMargin
+                            PostCounter:&postCounter
+                              ShowBlank:showBlank];
+                    }
+                    
+                    count ++;
+                    numberOfPostOnScreen ++;
+                }
             }
         }
 

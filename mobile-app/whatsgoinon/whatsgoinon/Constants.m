@@ -36,6 +36,7 @@ NSString *const PARSE_CLASS_EVENT_STATUS = @"status";
 NSString *const PARSE_CLASS_EVENT_STATUS_POSTED = @"posted";
 NSString *const PARSE_CLASS_EVENT_WEBSITE = @"website";
 
+NSString *const TRENDING_ORDER = @"Trending Order";
 NSString *const LOCATION_LATITUDE = @"latitude";
 NSString *const LOCATION_LONGITUDE = @"longitude";
 

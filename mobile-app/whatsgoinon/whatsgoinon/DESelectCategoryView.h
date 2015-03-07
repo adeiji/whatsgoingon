@@ -23,7 +23,6 @@
     UIColor *orbColor;
     NSString *category;
     NSInteger previousIndex;
-    NSInteger carouselIndex;
     
     double BUTTON_HOME_LOC_X;
     double BUTTON_HOME_LOC_Y;

@@ -124,6 +124,14 @@ static PFQuery *globalQuery;
                     [DESyncManager addEventsToAlreadyRetrievedEvents : objects
                                                            PostsArray:postsArray
                                                         ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING isNewProcess:isNewProcess];
+                    
+                    __block int counter = 0;
+                    [postsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                        PFObject *event = (PFObject *) obj;
+                        event[TRENDING_ORDER] = [NSNumber numberWithInt:counter];
+                        counter ++;
+                    }];
+
                 }
                 // Set the miles to zero so that the next time the events are loaded we load them from all to 25 miles distance
                 miles = 0;
@@ -176,8 +184,8 @@ static PFQuery *globalQuery;
     
     if (now)
     {
-        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
-        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
+//        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+//        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
     }
     else
     {

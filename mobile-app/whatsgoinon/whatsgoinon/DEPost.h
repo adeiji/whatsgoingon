@@ -31,6 +31,7 @@
 @property (strong, nonatomic) NSString *website;
 @property (strong, nonatomic) NSNumber *viewCount;
 @property (strong, nonatomic) NSNumber *thumbsUpCount;
+@property (strong, nonatomic) NSNumber *trendingOrder;
 @property BOOL active;
 
 + (DEPost *) getPostFromPFObject : (PFObject *) object;
