@@ -109,7 +109,7 @@ static PFQuery *globalQuery;
         {
             objectsCount += [objects count];
             BOOL isNewProcess = NO;
-            if (miles == 5)
+            if (miles == 1)
             {
                 isNewProcess = YES;
             }
