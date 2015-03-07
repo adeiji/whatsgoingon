@@ -96,7 +96,13 @@ static PFQuery *globalQuery;
     
     __block PFQuery *blockQuery = query;
     // Update the amount of miles so that we get the next set of posts
-    miles += 5;
+    if (miles < 5)
+    {
+        miles ++;
+    }
+    else {
+        miles += 5;
+    }
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
