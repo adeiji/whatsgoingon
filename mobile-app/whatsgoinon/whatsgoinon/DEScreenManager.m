@@ -112,6 +112,7 @@
     localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", post.title];
     localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
     localNotification.applicationIconBadgeNumber = 0;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     NSLog(@"Local Notification Object Set and Scheduled");

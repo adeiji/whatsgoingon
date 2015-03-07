@@ -77,6 +77,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     // Set the user info to contain the event id of the post that the user is at
     localNotification.alertBody = [NSString stringWithFormat:@"Recieved significant location change update"];
     localNotification.applicationIconBadgeNumber = 0;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
@@ -210,6 +211,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", postTitle];
     localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
     localNotification.applicationIconBadgeNumber = 0;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     NSLog(@"Local Notification Object Set and Scheduled");
