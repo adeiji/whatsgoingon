@@ -196,7 +196,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
          ParseColumnName : (NSString *) columnName
 {
     [[PFUser currentUser] addObject:item forKey:columnName];
-    [[PFUser currentUser] saveEventually:^(BOOL succeeded, NSError *error) {
+    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
        if (succeeded)
        {
            NSLog(@"Yeah!! You saved the item to an array on parse!");
@@ -206,6 +206,8 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
            NSLog(@"Uh oh, something happened and the item didn't save to the array");
        }
     }];
+    
+    
 }
 
 + (void) addProfileImage : (NSData *) profileImageData

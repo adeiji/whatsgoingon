@@ -17,6 +17,7 @@
 
 #define GOOGLE_MAPS_APP_URL @"comgooglemaps://?saddr=&daddr=%@&center=%f,%f&zoom=10"
 #define APPLE_MAPS_APP_URL @"http://maps.apple.com/?daddr=%@&saddr=%f,%f"
+static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWithCommentInformation";
 
 const int heightConstraintConstant = 62;
 
@@ -556,9 +557,14 @@ const int heightConstraintConstant = 62;
     NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
     [[[DEPostManager sharedManager] goingPost] addObject:_post.objectId];
     [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
+    
     [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
     [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
     [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
+    [userDefaults synchronize];
     
 }
 

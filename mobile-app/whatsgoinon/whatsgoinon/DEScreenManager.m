@@ -130,7 +130,7 @@
     {
         // Get the corresponding Event to this eventId
         NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", eventId];
-        PFObject *postObj = [[[DEPostManager sharedManager] posts] filteredArrayUsingPredicate:objectIdPredicate][0];
+        PFObject *postObj = [[[DEPostManager sharedManager] goingPost] filteredArrayUsingPredicate:objectIdPredicate][0];
         DEPost *post = [DEPost getPostFromPFObject:postObj];
         DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
         [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
