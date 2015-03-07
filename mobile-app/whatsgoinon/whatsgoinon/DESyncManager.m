@@ -184,8 +184,8 @@ static PFQuery *globalQuery;
     
     if (now)
     {
-//        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
-//        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
+        [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
+        [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:later];
     }
     else
     {

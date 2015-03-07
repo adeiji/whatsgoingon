@@ -33,7 +33,7 @@ struct TopMargin {
 };
 
 - (void) addObservers {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectorToNewCity) name:kNOTIFICATION_CENTER_IS_CITY_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUsersEvents:) name:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orbClicked) name:NOTIFICATION_CENTER_ORB_CLICKED object:nil];
@@ -89,7 +89,6 @@ struct TopMargin {
 {
     [[DELocationManager sharedManager] updateLocation];
     [super viewDidLoad];
-    numberOfPostOnScreen = 0;
     // Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.
     [self addObservers];
@@ -477,9 +476,9 @@ struct TopMargin {
     }
 }
 
-- (void) displayPost {
+- (void) displayPost : (NSNotification *) notification {
     [self stopActivitySpinner];
-    [self displayPost:nil TopMargin:0 PostArray:nil];
+    [self displayPost:notification TopMargin:0 PostArray:nil];
 }
 
 - (void) displayPost : (NSNotification *) notification
@@ -567,12 +566,13 @@ struct TopMargin {
     static CGFloat columnOneMargin = 0;
     static CGFloat columnTwoMargin = 0;
     static CGFloat margin = 0;
+    static NSInteger numberOfPostOnScreen = 0;
     CGFloat scrollViewContentSizeHeight = 0;
-    CGFloat screenSizeRelativeToiPhone5Width = [[UIScreen mainScreen]  bounds].size.width / 320;
     __block BOOL validated;
     static int count = 0;
     validated = NO;
     BOOL addPost = YES;
+    
 
     if ([process isEqualToString: kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_NEW])
     {
@@ -590,6 +590,7 @@ struct TopMargin {
         columnTwoMargin = 0;
         margin = 0;
         scrollViewContentSizeHeight = 0;
+        numberOfPostOnScreen = 0;
         _isNewProcess = NO;
     }
     
@@ -638,9 +639,7 @@ struct TopMargin {
         CGSize size = _scrollView.contentSize;
         size.height = scrollViewContentSizeHeight;
         [_scrollView setContentSize:size];
-        
     }
-
     
 }
 
@@ -911,7 +910,7 @@ struct TopMargin {
     {
         [self addEventsToScreen : 0
                    ProcessStatus:nil
-                        Category:nil
+                        Category:category
                        PostArray:_posts
                        ShowBlank:YES];
         

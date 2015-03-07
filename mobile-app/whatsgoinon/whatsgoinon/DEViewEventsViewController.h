@@ -30,7 +30,6 @@
     UIActivityIndicatorView *spinner;
     BOOL welcomeScreen;
     DEWelcomeEventView *welcomeView;
-    NSInteger numberOfPostOnScreen;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
