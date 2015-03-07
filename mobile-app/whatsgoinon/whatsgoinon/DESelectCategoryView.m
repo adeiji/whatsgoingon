@@ -38,7 +38,7 @@
 
 - (void) loadView {
     [self setButtonConstants];
-    
+    carouselIndex = 0;
     orbColor = [UIColor colorWithRed: 66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha: 1];
     _orbView = [UIButton new];
     _outerView = [[UIView alloc] initWithFrame:CGRectMake(OUTER_VIEW_X_POS, OUTER_VIEW_Y_POS, BUTTON_OUTER_CIRCLE_WIDTH, BUTTON_OUTER_CIRCLE_HEIGHT)];
@@ -274,6 +274,8 @@
     return view;
 }
 
+
+
 - (NSInteger)numberOfItemsInCarousel:(__unused iCarousel *)carousel
 {
     return (NSInteger)[categories count];
@@ -300,9 +302,25 @@
 }
 
 - (void) carouselCurrentItemIndexDidChange:(iCarousel *)carousel {
-    category = [categories objectAtIndex:carousel.currentItemIndex];
+    if (previousIndex < carousel.currentItemIndex)
+    {
+        carouselIndex ++;
+    }
+    else {
+        carouselIndex --;
+    }
+    
+    if (carouselIndex < 0)
+    {
+        carouselIndex = [categories count] - 1;
+    }
+    else if (carouselIndex == [categories count])
+    {
+        carouselIndex = 0;
+    }
+    
+    category = [categories objectAtIndex:carouselIndex];
     [self.btnCategory setTitle:categories[carousel.currentItemIndex] forState:UIControlStateNormal];
 }
-
 
 @end
