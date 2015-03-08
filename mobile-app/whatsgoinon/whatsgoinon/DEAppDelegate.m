@@ -51,6 +51,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [self loadGoingPosts];
     [self loadMaybeGoingPosts];
     [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
+    [[DEScreenManager sharedManager] showPostingIndicator];
 
     return YES;
 }
@@ -109,7 +110,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
                                      @"time": nowString
                                      };
         // Send the dimensions to Parse along with the 'read' event
-        [PFAnalytics trackEvent:@"appopen" dimensions:dimensions];
+        [PFAnalytics trackEvent:@"read" dimensions:dimensions];
         __block UIBackgroundTaskIdentifier background_task;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -119,12 +120,8 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
             // 1.  Get the current Location
             // 2.  See if any of the events the user is going to are nearby
             CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+            [[DELocationManager sharedManager] startMonitoringSignificantLocationChanges];
             NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
-            NSDictionary *dimensions = @{
-                                         @"type": @"Retrieved the going posts",
-                                         };
-            // Send the dimensions to Parse along with the 'read' event
-            [PFAnalytics trackEvent:@"appopen" dimensions:dimensions];
             
             if (postsWithCommentInformation != nil)
             {
@@ -132,53 +129,49 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
                     NSDictionary *values = (NSDictionary *) obj;
                     NSString *postTitle = values[PARSE_CLASS_EVENT_TITLE];
                     NSDictionary *dimensions = @{
-                                                 @"type": @"Searching through events",
-                                                 @"eventId": values[PARSE_CLASS_EVENT_OBJECT_ID],
+                                                 @"Event Id": values[PARSE_CLASS_EVENT_OBJECT_ID],
                                                  @"Event Name" : postTitle
                                                  };
                     
                     // Send the dimensions to Parse along with the 'read' event
-                    [PFAnalytics trackEvent:@"appopen" dimensions:dimensions];
+                    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
                     CLLocationDegrees latitude = ((NSNumber *) values[LOCATION_LATITUDE]).doubleValue;
                     CLLocationDegrees longitude = ((NSNumber *) values[LOCATION_LONGITUDE]).doubleValue;
                     CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
                     
-                    if ([self checkIfNearEventLocation:location Event:eventLocation])
+                    if ([self checkIfNearEventLocation:location Event:eventLocation EventName:postTitle])
                     {
                         NSDictionary *dimensions = @{
-                                                     @"type" : @"User is near location of going to event",
-                                                     @"time" : nowString,
-                                                     @"eventId" : values[PARSE_CLASS_EVENT_OBJECT_ID],
+                                                     @"Time" : nowString,
+                                                     @"Event Id" : values[PARSE_CLASS_EVENT_OBJECT_ID],
                                                      @"Event Name" : postTitle
                                                      };
                         NSDate *later = values[PARSE_CLASS_EVENT_END_TIME];
                         NSDate *startTime = values[PARSE_CLASS_EVENT_START_TIME];
                         NSString *postId = values[PARSE_CLASS_EVENT_OBJECT_ID];
                         // Send the dimensions to Parse along with the 'read' event
-                        [PFAnalytics trackEvent:@"appopen" dimensions:dimensions];
+                        [PFAnalytics trackEvent:@"read" dimensions:dimensions];
                         later = [later dateByAddingTimeInterval:(60 * 60)];
                         
                         if (([startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
                         {
                             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
                             NSDictionary *dimensions = @{
-                                                         @"type" : @"Sending Local Notification For Now",
-                                                         @"time" : nowString,
+                                                         @"Time" : nowString,
                                                          @"Event Name" : postTitle
                                                          };
                             // Send the dimensions to Parse along with the 'read' event
-                            [PFAnalytics trackEvent:@"appopen" dimensions:dimensions];
+                            [PFAnalytics trackEvent:@"read" dimensions:dimensions];
                         }
                         else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
                         {
                             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:YES];
                             NSDictionary *dimensions = @{
-                                                         @"type": @"HappSnap Application - Sending Local Notification for Later",
                                                          @"Time" : nowString,
                                                          @"Event Name" : postTitle
                                                          };
                             // Send the dimensions to Parse along with the 'read' event
-                            [PFAnalytics trackEvent:@"appopen" dimensions:dimensions];
+                            [PFAnalytics trackEvent:@"read" dimensions:dimensions];
                         }
                     }
                     
@@ -219,15 +212,15 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 
 
 - (BOOL) checkIfNearEventLocation : (CLLocation *) location
-                            Event : (CLLocation *) eventLocation {
-    NSNumber *lat = [NSNumber numberWithDouble:location.coordinate.latitude];
-    NSNumber *longitude = [NSNumber numberWithDouble:location.coordinate.longitude];
-    CLLocationDistance distance = [location distanceFromLocation:eventLocation];
+                            Event : (CLLocation *) eventLocation
+                        EventName : (NSString *) eventName {
+    
+    double distance = [location distanceFromLocation:eventLocation];
     NSNumber *distanceObject = [NSNumber numberWithDouble:distance];
     NSDictionary *dimensions = @{
                                  @"Type": @"Distance to event",
-                                 @"Distance to Event": [distanceObject stringValue],
-                                 @"Current Location" : [NSString stringWithFormat:@"Lat - %@, Long - %@", [lat stringValue], [longitude stringValue]]
+                                 @"Distance to Event" : [distanceObject stringValue],
+                                 @"Event Name" : eventName
                                  };
     // Send the dimensions to Parse along with the 'read' event
     [PFAnalytics trackEvent:@"read" dimensions:dimensions];
@@ -290,9 +283,32 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     }
 }
 
+- (void) sendTestNotification {
+    
+    NSDictionary *values = [[DEPostManager sharedManager] goingPostWithCommentInformation][0];
+    NSString *postTitle = values[PARSE_CLASS_EVENT_TITLE];
+    NSString *postId = values[PARSE_CLASS_EVENT_OBJECT_ID];
+    // Perform task here
+    // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
+    UILocalNotification *localNotification = [UILocalNotification new];
+    double minutes = .1;
+    NSDate *nowPlusSevenMinutes = [[NSDate date] dateByAddingTimeInterval:(60 * minutes)];
+    [localNotification setFireDate:nowPlusSevenMinutes];
+    // Set the user info to contain the event id of the post that the user is at
+    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : postId,
+                                    kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE : @NO };
+    localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", postTitle];
+    localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
+    localNotification.applicationIconBadgeNumber = 0;
+    localNotification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+    NSLog(@"Local Notification Object Set and Scheduled");
+}
+
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
-    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateInactive)
     {
         [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
     }

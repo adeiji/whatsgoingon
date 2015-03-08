@@ -40,6 +40,21 @@
     [self checkForCommenting : goingPosts];
 }
 
+/*
+ 
+ Handle any errors that happen from the location manager
+ 
+ */
+
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSDictionary *dimensions = @{
+                                 @"Error" : [error description],
+                                };
+    
+    // Send the dimensions to Parse along with the 'read' event
+    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+}
+
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorized || status == kCLAuthorizationStatusAuthorizedWhenInUse)
     {
@@ -134,16 +149,7 @@
 //    [_locationManager startUpdatingLocation];
 }
 
-/*
- 
- Handle any errors that happen from the location manager
- 
- */
 
-- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    
-}
 
 /*
  

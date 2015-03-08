@@ -28,7 +28,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jU5-qi-qDz" customClass="DEActionButton">
-                    <rect key="frame" x="188" y="247" width="50" height="50"/>
+                    <rect key="frame" x="188" y="234" width="50" height="50"/>
                     <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="G3G-q7-iuF"/>
@@ -42,7 +42,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ZU-JE-nnH" customClass="DEActionButton">
-                    <rect key="frame" x="251" y="247" width="50" height="50"/>
+                    <rect key="frame" x="251" y="234" width="50" height="50"/>
                     <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="bQG-S8-6qa"/>
@@ -56,7 +56,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shs-UD-vDI">
-                    <rect key="frame" x="20" y="263" width="42" height="21"/>
+                    <rect key="frame" x="20" y="250" width="42" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="42" id="1Ea-3T-J4L"/>
                     </constraints>
@@ -110,12 +110,12 @@
                 <constraint firstItem="7ZU-JE-nnH" firstAttribute="top" secondItem="jU5-qi-qDz" secondAttribute="top" id="Gxr-dq-1Vf"/>
                 <constraint firstItem="6f2-Fo-n2K" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="JAK-7x-RAV"/>
                 <constraint firstItem="sSg-IN-yue" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="OIs-js-QyM"/>
+                <constraint firstAttribute="bottom" secondItem="jU5-qi-qDz" secondAttribute="bottom" constant="284" id="Ttd-DB-vpB"/>
                 <constraint firstItem="6f2-Fo-n2K" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" id="YfZ-MV-KUc"/>
                 <constraint firstAttribute="trailing" secondItem="sSg-IN-yue" secondAttribute="trailing" id="auw-gI-0gn"/>
                 <constraint firstItem="Shs-UD-vDI" firstAttribute="centerY" secondItem="jU5-qi-qDz" secondAttribute="centerY" constant="1.5" id="cGt-W9-wUp"/>
                 <constraint firstItem="6f2-Fo-n2K" firstAttribute="leading" secondItem="zDA-3x-sHE" secondAttribute="leading" id="mrb-E6-Qqj"/>
                 <constraint firstAttribute="trailing" secondItem="7ZU-JE-nnH" secondAttribute="trailing" constant="19" id="nNf-6U-sL3"/>
-                <constraint firstItem="jU5-qi-qDz" firstAttribute="top" secondItem="zDA-3x-sHE" secondAttribute="bottom" constant="8" id="uUD-zB-TC3"/>
                 <constraint firstItem="6f2-Fo-n2K" firstAttribute="trailing" secondItem="zDA-3x-sHE" secondAttribute="trailing" id="xK7-XO-ZXr"/>
             </constraints>
             <connections>

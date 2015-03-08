@@ -119,6 +119,60 @@
 
 }
 
+- (void) showPostingIndicator {
+    postingIndicatorView = [UIView new];
+    CGRect window = [[UIScreen mainScreen] bounds];
+    [postingIndicatorView setFrame:CGRectMake(0, window.size.height - 25, window.size.width, 25)];
+    [postingIndicatorView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.55f]];
+    
+    UILabel *posting = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, 100, 25)];
+    [posting setText:@"Posting Event"];
+    [posting setFont:[UIFont fontWithName:@"Avenir Medium" size:12.0f]];
+    [posting setTextColor:[UIColor whiteColor]];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:postingIndicatorView];
+    
+    progressView = [UIProgressView new];
+    [progressView setFrame:CGRectMake(150, 25/2.0f, window.size.width - 175, 10)];
+    [progressView setProgressTintColor:[UIColor greenColor]];
+    [postingIndicatorView addSubview:progressView];
+    [postingIndicatorView addSubview:posting];
+    [progressView setProgress:.25 animated:YES];
+    [progressView setBackgroundColor:[UIColor whiteColor]];
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        timer = [NSTimer scheduledTimerWithTimeInterval:.35 target:self selector:@selector(incrementProgressView) userInfo:nil repeats:YES];
+        
+        [timer fire];
+    });
+    
+}
+
+- (void) incrementProgressView {
+
+    static int progressCounter = .25;
+    progressCounter +=.10;
+    
+    if (progressCounter < .95)
+    {
+        [progressView setProgress:progressCounter animated:YES];
+    }
+    else {
+        [timer setFireDate:[NSDate distantFuture]];
+        [timer invalidate];
+        
+        timer = nil;
+    }
+}
+
+- (void) hidePostingIndicator {
+    [progressView setProgress:1.0 animated:NO];
+
+    [postingIndicatorView removeFromSuperview];
+    [timer setFireDate:[NSDate distantFuture]];
+    [timer invalidate];
+    timer = nil;
+}
+
 /*
  
  Display a screen similar to an iOS banner that asks the user if he wants to comment on the event that he just visited

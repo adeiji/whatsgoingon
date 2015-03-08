@@ -500,6 +500,7 @@ static PFQuery *globalQuery;
             
             [sharedManager setPosts:array];
             [self updatePostCountForUser];
+            [[DEScreenManager sharedManager] hidePostingIndicator];
         }
     }];
     
