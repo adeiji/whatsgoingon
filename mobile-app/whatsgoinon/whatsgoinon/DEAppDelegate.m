@@ -52,6 +52,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [self loadMaybeGoingPosts];
     [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
     [[DEScreenManager sharedManager] showPostingIndicator];
+    [self sendTestNotification];
 
     return YES;
 }
@@ -105,12 +106,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         [df setTimeStyle:NSDateFormatterFullStyle];
         NSString *nowString = [df stringFromDate:now];
         
-        NSDictionary *dimensions = @{
-                                     @"type": @"Opened from terminated state.  Location update",
-                                     @"time": nowString
-                                     };
-        // Send the dimensions to Parse along with the 'read' event
-        [PFAnalytics trackEvent:@"read" dimensions:dimensions];
         __block UIBackgroundTaskIdentifier background_task;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -128,50 +123,25 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
                 [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                     NSDictionary *values = (NSDictionary *) obj;
                     NSString *postTitle = values[PARSE_CLASS_EVENT_TITLE];
-                    NSDictionary *dimensions = @{
-                                                 @"Event Id": values[PARSE_CLASS_EVENT_OBJECT_ID],
-                                                 @"Event Name" : postTitle
-                                                 };
-                    
-                    // Send the dimensions to Parse along with the 'read' event
-                    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
                     CLLocationDegrees latitude = ((NSNumber *) values[LOCATION_LATITUDE]).doubleValue;
                     CLLocationDegrees longitude = ((NSNumber *) values[LOCATION_LONGITUDE]).doubleValue;
                     CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
                     
                     if ([self checkIfNearEventLocation:location Event:eventLocation EventName:postTitle])
                     {
-                        NSDictionary *dimensions = @{
-                                                     @"Time" : nowString,
-                                                     @"Event Id" : values[PARSE_CLASS_EVENT_OBJECT_ID],
-                                                     @"Event Name" : postTitle
-                                                     };
                         NSDate *later = values[PARSE_CLASS_EVENT_END_TIME];
                         NSDate *startTime = values[PARSE_CLASS_EVENT_START_TIME];
                         NSString *postId = values[PARSE_CLASS_EVENT_OBJECT_ID];
-                        // Send the dimensions to Parse along with the 'read' event
-                        [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+
                         later = [later dateByAddingTimeInterval:(60 * 60)];
                         
                         if (([startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
                         {
                             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
-                            NSDictionary *dimensions = @{
-                                                         @"Time" : nowString,
-                                                         @"Event Name" : postTitle
-                                                         };
-                            // Send the dimensions to Parse along with the 'read' event
-                            [PFAnalytics trackEvent:@"read" dimensions:dimensions];
                         }
                         else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
                         {
                             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:YES];
-                            NSDictionary *dimensions = @{
-                                                         @"Time" : nowString,
-                                                         @"Event Name" : postTitle
-                                                         };
-                            // Send the dimensions to Parse along with the 'read' event
-                            [PFAnalytics trackEvent:@"read" dimensions:dimensions];
                         }
                     }
                     
@@ -217,13 +187,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     
     double distance = [location distanceFromLocation:eventLocation];
     NSNumber *distanceObject = [NSNumber numberWithDouble:distance];
-    NSDictionary *dimensions = @{
-                                 @"Type": @"Distance to event",
-                                 @"Distance to Event" : [distanceObject stringValue],
-                                 @"Event Name" : eventName
-                                 };
-    // Send the dimensions to Parse along with the 'read' event
-    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
     
     if (distance < 600)
     {
@@ -308,29 +271,35 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     
-    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateInactive)
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
     {
-        [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
+        if ([[DEPostManager sharedManager] posts])  // If the user has not loaded the posts yet by pressing the 'Now' or 'Later' buttons
+        {
+            [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
+        }
+        else {
+            [self displayCommentViewWithObjectId:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];  // Load the post information from the Array that stores the comment information
+        }
     }
-    else {
-        // Get the corresponding Event to this eventId
-        NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", [notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
-        NSArray *object = [[[DEPostManager sharedManager] goingPostWithCommentInformation] filteredArrayUsingPredicate:objectIdPredicate];
-        if (!object)
-        {
-            [[[DEPostManager sharedManager] goingPost] filteredArrayUsingPredicate:objectIdPredicate];
-        }
-        if ([object count] != 0)
-        {
-            PFObject *postObj = object[0];
-            DEPost *post = [DEPost getPostFromPFObject:postObj];
-            
-            // Show the comment view for this particular event
-            [DEScreenManager showCommentView:post];
-        }
+    else  {  // Notification has come from being pressed
+        [self displayCommentViewWithObjectId:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
     }
 }
 
+- (void) displayCommentViewWithObjectId : (NSString *) objectId {
+    // Get the corresponding Event to this eventId
+    NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", objectId];
+    NSArray *object = [[[DEPostManager sharedManager] goingPostWithCommentInformation] filteredArrayUsingPredicate:objectIdPredicate];
+    
+    if ([object count] != 0)
+    {
+        PFObject *postObj = object[0];
+        DEPost *post = [DEPost getPostFromPFObject:postObj];
+        
+        // Show the comment view for this particular event
+        [DEScreenManager showCommentView:post];
+    }
+}
 
 - (void) checkIfLocalNotification : (NSDictionary *) launchOptions {
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];

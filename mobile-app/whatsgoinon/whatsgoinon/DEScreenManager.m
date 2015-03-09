@@ -184,23 +184,34 @@
     if (!myPost)
     {
         // Get the corresponding Event to this eventId
-        NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", eventId];
-        PFObject *postObj = [[[DEPostManager sharedManager] goingPost] filteredArrayUsingPredicate:objectIdPredicate][0];
-        DEPost *post = [DEPost getPostFromPFObject:postObj];
-        DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
-        [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+        __block PFObject *postObj;
         
+        if ([[DEPostManager sharedManager] posts])
         {
-            CGRect frame = view.frame;
-            frame.size.width = [[UIScreen mainScreen] bounds].size.width;
-            [view setFrame:frame];
+            [[[DEPostManager sharedManager] posts] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                PFObject *object = (PFObject *) obj;
+                if ([object[PARSE_CLASS_EVENT_OBJECT_ID] isEqualToString:eventId ])
+                {
+                    postObj = object;
+                    *stop = YES;
+                }
+            }];
+            
+            DEPost *post = [DEPost getPostFromPFObject:postObj];
+            DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
+            [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+            
+            {
+                CGRect frame = view.frame;
+                frame.size.width = [[UIScreen mainScreen] bounds].size.width;
+                [view setFrame:frame];
+            }
+            
+            [view showView];
+            [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
+            // Make sure its saved that the user has already been prompted to comment for the event
+            [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
         }
-        
-        [view showView];
-        [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
-        // Make sure its saved that the user has already been prompted to comment for the event
-        [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
-        
     }
     else {
         DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];

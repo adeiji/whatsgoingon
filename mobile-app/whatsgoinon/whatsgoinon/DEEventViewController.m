@@ -541,7 +541,8 @@ const int heightConstraintConstant = 62;
                              LOCATION_LATITUDE : [NSNumber numberWithDouble:_post.location.latitude],
                              LOCATION_LONGITUDE : [NSNumber numberWithDouble:_post.location.longitude],
                              PARSE_CLASS_EVENT_OBJECT_ID : _post.objectId,
-                             PARSE_CLASS_EVENT_TITLE : _post.title
+                             PARSE_CLASS_EVENT_TITLE : _post.title,
+                             PARSE_CLASS_EVENT_ADDRESS : _post.address
     };
     
     [[postManager goingPostWithCommentInformation] addObject:values];

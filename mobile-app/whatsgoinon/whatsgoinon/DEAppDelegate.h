@@ -21,6 +21,7 @@
 - (void) loadGoingPosts;
 - (void) loadMaybeGoingPosts;
 - (void) setUserDefaultArraysToEmpty;
+- (void) displayCommentView;
 
 @property (strong, nonatomic) UIWindow *window;
 
