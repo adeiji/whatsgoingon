@@ -123,7 +123,7 @@
     postingIndicatorView = [UIView new];
     CGRect window = [[UIScreen mainScreen] bounds];
     [postingIndicatorView setFrame:CGRectMake(0, window.size.height - 25, window.size.width, 25)];
-    [postingIndicatorView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.55f]];
+    [postingIndicatorView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.85f]];
     
     UILabel *posting = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, 100, 25)];
     [posting setText:@"Posting Event"];
@@ -148,29 +148,41 @@
 }
 
 - (void) incrementProgressView {
-
-    static int progressCounter = .25;
-    progressCounter +=.10;
     
-    if (progressCounter < .95)
+    if (progressView.progress < .95)
     {
-        [progressView setProgress:progressCounter animated:YES];
+        [progressView setProgress:progressView.progress + .15 animated:YES];
     }
     else {
         [timer setFireDate:[NSDate distantFuture]];
         [timer invalidate];
         
         timer = nil;
+        [self hidePostingIndicator];
     }
 }
 
 - (void) hidePostingIndicator {
-    [progressView setProgress:1.0 animated:NO];
-
-    [postingIndicatorView removeFromSuperview];
-    [timer setFireDate:[NSDate distantFuture]];
-    [timer invalidate];
-    timer = nil;
+    [progressView setProgress:1.0f animated:NO];
+    [progressView setProgressTintColor:[HPStyleKit blueColor]];
+    for (UIView *view in [postingIndicatorView subviews]) {
+        if ([view isKindOfClass:[UILabel class]])
+        {
+            UILabel *label = (UILabel *) view;
+            [label setText:@"Event Posted"];
+            [label setTextColor:[HPStyleKit blueColor]];
+        }
+    }
+    
+    [UIView animateWithDuration:1.0f animations:^{
+        [postingIndicatorView setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [postingIndicatorView removeFromSuperview];
+        postingIndicatorView = nil;
+        [timer setFireDate:[NSDate distantFuture]];
+        [timer invalidate];
+        timer = nil;
+    }];
 }
 
 /*

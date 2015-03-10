@@ -184,13 +184,14 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     // Application is launched because of a significant location change
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
-        [[[DELocationManager sharedManager] locationManager] startMonitoringSignificantLocationChanges];
+        
         __block UIBackgroundTaskIdentifier background_task;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [self cancelAllFutureNotifications];
             NSString *nowString = [self getNowString];
-            __block CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+            CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+            [[[DELocationManager sharedManager] locationManager] startMonitoringSignificantLocationChanges];
             __block NSMutableDictionary *analyticsDictionary;
             NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
             __block NSMutableArray *analyticsDetailsArray = [[self loadAnalyticsArray] mutableCopy];
@@ -203,7 +204,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
                     
                     // Save analytics information and upload to the server
                     {
-                        [analyticsDictionary setObject:nowString forKey:PARSE_ANALYTICS_TIME];
+                           [analyticsDictionary setObject:nowString forKey:PARSE_ANALYTICS_TIME];
                         [analyticsDetailsArray addObject:[analyticsDictionary copy]];
                     }
                 }];

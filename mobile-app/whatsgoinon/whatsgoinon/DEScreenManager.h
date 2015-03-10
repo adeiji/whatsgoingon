@@ -12,6 +12,7 @@
 #import <MessageUI/MessageUI.h>
 #import "DEMainViewController.h"
 #import "DEPromptCommentView.h"
+#import "HPStyleKit.h"
 
 @class DEViewMainMenu;
 
