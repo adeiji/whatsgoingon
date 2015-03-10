@@ -15,6 +15,8 @@
 @interface DEAppDelegate : UIResponder <UIApplicationDelegate>
 {
     NSTimer *timer;
+    NSMutableDictionary *analytics;
+    NSMutableArray *analyticsArray;
 }
 
 - (void) loadPromptedForCommentEvents;
@@ -22,6 +24,7 @@
 - (void) loadMaybeGoingPosts;
 - (void) setUserDefaultArraysToEmpty;
 - (void) displayCommentView;
+- (NSMutableArray *) loadAnalyticsArray;
 
 @property (strong, nonatomic) UIWindow *window;
 

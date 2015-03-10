@@ -44,7 +44,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
-    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     [self checkIfLocalNotification:launchOptions];
     [self checkIfSignificantLocationChange:launchOptions];
     [self loadPromptedForCommentEvents];
@@ -52,8 +51,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [self loadMaybeGoingPosts];
     [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
     [[DEScreenManager sharedManager] showPostingIndicator];
-    [self sendTestNotification];
-
+    [self loadAnalyticsArray];
     return YES;
 }
 
@@ -95,65 +93,179 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     }];
 }
 
+- (NSMutableArray *) loadAnalyticsArray {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *array = [defaults objectForKey:kAnalyticsArray];
+    
+    if (!array)
+    {
+        array = [NSMutableArray new];
+    }
+    else {
+        if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground)
+        {
+            for (NSMutableDictionary *analyticsDictionary in array) {
+                [DESyncManager saveAnalyticsDictionary:analyticsDictionary];
+            }
+        }
+    }
+    
+    return array;
+}
+
+- (NSMutableDictionary *) getTimeLapsedAnalyticsDictionary : (NSMutableDictionary *) dictionary {
+    NSDate *previousDateTime = [analytics objectForKey:PARSE_ANALYTICS_TIME];
+    if (previousDateTime)
+    {
+        double timeLapse = [previousDateTime timeIntervalSinceDate:[NSDate date]];
+        [dictionary setObject:[NSNumber numberWithDouble:timeLapse] forKey:PARSE_ANALYTICS_TIME_LAPSED];
+    }
+    
+    return dictionary;
+}
+
+
+
+/*
+ 
+ Get the distance between the location the user is at now and the location that the user was at last time the app updated from a significant location change update
+ 
+ */
+- (NSMutableDictionary *) getDistanceTraveledAnalyticsDictionary : (NSMutableDictionary *) dictionary
+{
+    CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+    CLLocationDegrees latitude = [[dictionary objectForKey:PARSE_ANALYTICS_LATITUDE] doubleValue];
+    CLLocationDegrees longitude = [[dictionary objectForKey:PARSE_ANALYTICS_LONGITUDE] doubleValue];
+    CLLocation *previousLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    double distance = [location distanceFromLocation:previousLocation];
+    NSNumber *distanceObject = [NSNumber numberWithDouble:distance];
+    
+    [dictionary setObject:distanceObject forKey:PARSE_ANALYTICS_DISTANCE_TRAVELED];
+    return dictionary;
+}
+
+- (NSString *) getNowString {
+    NSDate *now = [NSDate date];
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateStyle:NSDateFormatterShortStyle];
+    [df setTimeStyle:NSDateFormatterFullStyle];
+    return [df stringFromDate:now];
+}
+
+- (NSMutableDictionary *) getCurrentLocationAnalyticsDictionary : (NSMutableDictionary *) dictionary {
+    CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+    CLLocationDegrees latitude = location.coordinate.latitude;
+    CLLocationDegrees longitude = location.coordinate.longitude;
+    
+    NSNumber *latObject = [NSNumber numberWithDouble:latitude];
+    NSNumber *longObject = [NSNumber numberWithDouble:longitude];
+    
+    [dictionary setObject:latObject forKey:PARSE_ANALYTICS_LATITUDE];
+    [dictionary setObject:longObject forKey:PARSE_ANALYTICS_LONGITUDE];
+    
+    return dictionary;
+}
+
+- (NSMutableDictionary *) getAnalyticsInformation : (NSMutableDictionary *) analyticsDictionary {
+    analyticsDictionary = [NSMutableDictionary new];
+    analyticsDictionary = [self getDistanceTraveledAnalyticsDictionary:analyticsDictionary];
+    analyticsDictionary = [self getTimeLapsedAnalyticsDictionary:analyticsDictionary];
+    analyticsDictionary = [self getCurrentLocationAnalyticsDictionary:analyticsDictionary];
+    
+    return analyticsDictionary;
+    
+}
+
+/* 1.  Get the current Location
+ 2.  See if any of the events the user is going to are nearby */
+
 - (void) checkIfSignificantLocationChange : (NSDictionary *) launchOptions {
     
     // Application is launched because of a significant location change
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
-        NSDate *now = [NSDate date];
-        NSDateFormatter *df = [NSDateFormatter new];
-        [df setDateStyle:NSDateFormatterShortStyle];
-        [df setTimeStyle:NSDateFormatterFullStyle];
-        NSString *nowString = [df stringFromDate:now];
-        
+        [[[DELocationManager sharedManager] locationManager] startMonitoringSignificantLocationChanges];
         __block UIBackgroundTaskIdentifier background_task;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            //### background task starts
-            NSLog(@"Running in the background\n");
             [self cancelAllFutureNotifications];
-            // 1.  Get the current Location
-            // 2.  See if any of the events the user is going to are nearby
-            CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
-            [[DELocationManager sharedManager] startMonitoringSignificantLocationChanges];
+            NSString *nowString = [self getNowString];
+            __block CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+            __block NSMutableDictionary *analyticsDictionary;
             NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
-            
+            __block NSMutableArray *analyticsDetailsArray = [[self loadAnalyticsArray] mutableCopy];
+            analyticsDictionary = [self getAnalyticsInformation:analyticsDictionary];
+
             if (postsWithCommentInformation != nil)
             {
                 [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                    NSDictionary *values = (NSDictionary *) obj;
-                    NSString *postTitle = values[PARSE_CLASS_EVENT_TITLE];
-                    CLLocationDegrees latitude = ((NSNumber *) values[LOCATION_LATITUDE]).doubleValue;
-                    CLLocationDegrees longitude = ((NSNumber *) values[LOCATION_LONGITUDE]).doubleValue;
-                    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+                    analyticsDictionary = [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location AnalyticsDictionary:analyticsDictionary];
                     
-                    if ([self checkIfNearEventLocation:location Event:eventLocation EventName:postTitle])
+                    // Save analytics information and upload to the server
                     {
-                        NSDate *later = values[PARSE_CLASS_EVENT_END_TIME];
-                        NSDate *startTime = values[PARSE_CLASS_EVENT_START_TIME];
-                        NSString *postId = values[PARSE_CLASS_EVENT_OBJECT_ID];
-
-                        later = [later dateByAddingTimeInterval:(60 * 60)];
-                        
-                        if (([startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
-                        {
-                            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
-                        }
-                        else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
-                        {
-                            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:YES];
-                        }
+                        [analyticsDictionary setObject:nowString forKey:PARSE_ANALYTICS_TIME];
+                        [analyticsDetailsArray addObject:[analyticsDictionary copy]];
                     }
-                    
                 }];
             }
-            //#### background task ends
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:analyticsDetailsArray forKey:kAnalyticsArray];
+            [defaults synchronize];
             
             //Clean up code. Tell the system that we are done.
             [[UIApplication sharedApplication] endBackgroundTask: background_task];
-            background_task = UIBackgroundTaskInvalid; 
+            background_task = UIBackgroundTaskInvalid;
         });
     }
+    else {
+        [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+    }
+}
+
+- (NSMutableDictionary *) checkForCommentingValuesDictionary : (NSDictionary *) obj
+                                             CurrentLocation : (CLLocation *) location
+                                         AnalyticsDictionary : (NSMutableDictionary *) analyticsDictionary
+{
+    NSDictionary *values = (NSDictionary *) obj;
+    NSString *postTitle = values[PARSE_CLASS_EVENT_TITLE];
+    CLLocationDegrees latitude = ((NSNumber *) values[LOCATION_LATITUDE]).doubleValue;
+    CLLocationDegrees longitude = ((NSNumber *) values[LOCATION_LONGITUDE]).doubleValue;
+    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+    
+    [analyticsDictionary setObject:values[PARSE_CLASS_EVENT_TITLE] forKey:PARSE_ANALYTICS_EVENT_NAME];
+    
+    if ([self checkIfNearEventLocation:location Event:eventLocation EventName:postTitle AnalyticsDictionary:&analyticsDictionary])
+    {
+        NSDate *later = values[PARSE_CLASS_EVENT_END_TIME];
+        NSDate *startTime = values[PARSE_CLASS_EVENT_START_TIME];
+        NSString *postId = values[PARSE_CLASS_EVENT_OBJECT_ID];
+        
+        later = [later dateByAddingTimeInterval:(60 * 60)];
+        
+        [analyticsDictionary setObject:startTime forKey:PARSE_ANALYTICS_START_TIME];
+        [analyticsDictionary setObject:later forKey:PARSE_ANALYTICS_START_TIME];
+        
+        if (([startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
+        {
+            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
+            [analyticsDictionary setObject:@YES forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
+        }
+        else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
+        {
+            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:YES];
+            [analyticsDictionary setObject:@YES forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
+        }
+        else {
+            [analyticsDictionary setObject:@NO forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
+        }
+    }
+    
+    return analyticsDictionary;
+}
+
+- (void) saveCurrentLocatino {
+    
 }
 
 - (void) createPromptUserCommentNotification : (NSString *) postId
@@ -183,10 +295,13 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 
 - (BOOL) checkIfNearEventLocation : (CLLocation *) location
                             Event : (CLLocation *) eventLocation
-                        EventName : (NSString *) eventName {
+                        EventName : (NSString *) eventName
+              AnalyticsDictionary : (NSMutableDictionary**) analyticsDictionary
+{
     
     double distance = [location distanceFromLocation:eventLocation];
     NSNumber *distanceObject = [NSNumber numberWithDouble:distance];
+    [*analyticsDictionary setObject:distanceObject forKey:PARSE_ANALYTICS_DISTANCE_TO_EVENT];
     
     if (distance < 600)
     {

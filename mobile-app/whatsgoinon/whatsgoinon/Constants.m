@@ -81,6 +81,20 @@ NSString *const PARSE_CLASS_USER_CREATED_AT = @"createdAt";
 NSString *const PARSE_CLASS_USER_STATE = @"state";
 NSString *const PARSE_CLASS_USER_CITY = @"city";
 
+// Parse - Custom Analytics
+
+NSString *const PARSE_CLASS_NAME_ANALYTICS = @"analytics";
+NSString *const PARSE_ANALYTICS_TIME = @"time";
+NSString *const PARSE_ANALYTICS_EVENT_NAME = @"eventName";
+NSString *const PARSE_ANALYTICS_DISTANCE_TO_EVENT = @"distanceToEvent";
+NSString *const PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION = @"didShowLocalNotification";
+NSString *const PARSE_ANALYTICS_DISTANCE_TRAVELED = @"distanceTraveled";
+NSString *const PARSE_ANALYTICS_TIME_LAPSED = @"timeLapsed";
+NSString *const PARSE_ANALYTICS_LATITUDE = @"latitude";
+NSString *const PARSE_ANALYTICS_LONGITUDE = @"longitude";
+NSString *const PARSE_ANALYTICS_START_TIME = @"startTime";
+NSString *const PARSE_ANALYTICS_END_TIME = @"endTime";
+
 // Geocoding
 
 NSString *const PLACES_API_DATA_RESULT_TYPE_CITIES = @"(cities)";
@@ -149,4 +163,5 @@ NSString *const IMAGE_DIMENSION_HEIGHT = @"height";
 
 // Parse Local Datastore
 NSString *const kGOING_POST_LOCAL_DATASTORE = @"com.happsnap.goingPostsInLocalDatastore";
-
+NSString *const kAnalytics = @"com.happsnap.analytics";
+NSString *const kAnalyticsArray = @"com.happsnap.analyticsArray";

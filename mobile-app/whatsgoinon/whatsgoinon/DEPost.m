@@ -40,7 +40,13 @@
     post.active = object[PARSE_CLASS_EVENT_ACTIVE];
     post.title = object[PARSE_CLASS_EVENT_TITLE];
     post.myDescription = object[PARSE_CLASS_EVENT_DESCRIPTION];
-    post.objectId = object[PARSE_CLASS_EVENT_OBJECT_ID]; // Changed this back from object.objectId because it was throwing an error when trying to retrieve comment information
+    if (object[PARSE_CLASS_EVENT_OBJECT_ID])
+    {
+        post.objectId = object[PARSE_CLASS_EVENT_OBJECT_ID]; // Changed this back from object.objectId because it was throwing an error when trying to retrieve comment information
+    }
+    else {
+        post.objectId = object.objectId;
+    }
     post.comments = object[PARSE_CLASS_EVENT_COMMENTS];
     post.rating = object[PARSE_CLASS_EVENT_RATING];
     post.address = object[PARSE_CLASS_EVENT_ADDRESS];

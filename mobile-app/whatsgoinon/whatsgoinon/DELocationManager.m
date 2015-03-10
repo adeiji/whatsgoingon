@@ -24,6 +24,7 @@
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    
     //Get the latitude and longitude values of the current user
     _currentLocation.latitude = [[locations objectAtIndex:0] coordinate].latitude;
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
@@ -52,7 +53,7 @@
                                 };
     
     // Send the dimensions to Parse along with the 'read' event
-    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+    [PFAnalytics trackEvent:@"error" dimensions:dimensions];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
@@ -233,7 +234,6 @@
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[self alloc] init];
     });
-    
     
     return sharedMyManager;
 }

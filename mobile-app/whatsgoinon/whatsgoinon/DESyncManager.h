@@ -39,6 +39,7 @@
 + (void) getEventsPostedByUser : (NSString *) username;
 + (void) getPFObjectForEventObjectIdAndUpdate:(NSString *)objectId
                                           WithPost : (DEPost *) post;
++ (void) saveAnalyticsDictionary : (NSMutableDictionary *) dictionary;
 /*
  
  Get all the saved events that the user has selected has maybe or going
