@@ -107,6 +107,10 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
             for (NSMutableDictionary *analyticsDictionary in array) {
                 [DESyncManager saveAnalyticsDictionary:analyticsDictionary];
             }
+            
+            array = nil;
+            [defaults setObject:array forKey:kAnalytics];
+            [defaults synchronize];
         }
     }
     
@@ -185,39 +189,43 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
         
-        __block UIBackgroundTaskIdentifier background_task;
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [self cancelAllFutureNotifications];
-            NSString *nowString = [self getNowString];
-            CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
-            [[[DELocationManager sharedManager] locationManager] startMonitoringSignificantLocationChanges];
-            __block NSMutableDictionary *analyticsDictionary;
-            NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
-            __block NSMutableArray *analyticsDetailsArray = [[self loadAnalyticsArray] mutableCopy];
-            analyticsDictionary = [self getAnalyticsInformation:analyticsDictionary];
+        bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            [[UIApplication sharedApplication] endBackgroundTask:bgTask];
+        }];
+        [self createPromptUserCommentNotification:@"XXXXXX" Title:@"Notifity" TimeToShow:[NSDate date] isFuture:NO];
+        [self cancelAllFutureNotifications];
+        NSString *nowString = [self getNowString];
+        CLLocationManager *locationManager = [CLLocationManager new];
+        CLLocation *location = [locationManager location];
+        [locationManager startMonitoringSignificantLocationChanges];
+//        __block NSMutableDictionary *analyticsDictionary;
+        NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
+//        __block NSMutableArray *analyticsDetailsArray = [[self loadAnalyticsArray] mutableCopy];
+        analyticsDictionary = [self getAnalyticsInformation:analyticsDictionary];
 
-            if (postsWithCommentInformation != nil)
-            {
-                [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                    analyticsDictionary = [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location AnalyticsDictionary:analyticsDictionary];
-                    
-                    // Save analytics information and upload to the server
-                    {
-                           [analyticsDictionary setObject:nowString forKey:PARSE_ANALYTICS_TIME];
-                        [analyticsDetailsArray addObject:[analyticsDictionary copy]];
-                    }
-                }];
-            }
-            
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:analyticsDetailsArray forKey:kAnalyticsArray];
-            [defaults synchronize];
-            
+        if (postsWithCommentInformation != nil)
+        {
+            [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                analyticsDictionary = [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location AnalyticsDictionary:analyticsDictionary];
+                
+//                // Save analytics information and upload to the server
+//                {
+//                    [analyticsDictionary setObject:nowString forKey:PARSE_ANALYTICS_TIME];
+//                    [analyticsDetailsArray addObject:[analyticsDictionary copy]];
+//                }
+            }];
+        }
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:analyticsDetailsArray forKey:kAnalyticsArray];
+        [defaults synchronize];
+    
+        if (bgTask != UIBackgroundTaskInvalid)
+        {
             //Clean up code. Tell the system that we are done.
-            [[UIApplication sharedApplication] endBackgroundTask: background_task];
-            background_task = UIBackgroundTaskInvalid;
-        });
+            [[UIApplication sharedApplication] endBackgroundTask: bgTask];
+            bgTask = UIBackgroundTaskInvalid;
+        }
     }
     else {
         [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
@@ -234,7 +242,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     CLLocationDegrees longitude = ((NSNumber *) values[LOCATION_LONGITUDE]).doubleValue;
     CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
     
-    [analyticsDictionary setObject:values[PARSE_CLASS_EVENT_TITLE] forKey:PARSE_ANALYTICS_EVENT_NAME];
+//    [analyticsDictionary setObject:values[PARSE_CLASS_EVENT_TITLE] forKey:PARSE_ANALYTICS_EVENT_NAME];
     
     if ([self checkIfNearEventLocation:location Event:eventLocation EventName:postTitle AnalyticsDictionary:&analyticsDictionary])
     {
@@ -244,25 +252,24 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         
         later = [later dateByAddingTimeInterval:(60 * 60)];
         
-        [analyticsDictionary setObject:startTime forKey:PARSE_ANALYTICS_START_TIME];
-        [analyticsDictionary setObject:later forKey:PARSE_ANALYTICS_START_TIME];
+//        [analyticsDictionary setObject:startTime forKey:PARSE_ANALYTICS_START_TIME];
+//        [analyticsDictionary setObject:later forKey:PARSE_ANALYTICS_START_TIME];
         
         if (([startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
         {
             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
-            [analyticsDictionary setObject:@YES forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
+//            [analyticsDictionary setObject:@YES forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
         }
         else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
         {
             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:YES];
-            [analyticsDictionary setObject:@YES forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
-        }
-        else {
-            [analyticsDictionary setObject:@NO forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
+//            [analyticsDictionary setObject:@YES forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
         }
     }
     
-    return analyticsDictionary;
+//    [analyticsDictionary setObject:@NO forKey:PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
+    
+    return nil;
 }
 
 - (void) saveCurrentLocatino {
@@ -278,7 +285,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     // Perform task here
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
     UILocalNotification *localNotification = [UILocalNotification new];
-    double minutes = .01;
+    double minutes = .001;
     NSDate *nowPlusSevenMinutes = [dateToShow dateByAddingTimeInterval:(60 * minutes)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at

@@ -17,6 +17,7 @@
     NSTimer *timer;
     NSMutableDictionary *analytics;
     NSMutableArray *analyticsArray;
+    UIBackgroundTaskIdentifier bgTask;
 }
 
 - (void) loadPromptedForCommentEvents;
@@ -25,6 +26,10 @@
 - (void) setUserDefaultArraysToEmpty;
 - (void) displayCommentView;
 - (NSMutableArray *) loadAnalyticsArray;
+- (void) createPromptUserCommentNotification : (NSString *) postId
+                                       Title : (NSString *) postTitle
+                                  TimeToShow : (NSDate *) dateToShow
+                                    isFuture : (BOOL) future;
 
 @property (strong, nonatomic) UIWindow *window;
 
