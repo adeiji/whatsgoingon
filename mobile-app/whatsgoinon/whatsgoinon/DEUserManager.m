@@ -256,6 +256,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
                 [DEScreenManager popToRootAndShowViewController:viewController];
                 // Clear user image defaults
                 [self clearUserImageDefaults];
+                [DEUserManager logoutUser];
             }
             else {
                 [self usernameExist:[blockUsername lowercaseString] ErrorLabel:label];
@@ -321,7 +322,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             [[PFUser currentUser] setUsername:[PFTwitterUtils twitter].screenName];
             [[PFUser currentUser] saveInBackground];
             [self clearUserImageDefaults];
-
+            [DEUserManager logoutUser];
         }
     }];
     
@@ -430,6 +431,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
                 // Get the Facebook Profile Picture
                 [self clearUserImageDefaults];
                 [self getFacebookProfileInformation];
+                [DEUserManager logoutUser];
             }
         }];
     }
@@ -468,7 +470,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
 
 + (void) logoutUser {
 
-    DEAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    DEAppDelegate *delegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
     [delegate setUserDefaultArraysToEmpty];
     [delegate loadGoingPosts];
     [delegate loadMaybeGoingPosts];
