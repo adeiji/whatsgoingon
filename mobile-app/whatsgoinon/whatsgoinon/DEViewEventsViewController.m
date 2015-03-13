@@ -87,7 +87,6 @@ struct TopMargin {
 
 - (void)viewDidLoad
 {
-    [[DELocationManager sharedManager] updateLocation];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     //Load the posts first so that we can see how big we need to make the scroll view's content size.

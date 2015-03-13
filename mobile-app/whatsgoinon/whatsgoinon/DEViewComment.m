@@ -143,6 +143,16 @@
         {
             [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
         }
+        
+        if (![[[DEPostManager sharedManager] goingPostWithCommentInformation] containsObject:post.objectId])
+        {
+            [[[DEPostManager sharedManager] goingPostWithCommentInformation] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                if ([obj[PARSE_CLASS_EVENT_OBJECT_ID] isEqual: post.objectId])
+                {
+                    [[[DEPostManager sharedManager] goingPostWithCommentInformation] removeObject:obj];
+                }
+            }];
+        }
     }
     
     if (ratingChange == 0) { // If the user has not selected thumbs up or down then display to them that they need to do this by adding a red border to thumbs buttons

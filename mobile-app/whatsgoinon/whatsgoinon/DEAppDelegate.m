@@ -55,7 +55,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         [self loadGoingPosts];
         [self loadMaybeGoingPosts];
         [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
-        [[DEScreenManager sharedManager] showPostingIndicator];
         [self loadAnalyticsArray];
     }
     return YES;
@@ -199,10 +198,8 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     manager.delegate = self;
     [manager startMonitoringSignificantLocationChanges];
     
-    [self createPromptUserCommentNotification:@"XXXXXX" Title:@"Notifity" TimeToShow:[NSDate date] isFuture:NO];
     [self cancelAllFutureNotifications];
-    
-    
+
     NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
     
     if (postsWithCommentInformation != nil)
@@ -403,6 +400,9 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         
         // Show the comment view for this particular event
         [DEScreenManager showCommentView:post];
+    }
+    else {
+        [DESyncManager getPostById:objectId Comment:YES];
     }
 }
 

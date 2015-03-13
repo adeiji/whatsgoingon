@@ -145,13 +145,6 @@
     [_locationManager stopUpdatingLocation];
 }
 
-- (void) updateLocation {
-#warning Make sure to uncomment when going to Fabian
-//    [_locationManager startUpdatingLocation];
-}
-
-
-
 /*
  
  Start monitoring for the current post location

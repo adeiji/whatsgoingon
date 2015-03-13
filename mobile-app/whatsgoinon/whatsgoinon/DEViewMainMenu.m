@@ -21,8 +21,8 @@
     // If the person has not logged in, then we don't show the posted by me menu item
     if ([PFUser currentUser] == nil)
     {
-        _btnPostedByMe.hidden = YES;
-        _viewPostedByMe.hidden = YES;
+        [_btnPostedByMe setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        _btnPostedByMe.enabled = NO;
     }
 }
 

@@ -48,21 +48,30 @@
     cell.lblComment.text = _comments[indexPath.row][PARSE_CLASS_COMMENT_COMMENT];
     
     PFObject *user = (PFObject *) _comments[indexPath.row][PARSE_CLASS_COMMENT_USER];
-    [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (!user[PARSE_CLASS_USER_PROFILE_PICTURE])
-        {
-            [cell.imgProfileView setImage:[UIImage imageNamed:@"HappSnap-image-only-logo.png"]];
-        }
-        else
-        {
-            PFFile *profileImage = _comments[indexPath.row][PARSE_CLASS_COMMENT_USER][PARSE_CLASS_USER_PROFILE_PICTURE];
-            
-            [profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                UIImage *image = [UIImage imageWithData:data];
-                [cell.imgProfileView setImage:image];
-            }];
-        }
-    }];
+    
+    if (user)
+    {
+        [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (!user[PARSE_CLASS_USER_PROFILE_PICTURE])
+            {
+                [cell.imgProfileView setImage:[UIImage imageNamed:@"HappSnap-image-only-logo.png"]];
+            }
+            else
+            {
+                PFFile *profileImage = _comments[indexPath.row][PARSE_CLASS_COMMENT_USER][PARSE_CLASS_USER_PROFILE_PICTURE];
+                
+                [profileImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    UIImage *image = [UIImage imageWithData:data];
+                    [cell.imgProfileView setImage:image];
+                }];
+            }
+        }];
+    }
+    else {
+        [cell.imgProfileView setImage:[UIImage imageNamed:@"happ-snap-logo-in-app.png"]];
+        [[cell.imgProfileView layer] setBorderWidth:2.0f];
+        [[cell.imgProfileView layer] setBorderColor:[UIColor whiteColor].CGColor];
+    }
 
 
     [cell.imgProfileView setClipsToBounds:YES];

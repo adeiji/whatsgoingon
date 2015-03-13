@@ -202,7 +202,7 @@
         {
             [[[DEPostManager sharedManager] posts] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
                 PFObject *object = (PFObject *) obj;
-                if ([object[PARSE_CLASS_EVENT_OBJECT_ID] isEqualToString:eventId ])
+                if ([object.objectId isEqualToString:eventId ])
                 {
                     postObj = object;
                     *stop = YES;

@@ -543,7 +543,11 @@ static PFQuery *globalQuery;
 {
     PFObject *commentObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_COMMENT];
     commentObject[PARSE_CLASS_COMMENT_COMMENT] = comment;
-    commentObject[PARSE_CLASS_COMMENT_USER] = [PFUser currentUser];
+    if ([PFUser currentUser])
+    {
+        commentObject[PARSE_CLASS_COMMENT_USER] = [PFUser currentUser];
+    }
+    
     commentObject[PARSE_CLASS_COMMENT_EVENT_ID] = objectId;
     
     if (rating > 0)
