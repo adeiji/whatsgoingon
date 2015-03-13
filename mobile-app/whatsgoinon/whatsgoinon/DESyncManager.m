@@ -485,31 +485,6 @@ static PFQuery *globalQuery;
     return postObject;
 }
 
-+ (void) saveAnalyticsDictionary : (NSMutableDictionary *) dictionary {
-    PFObject *analyticsObject = [PFObject objectWithClassName:PARSE_CLASS_NAME_ANALYTICS];
-    
-    if (dictionary[PARSE_ANALYTICS_DISTANCE_TO_EVENT])
-    {
-        analyticsObject[PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION] = dictionary[PARSE_ANALYTICS_DID_SHOW_LOCAL_NOTIFICATION];
-        analyticsObject[PARSE_ANALYTICS_DISTANCE_TO_EVENT] = dictionary[PARSE_ANALYTICS_DISTANCE_TO_EVENT];
-        analyticsObject[PARSE_ANALYTICS_DISTANCE_TRAVELED] = dictionary[PARSE_ANALYTICS_DISTANCE_TRAVELED];
-        analyticsObject[PARSE_ANALYTICS_END_TIME] = dictionary[PARSE_ANALYTICS_END_TIME];
-        analyticsObject[PARSE_ANALYTICS_EVENT_NAME] = dictionary[PARSE_ANALYTICS_EVENT_NAME];
-        analyticsObject[PARSE_ANALYTICS_START_TIME] = dictionary[PARSE_ANALYTICS_START_TIME];
-        analyticsObject[PARSE_ANALYTICS_TIME] = dictionary[PARSE_ANALYTICS_TIME];
-
-
-        [analyticsObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (!error)
-            {
-                NSLog(@"Yay!! You saved the analytics information!!!");
-            }
-            else {
-                NSLog(@"Analytics information did not save %@", [error description] );
-            }
-        }];
-    }
-}
 
 + (BOOL) savePost : (DEPost *) post {
     DEPostManager *sharedManager = [DEPostManager sharedManager];

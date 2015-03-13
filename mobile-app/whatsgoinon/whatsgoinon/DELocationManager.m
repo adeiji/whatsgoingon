@@ -247,6 +247,7 @@
         
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [_locationManager startMonitoringSignificantLocationChanges];
         _currentLocation = [PFGeoPoint new];
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app

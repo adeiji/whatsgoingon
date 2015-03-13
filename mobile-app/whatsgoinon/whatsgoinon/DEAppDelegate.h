@@ -12,7 +12,7 @@
 #import "DEScreenManager.h"
 #import "DEUserManager.h"
 
-@interface DEAppDelegate : UIResponder <UIApplicationDelegate>
+@interface DEAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 {
     NSTimer *timer;
     NSMutableDictionary *analytics;
