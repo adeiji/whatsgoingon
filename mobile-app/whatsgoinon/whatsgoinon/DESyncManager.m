@@ -211,8 +211,38 @@ static PFQuery *globalQuery;
     [DESyncManager getAllValuesWithinMilesForNow:now
                                       PostsArray:postsArray
                                         Location:[[DELocationManager sharedManager]  currentLocation]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [NSTimer scheduledTimerWithTimeInterval:8 target:self selector:@selector(takingTooLongToConnect) userInfo:nil repeats:NO];
+    });
 
 }
+// Show a view that shows that it's taken too long to connect to the server
++ (void) takingTooLongToConnect {
+    
+    if ([[DEPostManager sharedManager] posts])
+    {
+        UIViewController *viewController = (UIViewController *) [DEScreenManager getMainNavigationController].topViewController;
+        if ([viewController isKindOfClass:[DEViewEventsViewController class]])
+        {
+            DEViewEventsViewController *eventViewController = (DEViewEventsViewController *) viewController;
+            
+            UIView *tooLongToConnectView = [[[NSBundle mainBundle] loadNibNamed:@"viewTooLongToConnect" owner:viewController options:nil] firstObject];
+            
+            [[tooLongToConnectView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                if ([obj isKindOfClass:[UIButton class]])
+                {
+                    UIButton *button = (UIButton *) obj;
+                    [[button layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+                }
+            }];
+            
+            [eventViewController.view addSubview:tooLongToConnectView];
+            [DEAnimationManager animateView:tooLongToConnectView WithInsets:UIEdgeInsetsZero WithSelector:nil];
+        }
+    }
+}
+
 // Store the events that we just recieved from Parse and notify the app
 + (void) addEventsToAlreadyRetrievedEvents : (NSArray *) objects
                                 PostsArray : (NSMutableArray *) postsArray
@@ -274,8 +304,7 @@ static PFQuery *globalQuery;
                }
                else {   // Post that there are no saved events
                    [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_NO_SAVED_EVENTS object:nil];
-               }
-               
+               }               
            }
         }];
     }

@@ -127,6 +127,7 @@
 		F45E60B519AD8AB6007705F9 /* DEMagnifyingGlass.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60B419AD8AB6007705F9 /* DEMagnifyingGlass.m */; };
 		F45E60B819AD8CAF007705F9 /* DEPostView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60B719AD8CAF007705F9 /* DEPostView.m */; };
 		F45E60BB19AD8F22007705F9 /* DELocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F45E60BA19AD8F22007705F9 /* DELocationView.m */; };
+		F462E7E31AB3B5EC003B983A /* viewTooLongToConnect.xib in Resources */ = {isa = PBXBuildFile; fileRef = F462E7E21AB3B5EC003B983A /* viewTooLongToConnect.xib */; };
 		F46B944B19C1135F00B41D8C /* circle-placeholder-01.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B944A19C1135F00B41D8C /* circle-placeholder-01.png */; };
 		F46B944F19C116DA00B41D8C /* DEViewImGoing.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B944E19C116DA00B41D8C /* DEViewImGoing.m */; };
 		F46B945219C1181800B41D8C /* DEViewDistance.m in Sources */ = {isa = PBXBuildFile; fileRef = F46B945119C1181800B41D8C /* DEViewDistance.m */; };
@@ -366,6 +367,7 @@
 		F45E60B719AD8CAF007705F9 /* DEPostView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEPostView.m; sourceTree = "<group>"; };
 		F45E60B919AD8F22007705F9 /* DELocationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DELocationView.h; sourceTree = "<group>"; };
 		F45E60BA19AD8F22007705F9 /* DELocationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DELocationView.m; sourceTree = "<group>"; };
+		F462E7E21AB3B5EC003B983A /* viewTooLongToConnect.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewTooLongToConnect.xib; sourceTree = "<group>"; };
 		F46B944A19C1135F00B41D8C /* circle-placeholder-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-placeholder-01.png"; sourceTree = "<group>"; };
 		F46B944D19C116DA00B41D8C /* DEViewImGoing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEViewImGoing.h; sourceTree = "<group>"; };
 		F46B944E19C116DA00B41D8C /* DEViewImGoing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEViewImGoing.m; sourceTree = "<group>"; };
@@ -760,6 +762,7 @@
 				F4EEB05E19D26D7B0072B683 /* ViewMadeComments.xib */,
 				F49BB8E71A5E23F100C68E42 /* PromptForViewEpicEventsView.xib */,
 				F4CCCE0C1A68D3090073DEE5 /* LaunchScreen.xib */,
+				F462E7E21AB3B5EC003B983A /* viewTooLongToConnect.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1366,6 +1369,7 @@
 				F46B945B19C2518500B41D8C /* SettingsAccount Icon.png in Resources */,
 				F41277B619E611570092CD67 /* appicon-Small-50@2x.png in Resources */,
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
+				F462E7E31AB3B5EC003B983A /* viewTooLongToConnect.xib in Resources */,
 				F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */,
 				F46B945719C24F7500B41D8C /* House-icon 25x25.png in Resources */,
 				F45BC4D61A33C0E4001197CD /* main-screen-background-small.png in Resources */,

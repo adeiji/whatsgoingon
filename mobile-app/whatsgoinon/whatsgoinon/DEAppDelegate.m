@@ -218,11 +218,11 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 }
 
 - (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    [self createPromptUserCommentNotification:@"XXXXXX" Title:[error description] TimeToShow:[NSDate date] isFuture:NO];
+
 }
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    [self createPromptUserCommentNotification:@"XXXXXX" Title:@"Updated Location" TimeToShow:[NSDate date] isFuture:NO];
+
 }
 
 - (void) checkForCommentingValuesDictionary : (NSDictionary *) obj

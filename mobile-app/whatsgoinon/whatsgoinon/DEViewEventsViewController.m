@@ -882,6 +882,12 @@ struct TopMargin {
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+- (IBAction)closeSlowConnectionBox:(id)sender {
+    
+    UIButton *button = (UIButton *) sender;
+    [DEAnimationManager animateViewOut:[button superview] WithInsets:UIEdgeInsetsZero];
+    
+}
 
 
 #pragma mark - Scroll View Delegate Methods

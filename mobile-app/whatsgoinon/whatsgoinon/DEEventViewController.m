@@ -618,7 +618,6 @@ const int heightConstraintConstant = 62;
     [[_eventView btnMainImage] setHidden:YES];
 }
 
-
 - (IBAction)setEventAsMaybeGoing:(id)sender {
     
     DEPostManager *postManager = [DEPostManager sharedManager];
