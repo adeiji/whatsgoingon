@@ -513,7 +513,6 @@ const int heightConstraintConstant = 62;
         [[eventDetailsMoreView btnReportEvent] setEnabled:YES];
         [eventDetailsMoreView setEventId:[_post objectId]];
         [eventDetailsMoreView setCategory:[_post category]];
-        [_post setUsername:[[PFUser currentUser] username]];
         [[DEPostManager sharedManager] setCurrentPost:_post];
     }
 }
