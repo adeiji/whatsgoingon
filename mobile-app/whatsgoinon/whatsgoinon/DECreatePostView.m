@@ -616,8 +616,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void) displayCurrentLocation
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
-    [locationManager updateLocation];
-    
+
     [DELocationManager getAddressFromLatLongValue:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
         _txtAddress.text = value;
     }];

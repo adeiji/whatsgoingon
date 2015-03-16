@@ -220,7 +220,7 @@ static PFQuery *globalQuery;
 // Show a view that shows that it's taken too long to connect to the server
 + (void) takingTooLongToConnect {
     
-    if ([[DEPostManager sharedManager] posts])
+    if (![[DEPostManager sharedManager] posts])
     {
         UIViewController *viewController = (UIViewController *) [DEScreenManager getMainNavigationController].topViewController;
         if ([viewController isKindOfClass:[DEViewEventsViewController class]])

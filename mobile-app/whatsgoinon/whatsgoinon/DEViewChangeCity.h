@@ -13,7 +13,7 @@
 
 @interface DEViewChangeCity : UIView <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *locations;
+    NSMutableArray *locations;
     NSString *type;
 }
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;

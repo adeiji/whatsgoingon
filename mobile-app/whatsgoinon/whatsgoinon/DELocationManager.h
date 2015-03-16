@@ -48,7 +48,6 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 + (void) getAutocompleteValuesFromString : (NSString *) input
                           DataResultType : (NSString *) type
                          CompletionBlock : (autocompleteCompletionBlock) callback;
-
 /*
  
  Start monitoring to see when the user reaches this event
@@ -56,6 +55,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
  
  */
 - (void) startMonitoringRegionForPost : (DEPost *) post;
+- (void) setEventLocation : (NSString *) location;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;

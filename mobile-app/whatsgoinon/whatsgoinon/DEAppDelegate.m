@@ -66,7 +66,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [ParseCrashReporting enable];
     [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
                   clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
-#warning - Possibly need to change from PFTwitterUtils because it sometimes is showing a bug
     [PFTwitterUtils initializeWithConsumerKey:@"TFcHVbGMjgBiXuSUpE16untPd" consumerSecret:@"alxo7PP08tyyG2mR3QFm8n8XHdJBcTzGw1u7BKW7A13AaeCWe8"];
     [PFFacebookUtils initializeFacebook];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
@@ -350,9 +349,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 
 - (void) sendTestNotification {
     
-    NSDictionary *values = [[DEPostManager sharedManager] goingPostWithCommentInformation][0];
-    NSString *postTitle = values[PARSE_CLASS_EVENT_TITLE];
-    NSString *postId = values[PARSE_CLASS_EVENT_OBJECT_ID];
     // Perform task here
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
     UILocalNotification *localNotification = [UILocalNotification new];
@@ -360,9 +356,9 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     NSDate *nowPlusSevenMinutes = [[NSDate date] dateByAddingTimeInterval:(60 * minutes)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
-    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : postId,
+    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : @"Test",
                                     kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE : @NO };
-    localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", postTitle];
+    localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", @"Test"];
     localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
     localNotification.applicationIconBadgeNumber = 0;
     localNotification.soundName = UILocalNotificationDefaultSoundName;
@@ -421,7 +417,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     NSString *version = [UIDevice currentDevice].systemVersion;
     
     if (version.intValue >= 8) {
-        UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+        UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
         UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
         
         [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];

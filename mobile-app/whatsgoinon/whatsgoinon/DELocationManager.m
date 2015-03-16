@@ -195,6 +195,13 @@
     [timer fire];
 }
 
+- (void) setEventLocation : (NSString *) location
+{
+    [DELocationManager getLatLongValueFromAddress:location CompletionBlock:^(PFGeoPoint *value) {
+        
+    }];
+}
+
 /*
  
  Set the city to the newly selected city

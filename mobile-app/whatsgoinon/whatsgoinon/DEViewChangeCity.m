@@ -10,7 +10,7 @@
 
 @implementation DEViewChangeCity
 
-
+static NSString *GOOGLE_AUTOCOMPLETE_API_PLACES = @"establishment";
 
 - (id) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -35,7 +35,7 @@
 }
 
 - (void) initLocationsArray {
-    locations = [NSArray new];
+    locations = [NSMutableArray new];
 }
 
 - (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -43,10 +43,20 @@
 }
 
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    locations = [NSMutableArray new];
+    
     [DELocationManager getAutocompleteValuesFromString:searchText DataResultType:type CompletionBlock:^(NSArray *values) {
-        locations = values;
-        [_tableView reloadData];
+        [locations addObjectsFromArray:values];
     }];
+    
+    if ([type isEqualToString:PLACES_API_DATA_RESULT_TYPE_GEOCODE])
+    {
+        [DELocationManager getAutocompleteValuesFromString:searchText DataResultType:GOOGLE_AUTOCOMPLETE_API_PLACES CompletionBlock:^(NSArray *values) {
+            [locations addObjectsFromArray:values];
+            [self.tableView reloadData];
+        }];
+    }
     
     searchBar.text = searchText;
 }
@@ -91,8 +101,14 @@
     // Set the lat/long values to whatever was selected and then reload the post age with the necessary post that correspond to the city that was just selected
     _selection = [locations objectAtIndex:indexPath.row];
     [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];
-    [[DELocationManager sharedManager] setCity:_selection];
     
+    if ([type isEqualToString:PLACES_API_DATA_RESULT_TYPE_CITIES])
+    {
+        [[DELocationManager sharedManager] setCity:_selection];
+    }
+    else {
+        [[DELocationManager sharedManager] setEventLocation:_selection];
+    }
 }
 
 @end
