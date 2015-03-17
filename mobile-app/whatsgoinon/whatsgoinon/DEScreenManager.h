@@ -19,9 +19,10 @@
 @interface DEScreenManager : NSObject <MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 {
     UIActivityIndicatorView *spinner;
-    UIProgressView *progressView;
-    NSTimer *timer;
+    NSTimer *postingTimer;
+    NSTimer *gettingEventsTimer;
     UIView *postingIndicatorView;
+    UIView *gettingEventsView;
 }
 
 @property BOOL overlayDisplayed;
@@ -41,8 +42,9 @@
 + (UINavigationController *) getMainNavigationController;
 + (void) setBackgroundWithImageURL : (NSString *) imageUrl;
 + (void) popToRootAndShowViewController : (UIViewController *) viewController;
-- (void) showPostingIndicator;
-- (void) hidePostingIndicator;
+- (void) showPostingIndicatorWithText : (NSString *) text;
+- (void) showGettingEventsIndicatorWitText : (NSString *) text;
+- (void) hideIndicatorIsPosting : (BOOL) isPosting;
 /*
  
  Display a banner in 7 minutes asking the user to comment

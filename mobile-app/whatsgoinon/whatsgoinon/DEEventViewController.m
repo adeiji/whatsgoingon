@@ -271,7 +271,7 @@ const int heightConstraintConstant = 62;
     NSArray *postImages = [self imagesToNSDataArray:_post.images Compression:.02];
     [[[DEPostManager sharedManager] currentPost] setImages:postImages];
     BOOL postSaved = [DESyncManager savePost:[[DEPostManager sharedManager] currentPost]];
-    [[DEScreenManager sharedManager] showPostingIndicator];
+    [[DEScreenManager sharedManager] showPostingIndicatorWithText:@"Posting Event"];
     
     if (postSaved)
     {

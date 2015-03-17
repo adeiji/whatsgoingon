@@ -142,6 +142,8 @@
         if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
         {
             [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+            DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate saveAllCommentArrays];
         }
         
         if (![[[DEPostManager sharedManager] goingPostWithCommentInformation] containsObject:post.objectId])

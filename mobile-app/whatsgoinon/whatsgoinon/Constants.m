@@ -123,6 +123,7 @@ NSString *const NOTIFICATION_CENTER_USER_RETRIEVED = @"com.happsnap.retrievedUse
 NSString *const NOTIFICATION_CENTER_NO_SAVED_EVENTS = @"com.happsnap.no.saved.events";
 NSString *const NOTIFICATION_CENTER_SAVED_EVENTS_LOADED = @"com.happsnap.saved.events.loaded";
 NSString *const NOTIFICATION_CENTER_LOAD_USER_EVENTS = @"com.happsnap.load.user.events";
+NSString *const NOTIFICATION_LATER_EVENTS_ADDED = @"com.happsnap.later.events.added";
 
 
 // Notification Constants

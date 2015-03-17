@@ -120,66 +120,145 @@
 
 }
 
-- (void) showPostingIndicator {
-    postingIndicatorView = [UIView new];
+- (UIView *) setUpIndicatorViewWithText : (NSString *) text {
+    UIView *view = [UIView new];
     CGRect window = [[UIScreen mainScreen] bounds];
-    [postingIndicatorView setFrame:CGRectMake(0, window.size.height - 25, window.size.width, 25)];
-    [postingIndicatorView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.85f]];
+    if (gettingEventsView || postingIndicatorView)
+    {
+        [view setFrame:CGRectMake(0, window.size.height - 50, window.size.width, 25)];
+    }
+    else {
+        [view setFrame:CGRectMake(0, window.size.height - 25, window.size.width, 25)];
+    }
+    
+    [view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.85f]];
     
     UILabel *posting = [[UILabel alloc] initWithFrame:CGRectMake(25, 0, 100, 25)];
-    [posting setText:@"Posting Event"];
+    [posting setText:text];
     [posting setFont:[UIFont fontWithName:@"Avenir Medium" size:12.0f]];
     [posting setTextColor:[UIColor whiteColor]];
-    [[[[UIApplication sharedApplication] delegate] window] addSubview:postingIndicatorView];
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
     
-    progressView = [UIProgressView new];
+    UIProgressView *progressView = [UIProgressView new];
     [progressView setFrame:CGRectMake(150, 25/2.0f, window.size.width - 175, 10)];
     [progressView setProgressTintColor:[UIColor greenColor]];
-    [postingIndicatorView addSubview:progressView];
-    [postingIndicatorView addSubview:posting];
+    [view addSubview:progressView];
+    [view addSubview:posting];
     [progressView setProgress:.25 animated:YES];
     [progressView setBackgroundColor:[UIColor whiteColor]];
+    
+    return view;
+}
 
+- (void) showGettingEventsIndicatorWitText : (NSString *) text
+{
+    gettingEventsView = [self setUpIndicatorViewWithText:@"Getting Events"];
     dispatch_async(dispatch_get_main_queue(), ^{
-        timer = [NSTimer scheduledTimerWithTimeInterval:.35 target:self selector:@selector(incrementProgressView) userInfo:nil repeats:YES];
+        gettingEventsTimer = [NSTimer scheduledTimerWithTimeInterval:.35 target:self selector:@selector(incrementGettingEventsProgressView) userInfo:nil repeats:YES];
         
-        [timer fire];
+        [gettingEventsTimer fire];
+    });
+}
+
+- (void) showPostingIndicatorWithText : (NSString *) text
+{
+    postingIndicatorView = [self setUpIndicatorViewWithText:@"Posting Event"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        postingTimer = [NSTimer scheduledTimerWithTimeInterval:.35 target:self selector:@selector(incrementPostingProgressView) userInfo:nil repeats:YES];
+        
+        [postingTimer fire];
     });
     
 }
 
-- (void) incrementProgressView {
+- (void) incrementGettingEventsProgressView {
+    UIProgressView *progressView;
     
-    if (progressView.progress < .95)
+    for (UIView *subview in [gettingEventsView subviews]) {
+        if ([subview isKindOfClass:[UIProgressView class]])
+        {
+            progressView = (UIProgressView *) subview;
+        }
+    }
+    
+    if (progressView.progress < .80)
     {
         [progressView setProgress:progressView.progress + .15 animated:YES];
     }
     else {
-        [timer setFireDate:[NSDate distantFuture]];
-        [timer invalidate];
+        [gettingEventsTimer setFireDate:[NSDate distantFuture]];
+        [gettingEventsTimer invalidate];
         
-        timer = nil;
-        [self hidePostingIndicator];
+        gettingEventsTimer = nil;
     }
 }
 
-- (void) hidePostingIndicator {
+- (void) incrementPostingProgressView {
+    UIProgressView *progressView;
+    
+    for (UIView *subview in [postingIndicatorView subviews]) {
+        if ([subview isKindOfClass:[UIProgressView class]])
+        {
+            progressView = (UIProgressView *) subview;
+        }
+    }
+    
+    if (progressView.progress < .80)
+    {
+        [progressView setProgress:progressView.progress + .15 animated:YES];
+    }
+    else {
+        [postingTimer setFireDate:[NSDate distantFuture]];
+        [postingTimer invalidate];
+        
+        postingTimer = nil;
+    }
+}
+
+- (void) hideIndicatorIsPosting : (BOOL) isPosting {
+    UIProgressView *progressView;
+    __block UIView *view;
+    __block NSTimer *timer;
+    
+    if (isPosting)
+    {
+        view = postingIndicatorView;
+        timer = postingTimer;
+    }
+    else {
+        view = gettingEventsView;
+        timer = gettingEventsTimer;
+    }
+    
+    for (UIView *subview in [view subviews]) {
+        if ([subview isKindOfClass:[UIProgressView class]])
+        {
+            progressView = (UIProgressView *) subview;
+        }
+    }
+    
     [progressView setProgress:1.0f animated:NO];
     [progressView setProgressTintColor:[HPStyleKit blueColor]];
-    for (UIView *view in [postingIndicatorView subviews]) {
-        if ([view isKindOfClass:[UILabel class]])
+    for (UIView *myView in [view subviews]) {
+        if ([myView isKindOfClass:[UILabel class]])
         {
-            UILabel *label = (UILabel *) view;
-            [label setText:@"Event Posted"];
+            UILabel *label = (UILabel *) myView;
+            [label setText:@"Completed"];
             [label setTextColor:[HPStyleKit blueColor]];
         }
     }
     
     [UIView animateWithDuration:1.0f animations:^{
-        [postingIndicatorView setAlpha:0.0f];
+        [view setAlpha:0.0f];
     } completion:^(BOOL finished) {
-        [postingIndicatorView removeFromSuperview];
-        postingIndicatorView = nil;
+        [view removeFromSuperview];
+        if ([view isEqual:gettingEventsView])
+        {
+            gettingEventsView = nil;
+        }
+        else {
+            postingIndicatorView = nil;
+        }
         [timer setFireDate:[NSDate distantFuture]];
         [timer invalidate];
         timer = nil;
@@ -224,6 +303,8 @@
             [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
             // Make sure its saved that the user has already been prompted to comment for the event
             [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
+            DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
+            [appDelegate saveAllCommentArrays];
         }
     }
     else {
@@ -233,6 +314,8 @@
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:myPost.objectId];
         // Make sure its saved that the user has already been prompted to comment for the event
         [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:myPost.objectId];
+        DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
+        [appDelegate saveAllCommentArrays];
     }
 
 };

@@ -25,6 +25,7 @@
 - (void) loadMaybeGoingPosts;
 - (void) setUserDefaultArraysToEmpty;
 - (void) displayCommentView;
+- (void) saveAllCommentArrays;
 - (NSMutableArray *) loadAnalyticsArray;
 - (void) createPromptUserCommentNotification : (NSString *) postId
                                        Title : (NSString *) postTitle

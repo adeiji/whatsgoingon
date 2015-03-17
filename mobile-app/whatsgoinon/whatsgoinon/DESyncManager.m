@@ -137,10 +137,10 @@ static PFQuery *globalQuery;
                         event[TRENDING_ORDER] = [NSNumber numberWithInt:counter];
                         counter ++;
                     }];
-
                 }
                 // Set the miles to zero so that the next time the events are loaded we load them from all to 25 miles distance
                 miles = 0;
+                [[DEScreenManager sharedManager] hideIndicatorIsPosting:NO];
             }
 
         }
@@ -346,6 +346,11 @@ static PFQuery *globalQuery;
             NSMutableArray *array = (NSMutableArray *) [[DEPostManager sharedManager] posts];
             [DESyncManager addEventsToAlreadyRetrievedEvents:objects PostsArray:array ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING isNewProcess:blkIsNewProcess];
             
+            if (!blkIsNewProcess)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_LATER_EVENTS_ADDED object:nil];
+            }
+            
         }
     }];
     
@@ -530,7 +535,7 @@ static PFQuery *globalQuery;
             
             [sharedManager setPosts:array];
             [self updatePostCountForUser];
-            [[DEScreenManager sharedManager] hidePostingIndicator];
+            [[DEScreenManager sharedManager] hideIndicatorIsPosting:YES];
         }
     }];
     

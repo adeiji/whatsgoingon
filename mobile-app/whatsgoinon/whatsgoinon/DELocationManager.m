@@ -135,6 +135,8 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     else if (distance < 200 && ([post.endTime compare:[NSDate date]] == NSOrderedDescending))  // If the user is simply early
     {
         [self promptUserForCommentPost:post TimeToShow:[post.startTime dateByAddingTimeInterval:(60 * 15)] isFuture:YES];
+        DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
+        [appDelegate saveAllCommentArrays];
     }
     
     return NO;
@@ -146,6 +148,8 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 {
     [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date isFuture:future];
     [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+    DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
+    [appDelegate saveAllCommentArrays];
     [_locationManager stopUpdatingLocation];
 }
 
@@ -179,6 +183,8 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
             {
                 [DEScreenManager createPromptUserCommentNotification:post TimeToShow:[NSDate new] isFuture:NO];
                 [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+                DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate saveAllCommentArrays];
                 
                 break;
             }
@@ -318,7 +324,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         
         NSString *distance = jsonData[@"rows"][0][@"elements"][0][@"distance"][@"text"];
-//        NSLog(@"Distance from location1 to location2 is %@", jsonData[@"rows"][0][@"elements"][0][@"distance"][@"text"]);
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Make sure that we call this method on the main thread so that it updates properly as supposed to

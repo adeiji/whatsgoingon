@@ -34,6 +34,7 @@ struct TopMargin {
 
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addLaterEvents) name:NOTIFICATION_LATER_EVENTS_ADDED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectorToNewCity) name:kNOTIFICATION_CENTER_IS_CITY_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUsersEvents:) name:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orbClicked) name:NOTIFICATION_CENTER_ORB_CLICKED object:nil];
@@ -94,6 +95,7 @@ struct TopMargin {
     
     if (!_shouldNotDisplayPosts)
     {
+        [[DEScreenManager sharedManager] showGettingEventsIndicatorWitText:@"Getting Events"];
         [self startActivitySpinner];
         if (_now)
         {
@@ -480,6 +482,15 @@ struct TopMargin {
 - (void) displayPost : (NSNotification *) notification {
     [self stopActivitySpinner];
     [self displayPost:notification TopMargin:0 PostArray:nil];
+}
+
+- (void) addLaterEvents {
+    [self addEventsToScreen : 0
+               ProcessStatus:nil
+                    Category:CATEGORY_TRENDING
+                   PostArray:_posts
+                   ShowBlank:YES];
+    [self loadVisiblePost:_scrollView];
 }
 
 - (void) displayPost : (NSNotification *) notification
