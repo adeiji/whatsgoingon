@@ -47,10 +47,27 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnPreview;
 @property (strong, nonatomic) NSString *longAddress;
+
 #pragma mark - UIPickerView Properties
 
 @property (strong, nonatomic) NSArray *categories;
 @property (strong, nonatomic) UIPickerView *categoriesPicker;
+
+
+#pragma mark - Constraint Outlets First Page Of Posting
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintUseCurrentLocationToEventLocationVerticalSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAddressToCurrentLocationVerticalSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPostRangeToAddressVerticalSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintScrollViewToHeaderSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintEventDetailsToTopOfScrollView;
+
+#pragma mark - Constraints Outlets Second Page of Posting
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintScrollViewToLetsBuildIt;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCameraToTitleVerticalSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPriceToCameraBottomVerticalSpace;
+
 
 #pragma mark - Button Actions
 

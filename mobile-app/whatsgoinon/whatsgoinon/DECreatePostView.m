@@ -21,6 +21,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     [self registerForKeyboardNotifications];
     [self addFreeButtonToCostTextField];
     [self setUpValidators];
+    [self editConstraints];
     _txtStartTime.enabled = NO;
     _txtEndTime.enabled = NO;
     costText = [NSString new];
@@ -33,6 +34,40 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     {
         [_secondPageMainView addGestureRecognizer:tapGestureRecognizer];
     }
+}
+
+- (void) editConstraints {
+
+    static BOOL firstTime = YES;
+    
+    if (firstTime)
+    {
+        if ([[DEScreenManager sharedManager] screenHeight] < 500)
+        {
+            // First page of posting
+            _constraintUseCurrentLocationToEventLocationVerticalSpace.constant -= 25;
+            _constraintAddressToCurrentLocationVerticalSpace.constant -= 25;
+            _constraintPostRangeToAddressVerticalSpace.constant -= 20;
+            _constraintScrollViewToHeaderSpace.constant = 0;
+            _constraintEventDetailsToTopOfScrollView.constant = 0;
+            
+            // Second page of posting
+            _constraintScrollViewToLetsBuildIt.constant = 0;
+            _constraintCameraToTitleVerticalSpace.constant = 5;
+            _constraintPriceToCameraBottomVerticalSpace.constant = 5;
+            
+            [self layoutIfNeeded];
+        }
+        
+        firstTime = NO;
+    }
+    
+    // Second page of posting
+    _constraintScrollViewToLetsBuildIt.constant = 0;
+    _constraintCameraToTitleVerticalSpace.constant = 50;
+    _constraintPriceToCameraBottomVerticalSpace.constant = 50;
+    
+    [self layoutIfNeeded];
 }
 
 - (void) setUpTextFieldAvailability : (BOOL) isUpdateMode {

@@ -346,7 +346,8 @@
                 NSString *city = jsonData[@"results"][0][@"address_components"][3][@"short_name"];
                 NSString *state = jsonData[@"results"][0][@"address_components"][5][@"short_name"];
                 NSString *address = [NSString stringWithFormat:@"%@ %@, %@, %@", addressNumber, street, city, state];
-                NSString *countryCode = jsonData[@"results"][0][@"address_components"][6][@"short_name"];
+                NSArray *countryCodeComponents = jsonData[@"results"][0][@"address_components"];
+                NSString *countryCode = [countryCodeComponents lastObject][@"short_name"];
                 [[DELocationManager sharedManager] setCountryCode:countryCode];
                 NSLog(@"The address to get the lat long values is verified: %@", address);
                 dispatch_async(dispatch_get_main_queue(), ^{

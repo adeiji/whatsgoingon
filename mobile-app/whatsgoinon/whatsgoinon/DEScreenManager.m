@@ -24,6 +24,7 @@
     if (self = [super init]) {
         _overlayDisplayed = NO;
         _values = [NSMutableDictionary new];
+        _screenHeight = [[UIScreen mainScreen] bounds].size.height;
     }
     return self;
 }

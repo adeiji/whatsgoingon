@@ -35,9 +35,6 @@
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <userGuides>
-                            <userLayoutGuide location="200" affinity="minX"/>
-                        </userGuides>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5M-pl-9Ue">
                                 <rect key="frame" x="48" y="421" width="225" height="40"/>
@@ -281,6 +278,7 @@
                     <navigationItem key="navigationItem" id="OMo-1V-X28"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="logoTopViewConstraint" destination="UXk-cF-KL2" id="PvI-qq-nu6"/>
                         <outletCollection property="buttons" destination="j5M-pl-9Ue" id="2cv-NN-ZKm"/>
                         <outletCollection property="buttons" destination="M8F-ic-t46" id="Cn5-dq-bGV"/>
                         <outletCollection property="buttons" destination="8fT-UB-jEz" id="7PR-mk-rYn"/>
@@ -945,7 +943,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tap &quot;Continue&quot; to skip for now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="D4d-zZ-i4B">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap &quot;Continue&quot; to skip for now" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="D4d-zZ-i4B">
                                 <rect key="frame" x="61" y="86" width="200" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="6r4-EF-tFW">
@@ -971,7 +969,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="You can do this later by tapping the image under &quot;My Account&quot; in the side menu." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="UA9-wq-cFR">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can do this later by tapping the image under &quot;My Account&quot; in the side menu." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="200" translatesAutoresizingMaskIntoConstraints="NO" id="UA9-wq-cFR">
                                 <rect key="frame" x="61" y="86" width="200" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="o4w-TB-W3X">
@@ -1112,15 +1110,15 @@
                                 <exclude reference="UA9-wq-cFR"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="8oZ-38-iWd"/>
-                                <exclude reference="V2L-Fv-YdF"/>
-                                <exclude reference="fY8-Tu-NWM"/>
+                                <exclude reference="kOw-EU-kUS"/>
+                                <exclude reference="1v3-j1-GZZ"/>
+                                <exclude reference="e4W-gU-K7Y"/>
                                 <exclude reference="PFE-fq-QVO"/>
                                 <exclude reference="Vxn-mh-lI1"/>
                                 <exclude reference="aSO-2R-L5W"/>
-                                <exclude reference="1v3-j1-GZZ"/>
-                                <exclude reference="e4W-gU-K7Y"/>
-                                <exclude reference="kOw-EU-kUS"/>
+                                <exclude reference="8oZ-38-iWd"/>
+                                <exclude reference="V2L-Fv-YdF"/>
+                                <exclude reference="fY8-Tu-NWM"/>
                                 <exclude reference="MW6-cC-dRD"/>
                                 <exclude reference="lCM-6g-3zx"/>
                                 <exclude reference="nqS-bb-ypS"/>
@@ -1133,15 +1131,15 @@
                                 <include reference="UA9-wq-cFR"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="8oZ-38-iWd"/>
-                                <include reference="V2L-Fv-YdF"/>
-                                <include reference="fY8-Tu-NWM"/>
+                                <include reference="kOw-EU-kUS"/>
+                                <include reference="1v3-j1-GZZ"/>
+                                <include reference="e4W-gU-K7Y"/>
                                 <include reference="PFE-fq-QVO"/>
                                 <include reference="Vxn-mh-lI1"/>
                                 <include reference="aSO-2R-L5W"/>
-                                <include reference="1v3-j1-GZZ"/>
-                                <include reference="e4W-gU-K7Y"/>
-                                <include reference="kOw-EU-kUS"/>
+                                <include reference="8oZ-38-iWd"/>
+                                <include reference="V2L-Fv-YdF"/>
+                                <include reference="fY8-Tu-NWM"/>
                                 <include reference="MW6-cC-dRD"/>
                                 <include reference="lCM-6g-3zx"/>
                                 <include reference="nqS-bb-ypS"/>

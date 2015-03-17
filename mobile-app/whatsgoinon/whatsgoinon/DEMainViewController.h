@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (strong, nonatomic) DEPromptForEpicEvents *promptEpicEventsView;
 @property (strong, nonatomic) UIView *viewToBeRemoved;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoTopViewConstraint;
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender;
 

@@ -406,7 +406,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
 
 - (NSError *) loginWithFacebook {
     
-    NSArray *permissionsArray = @[@"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    NSArray *permissionsArray = @[@"user_location"];
     
     if (![PFUser currentUser] && // Check if a user is cached
         ![PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) // Check if user is linked to Facebook

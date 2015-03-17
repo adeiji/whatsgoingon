@@ -26,6 +26,24 @@
     return self;
 }
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    static BOOL firstAppearance = YES;
+    
+    
+    if (firstAppearance)
+    {
+        if (screenHeight < 500)
+        {
+            _logoTopViewConstraint.constant = _logoTopViewConstraint.constant - 50;
+            [self.view layoutIfNeeded];
+            firstAppearance = NO;
+        }
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
