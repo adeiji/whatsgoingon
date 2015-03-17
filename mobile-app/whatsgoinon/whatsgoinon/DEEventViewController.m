@@ -70,6 +70,13 @@ const int heightConstraintConstant = 62;
     userIsAmbassador = NO;
     [DEUserManager getUserFromUsername:_post.username];
     goingButtonBottomSpaceConstraintConstant = _goingButtonBottomSpaceConstraint.constant;
+    
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    if (screenHeight < 500)
+    {
+        _constraintMapViewHeight.constant -= 50;
+    }
+    
 }
 
 - (void) loadUpdateModeView {
@@ -444,7 +451,6 @@ const int heightConstraintConstant = 62;
         [[detailsView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", _post.numberGoing]];
         
         [self showFlagIfAmbassadorDetailsView:detailsView];
-        [self adjustDetailsViewHeightDetailsView:detailsView];
         
         if ([DEPostManager isBeforeEvent:_post])
         {
@@ -456,6 +462,7 @@ const int heightConstraintConstant = 62;
         }
     }
     
+    [self adjustDetailsViewHeightDetailsView:detailsView];
     [[detailsView lblTimeUntilStartsOrEnds] setText:[DEPostManager getTimeUntilStartOrFinishFromPost:_post]];
 }
 

@@ -20,35 +20,33 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry to break it to you, nobody has given us feedback for this event yet. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="245" translatesAutoresizingMaskIntoConstraints="NO" id="0PT-0I-UfF">
-                    <rect key="frame" x="38" y="17" width="245" height="82"/>
+                    <rect key="frame" x="15" y="25" width="290" height="62"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="82" id="aMn-Kr-jtl"/>
+                        <constraint firstAttribute="height" constant="62" id="aMn-Kr-jtl"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="245" translatesAutoresizingMaskIntoConstraints="NO" id="tgd-uU-ud1">
-                    <rect key="frame" x="38" y="99" width="245" height="116"/>
+                    <rect key="frame" x="15" y="87" width="290" height="128"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="116" id="vAJ-HX-QcM"/>
+                        <constraint firstAttribute="height" constant="128" id="vAJ-HX-QcM"/>
                     </constraints>
-                    <string key="text">Because we only allow comments from people actually at the event, choose either "Im Going" or "Maybe", and we'll send you a notification to comment when you arrive! You can also just open the app while you're there to tell us what you think!
-</string>
+                    <string key="text">Because we only allow comments from people actually at the event, choose either "Im Going" or "Maybe", and we'll send you a notification to comment when you arrive! You can also just open the app while you're there to tell us what you think!</string>
                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="0PT-0I-UfF" secondAttribute="trailing" constant="37" id="1ga-Mf-LgK"/>
+                <constraint firstAttribute="trailing" secondItem="0PT-0I-UfF" secondAttribute="trailing" constant="15" id="1ga-Mf-LgK"/>
                 <constraint firstItem="tgd-uU-ud1" firstAttribute="trailing" secondItem="0PT-0I-UfF" secondAttribute="trailing" id="GZE-bO-2px"/>
-                <constraint firstAttribute="centerY" secondItem="tgd-uU-ud1" secondAttribute="centerY" constant="-36.5" id="KzW-yl-xqK"/>
-                <constraint firstItem="0PT-0I-UfF" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="38" id="PeU-si-Ipl"/>
+                <constraint firstAttribute="centerY" secondItem="tgd-uU-ud1" secondAttribute="centerY" constant="-30.5" id="KzW-yl-xqK"/>
+                <constraint firstItem="0PT-0I-UfF" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="15" id="PeU-si-Ipl"/>
                 <constraint firstItem="tgd-uU-ud1" firstAttribute="leading" secondItem="0PT-0I-UfF" secondAttribute="leading" id="bfP-7x-hcm"/>
                 <constraint firstItem="tgd-uU-ud1" firstAttribute="top" secondItem="0PT-0I-UfF" secondAttribute="bottom" id="gFl-Yl-coq"/>
                 <constraint firstItem="tgd-uU-ud1" firstAttribute="centerX" secondItem="0PT-0I-UfF" secondAttribute="centerX" id="m6I-IU-Bhn"/>
-                <constraint firstAttribute="centerX" secondItem="0PT-0I-UfF" secondAttribute="centerX" constant="-0.5" id="sPR-7A-KJa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>

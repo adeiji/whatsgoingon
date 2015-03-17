@@ -51,6 +51,8 @@
 @property BOOL isMaybeGoing;
 @property BOOL isUpdateMode;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintMapViewHeight;
+
 #pragma mark - Button Action Methods
 
 - (IBAction)showEventDetails:(id)sender;

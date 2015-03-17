@@ -16,6 +16,10 @@
 #define GOOGLE_GEOLOCATION_API_GET_ADDRESS @"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 #define GOOGLE_PLACES_AUTOCOMPLETE @"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&types=%@&components=country:us&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 
+static const NSString *GOOGLE_API_RESULTS = @"results";
+static const NSString *GOOGLE_API_ADDRESS_COMPONENTS = @"address_components";
+static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
+
 // Do we need to make sure that the user is using location services or not upon application upload?
 
 //it’s recommended that you always call the locationServicesEnabled class method of CLLocationManager before attempting to start either the standard or significant-change location services. If it returns NO and you attempt to start location services anyway, the system prompts the user to confirm whether location services should be re-enabled. Because the user probably disabled location services on purpose, the prompt is likely to be unwelcome.
@@ -341,13 +345,14 @@
             
             if (![jsonData[@"status"] isEqualToString:@"ZERO_RESULTS"])
             {
-                NSString *addressNumber = jsonData[@"results"][0][@"address_components"][0][@"short_name"];
-                NSString *street = jsonData[@"results"][0][@"address_components"][1][@"short_name"];
-                NSString *city = jsonData[@"results"][0][@"address_components"][3][@"short_name"];
-                NSString *state = jsonData[@"results"][0][@"address_components"][5][@"short_name"];
+                NSString *addressNumber = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS][0][GOOGLE_API_SHORT_NAME];
+                NSString *street = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS][1][GOOGLE_API_SHORT_NAME];
+                NSString *city = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS][3][GOOGLE_API_SHORT_NAME];
+                NSArray *stateComponents = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS];
+                NSString *state = [stateComponents lastObject][GOOGLE_API_SHORT_NAME];
                 NSString *address = [NSString stringWithFormat:@"%@ %@, %@, %@", addressNumber, street, city, state];
-                NSArray *countryCodeComponents = jsonData[@"results"][0][@"address_components"];
-                NSString *countryCode = [countryCodeComponents lastObject][@"short_name"];
+                NSArray *countryCodeComponents = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS];
+                NSString *countryCode = [countryCodeComponents lastObject][GOOGLE_API_SHORT_NAME];
                 [[DELocationManager sharedManager] setCountryCode:countryCode];
                 NSLog(@"The address to get the lat long values is verified: %@", address);
                 dispatch_async(dispatch_get_main_queue(), ^{

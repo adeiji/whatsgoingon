@@ -323,7 +323,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="534" y="417"/>
+            <point key="canvasLocation" x="569" y="715"/>
         </view>
         <view contentMode="scaleToFill" id="VLz-SA-Cqq">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
