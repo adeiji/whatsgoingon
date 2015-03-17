@@ -80,6 +80,7 @@
     [scrollView addSubview:viewReportEvent];
     
     [DEAnimationManager fadeOutWithView:[[self superview] superview] ViewToAdd:scrollView];
+    [viewReportEvent updateView];
 }
 
 

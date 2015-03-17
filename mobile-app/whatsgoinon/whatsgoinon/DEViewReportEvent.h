@@ -24,12 +24,18 @@
 @property (weak, nonatomic) IBOutlet UITextView *txtNotes;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
 
+#pragma mark - Constraints
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTextViewSwitchVerticalSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTextViewHeight;
+
 @property (strong, nonatomic) NSString *eventId;
 
 - (IBAction)cancelReport:(id)sender;
 - (IBAction)reportEvent:(id)sender;
 - (IBAction)enableReportDetailsTextView:(id)sender;
 - (void) registerForKeyboardNotifications;
+- (void) updateView;
 
 @end
 

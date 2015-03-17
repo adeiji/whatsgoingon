@@ -152,6 +152,8 @@
                 <constraint firstItem="EAk-0j-VHh" firstAttribute="trailing" secondItem="oSW-cY-tDL" secondAttribute="trailing" id="tCp-wh-RcI"/>
             </constraints>
             <connections>
+                <outlet property="constraintTextViewHeight" destination="Gpu-cF-3SV" id="lal-Lg-wiJ"/>
+                <outlet property="constraintTextViewSwitchVerticalSpace" destination="Kqk-Va-gYO" id="7Gf-cw-q1W"/>
                 <outlet property="switchAbusive" destination="zRS-AL-DEg" id="Ze0-af-0cW"/>
                 <outlet property="switchCrude" destination="fiu-bC-saL" id="vpK-gf-JuI"/>
                 <outlet property="switchInappropriate" destination="Awi-gG-RdU" id="nnN-Sh-Joa"/>

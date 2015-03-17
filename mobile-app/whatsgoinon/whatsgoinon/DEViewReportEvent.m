@@ -11,6 +11,15 @@
 
 @implementation DEViewReportEvent
 
+- (void) updateView {
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    
+    if (screenHeight < 500)
+    {
+        _constraintTextViewHeight.constant -= 30;
+        _constraintTextViewSwitchVerticalSpace.constant -= 25;
+    }
+}
 
 - (IBAction)cancelReport:(id)sender {
 
