@@ -430,16 +430,20 @@ const int PICTURE_ACTION_SHEET = 2;
     _txtPassword.hidden = NO;
     _txtConfirmPassword.hidden = NO;
     
-    CGRect frame = [self frame];
-    frame.size.height += 80;
-    
-    [UIView animateWithDuration:1.0f animations:^{
-        [self setFrame:frame];
-    }];
-    
-    UIScrollView *scrollView = (UIScrollView *) [self superview];
-    CGPoint bottomOffset = CGPointMake(0, scrollView.contentSize.height - scrollView.bounds.size.height);
-    [scrollView setContentOffset:bottomOffset animated:YES];
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    if (height < 500)
+    {
+        CGRect frame = [self frame];
+        frame.size.height += 80;
+        
+        [UIView animateWithDuration:1.0f animations:^{
+            [self setFrame:frame];
+        }];
+        
+        UIScrollView *scrollView = (UIScrollView *) [self superview];
+        CGPoint bottomOffset = CGPointMake(0, scrollView.contentSize.height - scrollView.bounds.size.height);
+        [scrollView setContentOffset:bottomOffset animated:YES];
+    }
 }
 
 #pragma mark - Change Password Button Functionality
@@ -457,16 +461,20 @@ User presses the cancel button and we just want to hide the password text fields
     [_btnChangePassword removeTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    CGRect frame = [self frame];
-    frame.size.height -= 80;
-    
-    [UIView animateWithDuration:1.0f animations:^{
-        [self setFrame:frame];
-    }];
-    
-    UIScrollView *scrollView = (UIScrollView *) [self superview];
-    CGPoint topOffset = CGPointMake(0, 0);
-    [scrollView setContentOffset:topOffset animated:YES];
+    CGFloat height = [[UIScreen mainScreen] bounds].size.height;
+    if (height < 500)
+    {
+        CGRect frame = [self frame];
+        frame.size.height -= 80;
+        
+        [UIView animateWithDuration:1.0f animations:^{
+            [self setFrame:frame];
+        }];
+        
+        UIScrollView *scrollView = (UIScrollView *) [self superview];
+        CGPoint topOffset = CGPointMake(0, 0);
+        [scrollView setContentOffset:topOffset animated:YES];
+    }
 }
 
 - (void) savePassword {

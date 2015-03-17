@@ -48,14 +48,15 @@ static NSString *GOOGLE_AUTOCOMPLETE_API_PLACES = @"establishment";
     
     [DELocationManager getAutocompleteValuesFromString:searchText DataResultType:type CompletionBlock:^(NSArray *values) {
         [locations addObjectsFromArray:values];
+        [self.tableView reloadData];
     }];
     
     if ([type isEqualToString:PLACES_API_DATA_RESULT_TYPE_GEOCODE])
     {
-        [DELocationManager getAutocompleteValuesFromString:searchText DataResultType:GOOGLE_AUTOCOMPLETE_API_PLACES CompletionBlock:^(NSArray *values) {
-            [locations addObjectsFromArray:values];
-            [self.tableView reloadData];
-        }];
+//        [DELocationManager getAutocompleteValuesFromString:searchText DataResultType:GOOGLE_AUTOCOMPLETE_API_PLACES CompletionBlock:^(NSArray *values) {
+//            [locations addObjectsFromArray:values];
+//            [self.tableView reloadData];
+//        }];
     }
     
     searchBar.text = searchText;

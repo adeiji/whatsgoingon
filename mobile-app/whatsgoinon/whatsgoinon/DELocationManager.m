@@ -14,7 +14,7 @@
 #define GOOGLE_GEOLOCATION_API_GET_COORDINATES @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&components=country:%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 #define GOOGLE_GEOLOCATION_API_GET_COORDINATES_TEMP @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 #define GOOGLE_GEOLOCATION_API_GET_ADDRESS @"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
-#define GOOGLE_PLACES_AUTOCOMPLETE @"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&types=%@&components=country:us&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
+#define GOOGLE_PLACES_AUTOCOMPLETE @"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&components=country:us&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 
 static const NSString *GOOGLE_API_RESULTS = @"results";
 static const NSString *GOOGLE_API_ADDRESS_COMPONENTS = @"address_components";
@@ -333,7 +333,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 }
 
 + (void) getAddressFromLatLongValue:(PFGeoPoint *)location CompletionBlock:(completionBlock)callback {
-//    NSLog(@"The lat/long value to get the address is: %@", location);
     
     NSString *latLong = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API_GET_ADDRESS, latLong]]];
@@ -354,7 +353,8 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
                 NSString *street = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS][1][GOOGLE_API_SHORT_NAME];
                 NSString *city = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS][3][GOOGLE_API_SHORT_NAME];
                 NSArray *stateComponents = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS];
-                NSString *state = [stateComponents lastObject][GOOGLE_API_SHORT_NAME];
+                int zipLocationInArray = (int) [stateComponents count] - 2;
+                NSString *state = stateComponents[zipLocationInArray][GOOGLE_API_SHORT_NAME];
                 NSString *address = [NSString stringWithFormat:@"%@ %@, %@, %@", addressNumber, street, city, state];
                 NSArray *countryCodeComponents = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS];
                 NSString *countryCode = [countryCodeComponents lastObject][GOOGLE_API_SHORT_NAME];
