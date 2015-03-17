@@ -51,23 +51,21 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
             _constraintScrollViewToHeaderSpace.constant = 0;
             _constraintEventDetailsToTopOfScrollView.constant = 0;
             
-            // Second page of posting
-            _constraintScrollViewToLetsBuildIt.constant = 0;
-            _constraintCameraToTitleVerticalSpace.constant = 5;
-            _constraintPriceToCameraBottomVerticalSpace.constant = 5;
-            
             [self layoutIfNeeded];
         }
         
         firstTime = NO;
     }
     
-    // Second page of posting
-    _constraintScrollViewToLetsBuildIt.constant = 0;
-    _constraintCameraToTitleVerticalSpace.constant = 50;
-    _constraintPriceToCameraBottomVerticalSpace.constant = 50;
-    
-    [self layoutIfNeeded];
+    if ([[DEScreenManager sharedManager] screenHeight] < 500)
+    {
+        // Second page of posting
+        _constraintScrollViewToLetsBuildIt.constant = 5;
+        _constraintCameraToTitleVerticalSpace.constant = 5;
+        _constraintPriceToCameraBottomVerticalSpace.constant = 5;
+        _constraintViewToSuperviewTop.constant = -20;
+        _constraintPreviewAndPostBottomConstraint.constant = 5;
+    }
 }
 
 - (void) setUpTextFieldAvailability : (BOOL) isUpdateMode {

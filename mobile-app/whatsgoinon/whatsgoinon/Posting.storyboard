@@ -368,7 +368,7 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="60573730-CCDA-421A-9242-7F3619AFE69D" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="B12C9850-6A40-4659-876D-85EF1B395148" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="iZM-I6-gde"/>
@@ -1203,9 +1203,7 @@
                                             <constraint firstItem="IVB-OI-kmN" firstAttribute="leading" secondItem="dCj-sp-25g" secondAttribute="leading" id="LU4-JQ-Vqt"/>
                                             <constraint firstItem="IVB-OI-kmN" firstAttribute="trailing" secondItem="pgD-7U-wCg" secondAttribute="trailing" id="MTZ-gg-cpZ"/>
                                             <constraint firstItem="g64-bY-Vd5" firstAttribute="centerY" secondItem="8dK-oJ-VIv" secondAttribute="centerY" id="P2t-Lz-k6n"/>
-                                            <constraint firstItem="g64-bY-Vd5" firstAttribute="top" secondItem="dCj-sp-25g" secondAttribute="bottom" constant="79" id="QaB-BU-fIy">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="31"/>
-                                            </constraint>
+                                            <constraint firstItem="g64-bY-Vd5" firstAttribute="top" secondItem="dCj-sp-25g" secondAttribute="bottom" constant="31" id="QaB-BU-fIy"/>
                                             <constraint firstAttribute="width" constant="320" id="V9Q-l6-t1c"/>
                                             <constraint firstItem="LY0-xd-I6Z" firstAttribute="leading" secondItem="nXM-q4-M7m" secondAttribute="leading" id="WYq-Ng-cdR"/>
                                             <constraint firstItem="E1R-XT-ty2" firstAttribute="leading" secondItem="wW1-NQ-Gpz" secondAttribute="leading" constant="48" id="Wv7-tM-FPb"/>
@@ -1218,12 +1216,8 @@
                                             <constraint firstItem="E1R-XT-ty2" firstAttribute="trailing" secondItem="82v-ss-xtE" secondAttribute="trailing" id="bx0-Ow-TPB"/>
                                             <constraint firstItem="g64-bY-Vd5" firstAttribute="centerY" secondItem="6Ro-td-BYQ" secondAttribute="centerY" constant="0.5" id="d3K-c1-3Vz"/>
                                             <constraint firstItem="8dK-oJ-VIv" firstAttribute="leading" secondItem="g64-bY-Vd5" secondAttribute="trailing" constant="8" id="evr-c3-79n"/>
-                                            <constraint firstItem="IVB-OI-kmN" firstAttribute="top" secondItem="E1R-XT-ty2" secondAttribute="bottom" constant="8" symbolic="YES" id="f9W-Ni-98l">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="26"/>
-                                            </constraint>
-                                            <constraint firstAttribute="bottom" secondItem="LY0-xd-I6Z" secondAttribute="bottom" constant="32" id="hw3-Mg-Oup">
-                                                <variation key="heightClass=regular-widthClass=compact" constant="42"/>
-                                            </constraint>
+                                            <constraint firstItem="IVB-OI-kmN" firstAttribute="top" secondItem="E1R-XT-ty2" secondAttribute="bottom" constant="26" id="f9W-Ni-98l"/>
+                                            <constraint firstAttribute="bottom" secondItem="LY0-xd-I6Z" secondAttribute="bottom" constant="42" id="hw3-Mg-Oup"/>
                                             <constraint firstItem="E1R-XT-ty2" firstAttribute="top" secondItem="wW1-NQ-Gpz" secondAttribute="top" constant="29" id="j2D-VZ-rPS">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="19"/>
                                             </constraint>
@@ -1457,8 +1451,11 @@
                             <outlet property="btnPreview" destination="LY0-xd-I6Z" id="FUL-lc-UFd"/>
                             <outlet property="btnTakePicture" destination="IVB-OI-kmN" id="fJR-L2-cyh"/>
                             <outlet property="constraintCameraToTitleVerticalSpace" destination="f9W-Ni-98l" id="59b-ul-sRA"/>
+                            <outlet property="constraintPreviewAndPostBottomConstraint" destination="hw3-Mg-Oup" id="vpF-2z-KkR"/>
                             <outlet property="constraintPriceToCameraBottomVerticalSpace" destination="QaB-BU-fIy" id="lhL-c8-wuy"/>
                             <outlet property="constraintScrollViewToLetsBuildIt" destination="fTB-ab-ia4" id="uPJ-hD-XgB"/>
+                            <outlet property="constraintViewBottomSpaceToScrollView" destination="7fV-eR-rLZ" id="pOF-d4-tk3"/>
+                            <outlet property="constraintViewToSuperviewTop" destination="hpI-89-FCg" id="c4h-4r-02A"/>
                             <outlet property="scrollView" destination="JVg-ae-v1d" id="0HR-ZZ-kiK"/>
                             <outlet property="secondPageMainView" destination="wW1-NQ-Gpz" id="lKF-8c-I8q"/>
                             <outlet property="txtCost" destination="g64-bY-Vd5" id="pgL-Sj-mRI"/>
@@ -1690,7 +1687,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="60573730-CCDA-421A-9242-7F3619AFE69D" width="140" height="211">
+        <image name="B12C9850-6A40-4659-876D-85EF1B395148" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

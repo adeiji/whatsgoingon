@@ -67,6 +67,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintScrollViewToLetsBuildIt;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCameraToTitleVerticalSpace;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPriceToCameraBottomVerticalSpace;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPreviewAndPostBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintViewToSuperviewTop;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintViewBottomSpaceToScrollView;
 
 
 #pragma mark - Button Actions
