@@ -287,6 +287,12 @@ const int PICTURE_ACTION_SHEET = 2;
         {
             [[DEScreenManager sharedManager] showEmail];
         }
+        else if (buttonIndex == 1)
+        {
+            NSString *stringUrl = @"itms-apps://itunes.apple.com/app/id957130862";
+            NSURL *url = [NSURL URLWithString:stringUrl];
+            [[UIApplication sharedApplication] openURL:url];
+        }
     }
     else if (actionSheet.tag == PICTURE_ACTION_SHEET)
     {

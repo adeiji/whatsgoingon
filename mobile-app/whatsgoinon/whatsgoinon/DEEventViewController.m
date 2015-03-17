@@ -75,6 +75,7 @@ const int heightConstraintConstant = 62;
     if (screenHeight < 500)
     {
         _constraintMapViewHeight.constant -= 50;
+        _constraintMainImageHeight.constant -= 20;
     }
     
 }

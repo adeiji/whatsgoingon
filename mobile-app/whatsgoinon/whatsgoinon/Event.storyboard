@@ -471,6 +471,7 @@
                     </view>
                     <connections>
                         <outlet property="btnPost" destination="177-jK-Otc" id="ejo-73-ZqD"/>
+                        <outlet property="constraintMainImageHeight" destination="FoX-br-2i4" id="w2A-zn-50N"/>
                         <outlet property="constraintMapViewHeight" destination="oLe-5X-lWh" id="dyA-M4-PCl"/>
                         <outlet property="eventView" destination="OQg-c0-tjK" id="5as-B5-hgk"/>
                         <outlet property="goingButtonBottomSpaceConstraint" destination="ZCc-MF-O2d" id="XFt-bU-0qQ"/>

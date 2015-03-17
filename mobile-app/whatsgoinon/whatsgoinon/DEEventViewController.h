@@ -52,6 +52,7 @@
 @property BOOL isUpdateMode;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintMapViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintMainImageHeight;
 
 #pragma mark - Button Action Methods
 

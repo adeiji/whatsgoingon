@@ -37,25 +37,6 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 }
 
 - (void) editConstraints {
-
-    static BOOL firstTime = YES;
-    
-    if (firstTime)
-    {
-        if ([[DEScreenManager sharedManager] screenHeight] < 500)
-        {
-            // First page of posting
-            _constraintUseCurrentLocationToEventLocationVerticalSpace.constant -= 25;
-            _constraintAddressToCurrentLocationVerticalSpace.constant -= 25;
-            _constraintPostRangeToAddressVerticalSpace.constant -= 20;
-            _constraintScrollViewToHeaderSpace.constant = 0;
-            _constraintEventDetailsToTopOfScrollView.constant = 0;
-            
-            [self layoutIfNeeded];
-        }
-        
-        firstTime = NO;
-    }
     
     if ([[DEScreenManager sharedManager] screenHeight] < 500)
     {
@@ -65,6 +46,12 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
         _constraintPriceToCameraBottomVerticalSpace.constant = 5;
         _constraintViewToSuperviewTop.constant = -20;
         _constraintPreviewAndPostBottomConstraint.constant = 5;
+        _constraintPostRangeToAddressVerticalSpace.constant = 8;
+        _constraintUseCurrentLocationToEventLocationVerticalSpace.constant = 7;
+        _constraintScrollViewToHeaderSpace.constant = 0;
+        _constraintEventDetailsToTopOfScrollView.constant = 0;
+        
+        [self layoutIfNeeded];
     }
 }
 

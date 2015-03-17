@@ -48,8 +48,8 @@
     {
         [_createPostViewOne displayCurrentLocation];
     }
-
-    _createPostViewOne.txtCategory.text = [[[DEPostManager sharedManager] currentPost] category];
+    
+    _createPostViewOne.txtCategory.text = _post.category;
     [[self.navigationController navigationBar] setHidden:YES];
     [self addObservers];
     
@@ -605,9 +605,22 @@ Display the second screen for the post details
 }
 
 - (IBAction)goBack:(id)sender {
-    NSArray *viewControllers = self.navigationController.viewControllers;
+    BOOL secondPage = NO;
+    int counter = 0;
     
-    if ([viewControllers count] == 2)
+    for (UIViewController *viewController in self.navigationController.viewControllers) {
+        if ([viewController isKindOfClass:[DECreatePostViewController class]])
+        {
+            counter ++;
+        }
+    }
+    
+    if (counter > 1)
+    {
+        secondPage = YES;
+    }
+    
+    if (!secondPage)
     {
         UIView *view = [[[NSBundle mainBundle] loadNibNamed:@"ViewAlert" owner:self options:nil] firstObject];
         for (UIView *subview in [view subviews]) {
@@ -629,7 +642,10 @@ Display the second screen for the post details
 - (IBAction)continueGoingBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
     
-    [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
+    if (!_isPostSomethingSimilar)
+    {
+        [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
+    }
 }
 
 - (IBAction)cancel:(id)sender {
