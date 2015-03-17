@@ -286,7 +286,7 @@
                 <outlet property="btnComment" destination="5NH-aQ-ppc" id="eou-dM-pPR"/>
                 <outlet property="lblEventTitle" destination="xOd-ok-Wws" id="ZCl-O2-ULZ"/>
             </connections>
-            <point key="canvasLocation" x="497" y="106.5"/>
+            <point key="canvasLocation" x="504" y="34.5"/>
         </view>
     </objects>
     <resources>

@@ -107,36 +107,33 @@ Show the tutorial showing the user what should be entered for the different desc
     }
     
     // Get how many characters are available to be entered after the data is pasted
-    int targetLength = 150 - (int) newLength;
-    
-    if (!_isQuickDescription && targetLength > -1)
+    int targetLength;
+    int maxLength;
+    if (!_isQuickDescription)
     {
-        self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 150 - newLength];
+        maxLength = 500;
+        targetLength = maxLength - (int) newLength;
+    }
+    else {
+        maxLength = 150;
+        targetLength = maxLength - (int) newLength;
+    }
+    
+    if (targetLength < 0)
+    {
+        NSMutableString *allText = [NSMutableString new];
+        [allText appendString:textView.text];
+        [allText appendString:text];
+        
+        textView.text = [allText substringToIndex:maxLength];
+        self.lblMinCharacters.text = @"0";
+        return NO;
     }
     else
     {
-        self.lblMinCharacters.text = @"0";
+        self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", maxLength - newLength];
     }
     
-    targetLength = 150 - (int) newLength;
-    
-    if (_isQuickDescription)
-    {
-        if (targetLength < 0)
-        {
-            NSMutableString *allText = [NSMutableString new];
-            [allText appendString:textView.text];
-            [allText appendString:text];
-            
-            textView.text = [allText substringToIndex:150];
-            
-            return NO;
-        }
-        else
-        {
-            self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 150 - newLength];
-        }
-    }
     
     return  YES;
 }

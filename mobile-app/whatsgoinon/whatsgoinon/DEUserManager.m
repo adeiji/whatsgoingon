@@ -30,7 +30,10 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
 
 - (id)init {
     if (self = [super init]) {
-        _user = [PFUser user];
+        if (nil == _user)
+        {
+            _user = [PFUser currentUser];
+        }
     }
     return self;
 }

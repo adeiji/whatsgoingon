@@ -65,11 +65,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="zDA-3x-sHE">
-                    <rect key="frame" x="20" y="67" width="280" height="172"/>
+                    <rect key="frame" x="20" y="67" width="280" height="163"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="172" id="YK3-dX-eVs"/>
-                    </constraints>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" enablesReturnKeyAutomatically="YES"/>
@@ -109,6 +106,7 @@
                 <constraint firstItem="sSg-IN-yue" firstAttribute="centerX" secondItem="6f2-Fo-n2K" secondAttribute="centerX" id="Gva-Ay-HIe"/>
                 <constraint firstItem="7ZU-JE-nnH" firstAttribute="top" secondItem="jU5-qi-qDz" secondAttribute="top" id="Gxr-dq-1Vf"/>
                 <constraint firstItem="6f2-Fo-n2K" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="JAK-7x-RAV"/>
+                <constraint firstItem="jU5-qi-qDz" firstAttribute="top" secondItem="zDA-3x-sHE" secondAttribute="bottom" constant="4" id="LaG-mI-nnl"/>
                 <constraint firstItem="sSg-IN-yue" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="OIs-js-QyM"/>
                 <constraint firstAttribute="bottom" secondItem="jU5-qi-qDz" secondAttribute="bottom" constant="284" id="Ttd-DB-vpB"/>
                 <constraint firstItem="6f2-Fo-n2K" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" id="YfZ-MV-KUc"/>

@@ -504,7 +504,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     
     if ([textField isEqual:_txtTitle])
     {
-        maxLength = 20;
+        maxLength = 25;
     }
     else {
         maxLength = 40;

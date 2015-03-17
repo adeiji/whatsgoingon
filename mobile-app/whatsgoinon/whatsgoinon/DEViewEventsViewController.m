@@ -436,6 +436,8 @@ struct TopMargin {
                 }
             }
             
+            [view setFrame:[[UIScreen mainScreen] bounds]];
+            
             [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
             [[DEScreenManager sharedManager] stopActivitySpinner];
         }

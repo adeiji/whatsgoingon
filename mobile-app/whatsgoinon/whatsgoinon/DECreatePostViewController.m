@@ -591,6 +591,7 @@ Display the second screen for the post details
     {
         [addValueViewController setIsQuickDescription:NO];
         view.txtValue.text = [[DEPostManager sharedManager] currentPost].myDescription;
+        addValueViewController.lblMinCharacters.text = @"500";
     }
     
     [self.navigationController pushViewController:addValueViewController animated:YES];
