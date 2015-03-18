@@ -34,7 +34,7 @@ struct TopMargin {
 
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayPost:) name:NOTIFICATION_CENTER_ALL_EVENTS_LOADED object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addLaterEvents) name:NOTIFICATION_LATER_EVENTS_ADDED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addLaterEvents) name:NOTIFICATION_LATER_EVENTS_ADDED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSelectorToNewCity) name:kNOTIFICATION_CENTER_IS_CITY_CHANGE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayUsersEvents:) name:NOTIFICATION_CENTER_USERS_EVENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orbClicked) name:NOTIFICATION_CENTER_ORB_CLICKED object:nil];
@@ -49,7 +49,6 @@ struct TopMargin {
 }
 
 #pragma mark - Activity Spinners
-
 
 - (void) startActivitySpinner
 {
