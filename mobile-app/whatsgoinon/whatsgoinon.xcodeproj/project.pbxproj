@@ -1691,6 +1691,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "whatsgoinon/whatsgoinon-Prefix.pch";
 				INFOPLIST_FILE = "whatsgoinon/whatsgoinon-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/whatsgoinon/TestFlightSDK3.0.2",
@@ -1716,6 +1717,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "whatsgoinon/whatsgoinon-Prefix.pch";
 				INFOPLIST_FILE = "whatsgoinon/whatsgoinon-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/whatsgoinon/TestFlightSDK3.0.2",

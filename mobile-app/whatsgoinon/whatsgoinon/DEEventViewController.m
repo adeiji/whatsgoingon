@@ -187,7 +187,7 @@ const int heightConstraintConstant = 62;
     if ([firstObject isKindOfClass:[PFFile class]])
     {
         PFFile *file = [[_post images] firstObject];
-        #warning - When we run this through twice the app crashes
+        
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if (!error)
             {

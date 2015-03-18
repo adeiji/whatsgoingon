@@ -683,9 +683,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yt1-UP-mJz">
                                 <rect key="frame" x="16" y="103" width="568" height="438"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="422" id="2cr-bH-Txg">
-                                        <variation key="heightClass=regular-widthClass=compact" constant="368"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="368" id="2cr-bH-Txg"/>
                                     <constraint firstAttribute="width" constant="368" id="uJ2-Tl-ocL"/>
                                 </constraints>
                                 <variation key="default">

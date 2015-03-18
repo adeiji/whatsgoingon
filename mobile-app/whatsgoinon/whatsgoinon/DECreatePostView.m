@@ -326,7 +326,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
                    StartTime : (NSDate *) startTime
 {
 
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *endTimeComponents = [calendar components:NSUIntegerMax fromDate:endTime];
     NSDateComponents *startTimeComponents = [calendar components:NSUIntegerMax fromDate:startTime];
     
@@ -338,7 +338,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 }
 
 - (void) updateEndDate {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"mm/dd/yy"];
     NSDate *endDate = [df dateFromString:_txtEndDate.text];
@@ -355,7 +355,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 - (BOOL) dateIsToday : (NSDate *) date {
     
     NSDate *today = [NSDate date];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *todayComponents = [calendar components:NSUIntegerMax fromDate:today];
     NSDateComponents *dateComponents = [calendar components:NSUIntegerMax fromDate:date];
     
@@ -489,7 +489,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 - (void) setMinimumDateForTimePicker : (UITextField *) textField {
     UIDatePicker *datePicker = (UIDatePicker *) textField.inputView;
     NSDate *now = [NSDate new];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSGregorianCalendar];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
     NSDateComponents *components = [gregorian components: NSUIntegerMax fromDate: now];
     
     if ([components minute] > 30)

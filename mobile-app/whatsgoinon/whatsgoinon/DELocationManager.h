@@ -27,7 +27,6 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 
 - (PFGeoPoint *) geoPoint;
 + (id)sharedManager;
-- (void) startSignificantChangeUpdates;
 
 /*
  

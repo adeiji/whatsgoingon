@@ -11,12 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are You Sure?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFS-k0-yzt">
-                    <rect key="frame" x="97" y="59" width="126" height="28"/>
-                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="20"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you continue, you'll lose all the information that you've entered for this post?  Are you sure you want to do that?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="G4i-Te-wIH">
                     <rect key="frame" x="48" y="90" width="225" height="211"/>
                     <constraints>
@@ -56,21 +50,25 @@
                         <action selector="cancel:" destination="-1" eventType="touchUpInside" id="Y9z-4s-MeY"/>
                     </connections>
                 </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are You Sure?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BFS-k0-yzt">
+                    <rect key="frame" x="97" y="59" width="126" height="28"/>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.56999999999999995" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="BFS-k0-yzt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="59" id="Czu-H4-CHL"/>
                 <constraint firstItem="nxA-7d-YPo" firstAttribute="trailing" secondItem="rRj-7I-5wX" secondAttribute="trailing" id="FSo-S3-g2H"/>
-                <constraint firstItem="rRj-7I-5wX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="I7m-Zk-zbf"/>
                 <constraint firstItem="rRj-7I-5wX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="48" id="RUG-VY-9cL"/>
-                <constraint firstItem="G4i-Te-wIH" firstAttribute="leading" secondItem="nxA-7d-YPo" secondAttribute="leading" id="UpX-cB-AhU"/>
-                <constraint firstItem="G4i-Te-wIH" firstAttribute="centerX" secondItem="BFS-k0-yzt" secondAttribute="centerX" id="VX0-t9-Jjb"/>
                 <constraint firstAttribute="trailing" secondItem="rRj-7I-5wX" secondAttribute="trailing" constant="47" id="Xqb-kY-kDH"/>
                 <constraint firstItem="G4i-Te-wIH" firstAttribute="top" secondItem="BFS-k0-yzt" secondAttribute="bottom" constant="3" id="dSo-xT-VtR"/>
+                <constraint firstAttribute="centerX" secondItem="G4i-Te-wIH" secondAttribute="centerX" constant="-0.5" id="edJ-Js-Fne"/>
+                <constraint firstAttribute="centerX" secondItem="BFS-k0-yzt" secondAttribute="centerX" id="eqn-Xe-IyM"/>
                 <constraint firstAttribute="bottom" secondItem="rRj-7I-5wX" secondAttribute="bottom" constant="20" id="fY9-GN-4yW"/>
                 <constraint firstItem="rRj-7I-5wX" firstAttribute="top" secondItem="nxA-7d-YPo" secondAttribute="bottom" constant="8" symbolic="YES" id="p6B-6z-dfR"/>
                 <constraint firstItem="nxA-7d-YPo" firstAttribute="leading" secondItem="rRj-7I-5wX" secondAttribute="leading" id="to9-8e-ABe"/>
-                <constraint firstItem="G4i-Te-wIH" firstAttribute="trailing" secondItem="nxA-7d-YPo" secondAttribute="trailing" id="ywy-HS-To2"/>
             </constraints>
         </view>
     </objects>

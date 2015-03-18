@@ -61,7 +61,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 }
 
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    if (status == kCLAuthorizationStatusAuthorized || status == kCLAuthorizationStatusAuthorizedWhenInUse)
+    if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse)
     {
         [_locationManager startMonitoringSignificantLocationChanges];
     }
@@ -374,7 +374,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
                           DataResultType : (NSString *) type
                          CompletionBlock : (autocompleteCompletionBlock) callback {
     input = [input stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_PLACES_AUTOCOMPLETE, input, type]]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_PLACES_AUTOCOMPLETE, input]]];
     
     NSOperationQueue *queue = [NSOperationQueue new];
     queue.name = @"Google Places Queue";

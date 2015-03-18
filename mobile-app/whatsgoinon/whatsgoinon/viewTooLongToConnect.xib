@@ -11,22 +11,8 @@
             <rect key="frame" x="0.0" y="0.0" width="295" height="295"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6c9-yQ-eIC">
-                    <rect key="frame" x="37" y="232" width="220" height="36"/>
-                    <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="36" id="LO1-ez-EzF"/>
-                    </constraints>
-                    <state key="normal" title="Go Home &amp; Try Again">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="goHome:" destination="-1" eventType="touchUpInside" id="BNx-Tb-aAd"/>
-                    </connections>
-                </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fp8-HP-DXO">
-                    <rect key="frame" x="37" y="186" width="220" height="36"/>
+                    <rect key="frame" x="37" y="241" width="220" height="36"/>
                     <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="p0R-4C-ruY"/>
@@ -39,7 +25,7 @@
                         <action selector="closeSlowConnectionBox:" destination="-1" eventType="touchUpInside" id="lsj-CU-YMV"/>
                     </connections>
                 </button>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hmm, seems like you have a poor internet connection.  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="173" translatesAutoresizingMaskIntoConstraints="NO" id="yl8-Gh-POI">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry that things are loading a little slow. Your internet connection is not the greatest at the moment" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="173" translatesAutoresizingMaskIntoConstraints="NO" id="yl8-Gh-POI">
                     <rect key="frame" x="43" y="41" width="208" height="147"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="147" id="Nqg-IJ-gt9"/>
@@ -52,15 +38,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.90000000000000002" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="yl8-Gh-POI" firstAttribute="leading" secondItem="pTd-wz-iCW" secondAttribute="leading" constant="43" id="37M-Oi-7xR"/>
-                <constraint firstItem="Fp8-HP-DXO" firstAttribute="trailing" secondItem="6c9-yQ-eIC" secondAttribute="trailing" id="8OF-pY-Jlb"/>
                 <constraint firstItem="yl8-Gh-POI" firstAttribute="top" secondItem="pTd-wz-iCW" secondAttribute="top" constant="41" id="A1g-L3-b8v"/>
-                <constraint firstItem="Fp8-HP-DXO" firstAttribute="centerX" secondItem="6c9-yQ-eIC" secondAttribute="centerX" id="Cjl-H9-wFS"/>
-                <constraint firstItem="Fp8-HP-DXO" firstAttribute="leading" secondItem="6c9-yQ-eIC" secondAttribute="leading" id="HUa-3f-axP"/>
-                <constraint firstAttribute="trailing" secondItem="6c9-yQ-eIC" secondAttribute="trailing" constant="38" id="KQb-rF-X8U"/>
-                <constraint firstItem="6c9-yQ-eIC" firstAttribute="top" secondItem="Fp8-HP-DXO" secondAttribute="bottom" constant="10" id="KQj-wZ-M6H"/>
+                <constraint firstAttribute="bottom" secondItem="Fp8-HP-DXO" secondAttribute="bottom" constant="18" id="D79-NP-XJy"/>
+                <constraint firstAttribute="trailing" secondItem="Fp8-HP-DXO" secondAttribute="trailing" constant="38" id="Hcv-hd-Ngh"/>
                 <constraint firstAttribute="trailing" secondItem="yl8-Gh-POI" secondAttribute="trailing" constant="44" id="Tak-zA-dep"/>
-                <constraint firstAttribute="bottom" secondItem="6c9-yQ-eIC" secondAttribute="bottom" constant="27" id="oMG-sm-elc"/>
-                <constraint firstItem="6c9-yQ-eIC" firstAttribute="leading" secondItem="pTd-wz-iCW" secondAttribute="leading" constant="37" id="wOz-0Q-p8f"/>
+                <constraint firstItem="Fp8-HP-DXO" firstAttribute="leading" secondItem="pTd-wz-iCW" secondAttribute="leading" constant="37" id="XwV-rh-pHx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="349.5" y="342.5"/>
