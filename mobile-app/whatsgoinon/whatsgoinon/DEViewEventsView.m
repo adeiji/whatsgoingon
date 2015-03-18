@@ -60,21 +60,24 @@ const int POST_WIDTH = 140;
             if ([view isKindOfClass:[DEEventsTimeline class]])
             {
                 DEEventsTimeline *overlayView = (DEEventsTimeline *) view;
-                [self setUpOverlayViewWithSuperview:(DEViewEventsView *)[overlayView superview]];
+                if (((DEViewEventsView *) [overlayView superview]).imgMainImageView.alpha != 0)
+                {
+                    [self setUpOverlayViewWithSuperview:(DEViewEventsView *)[overlayView superview]];
 
-                if (sender.state == UIGestureRecognizerStateBegan)
-                {
-                    [UIView animateWithDuration:.3 animations:^{
-                        [[overlayView layer] setOpacity:.8];
-                        [screenManager setOverlayDisplayed:YES];
-                    }];
-                }
-                else if (sender.state == UIGestureRecognizerStateEnded)
-                {
-                    [UIView animateWithDuration:.3 animations:^{
-                        [[overlayView layer] setOpacity:0];
-                        [screenManager setOverlayDisplayed:NO];
-                    }];
+                    if (sender.state == UIGestureRecognizerStateBegan)
+                    {
+                        [UIView animateWithDuration:.3 animations:^{
+                            [[overlayView layer] setOpacity:.8];
+                            [screenManager setOverlayDisplayed:YES];
+                        }];
+                    }
+                    else if (sender.state == UIGestureRecognizerStateEnded)
+                    {
+                        [UIView animateWithDuration:.3 animations:^{
+                            [[overlayView layer] setOpacity:0];
+                            [screenManager setOverlayDisplayed:NO];
+                        }];
+                    }
                 }
             }
         }

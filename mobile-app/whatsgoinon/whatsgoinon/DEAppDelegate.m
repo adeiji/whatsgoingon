@@ -29,35 +29,32 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self setUpParseWithLaunchOptions:launchOptions];
+    [GMSServices provideAPIKey:@"AIzaSyAChpei4sacCZDpzE4boq1lhftbBteTYak"];
+    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        // Make sure this keeps running in the background
+        [[[DELocationManager sharedManager] locationManager] requestAlwaysAuthorization];
+    }
+    
+    [self registerForNotifications:application];
+    [DEScreenManager sharedManager];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
+    [self checkIfLocalNotification:launchOptions];
+    [self loadPromptedForCommentEvents];
+    [self loadGoingPosts];
+    [self loadMaybeGoingPosts];
+    [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
+    [self checkIfCanComment];
+    [self loadAnalyticsArray];
+
     // Application is launched because of a significant location change
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
         [self respondToSignificantLocationChange];
     }
-    else {
-        // Override point for customization after application launch.
-        // start of your application:didFinishLaunchingWithOptions // ...
-        [self setUpParseWithLaunchOptions:launchOptions];
-        [TestFlight takeOff:@"7dff8d72-f33d-4eb7-aa3f-632fff9c3f03"];
-        [GMSServices provideAPIKey:@"AIzaSyAChpei4sacCZDpzE4boq1lhftbBteTYak"];
-        [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
-        if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-            // Make sure this keeps running in the background
-            [[[DELocationManager sharedManager] locationManager] requestAlwaysAuthorization];
-        }
 
-        [self registerForNotifications:application];
-        [DEScreenManager sharedManager];
-        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-        [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
-        [self checkIfLocalNotification:launchOptions];
-        [self loadPromptedForCommentEvents];
-        [self loadGoingPosts];
-        [self loadMaybeGoingPosts];
-        [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
-        [self checkIfCanComment];
-        [self loadAnalyticsArray];
-    }
     return YES;
 }
 
@@ -65,15 +62,21 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [self cancelAllFutureNotifications];
     
     NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+    
     if (postsWithCommentInformation != nil)
     {
         [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location];
+            BOOL commented = [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location];
+            if (commented)
+            {
+                [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:obj[PARSE_CLASS_EVENT_OBJECT_ID]];
+                [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
+            }
         }];
     }
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
 }
 
@@ -251,7 +254,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 
 }
 
-- (void) checkForCommentingValuesDictionary : (NSDictionary *) obj
+- (BOOL) checkForCommentingValuesDictionary : (NSDictionary *) obj
                                              CurrentLocation : (CLLocation *) location
 {
     NSDictionary *values = (NSDictionary *) obj;
@@ -271,13 +274,16 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         if (([startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
         {
             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
+            return YES;
         }
         else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
         {
             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:YES];
+            return YES;
         }
     }
 
+    return NO;
 }
 
 - (void) saveCurrentLocatino {
@@ -415,6 +421,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         else {
             // Get the corresponding Event to the Event ID and then prompt the user to comment
             [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Comment:NO];
+            // Comment: NO, signifies that we only want the user to be prompted for the comment, not have them actually comment
         }
     }
     else  {  // Notification has come from being pressed

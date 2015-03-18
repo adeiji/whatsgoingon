@@ -273,7 +273,6 @@ struct TopMargin {
 
     [super viewWillDisappear:animated];
     [self.view setHidden:YES];
-    [self.scrollView removeFromSuperview];
     
 }
 
@@ -293,12 +292,6 @@ struct TopMargin {
         DEScreenManager *screenManager = [DEScreenManager sharedManager];
         [[self view] addSubview:[screenManager mainMenu]];
         [[[DEScreenManager sharedManager] mainMenu] setHidden:NO];
-    }
-    
-    if (![_scrollView superview])
-    {
-        [_containerView addSubview:_scrollView];
-        [_scrollView setTranslatesAutoresizingMaskIntoConstraints:YES];
     }
 }
 

@@ -48,7 +48,7 @@ static PFQuery *globalQuery;
 
 /*
  
- Get one post by its Id and then display the comment view
+ Get one post by its Id and then display the comment view if Comment is set to YES, otherwise, prompt the user to comment
  
  */
 + (void) getPostById:(NSString *)eventId
