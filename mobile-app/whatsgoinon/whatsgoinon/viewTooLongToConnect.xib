@@ -39,7 +39,7 @@
                         <action selector="closeSlowConnectionBox:" destination="-1" eventType="touchUpInside" id="lsj-CU-YMV"/>
                     </connections>
                 </button>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hmm, seems like you have a poor internet connection.  Please go to the home screen and try again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="173" translatesAutoresizingMaskIntoConstraints="NO" id="yl8-Gh-POI">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hmm, seems like you have a poor internet connection.  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="173" translatesAutoresizingMaskIntoConstraints="NO" id="yl8-Gh-POI">
                     <rect key="frame" x="43" y="41" width="208" height="147"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="147" id="Nqg-IJ-gt9"/>

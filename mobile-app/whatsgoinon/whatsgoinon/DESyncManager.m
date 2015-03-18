@@ -82,6 +82,7 @@ static PFQuery *globalQuery;
     static int objectsCount = 0;
     
     PFQuery *query = [DESyncManager getBasePFQueryForNow:now];
+
     globalQuery = query;
     // If the miles is set to 0 that means the range is all, which means basically 30 miles and in, so we want to grab all events basically that are set to all
     if (miles > 0)

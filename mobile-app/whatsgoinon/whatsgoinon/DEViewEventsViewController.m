@@ -893,6 +893,7 @@ struct TopMargin {
     }
     
     [self.navigationController popViewControllerAnimated:YES];
+
     
 }
 - (IBAction)closeSlowConnectionBox:(id)sender {
@@ -987,7 +988,7 @@ struct TopMargin {
     
     if (![[searchText stringByReplacingOccurrencesOfString:@" " withString:@"" ] isEqualToString:@""])
     {
-        [_posts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [_postsCopy enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *post = [DEPost getPostFromPFObject:obj];
             if ([[post.myDescription lowercaseString] rangeOfString:[searchText lowercaseString] ].location != NSNotFound ||
                 [[post.title lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound ||
