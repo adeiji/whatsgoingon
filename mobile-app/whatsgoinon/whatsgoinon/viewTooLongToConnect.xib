@@ -25,7 +25,7 @@
                         <action selector="closeSlowConnectionBox:" destination="-1" eventType="touchUpInside" id="lsj-CU-YMV"/>
                     </connections>
                 </button>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry that things are loading a little slow. Your internet connection is not the greatest at the moment" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="173" translatesAutoresizingMaskIntoConstraints="NO" id="yl8-Gh-POI">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry that things are loading a little slow. Your internet connection is not the greatest at the moment." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="9" preferredMaxLayoutWidth="173" translatesAutoresizingMaskIntoConstraints="NO" id="yl8-Gh-POI">
                     <rect key="frame" x="43" y="41" width="208" height="147"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="147" id="Nqg-IJ-gt9"/>
