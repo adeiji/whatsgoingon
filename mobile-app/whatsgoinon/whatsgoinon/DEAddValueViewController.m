@@ -131,7 +131,7 @@ Show the tutorial showing the user what should be entered for the different desc
     }
     else
     {
-        self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", maxLength - newLength];
+        self.lblMinCharacters.text = [NSString stringWithFormat:@"%u", maxLength - newLength];
     }
     
     

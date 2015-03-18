@@ -65,6 +65,9 @@ static PFQuery *globalQuery;
            {
                [DEScreenManager showCommentView:post];
            }
+           else {
+               [DEScreenManager promptForComment:post.objectId Post:post];
+           }
        }
     }];
 }

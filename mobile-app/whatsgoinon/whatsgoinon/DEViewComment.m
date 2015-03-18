@@ -284,7 +284,7 @@
     
     if (targetLength > -1)
     {
-        self.lblMinCharacters.text = [NSString stringWithFormat:@"%lu", 75 - newLength];
+        self.lblMinCharacters.text = [NSString stringWithFormat:@"%u", 75 - newLength];
     }
     else
     {

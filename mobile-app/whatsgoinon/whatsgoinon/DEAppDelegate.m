@@ -55,9 +55,26 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         [self loadGoingPosts];
         [self loadMaybeGoingPosts];
         [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
+        [self checkIfCanComment];
         [self loadAnalyticsArray];
     }
     return YES;
+}
+
+- (void) checkIfCanComment {
+    [self cancelAllFutureNotifications];
+    
+    NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
+    CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
+    if (postsWithCommentInformation != nil)
+    {
+        [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location];
+        }];
+    }
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
 }
 
 - (void) setUpParseWithLaunchOptions : (NSDictionary *) launchOptions {
@@ -88,14 +105,24 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 
 - (void) cancelAllFutureNotifications
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // Make sure that there actually is some data stored that we're pulling
+    NSMutableArray *savedPromptedForCommentEvents = [[defaults objectForKey:kEventsUserPromptedForComment] mutableCopy];
     NSArray *scheduledLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
     [scheduledLocalNotifications enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UILocalNotification *notification = (UILocalNotification *) obj;
         if ([notification.userInfo[kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE] isEqual:[NSNumber numberWithBool:YES]])
         {
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
+            NSString *eventId = notification.userInfo[kNOTIFICATION_CENTER_EVENT_USER_AT];
+            [savedPromptedForCommentEvents removeObject:eventId];
         }
     }];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
+    
 }
 
 - (NSMutableArray *) loadAnalyticsArray {
@@ -279,6 +306,16 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     NSLog(@"Local Notification Object Set and Scheduled");
+    
+    // Get the corresponding Event to this eventId
+    NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", postId];
+    NSArray *object = [[[DEPostManager sharedManager] goingPostWithCommentInformation] filteredArrayUsingPredicate:objectIdPredicate];
+    if (object[0])
+    {
+        id postWithCommentInformation = object[0];
+        [[[DEPostManager sharedManager] goingPostWithCommentInformation] removeObject:postWithCommentInformation];
+    }
+    
 }
 
 
@@ -376,7 +413,8 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
             [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
         }
         else {
-            [self displayCommentViewWithObjectId:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];  // Load the post information from the Array that stores the comment information
+            // Get the corresponding Event to the Event ID and then prompt the user to comment
+            [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Comment:NO];
         }
     }
     else  {  // Notification has come from being pressed

@@ -55,6 +55,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
  */
 - (void) startMonitoringRegionForPost : (DEPost *) post;
 - (void) setEventLocation : (NSString *) location;
+- (void) getUpdatedLocation;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;
