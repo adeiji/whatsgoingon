@@ -22,8 +22,28 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     [self addFreeButtonToCostTextField];
     [self setUpValidators];
     [self editConstraints];
-    _txtStartTime.enabled = NO;
-    _txtEndTime.enabled = NO;
+    if (![_txtStartTime.text isEqualToString:@""])
+    {
+        NSDateFormatter *df = [NSDateFormatter new];
+        [df setDateFormat:@"hh:mm a"];
+        NSDate *startTime = [df dateFromString:_txtStartTime.text];
+        UIDatePicker *datePicker = (UIDatePicker *) _txtStartTime.inputView;
+        [datePicker setDate:startTime];
+    }
+    else {
+        _txtStartTime.enabled = NO;
+    }
+    if (![_txtEndTime.text isEqualToString:@""])
+    {
+        NSDateFormatter *df = [NSDateFormatter new];
+        [df setDateFormat:@"hh:mm a"];
+        NSDate *endTime = [df dateFromString:_txtEndTime.text];
+        UIDatePicker *datePicker = (UIDatePicker *) _txtEndTime.inputView;
+        [datePicker setDate:endTime];
+    }
+    else {
+        _txtEndTime.enabled = NO;
+    }
     costText = [NSString new];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeFirstResponder)];
     if (_mainView)
@@ -34,6 +54,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     {
         [_secondPageMainView addGestureRecognizer:tapGestureRecognizer];
     }
+
 }
 
 - (void) editConstraints {
@@ -122,10 +143,24 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     NSDate *startDate = [df dateFromString:_txtStartDate.text];
     NSDate *endDate = [df dateFromString:_txtEndDate.text];
     
+    [df setDateFormat:@"MM/dd/yy hh:mm a"];
+    NSDate *startTime = [df dateFromString:[NSString stringWithFormat:@"%@ %@", _txtStartDate.text, _txtStartTime.text]];
+    
+    if ([startTime compare:[NSDate new]] == NSOrderedAscending)
+    {
+        [[_txtStartDate layer] setBorderWidth:2.0f];
+        [[_txtStartDate layer] setBorderColor:[UIColor redColor].CGColor];
+        [[_txtStartTime layer] setBorderWidth:2.0f];
+        [[_txtStartTime layer] setBorderColor:[UIColor redColor].CGColor];
+        return NO;
+    }
+    
     if ([startDate compare:endDate] == NSOrderedDescending)
     {
         [[_txtEndDate layer] setBorderWidth:2.0f];
         [[_txtEndDate layer] setBorderColor:[UIColor redColor].CGColor];
+        [[_txtEndTime layer] setBorderWidth:2.0f];
+        [[_txtEndTime layer] setBorderColor:[UIColor redColor].CGColor];
         
         return NO;
     }
@@ -204,7 +239,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     [((UIDatePicker *) _txtStartDate.inputView) setMinimumDate:[NSDate new]];
     [self setTextFieldInputViewForTextField:_txtEndDate DatePickerMode:UIDatePickerModeDate Selector:@selector(updateDateTextField:) MinuteInterval:0];
     [self setTextFieldInputViewForTextField:_txtStartTime DatePickerMode:UIDatePickerModeTime Selector:@selector(updateTimeTextField:) MinuteInterval:30];
-    [self setTextFieldInputViewForTextField:_txtEndTime DatePickerMode:UIDatePickerModeTime Selector:@selector(updateTimeTextField:) MinuteInterval:0];
+    [self setTextFieldInputViewForTextField:_txtEndTime DatePickerMode:UIDatePickerModeTime Selector:@selector(updateTimeTextField:) MinuteInterval:30];
 }
 
 
@@ -274,7 +309,11 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 }
 
 - (void) updateTimeTextField : (UIDatePicker *) sender {
-
+    [[_txtStartDate layer] setBorderWidth:0];
+    [[_txtStartTime layer] setBorderWidth:0];
+    [[_txtEndDate layer] setBorderWidth:0];
+    [[_txtEndTime layer] setBorderWidth:0];
+    
     UITextField *textField;
     
     for (UIView *view in self.subviews) {
@@ -371,8 +410,13 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
 }
 
 - (void) updateDateTextField : (UIDatePicker *) sender {
-    // Check to see if the current selected date is today's date
     
+    [[_txtEndTime layer] setBorderWidth:0];
+    [[_txtStartTime layer] setBorderWidth:0];
+    [[_txtEndDate layer] setBorderWidth:0];
+    [[_txtEndTime layer] setBorderWidth:0];
+    
+    // Check to see if the current selected date is today's date
     UITextField *textField;
     
     for (UIView *view in self.subviews) {
