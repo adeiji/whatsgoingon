@@ -24,6 +24,7 @@
 typedef void (^completionBlock) (NSString *value);
 typedef void (^completionHandler) (PFGeoPoint *value);
 typedef void (^autocompleteCompletionBlock) (NSArray *values);
+typedef void (^getAddressFromPlace) (NSString *address);
 
 - (PFGeoPoint *) geoPoint;
 + (id)sharedManager;
@@ -47,6 +48,8 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 + (void) getAutocompleteValuesFromString : (NSString *) input
                           DataResultType : (NSString *) type
                          CompletionBlock : (autocompleteCompletionBlock) callback;
++ (void) getAddressFromPlace : (NSString *) placeId
+             CompletionBlock : (completionBlock)callback ;
 /*
  
  Start monitoring to see when the user reaches this event
@@ -56,6 +59,7 @@ typedef void (^autocompleteCompletionBlock) (NSArray *values);
 - (void) startMonitoringRegionForPost : (DEPost *) post;
 - (void) setEventLocation : (NSString *) location;
 - (void) getUpdatedLocation;
+- (void) startLocationUpdateTimer;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;

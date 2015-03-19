@@ -55,7 +55,7 @@
     
     [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
     
-    if ([[[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_RANK] isEqualToString:USER_RANK_STANDARD])
+    if (![[[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_RANK] isEqualToString:USER_RANK_AMBASSADOR])
     {
         _createPostViewTwo.txtWebsite.hidden = YES;
     }

@@ -15,8 +15,11 @@
 #define GOOGLE_GEOLOCATION_API_GET_COORDINATES_TEMP @"https://maps.googleapis.com/maps/api/geocode/json?address=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 #define GOOGLE_GEOLOCATION_API_GET_ADDRESS @"https://maps.googleapis.com/maps/api/geocode/json?latlng=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
 #define GOOGLE_PLACES_AUTOCOMPLETE @"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&components=country:us&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
+#define GOOGLE_PLACES_DETAILS @"https://maps.googleapis.com/maps/api/place/details/json?placeid=%@&key=AIzaSyD478Y5RvbosbO4s34uRaukMwiPkBxJi5A"
+
 
 static const NSString *GOOGLE_API_RESULTS = @"results";
+static const NSString *GOOGLE_API_RESULT = @"result";
 static const NSString *GOOGLE_API_ADDRESS_COMPONENTS = @"address_components";
 static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 
@@ -44,6 +47,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     NSArray *goingPosts = [self getGoingPostEventObjects];
     [self checkForCommenting : goingPosts];
 }
+
 // Update the users location every 1 minute
 - (void) startLocationUpdateTimer {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -378,7 +382,42 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
             }
         }
     }];
+}
 
++ (void) getAddressFromPlace:(NSString *) placeId CompletionBlock:(completionBlock)callback {
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_PLACES_DETAILS, placeId]]];
+    
+    NSOperationQueue *queue = [NSOperationQueue new];
+    queue.name = @"Google Geolocation Queue";
+    queue.maxConcurrentOperationCount = 3;
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSError *error;
+        if (data != nil)
+        {
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            
+            if (![jsonData[@"status"] isEqualToString:@"ZERO_RESULTS"])
+            {
+                NSString *addressNumber = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS][0][GOOGLE_API_SHORT_NAME];
+                NSString *street = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS][1][GOOGLE_API_SHORT_NAME];
+                NSString *city = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS][3][GOOGLE_API_SHORT_NAME];
+                NSArray *stateComponents = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS];
+                int zipLocationInArray = (int) [stateComponents count] - 2;
+                NSString *state = stateComponents[zipLocationInArray][GOOGLE_API_SHORT_NAME];
+                NSString *address = [NSString stringWithFormat:@"%@ %@, %@, %@", addressNumber, street, city, state];
+                NSArray *countryCodeComponents = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS];
+                NSString *countryCode = [countryCodeComponents lastObject][GOOGLE_API_SHORT_NAME];
+                [[DELocationManager sharedManager] setCountryCode:countryCode];
+                NSLog(@"The address to get the lat long values is verified: %@", address);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Make sure that we call this method on the main thread so that it updates properly as supposed to
+                    callback(address);
+                });
+            }
+        }
+    }];
 }
 
 + (void) getAutocompleteValuesFromString : (NSString *) input
@@ -396,18 +435,28 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
         NSArray *predictions = jsonData[@"predictions"];
         NSMutableArray *values = [NSMutableArray new];
+        
         for (NSDictionary *dictionary in predictions) {
             // At times when entering the values are returned together for example. Val 1 will equal 8785 when the street number has not begun being entered, but it will also be 8785 Hawk St, if the user has begun entering the address
             NSString *fullAddress = [dictionary objectForKey:@"description"];
             NSRange range = [fullAddress rangeOfString:@"," options:NSBackwardsSearch];
             NSString *address = [fullAddress substringToIndex:range.location];
-            [values addObject:address];
-        };
+            
+            if (dictionary[@"place_id"])
+            {
+                [values addObject:@{ @"name"    : address,
+                                     @"place_id": dictionary[@"place_id"]}];
+            }
+            else {
+                [values addObject:@{ @"name"    : address }];
+            }
+        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Make sure that we call this method on the main thread so that it updates properly as supposed to
             callback(values);
         });
+        
     }];
 }
 

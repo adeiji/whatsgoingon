@@ -639,6 +639,7 @@ numberOfRowsInComponent:(NSInteger)component
 
     [DELocationManager getAddressFromLatLongValue:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
         _txtAddress.text = value;
+        [_txtAddress validate];
     }];
 }
 

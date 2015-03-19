@@ -32,6 +32,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [self setUpParseWithLaunchOptions:launchOptions];
     [GMSServices provideAPIKey:@"AIzaSyAChpei4sacCZDpzE4boq1lhftbBteTYak"];
     [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+    [[DELocationManager sharedManager] startLocationUpdateTimer];
     if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
         // Make sure this keeps running in the background
         [[[DELocationManager sharedManager] locationManager] requestAlwaysAuthorization];

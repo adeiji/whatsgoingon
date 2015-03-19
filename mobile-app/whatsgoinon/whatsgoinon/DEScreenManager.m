@@ -292,7 +292,6 @@
             DEPost *post = [DEPost getPostFromPFObject:postObj];
             DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
             [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
-            
             {
                 CGRect frame = view.frame;
                 frame.size.width = [[UIScreen mainScreen] bounds].size.width;
@@ -310,6 +309,11 @@
     else {
         DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
         [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+        {
+            CGRect frame = view.frame;
+            frame.size.width = [[UIScreen mainScreen] bounds].size.width;
+            [view setFrame:frame];
+        }
         [view showView];
         [[[DEPostManager sharedManager] eventsUserAt] removeObject:myPost.objectId];
         // Make sure its saved that the user has already been prompted to comment for the event

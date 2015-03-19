@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "HappSnap": {
+            "applicationId": "3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR", 
+            "masterKey": "6HAIlLdIrHaUoMKfSHKNRpvjduEp8YRAVkllMH7p"
+        }, 
+        "_default": {
+            "link": "HappSnap"
+        }
+    }
+}

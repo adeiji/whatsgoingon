@@ -47,7 +47,15 @@ static NSString *GOOGLE_AUTOCOMPLETE_API_PLACES = @"establishment";
     locations = [NSMutableArray new];
     
     [DELocationManager getAutocompleteValuesFromString:searchText DataResultType:type CompletionBlock:^(NSArray *values) {
-        [locations addObjectsFromArray:values];
+        
+        locations = [NSMutableArray new];
+        
+        for (NSDictionary *dictionary in values) {
+            NSString *value = [dictionary objectForKey:@"name"];
+            [locations addObject:value];
+        }
+
+        locationDetails = [values mutableCopy];
         [self.tableView reloadData];
     }];
     
@@ -92,16 +100,40 @@ static NSString *GOOGLE_AUTOCOMPLETE_API_PLACES = @"establishment";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Set the lat/long values to whatever was selected and then reload the post age with the necessary post that correspond to the city that was just selected
-    _selection = [locations objectAtIndex:indexPath.row];
-    [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];
+    // Set the selection to the address of the event if it's a Place
     
-    if ([type isEqualToString:PLACES_API_DATA_RESULT_TYPE_CITIES])
+    _selection = [locations objectAtIndex:indexPath.row];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@", _selection];
+    NSArray *value = [locationDetails filteredArrayUsingPredicate:predicate];
+    NSDictionary *valueDictionary = (NSDictionary *) value[0];
+    
+    if (valueDictionary[@"place_id"])
     {
-        [[DELocationManager sharedManager] setCity:_selection];
+        [DELocationManager getAddressFromPlace:[valueDictionary objectForKey:@"place_id"] CompletionBlock:^(NSString *value) {
+            [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];
+            
+            if ([type isEqualToString:PLACES_API_DATA_RESULT_TYPE_CITIES])
+            {
+                [[DELocationManager sharedManager] setCity:value];
+            }
+            else {
+                [[DELocationManager sharedManager] setEventLocation:value];
+            }
+        }];
     }
     else {
-        [[DELocationManager sharedManager] setEventLocation:_selection];
+        [DEAnimationManager fadeOutRemoveView:self FromView:[self superview]];
+        
+        if ([type isEqualToString:PLACES_API_DATA_RESULT_TYPE_CITIES])
+        {
+            [[DELocationManager sharedManager] setCity:_selection];
+        }
+        else {
+            [[DELocationManager sharedManager] setEventLocation:_selection];
+        }
     }
+    
 }
 
 @end
