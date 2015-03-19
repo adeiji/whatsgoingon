@@ -89,7 +89,10 @@ static NSString *GOOGLE_AUTOCOMPLETE_API_PLACES = @"establishment";
     }
 
     [cell setBackgroundColor:[UIColor clearColor]];
-    cell.textLabel.text = [locations objectAtIndex:indexPath.row];
+    if (locations[indexPath.row])
+    {
+        cell.textLabel.text = [locations objectAtIndex:indexPath.row];
+    }
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     
     return cell;
@@ -119,6 +122,7 @@ static NSString *GOOGLE_AUTOCOMPLETE_API_PLACES = @"establishment";
             }
             else {
                 [[DELocationManager sharedManager] setEventLocation:value];
+                // Send a notification showing that we just got the event location.
             }
         }];
     }

@@ -338,14 +338,20 @@ Display the second screen for the post details
 
 - (void) checkAddressAvailability
 {
-    [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
-        DELocationManager *sharedManager = [DELocationManager sharedManager];
-        if (value)
-        {
-            sharedManager.storedLocation = value;
-            _post.location = value;
-        }
-    }];
+    if ([[DELocationManager sharedManager] placeLocation])
+    {
+        _post.location = [[DELocationManager sharedManager] placeLocation];
+    }
+    else {
+        [DELocationManager getLatLongValueFromAddress:_createPostViewOne.txtAddress.text CompletionBlock:^(PFGeoPoint *value) {
+            DELocationManager *sharedManager = [DELocationManager sharedManager];
+            if (value)
+            {
+                sharedManager.storedLocation = value;
+                _post.location = value;
+            }
+        }];
+    }
 }
 
 // We get the user rank from the notification, and if the user is a standard user then we want to keep the website text field hidden.

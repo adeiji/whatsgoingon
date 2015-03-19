@@ -223,7 +223,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 - (void) setEventLocation : (NSString *) location
 {
     [DELocationManager getLatLongValueFromAddress:location CompletionBlock:^(PFGeoPoint *value) {
-        
+        _placeLocation = value;
     }];
 }
 
@@ -400,14 +400,10 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
             
             if (![jsonData[@"status"] isEqualToString:@"ZERO_RESULTS"])
             {
-                NSString *addressNumber = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS][0][GOOGLE_API_SHORT_NAME];
-                NSString *street = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS][1][GOOGLE_API_SHORT_NAME];
-                NSString *city = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS][3][GOOGLE_API_SHORT_NAME];
-                NSArray *stateComponents = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS];
-                int zipLocationInArray = (int) [stateComponents count] - 2;
-                NSString *state = stateComponents[zipLocationInArray][GOOGLE_API_SHORT_NAME];
-                NSString *address = [NSString stringWithFormat:@"%@ %@, %@, %@", addressNumber, street, city, state];
-                NSArray *countryCodeComponents = jsonData[GOOGLE_API_RESULT][GOOGLE_API_ADDRESS_COMPONENTS];
+                NSString *address = jsonData[GOOGLE_API_RESULT][@"formatted_address"];
+                NSRange rangeOfLastComma = [address rangeOfString:@"," options:NSBackwardsSearch];
+                address = [address substringToIndex:rangeOfLastComma.location];
+                NSArray *countryCodeComponents = jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS];
                 NSString *countryCode = [countryCodeComponents lastObject][GOOGLE_API_SHORT_NAME];
                 [[DELocationManager sharedManager] setCountryCode:countryCode];
                 NSLog(@"The address to get the lat long values is verified: %@", address);

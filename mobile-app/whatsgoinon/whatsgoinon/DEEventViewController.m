@@ -291,6 +291,7 @@ const int heightConstraintConstant = 62;
         [createPostViewController.navigationItem setHidesBackButton:YES];
         [self.navigationController pushViewController:createPostViewController animated:YES];
         [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
+        [[DELocationManager sharedManager] setPlaceLocation:nil];
     }
     
     _post = nil;

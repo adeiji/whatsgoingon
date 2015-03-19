@@ -70,5 +70,6 @@ typedef void (^getAddressFromPlace) (NSString *address);
 @property (strong, nonatomic) DEPost *eventPersonAt;
 @property (setter = setCity:, strong, nonatomic) NSString *city;
 @property (strong, nonatomic) PFGeoPoint *cityLocation;
+@property (strong, nonatomic) PFGeoPoint *placeLocation;
 
 @end

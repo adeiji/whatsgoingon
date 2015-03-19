@@ -119,7 +119,7 @@ static PFQuery *globalQuery;
             }
             // Check to see if we need to store this data and finish loading
             [DESyncManager addEventsToAlreadyRetrievedEvents : objects PostsArray:postsArray ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_STILL_LOADING isNewProcess:isNewProcess];
-            if (miles < 30)
+            if (miles < 35)
             {
                 [DESyncManager getAllValuesWithinMilesForNow:now PostsArray:postsArray Location:location];
             }
