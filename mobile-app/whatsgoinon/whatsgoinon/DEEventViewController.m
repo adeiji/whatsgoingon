@@ -554,6 +554,9 @@ const int heightConstraintConstant = 62;
     };
     
     [[postManager goingPostWithCommentInformation] addObject:values];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
+    [userDefaults synchronize];
 }
 
 #pragma mark - Going and Not Going Methods
@@ -570,11 +573,6 @@ const int heightConstraintConstant = 62;
     [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
     [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
     [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
-    [userDefaults synchronize];
-    
 }
 
 - (IBAction)setEventAsGoing:(id)sender {

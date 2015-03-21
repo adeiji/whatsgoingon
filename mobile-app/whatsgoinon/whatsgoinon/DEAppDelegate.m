@@ -281,7 +281,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         }
         else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
         {
-            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:YES];
+            [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[startTime dateByAddingTimeInterval:(10 * 60)] isFuture:YES];
             return YES;
         }
     }
