@@ -124,7 +124,7 @@
     }
     else
     {
-        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/app/id957130862"]];
     }
 }
 

@@ -469,6 +469,8 @@ struct TopMargin {
     else {
         [self showNoPostedEventsByUser];
     }
+    
+    _lblCategoryHeader.text = @"My Posts";
 }
 
 - (void) displayPost : (NSNotification *) notification {
@@ -528,6 +530,7 @@ struct TopMargin {
     CGSize contentSize = [_scrollView contentSize];
     contentSize.height = _scrollView.frame.size.height;
     [_scrollView setContentSize:contentSize];
+
     [self hideOrbView];
 }
 
@@ -544,7 +547,7 @@ struct TopMargin {
     postArray = [self setAllPostsToNotLoaded:postArray];
     [self displayPost:nil TopMargin:0 PostArray:postArray];
     [self loadVisiblePost:_scrollView];
-    _lblCategoryHeader.text = @"My Events";
+    _lblCategoryHeader.text = @"Going/Maybe Events";
 }
 
 - (void) getEventsFromEventIdsInGoingAndMaybe {
@@ -670,6 +673,7 @@ struct TopMargin {
     [self showOrbView];
     
     [self scrollToTopOfScrollView];
+    _lblCategoryHeader.text = @"Going/Maybe Events";
 }
 
 /*
