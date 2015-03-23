@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/whatsgoinon/DEViewImagesViewController.m \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/whatsgoinon/DEViewImagesViewController.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/whatsgoinon/DEViewImageViewController.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PF_Twitter.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFTwitterUtils.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFPush.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFPurchase.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFProduct.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFNetworkActivityIndicatorManager.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFInstallation.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFRole.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFRelation.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFQuery.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFObject+Subclass.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFGeoPoint.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFFile.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFConfig.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFCloud.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFSubclassing.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFObject.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFUser.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFAnonymousUtils.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFConstants.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFAnalytics.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/PFACL.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Headers/Parse.h \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/Pods/Parse/Parse.framework/Modules/module.modulemap \
+  /Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon/whatsgoinon/Constants.h

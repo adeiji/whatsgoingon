@@ -51,9 +51,15 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 }
 
 - (void) stopMonitoringRegionForPost : (DEPost * ) post {
-    CLLocationCoordinate2D locCoordinate = CLLocationCoordinate2DMake(post.location.latitude, post.location.longitude);
-    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:500 identifier:post.objectId];
-    [_locationManager stopMonitoringForRegion:region];
+    [[_locationManager monitoredRegions] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+        CLCircularRegion *region = (CLCircularRegion *) obj;
+        if ([post.objectId isEqualToString:region.identifier])
+        {
+            [_locationManager stopMonitoringForRegion:region];
+        }
+    }];
+    
+    [[DEPostManager sharedManager] removeEventFromPromptedForCommentEvents:post];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
@@ -188,10 +194,10 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
  post : The event that we're creating the location region for
  
  */
-- (void) startMonitoringRegionForPost : (DEPost *) post {
-    
+- (void) startMonitoringRegionForPost : (DEPost *) post
+{
     CLLocationCoordinate2D locCoordinate = CLLocationCoordinate2DMake(post.location.latitude, post.location.longitude);
-    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:500 identifier:post.objectId];
+    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:200 identifier:post.objectId];
     
     // Ensure that when the user enters this specific region the app is notified, and woken up if necessary
     [region setNotifyOnEntry:YES];

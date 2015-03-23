@@ -575,7 +575,7 @@ const int heightConstraintConstant = 62;
     [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
 }
 
-- (IBAction)setEventAsGoing:(id)sender {
+- (IBAction) setEventAsGoing:(id)sender {
     
     static BOOL going = NO;
     DEPostManager *postManager = [DEPostManager sharedManager];
@@ -628,11 +628,13 @@ const int heightConstraintConstant = 62;
     DEPostManager *postManager = [DEPostManager sharedManager];
     if (![[postManager maybeGoingPost] containsObject:_post.objectId])
     {
+        [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
         [[postManager maybeGoingPost] addObject:_post.objectId];
         // Save this item as maybe going for the user to the server
         [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
         self.maybeCheckmarkView.hidden = NO;
         [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
+        [[DELocationManager sharedManager] checkIfCanCommentForEvent:_post];
         [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
     }
 }

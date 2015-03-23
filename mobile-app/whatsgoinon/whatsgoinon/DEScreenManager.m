@@ -79,6 +79,7 @@
     }
     
     [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+    [[DEPostManager sharedManager] removeEventFromPromptedForCommentEvents:post];
 }
 
 + (void) hideCommentView
@@ -307,6 +308,7 @@
             DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
             [appDelegate saveAllCommentArrays];
             [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+            [[DEPostManager sharedManager] removeEventFromPromptedForCommentEvents:post];
         }
     }
     else {
@@ -324,9 +326,12 @@
         DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
         [appDelegate saveAllCommentArrays];
         [[DELocationManager sharedManager] stopMonitoringRegionForPost:myPost];
+        [[DEPostManager sharedManager] removeEventFromPromptedForCommentEvents:myPost];
     }
 
-};
+}
+
+
 
 - (void) startActivitySpinner
 {

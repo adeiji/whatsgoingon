@@ -145,7 +145,15 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     
     [df setDateFormat:@"MM/dd/yy hh:mm a"];
     NSDate *startTime = [df dateFromString:[NSString stringWithFormat:@"%@ %@", _txtStartDate.text, _txtStartTime.text]];
-    
+    if ([startTime compare:[[NSDate date] dateByAddingTimeInterval:-60 * 60 * 5]] == NSOrderedAscending)
+    {
+        [[_txtStartDate layer] setBorderWidth:2.0f];
+        [[_txtStartDate layer] setBorderColor:[UIColor redColor].CGColor];
+        [[_txtStartTime layer] setBorderWidth:2.0f];
+        [[_txtStartTime layer] setBorderColor:[UIColor redColor].CGColor];
+        
+        return NO;
+    }
     
     if ([startDate compare:endDate] == NSOrderedDescending)
     {

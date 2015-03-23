@@ -8,6 +8,7 @@
 
 #import "DEPostManager.h"
 #import "DEPost.h"
+#import "DEAppDelegate.h"
 
 @implementation DEPostManager
 
@@ -201,6 +202,28 @@ static NSString *CATEGORY_ANYTHING = @"Anything";
     [self sendNotificationThatTheEventsWereLoaded : eventsInCategory
                                CategoryDictionary : categoryDictionary];
 
+}
+
+// Remove the event that the user has been prompted to comment for
+- (void) removeEventFromPromptedForCommentEvents : (DEPost *) post
+{
+    NSMutableArray *objectsToDelete = [NSMutableArray new];
+    
+    [_goingPostWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+      
+        if ([obj[PARSE_CLASS_EVENT_OBJECT_ID] isEqualToString:post.objectId])
+        {
+            [objectsToDelete addObject:obj];
+        }
+    }];
+    
+    if ([objectsToDelete count] > 0)
+    {
+        [_goingPostWithCommentInformation removeObjectsInArray:objectsToDelete];
+    }
+    
+    [((DEAppDelegate *)[[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
+    
 }
 
 + (void) sendNotificationThatTheEventsWereLoaded : (NSMutableArray *) eventsInCategory

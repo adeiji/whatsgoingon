@@ -64,11 +64,11 @@ static PFQuery *globalQuery;
            if ([process isEqualToString:SHOW_COMMENT_VIEW])
            {
                [DEScreenManager showCommentView:post];
-              [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+               [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
            }
            else if ([process isEqualToString:PROMPT_COMMENT_FOR_EVENT]) {
                [DEScreenManager promptForComment:post.objectId Post:post];
-              [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+               [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
            }
            else if ([process isEqualToString:SEE_IF_CAN_COMMENT])
            {

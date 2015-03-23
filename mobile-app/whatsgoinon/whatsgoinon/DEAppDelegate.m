@@ -72,16 +72,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 }
 
-- (void) locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    for (UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-        if ([notification.userInfo[kNOTIFICATION_CENTER_EVENT_USER_AT] isEqualToString:region.identifier])
-        {
-            // If the user leaves this place then cancel this notification, but don't stop monitoring for the region.
-            [[UIApplication sharedApplication] cancelLocalNotification:notification];
-        }
-    }
-}
-
 - (NSMutableArray *) loadAnalyticsArray {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *array = [defaults objectForKey:kAnalyticsArray];
@@ -165,6 +155,16 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     
 }
 
+- (void) cancelAllFutureNotifications {
+    for (UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        if ([notification.userInfo[kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE] isEqual:@YES])
+        {
+            // If the user leaves this place then cancel this notification, but don't stop monitoring for the region.
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        }
+    }
+}
+
 /* 1.  Get the current Location
  2.  See if any of the events the user is going to are nearby */
 
@@ -176,6 +176,8 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     }];
     
     //### background task starts
+    // Since we know that we've just entered or exited a region, we want to remove all the future notifications because now most they've either exited somewhere they said they're going to go to or have just come to somewhere they want to go
+    [self cancelAllFutureNotifications];
     CLLocationManager *manager = [[CLLocationManager alloc] init];
     CLLocation *location = [manager location];
     manager.delegate = self;
@@ -188,6 +190,11 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location];
         }];
+        
+        // Save the new array that has removed the object that has been commented on
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
+        [userDefaults synchronize];
     }
     
     if (bgTask != UIBackgroundTaskInvalid)
@@ -261,15 +268,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     NSLog(@"Local Notification Object Set and Scheduled");
-    
-    // Get the corresponding Event to this eventId
-    NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", postId];
-    NSArray *object = [[[DEPostManager sharedManager] goingPostWithCommentInformation] filteredArrayUsingPredicate:objectIdPredicate];
-    if (object[0])
-    {
-        id postWithCommentInformation = object[0];
-        [[[DEPostManager sharedManager] goingPostWithCommentInformation] removeObject:postWithCommentInformation];
-    }
     
 }
 
