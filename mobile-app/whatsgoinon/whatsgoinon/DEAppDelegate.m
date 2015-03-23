@@ -72,20 +72,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 }
 
-- (void) sendNotification {
-    // Perform task here
-    // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
-    UILocalNotification *localNotification = [UILocalNotification new];
-    double minutes = 15;
-    NSDate *nowPlusSevenMinutes = [[NSDate new] dateByAddingTimeInterval:(minutes * 60)];
-    [localNotification setFireDate:nowPlusSevenMinutes];
-    // Set the user info to contain the event id of the post that the user is at
-    localNotification.alertBody = [NSString stringWithFormat:@"Recieved significant location change update"];
-    localNotification.applicationIconBadgeNumber = 0;
-    localNotification.soundName = UILocalNotificationDefaultSoundName;
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-}
-
 - (void) locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
     for (UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
         if ([notification.userInfo[kNOTIFICATION_CENTER_EVENT_USER_AT] isEqualToString:region.identifier])
