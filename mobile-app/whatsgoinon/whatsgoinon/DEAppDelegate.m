@@ -60,7 +60,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 }
 
 - (void) checkIfCanComment {
-    [self cancelAllFutureNotifications];
     
     NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -92,7 +91,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [PFTwitterUtils initializeWithConsumerKey:@"TFcHVbGMjgBiXuSUpE16untPd" consumerSecret:@"alxo7PP08tyyG2mR3QFm8n8XHdJBcTzGw1u7BKW7A13AaeCWe8"];
     [PFFacebookUtils initializeFacebook];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-
 }
 
 - (void) sendNotification {
@@ -109,26 +107,14 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
-- (void) cancelAllFutureNotifications
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    // Make sure that there actually is some data stored that we're pulling
-    NSMutableArray *savedPromptedForCommentEvents = [[defaults objectForKey:kEventsUserPromptedForComment] mutableCopy];
-    NSArray *scheduledLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    [scheduledLocalNotifications enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        UILocalNotification *notification = (UILocalNotification *) obj;
-        if ([notification.userInfo[kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE] isEqual:[NSNumber numberWithBool:YES]])
+- (void) locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    for (UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        if ([notification.userInfo[kNOTIFICATION_CENTER_EVENT_USER_AT] isEqualToString:region.identifier])
         {
+            // If the user leaves this place then cancel this notification, but don't stop monitoring for the region.
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
-            NSString *eventId = notification.userInfo[kNOTIFICATION_CENTER_EVENT_USER_AT];
-            [savedPromptedForCommentEvents removeObject:eventId];
         }
-    }];
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
-    
+    }
 }
 
 - (NSMutableArray *) loadAnalyticsArray {
@@ -229,7 +215,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     CLLocation *location = [manager location];
     manager.delegate = self;
     
-    [self cancelAllFutureNotifications];
 
     NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
     
@@ -276,11 +261,19 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         if (([startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
         {
             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[NSDate new] isFuture:NO];
+            DEPost *post = [[DEPost alloc] init];
+            post.objectId = postId;
+            post.location = values[PARSE_CLASS_EVENT_LOCATION];
+            [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
             return YES;
         }
         else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
         {
             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[startTime dateByAddingTimeInterval:(10 * 60)] isFuture:YES];
+            DEPost *post = [[DEPost alloc] init];
+            post.objectId = postId;
+            post.location = values[PARSE_CLASS_EVENT_LOCATION];
+            [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
             return YES;
         }
     }
