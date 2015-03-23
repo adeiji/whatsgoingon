@@ -603,7 +603,6 @@ const int heightConstraintConstant = 62;
         // Start monitoring to see if the user is near this event location
         [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
         // Update the location so we can see if they are at this event and can comment
-        [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     }
     
     if (!_mapView)
@@ -634,6 +633,7 @@ const int heightConstraintConstant = 62;
         [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
         self.maybeCheckmarkView.hidden = NO;
         [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
+        [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
     }
 }
 

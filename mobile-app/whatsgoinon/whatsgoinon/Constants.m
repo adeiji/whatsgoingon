@@ -64,6 +64,10 @@ NSString *const PARSE_CLASS_COMMENT_USER = @"user";
 NSString *const PARSE_CLASS_COMMENT_THUMBS_UP = @"thumbs_up";
 NSString *const PARSE_CLASS_COMMENT_EVENT_ID = @"event_id";
 
+NSString *const PROMPT_COMMENT_FOR_EVENT = @"com.happsnap.prompt.for.event";
+NSString *const SHOW_COMMENT_VIEW = @"com.happsnap.show.comment.view";
+NSString *const SEE_IF_CAN_COMMENT = @"com.happsnap.see.if.can.comment";
+
 // Parse - User
 
 NSString *const PARSE_CLASS_NAME_USER = @"UserDetails";

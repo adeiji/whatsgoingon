@@ -60,11 +60,11 @@
 
 /*
  
- Get one post by its Id
+ Get one post by its Id and then display the comment view if Comment is set to YES, otherwise, prompt the user to comment
  
  */
-+ (void) getPostById : (NSString *) eventId
-             Comment : (BOOL) comment;
++ (void) getPostById:(NSString *)eventId
+             Process:(NSString *) process;
 
 
 + (void) loadEpicEvents : (BOOL) epicEvents;

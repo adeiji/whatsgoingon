@@ -546,7 +546,7 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     }
     
     NSDate *nowTime = [gregorian dateFromComponents:components];
-    datePicker.minimumDate = nowTime;
+    datePicker.minimumDate = [nowTime dateByAddingTimeInterval:-60 * 60 * 5];
     textField.inputView = datePicker;
 }
 
@@ -680,6 +680,7 @@ numberOfRowsInComponent:(NSInteger)component
 - (void) displayCurrentLocation
 {
     DELocationManager *locationManager = [DELocationManager sharedManager];
+    [locationManager getUpdatedLocation];
 
     [DELocationManager getAddressFromLatLongValue:[locationManager currentLocation] CompletionBlock:^(NSString *value) {
         _txtAddress.text = value;

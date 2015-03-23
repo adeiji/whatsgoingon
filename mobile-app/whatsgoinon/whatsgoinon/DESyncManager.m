@@ -52,7 +52,7 @@ static PFQuery *globalQuery;
  
  */
 + (void) getPostById:(NSString *)eventId
-             Comment:(BOOL) comment
+             Process:(NSString *) process
 {
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     [query whereKey:PARSE_CLASS_EVENT_OBJECT_ID equalTo:eventId];
@@ -61,12 +61,27 @@ static PFQuery *globalQuery;
        if (!error)
        {
            DEPost *post = [DEPost getPostFromPFObject:object];
-           if (comment)
+           if ([process isEqualToString:SHOW_COMMENT_VIEW])
            {
                [DEScreenManager showCommentView:post];
+              [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
            }
-           else {
+           else if ([process isEqualToString:PROMPT_COMMENT_FOR_EVENT]) {
                [DEScreenManager promptForComment:post.objectId Post:post];
+              [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+           }
+           else if ([process isEqualToString:SEE_IF_CAN_COMMENT])
+           {
+               if (([[NSDate date] compare:post.startTime] == NSOrderedDescending)  && ([[NSDate date] compare:post.endTime] == NSOrderedAscending))
+               {
+                   // Prompt for the comment and then stop monitoring for the region
+                   [DEScreenManager promptForComment:post.objectId Post:post];
+                   [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+               }
+               else if ([[NSDate date] compare:post.endTime] == NSOrderedAscending) // User is early
+               {
+                   [DEScreenManager createPromptUserCommentNotification:post TimeToShow:post.startTime isFuture:YES];
+               }
            }
        }
     }];

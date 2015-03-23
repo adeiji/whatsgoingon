@@ -43,15 +43,27 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     }
     
     NSLog(@"Location Updated");
+//    
+//    NSArray *goingPosts = [self getGoingPostEventObjects];
+//    [self checkForCommenting : goingPosts];
+}
+
+- (void) stopMonitoringRegionForPost : (DEPost * ) post {
+    CLLocationCoordinate2D locCoordinate = CLLocationCoordinate2DMake(post.location.latitude, post.location.longitude);
+    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:500 identifier:post.objectId];
+    [_locationManager stopMonitoringForRegion:region];
+}
+
+- (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     
-    NSArray *goingPosts = [self getGoingPostEventObjects];
-    [self checkForCommenting : goingPosts];
+    // Get the post that matches the regions id and then see if they can comment for it
+    [DESyncManager getPostById:region.identifier Process:SEE_IF_CAN_COMMENT];
 }
 
 // Update the users location every 1 minute
 - (void) startLocationUpdateTimer {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSTimer *locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getUpdatedLocation) userInfo:nil repeats:YES];
+        NSTimer *locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:60 * 20 target:self selector:@selector(getUpdatedLocation) userInfo:nil repeats:YES];
         
         [locationUpdateTimer fire];
     });
@@ -78,7 +90,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedAlways || status == kCLAuthorizationStatusAuthorizedWhenInUse)
     {
-        [_locationManager startMonitoringSignificantLocationChanges];
+
     }
 }
 
@@ -182,30 +194,8 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     // Ensure that when the user enters this specific region the app is notified, and woken up if necessary
     [region setNotifyOnEntry:YES];
     [_locationManager startMonitoringForRegion:region];
-    [_locationManager startMonitoringSignificantLocationChanges];
 }
-// The user entered the location of an event that he said he was going to or maybe going to
-- (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
-    NSArray *goingPosts = [self getGoingPostEventObjects];
-    
-    // Check to see if this event that the user is at has already started
-    
-    for (DEPost *post in goingPosts) {
-        if ([post.objectId isEqualToString:region.identifier])
-        {
-            // Check to see if this event has started.  If the start time of the event is less than the current time
-            if (([post.startTime compare:[NSDate new]] == NSOrderedAscending) &&  ([post.endTime compare:[NSDate new]] == NSOrderedDescending) )
-            {
-                [DEScreenManager createPromptUserCommentNotification:post TimeToShow:[NSDate new] isFuture:NO];
-                [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
-                DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
-                [appDelegate saveAllCommentArrays];
-                
-                break;
-            }
-        }
-    }
-}
+
 
 - (void) promptUserForFeedback
 {
@@ -272,7 +262,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        [_locationManager startMonitoringSignificantLocationChanges];
         _currentLocation = [PFGeoPoint new];
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app

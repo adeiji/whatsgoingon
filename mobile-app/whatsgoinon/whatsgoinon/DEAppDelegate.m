@@ -228,7 +228,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     CLLocationManager *manager = [[CLLocationManager alloc] init];
     CLLocation *location = [manager location];
     manager.delegate = self;
-    [manager startMonitoringSignificantLocationChanges];
     
     [self cancelAllFutureNotifications];
 
@@ -423,7 +422,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         }
         else {
             // Get the corresponding Event to the Event ID and then prompt the user to comment
-            [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Comment:NO];
+            [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:PROMPT_COMMENT_FOR_EVENT];
             // Comment: NO, signifies that we only want the user to be prompted for the comment, not have them actually comment
         }
     }
@@ -446,7 +445,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         [DEScreenManager showCommentView:post];
     }
     else {
-        [DESyncManager getPostById:objectId Comment:YES];
+        [DESyncManager getPostById:objectId Process:SHOW_COMMENT_VIEW];
     }
 }
 
@@ -454,7 +453,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
         // Reload the Event that the user had been to
-        [DESyncManager getPostById:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Comment:YES];
+        [DESyncManager getPostById:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:SHOW_COMMENT_VIEW];
     }
 }
 
