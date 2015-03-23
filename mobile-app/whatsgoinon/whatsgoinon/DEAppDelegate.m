@@ -47,7 +47,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [self loadGoingPosts];
     [self loadMaybeGoingPosts];
     [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
-    [self checkIfCanComment];
     [self loadAnalyticsArray];
 
     // Application is launched because of a significant location change
@@ -59,26 +58,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     return YES;
 }
 
-- (void) checkIfCanComment {
-    
-    NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    CLLocation *location = [[[DELocationManager sharedManager] locationManager] location];
-    
-    if (postsWithCommentInformation != nil)
-    {
-        [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            BOOL commented = [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location];
-            if (commented)
-            {
-                [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:obj[PARSE_CLASS_EVENT_OBJECT_ID]];
-                [userDefaults setObject:[[DEPostManager sharedManager] promptedForCommentEvents] forKey:kEventsUserPromptedForComment];
-            }
-        }];
-    }
-    
-    [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
-}
 
 - (void) setUpParseWithLaunchOptions : (NSDictionary *) launchOptions {
     // Connect our app to Parse
