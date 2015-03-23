@@ -61,6 +61,7 @@ typedef void (^getAddressFromPlace) (NSString *address);
 - (void) getUpdatedLocation;
 - (void) startLocationUpdateTimer;
 - (void) stopMonitoringRegionForPost : (DEPost * ) post;
+- (BOOL) checkIfUserCanCommentAtForEvent : (DEPost *) post;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;

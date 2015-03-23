@@ -600,9 +600,12 @@ const int heightConstraintConstant = 62;
             [[eventView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
         }
         
-        // Start monitoring to see if the user is near this event location
-        [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
-        // Update the location so we can see if they are at this event and can comment
+        if (![[DELocationManager sharedManager] checkIfCanCommentForEvent:_post])
+        {
+            // Start monitoring to see if the user is near this event location
+            [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
+            // Update the location so we can see if they are at this event and can comment
+        }
     }
     
     if (!_mapView)

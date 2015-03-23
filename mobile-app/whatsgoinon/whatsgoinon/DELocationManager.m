@@ -43,9 +43,11 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     }
     
     NSLog(@"Location Updated");
-//    
-//    NSArray *goingPosts = [self getGoingPostEventObjects];
-//    [self checkForCommenting : goingPosts];
+}
+
+- (BOOL) checkIfUserCanCommentAtForEvent : (DEPost *) post {
+    NSArray *array = [NSArray arrayWithObjects:post, nil];
+    return [self checkForCommenting : array];
 }
 
 - (void) stopMonitoringRegionForPost : (DEPost * ) post {
@@ -94,19 +96,18 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     }
 }
 
-- (void) checkForCommenting : (NSArray *) goingPosts {
+- (BOOL) checkForCommenting : (NSArray *) goingPosts {
     // Perform task here
     
     for (DEPost *post in goingPosts) {
         // Check to make sure that the user has already been prompted to comment for this
         if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
         {
-            if ([self checkIfCanCommentForEvent:post])
-            {
-                break;
-            }
+            return [self checkIfCanCommentForEvent:post];
         }
     }
+    
+    return NO;
 }
 
 /*
@@ -164,6 +165,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         [self promptUserForCommentPost:post TimeToShow:[post.startTime dateByAddingTimeInterval:(60 * 15)] isFuture:YES];
         DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
         [appDelegate saveAllCommentArrays];
+        return YES;
     }
     
     return NO;
