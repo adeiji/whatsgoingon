@@ -77,6 +77,8 @@
     {
         [DEAnimationManager fadeOutWithView:[[window rootViewController] view]  ViewToAdd:scrollView];
     }
+    
+    [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
 }
 
 + (void) hideCommentView
@@ -304,6 +306,7 @@
             [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
             DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
             [appDelegate saveAllCommentArrays];
+            [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
         }
     }
     else {
@@ -320,6 +323,7 @@
         [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:myPost.objectId];
         DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
         [appDelegate saveAllCommentArrays];
+        [[DELocationManager sharedManager] stopMonitoringRegionForPost:myPost];
     }
 
 };

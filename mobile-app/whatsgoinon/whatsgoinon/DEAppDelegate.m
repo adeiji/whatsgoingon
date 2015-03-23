@@ -198,14 +198,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     
 }
 
-- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-
-}
-
-- (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-
-}
-
 - (BOOL) checkForCommentingValuesDictionary : (NSDictionary *) obj
                                              CurrentLocation : (CLLocation *) location
 {
@@ -246,9 +238,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     return NO;
 }
 
-- (void) saveCurrentLocatino {
-    
-}
 
 - (void) createPromptUserCommentNotification : (NSString *) postId
                                        Title : (NSString *) postTitle
