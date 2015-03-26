@@ -359,13 +359,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     {
         if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
         {
-            if ([[DEPostManager sharedManager] posts])
-            {
-                [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:PROMPT_COMMENT_FOR_EVENT];
-            }
-            else {
-                [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:SHOW_COMMENT_VIEW];
-            }
+            [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:PROMPT_COMMENT_FOR_EVENT];
         }
         else  {  // Notification has come from being pressed
             [self displayCommentViewWithObjectId:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
