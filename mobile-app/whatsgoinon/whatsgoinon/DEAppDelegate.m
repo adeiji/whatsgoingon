@@ -252,7 +252,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     // Perform task here
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
     UILocalNotification *localNotification = [UILocalNotification new];
-    double minutes = 1;
+    double minutes = 5;
     NSDate *nowPlusSevenMinutes = [dateToShow dateByAddingTimeInterval:(60 * minutes)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
@@ -294,7 +294,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         return postsWithCommentInformation;
     }
     
-    return nil;
+    return [[DEPostManager sharedManager] goingPostWithCommentInformation];
 }
 
 - (void) loadPromptedForCommentEvents {
@@ -362,7 +362,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
             [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:PROMPT_COMMENT_FOR_EVENT];
         }
         else  {  // Notification has come from being pressed
-            [self displayCommentViewWithObjectId:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
+            [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:SHOW_COMMENT_VIEW];
         }
     }
 }
@@ -386,6 +386,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 }
 
 - (void) checkIfLocalNotification : (NSDictionary *) launchOptions {
+    _appOpenedByUser = YES;
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
         NSString *objectId = [localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT];
@@ -394,6 +395,8 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
             // Reload the Event that the user had been to
             [DESyncManager getPostById:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:SHOW_COMMENT_VIEW];
         }
+        
+        _appOpenedByUser = NO;
     }
 }
 
@@ -450,8 +453,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:kEventsUserMaybeGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
     [userDefaults synchronize];
-    
-    [[[DELocationManager sharedManager] locationManager] stopMonitoringSignificantLocationChanges];
 }
 
 - (void) saveAllCommentArrays {

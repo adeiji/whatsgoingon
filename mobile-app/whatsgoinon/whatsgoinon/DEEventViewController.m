@@ -602,8 +602,8 @@ const int heightConstraintConstant = 62;
         if (![[DELocationManager sharedManager] checkIfCanCommentForEvent:_post] && ![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:_post.objectId])
         {
             // Start monitoring to see if the user is near this event location
-            [[DELocationManager sharedManager] startMonitoringRegionForPost:_post MonitorExit:NO];
             [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
+            [[DELocationManager sharedManager] startMonitoringRegionForPost:_post MonitorExit:NO];
         }
     }
     
