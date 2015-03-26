@@ -285,7 +285,7 @@ const int heightConstraintConstant = 62;
         if ([[_post startTime] compare:laterDate] == NSOrderedDescending)
         {
             finishedPostView.lblParagraphOne.text = @"Because your event is a little ways away, you won't be able to see it in the app yet.  When your event is a few days from happening, it will then appear for all to see!";
-            finishedPostView.lblParagraphTwo.text = @"If you would like to make changes to your post, you can do that and more from our website";
+            finishedPostView.lblParagraphTwo.text = @"If you would like to make changes to your post, head over to the 'My Posts' section of the side menu.  If you need more functionality, check out our web portal";
         }
         
         [createPostViewController.navigationItem setHidesBackButton:YES];
@@ -568,7 +568,6 @@ const int heightConstraintConstant = 62;
     _post.numberGoing = [NSNumber numberWithInt:numGoing];
     NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
     [[[DEPostManager sharedManager] goingPost] addObject:_post.objectId];
-    [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
     
     [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
     [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
@@ -600,9 +599,12 @@ const int heightConstraintConstant = 62;
             [[eventView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
         }
         
-        [[DELocationManager sharedManager] checkIfCanCommentForEvent:_post];
-        // Start monitoring to see if the user is near this event location
-        [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
+        if (![[DELocationManager sharedManager] checkIfCanCommentForEvent:_post] && ![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:_post.objectId])
+        {
+            // Start monitoring to see if the user is near this event location
+            [[DELocationManager sharedManager] startMonitoringRegionForPost:_post MonitorExit:NO];
+            [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
+        }
     }
     
     if (!_mapView)
@@ -634,8 +636,10 @@ const int heightConstraintConstant = 62;
         [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
         self.maybeCheckmarkView.hidden = NO;
         [DEAnimationManager savedAnimationWithImage:@"maybe-indicator-icon.png"];
-        [[DELocationManager sharedManager] checkIfCanCommentForEvent:_post];
-        [[DELocationManager sharedManager] startMonitoringRegionForPost:_post];
+        if (![[DELocationManager sharedManager] checkIfCanCommentForEvent:_post])
+        {
+            [[DELocationManager sharedManager] startMonitoringRegionForPost:_post MonitorExit:NO];
+        }
     }
 }
 

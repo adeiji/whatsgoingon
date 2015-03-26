@@ -30,6 +30,7 @@
                                        Title : (NSString *) postTitle
                                   TimeToShow : (NSDate *) dateToShow
                                     isFuture : (BOOL) future;
+- (void) sendTestNotification;
 
 @property (strong, nonatomic) UIWindow *window;
 

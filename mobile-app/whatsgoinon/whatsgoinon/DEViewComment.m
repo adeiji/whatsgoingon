@@ -132,18 +132,12 @@
     if (ratingChange != 0 && commentSelected == YES)
     {
         [DESyncManager saveCommentWithEventId:[post objectId] Comment:_txtComment.text Rating:ratingChange];
+
         [DEScreenManager hideCommentView];
         //Thumbs up
         if (ratingChange == 5)
         {
             [self incrementThumbsUpCount];
-        }
-        // If this post has not already been marked as prompted for comment, do so now
-        if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
-        {
-            [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
-            DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
-            [appDelegate saveAllCommentArrays];
         }
         
         if (![[[DEPostManager sharedManager] goingPostWithCommentInformation] containsObject:post.objectId])

@@ -92,6 +92,7 @@ static NSString *GOOGLE_AUTOCOMPLETE_API_PLACES = @"establishment";
     if (locations[indexPath.row])
     {
         cell.textLabel.text = [locations objectAtIndex:indexPath.row];
+        [cell.textLabel setAdjustsFontSizeToFitWidth:YES];
     }
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     

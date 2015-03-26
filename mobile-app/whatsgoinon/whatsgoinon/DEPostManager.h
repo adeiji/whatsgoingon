@@ -44,7 +44,7 @@
 - (void) deletePFObjectWithObjectId : (NSString *) objectId;
 - (void) setAllPostToNotLoaded;
 // Remove the event that the user has been prompted to comment for
-- (void) removeEventFromPromptedForCommentEvents : (DEPost *) post;
+- (void) removeEventFromGoingPostWithCommentInformation : (DEPost *) post;
 @property (strong, nonatomic) DEPost *currentPost;
 // Stores all the posts that will be viewed currently
 @property (strong, nonatomic) NSArray *posts;

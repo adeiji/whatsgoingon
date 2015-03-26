@@ -59,13 +59,14 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         }
     }];
     
-    [[DEPostManager sharedManager] removeEventFromPromptedForCommentEvents:post];
+    [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     
     // Get the post that matches the regions id and then see if they can comment for it
     [DESyncManager getPostById:region.identifier Process:SEE_IF_CAN_COMMENT];
+    
 }
 
 // Update the users location every 1 minute
@@ -169,9 +170,8 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     else if (distance < 200 && ([post.endTime compare:[NSDate date]] == NSOrderedDescending))  // If the user is simply early
     {
         [self promptUserForCommentPost:post TimeToShow:[post.startTime dateByAddingTimeInterval:(60 * 15)] isFuture:YES];
-        DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
-        [appDelegate saveAllCommentArrays];
-        return YES;
+        [self startMonitoringRegionForPost:post MonitorExit:YES];
+        return NO;
     }
     
     return NO;
@@ -182,10 +182,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
                          isFuture : (BOOL) future
 {
     [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date isFuture:future];
-    [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
-    DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
-    [appDelegate saveAllCommentArrays];
-    [_locationManager stopUpdatingLocation];
 }
 
 /*
@@ -195,12 +191,14 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
  
  */
 - (void) startMonitoringRegionForPost : (DEPost *) post
+                          MonitorExit : (BOOL) onExit
 {
     CLLocationCoordinate2D locCoordinate = CLLocationCoordinate2DMake(post.location.latitude, post.location.longitude);
     CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:200 identifier:post.objectId];
     
     // Ensure that when the user enters this specific region the app is notified, and woken up if necessary
     [region setNotifyOnEntry:YES];
+    [region setNotifyOnExit:onExit];
     [_locationManager startMonitoringForRegion:region];
 }
 
@@ -270,6 +268,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        [_locationManager startMonitoringSignificantLocationChanges];
         _currentLocation = [PFGeoPoint new];
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app
@@ -425,31 +424,33 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         NSError *error;
-        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-        NSArray *predictions = jsonData[@"predictions"];
-        NSMutableArray *values = [NSMutableArray new];
-        
-        for (NSDictionary *dictionary in predictions) {
-            // At times when entering the values are returned together for example. Val 1 will equal 8785 when the street number has not begun being entered, but it will also be 8785 Hawk St, if the user has begun entering the address
-            NSString *fullAddress = [dictionary objectForKey:@"description"];
-            NSRange range = [fullAddress rangeOfString:@"," options:NSBackwardsSearch];
-            NSString *address = [fullAddress substringToIndex:range.location];
+        if (!connectionError)
+        {
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            NSArray *predictions = jsonData[@"predictions"];
+            NSMutableArray *values = [NSMutableArray new];
             
-            if (dictionary[@"place_id"])
-            {
-                [values addObject:@{ @"name"    : address,
-                                     @"place_id": dictionary[@"place_id"]}];
+            for (NSDictionary *dictionary in predictions) {
+                // At times when entering the values are returned together for example. Val 1 will equal 8785 when the street number has not begun being entered, but it will also be 8785 Hawk St, if the user has begun entering the address
+                NSString *fullAddress = [dictionary objectForKey:@"description"];
+                NSRange range = [fullAddress rangeOfString:@"," options:NSBackwardsSearch];
+                NSString *address = [fullAddress substringToIndex:range.location];
+                
+                if (dictionary[@"place_id"])
+                {
+                    [values addObject:@{ @"name"    : address,
+                                         @"place_id": dictionary[@"place_id"]}];
+                }
+                else {
+                    [values addObject:@{ @"name"    : address }];
+                }
             }
-            else {
-                [values addObject:@{ @"name"    : address }];
-            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Make sure that we call this method on the main thread so that it updates properly as supposed to
+                callback(values);
+            });
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Make sure that we call this method on the main thread so that it updates properly as supposed to
-            callback(values);
-        });
-        
     }];
 }
 

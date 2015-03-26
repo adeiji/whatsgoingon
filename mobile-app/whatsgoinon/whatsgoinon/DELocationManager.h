@@ -50,17 +50,20 @@ typedef void (^getAddressFromPlace) (NSString *address);
                          CompletionBlock : (autocompleteCompletionBlock) callback;
 + (void) getAddressFromPlace : (NSString *) placeId
              CompletionBlock : (completionBlock)callback ;
+
 /*
  
  Start monitoring to see when the user reaches this event
  post : The post/event that the user has said they're going to
  
  */
-- (void) startMonitoringRegionForPost : (DEPost *) post;
+- (void) startMonitoringRegionForPost : (DEPost *) post
+                          MonitorExit : (BOOL) onExit;
+- (void) stopMonitoringRegionForPost : (DEPost * ) post;
+
 - (void) setEventLocation : (NSString *) location;
 - (void) getUpdatedLocation;
 - (void) startLocationUpdateTimer;
-- (void) stopMonitoringRegionForPost : (DEPost * ) post;
 - (BOOL) checkIfUserCanCommentAtForEvent : (DEPost *) post;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;

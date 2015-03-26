@@ -205,7 +205,7 @@ static NSString *CATEGORY_ANYTHING = @"Anything";
 }
 
 // Remove the event that the user has been prompted to comment for
-- (void) removeEventFromPromptedForCommentEvents : (DEPost *) post
+- (void) removeEventFromGoingPostWithCommentInformation : (DEPost *) post
 {
     NSMutableArray *objectsToDelete = [NSMutableArray new];
     

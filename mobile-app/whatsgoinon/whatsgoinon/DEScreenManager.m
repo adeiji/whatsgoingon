@@ -11,6 +11,8 @@
 
 @implementation DEScreenManager
 
+static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUserPromptedForComment";
+
 + (id)sharedManager {
     static DEScreenManager *sharedMyManager = nil;
     static dispatch_once_t onceToken;
@@ -79,7 +81,9 @@
     }
     
     [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
-    [[DEPostManager sharedManager] removeEventFromPromptedForCommentEvents:post];
+    [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
+    [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+    [((DEAppDelegate *) [[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
 }
 
 + (void) hideCommentView
@@ -107,7 +111,7 @@
     // Perform task here
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
     UILocalNotification *localNotification = [UILocalNotification new];
-    double minutes = 1;
+    double minutes = .1;
     NSDate *nowPlusSevenMinutes = [dateToShow dateByAddingTimeInterval:(minutes * 60)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
@@ -278,57 +282,63 @@
 {
     if (!myPost)
     {
-        // Get the corresponding Event to this eventId
-        __block PFObject *postObj;
-        
-        if ([[DEPostManager sharedManager] posts])
+        if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:eventId])
         {
-            [[[DEPostManager sharedManager] posts] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                PFObject *object = (PFObject *) obj;
-                if ([object.objectId isEqualToString:eventId ])
-                {
-                    postObj = object;
-                    *stop = YES;
-                }
-            }];
+            // Get the corresponding Event to this eventId
+            __block PFObject *postObj;
             
-            DEPost *post = [DEPost getPostFromPFObject:postObj];
-            DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
+            if ([[DEPostManager sharedManager] posts])
+            {
+                [[[DEPostManager sharedManager] posts] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    PFObject *object = (PFObject *) obj;
+                    if ([object.objectId isEqualToString:eventId ])
+                    {
+                        postObj = object;
+                        *stop = YES;
+                    }
+                }];
+                
+                DEPost *post = [DEPost getPostFromPFObject:postObj];
+                DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : post];
+                [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
+                {
+                    CGRect frame = view.frame;
+                    frame.size.width = [[UIScreen mainScreen] bounds].size.width;
+                    [view setFrame:frame];
+                }
+                
+                [view showView];
+                [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
+                // Make sure its saved that the user has already been prompted to comment for the event
+                DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
+                [appDelegate saveAllCommentArrays];
+                [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+                [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
+            }
+        }
+    }
+    else {
+        if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:myPost.objectId])
+        {
+            DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
             [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
             {
                 CGRect frame = view.frame;
                 frame.size.width = [[UIScreen mainScreen] bounds].size.width;
                 [view setFrame:frame];
             }
-            
             [view showView];
-            [[[DEPostManager sharedManager] eventsUserAt] removeObject:eventId];
+            [[[DEPostManager sharedManager] eventsUserAt] removeObject:myPost.objectId];
             // Make sure its saved that the user has already been prompted to comment for the event
-            [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:eventId];
+            [[DELocationManager sharedManager] stopMonitoringRegionForPost:myPost];
+            [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:myPost];
+            
             DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
             [appDelegate saveAllCommentArrays];
-            [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
-            [[DEPostManager sharedManager] removeEventFromPromptedForCommentEvents:post];
         }
     }
-    else {
-        DEPromptCommentView *view = [[DEPromptCommentView alloc] initWithPost : myPost];
-        [[[[UIApplication sharedApplication] delegate] window] addSubview:view];
-        {
-            CGRect frame = view.frame;
-            frame.size.width = [[UIScreen mainScreen] bounds].size.width;
-            [view setFrame:frame];
-        }
-        [view showView];
-        [[[DEPostManager sharedManager] eventsUserAt] removeObject:myPost.objectId];
-        // Make sure its saved that the user has already been prompted to comment for the event
-        [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:myPost.objectId];
-        DEAppDelegate *appDelegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
-        [appDelegate saveAllCommentArrays];
-        [[DELocationManager sharedManager] stopMonitoringRegionForPost:myPost];
-        [[DEPostManager sharedManager] removeEventFromPromptedForCommentEvents:myPost];
-    }
-
+    [((DEAppDelegate *) [[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
+    
 }
 
 

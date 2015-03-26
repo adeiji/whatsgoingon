@@ -42,13 +42,14 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
-    [self checkIfLocalNotification:launchOptions];
     [self loadPromptedForCommentEvents];
     [self loadGoingPosts];
     [self loadMaybeGoingPosts];
+    [self checkIfLocalNotification:launchOptions];
     [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
     [self loadAnalyticsArray];
-
+    
+    
     // Application is launched because of a significant location change
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
@@ -191,9 +192,9 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
             [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location];
         }];
         
-        // Save the new array that has removed the object that has been commented on
+        // Save the new array that has removed the object that has∂ been commented on
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
+        [userDefaults setObject:postsWithCommentInformation forKey:kEventsWithCommentInformation];
         [userDefaults synchronize];
     }
     
@@ -234,10 +235,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
         else if ([later compare:[NSDate date]] == NSOrderedDescending)  // If the user is simply early
         {
             [self createPromptUserCommentNotification:postId Title:postTitle TimeToShow:[startTime dateByAddingTimeInterval:(10 * 60)] isFuture:YES];
-            DEPost *post = [[DEPost alloc] init];
-            post.objectId = postId;
-            post.location = values[PARSE_CLASS_EVENT_LOCATION];
-            [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
             return YES;
         }
     }
@@ -268,7 +265,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     
     NSLog(@"Local Notification Object Set and Scheduled");
-    
 }
 
 
@@ -279,7 +275,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     
     double distance = [location distanceFromLocation:eventLocation];
     
-    if (distance < 600)
+    if (distance < 200)
     {
         return YES;
     }
@@ -346,7 +342,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     NSDate *nowPlusSevenMinutes = [[NSDate date] dateByAddingTimeInterval:(60 * minutes)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
-    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : @"Test",
+    localNotification.userInfo = @{ kNOTIFICATION_CENTER_EVENT_USER_AT : @"FbsY4rV1Vq",
                                     kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE : @NO };
     localNotification.alertBody = [NSString stringWithFormat:@"So, tell us what you think about\n%@?", @"Test"];
     localNotification.alertAction = [NSString stringWithFormat:@"comment for this event"];
@@ -358,21 +354,22 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 }
 
 - (void) application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    
-    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+    NSString *objectId = [notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT];
+    if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:objectId])
     {
-        if ([[DEPostManager sharedManager] posts])  // If the user has not loaded the posts yet by pressing the 'Now' or 'Later' buttons
+        if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
         {
-            [DEScreenManager promptForComment:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Post:nil];
+            if ([[DEPostManager sharedManager] posts])
+            {
+                [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:PROMPT_COMMENT_FOR_EVENT];
+            }
+            else {
+                [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:SHOW_COMMENT_VIEW];
+            }
         }
-        else {
-            // Get the corresponding Event to the Event ID and then prompt the user to comment
-            [DESyncManager getPostById:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:PROMPT_COMMENT_FOR_EVENT];
-            // Comment: NO, signifies that we only want the user to be prompted for the comment, not have them actually comment
+        else  {  // Notification has come from being pressed
+            [self displayCommentViewWithObjectId:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
         }
-    }
-    else  {  // Notification has come from being pressed
-        [self displayCommentViewWithObjectId:[notification.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT]];
     }
 }
 
@@ -397,8 +394,12 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 - (void) checkIfLocalNotification : (NSDictionary *) launchOptions {
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
-        // Reload the Event that the user had been to
-        [DESyncManager getPostById:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:SHOW_COMMENT_VIEW];
+        NSString *objectId = [localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT];
+        if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:objectId])
+        {
+            // Reload the Event that the user had been to
+            [DESyncManager getPostById:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:SHOW_COMMENT_VIEW];
+        }
     }
 }
 
@@ -455,6 +456,8 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:kEventsUserMaybeGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
     [userDefaults synchronize];
+    
+    [[[DELocationManager sharedManager] locationManager] stopMonitoringSignificantLocationChanges];
 }
 
 - (void) saveAllCommentArrays {

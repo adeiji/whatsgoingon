@@ -65,10 +65,12 @@ static PFQuery *globalQuery;
            {
                [DEScreenManager showCommentView:post];
                [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+               [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
            }
            else if ([process isEqualToString:PROMPT_COMMENT_FOR_EVENT]) {
                [DEScreenManager promptForComment:post.objectId Post:post];
                [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+               [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
            }
            else if ([process isEqualToString:SEE_IF_CAN_COMMENT])
            {
@@ -76,6 +78,7 @@ static PFQuery *globalQuery;
                {
                    // Prompt for the comment and then stop monitoring for the region
                    [DEScreenManager promptForComment:post.objectId Post:post];
+                   [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
                    [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
                }
                else if ([[NSDate date] compare:post.endTime] == NSOrderedAscending) // User is early
@@ -83,6 +86,9 @@ static PFQuery *globalQuery;
                    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:post.startTime isFuture:YES];
                }
            }
+           
+           [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+           [((DEAppDelegate *) [[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
        }
     }];
 }
