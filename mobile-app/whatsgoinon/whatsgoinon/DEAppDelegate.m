@@ -47,6 +47,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [self loadMaybeGoingPosts];
     [self checkIfLocalNotification:launchOptions];
     [[DEPostManager sharedManager] setGoingPostWithCommentInformation:[self getPostWithCommentInformation]];
+    [DESyncManager getPostById:@"yrIoVAlFNj" Process:@"HAHHAHA"];
     [self loadAnalyticsArray];
     
     
@@ -160,6 +161,12 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     for (UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
         if ([notification.userInfo[kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE] isEqual:@YES])
         {
+            NSMutableArray *postsWithCommentInformation = [self getPostWithCommentInformation];
+            [postsWithCommentInformation addObject:notification.userInfo];
+            
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:postsWithCommentInformation forKey:kEventsWithCommentInformation];
+            [userDefaults synchronize];
             // If the user leaves this place then cancel this notification, but don't stop monitoring for the region.
             [[UIApplication sharedApplication] cancelLocalNotification:notification];
         }
@@ -184,14 +191,18 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     manager.delegate = self;
     
 
-    NSArray *postsWithCommentInformation = [self getPostWithCommentInformation];
-    
+    NSMutableArray *postsWithCommentInformation = [self getPostWithCommentInformation];
+    NSMutableArray *objectsToDelete = [NSMutableArray new];
     if (postsWithCommentInformation != nil)
     {
         [postsWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            [self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location];
+            if ([self checkForCommentingValuesDictionary:(NSMutableDictionary *) obj CurrentLocation:location])
+            {
+                [objectsToDelete addObject:obj];
+            }
         }];
         
+        [postsWithCommentInformation removeObjectsInArray:objectsToDelete];
         // Save the new array that has removed the object that has∂ been commented on
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:postsWithCommentInformation forKey:kEventsWithCommentInformation];
@@ -252,7 +263,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     // Perform task here
     // Create a local notification so that way if the app is completely closed it will still notify the user that an event has started
     UILocalNotification *localNotification = [UILocalNotification new];
-    double minutes = 5;
+    double minutes = .001;
     NSDate *nowPlusSevenMinutes = [dateToShow dateByAddingTimeInterval:(60 * minutes)];
     [localNotification setFireDate:nowPlusSevenMinutes];
     // Set the user info to contain the event id of the post that the user is at
@@ -367,26 +378,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     }
 }
 
-- (void) displayCommentViewWithObjectId : (NSString *) objectId {
-    // Get the corresponding Event to this eventId
-    NSPredicate *objectIdPredicate = [NSPredicate predicateWithFormat:@"objectId == %@", objectId];
-    NSArray *object = [[[DEPostManager sharedManager] goingPostWithCommentInformation] filteredArrayUsingPredicate:objectIdPredicate];
-    
-    if ([object count] != 0)
-    {
-        PFObject *postObj = object[0];
-        DEPost *post = [DEPost getPostFromPFObject:postObj];
-        
-        // Show the comment view for this particular event
-        [DEScreenManager showCommentView:post];
-    }
-    else {
-        [DESyncManager getPostById:objectId Process:SHOW_COMMENT_VIEW];
-    }
-}
-
 - (void) checkIfLocalNotification : (NSDictionary *) launchOptions {
-    _appOpenedByUser = YES;
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {
         NSString *objectId = [localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT];
@@ -396,7 +388,6 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
             [DESyncManager getPostById:[localNotif.userInfo objectForKey:kNOTIFICATION_CENTER_EVENT_USER_AT] Process:SHOW_COMMENT_VIEW];
         }
         
-        _appOpenedByUser = NO;
     }
 }
 
@@ -453,6 +444,7 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
     [userDefaults setObject:[[DEPostManager sharedManager] maybeGoingPost] forKey:kEventsUserMaybeGoingTo];
     [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
     [userDefaults synchronize];
+    [[[DELocationManager sharedManager] locationManager] stopMonitoringSignificantLocationChanges];
 }
 
 - (void) saveAllCommentArrays {
@@ -467,10 +459,10 @@ static NSString *const kEventsWithCommentInformation = @"com.happsnap.eventsWith
 
 - (void) setUserDefaultArraysToEmpty {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:nil forKey:kEventsUserPromptedForComment];
-    [userDefaults setObject:nil forKey:kEventsUserGoingTo];
-    [userDefaults setObject:nil forKey:kEventsUserMaybeGoingTo];
-    [userDefaults setObject:nil forKey:kEventsWithCommentInformation];
+    [userDefaults setObject:[NSMutableArray new] forKey:kEventsUserPromptedForComment];
+    [userDefaults setObject:[NSMutableArray new] forKey:kEventsUserGoingTo];
+    [userDefaults setObject:[NSMutableArray new] forKey:kEventsUserMaybeGoingTo];
+    [userDefaults setObject:[NSMutableArray new] forKey:kEventsWithCommentInformation];
     [[DEPostManager sharedManager] setPromptedForCommentEvents:[NSMutableArray new]];
     [[DEPostManager sharedManager] setGoingPost:[NSMutableArray new]];
     [[DEPostManager sharedManager] setMaybeGoingPost:[NSMutableArray new]];

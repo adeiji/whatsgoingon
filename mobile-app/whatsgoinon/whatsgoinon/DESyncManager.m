@@ -66,29 +66,36 @@ static PFQuery *globalQuery;
                [DEScreenManager showCommentView:post];
                [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
                [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
+               [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+               [((DEAppDelegate *) [[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
            }
            else if ([process isEqualToString:PROMPT_COMMENT_FOR_EVENT]) {
                [DEScreenManager promptForComment:post.objectId Post:post];
                [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
                [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
+               [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
+               [((DEAppDelegate *) [[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
            }
            else if ([process isEqualToString:SEE_IF_CAN_COMMENT])
            {
-               if (([[NSDate date] compare:post.startTime] == NSOrderedDescending)  && ([[NSDate date] compare:post.endTime] == NSOrderedAscending))
+               if (([post.startTime compare:[NSDate date]] == NSOrderedAscending)  && ([post.endTime compare:[NSDate date]] == NSOrderedDescending))
                {
-                   // Prompt for the comment and then stop monitoring for the region
-                   [DEScreenManager promptForComment:post.objectId Post:post];
-                   [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
-                   [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+                   if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+                   {
+                       // Prompt for the comment and then stop monitoring for the region
+                       [DEScreenManager promptForComment:post.objectId Post:post];
+                       [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
+                       [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
+                   }
+                   else {
+                       [DEScreenManager createPromptUserCommentNotification:post TimeToShow:[NSDate date] isFuture:NO];
+                   }
                }
                else if ([[NSDate date] compare:post.endTime] == NSOrderedAscending) // User is early
                {
                    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:post.startTime isFuture:YES];
                }
            }
-           
-           [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
-           [((DEAppDelegate *) [[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
        }
     }];
 }

@@ -37,18 +37,12 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
 
     // If the application is open then we know we'll be getting regular updates everytime the user presses What's Going On Now or Later
-    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
-    {
-        [_locationManager stopUpdatingLocation];
-    }
+    [_locationManager stopUpdatingLocation];
+    
     
     NSLog(@"Location Updated");
 }
 
-- (BOOL) checkIfUserCanCommentAtForEvent : (DEPost *) post {
-    NSArray *array = [NSArray arrayWithObjects:post, nil];
-    return [self checkForCommenting : array];
-}
 
 - (void) stopMonitoringRegionForPost : (DEPost * ) post {
     [[_locationManager monitoredRegions] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
@@ -101,20 +95,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     {
 
     }
-}
-
-- (BOOL) checkForCommenting : (NSArray *) goingPosts {
-    // Perform task here
-    
-    for (DEPost *post in goingPosts) {
-        // Check to make sure that the user has already been prompted to comment for this
-        if (![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:post.objectId])
-        {
-            return [self checkIfCanCommentForEvent:post];
-        }
-    }
-    
-    return NO;
 }
 
 /*
@@ -181,7 +161,8 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
                        TimeToShow : (NSDate *) date
                          isFuture : (BOOL) future
 {
-    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date isFuture:future];
+        #warning - make sure to uncomment
+//    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date isFuture:future];
 }
 
 /*
@@ -200,20 +181,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     [region setNotifyOnEntry:YES];
     [region setNotifyOnExit:onExit];
     [_locationManager startMonitoringForRegion:region];
-}
-
-
-- (void) promptUserForFeedback
-{
-    [DEScreenManager showCommentView : _eventPersonAt];
-
-}
-
-- (void) startTimerForFeedback
-{
-    timer = [NSTimer scheduledTimerWithTimeInterval:180 target:self selector:@selector(promptUserForFeedback) userInfo:nil repeats:NO];
-    
-    [timer fire];
 }
 
 - (void) setEventLocation : (NSString *) location
@@ -268,7 +235,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        [_locationManager startMonitoringSignificantLocationChanges];
         _currentLocation = [PFGeoPoint new];
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app

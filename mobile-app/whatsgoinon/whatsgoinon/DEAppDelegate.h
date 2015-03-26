@@ -33,6 +33,5 @@
 - (void) sendTestNotification;
 
 @property (strong, nonatomic) UIWindow *window;
-@property BOOL appOpenedByUser;
 
 @end
