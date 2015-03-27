@@ -94,6 +94,9 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
                {
                    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:post.startTime isFuture:YES];
                }
+               else {
+                  [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];                   
+               }
            }
        }
         
