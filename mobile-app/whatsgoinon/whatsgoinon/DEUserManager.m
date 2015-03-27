@@ -260,6 +260,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
                 // Clear user image defaults
                 [self clearUserImageDefaults];
                 [DEUserManager logoutUser];
+                [self isLoggedIn];
             }
             else {
                 [self usernameExist:[blockUsername lowercaseString] ErrorLabel:label];
@@ -326,6 +327,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             [[PFUser currentUser] saveInBackground];
             [self clearUserImageDefaults];
             [DEUserManager logoutUser];
+            [self isLoggedIn];
         }
     }];
     
@@ -435,6 +437,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
                 [self clearUserImageDefaults];
                 [self getFacebookProfileInformation];
                 [DEUserManager logoutUser];
+                [self isLoggedIn];
             }
         }];
     }

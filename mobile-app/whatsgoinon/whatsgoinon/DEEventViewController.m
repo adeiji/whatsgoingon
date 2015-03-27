@@ -583,14 +583,14 @@ const int heightConstraintConstant = 62;
         }
         
         // Make sure that the user has not selected maybe going, and if so don't allow them to comment
-//        if (![[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post])
-//        {
+        if (![[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post] || ![[DEPostManager sharedManager] maybeGoingPost])
+        {
             if (![[DELocationManager sharedManager] checkIfCanCommentForEvent:_post])
             {
                 // Start monitoring to see if the user is near this event location
                 [[DELocationManager sharedManager] startMonitoringRegionForPost:_post MonitorExit:NO];
             }
-//        }
+        }
     }
     
     if (!_mapView)
