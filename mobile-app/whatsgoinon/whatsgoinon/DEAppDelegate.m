@@ -168,11 +168,17 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [[[DELocationManager sharedManager] locationManager] stopMonitoringSignificantLocationChanges];
+    
 }
 
 - (void) setUserArraysToEmpty {
     [[DEPostManager sharedManager] setGoingPost:[NSMutableArray new]];
     [[DEPostManager sharedManager] setMaybeGoingPost:[NSMutableArray new]];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [[DEPostManager sharedManager] setPromptedForComment:[NSMutableArray new]];
+    [userDefaults setObject:[[DEPostManager sharedManager] promptedForComment] forKey:kEventsUserPromptedForComment];
+    [userDefaults synchronize];
+    
 }
 
 - (BOOL) application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

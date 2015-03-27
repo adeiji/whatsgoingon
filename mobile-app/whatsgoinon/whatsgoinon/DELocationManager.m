@@ -215,7 +215,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         }
         
         _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;        
 
         _currentLocation = [PFGeoPoint new];
         
@@ -375,29 +375,39 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         if (!connectionError)
         {
             NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-            NSArray *predictions = jsonData[@"predictions"];
-            NSMutableArray *values = [NSMutableArray new];
-            
-            for (NSDictionary *dictionary in predictions) {
-                // At times when entering the values are returned together for example. Val 1 will equal 8785 when the street number has not begun being entered, but it will also be 8785 Hawk St, if the user has begun entering the address
-                NSString *fullAddress = [dictionary objectForKey:@"description"];
-                NSRange range = [fullAddress rangeOfString:@"," options:NSBackwardsSearch];
-                NSString *address = [fullAddress substringToIndex:range.location];
+            if (jsonData[@"predictions"])
+            {
+                NSArray *predictions = jsonData[@"predictions"];
+                NSMutableArray *values = [NSMutableArray new];
                 
-                if (dictionary[@"place_id"])
-                {
-                    [values addObject:@{ @"name"    : address,
-                                         @"place_id": dictionary[@"place_id"]}];
+                for (NSDictionary *dictionary in predictions) {
+                    // At times when entering the values are returned together for example. Val 1 will equal 8785 when the street number has not begun being entered, but it will also be 8785 Hawk St, if the user has begun entering the address
+                    NSString *fullAddress = [dictionary objectForKey:@"description"];
+                    NSRange range = [fullAddress rangeOfString:@"," options:NSBackwardsSearch];
+                    NSString *address;
+                    if (range.location != 0)
+                    {
+                        address = [fullAddress substringToIndex:range.location];
+                    }
+                    else {
+                        address = fullAddress;
+                    }
+                    
+                    if (dictionary[@"place_id"])
+                    {
+                        [values addObject:@{ @"name"    : address,
+                                             @"place_id": dictionary[@"place_id"]}];
+                    }
+                    else {
+                        [values addObject:@{ @"name"    : address }];
+                    }
                 }
-                else {
-                    [values addObject:@{ @"name"    : address }];
-                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Make sure that we call this method on the main thread so that it updates properly as supposed to
+                    callback(values);
+                });
             }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                // Make sure that we call this method on the main thread so that it updates properly as supposed to
-                callback(values);
-            });
         }
     }];
 }
