@@ -39,7 +39,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     // If the application is open then we know we'll be getting regular updates everytime the user presses What's Going On Now or Later
     [_locationManager stopUpdatingLocation];
     
-    
     NSLog(@"Location Updated");
 }
 
@@ -52,15 +51,21 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
             [_locationManager stopMonitoringForRegion:region];
         }
     }];
-    
-    [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     
     // Get the post that matches the regions id and then see if they can comment for it
     [DESyncManager getPostById:region.identifier Process:SEE_IF_CAN_COMMENT];
-    
+}
+
+- (void) locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    for (UILocalNotification *notification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        if ([notification.userInfo[kNOTIFICATION_CENTER_EVENT_USER_AT] isEqualToString:region.identifier] && [notification.userInfo[kNOTIFICATION_CENTER_LOCAL_NOTIFICATION_FUTURE] isEqual:@YES])
+        {
+            [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        }
+    }
 }
 
 // Update the users location every 1 minute
@@ -95,29 +100,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     {
 
     }
-}
-
-/*
- 
- Get the actual events that correspond to the saved Post Ids stored in the Post Manager
- 
- */
-- (NSArray *) getGoingPostEventObjects {
-    NSMutableArray *goingPosts = [NSMutableArray new];
-    NSMutableArray *goingPFObjectPosts = [NSMutableArray new];
-    
-    // Get all the actual posts that are set as is going by this user and convert them to DEPost objects and then store them in a local array
-    for (PFObject *post in [[DEPostManager sharedManager] posts]) {
-        for (NSString *postId in [[DEPostManager sharedManager] goingPost]) {
-            if ([postId isEqualToString:post.objectId])
-            {
-                [goingPosts addObject:[DEPost getPostFromPFObject:post]];
-                [goingPFObjectPosts addObject:post];
-            }
-        }
-    }
-    
-    return goingPosts;
 }
 
 /*
@@ -161,8 +143,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
                        TimeToShow : (NSDate *) date
                          isFuture : (BOOL) future
 {
-        #warning - make sure to uncomment
-//    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date isFuture:future];
+    [DEScreenManager createPromptUserCommentNotification:post TimeToShow:date isFuture:future];
 }
 
 /*
@@ -235,6 +216,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+
         _currentLocation = [PFGeoPoint new];
         
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app

@@ -542,23 +542,6 @@ const int heightConstraintConstant = 62;
 
 }
 
-- (void) addPostInformationToGoingPostWithCommentInformationManager : (DEPostManager *) postManager {
-    NSDictionary *values = @{
-                             PARSE_CLASS_EVENT_START_TIME : _post.startTime,
-                             PARSE_CLASS_EVENT_END_TIME : _post.endTime,
-                             LOCATION_LATITUDE : [NSNumber numberWithDouble:_post.location.latitude],
-                             LOCATION_LONGITUDE : [NSNumber numberWithDouble:_post.location.longitude],
-                             PARSE_CLASS_EVENT_OBJECT_ID : _post.objectId,
-                             PARSE_CLASS_EVENT_TITLE : _post.title,
-                             PARSE_CLASS_EVENT_ADDRESS : _post.address
-    };
-    
-    [[postManager goingPostWithCommentInformation] addObject:values];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:[[DEPostManager sharedManager] goingPostWithCommentInformation] forKey:kEventsWithCommentInformation];
-    [userDefaults synchronize];
-}
-
 #pragma mark - Going and Not Going Methods
 
 - (void) addEventToGoingListAndUpdateGoingCount
@@ -599,12 +582,15 @@ const int heightConstraintConstant = 62;
             [[eventView lblNumberGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
         }
         
-        if (![[DELocationManager sharedManager] checkIfCanCommentForEvent:_post] && ![[[DEPostManager sharedManager] promptedForCommentEvents] containsObject:_post.objectId])
-        {
-            // Start monitoring to see if the user is near this event location
-            [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
-            [[DELocationManager sharedManager] startMonitoringRegionForPost:_post MonitorExit:NO];
-        }
+        // Make sure that the user has not selected maybe going, and if so don't allow them to comment
+//        if (![[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post])
+//        {
+            if (![[DELocationManager sharedManager] checkIfCanCommentForEvent:_post])
+            {
+                // Start monitoring to see if the user is near this event location
+                [[DELocationManager sharedManager] startMonitoringRegionForPost:_post MonitorExit:NO];
+            }
+//        }
     }
     
     if (!_mapView)
@@ -625,12 +611,11 @@ const int heightConstraintConstant = 62;
     [[_eventView btnMainImage] setHidden:YES];
 }
 
-- (IBAction)setEventAsMaybeGoing:(id)sender {
+- (IBAction) setEventAsMaybeGoing:(id)sender {
     
     DEPostManager *postManager = [DEPostManager sharedManager];
     if (![[postManager maybeGoingPost] containsObject:_post.objectId])
     {
-        [self addPostInformationToGoingPostWithCommentInformationManager:[DEPostManager sharedManager]];
         [[postManager maybeGoingPost] addObject:_post.objectId];
         // Save this item as maybe going for the user to the server
         [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];

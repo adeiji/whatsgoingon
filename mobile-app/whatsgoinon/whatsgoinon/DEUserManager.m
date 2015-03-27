@@ -474,10 +474,8 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
 + (void) logoutUser {
 
     DEAppDelegate *delegate = (DEAppDelegate *) [[UIApplication sharedApplication] delegate];
-    [delegate setUserDefaultArraysToEmpty];
-    [delegate loadGoingPosts];
-    [delegate loadMaybeGoingPosts];
-    [delegate loadPromptedForCommentEvents];
+    [delegate setUserArraysToEmpty];
+
 }
 
 @end

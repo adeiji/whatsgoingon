@@ -15,6 +15,7 @@ static PFQuery *globalQuery;
 
 @implementation DESyncManager
 
+static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUserPromptedForComment";
 
 // Get all the future values from the server and store this information, then when the user wants to get Now or Later events, they will come from this list rather then be pulled down from the server
 + (void) getAllValues {
@@ -64,17 +65,15 @@ static PFQuery *globalQuery;
            if ([process isEqualToString:SHOW_COMMENT_VIEW])
            {
                [DEScreenManager showCommentView:post];
-               [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
-               [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
-               [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
-               [((DEAppDelegate *) [[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
+               [[[DEPostManager sharedManager] promptedForComment] addObject:post.objectId];
+               NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+               [userDefaults setObject:[[DEPostManager sharedManager] promptedForComment] forKey:kEventsUserPromptedForComment];
            }
            else if ([process isEqualToString:PROMPT_COMMENT_FOR_EVENT]) {
                [DEScreenManager promptForComment:post.objectId Post:post];
-               [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
-               [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
-               [[[DEPostManager sharedManager] promptedForCommentEvents] addObject:post.objectId];
-               [((DEAppDelegate *) [[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
+               [[[DEPostManager sharedManager] promptedForComment] addObject:post.objectId];
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+               [userDefaults setObject:[[DEPostManager sharedManager] promptedForComment] forKey:kEventsUserPromptedForComment];
            }
            else if ([process isEqualToString:SEE_IF_CAN_COMMENT])
            {
@@ -84,11 +83,11 @@ static PFQuery *globalQuery;
                    {
                        // Prompt for the comment and then stop monitoring for the region
                        [DEScreenManager promptForComment:post.objectId Post:post];
-                       [[DEPostManager sharedManager] removeEventFromGoingPostWithCommentInformation:post];
                        [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
                    }
                    else {
                        [DEScreenManager createPromptUserCommentNotification:post TimeToShow:[NSDate date] isFuture:NO];
+                      [[DELocationManager sharedManager] stopMonitoringRegionForPost:post];
                    }
                }
                else if ([[NSDate date] compare:post.endTime] == NSOrderedAscending) // User is early
@@ -97,6 +96,7 @@ static PFQuery *globalQuery;
                }
            }
        }
+        
     }];
 }
 

@@ -43,8 +43,6 @@
                                      WithArray : (NSArray *) array;
 - (void) deletePFObjectWithObjectId : (NSString *) objectId;
 - (void) setAllPostToNotLoaded;
-// Remove the event that the user has been prompted to comment for
-- (void) removeEventFromGoingPostWithCommentInformation : (DEPost *) post;
 @property (strong, nonatomic) DEPost *currentPost;
 // Stores all the posts that will be viewed currently
 @property (strong, nonatomic) NSArray *posts;
@@ -53,15 +51,13 @@
 @property (strong, nonatomic) NSMutableArray *maybeGoingPost;
 @property (strong, nonatomic) NSMutableArray *loadedSavedEventIds;
 @property (strong, nonatomic) NSMutableArray *loadedSavedEvents;
-@property (strong, nonatomic) NSMutableArray *promptedForCommentEvents;
-@property (strong, nonatomic) NSMutableArray *goingPostWithCommentInformation;
 @property (strong, nonatomic) NSMutableArray *loadedEvents;
+@property (strong, nonatomic) NSMutableArray *promptedForComment;
 /*
  
  Events that the user has said he may go to or will go to that he is currently at
  
  */
-@property (strong, nonatomic) NSMutableArray *eventsUserAt;
 @property (strong, nonatomic) NSArray *allEvents;
 @property (strong, nonatomic) NSString *distanceFromEvent;
 @property (strong, nonatomic) NSArray *comments;

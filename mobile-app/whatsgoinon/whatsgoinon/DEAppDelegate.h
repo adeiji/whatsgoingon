@@ -20,16 +20,7 @@
     UIBackgroundTaskIdentifier bgTask;
 }
 
-- (void) loadPromptedForCommentEvents;
-- (void) loadGoingPosts;
-- (void) loadMaybeGoingPosts;
-- (void) setUserDefaultArraysToEmpty;
-- (void) saveAllCommentArrays;
-- (NSMutableArray *) loadAnalyticsArray;
-- (void) createPromptUserCommentNotification : (NSString *) postId
-                                       Title : (NSString *) postTitle
-                                  TimeToShow : (NSDate *) dateToShow
-                                    isFuture : (BOOL) future;
+- (void) setUserArraysToEmpty;
 - (void) sendTestNotification;
 
 @property (strong, nonatomic) UIWindow *window;

@@ -28,13 +28,11 @@ static NSString *CATEGORY_ANYTHING = @"Anything";
 - (id)init {
     if (self = [super init]) {
         _goingPost = [NSMutableArray new];
-        _eventsUserAt = [NSMutableArray new];
         _loadedSavedEventIds = [NSMutableArray new];
         _loadedSavedEvents = [NSMutableArray new];
         _currentPost = [DEPost new];
-        _promptedForCommentEvents = [NSMutableArray new];
-        _goingPostWithCommentInformation = [NSMutableArray new];
         _loadedEvents = [NSMutableArray new];
+        _promptedForComment = [NSMutableArray new];
     }
     return self;
 }
@@ -202,28 +200,6 @@ static NSString *CATEGORY_ANYTHING = @"Anything";
     [self sendNotificationThatTheEventsWereLoaded : eventsInCategory
                                CategoryDictionary : categoryDictionary];
 
-}
-
-// Remove the event that the user has been prompted to comment for
-- (void) removeEventFromGoingPostWithCommentInformation : (DEPost *) post
-{
-    NSMutableArray *objectsToDelete = [NSMutableArray new];
-    
-    [_goingPostWithCommentInformation enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-      
-        if ([obj[PARSE_CLASS_EVENT_OBJECT_ID] isEqualToString:post.objectId])
-        {
-            [objectsToDelete addObject:obj];
-        }
-    }];
-    
-    if ([objectsToDelete count] > 0)
-    {
-        [_goingPostWithCommentInformation removeObjectsInArray:objectsToDelete];
-    }
-    
-    [((DEAppDelegate *)[[UIApplication sharedApplication] delegate]) saveAllCommentArrays];
-    
 }
 
 + (void) sendNotificationThatTheEventsWereLoaded : (NSMutableArray *) eventsInCategory
