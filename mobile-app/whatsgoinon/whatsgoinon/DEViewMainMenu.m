@@ -144,7 +144,7 @@
         
     }
     else {
-        DEMainViewController *mainViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateInitialViewController];
+        DEMainViewController *mainViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"mainViewController"];
         [[DEScreenManager sharedManager] setNextScreen:mainViewController];
     }
 }

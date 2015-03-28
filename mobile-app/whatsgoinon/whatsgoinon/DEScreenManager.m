@@ -382,10 +382,9 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
 - (void) gotoNextScreen {
     UINavigationController *navController = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
     
-    [navController popToRootViewControllerAnimated:NO];
-    
     if (![_nextScreen isKindOfClass:[DEMainViewController class]])
     {
+        [navController popToRootViewControllerAnimated:NO];
         [navController pushViewController:_nextScreen animated:YES];
     }
     else {
