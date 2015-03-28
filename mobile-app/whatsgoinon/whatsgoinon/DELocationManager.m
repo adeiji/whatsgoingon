@@ -25,7 +25,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 
 // Do we need to make sure that the user is using location services or not upon application upload?
 
-//it’s recommended that you always call the locationServicesEnabled class method of CLLocationManager before attempting to start either the standard or significant-change location services. If it returns NO and you attempt to start location services anyway, the system prompts the user to confirm whether location services should be re-enabled. Because the user probably disabled location services on purpose, the prompt is likely to be unwelcome.
+//it’s recommended that you always call the locationServicesEnabled class method of CLLocationManager before attempting to start either the standard or significant-change location services. If it returns NO and you attempt to start location services anyway, the system prompts the user to confirm whether location services should be re-enabled. Because the user probably dis-abled location services on purpose, the prompt is likely to be unwelcome.
 
 #pragma mark - Location Services Delegate Methods
 
@@ -53,10 +53,34 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     }];
 }
 
+- (void) locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    NSLog(@"State of region determined");
+}
+
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     
     // Get the post that matches the regions id and then see if they can comment for it
     [DESyncManager getPostById:region.identifier Process:SEE_IF_CAN_COMMENT];
+}
+
+- (void) locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
+    NSLog(@"Starting to monitor region with identifier: %@", region.identifier );
+}
+
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"Error getting location: %@", [error description]);
+    
+    NSDictionary *dimensions = @{
+                                 @"Error" : [error description],
+                                 };
+    
+    // Send the dimensions to Parse along with the 'read' event
+    [PFAnalytics trackEvent:@"error" dimensions:dimensions];
+}
+
+- (void) locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
+    NSLog(@"Error monitoring region: %@", [error description]);
 }
 
 - (void) locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
@@ -67,6 +91,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         }
     }
 }
+
 
 // Update the users location every 1 minute
 - (void) startLocationUpdateTimer {
@@ -79,20 +104,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 
 - (void) getUpdatedLocation {
     [_locationManager startUpdatingLocation];
-}
-/*
- 
- Handle any errors that happen from the location manager
- 
- */
-
-- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSDictionary *dimensions = @{
-                                 @"Error" : [error description],
-                                };
-    
-    // Send the dimensions to Parse along with the 'read' event
-    [PFAnalytics trackEvent:@"error" dimensions:dimensions];
 }
 
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
@@ -157,7 +168,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 {
     CLLocationCoordinate2D locCoordinate = CLLocationCoordinate2DMake(post.location.latitude, post.location.longitude);
     CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:200 identifier:post.objectId];
-    
+        
     // Ensure that when the user enters this specific region the app is notified, and woken up if necessary
     [region setNotifyOnEntry:YES];
     [region setNotifyOnExit:onExit];
@@ -214,15 +225,15 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
             _locationManager = [CLLocationManager new];
         }
         
-        _locationManager.delegate = self;
-        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;        
-
-        _currentLocation = [PFGeoPoint new];
-        
         // If there on iOS 7, than the requestWhenInUseAuthorization will crash the app
         if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
             [self.locationManager requestAlwaysAuthorization];
         }
+        
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _currentLocation = [PFGeoPoint new];
+        
         
     }
     return self;

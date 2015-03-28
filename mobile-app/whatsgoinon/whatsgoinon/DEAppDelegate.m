@@ -28,15 +28,16 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
 {
     [self setUpParseWithLaunchOptions:launchOptions];
     [GMSServices provideAPIKey:@"AIzaSyAChpei4sacCZDpzE4boq1lhftbBteTYak"];
+    
     if (![launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
         [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
         [[DELocationManager sharedManager] startLocationUpdateTimer];
     }
-    if(SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
-        // Make sure this keeps running in the background
-        [[[DELocationManager sharedManager] locationManager] requestAlwaysAuthorization];
+    else {
+        [[DELocationManager sharedManager] locationManager];
     }
+    
     [self registerForNotifications:application];
     [DEScreenManager sharedManager];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;

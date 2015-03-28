@@ -28,6 +28,7 @@ static NSString *CATEGORY_ANYTHING = @"Anything";
 - (id)init {
     if (self = [super init]) {
         _goingPost = [NSMutableArray new];
+        _maybeGoingPost = [NSMutableArray new];
         _loadedSavedEventIds = [NSMutableArray new];
         _loadedSavedEvents = [NSMutableArray new];
         _currentPost = [DEPost new];
