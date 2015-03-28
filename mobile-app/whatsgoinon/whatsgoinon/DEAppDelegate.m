@@ -43,6 +43,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
 
+    [self loadPromptedForCommentArray];
     [self checkIfLocalNotification:launchOptions];
     
     // Application is launched because of a significant location change
@@ -54,16 +55,15 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     return YES;
 }
 
-- (NSMutableArray *) loadPromptedForCommentArray {
+- (void) loadPromptedForCommentArray {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *array = [userDefaults objectForKey:kEventsUserPromptedForComment];
     
-    if (!array)
+    if (array)
     {
-        array = [[DEPostManager sharedManager] promptedForComment];
-        return array;
+        [[DEPostManager sharedManager] setPromptedForComment:array];
     }
-    return array;
+
 }
 
 
