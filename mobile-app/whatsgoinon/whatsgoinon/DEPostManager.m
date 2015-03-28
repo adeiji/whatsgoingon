@@ -34,6 +34,8 @@ static NSString *CATEGORY_ANYTHING = @"Anything";
         _currentPost = [DEPost new];
         _loadedEvents = [NSMutableArray new];
         _promptedForComment = [NSMutableArray new];
+        _goingPostForNoAccount = [NSMutableArray new];
+        _maybeGoingPostForNoAccount = [NSMutableArray new];
     }
     return self;
 }

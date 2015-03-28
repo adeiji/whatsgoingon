@@ -551,7 +551,10 @@ const int heightConstraintConstant = 62;
     _post.numberGoing = [NSNumber numberWithInt:numGoing];
     NSDictionary *dictionary = @{ PARSE_CLASS_EVENT_NUMBER_GOING: _post.numberGoing };
     [[[DEPostManager sharedManager] goingPost] addObject:_post.objectId];
-    
+    if (![PFUser currentUser])
+    {
+        [[[DEPostManager sharedManager] goingPostForNoAccount] addObject:_post.objectId];
+    }
     [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
     [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
     [DEAnimationManager savedAnimationWithImage:@"going-indicator-icon.png"];
@@ -617,6 +620,10 @@ const int heightConstraintConstant = 62;
     if (![[postManager maybeGoingPost] containsObject:_post.objectId])
     {
         [[postManager maybeGoingPost] addObject:_post.objectId];
+        if (![PFUser currentUser])
+        {
+            [[[DEPostManager sharedManager] maybeGoingPostForNoAccount] addObject:_post.objectId];
+        }
         // Save this item as maybe going for the user to the server
         [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
         self.maybeCheckmarkView.hidden = NO;

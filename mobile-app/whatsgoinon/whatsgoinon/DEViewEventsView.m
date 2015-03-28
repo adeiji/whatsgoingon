@@ -264,14 +264,17 @@ const int POST_WIDTH = 140;
     
     [navigationController pushViewController:eventViewController animated:YES];
     
-    // If this event is already saved as going, then we need to display that in the view.
-    if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
+    if ([PFUser currentUser])
     {
-        eventViewController.isGoing = YES;
-    }
-    else if ([[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post.objectId])
-    {
-        eventViewController.isMaybeGoing = YES;
+        // If this event is already saved as going, then we need to display that in the view.
+        if ([[[DEPostManager sharedManager] goingPost] containsObject:_post.objectId])
+        {
+            eventViewController.isGoing = YES;
+        }
+        else if ([[[DEPostManager sharedManager] maybeGoingPost] containsObject:_post.objectId])
+        {
+            eventViewController.isMaybeGoing = YES;
+        }
     }
     
 }

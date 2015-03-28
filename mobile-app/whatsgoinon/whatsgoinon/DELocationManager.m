@@ -137,13 +137,13 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     // Check to make sure that the event has already started and that it ended within the past hour
     if (([post.startTime compare:[NSDate date]] == NSOrderedAscending) && ([later compare:[NSDate date]] == NSOrderedDescending))
     {
-        if (distance < 200)
+        if (distance < DISTANCE_TO_EVENT_FOR_COMMENTING)
         {
             [self promptUserForCommentPost:post TimeToShow:[NSDate new] isFuture:NO];
             return YES;
         }
     }
-    else if (distance < 200 && ([post.endTime compare:[NSDate date]] == NSOrderedDescending))  // If the user is simply early
+    else if (distance < DISTANCE_TO_EVENT_FOR_COMMENTING && ([post.endTime compare:[NSDate date]] == NSOrderedDescending))  // If the user is simply early
     {
         [self promptUserForCommentPost:post TimeToShow:[post.startTime dateByAddingTimeInterval:(60 * 15)] isFuture:YES];
         [self startMonitoringRegionForPost:post MonitorExit:YES];
@@ -170,7 +170,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
                           MonitorExit : (BOOL) onExit
 {
     CLLocationCoordinate2D locCoordinate = CLLocationCoordinate2DMake(post.location.latitude, post.location.longitude);
-    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:200 identifier:post.objectId];
+    CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:locCoordinate radius:DISTANCE_TO_EVENT_FOR_COMMENTING identifier:post.objectId];
         
     // Ensure that when the user enters this specific region the app is notified, and woken up if necessary
     [region setNotifyOnEntry:YES];

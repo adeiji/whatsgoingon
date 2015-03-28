@@ -170,3 +170,5 @@ NSString *const IMAGE_DIMENSION_HEIGHT = @"height";
 NSString *const kGOING_POST_LOCAL_DATASTORE = @"com.happsnap.goingPostsInLocalDatastore";
 NSString *const kAnalytics = @"com.happsnap.analytics";
 NSString *const kAnalyticsArray = @"com.happsnap.analyticsArray";
+
+int const DISTANCE_TO_EVENT_FOR_COMMENTING = 88;
