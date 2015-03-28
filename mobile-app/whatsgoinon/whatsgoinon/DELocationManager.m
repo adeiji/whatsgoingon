@@ -99,7 +99,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 // Update the users location every 1 minute
 - (void) startLocationUpdateTimer {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSTimer *locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:60 * 20 target:self selector:@selector(getUpdatedLocation) userInfo:nil repeats:YES];
+        NSTimer *locationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:60 * 1 target:self selector:@selector(getUpdatedLocation) userInfo:nil repeats:YES];
         
         [locationUpdateTimer fire];
     });

@@ -43,6 +43,8 @@
                                      WithArray : (NSArray *) array;
 - (void) deletePFObjectWithObjectId : (NSString *) objectId;
 - (void) setAllPostToNotLoaded;
+- (void) saveNoAccountInformation;
+
 @property (strong, nonatomic) DEPost *currentPost;
 // Stores all the posts that will be viewed currently
 @property (strong, nonatomic) NSArray *posts;

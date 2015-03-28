@@ -276,6 +276,17 @@ const int POST_WIDTH = 140;
             eventViewController.isMaybeGoing = YES;
         }
     }
+    else {
+        // If this event is already saved as going, then we need to display that in the view.
+        if ([[[DEPostManager sharedManager] goingPostForNoAccount] containsObject:_post.objectId])
+        {
+            eventViewController.isGoing = YES;
+        }
+        else if ([[[DEPostManager sharedManager] maybeGoingPostForNoAccount] containsObject:_post.objectId])
+        {
+            eventViewController.isMaybeGoing = YES;
+        }
+    }
     
 }
 @end

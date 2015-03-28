@@ -98,6 +98,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)viewWhatsGoingOnLater:(id)sender {
+    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     if ([self isLoggedIn : NO])
     {
         // Do any additional setup after loading the view.
@@ -119,6 +120,7 @@
 }
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
+    [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     if ([self isLoggedIn : NO])
     {
         // Do any additional setup after loading the view.

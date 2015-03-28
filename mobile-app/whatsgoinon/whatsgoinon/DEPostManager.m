@@ -15,6 +15,9 @@
 @synthesize posts = _posts;
 
 static NSString *CATEGORY_ANYTHING = @"Anything";
+static NSString *ARCHIVE_FILE = @"archive";
+static NSString *kGoingPostForNoAccount = @"goingPostForNoAccount";
+static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 
 + (id) sharedManager {
     static DEPostManager *sharedMyManager = nil;
@@ -36,8 +39,32 @@ static NSString *CATEGORY_ANYTHING = @"Anything";
         _promptedForComment = [NSMutableArray new];
         _goingPostForNoAccount = [NSMutableArray new];
         _maybeGoingPostForNoAccount = [NSMutableArray new];
+        [self loadNoAccountInformation];
     }
     return self;
+}
+
+- (void) saveNoAccountInformation {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:_goingPostForNoAccount forKey:kGoingPostForNoAccount];
+    [userDefaults setObject:_maybeGoingPostForNoAccount forKey:kMaybeGoingPostForNoAccount];
+    [userDefaults synchronize];
+}
+
+- (void) loadNoAccountInformation {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *goingPostForNoAccount = [[userDefaults objectForKey:kGoingPostForNoAccount] mutableCopy];
+    NSMutableArray *maybeGoingPostForNoAccount = [[userDefaults objectForKey:kMaybeGoingPostForNoAccount] mutableCopy];
+    
+    if (goingPostForNoAccount)
+    {
+        _goingPostForNoAccount = goingPostForNoAccount;
+    }
+    if (maybeGoingPostForNoAccount)
+    {
+        _maybeGoingPostForNoAccount = maybeGoingPostForNoAccount;
+    }
+    
 }
 
 + (DEPost *) createPostWithCategory:(NSString *)category

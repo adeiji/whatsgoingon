@@ -554,6 +554,7 @@ const int heightConstraintConstant = 62;
     if (![PFUser currentUser])
     {
         [[[DEPostManager sharedManager] goingPostForNoAccount] addObject:_post.objectId];
+        [[DEPostManager sharedManager] saveNoAccountInformation];
     }
     [DESyncManager updateObjectWithId:_post.objectId UpdateValues:dictionary ParseClassName:PARSE_CLASS_NAME_EVENT];
     [[_viewEventView lblNumGoing] setText:[NSString stringWithFormat:@"%@", [_post numberGoing]]];
@@ -623,6 +624,7 @@ const int heightConstraintConstant = 62;
         if (![PFUser currentUser])
         {
             [[[DEPostManager sharedManager] maybeGoingPostForNoAccount] addObject:_post.objectId];
+            [[DEPostManager sharedManager] saveNoAccountInformation];
         }
         // Save this item as maybe going for the user to the server
         [[DEUserManager sharedManager] saveItemToArray:_post.objectId ParseColumnName:PARSE_CLASS_USER_EVENTS_MAYBE];
