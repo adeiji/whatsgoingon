@@ -60,8 +60,11 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 
 - (void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     
-    // Get the post that matches the regions id and then see if they can comment for it
-    [DESyncManager getPostById:region.identifier Process:SEE_IF_CAN_COMMENT];
+    if ([CLLocationManager isMonitoringAvailableForClass:[CLRegion class]] && ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways))
+    {
+        // Get the post that matches the regions id and then see if they can comment for it
+        [DESyncManager getPostById:region.identifier Process:SEE_IF_CAN_COMMENT];
+    }
 }
 
 - (void) locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
