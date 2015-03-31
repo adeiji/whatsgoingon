@@ -40,7 +40,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     
     [self registerForNotifications:application];
     [DEScreenManager sharedManager];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
     [[UITextField appearance] setKeyboardAppearance:UIKeyboardAppearanceDark];
 
     [self loadPromptedForCommentArray];

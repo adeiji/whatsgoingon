@@ -31,7 +31,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    
+    _currentLocation = [PFGeoPoint new];
     //Get the latitude and longitude values of the current user
     _currentLocation.latitude = [[locations objectAtIndex:0] coordinate].latitude;
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
@@ -235,9 +235,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         
         _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        _currentLocation = [PFGeoPoint new];
-        
-        
     }
     return self;
 }
