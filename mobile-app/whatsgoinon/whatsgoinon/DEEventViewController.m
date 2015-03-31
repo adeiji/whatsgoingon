@@ -37,9 +37,12 @@ const int heightConstraintConstant = 62;
     frame.size.width = _eventView.frame.size.width;
     [[_eventView detailsView] setFrame:frame];
     
+    BOOL loadComments = YES;
+    
     if (_isPreview)
     {
         [self loadPreview];
+        loadComments = NO;
     }
     else if (_isEditDeleteMode)
     {
@@ -51,6 +54,10 @@ const int heightConstraintConstant = 62;
     }
     else {
         [self loadNonPreview];
+    }
+    
+    if (loadComments) {
+        [DESyncManager getAllCommentsForEventId:[[DEPostManager sharedManager] currentPost].objectId];
     }
     
     [[_eventView lblCost] setText:[[_post cost] stringValue]];
