@@ -66,7 +66,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
                 if ([region.identifier isEqualToString:post.objectId]) {
                     [_locationManager stopMonitoringForRegion:region];
                 }
-            }            
+            }
         }
     }
 }

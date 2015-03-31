@@ -53,7 +53,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     }
     
     #if DEBUG
-
+    [DEScreenManager showCommentView:nil];
     #endif
     return YES;
 }
