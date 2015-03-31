@@ -51,7 +51,10 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     {
         
     }
+    
+    #if DEBUG
 
+    #endif
     return YES;
 }
 

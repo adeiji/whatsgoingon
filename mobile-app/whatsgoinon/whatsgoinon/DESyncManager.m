@@ -176,6 +176,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
                 // Set the miles to zero so that the next time the events are loaded we load them from all to 25 miles distance
                 miles = 0;
                 [[DEScreenManager sharedManager] hideIndicatorIsPosting:NO];
+                [[DELocationManager sharedManager] stopAllRegionMonitoringForFinishedEvents];
             }
 
         }

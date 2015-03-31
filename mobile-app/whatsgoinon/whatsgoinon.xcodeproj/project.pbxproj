@@ -176,6 +176,7 @@
 		F49BB8FE1A60CC1D00C68E42 /* DELevelHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB8FD1A60CC1D00C68E42 /* DELevelHandler.m */; };
 		F49BB9011A60D07B00C68E42 /* DETrophy.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9001A60D07B00C68E42 /* DETrophy.m */; };
 		F49BB9041A65F27200C68E42 /* DEWrench.m in Sources */ = {isa = PBXBuildFile; fileRef = F49BB9031A65F27200C68E42 /* DEWrench.m */; };
+		F49DDE9F1ACAEB3F00A02162 /* thumbs-up-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = F49DDE9E1ACAEB3F00A02162 /* thumbs-up-gray.png */; };
 		F4AA5AE0199D91110035FEAF /* DESharingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4AA5ADF199D91110035FEAF /* DESharingView.m */; };
 		F4B910641A895D9400E83EE5 /* DEWelcomeEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B910631A895D9400E83EE5 /* DEWelcomeEventView.m */; };
 		F4C603E41A808A60009BB549 /* viewPromptForDeletionOfEvent.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C603E31A808A60009BB549 /* viewPromptForDeletionOfEvent.xib */; };
@@ -445,6 +446,7 @@
 		F49BB9001A60D07B00C68E42 /* DETrophy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETrophy.m; sourceTree = "<group>"; };
 		F49BB9021A65F27200C68E42 /* DEWrench.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEWrench.h; sourceTree = "<group>"; };
 		F49BB9031A65F27200C68E42 /* DEWrench.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEWrench.m; sourceTree = "<group>"; };
+		F49DDE9E1ACAEB3F00A02162 /* thumbs-up-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up-gray.png"; sourceTree = "<group>"; };
 		F4AA5ADE199D91110035FEAF /* DESharingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DESharingView.h; sourceTree = "<group>"; };
 		F4AA5ADF199D91110035FEAF /* DESharingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DESharingView.m; sourceTree = "<group>"; };
 		F4B910621A895D9400E83EE5 /* DEWelcomeEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEWelcomeEventView.h; sourceTree = "<group>"; };
@@ -1190,6 +1192,7 @@
 		F4D9C97619ABF15600855094 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F49DDE9E1ACAEB3F00A02162 /* thumbs-up-gray.png */,
 				F4CCCE141A696AD60073DEE5 /* thumbs-down.png */,
 				F4CCCE151A696AD60073DEE5 /* thumbs-up.png */,
 				F4CCCE121A68D5300073DEE5 /* happ-snap-logo-no-text.png */,
@@ -1357,6 +1360,7 @@
 				F41277C319E611570092CD67 /* Default-Portrait@2x.png in Resources */,
 				F41277C019E611570092CD67 /* Default-Landscape@2x.png in Resources */,
 				F40E0E0B19BFFD9F00D2C3A0 /* going-icon 23x23.png in Resources */,
+				F49DDE9F1ACAEB3F00A02162 /* thumbs-up-gray.png in Resources */,
 				F46B946119C2543400B41D8C /* location-icon-empty.png in Resources */,
 				F41277BB19E611570092CD67 /* appicon@2x.png in Resources */,
 				F41277C519E611570092CD67 /* Default@2x.png in Resources */,

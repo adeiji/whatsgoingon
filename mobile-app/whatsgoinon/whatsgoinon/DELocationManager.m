@@ -42,6 +42,34 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     NSLog(@"Location Updated");
 }
 
+- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"Error getting location: %@", [error description]);
+    
+    NSDictionary *dimensions = @{
+                                 @"Error" : [error description],
+                                 };
+    
+    // Send the dimensions to Parse along with the 'read' event
+    [PFAnalytics trackEvent:@"error" dimensions:dimensions];
+}
+
+
+#pragma mark - Region Monitoring
+
+- (void) stopAllRegionMonitoringForFinishedEvents {
+    for (id obj in [[DEPostManager sharedManager] posts]) {
+        DEPost *post = [DEPost getPostFromPFObject:obj];
+        
+        if ([post.endTime compare:[NSDate date]] == NSOrderedAscending) { // If the end time is earlier than the current time
+            
+            for (CLRegion *region in [_locationManager monitoredRegions]) {
+                if ([region.identifier isEqualToString:post.objectId]) {
+                    [_locationManager stopMonitoringForRegion:region];
+                }
+            }            
+        }
+    }
+}
 
 - (void) stopMonitoringRegionForPost : (DEPost * ) post {
     [[_locationManager monitoredRegions] enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
@@ -71,16 +99,6 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     NSLog(@"Starting to monitor region with identifier: %@", region.identifier );
 }
 
-- (void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"Error getting location: %@", [error description]);
-    
-    NSDictionary *dimensions = @{
-                                 @"Error" : [error description],
-                                 };
-    
-    // Send the dimensions to Parse along with the 'read' event
-    [PFAnalytics trackEvent:@"error" dimensions:dimensions];
-}
 
 - (void) locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
     NSLog(@"Error monitoring region: %@", [error description]);
@@ -95,6 +113,7 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
     }
 }
 
+#pragma mark - Location Update and Commenting
 
 // Update the users location every 1 minute
 - (void) startLocationUpdateTimer {
