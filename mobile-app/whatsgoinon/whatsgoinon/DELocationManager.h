@@ -65,6 +65,7 @@ typedef void (^getAddressFromPlace) (NSString *address);
 - (void) getUpdatedLocation;
 - (void) startLocationUpdateTimer;
 - (void) stopAllRegionMonitoringForFinishedEvents;
+- (void) loadPreviousLocation;
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) PFGeoPoint *currentLocation;

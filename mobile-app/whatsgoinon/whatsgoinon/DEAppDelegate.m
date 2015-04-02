@@ -28,6 +28,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
 {
     [self setUpParseWithLaunchOptions:launchOptions];
     [GMSServices provideAPIKey:@"AIzaSyAChpei4sacCZDpzE4boq1lhftbBteTYak"];
+    [[DELocationManager sharedManager] loadPreviousLocation];
     
     if (![launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey])
     {
@@ -53,10 +54,12 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     }
     
     #if DEBUG
-    [DEScreenManager showCommentView:nil];
+
     #endif
     return YES;
 }
+
+
 
 - (void) loadPromptedForCommentArray {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -172,7 +175,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [[[DELocationManager sharedManager] locationManager] stopMonitoringSignificantLocationChanges];
-    
+
 }
 
 - (void) setUserArraysToEmpty {

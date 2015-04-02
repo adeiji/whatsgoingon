@@ -22,6 +22,9 @@ static const NSString *GOOGLE_API_RESULTS = @"results";
 static const NSString *GOOGLE_API_RESULT = @"result";
 static const NSString *GOOGLE_API_ADDRESS_COMPONENTS = @"address_components";
 static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
+static NSString *const kPreviousLocation = @"com.happsnap.previousLocation";
+static const NSString *LATITUDE = @"lat";
+static const NSString *LONGITUDE = @"long";
 
 // Do we need to make sure that the user is using location services or not upon application upload?
 
@@ -31,13 +34,14 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    _currentLocation = [PFGeoPoint new];
+//    _currentLocation = [PFGeoPoint new];
     //Get the latitude and longitude values of the current user
     _currentLocation.latitude = [[locations objectAtIndex:0] coordinate].latitude;
     _currentLocation.longitude = [[locations objectAtIndex:0] coordinate].longitude;
 
     // If the application is open then we know we'll be getting regular updates everytime the user presses What's Going On Now or Later
     [_locationManager stopUpdatingLocation];
+    [self saveLocation:[locations objectAtIndex:0]];
     
     NSLog(@"Location Updated");
 }
@@ -93,6 +97,42 @@ static const NSString *GOOGLE_API_SHORT_NAME = @"short_name";
         // Get the post that matches the regions id and then see if they can comment for it
         [DESyncManager getPostById:region.identifier Process:SEE_IF_CAN_COMMENT];
     }
+    
+    [self saveLocation:manager.location];
+}
+
+- (void) saveLocation : (CLLocation *) location {
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDictionary *locationDictionary = @{ LATITUDE : [NSNumber numberWithDouble:location.coordinate.latitude],
+                                          LONGITUDE : [NSNumber numberWithDouble:location.coordinate.longitude]
+                                          };
+    
+    [userDefaults setObject:locationDictionary forKey:kPreviousLocation];
+}
+
+// If the location has not been updated already with the most recent one, we get the location the user was last at when they closed the app
+- (void) loadPreviousLocation {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *locationDictionary = [userDefaults objectForKey:kPreviousLocation];
+    
+    if (!_currentLocation)
+    {
+        if (locationDictionary)
+        {
+            PFGeoPoint *currentLocation = [PFGeoPoint new];
+            NSNumber *latitude = [locationDictionary objectForKey:LATITUDE];
+            NSNumber *longitude = [locationDictionary objectForKey:LONGITUDE];
+            currentLocation.latitude = latitude.doubleValue;
+            currentLocation.longitude = longitude.doubleValue;
+            _currentLocation = currentLocation;
+        }
+        else {
+            _currentLocation = [PFGeoPoint new];
+        }
+    }
+    
 }
 
 - (void) locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {

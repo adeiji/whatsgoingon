@@ -209,10 +209,9 @@
     [_lblPromptEntry setHidden:YES];
     
     // Create a border around the button showing that its been clicked
-    [[sender layer] setBorderColor:[UIColor colorWithRed:0.0f/255.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0].CGColor];
+    [[sender layer] setBorderColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0].CGColor];
     [[sender layer] setBorderWidth:1.5f];
     [[sender layer] setCornerRadius:5.0f];
-    [sender setBackgroundImage:[UIImage imageNamed:@"thumbs-up.png"] forState:UIControlStateNormal];
     // Set the other buttons border to nothing
     [[_btnThumbsDown layer] setBorderWidth:0.0f];
 }
@@ -222,10 +221,9 @@
     [_lblPromptEntry setHidden:YES];
     
     // Create a border around the button showing that its been clicked
-    [[sender layer] setBorderColor:[UIColor colorWithRed:151.0f/255.0f green:154.0f/255.0f blue:155.0f/255.0f alpha:1.0].CGColor];
+    [[sender layer] setBorderColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0].CGColor];
     [[sender layer] setBorderWidth:1.5f];
     [[sender layer] setCornerRadius:5.0f];
-    [_btnThumbsUp setBackgroundImage:[UIImage imageNamed:@"thumbs-up-gray.png"] forState:UIControlStateNormal];
     // Set the other buttons border to nothing
     [[_btnThumbsUp layer] setBorderWidth:0.0f];
 }
