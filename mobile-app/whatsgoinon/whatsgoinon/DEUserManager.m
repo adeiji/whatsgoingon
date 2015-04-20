@@ -122,7 +122,6 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             [_userObject saveEventually];
             
             [DELocationManager getStateFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSDictionary *value) {
-                
                 [self addLocationToUserCity:[value objectForKey:@"city"] State:[value objectForKey:@"state"]];
             }];
         }
@@ -361,7 +360,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             NSString *state = [items[1] stringByReplacingOccurrencesOfString:@" " withString:@""];
             [self addLocationToUserCity:city State:state];
         }
-        
+
         // Add the profile image from twitter
         [DEUserManager addProfileImage:data];
     }
@@ -466,6 +465,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             
             // Set the current user's name to the name that is on their social network profile
             [[PFUser currentUser] setUsername:result[@"name"]];
+            [PFUser currentUser][@"email"] = result[@"email"];
             [[PFUser currentUser] saveInBackground];
         }
     }];
