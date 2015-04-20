@@ -17,9 +17,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+
     }
     return self;
+}
+
+- (void) setUpViewForiPhone4 {
+    self.constraintConfirmPasswordToSignUpButton.constant = 0;
+    self.constraintLoginLabelToAccountButtons.constant = 0;
+    self.constraintOrLabelToLoginLabel.constant = 0;
+    self.constraintSignUpButtonToOrLabel.constant = 0;
 }
 
 - (void) setUpView {

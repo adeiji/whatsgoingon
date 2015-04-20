@@ -19,6 +19,12 @@
 @property (weak, nonatomic) IBOutlet TextFieldValidator *txtConfirmPassword;
 @property (weak, nonatomic) IBOutlet UILabel *lblUsernameError;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintConfirmPasswordToSignUpButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintSignUpButtonToOrLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintOrLabelToLoginLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintLoginLabelToAccountButtons;
+
+- (void) setUpViewForiPhone4;
 - (void) setUpView;
 - (IBAction)signUp:(id)sender;
 

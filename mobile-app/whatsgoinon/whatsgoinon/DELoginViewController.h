@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DECreateAccountView.h"
 #import "DEScreenManager.h"
+#import "DELoginView.h"
+#import "DECreateAccountView.h"
 
 @interface DELoginViewController : UIViewController
 
@@ -21,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *createAccountButtonToBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *skipButtonToBottomConstraint;
 @property BOOL posting;
+
 #pragma mark - Button Press Methods
 
 - (IBAction)createAnAccount:(id)sender;
