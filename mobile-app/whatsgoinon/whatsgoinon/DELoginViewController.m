@@ -35,6 +35,9 @@
         _lblLoginMessage.text = @"Posting an event to HappSnap is free but an account is required. It also only takes a few seconds and then you can get right to it.";
         _createAccountButtonToBottomConstraint.constant = _skipButtonToBottomConstraint.constant;
     }
+    else {
+        _lblLoginMessage.text = @"HappSnap is more fun and useful with an account.\n\nSign up in seconds for free!";
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated

@@ -99,7 +99,6 @@
 		F437BFE5199190F500CF61E9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE4199190F500CF61E9 /* QuartzCore.framework */; };
 		F437BFE7199190FF00CF61E9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE6199190FF00CF61E9 /* Security.framework */; };
 		F437BFE91991910800CF61E9 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFE81991910800CF61E9 /* Social.framework */; };
-		F437BFEB1991911100CF61E9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFEA1991911100CF61E9 /* StoreKit.framework */; };
 		F437BFED1991911900CF61E9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BFEC1991911900CF61E9 /* SystemConfiguration.framework */; };
 		F437BFF11991968200CF61E9 /* DEEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFF01991968200CF61E9 /* DEEvents.m */; };
 		F437BFF519919B9B00CF61E9 /* DECreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F437BFF419919B9B00CF61E9 /* DECreatePostViewController.m */; };
@@ -319,7 +318,6 @@
 		F437BFE4199190F500CF61E9 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F437BFE6199190FF00CF61E9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F437BFE81991910800CF61E9 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		F437BFEA1991911100CF61E9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		F437BFEC1991911900CF61E9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F437BFEF1991968200CF61E9 /* DEEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEEvents.h; sourceTree = "<group>"; };
 		F437BFF01991968200CF61E9 /* DEEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEEvents.m; sourceTree = "<group>"; };
@@ -520,7 +518,6 @@
 				F41654551ABB98C700F71920 /* libTestFlight.a in Frameworks */,
 				F4EEB03719D21F720072B683 /* MessageUI.framework in Frameworks */,
 				F437BFED1991911900CF61E9 /* SystemConfiguration.framework in Frameworks */,
-				F437BFEB1991911100CF61E9 /* StoreKit.framework in Frameworks */,
 				F437BFE91991910800CF61E9 /* Social.framework in Frameworks */,
 				F437BFE7199190FF00CF61E9 /* Security.framework in Frameworks */,
 				F437BFE5199190F500CF61E9 /* QuartzCore.framework in Frameworks */,
@@ -647,7 +644,6 @@
 			children = (
 				F4EEB03619D21F720072B683 /* MessageUI.framework */,
 				F437BFEC1991911900CF61E9 /* SystemConfiguration.framework */,
-				F437BFEA1991911100CF61E9 /* StoreKit.framework */,
 				F437BFE81991910800CF61E9 /* Social.framework */,
 				F437BFE6199190FF00CF61E9 /* Security.framework */,
 				F437BFE4199190F500CF61E9 /* QuartzCore.framework */,
@@ -1305,6 +1301,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
 						};
 					};
 					F437BFA11990452000CF61E9 = {
@@ -1701,8 +1700,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Adebayo Ijidakinro (HJPTQ3N75W)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adebayo Ijidakinro (HJPTQ3N75W)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon",
@@ -1717,7 +1716,7 @@
 					"$(PROJECT_DIR)/whatsgoinon/TestFlightSDK3.0.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52b99210-9064-41bc-a85a-6f800f75fab0";
+				PROVISIONING_PROFILE = "85ca44cd-eb62-4468-a851-ca3bba253b22";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1728,8 +1727,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (36756F4Y54)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Adebayo Ijidakinro (HJPTQ3N75W)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Adebayo Ijidakinro (HJPTQ3N75W)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon",
@@ -1744,7 +1743,7 @@
 					"$(PROJECT_DIR)/whatsgoinon/TestFlightSDK3.0.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "52b99210-9064-41bc-a85a-6f800f75fab0";
+				PROVISIONING_PROFILE = "85ca44cd-eb62-4468-a851-ca3bba253b22";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
