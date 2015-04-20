@@ -103,6 +103,22 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     }];
 }
 
+
++ (void) checkEventForIfMonitoringNecessaryEventId : (CLRegion *) monitoredRegion {
+
+    PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
+    [query whereKey:PARSE_CLASS_EVENT_OBJECT_ID equalTo:monitoredRegion.identifier];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+       
+        DEPost *post = [DEPost getPostFromPFObject:object];
+        if ([post.endTime compare:[NSDate date]] == NSOrderedDescending)
+        {
+            CLLocationManager *manager = [CLLocationManager new];
+            [manager stopMonitoringForRegion:monitoredRegion];
+        }
+    }];
+}
 /*
  
  Get all the values that are posted at a specific miles distance from the user

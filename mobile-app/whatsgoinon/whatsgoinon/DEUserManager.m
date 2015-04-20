@@ -230,8 +230,6 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
     }];
 }
 
-
-
 - (NSError *) loginWithUsername : (NSString *) username
                        Password : (NSString *) password
                  ViewController : (UIViewController *)viewController

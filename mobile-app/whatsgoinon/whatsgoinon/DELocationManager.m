@@ -61,17 +61,9 @@ static const NSString *LONGITUDE = @"long";
 #pragma mark - Region Monitoring
 
 - (void) stopAllRegionMonitoringForFinishedEvents {
-    for (id obj in [[DEPostManager sharedManager] posts]) {
-        DEPost *post = [DEPost getPostFromPFObject:obj];
-        
-        if ([post.endTime compare:[NSDate date]] == NSOrderedAscending) { // If the end time is earlier than the current time
-            
-            for (CLRegion *region in [_locationManager monitoredRegions]) {
-                if ([region.identifier isEqualToString:post.objectId]) {
-                    [_locationManager stopMonitoringForRegion:region];
-                }
-            }
-        }
+
+    for (CLRegion *region in [_locationManager monitoredRegions]) {
+        [DESyncManager checkEventForIfMonitoringNecessaryEventId:region];
     }
 }
 
@@ -132,7 +124,6 @@ static const NSString *LONGITUDE = @"long";
             _currentLocation = [PFGeoPoint new];
         }
     }
-    
 }
 
 - (void) locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
