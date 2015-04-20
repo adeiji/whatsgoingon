@@ -112,8 +112,8 @@ const int heightConstraintConstant = 62;
 
     DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
     DEFinishedPostingView *finishedPostView = (DEFinishedPostingView *) createPostViewController.view;
-    [[finishedPostView lblParagraphOne] setText:@"The changes to your event have been submitted and  applied."];
-    [[finishedPostView lblParagraphTwo] setText:@"Hey! Don't forget about the HappSnap posting portal. You can do a lot more with your events from there. Check it out!"];
+    [[finishedPostView lblParagraphOne] setText:@"The changes to your event have been applied."];
+    [[finishedPostView lblParagraphTwo] setText:@"Need more posting options?  Full feautured posting available on HappSnap.com"];
     [self.navigationController pushViewController:createPostViewController animated:YES];
 }
 
@@ -291,8 +291,16 @@ const int heightConstraintConstant = 62;
         // If the start time of the post is beyond three days, then we want to display to the user that this event will not show up until it's within three days of the start time of the event
         if ([[_post startTime] compare:laterDate] == NSOrderedDescending)
         {
-            finishedPostView.lblParagraphOne.text = @"Because your event is a little ways away, you won't be able to see it in the app yet.  When your event is a few days from happening, it will then appear for all to see!";
-            finishedPostView.lblParagraphTwo.text = @"If you would like to make changes to your post, head over to the 'My Posts' section of the side menu.  If you need more functionality, check out our web portal";
+            finishedPostView.lblParagraphOne.text = @"PLEASE NOTE: Your event will be available for viewing 3 deays from its start time.";
+            finishedPostView.lblParagraphTwo.text = @"Need to make changes?\nEdit or delete your event from";
+            finishedPostView.lblParagraphThree.text = @"My Posts";
+            finishedPostView.lblParagraphFour.text = @"Need more posting options?\nFull featured posting available on\nHappSnap.com";
+        }
+        else {
+            finishedPostView.lblParagraphOne.text = @"Your post will appear shortly";
+            finishedPostView.lblParagraphTwo.text = @"Need to make changes?\nEdit or delete your event from";
+            finishedPostView.lblParagraphThree.text = @"My Posts";
+            finishedPostView.lblParagraphFour.text = @"Need more posting options?\nFull featured posting available on\nHappSnap.com";
         }
         
         [createPostViewController.navigationItem setHidesBackButton:YES];

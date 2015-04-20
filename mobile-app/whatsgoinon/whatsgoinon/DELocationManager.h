@@ -22,6 +22,7 @@
 @property (strong, nonatomic) NSString *countryCode;
 
 typedef void (^completionBlock) (NSString *value);
+typedef void (^stateCompletionBlock) (NSDictionary *value);
 typedef void (^completionHandler) (PFGeoPoint *value);
 typedef void (^autocompleteCompletionBlock) (NSArray *values);
 typedef void (^getAddressFromPlace) (NSString *address);
@@ -50,6 +51,8 @@ typedef void (^getAddressFromPlace) (NSString *address);
                          CompletionBlock : (autocompleteCompletionBlock) callback;
 + (void) getAddressFromPlace : (NSString *) placeId
              CompletionBlock : (completionBlock)callback ;
++ (void) getStateFromLatLongValue:(PFGeoPoint *)location
+                  CompletionBlock:(stateCompletionBlock)callback;
 
 /*
  

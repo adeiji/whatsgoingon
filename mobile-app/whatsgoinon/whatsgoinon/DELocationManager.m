@@ -361,6 +361,46 @@ static const NSString *LONGITUDE = @"long";
     }];
 }
 
++ (void) getStateFromLatLongValue:(PFGeoPoint *)location CompletionBlock:(stateCompletionBlock) callback {
+    
+    NSString *latLong = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:GOOGLE_GEOLOCATION_API_GET_ADDRESS, latLong]]];
+    
+    NSOperationQueue *queue = [NSOperationQueue new];
+    queue.name = @"Google Geolocation Queue";
+    queue.maxConcurrentOperationCount = 3;
+    NSMutableDictionary *result = [NSMutableDictionary new];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSError *error;
+        if (data != nil)
+        {
+            NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            
+            if (![jsonData[@"status"] isEqualToString:@"ZERO_RESULTS"])
+            {
+                for (id addressComponent in jsonData[GOOGLE_API_RESULTS][0][GOOGLE_API_ADDRESS_COMPONENTS]) {
+                    for (id type in addressComponent[@"types"]) {
+                        if ([type isEqualToString:@"administrative_area_level_1"]) {
+                            result[@"state"] = addressComponent[@"long_name"];
+                            break;
+                        }
+                        else if ([type isEqualToString:@"administrative_area_level_2"]) {
+                            result[@"city"] = addressComponent[@"long_name"];
+                            break;
+                        }
+                    }
+                }
+                
+                if (result)
+                {
+                    callback(result);
+                }
+            }
+        }
+    }];
+}
+
 + (void) getAddressFromLatLongValue:(PFGeoPoint *)location CompletionBlock:(completionBlock)callback {
     
     NSString *latLong = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];

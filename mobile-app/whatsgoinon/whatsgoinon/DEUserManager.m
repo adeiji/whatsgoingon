@@ -121,12 +121,9 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             _userObject[PARSE_CLASS_USER_VISIBLE_PASSWORD] = password;
             [_userObject saveEventually];
             
-            [DELocationManager getAddressFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSString *value) {
-                NSArray *items = [value componentsSeparatedByString:@","];
-                NSString *state = [items lastObject];
-                NSString *city = [items objectAtIndex:[items count] - 2];
+            [DELocationManager getStateFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSDictionary *value) {
                 
-                [self addLocationToUserCity:city State:state];
+                [self addLocationToUserCity:[value objectForKey:@"city"] State:[value objectForKey:@"state"]];
             }];
         }
         else
