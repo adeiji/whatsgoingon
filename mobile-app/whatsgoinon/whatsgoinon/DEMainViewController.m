@@ -89,7 +89,7 @@
     [super viewWillAppear:animated];
     [self.view setHidden:NO];
     
-    [DEScreenManager setBackgroundWithImageURL:@"main-vc-background.png"];
+    [DEScreenManager setBackgroundWithImageURL:@"newyorkbackground.png"];
 }
 
 - (void)didReceiveMemoryWarning

@@ -368,7 +368,7 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="57EE737D-059F-4E37-AB7B-B33068AECDF5" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="FF5D3810-3FD7-4ED0-B7FA-406F36D31A53" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="iZM-I6-gde"/>
@@ -1454,6 +1454,7 @@
                             <outlet property="constraintPreviewAndPostBottomConstraint" destination="hw3-Mg-Oup" id="vpF-2z-KkR"/>
                             <outlet property="constraintPriceToCameraBottomVerticalSpace" destination="QaB-BU-fIy" id="lhL-c8-wuy"/>
                             <outlet property="constraintScrollViewToLetsBuildIt" destination="fTB-ab-ia4" id="uPJ-hD-XgB"/>
+                            <outlet property="constraintSecondPageScrollViewToTitle" destination="fTB-ab-ia4" id="Wcc-hj-wZt"/>
                             <outlet property="constraintViewBottomSpaceToScrollView" destination="7fV-eR-rLZ" id="pOF-d4-tk3"/>
                             <outlet property="constraintViewToSuperviewTop" destination="hpI-89-FCg" id="c4h-4r-02A"/>
                             <outlet property="scrollView" destination="JVg-ae-v1d" id="0HR-ZZ-kiK"/>
@@ -1757,7 +1758,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="57EE737D-059F-4E37-AB7B-B33068AECDF5" width="140" height="211">
+        <image name="FF5D3810-3FD7-4ED0-B7FA-406F36D31A53" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

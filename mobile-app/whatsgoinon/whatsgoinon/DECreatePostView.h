@@ -70,6 +70,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPreviewAndPostBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintViewToSuperviewTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintViewBottomSpaceToScrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintSecondPageScrollViewToTitle;
 
 
 #pragma mark - Button Actions

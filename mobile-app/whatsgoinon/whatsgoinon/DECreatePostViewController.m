@@ -53,7 +53,7 @@
     [[self.navigationController navigationBar] setHidden:YES];
     [self addObservers];
     
-    [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
+    [DEScreenManager setBackgroundWithImageURL:@"newyork-blur.png"];
     
     if (![[[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_RANK] isEqualToString:USER_RANK_AMBASSADOR])
     {

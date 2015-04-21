@@ -23,7 +23,7 @@
 }
 
 - (void) setUpViewForiPhone4 {
-    self.constraintConfirmPasswordToSignUpButton.constant = 0;
+    self.constraintConfirmPasswordToSignUpButton.constant = 5;
     self.constraintLoginLabelToAccountButtons.constant = 0;
     self.constraintOrLabelToLoginLabel.constant = 0;
     self.constraintSignUpButtonToOrLabel.constant = 0;

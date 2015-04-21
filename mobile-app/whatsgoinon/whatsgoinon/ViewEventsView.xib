@@ -208,7 +208,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not to worry! Below are some Past Epic Events to inspire you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="TaV-DE-mMd">
-                    <rect key="frame" x="20" y="15" width="280" height="55"/>
+                    <rect key="frame" x="20" y="45" width="280" height="55"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="280" id="1uS-5c-OSK"/>
                         <constraint firstAttribute="height" constant="55" id="NL7-ks-qas"/>
@@ -218,7 +218,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why not be the first to start posting awesome events near you?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="cN9-Yo-zwV">
-                    <rect key="frame" x="20" y="78" width="280" height="55"/>
+                    <rect key="frame" x="20" y="108" width="280" height="55"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="EAF-g2-E5a"/>
                         <constraint firstAttribute="width" constant="280" id="num-wL-vsL"/>
@@ -230,7 +230,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="cN9-Yo-zwV" secondAttribute="centerY" constant="1" id="3kb-DE-ATU"/>
+                <constraint firstAttribute="centerY" secondItem="cN9-Yo-zwV" secondAttribute="centerY" constant="-29" id="3kb-DE-ATU"/>
                 <constraint firstItem="cN9-Yo-zwV" firstAttribute="top" secondItem="TaV-DE-mMd" secondAttribute="bottom" constant="8" id="GvR-48-9hf"/>
                 <constraint firstAttribute="centerX" secondItem="cN9-Yo-zwV" secondAttribute="centerX" id="Hz6-vf-mEp"/>
                 <constraint firstAttribute="centerX" secondItem="TaV-DE-mMd" secondAttribute="centerX" id="fIr-bb-XIZ"/>

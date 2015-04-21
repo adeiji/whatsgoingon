@@ -121,7 +121,7 @@ struct TopMargin {
     }
     [selectCategoryView setFrame:[[UIScreen mainScreen] bounds]];
     [self.view addSubview:selectCategoryView];
-    [DEScreenManager setBackgroundWithImageURL:@"HappSnap-bg.png"];
+    [DEScreenManager setBackgroundWithImageURL:@"newyork-blur.png"];
     
     /* Check to see if this is their first time going to this part of the application
      If it is their first time then show the welcome screen.

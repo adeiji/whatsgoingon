@@ -65,6 +65,8 @@
 		F41277CA19E614770092CD67 /* DEAddProfileImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F41277C919E614770092CD67 /* DEAddProfileImageViewController.m */; };
 		F412BC9E19CBB6650088F265 /* ViewAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = F412BC9D19CBB6650088F265 /* ViewAlert.xib */; };
 		F41654551ABB98C700F71920 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4CCBD6E199AADBD00532E9B /* libTestFlight.a */; };
+		F432F2E51AE6C57D00F27060 /* newyork-blur.png in Resources */ = {isa = PBXBuildFile; fileRef = F432F2E41AE6C57D00F27060 /* newyork-blur.png */; };
+		F432F2E71AE6C6AC00F27060 /* newyorkbackground.png in Resources */ = {isa = PBXBuildFile; fileRef = F432F2E61AE6C6AC00F27060 /* newyorkbackground.png */; };
 		F437BF851990452000CF61E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF841990452000CF61E9 /* Foundation.framework */; };
 		F437BF871990452000CF61E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF861990452000CF61E9 /* CoreGraphics.framework */; };
 		F437BF891990452000CF61E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F437BF881990452000CF61E9 /* UIKit.framework */; };
@@ -278,6 +280,8 @@
 		F41277C819E614770092CD67 /* DEAddProfileImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAddProfileImageViewController.h; sourceTree = "<group>"; };
 		F41277C919E614770092CD67 /* DEAddProfileImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAddProfileImageViewController.m; sourceTree = "<group>"; };
 		F412BC9D19CBB6650088F265 /* ViewAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewAlert.xib; sourceTree = "<group>"; };
+		F432F2E41AE6C57D00F27060 /* newyork-blur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "newyork-blur.png"; sourceTree = "<group>"; };
+		F432F2E61AE6C6AC00F27060 /* newyorkbackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newyorkbackground.png; sourceTree = "<group>"; };
 		F437BF811990452000CF61E9 /* whatsgoinon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = whatsgoinon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F437BF841990452000CF61E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F437BF861990452000CF61E9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -841,9 +845,11 @@
 		F439AEEC1A44BE0D00D24356 /* backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				F432F2E61AE6C6AC00F27060 /* newyorkbackground.png */,
 				F412770B19E5037A0092CD67 /* main-vc-background.png */,
 				F45BC4D51A33C0E4001197CD /* main-screen-background-small.png */,
 				F439AEEA1A44BDDC00D24356 /* HappSnap-bg.png */,
+				F432F2E41AE6C57D00F27060 /* newyork-blur.png */,
 			);
 			name = backgrounds;
 			sourceTree = "<group>";
@@ -1351,6 +1357,7 @@
 				F412770A19E4F8390092CD67 /* HappSnap-image-only-logo.png in Resources */,
 				F41277AC19E611570092CD67 /* appicon-60.png in Resources */,
 				F41277B319E611570092CD67 /* appicon-Small-40.png in Resources */,
+				F432F2E51AE6C57D00F27060 /* newyork-blur.png in Resources */,
 				F437BFC2199049D300CF61E9 /* SelectCategoryView.xib in Resources */,
 				F41277B519E611570092CD67 /* appicon-Small-50.png in Resources */,
 				F4CCCE161A696AD60073DEE5 /* thumbs-down.png in Resources */,
@@ -1373,6 +1380,7 @@
 				F46B945B19C2518500B41D8C /* SettingsAccount Icon.png in Resources */,
 				F41277B619E611570092CD67 /* appicon-Small-50@2x.png in Resources */,
 				F437BFCC199185D000CF61E9 /* Posting.storyboard in Resources */,
+				F432F2E71AE6C6AC00F27060 /* newyorkbackground.png in Resources */,
 				F462E7E31AB3B5EC003B983A /* viewTooLongToConnect.xib in Resources */,
 				F45030A719C014AB0061F362 /* clock-icon 44x44.png in Resources */,
 				F46B945719C24F7500B41D8C /* House-icon 25x25.png in Resources */,

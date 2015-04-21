@@ -54,6 +54,10 @@ const int DISPLAY_INFO_VIEW_WIDTH = 183;
     {
         [_secondPageMainView addGestureRecognizer:tapGestureRecognizer];
     }
+    
+    if (self.constraintSecondPageScrollViewToTitle) {
+        self.constraintSecondPageScrollViewToTitle.constant = 0;
+    }
 
 }
 
