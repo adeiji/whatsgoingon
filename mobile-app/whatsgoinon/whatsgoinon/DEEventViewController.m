@@ -113,7 +113,8 @@ const int heightConstraintConstant = 62;
     DECreatePostViewController *createPostViewController = [[UIStoryboard storyboardWithName:@"Posting" bundle:nil] instantiateViewControllerWithIdentifier:@"FinishedPosting"];
     DEFinishedPostingView *finishedPostView = (DEFinishedPostingView *) createPostViewController.view;
     [[finishedPostView lblParagraphOne] setText:@"The changes to your event have been applied."];
-    [[finishedPostView lblParagraphTwo] setText:@"Need more posting options?  Full feautured posting available on HappSnap.com"];
+    [[finishedPostView lblParagraphFour] setText:@"Need more posting options?  Full feautured posting available on HappSnap.com"];
+    [[finishedPostView lblHeader] setText:@"Edit Complete!"];
     [self.navigationController pushViewController:createPostViewController animated:YES];
 }
 

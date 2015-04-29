@@ -368,7 +368,7 @@
                                                     </mask>
                                                 </variation>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="FF5D3810-3FD7-4ED0-B7FA-406F36D31A53" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
+                                            <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="D27B6A80-EBA1-4CE7-9121-3CDE65894863" translatesAutoresizingMaskIntoConstraints="NO" id="ceK-CD-VUG">
                                                 <rect key="frame" x="19" y="399" width="17" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="iZM-I6-gde"/>
@@ -1740,6 +1740,7 @@
                             </mask>
                         </variation>
                         <connections>
+                            <outlet property="lblHeader" destination="BIb-1Z-H6N" id="aYO-ce-Taj"/>
                             <outlet property="lblParagraphFour" destination="yUo-ER-IdM" id="zOr-Kk-3Y3"/>
                             <outlet property="lblParagraphOne" destination="yxH-kS-sRs" id="xyI-PA-F6v"/>
                             <outlet property="lblParagraphThree" destination="xOy-8t-za2" id="juI-S1-g9S"/>
@@ -1758,7 +1759,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FF5D3810-3FD7-4ED0-B7FA-406F36D31A53" width="140" height="211">
+        <image name="D27B6A80-EBA1-4CE7-9121-3CDE65894863" width="140" height="211">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

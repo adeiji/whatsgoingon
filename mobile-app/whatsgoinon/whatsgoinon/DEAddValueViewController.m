@@ -47,7 +47,7 @@ Show the tutorial showing the user what should be entered for the different desc
 - (void) showTutorial {
     if (_isQuickDescription)
     {
-        [_lblTutorial setText:@"Start typing to begin...\n\nThe Quick Description si the first thign people will see for your event.\n\nYou only get 150 characters.\nUse them wisely to make it stand out."];
+        [_lblTutorial setText:@"Start typing to begin...\n\nThe Quick Description is the first thing people will see for your event.\n\nYou only get 150 characters.\nUse them wisely to make it stand out."];
     }
     else {
         [_lblTutorial setText:@"Start typing to begin...\n\nThe Full Description will appear when someone opens your event.\n\nBe sure to include all the details."];

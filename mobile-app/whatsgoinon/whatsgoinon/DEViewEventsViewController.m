@@ -363,9 +363,11 @@ struct TopMargin {
     {
         // If this method is being called because there are no events loaded
         view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:2];
+        _lblCategoryHeader.text = @"No Nearby Events Found";
     }
     else {
         view = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:4];
+        _lblCategoryHeader.text = @"Past Epic Events";
     }
     
     [self moveViewToCenterOfScrollViewView:view];
@@ -376,8 +378,6 @@ struct TopMargin {
     [self displayPost:nil TopMargin:view.frame.size.height + 15 PostArray:nil];
     
     [self hideOrbView];
-    
-    _lblCategoryHeader.text = @"Past Epic Events";
 }
 
 - (void) moveViewToCenterOfScrollViewView : (UIView *) view {

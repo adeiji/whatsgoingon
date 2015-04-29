@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblParagraphTwo;
 @property (weak, nonatomic) IBOutlet UILabel *lblParagraphThree;
 @property (weak, nonatomic) IBOutlet UILabel *lblParagraphFour;
+@property (weak, nonatomic) IBOutlet UILabel *lblHeader;
 
 @end

@@ -31,7 +31,8 @@
 }
 
 - (IBAction)shareFacebook:(id)sender {
-    if ([PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
+    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
     {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
 
@@ -45,7 +46,12 @@
         }];
     }
     else {
-        [PFFacebookUtils linkUserInBackground:[PFUser currentUser] permissions:nil];
+        if (UIApplicationOpenSettingsURLString != NULL)  // If we're in iOS 8 and the user can open the settings app from within this app
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Tweet" message:@"It seems that you can't post to Facebook using this app right now.  Go to Settings --> Facebook, and ensure that all is set up accurately" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", @"Settings", nil];
+            
+            [alert show];
+        }
     }
 }
 
@@ -66,7 +72,7 @@
         }];
     }
     else {
-        if (&UIApplicationOpenSettingsURLString != NULL)  // If we're in iOS 8 and the user can open the settings app from within this app
+        if (UIApplicationOpenSettingsURLString != NULL)  // If we're in iOS 8 and the user can open the settings app from within this app
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Tweet" message:@"It seems that you can't tweet using this app right now.  Go to Settings --> Twitter, and ensure that all is set up accurately" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", @"Settings", nil];
             

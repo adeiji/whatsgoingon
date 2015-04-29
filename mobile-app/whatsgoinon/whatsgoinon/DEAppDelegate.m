@@ -53,6 +53,8 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
         
     }
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    
     #if DEBUG
 
     #endif
