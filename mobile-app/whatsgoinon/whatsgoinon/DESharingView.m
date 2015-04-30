@@ -10,6 +10,7 @@
 #import "DESharingView.h"
 #import <Social/Social.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import <ParseCrashReporting/ParseCrashReporting.h>
 
 @implementation DESharingView
 
@@ -41,14 +42,23 @@
         [controller setInitialText:[self messageCaption]];
         [controller setTitle:_post.title];
         [controller addImage:_image];
+        NSString *message = [self messageCaption];
+        NSString *url = [self getEventUrl].absoluteString;
         [vc presentViewController:controller animated:NO completion:^{
             NSLog(@"Completed the transition");
+            NSDictionary *facebookPostData = @{
+                                                @"message" : message,
+                                                @"url" : url,
+                                                @"title" : _post.title
+                                                };
+            
+            [PFAnalytics trackEvent:@"facebookSharing" dimensions:facebookPostData];
         }];
     }
     else {
         if (UIApplicationOpenSettingsURLString != NULL)  // If we're in iOS 8 and the user can open the settings app from within this app
         {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Tweet" message:@"It seems that you can't post to Facebook using this app right now.  Go to Settings --> Facebook, and ensure that all is set up accurately" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", @"Settings", nil];
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot Post to Facebook" message:@"It seems that you can't post to Facebook using this app right now.  Go to Settings --> Facebook, and ensure that all is set up accurately" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", @"Settings", nil];
             
             [alert show];
         }
@@ -113,7 +123,7 @@
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // If he clicks on settings
-    if (buttonIndex == 0)
+    if (buttonIndex == 1)
     {
         if (&UIApplicationOpenSettingsURLString != NULL) {
             NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
