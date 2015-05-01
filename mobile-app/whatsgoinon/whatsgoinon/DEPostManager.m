@@ -127,6 +127,8 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 
 + (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post
 {
+    // Get the date three hours from now
+    NSDate *threeHoursFromNow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 3)];
     // Event has already started
     if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending)
     {
@@ -134,15 +136,74 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
         NSTimeInterval distanceBetweenDates = [[post endTime] timeIntervalSinceDate:[NSDate date]];
         return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
     }
-    else
+    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending)
     {
         // Get the amount of seconds until the start of the event
         NSTimeInterval distanceBetweenDates = [[post startTime] timeIntervalSinceDate:[NSDate date]];
         return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
     }
+    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending) // If the event is more than three hours from now
+    {
+        return [self getTimeForEventMoreThanThreeHoursOutWithPost:post];
+    }
     return nil;
 }
 
++ (NSString *) getDayOfWeekFromPost : (DEPost *) post {
+    NSDateComponents *eventDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
+    NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
+    
+    if ([eventDateComponents day] == [todayComponents day] &&
+        [eventDateComponents month] == [todayComponents month] &&
+        [eventDateComponents year] == [todayComponents year]) {
+        return @"Today";
+    }
+    else if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending) {
+        return [self getDayOfWeekFromInt:[eventDateComponents day]];
+    }
+    return nil;
+}
+
++ (NSString *) getDayOfWeekFromInt : (NSInteger) day {
+    
+    switch (day) {
+        case 1:
+            return @"Monday";
+            break;
+        case 2:
+            return @"Tuesday";
+            break;
+        case 3:
+            return @"Wednesday";
+            break;
+        case 4:
+            return @"Thursday";
+            break;
+        case 5:
+            return @"Friday";
+            break;
+        case 6:
+            return @"Saturday";
+            break;
+        case 7:
+            return @"Sunday";
+            break;
+        default:
+            break;
+            return nil;
+    }
+    
+    return nil;
+}
+
++ (NSString *) getTimeForEventMoreThanThreeHoursOutWithPost : (DEPost *) post
+{
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateFormat:@"HH:mm a"];
+    NSString *startTime = [df stringFromDate:[post startTime]];
+
+    return startTime;
+}
 
 + (NSString *) convertToHoursAndMinutesFromSeconds : (NSTimeInterval) seconds
 {
