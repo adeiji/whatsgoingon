@@ -470,7 +470,7 @@ const int heightConstraintConstant = 62;
         
         [self showFlagIfAmbassadorDetailsView:detailsView];
         
-        if ([DEPostManager isBeforeEvent:_post])
+        if ([DEPostManager isLessThanThreeHoursBeforeEvent:_post])
         {
             [[detailsView lblEndsInStartsIn] setText:@"Starts In"];
         }

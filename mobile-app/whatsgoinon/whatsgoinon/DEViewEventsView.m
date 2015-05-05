@@ -28,25 +28,36 @@ const int POST_WIDTH = 140;
 {
     [eventView.overlayView setFrame:eventView.imgMainImageView.frame];
     
-    if ([DEPostManager isBeforeEvent:eventView.post])
+    // If the event is 3 hours before the event, then we simply display as normal
+    
+    if ([DEPostManager isLessThanThreeHoursBeforeEvent:eventView.post])
     {
-        [[eventView.overlayView lblEndsInStartsIn] setText:@"Starts In"];
+        [[eventView.overlayView lblEndsInStartsIn] setText:[DEPostManager getDayOfWeekFromPost:eventView.post]];
         [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
         NSNumber *hours = [DEPostManager getDurationOfEvent:eventView.post];
         NSNumberFormatter *formatter = [NSNumberFormatter new];
         [formatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-        
         NSString *timeString = [NSString stringWithFormat:@"Duration: %@ hr(s)", [formatter stringFromNumber:hours]];
-        
         [[eventView.overlayView lblDuration] setText:timeString];
+        
+        NSDateFormatter *df = [NSDateFormatter new];
+        [df setDateFormat:@"HH:mm a"];
+        NSString *startTime = [df stringFromDate:_post.startTime];
+        NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post];
+        [[eventView.overlayView lblEndsInStartsIn] setText:@"Starts in"];
+        [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@\n@\n%@", timeUntilStartOrFinishFromPost, startTime]];
     }
     else
     {
         [[eventView.overlayView lblEndsInStartsIn] setText:@"Ends In"];
         [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0f]];
+        
+        NSDateFormatter *df = [NSDateFormatter new];
+        [df setDateFormat:@"HH:mm a"];
+        NSString *endTime = [df stringFromDate:_post.endTime];
+        NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post];
+        [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@\n@\n%@", timeUntilStartOrFinishFromPost, endTime]];
     }
-    
-    [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post]];
 }
 
 - (void) showOverlayView : (UILongPressGestureRecognizer *) sender {

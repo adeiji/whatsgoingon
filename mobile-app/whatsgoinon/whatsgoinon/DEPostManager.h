@@ -30,8 +30,9 @@
                       ThumbsUpCount:(NSNumber *) thumbsUpCount;
 
 + (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post;
-+ (BOOL) isBeforeEvent : (DEPost *) post;
++ (BOOL) isLessThanThreeHoursBeforeEvent : (DEPost *) post;
 + (NSNumber *) getDurationOfEvent : (DEPost *) event;
++ (NSString *) getDayOfWeekFromPost : (DEPost *) post;
 /*
  
  Sort through the post and get the events that fit for a specific category

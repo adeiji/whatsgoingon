@@ -103,16 +103,19 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
     return post;
 }
 
-+ (BOOL) isBeforeEvent : (DEPost *) post
++ (BOOL) isLessThanThreeHoursBeforeEvent : (DEPost *) post
 {
+    CGFloat threeHours = 60 * 60 * 3;
+    NSDate *startTimeMinusThreeHours = [[post startTime] dateByAddingTimeInterval:-threeHours];
+    
     // Has already started
-    if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending)
+    if ([startTimeMinusThreeHours compare:[NSDate date]] == NSOrderedAscending)
     {
-        return NO;
+        return YES;
     }
     else
     {
-        return YES;
+        return NO;
     }
 }
 
@@ -153,14 +156,49 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
     NSDateComponents *eventDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
     NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
     
-    if ([eventDateComponents day] == [todayComponents day] &&
-        [eventDateComponents month] == [todayComponents month] &&
-        [eventDateComponents year] == [todayComponents year]) {
-        return @"Today";
+    // Get the date three hours from now
+    NSDate *threeHoursFromNow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 3)];
+    if ([[post startTime] compare:threeHoursFromNow] == NSOrderedDescending) {  // If the event starts in less than three hours
+        if ([eventDateComponents day] == [todayComponents day] &&
+            [eventDateComponents month] == [todayComponents month] &&
+            [eventDateComponents year] == [todayComponents year]) {
+            
+            return [NSString stringWithFormat:@"Starts\nToday"];
+        }
+        else if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending) {
+            return [NSString stringWithFormat:@"Starts\n%@", [self getDayOfWeekFromInt:[eventDateComponents day]]];
+        }
     }
-    else if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending) {
-        return [self getDayOfWeekFromInt:[eventDateComponents day]];
+    
+    return nil;
+}
+
+
++ (NSString *) getTimeFromPost : (DEPost *) post {
+    NSDateComponents *eventDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
+    NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
+    
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateFormat:@"HH:mm a"];
+    NSString *startTime = [df stringFromDate:post.startTime];
+    
+    // Get the date three hours from now
+    NSDate *threeHoursFromNow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 3)];
+    if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending) {  // If the event starts in less than three hours
+        return @"";
     }
+    else {
+        if ([eventDateComponents day] == [todayComponents day] &&
+            [eventDateComponents month] == [todayComponents month] &&
+            [eventDateComponents year] == [todayComponents year]) {
+            
+            return [NSString stringWithFormat:@"@\n%@", startTime];
+        }
+        else if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending) {
+            return [NSString stringWithFormat:@"Starts\n%@", [self getDayOfWeekFromInt:[eventDateComponents day]]];
+        }
+    }
+    
     return nil;
 }
 
