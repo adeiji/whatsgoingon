@@ -113,10 +113,12 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
     {
         return YES;
     }
-    else
+    else if ([startTimeMinusThreeHours compare:[NSDate date]] == NSOrderedDescending)
     {
         return NO;
     }
+    
+    return NO;
 }
 
 + (NSNumber *) getDurationOfEvent : (DEPost *) event
@@ -153,51 +155,19 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 }
 
 + (NSString *) getDayOfWeekFromPost : (DEPost *) post {
-    NSDateComponents *eventDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
-    NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
+    NSDateComponents *eventDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
+    NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
     
-    // Get the date three hours from now
-    NSDate *threeHoursFromNow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 3)];
-    if ([[post startTime] compare:threeHoursFromNow] == NSOrderedDescending) {  // If the event starts in less than three hours
-        if ([eventDateComponents day] == [todayComponents day] &&
-            [eventDateComponents month] == [todayComponents month] &&
-            [eventDateComponents year] == [todayComponents year]) {
-            
-            return [NSString stringWithFormat:@"Starts\nToday"];
-        }
-        else if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending) {
-            return [NSString stringWithFormat:@"Starts\n%@", [self getDayOfWeekFromInt:[eventDateComponents day]]];
-        }
-    }
-    
-    return nil;
-}
-
-
-+ (NSString *) getTimeFromPost : (DEPost *) post {
-    NSDateComponents *eventDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
-    NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
-    
-    NSDateFormatter *df = [NSDateFormatter new];
-    [df setDateFormat:@"HH:mm a"];
-    NSString *startTime = [df stringFromDate:post.startTime];
-    
-    // Get the date three hours from now
-    NSDate *threeHoursFromNow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 3)];
-    if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending) {  // If the event starts in less than three hours
-        return @"";
+    if ([eventDateComponents day] == [todayComponents day] &&
+        [eventDateComponents month] == [todayComponents month] &&
+        [eventDateComponents year] == [todayComponents year]) {
+        
+        return [NSString stringWithFormat:@"Starts\nToday"];
     }
     else {
-        if ([eventDateComponents day] == [todayComponents day] &&
-            [eventDateComponents month] == [todayComponents month] &&
-            [eventDateComponents year] == [todayComponents year]) {
-            
-            return [NSString stringWithFormat:@"@\n%@", startTime];
-        }
-        else if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending) {
-            return [NSString stringWithFormat:@"Starts\n%@", [self getDayOfWeekFromInt:[eventDateComponents day]]];
-        }
+        return [NSString stringWithFormat:@"Starts\n%@", [self getDayOfWeekFromInt:[eventDateComponents weekday]]];
     }
+
     
     return nil;
 }
@@ -205,25 +175,25 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 + (NSString *) getDayOfWeekFromInt : (NSInteger) day {
     
     switch (day) {
-        case 1:
+        case 0:
             return @"Monday";
             break;
-        case 2:
+        case 1:
             return @"Tuesday";
             break;
-        case 3:
+        case 2:
             return @"Wednesday";
             break;
-        case 4:
+        case 3:
             return @"Thursday";
             break;
-        case 5:
+        case 4:
             return @"Friday";
             break;
-        case 6:
+        case 5:
             return @"Saturday";
             break;
-        case 7:
+        case 6:
             return @"Sunday";
             break;
         default:
