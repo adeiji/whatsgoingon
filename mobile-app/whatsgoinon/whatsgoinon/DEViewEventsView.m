@@ -40,7 +40,7 @@ const int POST_WIDTH = 140;
             [self displayOverlayViewForEventInMoreThanThreeHoursFromNowWithView:eventView];
         }
     }
-    else
+    else if (([[eventView.post startTime] compare:[NSDate date]] == NSOrderedAscending) && ([[eventView.post endTime] compare:[NSDate date]] == NSOrderedDescending))
     {
         [[eventView.overlayView lblEndsInStartsIn] setText:@"Ends In"];
         [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0f]];
@@ -50,6 +50,11 @@ const int POST_WIDTH = 140;
         NSString *endTime = [df stringFromDate:eventView.post.endTime];
         NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post];
         [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@\n@\n%@", timeUntilStartOrFinishFromPost, endTime]];
+    }
+    else {
+        [[eventView.overlayView lblEndsInStartsIn] setText:@""];
+        [[eventView.overlayView lblDuration] setText:@""];
+        [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:@"DONE"];
     }
 }
 
