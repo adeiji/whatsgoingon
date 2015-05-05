@@ -167,7 +167,6 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
     else {
         return [NSString stringWithFormat:@"Starts\n%@", [self getDayOfWeekFromInt:[eventDateComponents weekday]]];
     }
-
     
     return nil;
 }
