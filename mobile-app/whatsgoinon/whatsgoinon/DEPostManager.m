@@ -131,23 +131,29 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 }
 
 + (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post
+                                   isOverlayView : (BOOL) isOverlayView
 {
     // Get the date three hours from now
     NSDate *threeHoursFromNow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 3)];
     // Event has already started
-    if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending)
+    if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending) // Event has already begun
     {
         // Get the amount of seconds until the end of the event
         NSTimeInterval distanceBetweenDates = [[post endTime] timeIntervalSinceDate:[NSDate date]];
         return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
     }
-    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending)
+    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending && isOverlayView) /* If this screen is being displayed from the user pressing the view, and the event
+                                                                                                   begins in less than three hours*/
     {
-        // Get the amount of seconds until the start of the event
+        // Get the amount of seconds until the end of the event
         NSTimeInterval distanceBetweenDates = [[post startTime] timeIntervalSinceDate:[NSDate date]];
         return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
     }
-    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending) // If the event is more than three hours from now
+    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending && !isOverlayView) { /* If this screen is being displayed from the user pressing the view, and the event
+                                                                                                      begins in less than three hours*/
+        return [self getTimeForEventMoreThanThreeHoursOutWithPost:post];
+    }
+    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedDescending) // If the event is more than three hours from now
     {
         return [self getTimeForEventMoreThanThreeHoursOutWithPost:post];
     }
@@ -162,10 +168,10 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
         [eventDateComponents month] == [todayComponents month] &&
         [eventDateComponents year] == [todayComponents year]) {
         
-        return [NSString stringWithFormat:@"Starts\nToday"];
+        return @"Today";
     }
     else {
-        return [NSString stringWithFormat:@"Starts\n%@", [self getDayOfWeekFromInt:[eventDateComponents weekday]]];
+        return [self getDayOfWeekFromInt:[eventDateComponents weekday]];
     }
     
     return nil;
@@ -206,7 +212,7 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 + (NSString *) getTimeForEventMoreThanThreeHoursOutWithPost : (DEPost *) post
 {
     NSDateFormatter *df = [NSDateFormatter new];
-    [df setDateFormat:@"HH:mm a"];
+    [df setDateFormat:@"h:mm a"];
     NSString *startTime = [df stringFromDate:[post startTime]];
 
     return startTime;

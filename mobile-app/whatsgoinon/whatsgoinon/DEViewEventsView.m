@@ -48,7 +48,7 @@ const int POST_WIDTH = 140;
         NSDateFormatter *df = [NSDateFormatter new];
         [df setDateFormat:@"h:mm a"];
         NSString *endTime = [df stringFromDate:eventView.post.endTime];
-        NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post];
+        NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES];
         [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@\n@\n%@", timeUntilStartOrFinishFromPost, endTime]];
     }
     else {
@@ -67,32 +67,30 @@ const int POST_WIDTH = 140;
 }
 
 - (void) displayOverlayViewForEventInLessThanThreeHoursFromNowWithView : (DEViewEventsView *) eventView {
-    [[eventView.overlayView lblEndsInStartsIn] setText:[DEPostManager getDayOfWeekFromPost:eventView.post]];
     [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
-    
     [self displayDurationWithView:eventView];
-    
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"h:mm a"];
     NSString *startTime = [df stringFromDate:eventView.post.startTime];
-    NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post];
+    NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES];
     [[eventView.overlayView lblEndsInStartsIn] setText:@"Starts in"];
     [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@\n@\n%@", timeUntilStartOrFinishFromPost, startTime]];
 }
 
+- (void) displayDayOfWeekWithView : (DEViewEventsView *) eventView {
+    NSString *dayOfWeek = [DEPostManager getDayOfWeekFromPost:eventView.post];
+    [[eventView.overlayView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Starts\n%@", dayOfWeek]];
+}
+
 - (void) displayOverlayViewForEventInMoreThanThreeHoursFromNowWithView : (DEViewEventsView *) eventView {
-    [[eventView.overlayView lblEndsInStartsIn] setText:[DEPostManager getDayOfWeekFromPost:eventView.post]];
+    [self displayDayOfWeekWithView:eventView];
     [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
-    
     [self displayDurationWithView:eventView];
-    
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"h:mm a"];
     NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"US/Pacific"];
     [df setTimeZone:timeZone];
     NSString *startTime = [df stringFromDate:eventView.post.startTime];
-    NSString *dayOfWeek = [DEPostManager getDayOfWeekFromPost:eventView.post];
-    [[eventView.overlayView lblEndsInStartsIn] setText:dayOfWeek];
     [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@", startTime]];
 }
 

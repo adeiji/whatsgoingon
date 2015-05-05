@@ -470,9 +470,9 @@ const int heightConstraintConstant = 62;
         
         [self showFlagIfAmbassadorDetailsView:detailsView];
         
-        if ([DEPostManager isLessThanThreeHoursBeforeEvent:_post])
+        if ([[_post startTime] compare:[NSDate date]] == NSOrderedDescending)
         {
-            [[detailsView lblEndsInStartsIn] setText:@"Starts In"];
+            [[detailsView lblEndsInStartsIn] setText:[DEPostManager getDayOfWeekFromPost:_post]];
         }
         else
         {
@@ -481,7 +481,7 @@ const int heightConstraintConstant = 62;
     }
     
     [self adjustDetailsViewHeightDetailsView:detailsView];
-    [[detailsView lblTimeUntilStartsOrEnds] setText:[DEPostManager getTimeUntilStartOrFinishFromPost:_post]];
+    [[detailsView lblTimeUntilStartsOrEnds] setText:[DEPostManager getTimeUntilStartOrFinishFromPost:_post isOverlayView:NO]];
 }
 
 - (void) adjustDetailsViewHeightDetailsView : (DEEventDetailsView *) detailsView {

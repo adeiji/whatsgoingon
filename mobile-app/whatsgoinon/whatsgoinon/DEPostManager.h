@@ -29,7 +29,8 @@
                           ViewCount:(NSNumber *) viewCount
                       ThumbsUpCount:(NSNumber *) thumbsUpCount;
 
-+ (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post;
++ (NSString *) getTimeUntilStartOrFinishFromPost : (DEPost *) post
+                                   isOverlayView : (BOOL) isOverlayView;
 + (BOOL) isLessThanThreeHoursBeforeEvent : (DEPost *) post;
 + (NSNumber *) getDurationOfEvent : (DEPost *) event;
 + (NSString *) getDayOfWeekFromPost : (DEPost *) post;
