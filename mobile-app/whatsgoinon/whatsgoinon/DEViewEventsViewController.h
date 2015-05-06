@@ -30,6 +30,7 @@
     UIActivityIndicatorView *spinner;
     BOOL welcomeScreen;
     DEWelcomeEventView *welcomeView;
+    UIView *tutorialView;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;

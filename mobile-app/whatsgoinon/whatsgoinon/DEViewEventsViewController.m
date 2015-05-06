@@ -74,7 +74,7 @@ struct TopMargin {
     NSNumber *isFirstTimeViewingScreen = (NSNumber *) [userDefaults objectForKey:IS_FIRST_TIME_VIEWING_SCREEN];
     welcomeScreen = NO;
     
-    if (!isFirstTimeViewingScreen)
+    if (isFirstTimeViewingScreen)
     {
         welcomeView = (DEWelcomeEventView *)[[[NSBundle mainBundle] loadNibNamed:@"WelcomeEventsView" owner:self options:nil] firstObject];
         [welcomeView setFrame:[[UIScreen mainScreen] bounds]];
@@ -301,7 +301,7 @@ struct TopMargin {
     }
 }
 
-- (IBAction)hideWelcomeScreen:(id)sender {
+- (IBAction) hideWelcomeScreen:(id)sender {
     for (UIView *subview in [welcomeView subviews]) {
         [subview removeFromSuperview];
     }
@@ -318,12 +318,45 @@ struct TopMargin {
             [welcomeView setFrame:frame];
         } completion:^(BOOL finished) {
             [welcomeView removeFromSuperview];
+            [self showTutorialView];
         }];
     }];
     
     welcomeScreen = NO;
     [orbView setEnabled:YES];
+}
+
+- (void) showTutorialView {
+    tutorialView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [tutorialView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:tutorialView];
     
+    [UIView animateWithDuration:.25f animations:^{
+        [tutorialView setBackgroundColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:.87f]];
+        CGRect screenBounds = [[UIScreen mainScreen] bounds];
+        screenBounds.size.width = screenBounds.size.width - 150;
+        screenBounds.size.height = 250.0f;
+        screenBounds.origin.y = 150;
+        screenBounds.origin.x = 150.0f / 2.0f;
+        UILabel *label = [[UILabel alloc] initWithFrame:screenBounds];
+        [label setFont:[UIFont fontWithName:@"Avenir-Roman" size:22.0f]];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setNumberOfLines:5.0f];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [label setText:@"You can quickly see how long until an event starts or ends by holding down your finger on an event tile"];
+        [tutorialView addSubview:label];
+        [self.view addSubview:tutorialView];
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tutorialViewPress)];
+        [tutorialView setGestureRecognizers:[NSArray arrayWithObject:tapGestureRecognizer]];
+    }];
+}
+
+- (void) tutorialViewPress {
+    [UIView animateWithDuration:.25f animations:^{
+        [tutorialView setAlpha:0.0f];
+    } completion:^(BOOL finished) {
+        [tutorialView removeFromSuperview];
+    }];
 }
 
 - (void) hideOrbView

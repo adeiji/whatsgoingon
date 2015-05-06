@@ -33,6 +33,7 @@
     int goingButtonBottomSpaceConstraintConstant;
     UIView *deletionPromptView;
 }
+
 @property BOOL isPreview;
 @property (weak, nonatomic) DEPost *post;
 @property (strong, nonatomic) PFObject *postObject;
@@ -66,6 +67,7 @@
 - (IBAction)showImages:(id)sender;
 
 #pragma mark - Private Methods
+
 - (void) updateViewToGoing;
 
 @end

@@ -336,7 +336,7 @@
                         <constraint firstAttribute="width" constant="23" id="6gW-Uf-gQT"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="30" translatesAutoresizingMaskIntoConstraints="NO" id="Xsb-zB-uUe">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Xsb-zB-uUe">
                     <rect key="frame" x="103" y="77" width="115" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="115" id="G6i-F1-EzP"/>
