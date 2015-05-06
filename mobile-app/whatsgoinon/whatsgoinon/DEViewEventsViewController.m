@@ -74,7 +74,7 @@ struct TopMargin {
     NSNumber *isFirstTimeViewingScreen = (NSNumber *) [userDefaults objectForKey:IS_FIRST_TIME_VIEWING_SCREEN];
     welcomeScreen = NO;
     
-    if (isFirstTimeViewingScreen)
+    if (!isFirstTimeViewingScreen)
     {
         welcomeView = (DEWelcomeEventView *)[[[NSBundle mainBundle] loadNibNamed:@"WelcomeEventsView" owner:self options:nil] firstObject];
         [welcomeView setFrame:[[UIScreen mainScreen] bounds]];

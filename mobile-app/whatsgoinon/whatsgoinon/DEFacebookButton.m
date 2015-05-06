@@ -29,7 +29,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     //// Color Declarations
-    UIColor* color7 = [UIColor grayColor];
+    UIColor* color7 = [UIColor colorWithRed: 0.075 green: 0.606 blue: 0.915 alpha: 1];
 
     CGContextSaveGState(context);
     CGContextTranslateCTM(context, 5.7, 7.8);
