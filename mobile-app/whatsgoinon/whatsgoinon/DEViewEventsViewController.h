@@ -31,6 +31,7 @@
     BOOL welcomeScreen;
     DEWelcomeEventView *welcomeView;
     UIView *tutorialView;
+    UIGestureRecognizer *tapGestureCloseMenuRecognizer;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;

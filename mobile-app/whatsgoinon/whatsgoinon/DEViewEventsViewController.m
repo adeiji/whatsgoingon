@@ -138,6 +138,14 @@ struct TopMargin {
     [self.navigationController setNavigationBarHidden:YES];
     [self setUpSearchBar];
     [self removeAllPostFromScreen];
+    [self addCloseMenuTapGestureRecognizer];
+}
+
+- (void) addCloseMenuTapGestureRecognizer {
+    tapGestureCloseMenuRecognizer = [UITapGestureRecognizer new];
+    [tapGestureCloseMenuRecognizer addTarget:self action:@selector(hideMainMenu)];
+    [tapGestureCloseMenuRecognizer setEnabled:NO];
+    [self.view addGestureRecognizer:tapGestureCloseMenuRecognizer];
 }
 
 - (void) removeFirstResponder {
@@ -212,6 +220,7 @@ struct TopMargin {
     
     menuDisplayed = YES;
     [self hideOrbView];
+    [tapGestureCloseMenuRecognizer setEnabled:YES];
 }
 
 - (void) hideMainMenu
@@ -232,6 +241,7 @@ struct TopMargin {
     
     menuDisplayed = NO;
     [self showOrbView];
+    [tapGestureCloseMenuRecognizer setEnabled:NO];
 }
 
 - (void) showOrHideMainMenu : (UISwipeGestureRecognizer *) gestureRecognizer {
@@ -1056,6 +1066,11 @@ struct TopMargin {
                       ShowBlank:NO];
         [self loadVisiblePost:_scrollView];
     }
+}
+
+#pragma mark - Gesture Recognizer Delegate Methods 
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 @end
