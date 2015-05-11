@@ -407,7 +407,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     NSString *messageBody = @"";
     
     //To address
-    NSArray *toRecipients = [NSArray arrayWithObject:@"adebayoiji@gmail.com"];
+    NSArray *toRecipients = [NSArray arrayWithObject:@"support@happsnap.com"];
     
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     mc.mailComposeDelegate = self;
