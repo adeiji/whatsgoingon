@@ -328,7 +328,6 @@ struct TopMargin {
             [welcomeView setFrame:frame];
         } completion:^(BOOL finished) {
             [welcomeView removeFromSuperview];
-            [self showTutorialView];
         }];
     }];
     
