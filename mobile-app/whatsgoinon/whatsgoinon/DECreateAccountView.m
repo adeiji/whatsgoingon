@@ -57,7 +57,7 @@
 - (void) setUpValidators {
     [_txtEmail addRegx:@"[A-Z0-9a-z._%+-]{3,}+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}" withMsg:@"Must enter a valid email"];
     [_txtPassword addRegx:@"^(?!\\s*$).+" withMsg:@"Must enter a password"];
-    [_txtUsername addRegx:@"[A-Za-z0-9]{3,10}" withMsg:@"Only alpha numeric characters are allowed."];
+    [_txtUsername addRegx:@"^.{0,30}$" withMsg:@"Username must not be more than 30 characters."];
     [_txtConfirmPassword addConfirmValidationTo:_txtPassword withMsg:@"Passwords do not match"];
     
     [_txtEmail setPresentInView:self];
