@@ -54,6 +54,8 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     }
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+
     
     #if DEBUG
 
