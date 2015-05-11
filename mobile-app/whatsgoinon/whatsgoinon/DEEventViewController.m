@@ -554,6 +554,7 @@ const int heightConstraintConstant = 62;
         mapViewController.isGoing = _isGoing;
         mapViewController.post = _post;
         mapViewController.isPreview = _isPreview;
+        [mapViewController updateViewToGoing];
     }
 
 }
