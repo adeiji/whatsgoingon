@@ -80,11 +80,13 @@
 - (void) hideText {
     self.btnCategory.hidden = YES;
     self.lblMood.hidden = YES;
+    self.btnCancel.hidden = YES;
 }
 
 - (void) showText {
     self.btnCategory.hidden = NO;
     self.lblMood.hidden = NO;
+    self.btnCancel.hidden = NO;
 }
 
 - (void) renderView {
@@ -201,17 +203,18 @@
     [myCarousel removeFromSuperview];
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
     [self hideText];
-    
-    [self reloadEvents];
-    
     isActive = false;
 }
 
 - (IBAction)categoryButtonClicked:(id)sender {
     
     [self hideCategoryScreen];
+    [self reloadEvents];
 }
 
+- (IBAction)closeCategoryView:(id)sender {
+    [self hideCategoryScreen];
+}
 
 - (void) reloadEvents
 {

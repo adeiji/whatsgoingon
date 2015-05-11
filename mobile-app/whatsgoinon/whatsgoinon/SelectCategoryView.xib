@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DESView"/>
@@ -34,16 +34,34 @@
                         <action selector="categoryButtonClicked:" destination="1" eventType="touchUpInside" id="htS-TO-ZKB"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCO-0x-Q1I">
+                    <rect key="frame" x="230" y="0.0" width="90" height="90"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="1dl-wx-8D7"/>
+                        <constraint firstAttribute="height" constant="90" id="Whd-Q2-x76"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                    <state key="normal" title="x">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="closeCategoryView:" destination="1" eventType="touchUpInside" id="Y8Z-aV-oeA"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="bCO-0x-Q1I" secondAttribute="trailing" id="DSQ-Rl-uuH"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="centerX" secondItem="rxb-a2-EL3" secondAttribute="centerX" id="GIw-4u-owo"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="top" secondItem="rxb-a2-EL3" secondAttribute="bottom" id="Hg3-AA-SwA"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="25" id="IHj-EN-bKr"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="SMy-6g-LmF"/>
                 <constraint firstAttribute="centerY" secondItem="O9q-b2-CI6" secondAttribute="centerY" constant="113.5" id="rg4-Z7-Bfv"/>
+                <constraint firstItem="bCO-0x-Q1I" firstAttribute="top" secondItem="1" secondAttribute="top" id="u4C-c1-KZG"/>
             </constraints>
             <connections>
+                <outlet property="btnCancel" destination="bCO-0x-Q1I" id="GaM-Iw-yk6"/>
                 <outlet property="btnCategory" destination="O9q-b2-CI6" id="A4t-bT-qrc"/>
                 <outlet property="lblMood" destination="rxb-a2-EL3" id="pp9-T7-cWi"/>
             </connections>

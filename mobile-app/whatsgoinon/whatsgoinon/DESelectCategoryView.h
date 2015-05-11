@@ -42,6 +42,7 @@
 @property (strong, nonatomic) UIButton *orbView;
 @property (weak, nonatomic) IBOutlet UILabel *lblMood;
 @property (strong, nonatomic) UIView *outerView;
+@property (weak, nonatomic) IBOutlet UIButton *btnCancel;
 
 #pragma mark - Category Functions
 - (IBAction)displayCategoryWheel:(id)sender;
