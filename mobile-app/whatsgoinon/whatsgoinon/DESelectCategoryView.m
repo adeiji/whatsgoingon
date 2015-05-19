@@ -168,6 +168,7 @@
             myCarousel.contentOffset = CGSizeMake(5, -myCarousel.frame.size.height + 15);
             NSLog(@"Carousel Center %@", NSStringFromCGPoint(myCarousel.center));
             [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.9]];
+            [self setAlpha:.9f];
         } completion:^(BOOL finished) {
 //            [myCarousel setFrame:CGRectMake(0, 150, 320, 418)];
             double xPos = [[UIScreen mainScreen] bounds].size.width - 320;
@@ -190,7 +191,6 @@
     {
         isActive = true;
         [[myCarousel layer] setZPosition:-5.0f];
-        
         [self showOrbsAnimation];
         [self showText];
     }

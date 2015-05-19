@@ -21,8 +21,183 @@
 
 #pragma mark Drawing Methods
 
++ (void) drawArrows {
+    //// General Declarations
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    //// Color Declarations
+    UIColor* color0 = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
+    
+    //// Events_1
+    {
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, 23.4, 37.2);
+        CGContextRotateCTM(context, 180 * M_PI / 180);
+        
+        
+        
+        //// Bezier 2 Drawing
+        UIBezierPath* bezier2Path = UIBezierPath.bezierPath;
+        [bezier2Path moveToPoint: CGPointMake(14.7, 26.8)];
+        [bezier2Path addLineToPoint: CGPointMake(0, 13.4)];
+        [bezier2Path addLineToPoint: CGPointMake(14.7, 0)];
+        [color0 setStroke];
+        bezier2Path.lineWidth = 2;
+        [bezier2Path stroke];
+        
+        
+        
+        CGContextRestoreGState(context);
+    }
+    
+    
+    //// Events_
+    {
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, 35.4, 37.2);
+        CGContextRotateCTM(context, 180 * M_PI / 180);
+        
+        
+        
+        //// Bezier Drawing
+        UIBezierPath* bezierPath = UIBezierPath.bezierPath;
+        [bezierPath moveToPoint: CGPointMake(14.7, 26.8)];
+        [bezierPath addLineToPoint: CGPointMake(0, 13.4)];
+        [bezierPath addLineToPoint: CGPointMake(14.7, 0)];
+        [color0 setStroke];
+        bezierPath.lineWidth = 2;
+        [bezierPath stroke];
+        
+        
+        
+        CGContextRestoreGState(context);
+    }
+
+}
+
 + (UIColor *) blueColor {
     return [UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
+}
+
++ (void)drawTutorialWithFrame: (CGRect)frame
+{
+    //// Color Declarations
+    UIColor* strokeColor = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
+    UIColor* textForeground = [UIColor colorWithRed: 1 green: 1 blue: 1 alpha: 1];
+    
+    
+    //// Subframes
+    CGRect tutorialCategoryViewsvgGroup = CGRectMake(CGRectGetMinX(frame) + 11.6, CGRectGetMinY(frame) + 18.2, CGRectGetWidth(frame) - 29.6, CGRectGetHeight(frame) - 61.4);
+    
+    
+    //// TutorialCategoryView.svg Group
+    {
+        //// Bezier Drawing
+        UIBezierPath* bezierPath = UIBezierPath.bezierPath;
+        [bezierPath moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.35077 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.99774 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezierPath addCurveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.65136 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.59113 * CGRectGetHeight(tutorialCategoryViewsvgGroup)) controlPoint1: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.30180 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.81485 * CGRectGetHeight(tutorialCategoryViewsvgGroup)) controlPoint2: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.43625 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.63289 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [strokeColor setStroke];
+        bezierPath.lineWidth = 2;
+        [bezierPath stroke];
+        
+        
+        //// Bezier 2 Drawing
+        UIBezierPath* bezier2Path = UIBezierPath.bezierPath;
+        [bezier2Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.38016 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.95827 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier2Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.35112 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 1.00000 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier2Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.30096 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.96059 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [strokeColor setStroke];
+        bezier2Path.lineWidth = 2;
+        [bezier2Path stroke];
+        
+        
+        //// Bezier 3 Drawing
+        UIBezierPath* bezier3Path = UIBezierPath.bezierPath;
+        [bezier3Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.58677 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.58075 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier3Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.65874 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.58718 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier3Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.61150 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.63240 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [strokeColor setStroke];
+        bezier3Path.lineWidth = 2;
+        [bezier3Path stroke];
+        
+        
+        //// Label Drawing
+        CGRect labelRect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5), CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.66001 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.45936 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5) + 0.4, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.71791 - 0.22) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.66001 - 0.3) - 0.08);
+        NSMutableParagraphStyle* labelStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+        labelStyle.alignment = NSTextAlignmentLeft;
+        
+        NSDictionary* labelFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Avenir-Roman" size: 15], NSForegroundColorAttributeName: textForeground, NSParagraphStyleAttributeName: labelStyle};
+        
+        [@"Scroll through the " drawInRect: labelRect withAttributes: labelFontAttributes];
+        
+        
+        //// Label 2 Drawing
+        CGRect label2Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5), CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.71495 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.33540 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5) + 0.4, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.77338 - 0.42) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.71495 - 0.3) + 0.12);
+        NSMutableParagraphStyle* label2Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+        label2Style.alignment = NSTextAlignmentLeft;
+        
+        NSDictionary* label2FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Avenir-Roman" size: 15], NSForegroundColorAttributeName: textForeground, NSParagraphStyleAttributeName: label2Style};
+        
+        [@"orbs like this" drawInRect: label2Rect withAttributes: label2FontAttributes];
+        
+        
+        //// Bezier 4 Drawing
+        UIBezierPath* bezier4Path = UIBezierPath.bezierPath;
+        [bezier4Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.74518 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02588 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier4Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.96188 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02481 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [strokeColor setStroke];
+        bezier4Path.lineWidth = 2;
+        [bezier4Path stroke];
+        
+        
+        //// Bezier 5 Drawing
+        UIBezierPath* bezier5Path = UIBezierPath.bezierPath;
+        [bezier5Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95970 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02481 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier5Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95868 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.58584 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [strokeColor setStroke];
+        bezier5Path.lineWidth = 2;
+        [bezier5Path stroke];
+        
+        
+        //// Bezier 6 Drawing
+        UIBezierPath* bezier6Path = UIBezierPath.bezierPath;
+        [bezier6Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 1.00000 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.55780 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier6Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95855 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.59018 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier6Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.91735 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.55780 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [strokeColor setStroke];
+        bezier6Path.lineWidth = 2;
+        [bezier6Path stroke];
+        
+        
+        //// Bezier 7 Drawing
+        UIBezierPath* bezier7Path = UIBezierPath.bezierPath;
+        [bezier7Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.78257 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.05090 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier7Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.73885 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02545 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier7Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.78257 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.00000 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [strokeColor setStroke];
+        bezier7Path.lineWidth = 2;
+        [bezier7Path stroke];
+        
+        
+        //// Label 3 Drawing
+        CGRect label3Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) + 0.73, CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.21606 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.94490 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) - 0.34, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.27153 - 0.3) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.21606 - 0.3));
+        NSMutableParagraphStyle* label3Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+        label3Style.alignment = NSTextAlignmentLeft;
+        
+        NSDictionary* label3FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Avenir-Roman" size: 15], NSForegroundColorAttributeName: textForeground, NSParagraphStyleAttributeName: label3Style};
+        
+        [@"Make a selection" drawInRect: label3Rect withAttributes: label3FontAttributes];
+        
+        
+        //// Label 4 Drawing
+        CGRect label4Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) + 0.73, CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.26889 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.94490 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) - 0.34, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.32171 - 0.3) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.26889 - 0.3));
+        NSMutableParagraphStyle* label4Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
+        label4Style.alignment = NSTextAlignmentLeft;
+        
+        NSDictionary* label4FontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Avenir-Roman" size: 15], NSForegroundColorAttributeName: textForeground, NSParagraphStyleAttributeName: label4Style};
+        
+        [@"by tapping these" drawInRect: label4Rect withAttributes: label4FontAttributes];
+    }
 }
 
 

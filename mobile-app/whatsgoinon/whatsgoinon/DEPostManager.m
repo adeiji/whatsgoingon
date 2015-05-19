@@ -161,6 +161,7 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 }
 
 + (NSString *) getDayOfWeekFromPost : (DEPost *) post {
+    [[NSCalendar currentCalendar] setFirstWeekday:1];
     NSDateComponents *eventDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
     NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
     
@@ -180,26 +181,26 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 + (NSString *) getDayOfWeekFromInt : (NSInteger) day {
     
     switch (day) {
-        case 0:
-            return @"Monday";
-            break;
         case 1:
-            return @"Tuesday";
+            return @"Sunday";
             break;
         case 2:
-            return @"Wednesday";
+            return @"Monday";
             break;
         case 3:
-            return @"Thursday";
+            return @"Tuesday";
             break;
         case 4:
-            return @"Friday";
+            return @"Wednesday";
             break;
         case 5:
-            return @"Saturday";
+            return @"Thursday";
             break;
         case 6:
-            return @"Sunday";
+            return @"Friday";
+            break;
+        case 7:
+            return @"Saturday";
             break;
         default:
             break;

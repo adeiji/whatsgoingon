@@ -10,6 +10,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKO-9K-lO3" customClass="DETutorialCategory">
+                    <rect key="frame" x="0.0" y="143" width="320" height="425"/>
+                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What mood are you in?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxb-a2-EL3">
                     <rect key="frame" x="48" y="102" width="225" height="21"/>
                     <constraints>
@@ -52,11 +55,15 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="fKO-9K-lO3" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="CP9-Gj-6zC"/>
                 <constraint firstAttribute="trailing" secondItem="bCO-0x-Q1I" secondAttribute="trailing" id="DSQ-Rl-uuH"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="centerX" secondItem="rxb-a2-EL3" secondAttribute="centerX" id="GIw-4u-owo"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="top" secondItem="rxb-a2-EL3" secondAttribute="bottom" id="Hg3-AA-SwA"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="25" id="IHj-EN-bKr"/>
+                <constraint firstItem="O9q-b2-CI6" firstAttribute="top" secondItem="fKO-9K-lO3" secondAttribute="top" constant="-20" id="JLD-YH-Vj5"/>
                 <constraint firstItem="O9q-b2-CI6" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="SMy-6g-LmF"/>
+                <constraint firstAttribute="bottom" secondItem="fKO-9K-lO3" secondAttribute="bottom" id="dOE-9Z-wBa"/>
+                <constraint firstAttribute="trailing" secondItem="fKO-9K-lO3" secondAttribute="trailing" id="gS3-BZ-ZPl"/>
                 <constraint firstAttribute="centerY" secondItem="O9q-b2-CI6" secondAttribute="centerY" constant="113.5" id="rg4-Z7-Bfv"/>
                 <constraint firstItem="bCO-0x-Q1I" firstAttribute="top" secondItem="1" secondAttribute="top" id="u4C-c1-KZG"/>
             </constraints>

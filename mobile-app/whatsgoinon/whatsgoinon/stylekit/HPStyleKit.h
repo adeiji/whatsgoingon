@@ -17,6 +17,7 @@
 
 + (UIColor *) blueColor;
 // Drawing Methods
++ (void) drawArrows;
 + (void)drawAccountIconWithFrame: (CGRect)frame;
 + (void) drawAmbassadorFlagInRect: (CGRect)frame;
 + (void) drawMaybeCheckmark;
@@ -29,5 +30,6 @@
 + (void)drawHeartWithRect: (CGRect)rect;
 + (void)drawTimeWithFrame: (CGRect)frame;
 + (void)drawLocationWithFrame: (CGRect)frame;
++ (void) drawTutorialWithFrame : (CGRect) frame;
 
 @end

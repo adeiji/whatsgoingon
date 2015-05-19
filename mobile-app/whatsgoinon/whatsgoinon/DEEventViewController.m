@@ -736,7 +736,6 @@ const int heightConstraintConstant = 62;
     _goingButtonBottomSpaceConstraint.constant = -40;
     _goingButtonBottomSpaceConstraintMapView.constant = -40;
     [self.view layoutIfNeeded];
-   // [[_eventView btnMaybe] setTitle:@"Undo" forState:UIControlStateNormal];
     [maybeButton setHidden:YES];
     
     CGRect frame = _mapView.frame;

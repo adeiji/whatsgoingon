@@ -204,6 +204,8 @@
 		F4CCCE131A68D5300073DEE5 /* happ-snap-logo-no-text.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CCCE121A68D5300073DEE5 /* happ-snap-logo-no-text.png */; };
 		F4CCCE161A696AD60073DEE5 /* thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CCCE141A696AD60073DEE5 /* thumbs-down.png */; };
 		F4CCCE171A696AD60073DEE5 /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = F4CCCE151A696AD60073DEE5 /* thumbs-up.png */; };
+		F4E4ACAD1B07A560002805ED /* DETutorialCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E4ACAC1B07A560002805ED /* DETutorialCategory.m */; };
+		F4E4ACB01B07ADE4002805ED /* DEForwardArrowsView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4E4ACAF1B07ADE4002805ED /* DEForwardArrowsView.m */; };
 		F4EEB03519D20E400072B683 /* categories.plist in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03419D20E400072B683 /* categories.plist */; };
 		F4EEB03719D21F720072B683 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4EEB03619D21F720072B683 /* MessageUI.framework */; };
 		F4EEB03919D22A300072B683 /* going-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F4EEB03819D22A300072B683 /* going-indicator-icon.png */; };
@@ -497,6 +499,10 @@
 		F4CCCE121A68D5300073DEE5 /* happ-snap-logo-no-text.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "happ-snap-logo-no-text.png"; sourceTree = "<group>"; };
 		F4CCCE141A696AD60073DEE5 /* thumbs-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down.png"; sourceTree = "<group>"; };
 		F4CCCE151A696AD60073DEE5 /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
+		F4E4ACAB1B07A560002805ED /* DETutorialCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DETutorialCategory.h; sourceTree = "<group>"; };
+		F4E4ACAC1B07A560002805ED /* DETutorialCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DETutorialCategory.m; sourceTree = "<group>"; };
+		F4E4ACAE1B07ADE4002805ED /* DEForwardArrowsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEForwardArrowsView.h; sourceTree = "<group>"; };
+		F4E4ACAF1B07ADE4002805ED /* DEForwardArrowsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEForwardArrowsView.m; sourceTree = "<group>"; };
 		F4EEB03419D20E400072B683 /* categories.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = categories.plist; path = "supporting files/categories.plist"; sourceTree = "<group>"; };
 		F4EEB03619D21F720072B683 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F4EEB03819D22A300072B683 /* going-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "going-indicator-icon.png"; path = "../../../spec/graphics/illustrator files/icons/going-indicator-icon.png"; sourceTree = "<group>"; };
@@ -765,6 +771,8 @@
 				F49BB8E71A5E23F100C68E42 /* PromptForViewEpicEventsView.xib */,
 				F4CCCE0C1A68D3090073DEE5 /* LaunchScreen.xib */,
 				F462E7E21AB3B5EC003B983A /* viewTooLongToConnect.xib */,
+				F4E4ACAE1B07ADE4002805ED /* DEForwardArrowsView.h */,
+				F4E4ACAF1B07ADE4002805ED /* DEForwardArrowsView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -943,6 +951,8 @@
 				F4CCCE0A1A65FDD00073DEE5 /* DELocation.m */,
 				F45A90BE1AA535350080EBB5 /* DEAccountIcon.h */,
 				F45A90BF1AA535350080EBB5 /* DEAccountIcon.m */,
+				F4E4ACAB1B07A560002805ED /* DETutorialCategory.h */,
+				F4E4ACAC1B07A560002805ED /* DETutorialCategory.m */,
 			);
 			name = "Graphical Views - Paint Code";
 			sourceTree = "<group>";
@@ -1532,6 +1542,7 @@
 				F437BF9B1990452000CF61E9 /* DEViewController.m in Sources */,
 				F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */,
 				F45E60B519AD8AB6007705F9 /* DEMagnifyingGlass.m in Sources */,
+				F4E4ACAD1B07A560002805ED /* DETutorialCategory.m in Sources */,
 				F437C0171991CE7E00CF61E9 /* DEViewEventsViewController.m in Sources */,
 				F4774FA819956BBE00FCDE66 /* DECreateAccountViewController.m in Sources */,
 				F4C68D32199EB2E900AD0D36 /* DEViewReportEvent.m in Sources */,
@@ -1572,6 +1583,7 @@
 				F4CCBD6C199980B800532E9B /* DEAddValueView.m in Sources */,
 				F46B946619C2659C00B41D8C /* DELargeCameraButton.m in Sources */,
 				F46B944F19C116DA00B41D8C /* DEViewImGoing.m in Sources */,
+				F4E4ACB01B07ADE4002805ED /* DEForwardArrowsView.m in Sources */,
 				F45E60A519AD3287007705F9 /* DEHappSnapTitleView.m in Sources */,
 				F439AEEF1A4B3AFB00D24356 /* DEPromptCommentView.m in Sources */,
 				F43BBF1D1A5DC934005DE199 /* DEFinishedPostingView.m in Sources */,

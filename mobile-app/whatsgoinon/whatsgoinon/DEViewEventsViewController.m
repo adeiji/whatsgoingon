@@ -109,6 +109,7 @@ struct TopMargin {
     DESelectCategoryView *selectCategoryView = [[[NSBundle mainBundle] loadNibNamed:@"SelectCategoryView" owner:self options:nil] firstObject];
     [self.view addSubview:selectCategoryView];
     [selectCategoryView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+    [selectCategoryView setAlpha:0.0f];
     [selectCategoryView loadView];
     orbView = selectCategoryView.orbView;
     outerView = selectCategoryView.outerView;
