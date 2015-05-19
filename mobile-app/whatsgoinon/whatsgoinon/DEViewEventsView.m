@@ -88,7 +88,7 @@ const int POST_WIDTH = 140;
     [self displayDurationWithView:eventView];
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"h:mm a"];
-    NSTimeZone *timeZone = [NSTimeZone defaultTimeZonex];
+    NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
     [df setTimeZone:timeZone];
     NSString *startTime = [df stringFromDate:eventView.post.startTime];
     [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@", startTime]];
