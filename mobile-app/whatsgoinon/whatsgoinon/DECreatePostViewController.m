@@ -281,13 +281,10 @@
 - (IBAction)gotoNextScreen:(id)sender {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
     [dateFormatter setDateFormat:@"MM/d/yy h:mm a"];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    [gregorian setTimeZone:[NSTimeZone defaultTimeZone]];
     NSString *startDateString = [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtStartDate.text, _createPostViewOne.txtStartTime.text];
     NSDate *startDate = [dateFormatter dateFromString: startDateString];
-
-    
     NSString *endDateString = [NSString stringWithFormat:@"%@ %@", _createPostViewOne.txtEndDate.text, _createPostViewOne.txtEndTime.text];
     NSDate *endDate;
     

@@ -213,6 +213,7 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 + (NSString *) getTimeForEventMoreThanThreeHoursOutWithPost : (DEPost *) post
 {
     NSDateFormatter *df = [NSDateFormatter new];
+    [df setTimeZone:[NSTimeZone defaultTimeZone]];
     [df setDateFormat:@"h:mm a"];
     NSString *startTime = [df stringFromDate:[post startTime]];
 
