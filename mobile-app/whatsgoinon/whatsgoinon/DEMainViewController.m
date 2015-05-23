@@ -104,7 +104,7 @@
         // Do any additional setup after loading the view.
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
         DEViewEventsViewController *viewEventsViewController = [viewPosts instantiateInitialViewController];
-        [self.navigationController pushViewController:viewEventsViewController animated:YES];
+        [self.navigationController pushViewController:viewEventsViewController animated:NO];
         viewEventsViewController.now = NO;
     }
     else {
