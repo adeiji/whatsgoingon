@@ -84,8 +84,11 @@ const int POST_WIDTH = 140;
     NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
     [df setTimeZone:timeZone];
     NSString *dayOfWeek = [DEPostManager getDayOfWeekFromPost:eventView.post];
-    NSString *startTime = [df stringFromDate:eventView.post.startTime];
-    [[eventView.overlayView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Starts %@ @ %@", dayOfWeek, startTime]];
+    NSString *myStartTime = [df stringFromDate:eventView.post.startTime];
+    NSAttributedString *startTime = [[NSAttributedString alloc] initWithString:myStartTime attributes:@{ NSForegroundColorAttributeName : [HPStyleKit blueColor] }];
+    NSMutableAttributedString *timeDisplay = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Starts %@ @ ", dayOfWeek]];
+    [timeDisplay appendAttributedString:startTime];
+    [[eventView.overlayView lblEndsInStartsIn] setAttributedText:timeDisplay];
 }
 
 - (void) showOverlayView {
