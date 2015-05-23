@@ -16,6 +16,7 @@
 
 
 + (UIColor *) blueColor;
++ (UIColor *) greenColor;
 // Drawing Methods
 + (void) drawForwardArrowsWithFrame : (CGRect) frame;
 + (void)drawAccountIconWithFrame: (CGRect)frame;

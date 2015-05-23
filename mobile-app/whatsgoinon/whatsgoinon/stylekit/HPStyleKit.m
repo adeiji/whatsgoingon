@@ -108,6 +108,10 @@
     return [UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
 }
 
++ (UIColor *) greenColor {
+    return [UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0f];
+}
+
 + (void)drawTutorialWithFrame: (CGRect)frame
 {
     //// Color Declarations

@@ -57,20 +57,14 @@ const int POST_WIDTH = 140;
     }
 }
 
-//- (void) displayDurationWithView : (DEViewEventsView *) eventView {
-//    NSNumber *hours = [DEPostManager getDurationOfEvent:eventView.post];
-//    NSNumberFormatter *formatter = [NSNumberFormatter new];
-//    [formatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-//    NSString *timeString = [NSString stringWithFormat:@"Duration: %@ hr(s)", [formatter stringFromNumber:hours]];
-//    [[eventView.overlayView lblDuration] setText:timeString];
-//}
 
 - (void) displayOverlayViewForEventInLessThanThreeHoursFromNowWithView : (DEViewEventsView *) eventView {
-//    [self displayDurationWithView:eventView];
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"h:mm a"];
-    NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES];
-    [[eventView.overlayView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Starts in %@", timeUntilStartOrFinishFromPost]];
+    NSAttributedString *timeUntilStartOrFinishFromPost = [[NSAttributedString alloc] initWithString:[DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES]  attributes:@{ NSForegroundColorAttributeName : [HPStyleKit greenColor] }] ;
+    NSMutableAttributedString *timeDisplay = [[NSMutableAttributedString alloc] initWithString:@"Starts in "];
+    [timeDisplay appendAttributedString:timeUntilStartOrFinishFromPost];
+    [[eventView.overlayView lblEndsInStartsIn] setAttributedText:timeDisplay];
 }
 
 - (void) displayDayOfWeekWithView : (DEViewEventsView *) eventView {
