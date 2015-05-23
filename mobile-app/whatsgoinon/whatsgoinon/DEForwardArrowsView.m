@@ -17,7 +17,7 @@ IB_DESIGNABLE
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    [HPStyleKit drawArrows];
+    [HPStyleKit drawForwardArrowsWithFrame:rect];
 }
 
 

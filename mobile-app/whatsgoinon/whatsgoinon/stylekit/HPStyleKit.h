@@ -17,7 +17,7 @@
 
 + (UIColor *) blueColor;
 // Drawing Methods
-+ (void) drawArrows;
++ (void) drawForwardArrowsWithFrame : (CGRect) frame;
 + (void)drawAccountIconWithFrame: (CGRect)frame;
 + (void) drawAmbassadorFlagInRect: (CGRect)frame;
 + (void) drawMaybeCheckmark;

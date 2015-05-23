@@ -26,9 +26,13 @@ const int POST_WIDTH = 140;
 
 - (void) setUpOverlayViewWithSuperview : (DEViewEventsView *) eventView
 {
-    [eventView.overlayView setFrame:eventView.imgMainImageView.frame];
     
     // If the event is 3 hours before the event, then we simply display as normal
+    
+    CGRect frame = _overlayView.frame;
+    frame.size.width = eventView.frame.size.width;
+    frame.origin.y = eventView.imgMainImageView.frame.size.height - 24;
+    [_overlayView setFrame:frame];
     
     if ([[eventView.post startTime] compare:[NSDate date]] == NSOrderedDescending)
     {
@@ -42,89 +46,63 @@ const int POST_WIDTH = 140;
     }
     else if (([[eventView.post startTime] compare:[NSDate date]] == NSOrderedAscending) && ([[eventView.post endTime] compare:[NSDate date]] == NSOrderedDescending))
     {
-        [[eventView.overlayView lblEndsInStartsIn] setText:@"Ends In"];
-        [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:66.0f/255.0f green:188.0f/255.0f blue:98.0f/255.0f alpha:1.0f]];
+        NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES];
+        [[eventView.overlayView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Ends In %@", timeUntilStartOrFinishFromPost]];
         
         NSDateFormatter *df = [NSDateFormatter new];
         [df setDateFormat:@"h:mm a"];
-        NSString *endTime = [df stringFromDate:eventView.post.endTime];
-        NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES];
-        [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@\n@\n%@", timeUntilStartOrFinishFromPost, endTime]];
     }
     else {
-        [[eventView.overlayView lblEndsInStartsIn] setText:@""];
-        [[eventView.overlayView lblDuration] setText:@""];
-        [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:@"DONE"];
+        [[eventView.overlayView lblEndsInStartsIn] setText:@"DONE"];
     }
 }
 
-- (void) displayDurationWithView : (DEViewEventsView *) eventView {
-    NSNumber *hours = [DEPostManager getDurationOfEvent:eventView.post];
-    NSNumberFormatter *formatter = [NSNumberFormatter new];
-    [formatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
-    NSString *timeString = [NSString stringWithFormat:@"Duration: %@ hr(s)", [formatter stringFromNumber:hours]];
-    [[eventView.overlayView lblDuration] setText:timeString];
-}
+//- (void) displayDurationWithView : (DEViewEventsView *) eventView {
+//    NSNumber *hours = [DEPostManager getDurationOfEvent:eventView.post];
+//    NSNumberFormatter *formatter = [NSNumberFormatter new];
+//    [formatter setFormatterBehavior:NSNumberFormatterBehaviorDefault];
+//    NSString *timeString = [NSString stringWithFormat:@"Duration: %@ hr(s)", [formatter stringFromNumber:hours]];
+//    [[eventView.overlayView lblDuration] setText:timeString];
+//}
 
 - (void) displayOverlayViewForEventInLessThanThreeHoursFromNowWithView : (DEViewEventsView *) eventView {
-    [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
-    [self displayDurationWithView:eventView];
+//    [self displayDurationWithView:eventView];
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"h:mm a"];
-    NSString *startTime = [df stringFromDate:eventView.post.startTime];
     NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES];
-    [[eventView.overlayView lblEndsInStartsIn] setText:@"Starts in"];
-    [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@\n@\n%@", timeUntilStartOrFinishFromPost, startTime]];
+    [[eventView.overlayView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Starts in %@", timeUntilStartOrFinishFromPost]];
 }
 
 - (void) displayDayOfWeekWithView : (DEViewEventsView *) eventView {
-    NSString *dayOfWeek = [DEPostManager getDayOfWeekFromPost:eventView.post];
-    [[eventView.overlayView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Starts\n%@", dayOfWeek]];
+
 }
 
 - (void) displayOverlayViewForEventInMoreThanThreeHoursFromNowWithView : (DEViewEventsView *) eventView {
     [self displayDayOfWeekWithView:eventView];
-    [[eventView.overlayView lblTimeUntilStartsOrEnds] setTextColor:[UIColor colorWithRed:0.0f green:172.0f/255.0f blue:238.0f/255.0f alpha:1.0f]];
-    [self displayDurationWithView:eventView];
     NSDateFormatter *df = [NSDateFormatter new];
     [df setDateFormat:@"h:mm a"];
     NSTimeZone *timeZone = [NSTimeZone defaultTimeZone];
     [df setTimeZone:timeZone];
+    NSString *dayOfWeek = [DEPostManager getDayOfWeekFromPost:eventView.post];
     NSString *startTime = [df stringFromDate:eventView.post.startTime];
-    [[eventView.overlayView lblTimeUntilStartsOrEnds] setText:[NSString stringWithFormat:@"%@", startTime]];
+    [[eventView.overlayView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Starts %@ @ %@", dayOfWeek, startTime]];
 }
 
-- (void) showOverlayView : (UILongPressGestureRecognizer *) sender {
+- (void) showOverlayView {
     
-    NSArray *allViews = [[super superview] subviews];
+    NSArray *allViews = [self subviews];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     
     //Get all the sibling DEEventTimeline views and display them on the screen
-    for (UIView *superView in allViews) {
-        for (UIView *view in [superView subviews]) {
-            if ([view isKindOfClass:[DEEventsTimeline class]])
-            {
-                DEEventsTimeline *overlayView = (DEEventsTimeline *) view;
-                if (((DEViewEventsView *) [overlayView superview]).imgMainImageView.alpha != 0)
-                {
-                    [self setUpOverlayViewWithSuperview:(DEViewEventsView *)[overlayView superview]];
-
-                    if (sender.state == UIGestureRecognizerStateBegan)
-                    {
-                        [UIView animateWithDuration:.3 animations:^{
-                            [[overlayView layer] setOpacity:.8];
-                            [screenManager setOverlayDisplayed:YES];
-                        }];
-                    }
-                    else if (sender.state == UIGestureRecognizerStateEnded)
-                    {
-                        [UIView animateWithDuration:.3 animations:^{
-                            [[overlayView layer] setOpacity:0];
-                            [screenManager setOverlayDisplayed:NO];
-                        }];
-                    }
-                }
-            }
+    for (UIView *view in allViews) {
+        if ([view isKindOfClass:[DEEventsTimeline class]])
+        {
+            DEEventsTimeline *overlayView = (DEEventsTimeline *) view;
+            [self setUpOverlayViewWithSuperview:(DEViewEventsView *)[overlayView superview]];
+            [UIView animateWithDuration:.3 animations:^{
+                [[overlayView layer] setOpacity:1];
+                [screenManager setOverlayDisplayed:YES];
+            }];
         }
     }
 }
@@ -175,11 +153,6 @@ const int POST_WIDTH = 140;
 
 - (void) addGestureRecognizers
 {
-    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showOverlayView:)];
-    longPressGestureRecognizer.minimumPressDuration = .2;
-    longPressGestureRecognizer.delegate = self;
-    [self addGestureRecognizer:longPressGestureRecognizer];
-    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(displayEventDetails:)];
     tapGestureRecognizer.numberOfTapsRequired = 1;
     tapGestureRecognizer.delegate = self;
@@ -194,10 +167,8 @@ const int POST_WIDTH = 140;
     [self addGestureRecognizers];
     
     _overlayView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:OVERLAY_VIEW];
-    [_overlayView setFrame:CGRectMake(0, 0, 140, 140)];
     [self addSubview:_overlayView];
     [[_overlayView layer] setOpacity:0];
-//    [self loadImage];
     if (showBlank)
     {
         [self.imgMainImageView setAlpha:0.0];

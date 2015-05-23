@@ -38,4 +38,6 @@
 - (void) loadImage;
 - (void) showImage;
 - (void) hideImage;
+- (void) showOverlayView;
+
 @end

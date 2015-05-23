@@ -153,6 +153,7 @@ NSString *const LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER = @"addProfileImageViewC
 
 // NSUserDefaults
 NSString *const NSUSER_DEFAULTS_PROFILE_PICTURE = @"profile-picture";
+NSString *const EPIC_EVENTS_SCREEN_PROMPTED = @"epicEvents";
 
 // User Ranks
 NSString *const USER_RANK_AMBASSADOR = @"ambassador";

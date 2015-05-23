@@ -709,7 +709,6 @@ struct TopMargin {
     [viewEventsView renderViewWithPost:post
                              ShowBlank:showBlank];
     [viewEventsView setPostObject:obj];
-
     
     CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
     heightDifference += [self getEventImageHeightDifference:viewEventsView];
@@ -805,6 +804,7 @@ struct TopMargin {
     CGRect frame = CGRectMake((column * (POST_WIDTH * screenSizeRelativeToiPhone5Width)) + ((widthMargin * screenSizeRelativeToiPhone5Width) * (column + 1)), topMargin + (margin), (POST_WIDTH * screenSizeRelativeToiPhone5Width), viewEventsViewHeight);
 
     view.frame = frame;
+    [view showOverlayView];
 }
 /*
  

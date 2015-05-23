@@ -164,7 +164,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="goHome:" destination="M14-mQ-Lru" eventType="touchUpInside" id="dn8-Ux-2P5"/>
+                                        <action selector="viewWhatsGoingOnLater:" destination="M14-mQ-Lru" eventType="touchUpInside" id="zuM-vU-o6a"/>
                                     </connections>
                                 </button>
                             </subviews>

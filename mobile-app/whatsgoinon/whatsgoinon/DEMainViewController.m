@@ -148,10 +148,33 @@
 
 - (IBAction)showCreatePostView:(id)sender {
 
-    DEPromptForEpicEventsViewController *viewController = [[DEPromptForEpicEventsViewController alloc] initWithNibName:@"PromptForViewEpicEventsView" bundle:nil];
-    [self.navigationController pushViewController:viewController animated:YES];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [self.navigationController setNavigationBarHidden:YES];
+    if ([defaults objectForKey:EPIC_EVENTS_SCREEN_PROMPTED])
+    {
+        if ([self isLoggedIn : YES])
+        {
+            UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+            DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+            
+            [self.navigationController pushViewController:createPostViewController animated:YES];
+        }
+        else {
+            UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+            DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+            
+            [self setNextScreenWithViewController:createPostViewController];
+        }
+        
+        [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
+    }
+    else {
+        [defaults setObject:@YES forKey:EPIC_EVENTS_SCREEN_PROMPTED];
+        [defaults synchronize];
+        DEPromptForEpicEventsViewController *viewController = [[DEPromptForEpicEventsViewController alloc] initWithNibName:@"PromptForViewEpicEventsView" bundle:nil];
+        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController setNavigationBarHidden:YES];
+    }
     
 }
 

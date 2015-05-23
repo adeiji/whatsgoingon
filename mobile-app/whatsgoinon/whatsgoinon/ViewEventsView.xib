@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DEViewEventsViewController"/>
@@ -152,57 +151,31 @@
             <point key="canvasLocation" x="-158" y="112.5"/>
         </view>
         <view contentMode="scaleToFill" id="jXJ-tE-48P" customClass="DEEventsTimeline">
-            <rect key="frame" x="0.0" y="0.0" width="140" height="181"/>
+            <rect key="frame" x="0.0" y="5" width="140" height="24"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starts in" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="R9C-kj-Lr7">
-                    <rect key="frame" x="9" y="-1" width="123" height="42"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Starts in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="R9C-kj-Lr7">
+                    <rect key="frame" x="8" y="0.0" width="124" height="24"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="42" id="8Vy-JJ-vqr"/>
-                        <constraint firstAttribute="width" constant="123" id="McJ-Xr-Khv"/>
+                        <constraint firstAttribute="height" constant="24" id="T8S-Vw-6Af"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="FRa-I1-bKg">
-                    <rect key="frame" x="5" y="153" width="131" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="25" id="9nk-bz-mZI"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" minimumFontSize="15" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xk5-xL-dTH">
-                    <rect key="frame" x="9" y="48" width="123" height="90"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="90" id="Qw8-tL-wkj"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="82"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="R9C-kj-Lr7" firstAttribute="top" secondItem="jXJ-tE-48P" secondAttribute="top" constant="-1" id="BbK-dY-zpm"/>
-                <constraint firstItem="Xk5-xL-dTH" firstAttribute="trailing" secondItem="jXJ-tE-48P" secondAttribute="trailingMargin" id="INv-ze-HVY"/>
-                <constraint firstItem="Xk5-xL-dTH" firstAttribute="centerX" secondItem="FRa-I1-bKg" secondAttribute="centerX" id="JFd-bz-2fc"/>
-                <constraint firstAttribute="centerY" secondItem="Xk5-xL-dTH" secondAttribute="centerY" constant="-2.5" id="oJo-zn-bEc"/>
-                <constraint firstAttribute="bottom" secondItem="FRa-I1-bKg" secondAttribute="bottom" constant="3" id="oWP-mI-V2f"/>
-                <constraint firstItem="R9C-kj-Lr7" firstAttribute="centerX" secondItem="jXJ-tE-48P" secondAttribute="centerX" id="tcz-Zx-A5i"/>
-                <constraint firstItem="R9C-kj-Lr7" firstAttribute="centerX" secondItem="Xk5-xL-dTH" secondAttribute="centerX" id="ulO-dU-Xl4"/>
-                <constraint firstItem="FRa-I1-bKg" firstAttribute="leading" secondItem="jXJ-tE-48P" secondAttribute="leading" constant="5" id="vs1-XZ-Bvk"/>
+                <constraint firstItem="R9C-kj-Lr7" firstAttribute="leading" secondItem="jXJ-tE-48P" secondAttribute="leading" constant="8" id="RRK-4d-xyH"/>
+                <constraint firstAttribute="bottom" secondItem="R9C-kj-Lr7" secondAttribute="bottom" id="puZ-Xw-lIu"/>
+                <constraint firstAttribute="trailing" secondItem="R9C-kj-Lr7" secondAttribute="trailing" constant="8" id="qA1-57-yHe"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="lblDuration" destination="FRa-I1-bKg" id="FbW-tp-hUW"/>
                 <outlet property="lblEndsInStartsIn" destination="R9C-kj-Lr7" id="Yk4-w5-EyL"/>
-                <outlet property="lblTimeUntilStartsOrEnds" destination="Xk5-xL-dTH" id="yzq-Bm-Rfz"/>
             </connections>
-            <point key="canvasLocation" x="535" y="529.5"/>
+            <point key="canvasLocation" x="535" y="608"/>
         </view>
         <view contentMode="scaleToFill" id="Kwl-LH-GbA">
             <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>

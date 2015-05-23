@@ -166,6 +166,14 @@
     [DESyncManager getEventsPostedByUser:[[PFUser currentUser] username]];
 }
 
+- (IBAction)viewWhatsGoingOnLater:(id)sender {
+    
+    UINavigationController *navController = [DEScreenManager getMainNavigationController];
+    DEMainViewController *mainViewController = (DEMainViewController *) [navController viewControllers][0];
+    [navController popToRootViewControllerAnimated:NO];
+    [mainViewController viewWhatsGoingOnLater:nil];
+}
+
 - (void) drawRect:(CGRect)rect
 {
     

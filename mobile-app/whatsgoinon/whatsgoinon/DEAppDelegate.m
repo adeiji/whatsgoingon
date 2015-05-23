@@ -179,6 +179,10 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [[[DELocationManager sharedManager] locationManager] stopMonitoringSignificantLocationChanges];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:nil forKey:EPIC_EVENTS_SCREEN_PROMPTED];
+    [defaults synchronize];
 
 }
 

@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoTopViewConstraint;
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender;
-
+- (IBAction)viewWhatsGoingOnLater:(id)sender;
 - (IBAction)showCreatePostView:(id)sender;
+
 @end
