@@ -46,8 +46,11 @@ const int POST_WIDTH = 140;
     }
     else if (([[eventView.post startTime] compare:[NSDate date]] == NSOrderedAscending) && ([[eventView.post endTime] compare:[NSDate date]] == NSOrderedDescending))
     {
-        NSString *timeUntilStartOrFinishFromPost = [DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES];
-        [[eventView.overlayView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Ends In %@", timeUntilStartOrFinishFromPost]];
+        NSAttributedString *timeUntilStartOrFinishFromPost = [[NSAttributedString alloc] initWithString:[DEPostManager getTimeUntilStartOrFinishFromPost:eventView.post isOverlayView:YES]  attributes:@{ NSForegroundColorAttributeName : [HPStyleKit blueColor] }] ;
+        NSMutableAttributedString *timeDisplay = [[NSMutableAttributedString alloc] initWithString:@"Ends in "];
+        [timeDisplay appendAttributedString:timeUntilStartOrFinishFromPost];
+        
+        [[eventView.overlayView lblEndsInStartsIn] setAttributedText:timeDisplay];
         
         NSDateFormatter *df = [NSDateFormatter new];
         [df setDateFormat:@"h:mm a"];
@@ -79,7 +82,7 @@ const int POST_WIDTH = 140;
     [df setTimeZone:timeZone];
     NSString *dayOfWeek = [DEPostManager getDayOfWeekFromPost:eventView.post];
     NSString *myStartTime = [df stringFromDate:eventView.post.startTime];
-    NSAttributedString *startTime = [[NSAttributedString alloc] initWithString:myStartTime attributes:@{ NSForegroundColorAttributeName : [HPStyleKit blueColor] }];
+    NSAttributedString *startTime = [[NSAttributedString alloc] initWithString:myStartTime attributes:@{ NSForegroundColorAttributeName : [HPStyleKit greenColor] }];
     NSMutableAttributedString *timeDisplay = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Starts %@ @ ", dayOfWeek]];
     [timeDisplay appendAttributedString:startTime];
     [[eventView.overlayView lblEndsInStartsIn] setAttributedText:timeDisplay];

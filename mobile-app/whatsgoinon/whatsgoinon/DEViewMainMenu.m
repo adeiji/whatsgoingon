@@ -50,9 +50,35 @@
 }
 
 - (IBAction)gotoPostPage:(id)sender {
-    DEPromptForEpicEventsViewController *viewController = [[DEPromptForEpicEventsViewController alloc] initWithNibName:@"PromptForViewEpicEventsView" bundle:nil] ;
-    [[DEScreenManager getMainNavigationController] pushViewController:viewController animated:YES];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults objectForKey:EPIC_EVENTS_SCREEN_PROMPTED])
+    {
+        [defaults setObject:@YES forKey:EPIC_EVENTS_SCREEN_PROMPTED];
+        [defaults synchronize];
+        DEPromptForEpicEventsViewController *viewController = [[DEPromptForEpicEventsViewController alloc] initWithNibName:@"PromptForViewEpicEventsView" bundle:nil] ;
+        [[DEScreenManager getMainNavigationController] pushViewController:viewController animated:YES];
+        [self hideMenu:nil];
+    }
+    else {
+        if ([self isLoggedIn : YES])
+        {
+            UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+            DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+            
+            [[DEScreenManager getMainNavigationController ] pushViewController:createPostViewController animated:YES];
+        }
+        else {
+            UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
+            DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
+            
+            [self setNextScreenWithViewController:createPostViewController];
+        }
+        
+        [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
+    }
+    
     [self hideMenu:nil];
+
 }
 
 - (BOOL) isLoggedIn : (BOOL) posting {

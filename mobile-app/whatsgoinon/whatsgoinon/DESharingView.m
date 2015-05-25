@@ -39,6 +39,7 @@
 
         UINavigationController *vc = (UINavigationController *) [[[[UIApplication sharedApplication] delegate] window] rootViewController];
         [controller addURL:[self getEventUrl]];
+
         [controller setInitialText:[self messageCaption]];
         [controller setTitle:_post.title];
         [controller addImage:_image];
