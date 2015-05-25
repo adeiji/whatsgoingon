@@ -10,14 +10,14 @@
             <rect key="frame" x="0.0" y="0.0" width="259" height="561"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <scrollView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZXC-2F-TmY">
+                <scrollView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZXC-2F-TmY">
                     <rect key="frame" x="0.0" y="0.0" width="259" height="561"/>
                     <subviews>
                         <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oln-Vb-TmX">
                             <rect key="frame" x="0.0" y="8" width="259" height="551"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LPc-Oo-U47">
-                                    <rect key="frame" x="50" y="17" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="17" width="190" height="48"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="What's Happening Now">
@@ -29,7 +29,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yf-n8-lqY">
-                                    <rect key="frame" x="50" y="131" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="115" width="190" height="52"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Post Somethin'">
@@ -41,7 +41,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oDK-e8-07f">
-                                    <rect key="frame" x="50" y="359" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="319" width="190" height="52"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Change City">
@@ -53,7 +53,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4og-16-nF6">
-                                    <rect key="frame" x="50" y="473" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="421" width="190" height="52"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Feedback">
@@ -65,7 +65,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iid-vy-eBb">
-                                    <rect key="frame" x="50" y="416" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="370" width="190" height="52"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="My Account">
@@ -76,17 +76,14 @@
                                         <action selector="gotoAccountSettingsPage:" destination="M14-mQ-Lru" eventType="touchUpInside" id="qUe-U5-bQ2"/>
                                     </connections>
                                 </button>
-                                <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ABg-b3-xHl" customClass="DEPostView">
-                                    <rect key="frame" x="21" y="147" width="25" height="25"/>
-                                </view>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="House-icon 25x25.png" translatesAutoresizingMaskIntoConstraints="NO" id="Q2Q-4L-hW5">
-                                    <rect key="frame" x="21" y="33" width="25" height="25"/>
+                                    <rect key="frame" x="21" y="28" width="25" height="25"/>
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Comment-Feedback icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="vwT-vh-Akh">
-                                    <rect key="frame" x="20" y="490" width="27" height="23"/>
+                                    <rect key="frame" x="20" y="435" width="27" height="23"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRw-HW-kp1">
-                                    <rect key="frame" x="50" y="245" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="217" width="190" height="52"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Going/Maybe">
@@ -98,7 +95,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPF-Vg-KP0">
-                                    <rect key="frame" x="50" y="302" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="268" width="190" height="52"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="Past Epic Events">
@@ -111,19 +108,19 @@
                                     </connections>
                                 </button>
                                 <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LRN-QW-Ujn" customClass="DEAccountIcon">
-                                    <rect key="frame" x="13" y="425" width="40" height="40"/>
+                                    <rect key="frame" x="13" y="376" width="40" height="40"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pXm-xR-3qH" customClass="DEHeart">
-                                    <rect key="frame" x="21" y="261" width="25" height="25"/>
+                                    <rect key="frame" x="21" y="230" width="25" height="25"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IHu-Ls-iHS" customClass="DETime">
-                                    <rect key="frame" x="20" y="318" width="27" height="25"/>
+                                    <rect key="frame" x="20" y="281" width="27" height="25"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYy-kC-SWO">
-                                    <rect key="frame" x="50" y="188" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="166" width="190" height="52"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="My Posts">
@@ -135,19 +132,19 @@
                                     </connections>
                                 </button>
                                 <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pes-Z2-z2M" customClass="DEWrench">
-                                    <rect key="frame" x="20" y="204" width="27" height="25"/>
+                                    <rect key="frame" x="20" y="179" width="27" height="25"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTc-KL-s6l" customClass="DELocation">
-                                    <rect key="frame" x="21" y="369" width="25" height="37"/>
+                                    <rect key="frame" x="21" y="326" width="25" height="37"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aep-gw-N1V" customClass="DEForwardArrowsView">
-                                    <rect key="frame" x="21" y="90" width="25" height="25"/>
+                                    <rect key="frame" x="21" y="77" width="25" height="25"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmZ-qu-gP1">
-                                    <rect key="frame" x="50" y="74" width="190" height="58"/>
+                                    <rect key="frame" x="50" y="64" width="190" height="52"/>
                                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                     <inset key="contentEdgeInsets" minX="7" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="What's Happening Later">
@@ -158,12 +155,21 @@
                                         <action selector="viewWhatsGoingOnLater:" destination="M14-mQ-Lru" eventType="touchUpInside" id="zuM-vU-o6a"/>
                                     </connections>
                                 </button>
+                                <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ABg-b3-xHl" customClass="DEPostView">
+                                    <rect key="frame" x="21" y="128" width="25" height="25"/>
+                                </view>
                             </subviews>
                         </view>
                     </subviews>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.67000000000000004" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ZXC-2F-TmY" firstAttribute="top" secondItem="M14-mQ-Lru" secondAttribute="top" id="U9H-rM-eo1"/>
+                <constraint firstAttribute="trailing" secondItem="ZXC-2F-TmY" secondAttribute="trailing" id="prS-vb-8MQ"/>
+                <constraint firstAttribute="bottom" secondItem="ZXC-2F-TmY" secondAttribute="bottom" id="qcz-ME-9Ov"/>
+                <constraint firstItem="ZXC-2F-TmY" firstAttribute="leading" secondItem="M14-mQ-Lru" secondAttribute="leading" id="xdI-5Z-A52"/>
+            </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
