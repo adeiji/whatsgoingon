@@ -35,6 +35,8 @@ NSString *const PARSE_CLASS_EVENT_THUMBS_UP_COUNT = @"thumbsUpCount";
 NSString *const PARSE_CLASS_EVENT_STATUS = @"status";
 NSString *const PARSE_CLASS_EVENT_STATUS_POSTED = @"posted";
 NSString *const PARSE_CLASS_EVENT_WEBSITE = @"website";
+NSString *const PARSE_CLASS_EVENT_DISTANCE = @"distance";
+
 
 NSString *const TRENDING_ORDER = @"Trending Order";
 NSString *const LOCATION_LATITUDE = @"latitude";

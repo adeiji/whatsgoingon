@@ -25,7 +25,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="goHome:" destination="M14-mQ-Lru" eventType="touchUpInside" id="S30-ID-ACj"/>
+                                        <action selector="viewWhatsGoingOnNow:" destination="M14-mQ-Lru" eventType="touchUpInside" id="GQ1-ND-99E"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yf-n8-lqY">

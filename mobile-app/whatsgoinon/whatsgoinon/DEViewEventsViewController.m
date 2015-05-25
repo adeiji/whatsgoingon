@@ -245,6 +245,7 @@ struct TopMargin {
     [tapGestureCloseMenuRecognizer setEnabled:NO];
 }
 
+
 - (void) showOrHideMainMenu : (UISwipeGestureRecognizer *) gestureRecognizer {
     
     if (gestureRecognizer.direction == UISwipeGestureRecognizerDirectionRight )
@@ -360,6 +361,77 @@ struct TopMargin {
     for (UIView *subview in [_scrollView subviews]) {
         [subview removeFromSuperview];
     }
+}
+
+- (IBAction) showSortScreen : (id) sender {
+    sortView = [[DESortingView alloc] initWithOwner:self];
+    
+    [[sortView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:[UIButton class]])
+        {
+            UIButton *button = (UIButton *) obj;
+            [[button layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+        }
+    }];
+    
+    [self.view addSubview:sortView];
+    [DEAnimationManager animateView:sortView WithInsets:UIEdgeInsetsZero WithSelector:nil];
+    [_searchBar resignFirstResponder];
+}
+
+- (IBAction)hideSortScreen:(id)sender {
+    [DEAnimationManager animateViewOut:sortView WithInsets:UIEdgeInsetsZero];
+}
+
+- (IBAction)sortTrending:(id)sender {
+    [self sortArrayByKeyAndDisplay:TRENDING_ORDER];
+}
+
+- (void) sortArrayByKeyAndDisplay : (NSString *) key {
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:key ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
+        if ([key isEqualToString:PARSE_CLASS_EVENT_DISTANCE])
+        {
+            if ([obj1 doubleValue] < [obj2 doubleValue])
+            {
+                return NSOrderedAscending;
+            }
+            else {
+                return NSOrderedDescending;
+            }
+        }
+        else if ([key isEqualToString:TRENDING_ORDER])
+        {
+            if ([obj1 intValue] < [obj2 intValue])
+            {
+                return NSOrderedAscending;
+            }
+            else {
+                return NSOrderedDescending;
+            }
+        }
+        else
+        {
+            return ([(NSDate *) obj1 compare: (NSDate *) obj2]);
+        }
+    }];
+    
+    _posts = [_posts sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    [[DEPostManager sharedManager] setPosts:_posts];
+    
+    [self removeAllPostFromScreen];
+    [self setAllPostsToNotLoaded:_posts];
+    [self displayPost:nil];
+    [self hideSortScreen:nil];
+}
+
+- (IBAction)sortNearMe:(id)sender {
+    
+    [self sortArrayByKeyAndDisplay:PARSE_CLASS_EVENT_DISTANCE];
+}
+
+- (IBAction)sortStartTime:(id)sender {
+    [self sortArrayByKeyAndDisplay:PARSE_CLASS_EVENT_START_TIME];
 }
 
 - (void) displayPastEpicEvents : (NSNotification *) notification

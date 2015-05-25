@@ -19,19 +19,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7G2-Gs-pv6" userLabel="Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSd-il-cuu" customClass="DEMenuButton">
-                                        <rect key="frame" x="12" y="23" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="8lk-Uh-8k1"/>
-                                            <constraint firstAttribute="height" constant="40" id="OAh-do-Bpi"/>
-                                        </constraints>
-                                        <state key="normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="displayMainMenu:" destination="IJq-25-4RC" eventType="touchUpInside" id="8cS-FB-KPi"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trending" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="o38-TD-LuS">
                                         <rect key="frame" x="60" y="27" width="205" height="33"/>
                                         <constraints>
@@ -55,30 +42,45 @@
                                             <outlet property="delegate" destination="IJq-25-4RC" id="Ovw-Lh-TDj"/>
                                         </connections>
                                     </searchBar>
-                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aC-rG-TRw" customClass="DEHomeButton">
-                                        <rect key="frame" x="273" y="23" width="40" height="40"/>
+                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0aC-rG-TRw">
+                                        <rect key="frame" x="273" y="24" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="MMC-6N-jOw"/>
                                             <constraint firstAttribute="width" constant="40" id="ctC-EV-V1d"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                        <state key="normal" title="Sort">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showSortScreen:" destination="IJq-25-4RC" eventType="touchUpInside" id="FsE-Hu-0gV"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSd-il-cuu" customClass="DEMenuButton">
+                                        <rect key="frame" x="12" y="24" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="8lk-Uh-8k1"/>
+                                            <constraint firstAttribute="height" constant="40" id="OAh-do-Bpi"/>
                                         </constraints>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="goHome:" destination="IJq-25-4RC" eventType="touchUpInside" id="0dm-hv-qcS"/>
+                                            <action selector="displayMainMenu:" destination="IJq-25-4RC" eventType="touchUpInside" id="8cS-FB-KPi"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="TSd-il-cuu" firstAttribute="leading" secondItem="7G2-Gs-pv6" secondAttribute="leading" constant="12" id="3mQ-Bv-BAq"/>
-                                    <constraint firstItem="TSd-il-cuu" firstAttribute="centerY" secondItem="o38-TD-LuS" secondAttribute="centerY" constant="-0.5" id="5z2-Re-Wbe"/>
+                                    <constraint firstItem="TSd-il-cuu" firstAttribute="centerY" secondItem="o38-TD-LuS" secondAttribute="centerY" constant="0.5" id="5z2-Re-Wbe"/>
                                     <constraint firstAttribute="centerX" secondItem="o38-TD-LuS" secondAttribute="centerX" constant="-2.5" id="FvE-cl-Aob"/>
                                     <constraint firstItem="oFX-Ym-bdg" firstAttribute="top" secondItem="uV7-Rb-gZj" secondAttribute="bottom" id="Lql-Pe-fgs"/>
                                     <constraint firstItem="oFX-Ym-bdg" firstAttribute="leading" secondItem="7G2-Gs-pv6" secondAttribute="leading" id="MEZ-oU-VLx"/>
                                     <constraint firstItem="uV7-Rb-gZj" firstAttribute="top" secondItem="o38-TD-LuS" secondAttribute="bottom" constant="4" id="Mhc-JE-xJz"/>
-                                    <constraint firstItem="TSd-il-cuu" firstAttribute="top" secondItem="7G2-Gs-pv6" secondAttribute="top" constant="23" id="Ouc-4q-S8c"/>
+                                    <constraint firstItem="TSd-il-cuu" firstAttribute="top" secondItem="7G2-Gs-pv6" secondAttribute="top" constant="24" id="Ouc-4q-S8c"/>
                                     <constraint firstAttribute="bottom" secondItem="oFX-Ym-bdg" secondAttribute="bottom" constant="-1" id="PRy-Tr-ZZQ"/>
-                                    <constraint firstItem="o38-TD-LuS" firstAttribute="centerY" secondItem="0aC-rG-TRw" secondAttribute="centerY" constant="0.5" id="kbh-P6-wjH"/>
+                                    <constraint firstItem="o38-TD-LuS" firstAttribute="centerY" secondItem="0aC-rG-TRw" secondAttribute="centerY" constant="-0.5" id="kbh-P6-wjH"/>
                                     <constraint firstAttribute="trailing" secondItem="uV7-Rb-gZj" secondAttribute="trailing" constant="-1" id="lbM-ku-xdy"/>
                                     <constraint firstAttribute="trailing" secondItem="oFX-Ym-bdg" secondAttribute="trailing" id="nFK-kE-BV1"/>
                                     <constraint firstItem="uV7-Rb-gZj" firstAttribute="leading" secondItem="7G2-Gs-pv6" secondAttribute="leading" constant="1" id="xh2-zf-jcM"/>

@@ -26,7 +26,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnPostedByMe;
 @property (weak, nonatomic) IBOutlet UIView *viewPostedByMe;
 
-- (IBAction)goHome:(id)sender;
 - (IBAction)gotoPostPage:(id)sender;
 - (IBAction)gotoChangeCityPage:(id)sender;
 - (IBAction)showFeedbackPage:(id)sender;

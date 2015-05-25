@@ -26,19 +26,6 @@
     }
 }
 
-- (IBAction)goHome:(id)sender {
-
-    UINavigationController *nc = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-    
-    if ([[DEScreenManager sharedManager] mainMenu])
-    {
-        [[[DEScreenManager sharedManager] mainMenu] removeFromSuperview];
-        [[DEScreenManager sharedManager] setMainMenu:nil];
-    }
-    
-    [nc popToRootViewControllerAnimated:YES];
-}
-
 - (void) showPostPage {
     [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
     
@@ -174,6 +161,13 @@
     [mainViewController viewWhatsGoingOnLater:nil];
 }
 
+- (IBAction)viewWhatsGoingOnNow:(id)sender {
+    
+    UINavigationController *navController = [DEScreenManager getMainNavigationController];
+    DEMainViewController *mainViewController = (DEMainViewController *) [navController viewControllers][0];
+    [navController popToRootViewControllerAnimated:NO];
+    [mainViewController viewWhatsGoingOnNow:nil];
+}
 - (void) drawRect:(CGRect)rect
 {
     

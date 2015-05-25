@@ -182,13 +182,16 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
                                                            PostsArray:postsArray
                                                         ProcessStatus:kNOTIFICATION_CENTER_USER_INFO_USER_PROCESS_FINISHED_LOADING isNewProcess:isNewProcess];
                     
-                    __block int counter = 0;
-                    [postsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                        PFObject *event = (PFObject *) obj;
-                        event[TRENDING_ORDER] = [NSNumber numberWithInt:counter];
-                        counter ++;
-                    }];
                 }
+                
+                __block int counter = 0;
+                [postsArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                    PFObject *event = (PFObject *) obj;
+                    event[TRENDING_ORDER] = [NSNumber numberWithInt:counter];
+                    counter ++;
+                }];
+
+                
                 // Set the miles to zero so that the next time the events are loaded we load them from all to 25 miles distance
                 miles = 0;
                 [[DEScreenManager sharedManager] hideIndicatorIsPosting:NO];
@@ -306,6 +309,15 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     // Add all the events loaded to an array and store so that we don't pull these events down again
     [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [[[DEPostManager sharedManager] loadedEvents] addObject:[obj objectId]];
+        
+        PFGeoPoint *eventGeoPoint = obj[PARSE_CLASS_EVENT_LOCATION];
+        CLLocationDegrees latitude = eventGeoPoint.latitude;
+        CLLocationDegrees longitude = eventGeoPoint.longitude;
+        DELocationManager *locManager = [DELocationManager sharedManager];
+        CLLocation *currentLocation = [[CLLocation alloc] initWithLatitude:locManager.currentLocation.latitude longitude:locManager.currentLocation.longitude];
+        CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+        CLLocationDistance distance = [currentLocation distanceFromLocation:eventLocation];
+        obj[PARSE_CLASS_EVENT_DISTANCE] = [NSNumber numberWithDouble:distance];
     }];
     
     [sharedManager setPosts:postsArray];

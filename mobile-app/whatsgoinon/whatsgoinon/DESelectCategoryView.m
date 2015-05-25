@@ -202,6 +202,7 @@
 - (void) hideCategoryScreen {
     [myCarousel removeFromSuperview];
     [self setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+    [_tutorialView setHidden:YES];
     [self hideText];
     isActive = false;
 }

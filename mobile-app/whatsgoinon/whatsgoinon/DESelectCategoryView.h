@@ -13,6 +13,7 @@
 #import <iCarousel/iCarousel.h>
 #import "DEOrbButton.h"
 #import "DEPostManager.h"
+#import "DETutorialCategory.h"
 
 @interface DESelectCategoryView : UIView <UIGestureRecognizerDelegate, iCarouselDelegate, iCarouselDataSource>
 {
@@ -43,6 +44,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblMood;
 @property (strong, nonatomic) UIView *outerView;
 @property (weak, nonatomic) IBOutlet UIButton *btnCancel;
+@property (weak, nonatomic) IBOutlet DETutorialCategory *tutorialView;
 
 #pragma mark - Category Functions
 - (IBAction)displayCategoryWheel:(id)sender;

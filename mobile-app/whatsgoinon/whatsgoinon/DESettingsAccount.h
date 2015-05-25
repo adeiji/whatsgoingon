@@ -54,6 +54,7 @@
  The button that the user clicks when they want to take their profile picture.  This button also displays the profile picture after it has been taken.
  
  */
+@property (weak, nonatomic) IBOutlet UIButton *btnAmbassador;
 @property (weak, nonatomic) IBOutlet DELargeCameraButton *btnTakePicture;
 @property (weak, nonatomic) IBOutlet UIButton *btnSendFeedback;
 @property (weak, nonatomic) IBOutlet UIButton *btnSignOut;

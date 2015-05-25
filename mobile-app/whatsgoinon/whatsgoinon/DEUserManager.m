@@ -93,6 +93,9 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USER_RANK_RETRIEVED object:nil userInfo:@{ kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO : object[PARSE_CLASS_USER_RANK] }];
             }
+            else {
+                [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_CENTER_USER_RANK_RETRIEVED object:nil userInfo:nil];
+            }
         }
     }];
 }

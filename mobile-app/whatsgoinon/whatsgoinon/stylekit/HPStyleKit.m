@@ -120,15 +120,15 @@
     
     
     //// Subframes
-    CGRect tutorialCategoryViewsvgGroup = CGRectMake(CGRectGetMinX(frame) + 11.6, CGRectGetMinY(frame) + 18.2, CGRectGetWidth(frame) - 29.6, CGRectGetHeight(frame) - 61.4);
+    CGRect tutorialCategoryViewsvgGroup = CGRectMake(CGRectGetMinX(frame) + floor((CGRectGetWidth(frame) - 18) * 0.03842 - 0.1) + 0.6, CGRectGetMinY(frame) + floor((CGRectGetHeight(frame) - 77.2) * 0.05017 + 0.3) + 0.2, CGRectGetWidth(frame) - 18.6 - floor((CGRectGetWidth(frame) - 18) * 0.03842 - 0.1), CGRectGetHeight(frame) - 77.4 - floor((CGRectGetHeight(frame) - 77.2) * 0.05017 + 0.3));
     
     
     //// TutorialCategoryView.svg Group
     {
         //// Bezier Drawing
         UIBezierPath* bezierPath = UIBezierPath.bezierPath;
-        [bezierPath moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.35077 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.99774 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezierPath addCurveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.65136 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.59113 * CGRectGetHeight(tutorialCategoryViewsvgGroup)) controlPoint1: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.30180 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.81485 * CGRectGetHeight(tutorialCategoryViewsvgGroup)) controlPoint2: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.43625 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.63289 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezierPath moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.34733 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.99752 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezierPath addCurveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.64792 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.55078 * CGRectGetHeight(tutorialCategoryViewsvgGroup)) controlPoint1: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.29836 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.79658 * CGRectGetHeight(tutorialCategoryViewsvgGroup)) controlPoint2: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.43280 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.59667 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
         [strokeColor setStroke];
         bezierPath.lineWidth = 2;
         [bezierPath stroke];
@@ -136,9 +136,9 @@
         
         //// Bezier 2 Drawing
         UIBezierPath* bezier2Path = UIBezierPath.bezierPath;
-        [bezier2Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.38016 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.95827 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier2Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.35112 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 1.00000 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier2Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.30096 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.96059 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier2Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.37672 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.95415 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier2Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.34768 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 1.00000 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier2Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.29752 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.95670 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
         [strokeColor setStroke];
         bezier2Path.lineWidth = 2;
         [bezier2Path stroke];
@@ -146,16 +146,16 @@
         
         //// Bezier 3 Drawing
         UIBezierPath* bezier3Path = UIBezierPath.bezierPath;
-        [bezier3Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.58677 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.58075 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier3Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.65874 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.58718 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier3Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.61150 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.63240 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier3Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.58333 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.53938 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier3Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.65529 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.54645 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier3Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.60806 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.59613 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
         [strokeColor setStroke];
         bezier3Path.lineWidth = 2;
         [bezier3Path stroke];
         
         
         //// Label Drawing
-        CGRect labelRect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5), CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.66001 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.45936 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5) + 0.4, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.71791 - 0.22) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.66001 - 0.3) - 0.08);
+        CGRect labelRect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5), CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.60905 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.45936 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5) + 0.4, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.67266 - 0.22) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.60905 - 0.3) - 0.08);
         NSMutableParagraphStyle* labelStyle = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         labelStyle.alignment = NSTextAlignmentLeft;
         
@@ -165,7 +165,7 @@
         
         
         //// Label 2 Drawing
-        CGRect label2Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5), CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.71495 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.33540 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5) + 0.4, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.77338 - 0.42) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.71495 - 0.3) + 0.12);
+        CGRect label2Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5), CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.66941 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.33540 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.00000 + 0.5) + 0.4, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.73360 - 0.42) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.66941 - 0.3) + 0.12);
         NSMutableParagraphStyle* label2Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         label2Style.alignment = NSTextAlignmentLeft;
         
@@ -176,8 +176,8 @@
         
         //// Bezier 4 Drawing
         UIBezierPath* bezier4Path = UIBezierPath.bezierPath;
-        [bezier4Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.74518 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02588 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier4Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.96188 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02481 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier4Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.82782 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02844 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier4Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.96188 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02726 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
         [strokeColor setStroke];
         bezier4Path.lineWidth = 2;
         [bezier4Path stroke];
@@ -185,8 +185,8 @@
         
         //// Bezier 5 Drawing
         UIBezierPath* bezier5Path = UIBezierPath.bezierPath;
-        [bezier5Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95970 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02481 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier5Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95868 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.58584 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier5Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95970 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02725 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier5Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95868 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.46544 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
         [strokeColor setStroke];
         bezier5Path.lineWidth = 2;
         [bezier5Path stroke];
@@ -194,9 +194,9 @@
         
         //// Bezier 6 Drawing
         UIBezierPath* bezier6Path = UIBezierPath.bezierPath;
-        [bezier6Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 1.00000 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.55780 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier6Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95855 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.59018 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier6Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.91735 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.55780 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier6Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 1.00000 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.43292 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier6Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.95855 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.46849 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier6Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.91735 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.43292 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
         [strokeColor setStroke];
         bezier6Path.lineWidth = 2;
         [bezier6Path stroke];
@@ -204,16 +204,16 @@
         
         //// Bezier 7 Drawing
         UIBezierPath* bezier7Path = UIBezierPath.bezierPath;
-        [bezier7Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.78257 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.05090 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier7Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.73885 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02545 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
-        [bezier7Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.78257 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.00000 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier7Path moveToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.86522 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.05592 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier7Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.82150 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.02796 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
+        [bezier7Path addLineToPoint: CGPointMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + 0.86522 * CGRectGetWidth(tutorialCategoryViewsvgGroup), CGRectGetMinY(tutorialCategoryViewsvgGroup) + 0.00000 * CGRectGetHeight(tutorialCategoryViewsvgGroup))];
         [strokeColor setStroke];
         bezier7Path.lineWidth = 2;
         [bezier7Path stroke];
         
         
         //// Label 3 Drawing
-        CGRect label3Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) + 0.73, CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.21606 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.94490 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) - 0.34, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.27153 - 0.3) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.21606 - 0.3));
+        CGRect label3Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) + 0.73, CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.23738 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.94490 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) - 0.34, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.29832 - 0.3) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.23738 - 0.3));
         NSMutableParagraphStyle* label3Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         label3Style.alignment = NSTextAlignmentLeft;
         
@@ -223,7 +223,7 @@
         
         
         //// Label 4 Drawing
-        CGRect label4Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) + 0.73, CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.26889 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.94490 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) - 0.34, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.32171 - 0.3) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.26889 - 0.3));
+        CGRect label4Rect = CGRectMake(CGRectGetMinX(tutorialCategoryViewsvgGroup) + floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) + 0.73, CGRectGetMinY(tutorialCategoryViewsvgGroup) + floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.29541 - 0.3) + 0.8, floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.94490 + 0.1) - floor(CGRectGetWidth(tutorialCategoryViewsvgGroup) * 0.51906 - 0.23) - 0.34, floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.35345 - 0.3) - floor(CGRectGetHeight(tutorialCategoryViewsvgGroup) * 0.29541 - 0.3));
         NSMutableParagraphStyle* label4Style = NSMutableParagraphStyle.defaultParagraphStyle.mutableCopy;
         label4Style.alignment = NSTextAlignmentLeft;
         
@@ -232,8 +232,6 @@
         [@"by tapping these" drawInRect: label4Rect withAttributes: label4FontAttributes];
     }
 }
-
-
 
 + (void)drawAccountIconWithFrame: (CGRect)frame
 {

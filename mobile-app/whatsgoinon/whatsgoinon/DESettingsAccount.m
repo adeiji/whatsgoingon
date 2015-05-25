@@ -97,6 +97,12 @@ const int PICTURE_ACTION_SHEET = 2;
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 }
+- (IBAction)becomeAmbassadorPressed:(id)sender {
+    
+    NSString *ambassadorURL = @"http://www.happsnap.com/index.html#ambassadors";
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:ambassadorURL]];
+    
+}
 
 - (void) keyboardWillShow : (NSNotification *) aNotification {
     [self scrollViewToTopOfKeyboard:(UIScrollView *) [self superview] Notification:aNotification View:self TextFieldOrView:activeField];
@@ -152,6 +158,7 @@ const int PICTURE_ACTION_SHEET = 2;
     [_btnTakePicture setClipsToBounds:YES];
     [[_btnSendFeedback layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     [[_btnSignOut layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+    [[_btnAmbassador layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     
     [[_btnChangePassword layer] setCornerRadius:BUTTON_CORNER_RADIUS];
 }
@@ -171,6 +178,9 @@ const int PICTURE_ACTION_SHEET = 2;
             _progressBarForLevel.hidden = NO;
             _lblProgressToNextLevel.hidden = NO;
         }
+    }
+    else {
+        _btnAmbassador.hidden = NO;
     }
     self.lblRank.text = [notification.userInfo[kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO] capitalizedString];
 }
@@ -443,6 +453,7 @@ const int PICTURE_ACTION_SHEET = 2;
         UIScrollView *scrollView = (UIScrollView *) [self superview];
         CGPoint bottomOffset = CGPointMake(0, scrollView.contentSize.height - scrollView.bounds.size.height);
         [scrollView setContentOffset:bottomOffset animated:YES];
+        [_btnAmbassador setHidden:YES];
     }
 }
 
@@ -460,6 +471,7 @@ User presses the cancel button and we just want to hide the password text fields
     [_btnChangePassword setTitle:@"Change Password" forState:UIControlStateNormal];
     [_btnChangePassword removeTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     [_btnChangePassword addTarget:self action:@selector(changePasswordPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [_btnAmbassador setHidden:NO];
     
     CGFloat height = [[UIScreen mainScreen] bounds].size.height;
     if (height < 500)

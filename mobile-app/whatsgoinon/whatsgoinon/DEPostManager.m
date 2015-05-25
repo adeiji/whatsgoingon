@@ -271,7 +271,7 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
             PFObject *post1 = (PFObject *) obj1;
             PFObject *post2 = (PFObject *) obj2;
 
-            return [post1[TRENDING_ORDER] compare:post2[TRENDING_ORDER]];
+            return (post1[TRENDING_ORDER] > post2[TRENDING_ORDER]);
         }];
 
         

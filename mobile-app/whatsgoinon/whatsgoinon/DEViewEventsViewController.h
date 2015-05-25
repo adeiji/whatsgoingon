@@ -15,6 +15,7 @@
 #import "DEViewMainMenu.h"
 #import <Masonry/Masonry.h>
 #import "DEWelcomeEventView.h"
+#import "DESortingView.h"
 
 @class DEViewMainMenu;
 
@@ -32,6 +33,7 @@
     DEWelcomeEventView *welcomeView;
     UIView *tutorialView;
     UIGestureRecognizer *tapGestureCloseMenuRecognizer;
+    DESortingView *sortView;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;
@@ -54,8 +56,13 @@
 - (void) displayPost : (NSNotification *) notification
            TopMargin : (CGFloat) topMargin
            PostArray : (NSArray *) postArray;
+
 - (void) showMainMenu;
 - (void) hideMainMenu;
+
+- (IBAction)sortTrending:(id)sender;
+- (IBAction)sortNearMe:(id)sender;
+- (IBAction)sortStartTime:(id)sender;
 
 
 @end
