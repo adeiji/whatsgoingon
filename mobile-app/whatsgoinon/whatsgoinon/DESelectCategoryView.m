@@ -20,6 +20,8 @@
 #define BUTTON_OUTER_CIRCLE_HEIGHT 40
 #define BUTTON_OUTER_CIRCLE_WIDTH 40
 
+static NSString *kTutorialViewFirstTime = @"firstTutorialView";
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -185,6 +187,14 @@
     }
 }
 
+- (void) showTutorialViewFirstTime {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if (![userDefaults objectForKey:kTutorialViewFirstTime]) {
+        _tutorialView.hidden = NO;
+        [userDefaults setObject:@NO forKey:kTutorialViewFirstTime];
+    }
+}
+
 - (IBAction)displayCategoryWheel:(UIButton *)sender {
     
     if (!isActive)
@@ -192,6 +202,7 @@
         isActive = true;
         [[myCarousel layer] setZPosition:-5.0f];
         [self showOrbsAnimation];
+        [self showTutorialViewFirstTime];
         [self showText];
     }
     else {
