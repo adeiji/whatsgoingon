@@ -286,16 +286,6 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
     }
     else if ([category isEqualToString:CATEGORY_ANYTHING])
     {
-        [events sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            PFObject *post1 = (PFObject *) obj1;
-            PFObject *post2 = (PFObject *) obj2;
-
-            NSDate *startTimePost1 = post1[PARSE_CLASS_EVENT_START_TIME];
-            NSDate *startTimePost2 = post2[PARSE_CLASS_EVENT_START_TIME];
-            
-            return [startTimePost1 compare:startTimePost2];
-        }];
-
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             obj[@"loaded"] = @NO;
             [eventsInCategory addObject:obj];

@@ -417,6 +417,7 @@ struct TopMargin {
     }];
     
     _posts = [_posts sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    [[DEPostManager sharedManager] setAllEvents:[[[DEPostManager sharedManager] allEvents] sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
     [[DEPostManager sharedManager] setPosts:_posts];
     
     [self removeAllPostFromScreen];
