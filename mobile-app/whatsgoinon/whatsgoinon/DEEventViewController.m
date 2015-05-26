@@ -472,7 +472,14 @@ const int heightConstraintConstant = 62;
         
         if ([[_post startTime] compare:[NSDate date]] == NSOrderedDescending)
         {
-            [[detailsView lblEndsInStartsIn] setText:[DEPostManager getDayOfWeekFromPost:_post]];
+            NSDate *threeHoursFromNow = [[NSDate date] dateByAddingTimeInterval:60 * 60 * 3];
+            if ([threeHoursFromNow compare:[_post startTime]] == NSOrderedDescending)
+            {
+                [[detailsView lblEndsInStartsIn] setText:@"Starts In"];
+            }
+            else {
+                [[detailsView lblEndsInStartsIn] setText:[DEPostManager getDayOfWeekFromPost:_post]];
+            }
         }
         else
         {

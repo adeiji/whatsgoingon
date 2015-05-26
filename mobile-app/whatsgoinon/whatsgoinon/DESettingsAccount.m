@@ -453,8 +453,9 @@ const int PICTURE_ACTION_SHEET = 2;
         UIScrollView *scrollView = (UIScrollView *) [self superview];
         CGPoint bottomOffset = CGPointMake(0, scrollView.contentSize.height - scrollView.bounds.size.height);
         [scrollView setContentOffset:bottomOffset animated:YES];
-        [_btnAmbassador setHidden:YES];
     }
+    
+    [_btnAmbassador setHidden:YES];
 }
 
 #pragma mark - Change Password Button Functionality

@@ -364,19 +364,22 @@ struct TopMargin {
 }
 
 - (IBAction) showSortScreen : (id) sender {
-    sortView = [[DESortingView alloc] initWithOwner:self];
-    
-    [[sortView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isKindOfClass:[UIButton class]])
-        {
-            UIButton *button = (UIButton *) obj;
-            [[button layer] setCornerRadius:BUTTON_CORNER_RADIUS];
-        }
-    }];
-    
-    [self.view addSubview:sortView];
-    [DEAnimationManager animateView:sortView WithInsets:UIEdgeInsetsZero WithSelector:nil];
-    [_searchBar resignFirstResponder];
+    if (![sortView superview])
+    {
+        sortView = [[DESortingView alloc] initWithOwner:self];
+        
+        [[sortView subviews] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            if ([obj isKindOfClass:[UIButton class]])
+            {
+                UIButton *button = (UIButton *) obj;
+                [[button layer] setCornerRadius:BUTTON_CORNER_RADIUS];
+            }
+        }];
+        
+        [self.view addSubview:sortView];
+        [DEAnimationManager animateView:sortView WithInsets:UIEdgeInsetsZero WithSelector:nil];
+        [_searchBar resignFirstResponder];
+    }
 }
 
 - (IBAction)hideSortScreen:(id)sender {

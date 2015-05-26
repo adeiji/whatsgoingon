@@ -134,7 +134,7 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
                                    isOverlayView : (BOOL) isOverlayView
 {
     // Get the date three hours from now
-    NSDate *threeHoursFromNow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 3)];
+    NSDate *threeHoursFromNow = [[NSDate date] dateByAddingTimeInterval:(60 * 60 * 3)];
     // Event has already started
     if ([[post startTime] compare:[NSDate date]] == NSOrderedAscending) // Event has already begun
     {
@@ -142,7 +142,7 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
         NSTimeInterval distanceBetweenDates = [[post endTime] timeIntervalSinceDate:[NSDate date]];
         return [self convertToHoursAndMinutesFromSeconds:distanceBetweenDates];
     }
-    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending && isOverlayView) /* If this screen is being displayed from the user pressing the view, and the event
+    else if ([[post startTime] compare:threeHoursFromNow] == NSOrderedAscending) /* If this screen is being displayed from the user pressing the view, and the event
                                                                                                    begins in less than three hours*/
     {
         // Get the amount of seconds until the end of the event
