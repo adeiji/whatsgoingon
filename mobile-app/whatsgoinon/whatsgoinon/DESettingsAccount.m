@@ -178,9 +178,17 @@ const int PICTURE_ACTION_SHEET = 2;
             _progressBarForLevel.hidden = NO;
             _lblProgressToNextLevel.hidden = NO;
         }
+        
+        PFObject *userObject = [[DEUserManager sharedManager] userObject];
+        if (isPublic && [userObject[PARSE_CLASS_USER_RANK] isEqualToString:USER_RANK_STANDARD]) { // If the poster is an ambassador but the current device user is not
+            _btnAmbassador.hidden = NO;
+        }
     }
     else {
-        _btnAmbassador.hidden = NO;
+        if (!isPublic)
+        {
+            _btnAmbassador.hidden = NO;
+        }
     }
     self.lblRank.text = [notification.userInfo[kNOTIFICATION_CENTER_USER_RANK_OBJECT_INFO] capitalizedString];
 }

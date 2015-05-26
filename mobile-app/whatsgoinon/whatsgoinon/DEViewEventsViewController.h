@@ -34,6 +34,7 @@
     UIView *tutorialView;
     UIGestureRecognizer *tapGestureCloseMenuRecognizer;
     DESortingView *sortView;
+    UIVisualEffectView *blurView;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *containerView;

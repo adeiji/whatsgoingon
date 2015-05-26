@@ -130,7 +130,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="W6g-dj-Rel" secondAttribute="centerX" constant="0.5" id="FNL-MG-fr1"/>
                 <constraint firstAttribute="trailing" secondItem="B5Y-Yo-sE1" secondAttribute="trailing" constant="18" id="SKe-E3-gd4">

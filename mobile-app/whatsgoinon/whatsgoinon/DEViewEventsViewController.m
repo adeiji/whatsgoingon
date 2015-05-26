@@ -364,6 +364,11 @@ struct TopMargin {
 }
 
 - (IBAction) showSortScreen : (id) sender {
+    UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+    blurView = [[UIVisualEffectView alloc] initWithEffect:effect];
+    [blurView setFrame:[self.view frame]];
+    [self.view addSubview:blurView];
+    
     if (![sortView superview])
     {
         sortView = [[DESortingView alloc] initWithOwner:self];
@@ -384,6 +389,8 @@ struct TopMargin {
 
 - (IBAction)hideSortScreen:(id)sender {
     [DEAnimationManager animateViewOut:sortView WithInsets:UIEdgeInsetsZero];
+    [blurView removeFromSuperview];
+    blurView = nil;
 }
 
 - (IBAction)sortTrending:(id)sender {
