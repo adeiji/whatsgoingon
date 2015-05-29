@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSkip;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *createAccountButtonToBottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *skipButtonToBottomConstraint;
+@property BOOL account;
 @property BOOL posting;
 
 #pragma mark - Button Press Methods

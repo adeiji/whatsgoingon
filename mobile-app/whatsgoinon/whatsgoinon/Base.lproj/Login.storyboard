@@ -291,7 +291,7 @@
         <!--Login View Controller-->
         <scene sceneID="cBl-wS-1YV">
             <objects>
-                <viewController storyboardIdentifier="promptLogin" id="pGV-Sb-Wve" customClass="DELoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="promptLogin" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pGV-Sb-Wve" customClass="DELoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gsj-7s-1tf"/>
                         <viewControllerLayoutGuide type="bottom" id="ymb-vf-H3D"/>

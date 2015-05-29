@@ -182,6 +182,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:nil forKey:EPIC_EVENTS_SCREEN_PROMPTED];
+    [defaults setObject:nil forKey:kUSER_DEFAULTS_PROMPTED_FOR_LOGIN];
     [defaults synchronize];
 
 }

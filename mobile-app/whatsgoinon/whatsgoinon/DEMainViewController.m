@@ -97,9 +97,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (BOOL) promptLoginHasBeenDisplayed {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if (![userDefaults objectForKey:kUSER_DEFAULTS_PROMPTED_FOR_LOGIN]) {
+        [userDefaults setObject:@YES forKey:kUSER_DEFAULTS_PROMPTED_FOR_LOGIN];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (IBAction)viewWhatsGoingOnLater:(id)sender {
     [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
-    if ([self isLoggedIn : NO])
+    
+     if ([self isLoggedIn : NO])
     {
         // Do any additional setup after loading the view.
         UIStoryboard *viewPosts = [UIStoryboard storyboardWithName:@"ViewPosts" bundle:nil];
@@ -121,6 +134,7 @@
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
     [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+    
     if ([self isLoggedIn : NO])
     {
         // Do any additional setup after loading the view.
@@ -183,7 +197,7 @@
 - (BOOL) isLoggedIn : (BOOL) posting {
     DEUserManager *userManager = [DEUserManager sharedManager];
     
-    if (![userManager isLoggedIn])
+    if (![userManager isLoggedIn] && ![self promptLoginHasBeenDisplayed])
     {
         DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:PROMPT_LOGIN_VIEW_CONTROLLER];
         [[self navigationController] pushViewController:loginViewController animated:YES];

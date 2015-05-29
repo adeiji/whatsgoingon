@@ -29,7 +29,7 @@
 - (void) showPostPage {
     [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
     
-    if ([self isLoggedIn:YES])
+    if ([self isLoggedIn:YES Account:NO])
     {
         
         UINavigationController *nc = (UINavigationController *)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
@@ -60,7 +60,7 @@
         [self hideMenu:nil];
     }
     else {
-        if ([self isLoggedIn : YES])
+        if ([self isLoggedIn : YES Account:NO])
         {
             UIStoryboard *createPost = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
             DECreatePostViewController *createPostViewController = [createPost instantiateInitialViewController];
@@ -81,7 +81,8 @@
 
 }
 
-- (BOOL) isLoggedIn : (BOOL) posting {
+- (BOOL) isLoggedIn : (BOOL) posting
+            Account : (BOOL) account {
     DEUserManager *userManager = [DEUserManager sharedManager];
     
     if (![userManager isLoggedIn])
@@ -93,7 +94,7 @@
         [[loginViewController navigationController] setNavigationBarHidden:YES animated:YES];
         // If the user pressed post it then we don't want them to be able to skip this section
         loginViewController.posting = posting;
-        
+        loginViewController.account = account;
         return NO;
     }
     
@@ -143,7 +144,7 @@
 
 - (IBAction)gotoAccountSettingsPage:(id)sender {
     
-    if ([self isLoggedIn:YES])
+    if ([self isLoggedIn:NO Account:YES])
     {
         DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:[PFUser currentUser] IsPublic:NO];
 

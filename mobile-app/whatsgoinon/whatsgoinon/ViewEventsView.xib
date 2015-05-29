@@ -34,7 +34,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.2 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ali-rf-U8v">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.2 mi" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ali-rf-U8v">
                     <rect key="frame" x="91" y="251" width="44" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="bng-M9-uGC"/>
@@ -60,10 +60,10 @@
                     </constraints>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3k" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnQ-Xu-Rdb">
-                    <rect key="frame" x="32" y="277" width="100" height="24"/>
+                    <rect key="frame" x="32" y="277" width="30" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="jNP-VK-xR6"/>
-                        <constraint firstAttribute="width" constant="100" id="uJp-L0-rd1"/>
+                        <constraint firstAttribute="width" constant="30" id="uJp-L0-rd1"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="12"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -106,6 +106,26 @@
                         <constraint firstAttribute="height" constant="25" id="wzX-gW-6Nq"/>
                     </constraints>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDK-Gb-lGm">
+                    <rect key="frame" x="64" y="278" width="23" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="23" id="HoQ-h5-s2t"/>
+                        <constraint firstAttribute="height" constant="21" id="Jjf-Fs-lKz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccH-so-CjV">
+                    <rect key="frame" x="91" y="277" width="44" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="4iY-vY-GKc"/>
+                        <constraint firstAttribute="width" constant="44" id="z4f-fX-kAO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
             <constraints>
@@ -120,9 +140,11 @@
                 <constraint firstItem="wIg-bV-ff8" firstAttribute="centerY" secondItem="B1c-VQ-fcl" secondAttribute="centerY" constant="-0.5" id="FFV-bn-bfl"/>
                 <constraint firstItem="Ali-rf-U8v" firstAttribute="leading" secondItem="B1c-VQ-fcl" secondAttribute="trailing" constant="4" id="Fw2-e5-cKJ"/>
                 <constraint firstItem="Rdq-Pp-4T2" firstAttribute="top" secondItem="MJ0-LB-RQz" secondAttribute="bottom" constant="3" id="G2D-rO-Xz2"/>
+                <constraint firstItem="B1c-VQ-fcl" firstAttribute="centerX" secondItem="PDK-Gb-lGm" secondAttribute="centerX" id="GZo-NW-tS2"/>
                 <constraint firstItem="6uh-TH-Z8h" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="4" id="KZ9-86-EJv"/>
                 <constraint firstItem="6uh-TH-Z8h" firstAttribute="centerY" secondItem="wIg-bV-ff8" secondAttribute="centerY" constant="-1.5" id="L5h-Py-HTV"/>
                 <constraint firstItem="kW7-t4-DET" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="6" id="LTL-LV-kMw"/>
+                <constraint firstItem="ccH-so-CjV" firstAttribute="trailing" secondItem="Ali-rf-U8v" secondAttribute="trailing" id="PPR-ai-0Tj"/>
                 <constraint firstItem="dfb-u1-i4Q" firstAttribute="centerY" secondItem="L5I-6n-mVu" secondAttribute="centerY" id="PcX-5S-THw"/>
                 <constraint firstAttribute="trailing" secondItem="Ali-rf-U8v" secondAttribute="trailing" constant="5" id="Pnw-uY-6wv"/>
                 <constraint firstItem="xnQ-Xu-Rdb" firstAttribute="centerY" secondItem="HFq-xF-kAc" secondAttribute="centerY" constant="0.5" id="WYn-Tz-WK8"/>
@@ -130,11 +152,14 @@
                 <constraint firstAttribute="trailing" secondItem="dfb-u1-i4Q" secondAttribute="trailing" constant="5" id="bpv-Nu-Toj"/>
                 <constraint firstItem="xnQ-Xu-Rdb" firstAttribute="top" secondItem="Ali-rf-U8v" secondAttribute="bottom" constant="2" id="d3d-Es-bsx"/>
                 <constraint firstItem="Rdq-Pp-4T2" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="6" id="olk-eP-Z9B"/>
+                <constraint firstItem="ccH-so-CjV" firstAttribute="leading" secondItem="Ali-rf-U8v" secondAttribute="leading" id="pQ8-s5-Dd6"/>
                 <constraint firstItem="MJ0-LB-RQz" firstAttribute="top" secondItem="1" secondAttribute="top" id="qQT-IK-8eI"/>
+                <constraint firstItem="ccH-so-CjV" firstAttribute="top" secondItem="Ali-rf-U8v" secondAttribute="bottom" constant="2" id="qYM-S4-hnS"/>
                 <constraint firstAttribute="trailing" secondItem="kW7-t4-DET" secondAttribute="trailing" constant="5" id="rNO-jX-mbX"/>
                 <constraint firstItem="dfb-u1-i4Q" firstAttribute="top" secondItem="kW7-t4-DET" secondAttribute="bottom" constant="2" id="ten-oM-2iG"/>
                 <constraint firstItem="MJ0-LB-RQz" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="uBJ-qB-x4W"/>
                 <constraint firstAttribute="bottom" secondItem="xnQ-Xu-Rdb" secondAttribute="bottom" constant="4" id="wPs-PJ-rmY"/>
+                <constraint firstItem="PDK-Gb-lGm" firstAttribute="top" secondItem="B1c-VQ-fcl" secondAttribute="bottom" constant="7" id="y41-wc-BXS"/>
                 <constraint firstItem="xnQ-Xu-Rdb" firstAttribute="leading" secondItem="wIg-bV-ff8" secondAttribute="leading" id="zyw-9f-6dO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -142,6 +167,7 @@
                 <outlet property="imageViewHeightConstraint" destination="SPl-mj-GoB" id="D25-5W-sNc"/>
                 <outlet property="imgMainImageView" destination="MJ0-LB-RQz" id="eGy-qr-vHd"/>
                 <outlet property="lblAddress" destination="dfb-u1-i4Q" id="jan-Bk-Q5Y"/>
+                <outlet property="lblCost" destination="ccH-so-CjV" id="fC8-BR-Cd1"/>
                 <outlet property="lblDistance" destination="Ali-rf-U8v" id="Ohv-nv-uSm"/>
                 <outlet property="lblNumGoing" destination="wIg-bV-ff8" id="R2D-OY-Oez"/>
                 <outlet property="lblSubtitle" destination="kW7-t4-DET" id="XHW-lK-SBe"/>
@@ -211,6 +237,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="242" y="426.5"/>
         </view>
         <view contentMode="scaleToFill" id="huP-Tm-Pdt">
             <rect key="frame" x="0.0" y="0.0" width="320" height="358"/>
@@ -259,7 +286,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="139" y="515"/>
+            <point key="canvasLocation" x="-158" y="499"/>
         </view>
         <view contentMode="scaleToFill" id="6Go-G5-LzW">
             <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
@@ -283,7 +310,7 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="397" y="869"/>
+            <point key="canvasLocation" x="242" y="667"/>
         </view>
         <view contentMode="scaleToFill" id="VLz-SA-Cqq">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -348,7 +375,7 @@
                 <constraint firstItem="43U-0d-sAm" firstAttribute="top" secondItem="nnx-gM-Iun" secondAttribute="bottom" constant="19" id="zu1-mA-idM"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="850" y="-103"/>
+            <point key="canvasLocation" x="242" y="-19"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

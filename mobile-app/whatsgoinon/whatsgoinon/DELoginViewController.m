@@ -28,6 +28,9 @@
     }
     
     [DEScreenManager setUpTextFields:_textFields];
+    if (_account) {
+        [_btnSkip setHidden:YES];
+    }
     if (_posting)
     {
         [_btnSkip setHidden:YES];

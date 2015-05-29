@@ -33,8 +33,15 @@ const int POST_WIDTH = 140;
     frame.size.width = eventView.frame.size.width;
     frame.origin.y = eventView.imgMainImageView.frame.size.height - 24;
     [_overlayView setFrame:frame];
-    
-    if ([[eventView.post startTime] compare:[NSDate date]] == NSOrderedDescending)
+    NSInteger daysBetweenDates = [DEPostManager daysBetweenDate:[NSDate date] andDate:[eventView.post startTime]];
+    NSString *daysBetweenDatesStrings = [NSString stringWithFormat:@"%@ days", [[NSNumber numberWithInteger:daysBetweenDates] stringValue]];
+    if (daysBetweenDates >= 7) {
+        NSAttributedString *daysUntilStarts = [[NSAttributedString alloc] initWithString:daysBetweenDatesStrings attributes:@{ NSForegroundColorAttributeName : [HPStyleKit blueColor] }] ;
+        NSMutableAttributedString *timeDisplay = [[NSMutableAttributedString alloc] initWithString:@"Starts in "];
+        [timeDisplay appendAttributedString:daysUntilStarts];
+        [[eventView.overlayView lblEndsInStartsIn] setAttributedText:timeDisplay];
+    }
+    else if ([[eventView.post startTime] compare:[NSDate date]] == NSOrderedDescending)
     {
         if ([DEPostManager isLessThanThreeHoursBeforeEvent:eventView.post])
         {
@@ -182,6 +189,7 @@ const int POST_WIDTH = 140;
     self.lblAddress.text = post.address;
     self.lblSubtitle.text = post.quickDescription;
     self.lblViewCount.text = [post.viewCount stringValue];
+    self.lblCost.text = ([post.cost isEqual:[NSNumber numberWithInt:0]]) ? @"Free" : [post.cost stringValue];
     [self displayDistanceToLocationWithPost : post];
     
     _post = myPost;

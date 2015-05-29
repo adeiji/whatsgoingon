@@ -124,7 +124,6 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 + (NSNumber *) getDurationOfEvent : (DEPost *) event
 {
     NSTimeInterval secondsOfEvent = [[event endTime] timeIntervalSinceDate:[event startTime]];
-    
     NSNumber *hours = [NSNumber numberWithDouble:secondsOfEvent / 3600];
     
     return hours;
@@ -160,6 +159,24 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
     return nil;
 }
 
++ (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                 interval:NULL forDate:toDateTime];
+    
+    NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                               fromDate:fromDate toDate:toDate options:0];
+    
+    return [difference day];
+}
+
 + (NSString *) getDayOfWeekFromPost : (DEPost *) post {
     [[NSCalendar currentCalendar] setFirstWeekday:1];
     NSDateComponents *eventDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[post startTime]];
@@ -170,6 +187,10 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
         [eventDateComponents year] == [todayComponents year]) {
         
         return @"Today";
+    }
+    else if ([eventDateComponents day] == ([todayComponents day] + 1))
+    {
+        return @"Tomorrow";
     }
     else {
         return [self getDayOfWeekFromInt:[eventDateComponents weekday]];

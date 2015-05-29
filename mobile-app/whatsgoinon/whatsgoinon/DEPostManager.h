@@ -34,6 +34,7 @@
 + (BOOL) isLessThanThreeHoursBeforeEvent : (DEPost *) post;
 + (NSNumber *) getDurationOfEvent : (DEPost *) event;
 + (NSString *) getDayOfWeekFromPost : (DEPost *) post;
++ (NSInteger)daysBetweenDate:(NSDate*)fromDateTime andDate:(NSDate*)toDateTime;
 /*
  
  Sort through the post and get the events that fit for a specific category

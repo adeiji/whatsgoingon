@@ -451,6 +451,12 @@ const int heightConstraintConstant = 62;
         [detailsView setIsLoaded:YES];
         [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
         [[detailsView txtDescription] setText:nil];
+        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+        [fmt setPositiveFormat:@"0.##"];
+        
+        NSString *eventDuration = [fmt stringFromNumber:[DEPostManager getDurationOfEvent:_post]];
+        [[detailsView lblDuration] setText:[NSString stringWithFormat:@"%@hr Event", eventDuration]];
+        
         NSString *website = _post.website;
         if (!_post.website)
         {
@@ -484,6 +490,7 @@ const int heightConstraintConstant = 62;
         else
         {
             [[detailsView lblEndsInStartsIn] setText:@"Ends In"];
+            [[detailsView lblDuration] setText:@""];
         }
     }
     

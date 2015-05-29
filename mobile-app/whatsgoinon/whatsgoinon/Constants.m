@@ -154,7 +154,8 @@ NSString *const PROMPT_LOGIN_VIEW_CONTROLLER = @"promptLogin";
 NSString *const LOGIN_ADD_PROFILE_IMAGE_VIEW_CONTROLLER = @"addProfileImageViewControler";
 
 // NSUserDefaults
-NSString *const NSUSER_DEFAULTS_PROFILE_PICTURE = @"profile-picture";
+NSString *const kUSER_DEFAULTS_PROFILE_PICTURE = @"profile-picture";
+NSString *const kUSER_DEFAULTS_PROMPTED_FOR_LOGIN = @"com.userdefaults.prompted.for.login";
 NSString *const EPIC_EVENTS_SCREEN_PROMPTED = @"epicEvents";
 
 // User Ranks

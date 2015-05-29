@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblNumberGoing;
 @property (weak, nonatomic) IBOutlet UILabel *lblTimeUntilStartsOrEnds;
 @property (weak, nonatomic) IBOutlet UILabel *lblEndsInStartsIn;
+@property (weak, nonatomic) IBOutlet UILabel *lblDuration;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
 @property (weak, nonatomic) IBOutlet DEAmbassadorFlag *ambassadorFlagView;
 @property (weak, nonatomic) IBOutlet UIButton *btnUsername;
