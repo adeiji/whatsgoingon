@@ -242,6 +242,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query orderByDescending:PARSE_CLASS_EVENT_VIEW_COUNT];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
+    [query setLimit:1000];
     
     if (now)
     {
@@ -393,7 +394,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
     NSDate *latestDate = [date dateByAddingTimeInterval:(60 * 60 * 24 * 3)];
     __block BOOL blkIsNewProcess = isNewProcess;
-    [query setLimit:10];
+//    [query setLimit:10];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:latestDate];
     [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
@@ -742,7 +743,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     [query whereKey:PARSE_CLASS_EVENT_USERNAME equalTo:username];
     [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     [query whereKey:PARSE_CLASS_EVENT_END_TIME greaterThan:[NSDate date]];
-    [query setLimit:15];
+    [query setLimit:1000];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error)
             {

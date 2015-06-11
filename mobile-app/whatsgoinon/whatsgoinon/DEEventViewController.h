@@ -26,7 +26,7 @@
 
 @class DEPost, DEViewEventsView, DEEventView;
 
-@interface DEEventViewController : UIViewController <UIActionSheetDelegate>
+@interface DEEventViewController : UIViewController <UIActionSheetDelegate, UIGestureRecognizerDelegate>
 {
     BOOL userIsAmbassador;
     PFUser *user;

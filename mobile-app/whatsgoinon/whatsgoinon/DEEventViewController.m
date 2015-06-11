@@ -67,6 +67,7 @@ const int heightConstraintConstant = 62;
 {
     [super viewDidLoad];
     [self addObservers];
+    [self addSwipeGestureRecognizer];
 	// Do any additional setup after loading the view.
     [self setUpView];
     // Display the Event Details View and then set up the Username Button click action
@@ -84,8 +85,17 @@ const int heightConstraintConstant = 62;
         _constraintMapViewHeight.constant -= 50;
         _constraintMainImageHeight.constant -= 20;
     }
-    
+
 }
+
+- (void) addSwipeGestureRecognizer {
+    UISwipeGestureRecognizer *backswipeGestureRecognizer = [UISwipeGestureRecognizer new];
+    [backswipeGestureRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
+    [backswipeGestureRecognizer addTarget:self action:@selector(goBack:)];
+    [backswipeGestureRecognizer setDelegate:self];
+    [self.view addGestureRecognizer:backswipeGestureRecognizer];
+}
+
 
 - (void) loadUpdateModeView {
     _goingButtonBottomSpaceConstraint.constant = -40;
@@ -479,7 +489,13 @@ const int heightConstraintConstant = 62;
         if ([[_post startTime] compare:[NSDate date]] == NSOrderedDescending)
         {
             NSDate *threeHoursFromNow = [[NSDate date] dateByAddingTimeInterval:60 * 60 * 3];
-            if ([threeHoursFromNow compare:[_post startTime]] == NSOrderedDescending)
+            NSDateFormatter *df = [NSDateFormatter new];
+            [df setDateFormat:@"M/dd/yyyy"];
+            
+            if ([DEPostManager daysBetweenDate:[NSDate date] andDate:[_post startTime]] > 6) {
+                [[detailsView lblEndsInStartsIn] setText:[NSString stringWithFormat:@"Starts %@", [df stringFromDate:[_post startTime]]]];
+            }
+            else if ([threeHoursFromNow compare:[_post startTime]] == NSOrderedDescending)
             {
                 [[detailsView lblEndsInStartsIn] setText:@"Starts In"];
             }

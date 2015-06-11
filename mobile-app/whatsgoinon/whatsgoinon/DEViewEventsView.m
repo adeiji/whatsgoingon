@@ -28,17 +28,22 @@ const int POST_WIDTH = 140;
 {
     
     // If the event is 3 hours before the event, then we simply display as normal
-    
+    [eventView.imgMainImageView layoutIfNeeded];
     CGRect frame = _overlayView.frame;
     frame.size.width = eventView.frame.size.width;
     frame.origin.y = eventView.imgMainImageView.frame.size.height - 24;
     [_overlayView setFrame:frame];
     NSInteger daysBetweenDates = [DEPostManager daysBetweenDate:[NSDate date] andDate:[eventView.post startTime]];
-    NSString *daysBetweenDatesStrings = [NSString stringWithFormat:@"%@ days", [[NSNumber numberWithInteger:daysBetweenDates] stringValue]];
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateFormat:@"M/dd/yy"];
+    NSString *eventDateString = [df stringFromDate:[eventView.post startTime]];
+    [df setDateFormat:@"h:mm a"];
+    NSString *eventTimeString = [df stringFromDate:[eventView.post startTime]];
+    
     if (daysBetweenDates >= 7) {
-        NSAttributedString *daysUntilStarts = [[NSAttributedString alloc] initWithString:daysBetweenDatesStrings attributes:@{ NSForegroundColorAttributeName : [HPStyleKit blueColor] }] ;
-        NSMutableAttributedString *timeDisplay = [[NSMutableAttributedString alloc] initWithString:@"Starts in "];
-        [timeDisplay appendAttributedString:daysUntilStarts];
+        NSAttributedString *eventTime = [[NSAttributedString alloc] initWithString:eventTimeString attributes:@{ NSForegroundColorAttributeName : [HPStyleKit greenColor] }] ;
+        NSMutableAttributedString *timeDisplay = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"Starts %@ @ ", eventDateString]];
+        [timeDisplay appendAttributedString:eventTime];
         [[eventView.overlayView lblEndsInStartsIn] setAttributedText:timeDisplay];
     }
     else if ([[eventView.post startTime] compare:[NSDate date]] == NSOrderedDescending)
