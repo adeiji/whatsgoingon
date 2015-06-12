@@ -40,6 +40,7 @@
     post.active = object[PARSE_CLASS_EVENT_ACTIVE];
     post.title = object[PARSE_CLASS_EVENT_TITLE];
     post.myDescription = object[PARSE_CLASS_EVENT_DESCRIPTION];
+    
     if (object[PARSE_CLASS_EVENT_OBJECT_ID])
     {
         post.objectId = object[PARSE_CLASS_EVENT_OBJECT_ID]; // Changed this back from object.objectId because it was throwing an error when trying to retrieve comment information
@@ -54,6 +55,7 @@
     post.numberGoing = object[PARSE_CLASS_EVENT_NUMBER_GOING];
     post.comments = object[PARSE_CLASS_EVENT_COMMENTS];
     post.username = object[PARSE_CLASS_EVENT_USERNAME];
+    post.canonicalUsername = object[PARSE_CLASS_USER_CANONICAL_USERNAME];
     post.viewCount = object[PARSE_CLASS_EVENT_VIEW_COUNT];
     post.thumbsUpCount = object[PARSE_CLASS_EVENT_THUMBS_UP_COUNT];
     post.website = object[PARSE_CLASS_EVENT_WEBSITE];
@@ -98,6 +100,7 @@
         [copy setQuickDescription:[_quickDescription copyWithZone:zone]];
         [copy setNumberGoing:[_numberGoing copyWithZone:zone]];
         [copy setUsername:[_username copyWithZone:zone]];
+        [copy setCanonicalUsername:[_canonicalUsername copyWithZone:zone]];
         [copy setWebsite:[_website copyWithZone:zone]];
         [copy setViewCount:[_viewCount copyWithZone:zone]];
         [copy setThumbsUpCount:[_thumbsUpCount copyWithZone:zone]];

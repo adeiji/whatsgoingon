@@ -498,12 +498,6 @@ struct TopMargin {
     }
 }
 
-- (void) scrollToTopOfScrollView
-{
-    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    [_scrollView setContentSize:_scrollView.frame.size];
-}
-
 - (void) showNoInternetConnectionScreen : (NSNotification *) object {
     Reachability *reach = [object valueForKey:@"object"];
     
@@ -569,6 +563,7 @@ struct TopMargin {
 - (void) displayPost : (NSNotification *) notification {
     [self stopActivitySpinner];
     [self displayPost:notification TopMargin:0 PostArray:nil];
+    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 - (void) addLaterEvents {
@@ -803,8 +798,6 @@ struct TopMargin {
                 ViewEventsView:viewEventsView
               HeightDifference:heightDifference
                      TopMargin:topMargin];
-    
-
 
     [_scrollView addSubview:viewEventsView];
     
@@ -994,6 +987,12 @@ struct TopMargin {
 
 
 #pragma mark - Scroll View Delegate Methods
+- (void) scrollToTopOfScrollView
+{
+    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [_scrollView setContentSize:_scrollView.frame.size];
+}
+
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     [self loadVisiblePost:scrollView];

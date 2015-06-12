@@ -14,6 +14,8 @@
 #import "DEAddValueViewController.h"
 #import "DECameraButton.h"
 
+@import AssetsLibrary;
+
 @class DECreatePostView;
 
 @interface DECreatePostViewController : UIViewController <UIImagePickerControllerDelegate, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate>

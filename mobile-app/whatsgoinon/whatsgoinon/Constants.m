@@ -86,6 +86,7 @@ NSString *const PARSE_CLASS_USER_RANK = @"rank";
 NSString *const PARSE_CLASS_USER_CREATED_AT = @"createdAt";
 NSString *const PARSE_CLASS_USER_STATE = @"state";
 NSString *const PARSE_CLASS_USER_CITY = @"city";
+NSString *const PARSE_CLASS_USER_CANONICAL_USERNAME = @"canonicalUsername";
 
 // Parse - Custom Analytics
 

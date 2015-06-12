@@ -597,7 +597,6 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
             NSLog(@"Post Saved to Parse Server");
             NSMutableArray *array = [NSMutableArray arrayWithArray : [sharedManager posts]];
             [array addObject:postObject];
-            
             [sharedManager setPosts:array];
             [self updatePostCountForUser];
             [[DEScreenManager sharedManager] hideIndicatorIsPosting:YES];

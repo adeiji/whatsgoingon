@@ -176,8 +176,6 @@
     return NO;
 }
 
-
-
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrHideWebsiteInfoTextField:) name:NOTIFICATION_CENTER_USER_RANK_RETRIEVED object:nil];
 }
@@ -395,7 +393,7 @@ Display the second screen for the post details
     }
     else if (buttonIndex == 0)
     {
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         picker.delegate = self;
         [self savePostDetails];
         [self presentViewController:picker animated:YES completion:NULL];
@@ -440,13 +438,9 @@ Display the second screen for the post details
     }
 }
 
-
-#pragma mark - ImagePickerControllerDelegate Methods
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-
-    //Get the original image
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+- (void) saveImage : (UIImage *) image
+  PickerController : (UIImagePickerController *) picker
+{
     //Shrink the size of the image.
     UIGraphicsBeginImageContext( CGSizeMake(70, 56) );
     [image drawInRect:CGRectMake(0,0,70,56)];
@@ -454,7 +448,7 @@ Display the second screen for the post details
     NSArray *storedImages = [[[DEPostManager sharedManager] currentPost] images];
     NSMutableArray *images = [NSMutableArray arrayWithArray:storedImages];
     image.tag = [NSNumber numberWithInteger:_currentButton.tag];
-
+    
     if ([images count] == 0)
     {
         // Set the image at the correct location so that it can be restored later to this same exact location
@@ -487,6 +481,22 @@ Display the second screen for the post details
     [[_currentButton layer] setBorderColor:[UIColor whiteColor].CGColor];
     [[_currentButton layer] setBorderWidth:1.0f];
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - ImagePickerControllerDelegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+    //Get the original image
+    __block UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    if (!image)
+    {
+    }
+    else {
+        [self saveImage:image PickerController:picker];
+    }
+    
 }
 
 - (void) savePostDetails

@@ -194,7 +194,7 @@ const int heightConstraintConstant = 62;
         [scrollView setFrame:[[UIScreen mainScreen] bounds]];
         [settingsAccount setFrame:[scrollView frame]];
         [settingsAccount setIsPublic:YES];
-        [settingsAccount.lblTitle setText:[user username]];
+        [settingsAccount.lblTitle setText:user[PARSE_CLASS_USER_CANONICAL_USERNAME]];
     }
 }
 
@@ -411,7 +411,6 @@ const int heightConstraintConstant = 62;
         }
         
         [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-            
             @autoreleasepool {
                 NSData *imageData = data;
                 UIImage *image = [UIImage imageWithData:imageData];
@@ -433,6 +432,13 @@ const int heightConstraintConstant = 62;
     if ([topView isKindOfClass:[DEEventDetailsView class]])
     {
         [[((DEEventDetailsView *) topView).profileImageView layer] setCornerRadius:((DEEventDetailsView *) topView).profileImageView.frame.size.height / 2.0];
+        if (!user[PARSE_CLASS_USER_CANONICAL_USERNAME])
+        {
+            [((DEEventDetailsView *) topView).btnUsername setTitle:_post.username forState:UIControlStateNormal];
+        }
+        else {
+            [((DEEventDetailsView *) topView).btnUsername setTitle:user[PARSE_CLASS_USER_CANONICAL_USERNAME] forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -459,7 +465,12 @@ const int heightConstraintConstant = 62;
     if (![detailsView isLoaded])
     {
         [detailsView setIsLoaded:YES];
-        [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
+        
+        if (_isPreview)
+        {
+            [detailsView.btnUsername setTitle:[[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_CANONICAL_USERNAME] forState:UIControlStateNormal];
+        }
+        
         [[detailsView txtDescription] setText:nil];
         NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
         [fmt setPositiveFormat:@"0.##"];

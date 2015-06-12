@@ -114,7 +114,6 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
     NSError *error;
     
     [[DEScreenManager sharedManager] startActivitySpinner];
-    
     [_user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error)
         {
@@ -122,6 +121,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             _userObject = _user;
             _userObject[PARSE_CLASS_USER_RANK] = USER_RANK_STANDARD;
             _userObject[PARSE_CLASS_USER_VISIBLE_PASSWORD] = password;
+            _userObject[PARSE_CLASS_USER_CANONICAL_USERNAME] = userName;
             [_userObject saveEventually];
             
             [DELocationManager getStateFromLatLongValue:[[DELocationManager sharedManager] currentLocation] CompletionBlock:^(NSDictionary *value) {
@@ -243,7 +243,6 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
     // Get the user corresponding to an email and then use that username to login
     PFQuery *query = [PFUser query];
     [query whereKey:PARSE_CLASS_USER_EMAIL equalTo:username];
-    
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *obj, NSError *error) {
         // If there's no returned objects we know then that this email does not exist, if we get a returned object though, we want to get that username and login now
         if (obj) {

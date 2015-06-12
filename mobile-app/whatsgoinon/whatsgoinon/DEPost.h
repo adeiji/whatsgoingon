@@ -28,6 +28,7 @@
 @property (strong, nonatomic) NSString *quickDescription;
 @property (strong, nonatomic) NSNumber *numberGoing;
 @property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *canonicalUsername;
 @property (strong, nonatomic) NSString *website;
 @property (strong, nonatomic) NSNumber *viewCount;
 @property (strong, nonatomic) NSNumber *thumbsUpCount;
