@@ -249,7 +249,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             blockUsername = obj[PARSE_CLASS_USER_USERNAME];
         }
         
-        [PFUser logInWithUsernameInBackground:[blockUsername lowercaseString] password:password block:^(PFUser *user, NSError *error) {
+        [PFUser logInWithUsernameInBackground:blockUsername password:password block:^(PFUser *user, NSError *error) {
             if (user)
             {
                 [DEScreenManager popToRootAndShowViewController:viewController];
@@ -320,6 +320,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             
             [self getTwitterInformation:[PFTwitterUtils twitter].userId];
             [[PFUser currentUser] setUsername:[PFTwitterUtils twitter].screenName];
+            [PFUser currentUser][PARSE_CLASS_USER_CANONICAL_USERNAME] = [PFTwitterUtils twitter].screenName;
             [[PFUser currentUser] saveInBackground];
             [self clearUserImageDefaults];
             [DEUserManager logoutUser];
@@ -465,6 +466,7 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             
             // Set the current user's name to the name that is on their social network profile
             [[PFUser currentUser] setUsername:result[@"name"]];
+            [PFUser currentUser][PARSE_CLASS_USER_CANONICAL_USERNAME] = result[@"name"];
             [PFUser currentUser][@"email"] = result[@"email"];
             [[PFUser currentUser] saveInBackground];
         }

@@ -563,7 +563,8 @@ struct TopMargin {
 - (void) displayPost : (NSNotification *) notification {
     [self stopActivitySpinner];
     [self displayPost:notification TopMargin:0 PostArray:nil];
-    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [_scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+    [self loadVisiblePost:_scrollView];
 }
 
 - (void) addLaterEvents {
@@ -989,8 +990,9 @@ struct TopMargin {
 #pragma mark - Scroll View Delegate Methods
 - (void) scrollToTopOfScrollView
 {
-    [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [_scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
     [_scrollView setContentSize:_scrollView.frame.size];
+    [self loadVisiblePost:_scrollView];
 }
 
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate

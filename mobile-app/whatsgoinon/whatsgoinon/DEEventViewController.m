@@ -194,7 +194,12 @@ const int heightConstraintConstant = 62;
         [scrollView setFrame:[[UIScreen mainScreen] bounds]];
         [settingsAccount setFrame:[scrollView frame]];
         [settingsAccount setIsPublic:YES];
-        [settingsAccount.lblTitle setText:user[PARSE_CLASS_USER_CANONICAL_USERNAME]];
+        if (user[PARSE_CLASS_USER_CANONICAL_USERNAME]) {
+            [settingsAccount.lblTitle setText:user[PARSE_CLASS_USER_CANONICAL_USERNAME]];
+        }
+        else {
+            [settingsAccount.lblTitle setText:user[PARSE_CLASS_USER_USERNAME]];
+        }
     }
 }
 
@@ -468,7 +473,12 @@ const int heightConstraintConstant = 62;
         
         if (_isPreview)
         {
-            [detailsView.btnUsername setTitle:[[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_CANONICAL_USERNAME] forState:UIControlStateNormal];
+            if ([[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_CANONICAL_USERNAME]) {
+                [detailsView.btnUsername setTitle:[[DEUserManager sharedManager] userObject][PARSE_CLASS_USER_CANONICAL_USERNAME] forState:UIControlStateNormal];
+            }
+            else {
+                [detailsView.btnUsername setTitle:_post.username forState:UIControlStateNormal];
+            }
         }
         
         [[detailsView txtDescription] setText:nil];

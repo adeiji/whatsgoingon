@@ -280,8 +280,13 @@ const int PICTURE_ACTION_SHEET = 2;
 {
     NSArray *array = [NSArray arrayWithObjects:_txtPassword, _txtUsername, _txtConfirmPassword, nil];
     [DEScreenManager setUpTextFields:array];
-    
-    _txtUsername.text = user[PARSE_CLASS_USER_CANONICAL_USERNAME];
+    if (user[PARSE_CLASS_USER_CANONICAL_USERNAME]) {
+        _txtUsername.text = user[PARSE_CLASS_USER_CANONICAL_USERNAME];
+    }
+    else {
+        _txtUsername.text = user[PARSE_CLASS_USER_USERNAME];
+    }
+
     // Get the password that can actually be viewed on within the app
     _txtPassword.text = user[PARSE_CLASS_USER_VISIBLE_PASSWORD];
     _txtPassword.delegate = self;
