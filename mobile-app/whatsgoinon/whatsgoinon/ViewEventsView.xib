@@ -44,7 +44,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJ0-LB-RQz">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MJ0-LB-RQz">
                     <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="140" id="SPl-mj-GoB"/>
@@ -201,7 +201,7 @@
             <connections>
                 <outlet property="lblEndsInStartsIn" destination="R9C-kj-Lr7" id="Yk4-w5-EyL"/>
             </connections>
-            <point key="canvasLocation" x="535" y="608"/>
+            <point key="canvasLocation" x="-429" y="23"/>
         </view>
         <view contentMode="scaleToFill" id="Kwl-LH-GbA">
             <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>

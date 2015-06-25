@@ -248,7 +248,8 @@ const int PICTURE_ACTION_SHEET = 2;
         }
         else
         {
-            [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
+            [[_btnTakePicture imageView] setContentMode:UIViewContentModeScaleAspectFill];
+            [_btnTakePicture setImage:image forState:UIControlStateNormal];
         }
         
     }
@@ -265,7 +266,8 @@ const int PICTURE_ACTION_SHEET = 2;
                 if (image)
                 {
                     [_btnTakePicture setNoProfileImage:NO];
-                    [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
+                    [[_btnTakePicture imageView] setContentMode:UIViewContentModeScaleAspectFill];
+                    [_btnTakePicture setImage:image forState:UIControlStateNormal];
                 }
                 else {
                     [_btnTakePicture setNoProfileImage:YES];
@@ -357,17 +359,19 @@ const int PICTURE_ACTION_SHEET = 2;
 {
     //Get the original image
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    // Set the image at the correct location so that it can be restored later to this same exact location
+    [[_btnTakePicture imageView] setContentMode:UIViewContentModeScaleAspectFill];
+    [_btnTakePicture setImage:image forState:UIControlStateNormal];
     //Shrink the size of the image.
     UIGraphicsBeginImageContext( CGSizeMake(70, 56) );
     [image drawInRect:CGRectMake(0,0,70,56)];
     UIGraphicsEndImageContext();
-    
-    // Set the image at the correct location so that it can be restored later to this same exact location
-    [_btnTakePicture setBackgroundImage:image forState:UIControlStateNormal];
     NSData *imageData = UIImageJPEGRepresentation (
                                         image,
                                         .01
                                         );
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:imageData forKey:@"profile-picture"];
     [DEUserManager addProfileImage:imageData];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }

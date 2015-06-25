@@ -1102,7 +1102,7 @@
                                     <action selector="gotoNextScreen:" destination="BIc-Ga-SSU" eventType="touchUpInside" id="1Ad-v5-swW"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-G3-z6B" customClass="DECameraButton">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" ambiguous="YES" misplaced="YES" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hIa-G3-z6B" customClass="DECameraButton">
                                 <rect key="frame" x="72" y="205" width="178" height="178"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="178" id="S8p-Lp-ZGK"/>

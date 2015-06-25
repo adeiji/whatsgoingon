@@ -32,7 +32,6 @@
     [[_btnProfilePicture layer] setBorderColor:[UIColor whiteColor].CGColor];
     [[_btnProfilePicture layer] setBorderWidth:2.0f];
     [[_btnProfilePicture layer] setCornerRadius:BUTTON_CORNER_RADIUS * 2];
-    
     [[_btnContinue layer] setCornerRadius:BUTTON_CORNER_RADIUS];
 }
 
@@ -78,7 +77,7 @@
     {
         // Let the user take a picture and store it
         picker.delegate = self;
-        picker.allowsEditing = NO;
+        picker.allowsEditing = YES;
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         [self presentViewController:picker animated:YES completion:NULL];
     }
@@ -94,11 +93,13 @@
 {
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     //Shrink the size of the image.
-    UIGraphicsBeginImageContext( CGSizeMake(70, 56) );
-    [image drawInRect:CGRectMake(0,0,70,56)];
-    UIGraphicsEndImageContext();
+//    UIGraphicsBeginImageContext( CGSizeMake(100, 100) );
+//    [image drawInRect:CGRectMake(0,0,100,100)];
+//    UIGraphicsEndImageContext();
     
-    [_btnProfilePicture setBackgroundImage:image forState:UIControlStateNormal];
+//    [_btnProfilePicture setBackgroundImage:image forState:UIControlStateNormal];
+    [_btnProfilePicture setImage:image forState:UIControlStateNormal];
+    [[_btnProfilePicture imageView] setContentMode:UIViewContentModeScaleAspectFill];
 
     NSData *imageData = UIImageJPEGRepresentation(image, .1);
     profileImageData = imageData;

@@ -24,6 +24,7 @@ const int heightConstraintConstant = 62;
 - (void) addObservers {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadComments:) name:NOTIFICATION_CENTER_ALL_COMMENTS_LOADED object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAmbassador:) name:NOTIFICATION_CENTER_USER_RETRIEVED object:nil];
+
 }
 
 - (void) setUpView {

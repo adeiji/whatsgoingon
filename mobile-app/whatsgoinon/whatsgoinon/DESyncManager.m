@@ -308,6 +308,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     DEPostManager *sharedManager = [DEPostManager sharedManager];
     [postsArray addObjectsFromArray:objects];
     // Add all the events loaded to an array and store so that we don't pull these events down again
+    
     [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [[[DEPostManager sharedManager] loadedEvents] addObject:[obj objectId]];
         
@@ -545,7 +546,6 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
 
 + (void) getPFObjectForEventObjectIdAndUpdate:(NSString *)objectId
                                  WithPost : (DEPost *) post{
-    
     PFQuery *query = [PFQuery queryWithClassName:PARSE_CLASS_NAME_EVENT];
     [query whereKey:PARSE_CLASS_EVENT_OBJECT_ID equalTo:objectId];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

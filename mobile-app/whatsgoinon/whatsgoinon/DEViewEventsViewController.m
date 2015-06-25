@@ -898,23 +898,26 @@ struct TopMargin {
 }
 
 - (CGFloat) getEventImageHeightDifference : (DEViewEventsView *) view {
+    
     if ([[view post].images count] != 0)
     {
-        PFFile *file = [view post].images[0];
-        if ([file.name containsString:IMAGE_DIMENSION_HEIGHT]) {
-            NSRange widthRange = [file.name rangeOfString:IMAGE_DIMENSION_WIDTH];
-            NSString *dimensions = [file.name substringFromIndex:widthRange.location];
-            NSRange heightRange = [dimensions rangeOfString:IMAGE_DIMENSION_HEIGHT];
-            NSString *width = [dimensions substringToIndex:heightRange.location];
-            width = [width stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_WIDTH withString:@""];
-            NSString *height = [dimensions substringFromIndex:heightRange.location];
-            height = [height stringByReplacingOccurrencesOfString:IMAGE_DIMENSION_HEIGHT withString:@""];
-            
-            double imageWidth = [width doubleValue];
-            double imageHeight = [height doubleValue];
-            
-            return [self resizeViewEventsImageView:view ImageWidth:imageWidth ImageHeight:imageHeight];
-        }
+        __block PFFile *file = [view post].images[0];
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        __block CGFloat height;
+        __block CGFloat width;
+
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSData *data = [file getData];
+            UIImage *image = [UIImage imageWithData:data];
+            height = image.size.height;
+            width = image.size.width;
+            dispatch_semaphore_signal(sema);
+        });
+                       
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        return [self resizeViewEventsImageView:view ImageWidth:width ImageHeight:height];
+
     }
     return 0;
 }
