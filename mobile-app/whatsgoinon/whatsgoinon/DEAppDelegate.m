@@ -83,8 +83,15 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     [ParseCrashReporting enable];
     
     // Parse Keys - Live
-    [Parse setApplicationId:@"YUXdFW3MDiu17bHCaKGKpbpde5XQ1eWEHN8n5jRT"
-                  clientKey:@"7cNFD6SyCYqlbeH460CRYMEmaMPmtoSuehQPSGAX"];
+    
+    #if DEBUG
+        [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
+                      clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
+    #else
+        [Parse setApplicationId:@"YUXdFW3MDiu17bHCaKGKpbpde5XQ1eWEHN8n5jRT"
+                      clientKey:@"7cNFD6SyCYqlbeH460CRYMEmaMPmtoSuehQPSGAX"];
+    #endif
+
     [PFTwitterUtils initializeWithConsumerKey:@"TFcHVbGMjgBiXuSUpE16untPd" consumerSecret:@"alxo7PP08tyyG2mR3QFm8n8XHdJBcTzGw1u7BKW7A13AaeCWe8"];
     [PFFacebookUtils initializeFacebook];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];

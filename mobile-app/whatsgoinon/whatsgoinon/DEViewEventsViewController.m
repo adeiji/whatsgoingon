@@ -600,6 +600,8 @@ struct TopMargin {
                     Category:notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_CATEGORY]
                    PostArray:_posts
                    ShowBlank:YES];
+        
+
     [self loadVisiblePost:_scrollView];
 }
 
@@ -767,58 +769,6 @@ struct TopMargin {
 
 /*
  
- Load the event
- 
- */
-
-- (void) loadEvent : (PFObject *) obj
-           Margin1 : (CGFloat *) columnOneMargin
-           Margin2 : (CGFloat *) columnTwoMargin
-            Column : (CGFloat *) column
-         TopMargin : (CGFloat) topMargin
-       PostCounter : (int *) postCounter
-         ShowBlank : (BOOL) showBlank
-{
-    CGFloat viewEventsViewFrameHeight = POST_HEIGHT;
-    DEPost *post = [DEPost getPostFromPFObject:obj];
-    obj[@"loaded"] = @YES;
-    
-    DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
-    [viewEventsView setSearchBar:_searchBar];
-    [viewEventsView renderViewWithPost:post
-                             ShowBlank:showBlank];
-    [viewEventsView setPostObject:obj];
-    
-    CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
-    heightDifference += [self getEventImageHeightDifference:viewEventsView];
-    
-    [self setUpViewEventsFrame:*columnOneMargin
-                        Margin:*columnTwoMargin
-                          Post:post
-                        Column:*column
-                ViewEventsView:viewEventsView
-              HeightDifference:heightDifference
-                     TopMargin:topMargin];
-
-    [_scrollView addSubview:viewEventsView];
-    
-    if (*column == 0)
-    {
-        *column = 1;
-        *columnOneMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
-    }
-    else {
-        *column = 0;
-        *columnTwoMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
-        *postCounter = *postCounter + 1;
-    }
-    
-    [self getDistanceFromCurrentLocationOfEvent:obj];
-    
-}
-
-/*
- 
  Check to see if it is valid to show this event on the screen
  
  */
@@ -883,6 +833,57 @@ struct TopMargin {
     view.frame = frame;
     [view showOverlayView];
 }
+
+/*
+ 
+ Load the event
+ 
+ */
+- (void) loadEvent : (PFObject *) obj
+           Margin1 : (CGFloat *) columnOneMargin
+           Margin2 : (CGFloat *) columnTwoMargin
+            Column : (CGFloat *) column
+         TopMargin : (CGFloat) topMargin
+       PostCounter : (int *) postCounter
+         ShowBlank : (BOOL) showBlank
+{
+    CGFloat viewEventsViewFrameHeight = POST_HEIGHT;
+    DEPost *post = [DEPost getPostFromPFObject:obj];
+    obj[@"loaded"] = @YES;
+    
+    DEViewEventsView *viewEventsView = [[[NSBundle mainBundle] loadNibNamed:@"ViewEventsView" owner:self options:nil] objectAtIndex:0];
+    [viewEventsView setSearchBar:_searchBar];
+    [viewEventsView renderViewWithPost:post
+                             ShowBlank:showBlank];
+    [viewEventsView setPostObject:obj];
+    
+    CGFloat heightDifference = [self getLabelHeightDifference:viewEventsView];
+    heightDifference += [self getEventImageHeightDifference:obj View:viewEventsView];
+    
+    [self setUpViewEventsFrame:*columnOneMargin
+                        Margin:*columnTwoMargin
+                          Post:post
+                        Column:*column
+                ViewEventsView:viewEventsView
+              HeightDifference:heightDifference
+                     TopMargin:topMargin];
+    
+    [_scrollView addSubview:viewEventsView];
+    
+    if (*column == 0)
+    {
+        *column = 1;
+        *columnOneMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
+    }
+    else {
+        *column = 0;
+        *columnTwoMargin += viewEventsViewFrameHeight + heightDifference + TOP_MARGIN;
+        *postCounter = *postCounter + 1;
+    }
+    
+    [self getDistanceFromCurrentLocationOfEvent:obj];
+}
+
 /*
  
  Get the difference of height between the label with no description, and the label with the size necessary to fit to the description
@@ -897,25 +898,14 @@ struct TopMargin {
     return heightDifference;
 }
 
-- (CGFloat) getEventImageHeightDifference : (DEViewEventsView *) view {
-    
-    if ([[view post].images count] != 0)
+- (CGFloat) getEventImageHeightDifference : (PFObject *) postObject
+                                     View : (DEViewEventsView *) view
+{
+    if ([postObject[PARSE_CLASS_EVENT_IMAGES] count] != 0)
     {
-        __block PFFile *file = [view post].images[0];
-        dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-        __block CGFloat height;
-        __block CGFloat width;
-
+        CGFloat height = [postObject[PARSE_CLASS_EVENT_IMAGE_HEIGHT] doubleValue];
+        CGFloat width = [postObject[PARSE_CLASS_EVENT_IMAGE_WIDTH] doubleValue];
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSData *data = [file getData];
-            UIImage *image = [UIImage imageWithData:data];
-            height = image.size.height;
-            width = image.size.width;
-            dispatch_semaphore_signal(sema);
-        });
-                       
-        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
         return [self resizeViewEventsImageView:view ImageWidth:width ImageHeight:height];
 
     }

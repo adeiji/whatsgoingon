@@ -59,8 +59,10 @@
     {
         _createPostViewTwo.txtWebsite.hidden = YES;
     }
-    
-//    _createPostViewTwo.txtWebsite.text = @"";
+    [[_createPostViewTwo.btnTakePicture imageView] setContentMode:UIViewContentModeScaleAspectFill];
+    for (UIButton *button in _createPostViewTwo.btnSmallPictureButtons) {
+        [[button imageView] setContentMode:UIViewContentModeScaleAspectFill];
+    }
 }
 
 /*
@@ -141,7 +143,7 @@
         }
     }];
     
-    [button setBackgroundImage:image forState:UIControlStateNormal];
+    [button setImage:image forState:UIControlStateNormal];
 }
 
 - (void) setEditableTextFields {
@@ -368,9 +370,7 @@ Display the second screen for the post details
     {
         if (imageCounter < 4)
         {
-            
             UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose From Photo Library", @"Take a Picture",nil];
-            
             [actionSheet showInView:self.view];
         }
     }
@@ -538,7 +538,7 @@ Display the second screen for the post details
                     }
                 }];
 
-                [button setBackgroundImage:image forState:UIControlStateNormal];
+                [button setImage:image forState:UIControlStateNormal];
             }
             else if ([obj isKindOfClass:[PFFile class]]) {
                 PFFile *file = (PFFile *) obj;
@@ -555,7 +555,7 @@ Display the second screen for the post details
                         }
                     }];
                     
-                    [button setBackgroundImage:image forState:UIControlStateNormal];
+                    [button setImage:image forState:UIControlStateNormal];
                 }];
             }
         }];

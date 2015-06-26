@@ -289,8 +289,6 @@ const int PICTURE_ACTION_SHEET = 2;
         _txtUsername.text = user[PARSE_CLASS_USER_USERNAME];
     }
 
-    // Get the password that can actually be viewed on within the app
-    _txtPassword.text = user[PARSE_CLASS_USER_VISIBLE_PASSWORD];
     _txtPassword.delegate = self;
     _txtConfirmPassword.delegate = self;
 }

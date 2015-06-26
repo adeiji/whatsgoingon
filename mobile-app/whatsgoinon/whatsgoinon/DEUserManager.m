@@ -120,7 +120,6 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
             [[DEScreenManager getMainNavigationController] pushViewController:viewController animated:YES];
             _userObject = _user;
             _userObject[PARSE_CLASS_USER_RANK] = USER_RANK_STANDARD;
-            _userObject[PARSE_CLASS_USER_VISIBLE_PASSWORD] = password;
             _userObject[PARSE_CLASS_USER_CANONICAL_USERNAME] = userName;
             [_userObject saveEventually];
             
@@ -149,7 +148,6 @@ const static NSString *TWITTER_USER_LOCATION = @"location";
 - (void) changePassword:(NSString *)password
 {
     [[PFUser currentUser] setPassword:password];
-    [PFUser currentUser][PARSE_CLASS_USER_VISIBLE_PASSWORD] = password;
     
     [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded)

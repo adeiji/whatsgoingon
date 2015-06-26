@@ -36,6 +36,8 @@ NSString *const PARSE_CLASS_EVENT_STATUS = @"status";
 NSString *const PARSE_CLASS_EVENT_STATUS_POSTED = @"posted";
 NSString *const PARSE_CLASS_EVENT_WEBSITE = @"website";
 NSString *const PARSE_CLASS_EVENT_DISTANCE = @"distance";
+NSString *const PARSE_CLASS_EVENT_IMAGE_HEIGHT = @"imageHeight";
+NSString *const PARSE_CLASS_EVENT_IMAGE_WIDTH = @"imageWidth";
 
 
 NSString *const TRENDING_ORDER = @"Trending Order";
@@ -76,7 +78,6 @@ NSString *const PARSE_CLASS_NAME_USER = @"UserDetails";
 NSString *const PARSE_CLASS_USER_USERNAME = @"username";
 NSString *const PARSE_CLASS_USER_EMAIL = @"email";
 NSString *const PARSE_CLASS_USER_PASSWORD = @"password";
-NSString *const PARSE_CLASS_USER_VISIBLE_PASSWORD = @"visiblePassword";
 NSString *const PARSE_CLASS_USER_EMAIL_VERIFIED = @"emailVerified";
 NSString *const PARSE_CLASS_USER_PROFILE_PICTURE = @"profilePicture";
 NSString *const PARSE_CLASS_USER_EVENTS_GOING = @"eventsGoing";
