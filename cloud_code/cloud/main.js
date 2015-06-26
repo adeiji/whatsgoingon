@@ -5,8 +5,38 @@
 var ParseImage = require("parse-image");
 
 Parse.Cloud.afterSave("Event", function(request, response) {
+	
+	// Make sure this is a brand new event
+	if (request.object.existed() == false)
+	{
+		console.log(request);
+		var query = new Parse.Query(Parse.User);
+		query.equalTo("username", request.object.get("username"));
+		console.log(request.object.get("username"));
+		query.find({
+			success: function (results) {
+				console.log(results);
+				if (results[0].get("active") == false) {
+					request.object.destroy({
+						error : function () {
+							console.log("User is invalid but object was not succesfully deleted");
+						},
+						success : function () {
+							console.log("Object was deleted because user is invalid");	
+						}
+					});
+				}
+				else {
+					console.log("User is valid");
+				}
+			},
+			error : function () {
+				console.log("Error after saving of the object");
+			}
+		});
+	}
 
-	// Make sure that we only run this code when the object is first saved
+		// Make sure that we only run this code when the object is first saved
 	if (!request.object.get("imageHeight"))
 	{
 		var file = request.object.get("images")[0];	// Get the main image for the event
@@ -26,31 +56,29 @@ Parse.Cloud.afterSave("Event", function(request, response) {
 		}, function (response) {
 			console.log("Request failed with response code: " + response.status);
 		});
-	}	
+	}
+});
 
-	console.log(request);
-	var query = new Parse.Query(Parse.User);
-	query.equalTo("username", request.object.get("username"));
-	console.log(request.object.get("username"));
-	query.find({
-		success: function (results) {
-			console.log(results);
-			if (results[0].get("active") == false) {
-				request.object.destroy({
-					error : function () {
-						console.log("User is invalid but object was not succesfully deleted");
-					},
-					success : function () {
-						console.log("Object was deleted because user is invalid");	
-					}
+Parse.Cloud.job("getAllImageHeightsAndWidths", function (request, status) {
+	var query = new Parse.Query("Event");
+	query.each(
+		function (myEvent) {
+			var file = myEvent.get("images")[0];
+			// If the file is an image
+			if (file)
+			{
+				Parse.Cloud.httpRequest({
+					url : file.url()
+				}).then(function (response) {
+					var image = new ParseImage();
+					image.setData(response.buffer, {
+						success: function () {
+							myEvent.set('imageWidth', image.width());
+							myEvent.set('imageHeight', image.height());
+							myEvent.save();
+						}
+					});
 				});
 			}
-			else {
-				console.log("User is valid");
-			}
-		},
-		error : function () {
-			console.log("Error after saving of the object");
-		}
-	});
+		});
 });
