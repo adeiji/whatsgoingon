@@ -48,6 +48,7 @@
 @property BOOL isPostSomethingSimilar;
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (strong, nonatomic) DEPost *post;
+@property (strong, nonatomic) DEPost *originalPost;
 @property (strong, nonatomic) PFGeoPoint *location;
 
 @end

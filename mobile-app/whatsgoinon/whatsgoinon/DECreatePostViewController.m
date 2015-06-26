@@ -28,12 +28,14 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     DEPostManager *postManager = [DEPostManager sharedManager];
     _post = [postManager currentPost];
+    
     if ([_post.images count] == 0)
     {
         imagesCopy = [NSMutableArray new];
@@ -169,6 +171,13 @@
         [self setEditableTextFields];
         [self setTimesAndAddressForEditMode];
         _createPostViewOne.txtAddress.text = _post.address;
+        if (![_post.postRange isEqual:@0])
+        {
+            _createPostViewOne.txtPostRange.text = [NSString stringWithFormat:@"%@ mi", [_post.postRange stringValue]];
+        }
+        else {
+            _createPostViewOne.txtPostRange.text = @"ALL";
+        }
         [self setDescriptionsPriceAndImages];
         [_createPostViewOne setUpTextFieldAvailability:_isEditMode];
         
@@ -321,7 +330,6 @@ Display the second screen for the post details
  
 */
 - (void) displayNextScreen {
-    
     DEPostManager *postManager = [DEPostManager sharedManager];
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Posting" bundle:nil];
     DECreatePostViewController *createPostViewController = [sb instantiateViewControllerWithIdentifier:@"CreatePostDetailTwo"];
@@ -329,7 +337,6 @@ Display the second screen for the post details
     // Pass the new view controller the new post that was just created.
     [self.navigationController pushViewController:createPostViewController animated:YES];
     [postManager setCurrentPost:_post];
-    
     // Check to see what the rank of the user is and if the user is simply standard, then we want to disable the ability to add a website to the information
     [DEUserManager getUserRank : [[PFUser currentUser] username]];
 }
@@ -661,6 +668,33 @@ Display the second screen for the post details
     {
         [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
     }
+    
+    [self resetPost];
+    
+}
+
+- (void) resetPost {
+    _post.category = _originalPost.category;
+    _post.startTime = _originalPost.startTime;
+    _post.endTime = _originalPost.endTime;
+    _post.location = _originalPost.location;
+    _post.address = _originalPost.address;
+    _post.postRange = _originalPost.postRange;
+    _post.title = _originalPost.title;
+    _post.cost = _originalPost.cost;
+    _post.images = _originalPost.images;
+    _post.myDescription = _originalPost.myDescription;
+    _post.objectId = _originalPost.objectId;
+    _post.comments = _originalPost.comments;
+    _post.rating = _originalPost.rating;
+    _post.quickDescription = _originalPost.quickDescription;
+    _post.numberGoing = _originalPost.numberGoing;
+    _post.username = _originalPost.username;
+    _post.canonicalUsername = _originalPost.canonicalUsername;
+    _post.website = _originalPost.website;
+    _post.viewCount = _originalPost.viewCount;
+    _post.thumbsUpCount = _originalPost.thumbsUpCount;
+    _post.trendingOrder = _originalPost.trendingOrder;
 }
 
 - (IBAction)cancel:(id)sender {

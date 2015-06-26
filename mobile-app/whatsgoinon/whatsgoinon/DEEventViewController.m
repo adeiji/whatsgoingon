@@ -146,6 +146,7 @@ const int heightConstraintConstant = 62;
     createPostViewController.isEditMode = YES;
     [self.navigationController pushViewController:createPostViewController animated:YES];
     [[DEPostManager sharedManager] setCurrentPost:_post];
+    createPostViewController.originalPost = [_post copy];
 }
 
 - (void) deletePostPressed {

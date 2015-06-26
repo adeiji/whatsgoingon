@@ -237,7 +237,6 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     NSTimeInterval threeHours = (3 * 60 * 60) - 1;
     NSDate *later = [date dateByAddingTimeInterval:threeHours];
     
-    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     [query orderByDescending:PARSE_CLASS_EVENT_THUMBS_UP_COUNT];
     [query orderByDescending:PARSE_CLASS_EVENT_NUMBER_GOING];
     [query orderByDescending:PARSE_CLASS_EVENT_VIEW_COUNT];
@@ -324,6 +323,8 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     
     [sharedManager setPosts:postsArray];
     [sharedManager setAllEvents:postsArray];
+    
+    NSLog(@"Posts array count: %lu", (unsigned long)[postsArray count]);
     
     if (isNewProcess)
     {

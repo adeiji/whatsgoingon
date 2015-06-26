@@ -86,7 +86,7 @@
     {
         [copy setCategory:[_category copyWithZone:zone]];
         [copy setStartTime:[_startTime copyWithZone:zone]];
-        [copy setEndTime:[_category copyWithZone:zone]];
+        [copy setEndTime:[_endTime copyWithZone:zone]];
         [copy setLocation:[_location copyWithZone:zone]];
         [copy setAddress:[_address copyWithZone:zone]];
         [copy setPostRange:[_postRange copyWithZone:zone]];
