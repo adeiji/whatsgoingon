@@ -38,8 +38,11 @@
         [navController pushViewController:createPostViewController animated:YES];
         
         DEPost *post = [[DEPostManager sharedManager] currentPost];
-        post.images = nil;
+        // Make a copy of the post so that we can reference the original post in order to get the images back
+        createPostViewController.originalPost = [post copy];
         
+        // Set the images to nil so that the images do not show up in the new post that the user is creating
+        post.images = nil;
         // Get all the categories
         NSMutableDictionary *plistData = [[NSMutableDictionary alloc]initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"categories" ofType:@"plist"]];
         

@@ -399,6 +399,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
 //    [query setLimit:10];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME greaterThan:later];
     [query whereKey:PARSE_CLASS_EVENT_START_TIME lessThan:latestDate];
+    [query whereKey:PARSE_CLASS_EVENT_ACTIVE equalTo:[NSNumber numberWithBool:true]];
     [query orderByAscending:PARSE_CLASS_EVENT_START_TIME];
     [query whereKey:PARSE_CLASS_EVENT_LOCATION nearGeoPoint:location withinMiles:30];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

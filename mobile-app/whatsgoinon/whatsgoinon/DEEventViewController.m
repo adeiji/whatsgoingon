@@ -105,6 +105,7 @@ const int heightConstraintConstant = 62;
     [[_eventView btnGoing] setTitle:@"Update Now!" forState:UIControlStateNormal];
     [[_eventView btnGoing] removeTarget:self action:@selector(setEventAsGoing:) forControlEvents:UIControlEventTouchUpInside];
     [[_eventView btnGoing] addTarget:self action:@selector(updatePost) forControlEvents:UIControlEventTouchUpInside];
+    [self loadMainImage];
 }
 
 /*

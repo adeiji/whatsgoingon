@@ -97,10 +97,16 @@
     _createPostViewTwo.txtTitle.text = _post.title;
     _createPostViewTwo.txtWebsite.text = _post.website;
     
-    static BOOL imagesConverted = NO;
+    id image = _post.images[0];
     
-    [self convertPFFileArrayToImageArrayConverted:imagesConverted Images:_post.images];
-    imagesConverted = YES;
+    if ([image isKindOfClass:[PFFile class]])
+    {
+        [self convertPFFileArrayToImageArrayConverted:NO Images:_post.images];
+    }
+    else {
+        imagesCopy = [_post.images mutableCopy];
+        [self loadImages];
+    }
 }
 
 /*
@@ -127,10 +133,6 @@
             NSLog(@"happsnap.decreatepostviewcontroller.image.loaded");
             }];
         } ];
-    }
-    else {
-        imagesCopy = [_post.images mutableCopy];
-        [self loadImages];
     }
 }
 
@@ -370,7 +372,6 @@ Display the second screen for the post details
 
 
 - (IBAction)takePicture:(id)sender {
-    
     _currentButton = (UIButton *) sender;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
@@ -380,8 +381,6 @@ Display the second screen for the post details
             UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose From Photo Library", @"Take a Picture",nil];
             [actionSheet showInView:self.view];
         }
-    }
-    else {
     }
 }
 
@@ -466,6 +465,7 @@ Display the second screen for the post details
         // check to see if this a new image or the user clicked a button with an image already inside
         [images enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             UIImage *myImage = (UIImage *) obj;
+            
             if (((NSNumber *)myImage.tag).integerValue == ((NSNumber *) image.tag).integerValue)
             {
                 obj = image;
@@ -664,12 +664,14 @@ Display the second screen for the post details
 - (IBAction)continueGoingBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
     
-    if (!_isPostSomethingSimilar)
+    if (!_isPostSomethingSimilar && !_isEditMode)
     {
         [[DEPostManager sharedManager] setCurrentPost:[DEPost new]];
     }
-    
-    [self resetPost];
+    else if (_isEditMode || _isPostSomethingSimilar) {
+        [self resetPost];
+        [[DEPostManager sharedManager] setCurrentPost:_post];
+    }
     
 }
 
