@@ -689,6 +689,7 @@ struct TopMargin {
         margin = 0;
         scrollViewContentSizeHeight = 0;
         numberOfPostOnScreen = 0;
+        postCounter = 0;
         _isNewProcess = NO;
     }
     
