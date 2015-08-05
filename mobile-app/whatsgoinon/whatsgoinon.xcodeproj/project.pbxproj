@@ -1738,8 +1738,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: HappSnap Inc. (YM5FHD5F5W)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: HappSnap Inc. (YM5FHD5F5W)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (9BZME373F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (9BZME373F6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon",
@@ -1754,7 +1754,7 @@
 					"$(PROJECT_DIR)/whatsgoinon/TestFlightSDK3.0.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "42e499f0-b29c-4283-aa3f-45d29ace924a";
+				PROVISIONING_PROFILE = "bd8e548a-2b48-44f0-848b-1990b1df2d99";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1765,8 +1765,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: HappSnap Inc. (YM5FHD5F5W)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: HappSnap Inc. (YM5FHD5F5W)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Adebayo Ijidakinro (9BZME373F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Adebayo Ijidakinro (9BZME373F6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/adeiji/Documents/Dephyned/apps/whatsgoingon/mobile-app/whatsgoinon",
@@ -1781,7 +1781,7 @@
 					"$(PROJECT_DIR)/whatsgoinon/TestFlightSDK3.0.2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "42e499f0-b29c-4283-aa3f-45d29ace924a";
+				PROVISIONING_PROFILE = "bd8e548a-2b48-44f0-848b-1990b1df2d99";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
