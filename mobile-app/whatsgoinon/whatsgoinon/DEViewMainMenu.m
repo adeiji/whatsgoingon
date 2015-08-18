@@ -108,6 +108,10 @@
 
 - (IBAction)gotoChangeCityPage:(id)sender {
 
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"ChangeCity"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    
     DEViewChangeCity *changeCity = [[DEViewChangeCity alloc] init];
     
     CGRect frame = self.frame;
@@ -121,6 +125,10 @@
 
 - (IBAction)showFeedbackPage:(id)sender {
     
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Feedback"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
     DEViewEventsViewController *viewController = (DEViewEventsViewController *)[DEScreenManager getMainNavigationController].topViewController;
     [viewController hideMainMenu];
     
@@ -146,6 +154,10 @@
     
     if ([self isLoggedIn:NO Account:YES])
     {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"UserProfile"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+        
         DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:[PFUser currentUser] IsPublic:NO];
 
         UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] objectAtIndex:1];
@@ -169,18 +181,36 @@
 
 - (IBAction)showMyEvents:(id)sender {
     // Send a notification that my events was pressed
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"GoingMaybe"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
     [DESyncManager getAllSavedEvents];
 }
 
 - (IBAction)showPastEpicEvents:(id)sender {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"PastEpic"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
     [DESyncManager loadEpicEvents:YES];
 }
 
 - (IBAction)showPostedByUserEvents:(id)sender {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"MyPosts"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
     [DESyncManager getEventsPostedByUser:[[PFUser currentUser] username]];
 }
 
 - (IBAction)viewWhatsGoingOnLater:(id)sender {
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Trending"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
     
     UINavigationController *navController = [DEScreenManager getMainNavigationController];
     DEMainViewController *mainViewController = (DEMainViewController *) [navController viewControllers][0];
@@ -189,6 +219,10 @@
 }
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Trending"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     
     UINavigationController *navController = [DEScreenManager getMainNavigationController];
     DEMainViewController *mainViewController = (DEMainViewController *) [navController viewControllers][0];

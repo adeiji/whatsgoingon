@@ -18,7 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"NeedInspire"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     [_promptEpicEventsView editButtons];
 }
 

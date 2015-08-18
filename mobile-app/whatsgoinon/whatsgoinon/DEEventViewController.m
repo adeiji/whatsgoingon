@@ -76,6 +76,20 @@ const int heightConstraintConstant = 62;
     [self setUsernameButtonClickAction];
     // Make this an asynchronous call
     [_eventView performSelectorInBackground:@selector(loadMapViewWithLocation:) withObject:_post.location];
+    
+    if(_isPreview)
+    {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"PostSubmit"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    }
+    else
+    {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"EventInfo"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    }
+
     userIsAmbassador = NO;
     [DEUserManager getUserFromUsername:_post.username];
     goingButtonBottomSpaceConstraintConstant = _goingButtonBottomSpaceConstraint.constant;
@@ -188,6 +202,10 @@ const int heightConstraintConstant = 62;
 - (void) usernameButtonClicked {
     if (user)
     {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"PosterProfile"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
         DESettingsAccount *settingsAccount = [[DESettingsAccount alloc] initWithUser:user IsPublic:YES];
         
         UIScrollView *scrollView = [[[NSBundle mainBundle] loadNibNamed:@"ViewSettingsAccount" owner:self options:nil] objectAtIndex:1];
@@ -555,6 +573,10 @@ const int heightConstraintConstant = 62;
 
 - (IBAction)showEventComments:(id)sender
 {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"EventComment"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
     DEViewComments *view = (DEViewComments *) [_eventDetailsViewController viewComments];
 
     if ([view.comments count] == 0)
@@ -570,6 +592,11 @@ const int heightConstraintConstant = 62;
 }
 - (IBAction)shareEvent:(id)sender
 {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"EventShare"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
+    
     DESharingView *shareView = (DESharingView *) [self showView:[_eventDetailsViewController viewSocialNetworkShare]];
     
     if (!_isPreview)
@@ -584,6 +611,11 @@ const int heightConstraintConstant = 62;
 }
 - (IBAction)viewMoreForEvent:(id)sender
 {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"EventMore"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
+    
     DEEventDetailsMoreView *eventDetailsMoreView = (DEEventDetailsMoreView *)[self showView:[_eventDetailsViewController viewMore]];
     [eventDetailsMoreView loadView];
     if (!_isPreview) {
@@ -591,7 +623,7 @@ const int heightConstraintConstant = 62;
         [[eventDetailsMoreView btnPostSomethingSimilar] setEnabled:YES];
         [[eventDetailsMoreView btnReportEvent] setEnabled:YES];
         [eventDetailsMoreView setEventId:[_post objectId]];
-        [eventDetailsMoreView setCategory:[_post category]];
+        [eventDetailsMoreView setCategory:[_post categoryStr]];
         [[DEPostManager sharedManager] setCurrentPost:_post];
     }
 }

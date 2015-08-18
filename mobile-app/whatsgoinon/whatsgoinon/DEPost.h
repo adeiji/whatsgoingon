@@ -12,7 +12,7 @@
 
 @interface DEPost : NSObject <NSCopying>
 
-@property (strong, nonatomic) NSString *category;
+@property (strong, nonatomic) NSString *categoryStr;
 @property (strong, nonatomic) NSDate *startTime;
 @property (strong, nonatomic) NSDate *endTime;
 @property (strong, nonatomic) PFGeoPoint *location;

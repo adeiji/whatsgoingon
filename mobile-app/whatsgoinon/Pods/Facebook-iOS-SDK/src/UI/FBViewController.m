@@ -118,8 +118,11 @@
     self.doneButton.action = @selector(doneButtonPressed:);
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelButtonPressed:);
+}
 
+- (void)viewWillAppear:(BOOL)animated {
     [self updateBar];
+    [super viewWillAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -170,10 +173,10 @@
 }
 
 - (void)updateBar {
-    if (self.presentingViewController != nil) {
-        [self updateBarForPresentedMode];
-    } else if (self.navigationController != nil) {
+    if (self.navigationController != nil) {
         [self updateBarForNavigationMode];
+    } else if (self.presentingViewController != nil) {
+        [self updateBarForPresentedMode];
     }
 }
 

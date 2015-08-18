@@ -9,6 +9,7 @@
 #import "DEMainViewController.h"
 #import "DECreatePostViewController.h"
 #import "Constants.h"
+#import <Google/Analytics.h>
 
 @interface DEMainViewController ()
 
@@ -90,6 +91,9 @@
     [self.view setHidden:NO];
     
     [DEScreenManager setBackgroundWithImageURL:@"newyorkbackground.png"];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"HomeScreen"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,8 +114,20 @@
 }
 
 - (IBAction)viewWhatsGoingOnLater:(id)sender {
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Trending"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
+    
     [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
     
+    tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Home"
+                                                          action:@"ButtonClick"
+                                                           label:@"What's Happening Later"
+                                                           value:nil] build]];
+
      if ([self isLoggedIn : NO])
     {
         // Do any additional setup after loading the view.
@@ -133,7 +149,19 @@
 }
 
 - (IBAction)viewWhatsGoingOnNow:(id)sender {
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Trending"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
     [[[DELocationManager sharedManager] locationManager] startUpdatingLocation];
+    
+    tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Home"
+                                                          action:@"ButtonClick"
+                                                           label:@"What's Happening Now"
+                                                           value:nil] build]];
+
     
     if ([self isLoggedIn : NO])
     {

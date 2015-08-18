@@ -10,7 +10,6 @@
 #import "Constants.h"
 #import "Reachability.h"
 
-
 @interface DEViewEventsViewController ()
 
 @end
@@ -94,6 +93,10 @@ struct TopMargin {
     [[DELocationManager sharedManager] getUpdatedLocation];
     if (!_shouldNotDisplayPosts)
     {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"Trending"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+        
         [[DEScreenManager sharedManager] showGettingEventsIndicatorWitText:@"Getting Events"];
         [self startActivitySpinner];
         if (_now)
@@ -195,6 +198,11 @@ struct TopMargin {
 
 - (void) showMainMenu
 {
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"SideMenu"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    
     [self enableClickOnEvents:NO];
     DEScreenManager *screenManager = [DEScreenManager sharedManager];
     [[[self view] superview] addSubview:[screenManager mainMenu]];
@@ -364,6 +372,11 @@ struct TopMargin {
 }
 
 - (IBAction) showSortScreen : (id) sender {
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"SortMenu"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    
     UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
     blurView = [[UIVisualEffectView alloc] initWithEffect:effect];
     [blurView setFrame:[self.view frame]];
@@ -447,6 +460,7 @@ struct TopMargin {
 
 - (void) displayPastEpicEvents : (NSNotification *) notification
 {
+    
     BOOL isPastEpicEvent = notification.userInfo[kNOTIFICATION_CENTER_USER_INFO_IS_EPIC_EVENTS];
     UIView *view;
     
@@ -548,6 +562,7 @@ struct TopMargin {
 }
 
 - (void) displayUsersEvents : (NSNotification *) notification {
+        
     if ([[[DEPostManager sharedManager] posts] count] != 0)
     {
         [self removeAllPostFromScreen];
@@ -1077,7 +1092,7 @@ struct TopMargin {
             if ([[post.myDescription lowercaseString] rangeOfString:[searchText lowercaseString] ].location != NSNotFound ||
                 [[post.title lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound ||
                 [[post.address lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound ||
-                [[post.category lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound ||
+                [[post.categoryStr lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound ||
                 [[post.quickDescription lowercaseString] rangeOfString:[searchText lowercaseString]].location != NSNotFound
                 )
             {

@@ -84,7 +84,7 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
 {
     DEPost *post = [DEPost new];
     post.address = address;
-    post.category = category;
+    post.categoryStr = category;
     post.startTime = startTime;
     post.endTime = endTime;
     post.location = location;
@@ -279,7 +279,7 @@ static NSString *kMaybeGoingPostForNoAccount = @"maybeGoingPostForNoAccount";
         [events enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             DEPost *event = [DEPost getPostFromPFObject:obj];
             
-            if ([event.category isEqualToString:category] )
+            if ([event.categoryStr isEqualToString:category] )
             {
                 [eventsInCategory addObject:obj];
             }

@@ -49,7 +49,7 @@
         NSArray *categories = [plistData allKeys];
         NSInteger indexOfCategory = 0;
         for (NSString *category in categories) {
-            if ([category isEqualToString:post.category])
+            if ([category isEqualToString:post.categoryStr])
             {
                 break;
             }

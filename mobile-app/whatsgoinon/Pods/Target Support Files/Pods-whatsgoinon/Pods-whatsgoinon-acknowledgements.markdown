@@ -275,6 +275,26 @@ If you use the Google Maps SDK for iOS in your application, you must
  Robert Penner's Easing Functions (http://www.robertpenner.com/easing/)
 
 
+## Google
+
+Copyright 2015 Google Inc.
+
+## GoogleAnalytics
+
+Copyright 2015 Google Inc.
+
+## GoogleNetworkingUtilities
+
+Copyright 2015 Google Inc.
+
+## GoogleSymbolUtilities
+
+Copyright 2015 Google Inc.
+
+## GoogleUtilities
+
+Copyright 2015 Google Inc.
+
 ## Masonry
 
 Copyright (c) 2011-2012 Masonry Team - https://github.com/Masonry

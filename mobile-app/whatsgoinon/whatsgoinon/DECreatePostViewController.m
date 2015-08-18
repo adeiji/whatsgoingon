@@ -51,7 +51,7 @@
         [_createPostViewOne displayCurrentLocation];
     }
     
-    _createPostViewOne.txtCategory.text = _post.category;
+    _createPostViewOne.txtCategory.text = _post.categoryStr;
     [[self.navigationController navigationBar] setHidden:YES];
     [self addObservers];
     
@@ -65,6 +65,20 @@
     for (UIButton *button in _createPostViewTwo.btnSmallPictureButtons) {
         [[button imageView] setContentMode:UIViewContentModeScaleAspectFill];
     }
+   
+    if([self.restorationIdentifier isEqualToString:@"createPostDetailsOne"])
+    {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"CreatePost1"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    }
+    else
+    {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"CreatePost2"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    }
+
 }
 
 /*
@@ -318,7 +332,7 @@
     _post.endTime = endDate;
     _post.postRange = [NSNumber numberWithInt:[_createPostViewOne.txtPostRange.text intValue]];
     _post.address = _createPostViewOne.txtAddress.text;
-    _post.category = _createPostViewOne.txtCategory.text;
+    _post.categoryStr = _createPostViewOne.txtCategory.text;
 
     if ([_createPostViewOne validateTextFields])
     {
@@ -652,6 +666,10 @@ Display the second screen for the post details
             }
         }
         
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"CancelPost"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+
         [DEAnimationManager fadeOutWithView:self.view ViewToAdd:view];
         [view setFrame:self.view.frame];
     }
@@ -676,7 +694,7 @@ Display the second screen for the post details
 }
 
 - (void) resetPost {
-    _post.category = _originalPost.category;
+    _post.categoryStr = _originalPost.categoryStr;
     _post.startTime = _originalPost.startTime;
     _post.endTime = _originalPost.endTime;
     _post.location = _originalPost.location;

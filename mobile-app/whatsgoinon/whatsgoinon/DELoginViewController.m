@@ -26,6 +26,17 @@
     for (UIView *view in _buttons) {
         [[view layer] setCornerRadius:BUTTON_CORNER_RADIUS];
     }
+
+    NSString *restorationId = self.restorationIdentifier;
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    if([restorationId isEqualToString:@"promptLogin"])
+        [tracker set:kGAIScreenName value:@"GetStarted"];
+    else if([restorationId isEqualToString:@"LoginPage"])
+        [tracker set:kGAIScreenName value:@"AccountExists"];
+    else if([restorationId isEqualToString:@"createAccountViewController"])
+        [tracker set:kGAIScreenName value:@"AccountCreate"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     
     [DEScreenManager setUpTextFields:_textFields];
     if (_account) {
@@ -74,6 +85,7 @@
 #pragma mark - Button Press Methods
 
 - (IBAction)createAnAccount:(id)sender {
+    
     
     DELoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:CREATE_ACCOUNT_VIEW_CONTROLLER];
     

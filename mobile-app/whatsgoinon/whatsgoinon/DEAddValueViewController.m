@@ -29,6 +29,19 @@
     // Do any additional setup after loading the view from its nib.
     DEAddValueView *view = (DEAddValueView *) self.view;
     
+    if(_isQuickDescription)
+    {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"QuickDesc"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    }
+    else
+    {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker set:kGAIScreenName value:@"LongDesc"];
+        [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    }
+    
     [view.txtValue becomeFirstResponder];
     [[view.btnCancel layer] setCornerRadius:view.btnCancel.frame.size.height / 2.0f];
     [[view.btnOk layer] setCornerRadius:view.btnOk.frame.size.height / 2.0f];

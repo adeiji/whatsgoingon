@@ -29,8 +29,8 @@
 + (DEPost *) getPostFromPFObject:(PFObject *)object {
  
     DEPost *post = [DEPost new];
-    
-    post.category = object[PARSE_CLASS_EVENT_CATEGORY];
+
+    post.categoryStr = object[PARSE_CLASS_EVENT_CATEGORY];
     post.startTime = object[PARSE_CLASS_EVENT_START_TIME];
     post.endTime = object[PARSE_CLASS_EVENT_END_TIME];
     post.location = object[PARSE_CLASS_EVENT_LOCATION];
@@ -84,7 +84,7 @@
     
     if (copy)
     {
-        [copy setCategory:[_category copyWithZone:zone]];
+        [copy setCategoryStr:[_categoryStr copyWithZone:zone]];
         [copy setStartTime:[_startTime copyWithZone:zone]];
         [copy setEndTime:[_endTime copyWithZone:zone]];
         [copy setLocation:[_location copyWithZone:zone]];

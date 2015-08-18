@@ -197,6 +197,10 @@ static NSString *kTutorialViewFirstTime = @"firstTutorialView";
 
 - (IBAction)displayCategoryWheel:(UIButton *)sender {
     
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"OrbWheel"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+    
     if (!isActive)
     {
         isActive = true;

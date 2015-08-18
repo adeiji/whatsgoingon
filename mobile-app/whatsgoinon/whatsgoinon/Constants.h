@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Google/Analytics.h>
 
 FOUNDATION_EXPORT NSString *const PARSE_CLASS_NAME_EVENT;
 FOUNDATION_EXPORT NSString *const PARSE_CLASS_EVENT_ACTIVE;

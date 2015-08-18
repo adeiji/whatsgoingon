@@ -21,6 +21,7 @@
 
 /* Begin PBXBuildFile section */
 		1ADD77F251EC4AB29E379A83 /* libPods-whatsgoinon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36964091027C46C399137B26 /* libPods-whatsgoinon.a */; };
+		3EA565A71B81093300DD1AE9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3EA565A61B81093300DD1AE9 /* GoogleService-Info.plist */; };
 		F401BBFD1A35473400AE5BB7 /* DEMaybeCheckmarkView.m in Sources */ = {isa = PBXBuildFile; fileRef = F401BBFC1A35473400AE5BB7 /* DEMaybeCheckmarkView.m */; };
 		F40A4F911A1687450041FDD2 /* maybe-indicator-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */; };
 		F40A4F951A1AC7750041FDD2 /* HPStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F40A4F941A1AC7750041FDD2 /* HPStyleKit.m */; };
@@ -147,7 +148,6 @@
 		F46B947619C3657900B41D8C /* email-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947519C3657900B41D8C /* email-icon.png */; };
 		F46B947819C3674E00B41D8C /* password-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F46B947719C3674E00B41D8C /* password-icon.png */; };
 		F4774F891992E40C00FCDE66 /* DELocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F881992E40C00FCDE66 /* DELocationManager.m */; };
-		F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F901994398F00FCDE66 /* UDIDGenerator.m */; };
 		F4774F9519944B9400FCDE66 /* DEScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9419944B9400FCDE66 /* DEScreenManager.m */; };
 		F4774F9B19955E4200FCDE66 /* DEUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9A19955E4200FCDE66 /* DEUserManager.m */; };
 		F4774F9F1995629500FCDE66 /* DELoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F4774F9E1995629500FCDE66 /* DELoginViewController.m */; };
@@ -234,6 +234,7 @@
 /* Begin PBXFileReference section */
 		2C82BCC93070B9F603B0EE0B /* Pods-whatsgoinon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whatsgoinon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whatsgoinon/Pods-whatsgoinon.debug.xcconfig"; sourceTree = "<group>"; };
 		36964091027C46C399137B26 /* libPods-whatsgoinon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-whatsgoinon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EA565A61B81093300DD1AE9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F401BBFB1A35473400AE5BB7 /* DEMaybeCheckmarkView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEMaybeCheckmarkView.h; sourceTree = "<group>"; };
 		F401BBFC1A35473400AE5BB7 /* DEMaybeCheckmarkView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEMaybeCheckmarkView.m; sourceTree = "<group>"; };
 		F40A4F901A1687450041FDD2 /* maybe-indicator-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maybe-indicator-icon.png"; sourceTree = "<group>"; };
@@ -713,6 +714,7 @@
 		F437BF8B1990452000CF61E9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3EA565A61B81093300DD1AE9 /* GoogleService-Info.plist */,
 				F437BF8C1990452000CF61E9 /* whatsgoinon-Info.plist */,
 				F437BF8D1990452000CF61E9 /* InfoPlist.strings */,
 				F437BF901990452000CF61E9 /* main.m */,
@@ -1372,6 +1374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4EEB03519D20E400072B683 /* categories.plist in Resources */,
+				3EA565A71B81093300DD1AE9 /* GoogleService-Info.plist in Resources */,
 				F437BFCE19918A4500CF61E9 /* InsertLocationView.xib in Resources */,
 				F4EEB04F19D241670072B683 /* ViewNoInternet.xib in Resources */,
 				F4CCBD6919997FCF00532E9B /* DEAddValueViewController.xib in Resources */,
@@ -1584,7 +1587,6 @@
 				F4CB0BA119B0008600AABD12 /* DEBackButton.m in Sources */,
 				F483B08319A27CD700C12FB2 /* UIView+DEScrollOnShowKeyboard.m in Sources */,
 				F4CCBD6819997FCF00532E9B /* DEAddValueViewController.m in Sources */,
-				F4774F911994398F00FCDE66 /* UDIDGenerator.m in Sources */,
 				F401BBFD1A35473400AE5BB7 /* DEMaybeCheckmarkView.m in Sources */,
 				F40A4F991A1AC79C0041FDD2 /* DEAmbassadorFlag.m in Sources */,
 				F47EA7FF1A4121DC005B7B79 /* DEViewImageViewController.m in Sources */,

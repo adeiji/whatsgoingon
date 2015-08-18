@@ -13,6 +13,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
 #import <ParseCrashReporting/ParseCrashReporting.h>
+#import <Google/Analytics.h>
 
 @implementation DEAppDelegate
 
@@ -56,6 +57,7 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setDefaultTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
 
+    [self configureGoogleAnalytics];
     
     #if DEBUG
 
@@ -84,13 +86,13 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     
     // Parse Keys - Live
     
-    #if DEBUG
-        [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
-                      clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
-    #else
+//    #if DEBUG
+//        [Parse setApplicationId:@"3USSbS5bzUbOMXvC1bpGiQBx28ANI494v3B1OuYR"
+//                      clientKey:@"WR9vCDGASNSkgQsFI7AjW7cLAVL4T3m0g9S1mDb0"];
+//    #else
         [Parse setApplicationId:@"YUXdFW3MDiu17bHCaKGKpbpde5XQ1eWEHN8n5jRT"
                       clientKey:@"7cNFD6SyCYqlbeH460CRYMEmaMPmtoSuehQPSGAX"];
-    #endif
+//    #endif
 
     [PFTwitterUtils initializeWithConsumerKey:@"TFcHVbGMjgBiXuSUpE16untPd" consumerSecret:@"alxo7PP08tyyG2mR3QFm8n8XHdJBcTzGw1u7BKW7A13AaeCWe8"];
     [PFFacebookUtils initializeFacebook];
@@ -208,6 +210,19 @@ static NSString *const kEventsUserPromptedForComment = @"com.happsnap.eventsUser
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication
                         withSession:[PFFacebookUtils session]];
+}
+
+-(void) configureGoogleAnalytics
+{
+    // Configure tracker from GoogleService-Info.plist.
+    NSError *configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+    
+    // Optional: configure GAI options.
+    GAI *gai = [GAI sharedInstance];
+    gai.trackUncaughtExceptions = YES;  // report uncaught exceptions
+    gai.logger.logLevel = kGAILogLevelVerbose;  // remove before app release
 }
 
 @end
