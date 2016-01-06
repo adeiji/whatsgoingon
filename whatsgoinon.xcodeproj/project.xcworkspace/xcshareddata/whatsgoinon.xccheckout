@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E6043250-416C-4667-B716-8E4A91424D96</string>
+	<key>IDESourceControlProjectName</key>
+	<string>whatsgoinon</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C4579557-30D1-4503-8FB6-73E3C90327E1</key>
+		<string>https://github.com/adeiji/whatsgoingon.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>mobile-app/whatsgoinon/whatsgoinon.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C4579557-30D1-4503-8FB6-73E3C90327E1</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/adeiji/whatsgoingon.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C4579557-30D1-4503-8FB6-73E3C90327E1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C4579557-30D1-4503-8FB6-73E3C90327E1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>whatsgoingon</string>
+		</dict>
+	</array>
+</dict>
+</plist>
