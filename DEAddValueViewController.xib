@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DEAddValueViewController">
+            <connections>
+                <outlet property="lblMinCharacters" destination="Shs-UD-vDI" id="9ni-yd-Zdw"/>
+                <outlet property="lblTutorial" destination="Kvx-1n-Kro" id="gij-tf-RUr"/>
+                <outlet property="overlayView" destination="sSg-IN-yue" id="sEb-TY-hoJ"/>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1" customClass="DEAddValueView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6f2-Fo-n2K">
+                    <rect key="frame" x="20" y="20" width="280" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="EjG-Vt-ST2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jU5-qi-qDz" customClass="DEActionButton">
+                    <rect key="frame" x="188" y="234" width="50" height="50"/>
+                    <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="G3G-q7-iuF"/>
+                        <constraint firstAttribute="width" constant="50" id="esE-7h-eMO"/>
+                    </constraints>
+                    <state key="normal" image="ok.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="okPressed:" destination="-1" eventType="touchUpInside" id="x5W-YQ-6Ox"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ZU-JE-nnH" customClass="DEActionButton">
+                    <rect key="frame" x="251" y="234" width="50" height="50"/>
+                    <color key="backgroundColor" red="0.25882352939999997" green="0.73725490199999999" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="bQG-S8-6qa"/>
+                    </constraints>
+                    <state key="normal" image="cancel.png">
+                        <color key="titleColor" red="1" green="0.03113876489" blue="0.074984954940000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="530-EA-qbJ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Shs-UD-vDI">
+                    <rect key="frame" x="20" y="250" width="42" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="1Ea-3T-J4L"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="zDA-3x-sHE">
+                    <rect key="frame" x="20" y="67" width="280" height="163"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert" enablesReturnKeyAutomatically="YES"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="sJn-G7-rSP"/>
+                    </connections>
+                </textView>
+                <view userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSg-IN-yue">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="363"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" minimumFontSize="9" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Kvx-1n-Kro">
+                            <rect key="frame" x="20" y="72" width="280" height="241"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <string key="text">The description is the full description of what you want to display.  Right out every possible detail that you can about the event so people can know exactly what's goin' on!</string>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.56000000000000005" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Kvx-1n-Kro" firstAttribute="centerX" secondItem="sSg-IN-yue" secondAttribute="centerX" id="8QG-U0-afM"/>
+                        <constraint firstItem="Kvx-1n-Kro" firstAttribute="top" secondItem="sSg-IN-yue" secondAttribute="top" constant="72" id="Jsb-Np-jEZ"/>
+                        <constraint firstAttribute="bottom" secondItem="Kvx-1n-Kro" secondAttribute="bottom" constant="50" id="Mfl-zw-PYC"/>
+                        <constraint firstItem="Kvx-1n-Kro" firstAttribute="leading" secondItem="sSg-IN-yue" secondAttribute="leading" constant="20" id="gr5-vs-D4A"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="jU5-qi-qDz" firstAttribute="bottom" secondItem="7ZU-JE-nnH" secondAttribute="bottom" id="0yW-A7-eUp"/>
+                <constraint firstItem="zDA-3x-sHE" firstAttribute="leading" secondItem="Shs-UD-vDI" secondAttribute="leading" id="575-1O-4nZ"/>
+                <constraint firstItem="sSg-IN-yue" firstAttribute="top" secondItem="1" secondAttribute="top" id="6hI-wR-iJR"/>
+                <constraint firstItem="zDA-3x-sHE" firstAttribute="top" secondItem="1" secondAttribute="top" constant="67" id="Cew-8I-jgu"/>
+                <constraint firstItem="7ZU-JE-nnH" firstAttribute="leading" secondItem="jU5-qi-qDz" secondAttribute="trailing" constant="13" id="D3m-hc-oxY"/>
+                <constraint firstAttribute="bottom" secondItem="sSg-IN-yue" secondAttribute="bottom" constant="205" id="GtU-jH-vfj"/>
+                <constraint firstItem="sSg-IN-yue" firstAttribute="centerX" secondItem="6f2-Fo-n2K" secondAttribute="centerX" id="Gva-Ay-HIe"/>
+                <constraint firstItem="7ZU-JE-nnH" firstAttribute="top" secondItem="jU5-qi-qDz" secondAttribute="top" id="Gxr-dq-1Vf"/>
+                <constraint firstItem="6f2-Fo-n2K" firstAttribute="leading" secondItem="1" secondAttribute="leading" constant="20" id="JAK-7x-RAV"/>
+                <constraint firstItem="jU5-qi-qDz" firstAttribute="top" secondItem="zDA-3x-sHE" secondAttribute="bottom" constant="4" id="LaG-mI-nnl"/>
+                <constraint firstItem="sSg-IN-yue" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="OIs-js-QyM"/>
+                <constraint firstAttribute="bottom" secondItem="jU5-qi-qDz" secondAttribute="bottom" constant="284" id="Ttd-DB-vpB"/>
+                <constraint firstItem="6f2-Fo-n2K" firstAttribute="top" secondItem="1" secondAttribute="top" constant="20" id="YfZ-MV-KUc"/>
+                <constraint firstAttribute="trailing" secondItem="sSg-IN-yue" secondAttribute="trailing" id="auw-gI-0gn"/>
+                <constraint firstItem="Shs-UD-vDI" firstAttribute="centerY" secondItem="jU5-qi-qDz" secondAttribute="centerY" constant="1.5" id="cGt-W9-wUp"/>
+                <constraint firstItem="6f2-Fo-n2K" firstAttribute="leading" secondItem="zDA-3x-sHE" secondAttribute="leading" id="mrb-E6-Qqj"/>
+                <constraint firstAttribute="trailing" secondItem="7ZU-JE-nnH" secondAttribute="trailing" constant="19" id="nNf-6U-sL3"/>
+                <constraint firstItem="6f2-Fo-n2K" firstAttribute="trailing" secondItem="zDA-3x-sHE" secondAttribute="trailing" id="xK7-XO-ZXr"/>
+            </constraints>
+            <connections>
+                <outlet property="btnCancel" destination="7ZU-JE-nnH" id="EdO-Ro-owE"/>
+                <outlet property="btnOk" destination="jU5-qi-qDz" id="k58-Md-yar"/>
+                <outlet property="lblPrompt" destination="6f2-Fo-n2K" id="jSO-53-Jix"/>
+                <outlet property="txtValue" destination="zDA-3x-sHE" id="19P-HB-SPN"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="cancel.png" width="104" height="104"/>
+        <image name="ok.png" width="104" height="104"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

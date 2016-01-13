@@ -1,0 +1,29 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "37E1DD4F88874B9763C9AB992517625F7B6F0D7B" : 0,
+    "63A8E7D129B6E6982A246304D9950C935137BA3E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "678B5A82-33CB-433C-A608-12FBE787A9A2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "37E1DD4F88874B9763C9AB992517625F7B6F0D7B" : "..",
+    "63A8E7D129B6E6982A246304D9950C935137BA3E" : "whatsgoingon\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "HappSnap",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HappSnap.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/adeiji\/dephyned.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "37E1DD4F88874B9763C9AB992517625F7B6F0D7B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/adeiji\/whatsgoingon.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "63A8E7D129B6E6982A246304D9950C935137BA3E"
+    }
+  ]
+}

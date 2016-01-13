@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "EB881A284FF12E091941E3AA939B365D36B56520",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "EB881A284FF12E091941E3AA939B365D36B56520" : 0,
+    "63A8E7D129B6E6982A246304D9950C935137BA3E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E6043250-416C-4667-B716-8E4A91424D96",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "EB881A284FF12E091941E3AA939B365D36B56520" : "whatsgoinon-2\/",
+    "63A8E7D129B6E6982A246304D9950C935137BA3E" : "..\/Documents\/Dephyned\/apps\/whatsgoingon"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "whatsgoinon",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "whatsgoinon.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/adeiji\/whatsgoingon.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "63A8E7D129B6E6982A246304D9950C935137BA3E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/adeiji\/whatsgoinon.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EB881A284FF12E091941E3AA939B365D36B56520"
+    }
+  ]
+}
